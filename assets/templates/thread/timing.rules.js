@@ -20,7 +20,10 @@
 //               the file card); every link start is one already
 //   expressive  T2: the hand-offs of lib/handoffs that the line performs between states: path-type (the brief's two
 //               phrases), rail-press 'press' (the merge's stage name pressed into the line that becomes the ruler),
-//               rail-press 'cut' (the line cut into the name)
+//               rail-press 'cut' (the line cut into the name); the flood's dot-iris; and the template's own
+//               `thread-panel-push` (`devices`): the camera pushes through the panel the line has outlined into the
+//               shot it already shows, a change of ground on the beat (the zoom through a window, counter-portal's
+//               mechanism with the chain's own panel)
 //   peaks       T3: the hook (the big word's first swing; without the head, the first centre name), the climax (the
 //               contact sheet, on the music's drop; without the review, the name cut out of the line), the lock-up
 //   holds       the still windows after each landing, ≤ 2 beats; the close is a rest
@@ -141,8 +144,9 @@ const types = {
       return Math.max(sec(c0, g) + r.end + sec(0.1 + CARD.squash, g), sec(RC.card + CARD.bar + CARD.barDur + 0.25 + CARD.squash, g), cornerNeed(s, g, ctx));
     },
   },
-  // the line settles under the name's place, the blade cuts it into the name (≈ 1.0u), the line and URL follow; the URL
-  // holds ≥ 3 s; the underline's second move lands on the last bar's downbeat (shots.js closeSecondMove)
+  // the line settles under the name's place, the blade cuts it into the name (≈ 1.0u); the band contracts into the caret,
+  // which types the URL; the URL holds ≥ 3 s; the caret falls flat into the URL's underline on the last bar's downbeat
+  // (shots.js closeSecondMove)
   close: {
     rest: true, absorb: true, reason: 'closing card: the URL holds ≥ 3 s',
     read: (s) => [s.name, s.line, s.url],
@@ -189,7 +193,8 @@ const events = (scenes, g, content) => {
     if (S.type === 'palette') { [[0.5, 'hex labels'], [0.95, 'swatches hop'], [1.0, 'type specimen']].forEach(([u, w]) => micro(u, w)); hold(Math.max(1.75, nEnd), D - 0.15); }
     if (S.type === 'storyboard') { [[0.45, 'two more panels'], [0.6, 'sketches'], [1.45, 'panel 3 chosen']].forEach(([u, w]) => micro(u, w)); hold(Math.max(1.9, nEnd), D); }
     if (S.type === 'merge') {
-      handoff(1.0, 'push → shot'); shot(1.0, 'the shot behind panel 3');
+      // the push through the chosen panel (outlined in the line colour) into the shot it shows: the chain's middle T2
+      expr(0, 2, 'thread-panel-push', 'into panel 3, outlined by the line'); handoff(1.0, 'push → shot'); shot(1.0, 'the shot behind panel 3');
       [[1.0 + MERGE_CUES.contact[0], 'contact'], [1.0 + MERGE_CUES.contact[1], 'third sphere'], [1.0 + MERGE_CUES.land, 'landing'], [1.0 + MERGE_CUES.rebound, 'rebound']].forEach(([u, w]) => micro(u, w));
       if (ex) micro(D - ex, 'the sphere squashes into the line');
       hold(Math.max(1.0 + MERGE_CUES.settled, nEnd, ne != null ? ne + 0.1 : 0), D - ex);
@@ -232,11 +237,12 @@ const events = (scenes, g, content) => {
       expr(CLOSE.cut, 1, 'rail-press', 'cut: the line into the name'); handoff(CLOSE.cut, 'rail-press starts');
       const done = CLOSE.cut + CLOSE.cutDur;
       key(done, 'land', 'the name is cut out of the line'); micro(done, 'the name'); shot(done, 'the lock-up: name, line, URL');
+      const hasUrl = !!String(S.url || '').trim(), u2 = closeSecondMove(D);
+      if (hasUrl) micro(done, 'the line contracts into the caret');
       micro(CLOSE.line, 'closing line'); micro(CLOSE.url, 'URL typed');
-      const u2 = closeSecondMove(D);
       out.peaks.push({ t: at(done), kind: 'lockup', climax: !scenes.some((x) => x.type === 'review'), scene: i });
-      hold(CLOSE.url + CLOSE.urlDur + 0.05, u2 == null ? D : u2 - 0.1);
-      if (u2 != null) { key(u2, 'end', 'underline second move'); micro(u2, 'underline second move'); hold(u2 + 0.25, D); }
+      hold(CLOSE.url + CLOSE.urlDur + 0.05, u2 == null || !hasUrl ? D : u2 - OPEN.flat);
+      if (u2 != null && hasUrl) { key(u2, 'end', 'the caret falls flat into the URL\'s underline'); micro(u2, 'the URL underlined'); hold(u2 + 0.25, D); }
     }
   });
   // the hook: the big word's first swing; without the head, the first centre name
@@ -265,4 +271,5 @@ export default {
   wordSec: WORD,
   types,
   events,
+  devices: ['thread-panel-push'], // the template's own T2 (CONTRACT.md, Template devices): the push through panel 3
 };

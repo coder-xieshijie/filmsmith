@@ -4,7 +4,7 @@
 import { clamp, lerp, cubicInOut, cubicOut, smooth } from './lib/motion.js';
 import { hash } from './lib/rng.js';
 import { FLIGHT, MARK, WAVE, CHART_LIGHT_SPAN } from './timeline.js';
-import { ROLE, MX, LIST, listFade, glintScale } from './layouts.js';
+import { ROLE, MX, LIST, listFade, glintScale, REVEAL_POP } from './layouts.js';
 import * as fx from './fx.js';
 import { drawMark } from './marks.js';
 
@@ -96,7 +96,7 @@ export const makeSquares = ({ E, CH, P, START, MK, active }) => {
         const u = smooth((t - dk) / 0.25);
         if (p.reveal[k] !== p.role[k]) {
           rgb = fx.mixRgb(rgb, roleRgb[p.reveal[k]], u);
-          const pop = 1 + 0.45 * Math.sin(Math.PI * clamp((t - dk) / 0.35));
+          const pop = 1 + REVEAL_POP * Math.sin(Math.PI * clamp((t - dk) / 0.35));
           const ns = s * pop; x -= (ns - s) / 2; y -= (ns - s) / 2; s = ns;
         }
       }

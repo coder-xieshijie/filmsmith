@@ -20,6 +20,15 @@ export const measure = (ctx, text, f, ls = 0) => {
   return w;
 };
 export const clearMeasure = () => cache.clear();
+// A font's vertical extent from the baseline (ascent up, descent down), from the font's own metrics, so a layout
+// that stacks a rule, marks and text under a line of type keeps clear of any glyph that line can draw.
+export const vmetrics = (ctx, f) => {
+  ctx.save();
+  ctx.font = f;
+  const mt = ctx.measureText('Hg');
+  ctx.restore();
+  return { asc: mt.fontBoundingBoxAscent, desc: mt.fontBoundingBoxDescent };
+};
 
 // '*a* plain [b]' → [{ text: 'a', kind: 'accent' }, { text: ' plain ', kind: 'plain' }, { text: 'b', kind: 'strong' }]
 export const runs = (s) => {

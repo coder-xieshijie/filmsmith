@@ -18,15 +18,20 @@
 //   signal  ink/paper 16.4  grey/paper 6.0  accent/paper 3.1 (large/blocks only)  onAccent(ink)/accent 5.3
 //   ikb     ink/paper 16.4  grey/paper 6.0  accent/paper 6.6                       onAccent(paper)/accent 6.6
 //   orange  ink/paper 16.4  grey/paper 6.0  accent/paper 3.0 (large/blocks only)  onAccent(ink)/accent 5.4
+//   clay    ink/paper 16.4  grey/paper 6.0  accent/paper 3.05 (large/blocks only) onAccent(ink)/accent 5.4
 //   night   ink/paper 15.3  grey/paper 6.9  accent/paper 5.5                       onAccent(paper)/accent 5.5
-//   promptOnInk on the ink block: signal 5.3, ikb 7.9, orange 5.4, night 4.6 (all >= 4.5, 2026-10-18)
+//   promptOnInk on the ink block: signal 5.3, ikb 7.9, orange 5.4, clay 5.4, night 4.6 (all >= 4.5, 2026-10-18;
+//   clay 2026-10-19)
 //
 // Names and sources (2026-10-18, theory 05 §5.2; ids unchanged). `signal` is "Swiss red": #FF3B1F approximates the
 // hue of the Swiss federal design manual's red #FF0000 (ΔE00 3.8); it is not RAL 3001 Signal red, a different,
 // darker colour. `ikb` is "Ultramarine signal", #1E40D8: not Klein's IKB (no published value; the web's #002FA7 is
 // ΔE00 8.1 away). What separates it from ink is chroma, not lightness (it is only 2.5:1 against ink). `orange` is
 // the ANSI Z535 Safety Orange hue (5.0YR 6.0/15, about #E27700, clipped) darkened to #D36F01 until it just passes
-// 3:1 on paper; the ANSI centre itself reaches only 2.66.
+// 3:1 on paper; the ANSI centre itself reaches only 2.66. `clay` is "Clay", a warm terracotta chosen by the owner
+// 2026-10-19 from the sample #D97757 (OKLCH 0.672 0.131 38.8°, only 2.72:1 on paper), darkened along its own
+// OKLCH hue and chroma to #CF6E4E (0.643 0.131 38.9°, ΔE00 3.1 from the sample) until it passes 3:1 on paper with
+// a little margin (3.05). Ink stays the text on it (5.39), so it is the prompt glyph as well (5.39 on ink).
 
 export default {
   signal: {
@@ -51,6 +56,14 @@ export default {
     paper: '#F2EFE8', ink: '#111111', grey: '#5E5A53',
     accent: '#D36F01', onAccent: '#111111',
     onInk: '#F2EFE8', mutedOnInk: '#BDB8AE', promptOnInk: '#D36F01',
+    gridAlpha: 0.085, hairAlpha: 0.12,
+  },
+  clay: {
+    name: 'Clay (terracotta)',
+    fits: 'Warmer and softer than the red; craft, writing and people-first tools. Chosen by the owner 2026-10-19.',
+    paper: '#F2EFE8', ink: '#111111', grey: '#5E5A53',
+    accent: '#CF6E4E', onAccent: '#111111',
+    onInk: '#F2EFE8', mutedOnInk: '#BDB8AE', promptOnInk: '#CF6E4E',
     gridAlpha: 0.085, hairAlpha: 0.12,
   },
   night: {

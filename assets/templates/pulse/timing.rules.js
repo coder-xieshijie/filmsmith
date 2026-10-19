@@ -3,8 +3,9 @@
 // Every scene is a sequence of steps on the beat (a word lands, a highlight hops, a figure resolves), so each
 // type's need() plays choreo.js — the same schedule the picture and the sound use — and reads through
 // ctx.reading (the shared reader). steps() returns the still hold after each landing; fit() checks each against
-// the shared limits. events() is timeline.js: the key events, holds, the portal hand-off and the four pacing
-// tiers (micro, expressive, peaks), so renders/timing.json says what the film does.
+// the shared limits, at the need and again at the fitted length (ctx.dur). events() is timeline.js: the key
+// events, holds, the portal hand-off and the four pacing tiers (micro, expressive, peaks), so renders/timing.json
+// says what the film does.
 //
 // Reading tiers (principle 1):
 //   primary  every ask word (one state at a time, at most five words, read before the next aperture covers it),
@@ -18,16 +19,25 @@ import { planAt, needOf, stepsOf, contextAt } from './choreo.js';
 import { factsFor, validate as validateCopy } from './registry.js';
 import { timelineOf } from './timeline.js';
 
-const planOf = (s, g, ctx) => {
+const planOf = (s, g, ctx, extra = 0) => {
   const f = factsFor(ctx.content);
   const x = contextAt(ctx.scenes, ctx.i, f);
-  return { p: planAt(ctx.scenes, ctx.i, g.beat, f, ctx.content.aperture || 'cut'), x };
+  return { p: planAt(ctx.scenes, ctx.i, g.beat, f, ctx.content.aperture || 'cut', [], extra), x };
 };
 const t = (o) => ({
   in: 0,
   ...o,
   need: (s, g, ctx) => { const { p, x } = planOf(s, g, ctx); return needOf(s, p, g.beat, x, ctx.reading); },
-  steps: (s, g, ctx) => { const { p, x } = planOf(s, g, ctx); return stepsOf(s, p, g.beat, needOf(s, p, g.beat, x, ctx.reading), x); },
+  // At the fitted length (ctx.dur, fit()'s second call) the steps are the picture's: a search into a reveal spends
+  // the slack on extra highlight laps, an ask, a verdict or a data scene splits it with a beat pop (choreo.js popsOf),
+  // so each hold is checked as drawn. ctx.dur is undefined at the need.
+  steps: (s, g, ctx) => {
+    const dur = ctx.dur;
+    const { p, x } = planOf(s, g, ctx);
+    const need = needOf(s, p, g.beat, x, ctx.reading);
+    const laps = dur != null && s.type === 'search' && x.outKind === 'build' ? Math.max(0, dur - need) : 0;
+    return stepsOf(s, laps > 1e-6 ? planOf(s, g, ctx, laps).p : p, g.beat, need, x, dur);
+  },
 });
 
 export default {

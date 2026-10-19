@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { loadRun, fill } from '../run.js';
 import { plan } from '../timeline.js';
-import { caps as capsOf, lineOf, phrasesOf, enterOf, pathCaps, ENTER, PACES } from '../timing.rules.js';
+import { caps as capsOf, lineOf, phrasesOf, enterOf, pathCaps, ENTER, REVEAL, PACES } from '../timing.rules.js';
 import { report as timingReport } from '../lib/timing.js';
 import { plain } from '../fx.js';
 import palettes from '../palettes.js';
@@ -76,6 +76,13 @@ export const validate = async (content, { quiet = false } = {}) => {
     if (sc.enter != null) {
       if (!ENTER[sc.enter]) err(`${key('enter')}: "${sc.enter}"; use ${Object.keys(ENTER).join(', ')}`);
       else if (!enterOf(content.scenes, i)) err(`${key('enter')}: the ${i === 0 ? 'first scene' : 'thesis'} cannot enter by a transition (${i === 0 ? 'nothing comes before it' : 'it grows out of the chips'})`);
+    }
+    // the probe's turn into its reveal (TEMPLATE.md, "Transitions")
+    if (sc.reveal != null) {
+      if (sc.type !== 'probe') err(`${key('reveal')}: only a probe turns into a reveal`);
+      else if (!REVEAL[sc.reveal]) err(`${key('reveal')}: "${sc.reveal}"; use ${Object.keys(REVEAL).join(', ')}`);
+      // two flows in a row: the entry's would be unchanged (left to right) or a mirror two beats away; use one
+      else if (sc.enter === sc.reveal) err(`${key('reveal')}: this probe already enters by '${sc.enter}'; a second ${REVEAL[sc.reveal].device} straight after it repeats the device, so keep one of the two`);
     }
     if (sc.pace != null && (sc.type !== 'loop' || !PACES.includes(sc.pace))) err(`${key('pace')}: only a loop takes a pace, ${PACES.join(' or ')} beats a merge`);
     // a caption that rides path-type is one phrase of plain text, read only while its line is straight

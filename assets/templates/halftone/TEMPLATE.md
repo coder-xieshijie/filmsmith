@@ -29,6 +29,7 @@ npm run palettes      # contrast table of every preset
 | `film.js` | Renderer: layout from measured type, the anchor and the mark, worlds, the lock-up. `render(ctx, t)` is a pure function of `t`. The transitions come from the shared library where it can express them (Transitions, below). |
 | `score.mjs` | The `press` bed (built here from `lib/audio` voices) and one synthesised effect per picture event; writes `assets/audio/mix.wav` and `assets/audio/measure.json`. |
 | `index.html` | The canvas, the static `__timelines` stub and the pre-registered build hold in the head; `data-duration` is stamped by `npm run fit`. |
+| `examples/text-model.content.js` | The alternate example: a made-up text model with its own mark (a cursor at the end of three lines of text) and copy; fits 16 bars = 32.0 s at 120 bpm. Copy it over `content.js` to try it. |
 
 ## The mark
 
@@ -46,6 +47,28 @@ centre, the point that stays put all film:
 
 Draw the real mark (a product's logo is drawn in code, principle 2). Take the anchor from a detail that can stand
 alone at 220 px: a dot, a stroke end, a counter, a tool tip. Never an eye or an animal.
+
+Nothing in the template is made for one kind of product: the shipped microphone capsule is that example's mark, and
+`examples/text-model.content.js` is the same film for a text model, whose anchor is a text cursor at the end of three
+lines of text (copy it over `content.js` to try it). To put another product's mark in:
+
+1. **Choose the anchor.** One part of the mark that reads on its own at 220 px high, a simple closed shape with no
+   fine detail (it is printed as 7–24 px dots): the dot of an i, a cursor, a capsule, a counter, a tool tip, a
+   stroke end. Its centre is the point that stays on screen all film.
+2. **Draw the whole mark as SVG paths in mark units**, origin at the anchor's centre, y down; any scale (the
+   lock-up scales `box` to 405 px high, the film scales `anchorBox` to 220 px). `accent` is the anchor alone; `ink`
+   is every other part, as many sub-paths as needed (helpers such as the example's `band` or `line` keep it
+   readable). Where the two overlap the anchor wins: it knocks the black plate out under itself (a 3 px trap).
+3. **Set `box` and `anchorBox`** to the bounds of the whole mark and of the anchor. An anchor much taller than
+   wide (a cursor, a capsule) or wider than tall still works: it is sized by its height.
+4. **Set `lambda` and `ringAt` only if the mark has concentric parts** (arcs, rings, a round counter): `ringAt` the
+   radius of one of them, `lambda` their spacing, so the push-in's rings land on them. Without arcs, leave the
+   defaults or use a spacing the mark already has (the text model sets both to its line pitch).
+5. **Pick the fields for what the product does** (Fields, below), not for the mark: a speech model leans on `cross`,
+   `cells` and `wave`; a text model on `rows` (pages, rows of tokens), `cells` (one passage found), `wave` (a
+   stream); a build tool on `grid`; a protocol on `rings`. Keep at least one `mono` card with a real artefact.
+6. **Run `npm run fit`, then `npm run snapshot`** at the hook, a card, the push-in and the lock-up: the anchor
+   must read as itself in the hook and land in its place in the mark.
 
 ## Time
 
@@ -223,3 +246,16 @@ collapse → claim `Every voice, / its own words.` → pull → `parley-2` / `sp
 Order follows the product's pipeline (a mixture → separated → counted → written → said → live → on the device), not
 a fixed card-run; tiers: T0 median gap 1 beat (max 1.75), T1 12 compositions (median 2.5 s, CV 0.45), T2 4 (quantize
 9.75 s, invert 19.1 s, collapse 21.4 s, pull-back 26 s), T3 3 (hook 0.5 s, claim 22 s = 69 %, climax; lock-up 26 s).
+
+### Alternate example: a text model
+
+`examples/text-model.content.js`: "quire-3", a made-up text model that reads a whole archive in one pass and
+answers with the page behind every sentence. Its mark is three lines of text with a cursor at the end of the last
+(the cursor is the anchor); the mark has no arcs, so `lambda` and `ringAt` are the line pitch. It fits 16 bars =
+32.0 s at 120 bpm, `npm run fit` with no errors and no warnings:
+
+hook `Ask the whole / archive.` → `READ` (rows) → `FOUND` (cells) → whip → count `14` sources (ink) → quantize →
+`CITED` (rows as blocks) → whip → `ASK` `> notice period?` (rings, mono) → scan → `ANSWER` `30 days [412]` (rows,
+mono) → morph → `STREAMED` (wave) → invert → `ON PREM` (grid, ink) → collapse → claim `Every sentence, / with its
+source.` → pull → `quire-3` / `text model · out today`. Tiers: T0 median gap 1 beat (max 1.75), T1 11 compositions
+(median 2.5 s, CV 0.38), T2 4, T3 3 (claim 22 s = 69 %, climax).

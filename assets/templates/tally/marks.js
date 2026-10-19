@@ -15,6 +15,9 @@ import { clamp, smooth } from './lib/motion.js';
 
 export const GLYPH_MIN = 7, GLYPH_FULL = 12; // px: below MIN the square, from FULL up the whole pictogram
 const DOT = 1.128; // a disc of the square's area: d = 2 / sqrt(pi) × side
+// The widest any mark reaches, as a share of its cell's side, centred on the cell: the dot (glyphs and the square
+// stay inside the cell). Layouts that must keep a mark off a line or a text measure with it (layouts.js close).
+export const MARK_REACH = DOT;
 
 // Pictograms in unit coordinates (the square's cell, 0..1 both ways). Silhouettes with knocked-out gaps, as
 // Isotype drew them: no outline, no inner detail finer than about 1/12 of the symbol.

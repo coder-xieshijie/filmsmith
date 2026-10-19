@@ -21,8 +21,9 @@
 //
 // Tiers (api 3, principles 4 and 5): every onset of the choreography and every phrase is a micro event (T0); the
 // expressive transitions (T2) are the scenes' `enter` devices (path-type, token-sweep, trace-flow), two beats
-// straddling the cut; the peaks (T3) are the split of the words into chips (hook), the probe's reveal (the climax,
-// read in a pause) and the claim the thesis lands (lock-up); the probe's reveal is a second composition inside its
+// straddling the cut, and the probe's `reveal` flow, two beats straddling its reveal; the peaks (T3) are the split
+// of the words into chips (hook), the probe's reveal (the climax, read in a pause) and the claim the thesis lands
+// (lock-up); the probe's reveal is a second composition inside its
 // scene (a shot). The holds are the still windows between the scene's moves, computed from the same move list.
 //
 // Landings (principle 5): a fuse lands on the frame its move reaches 90 % (LAND_E of its duration, about
@@ -81,6 +82,15 @@ export const ENTER = {
   sweep: { device: 'token-sweep', beats: 2 },
   flow: { device: 'trace-flow', beats: 2 },
 };
+// The probe may turn into its reveal with an expressive transition: `reveal: 'flow'` on the probe scene (2026-10-19).
+// The run turns there, from replaying its rules on the unseen input to their result, and it is the film's last
+// stretch: without it the last T2 is the sweep into the summary, 14–17 s before the end (api 3 wants one every
+// 8–12 s). Two beats straddling the reveal beat inside the scene, as a cut would be: side A is the probe while its
+// last replay settles, side B the reveal (the push, the claim's caption, the size turning colour), each the run's
+// real state. Always left to right, in reading order over the encoded input: the front has left the caption band's
+// left half by the reveal beat, when the claim's caption starts to rise there.
+export const REVEAL = { flow: { device: 'trace-flow', beats: 2, variant: 'left to right, at the reveal' } };
+export const revealOf = (sc) => (sc?.type === 'probe' && REVEAL[sc.reveal] ? sc.reveal : null);
 export const enterOf = (scenes, i) => (i > 0 && scenes[i]?.type !== 'thesis' && ENTER[scenes[i]?.enter] ? scenes[i].enter : null);
 const halfWin = (scenes, i) => (enterOf(scenes, i) ? ENTER[scenes[i].enter].beats / 2 : 0); // beats of the window in scene i
 // The variant of each use: a device's second use runs the other way (mirrored), so no repeat is unchanged.
@@ -276,7 +286,8 @@ export const choreo = {
   // dim (one change at a time: the result first, then the context). The reveal is read in a pause (a claim): its
   // composition (a shot) holds until the hand-off. The scene's last MORPH seconds are the hand-off: the result's chips
   // fuse and grow into the thesis's first line, landing on the thesis's bar line; the camera returns over the morph's
-  // first EXIT.camera seconds, while the chips slide together.
+  // first EXIT.camera seconds, while the chips slide together. With `reveal: 'flow'` a trace-flow straddles the reveal
+  // beat (REVEAL), which then waits until the window's first beat is free of the scramble, the replays and caption 1.
   probe(sc, { run, b, cap, ready0, e0 }) {
     const n = run.probe?.steps.length ?? 0, cs = caps(sc);
     const dur = Math.min(0.45, PROBE_SP * b * 0.6);
@@ -288,6 +299,14 @@ export const choreo = {
     const contacts = Array.from({ length: n }, (_, i) => first + i * PROBE_SP);
     let reveal = n ? q(contacts[n - 1] + ((1 - LAND_E) * dur) / b + 0.4) : first;
     if (cs.length > 1) reveal = Math.max(reveal, q((ready0 + cap([cs[0]]) + CAP.gap + PUSH.land) / b));
+    // a flow at the reveal (revealOf) starts a beat before it: the last replay has landed, the letters have resolved
+    // and the first caption has been read before the front sets off
+    const flow = revealOf(sc);
+    const win = flow ? REVEAL[flow].beats / 2 : 0;
+    if (flow) {
+      reveal = Math.max(reveal, q(scrambleEnd / b + win), n ? contacts[n - 1] + win : 0);
+      if (cs.length > 1) reveal = Math.max(reveal, q((ready0 + cap([cs[0]]) + CAP.gap) / b + win));
+    }
     const out = MORPH;
     const size = run.probe ? `${run.probe.steps.at(-1)?.tokens.length ?? run.probe.tokens.length} x` : '';
     const moves = [
@@ -296,9 +315,10 @@ export const choreo = {
       ...contacts.map((c, i) => ({ t: c * b - LAND_E * dur, d: dur + SETTLE, what: `rule ${(run.probe.steps[i].rule ?? 0) + 1} replays`, info: true })),
       { t: reveal * b, d: PUSH.dur, what: 'the reveal: the result in learned pieces', info: true },
       { t: (reveal + 1) * b, d: 0.35, what: 'the unused rules dim', info: true },
+      ...(flow ? [{ t: (reveal - win) * b, d: 2 * win * b, what: `${REVEAL[flow].device} at the reveal`, info: false }] : []),
     ];
     return {
-      rowIn, chipsIn, scrambleEnd, contacts, replay: contacts.map((c) => c - (LAND_E * dur) / b), dur, reveal, dim: reveal + 1,
+      rowIn, chipsIn, scrambleEnd, contacts, replay: contacts.map((c) => c - (LAND_E * dur) / b), dur, reveal, dim: reveal + 1, flow, win,
       pushAt: reveal, capAt: [null, reveal],
       lands: [...contacts.map((c) => c * b), reveal * b, (reveal + 1) * b + 0.35], moves,
       motion: (reveal + 1) * b + 0.35 + HOLD * b + out, exit: out,
@@ -497,6 +517,8 @@ export const rulesFor = (run) => {
     // T2: the transition this scene enters with, starting a beat before the cut
     const e = enterOf(scenes, i);
     const expressive = e ? [{ t: -(ENTER[e].beats / 2) * b, beats: ENTER[e].beats, device: ENTER[e].device, variant: enterVariant(scenes, i) }] : [];
+    // and the probe's turn into its reveal (REVEAL), a beat before the reveal beat
+    if (s.type === 'probe' && ch.flow) expressive.push({ t: (ch.reveal - ch.win) * b, beats: REVEAL[ch.flow].beats, device: REVEAL[ch.flow].device, variant: REVEAL[ch.flow].variant });
     // T3: the hook's split, the probe's reveal (the climax), the claim the thesis lands (the lock-up)
     const peaks = [];
     if (s.type === 'hook') peaks.push({ t: ch.split * b, kind: 'hook' });

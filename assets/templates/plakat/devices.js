@@ -7,6 +7,11 @@
 //   counter-portal  (runtime/handoffs/counter-portal.js, T2)    the next scene waits in the counter of a figure's 0
 //   step-wipe       (runtime/handoffs/step-wipe.js, T2)  a staircase front whose steps are the next chart's values
 //   slot-rails      (runtime/handoffs/slot-rails.js, T0) two grid baselines are a slot; words pass through it
+// and one of the mode's own (rules.devices), like the problem's full accent wipe:
+//   plakat-reblock  (this template, T2)  a solid block of the outgoing poster is re-laid as a block of the next: the
+//                   verify page's accent stop band ("you decide") becomes the flow's first YOU node; the install page's
+//                   ink command block becomes the tagline's ink bar. Mode principle 5's re-layout at a turn: the block
+//                   is one object across the cut, keeps its colour (and so its meaning) and lands on the beat
 // The hand-offs are drawn by their modules on a canvas over the page (index.html), with the page's palette, fonts
 // and grid. The two frame-level entries need two rendered frames as textures, which a DOM page cannot hand to
 // WebGL; so this file computes their exact geometry — the module's own stagger, sweep, easing, slant and radius,
@@ -36,7 +41,13 @@ export const ENTER = {
   portal: { device: 'counter-portal', tier: 'T2', beats: counterPortal.beats, at: -counterPortal.beats },
   steps: { device: 'step-wipe', tier: 'T2', beats: stepWipe.beats, at: 0 },
   aperture: { device: 'aperture-swap', tier: 'T0', beats: AP.beats, at: 0 },
+  reblock: { device: 'plakat-reblock', tier: 'T2', beats: 1, at: -0.5 },
 };
+// The block hands over only where the outgoing block and the incoming one are the same kind of thing: the stop band
+// where the person decides → the flow's first node when it is the person; the ink command block → the tagline's bar.
+export const reblockPair = (prev, s) => !!prev && !!s && (
+  (prev.type === 'verify' && s.type === 'flow' && !!s.nodes?.[0]?.human) ||
+  (prev.type === 'install' && s.type === 'tagline'));
 export const SLOT_BEATS = slotRails.beats; // one word through the slot
 export const AP_BEATS = AP.beats; // one aperture (0.22 s at 120 BPM)
 export const isColumns = (e) => typeof e === 'string' && e.startsWith('columns');
@@ -48,7 +59,8 @@ export const portalTarget = (s) => !!s && (s.type === 'claim' || (s.type === 'wo
 // How scene i is entered. Explicit `enter` on the scene: 'columns', 'columns-lean', 'columns-two', 'turn' (the
 // mode's page turn) or 'cut'. Defaults: `bars` arrive by the step-wipe; a scene after a figure that can take the
 // portal arrives through it; `words` open their first state by the aperture; the first three chapter cards with no
-// `enter` take the columns in their three variants (upright, lean, two-phase), later ones turn the page.
+// `enter` take the columns in their three variants (upright, lean, two-phase), later ones turn the page; a `flow`
+// opening on the person after a `verify`, and a `tagline` after an `install`, take the block (reblock).
 export const enterOf = (scenes, i) => {
   const s = scenes[i], prev = scenes[i - 1];
   if (!s || !prev) return null;
@@ -59,6 +71,7 @@ export const enterOf = (scenes, i) => {
   if (s.type === 'words') return 'aperture';
   if (isColumns(e) && ENTER[e] && s.type !== 'claim') return e;
   if (e != null) return null;
+  if (reblockPair(prev, s)) return 'reblock';
   if (s.type === 'chapter') {
     const n = scenes.slice(1, i).filter((x) => x.type === 'chapter' && x.enter == null).length;
     return ['columns', 'columns-lean', 'columns-two'][n] ?? null;
@@ -66,10 +79,13 @@ export const enterOf = (scenes, i) => {
   return null;
 };
 // What ends scene i when the next scene's device covers it: 'columns', 'portal', 'aperture', else null (own exit).
+// 'reblock' does not cover the scene: it keeps its own exit and only hands its block over (planScene).
 export const exitOf = (scenes, i) => {
   const e = enterOf(scenes, i + 1);
-  return isColumns(e) ? 'columns' : e === 'portal' || e === 'aperture' ? e : null;
+  return isColumns(e) ? 'columns' : e === 'portal' || e === 'aperture' || e === 'reblock' ? e : null;
 };
+// u before the cut where the reblock starts (its block leaves the outgoing page there): half a beat
+export const REBLOCK_LEAD = -ENTER.reblock.at / 2; // beats → u (1 u = 2 beats)
 // The scene with its links: enterBy, exitBy, last. Every caller (index.html, timing.rules.js, score.mjs) plans
 // a scene through this, so a scene's length, picture and sound agree on how it starts and ends.
 export const linked = (scenes, i) => ({ ...scenes[i], enterBy: enterOf(scenes, i), exitBy: exitOf(scenes, i), last: i === scenes.length - 1 });

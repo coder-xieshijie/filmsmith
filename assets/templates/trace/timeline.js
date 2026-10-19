@@ -7,7 +7,7 @@ import { grid } from './lib/beat.js';
 import { fit } from './lib/timing.js';
 import {
   rulesFor, sceneTiming, caps, phrasesOf, stepRanges, morphs, morphFrom, enterOf, enterVariant, pathCaps,
-  CAP, FLIGHT, FUSE, EXIT, MORPH, PUSH, BIG, ENTER, SCRAMBLE,
+  CAP, FLIGHT, FUSE, EXIT, MORPH, PUSH, BIG, ENTER, REVEAL, SCRAMBLE,
 } from './timing.rules.js';
 
 export { FUSE };
@@ -115,6 +115,13 @@ export const plan = (content, run) => {
         S.events.push({ t: S.probe.rowIn, kind: 'pop' }, { t: S.probe.chipsIn, kind: 'scramble', dur: ch.scrambleEnd - ch.chipsIn * b });
         ch.contacts.forEach((c) => S.events.push({ t: B(c), kind: 'fuse', gain: 0.75 }));
         S.events.push({ t: reveal, kind: 'chime' });
+        // the flow at the reveal (REVEAL): a frame-level window like an entry's, its cut on the reveal beat; side A is
+        // the probe held just before the reveal, side B the reveal held until it starts
+        if (ch.flow) {
+          const dur = 2 * ch.win * b;
+          S.windows.push({ name: ch.flow, device: REVEAL[ch.flow].device, scene: i, t0: reveal - dur / 2, dur, cut: reveal, variant: REVEAL[ch.flow].variant, mirror: false });
+          S.events.push({ t: reveal - dur / 2, kind: ch.flow, dur });
+        }
         S.camera.push([B(ch.pushAt), 1.06, 960, 540, 'push', PUSH.dur], [out, 1, 960, 540, 'return', EXIT.camera]);
         cap();
         S.focus.push([sc.start, { board: 0.3, bar: 0.5, hist: 0, rules: 1 }]);

@@ -139,7 +139,8 @@ export const namedLinks = (scenes) => {
 export const REVIEW_CUES = { gather: 0.1, sheet: 2.0, tile: 0.125, checks: 4.0, counted: 5.5, pushEnd: 6.0, collapse: 6.45, card: 6.85, cardText: 7.05, recede: 4.0 };
 export const RECEDE = 0.4;
 
-// close: the second move (the underline extends right) lands on the downbeat of the link's last bar.
+// close: the second move (the caret at the URL's end falls flat into the URL's underline) lands on the downbeat of the
+// link's last bar.
 export const closeSecondMove = (D) => (D >= 3 ? D - 2 : null);
 
 // ---------- timing API 3 choreography (2026-10-19): the line hands over with the hand-off library ----------
@@ -186,9 +187,12 @@ export const NAME_UNDER = CENTRE_NAME.merge.y; // the merge's centre name baseli
 export const RIDE = { from: 0.95, to: 2.0 };
 
 // close: the line settles where the name's band will be, then thickens into a bar that a blade cuts into the name
-// (lib/handoffs rail-press, phase 'cut', 1 beat: the T2 of the lock-up). The band stays under the name as its
-// underline, at the same place as before (baseline + 50).
-export const CLOSE = { settle: 0.05, cut: 0.5, cutDur: 0.5, line: 1.05, url: 1.15, urlDur: 0.35, gap: 50 };
+// (lib/handoffs rail-press, phase 'cut', 1 beat: the T2 of the lock-up). What is left of the line does not stay under
+// the name (an underline there meant nothing: owner review, 2026-10-19): as the name lands
+// the band contracts into the caret at the URL's start (`caret` u, the open's caret path run back), the caret types the
+// URL, and on the last downbeat it falls flat into the URL's underline (OPEN.flat u, landing on closeSecondMove): the
+// line that typed the brief ends as the link. The closing line enters once the caret has passed (`line`).
+export const CLOSE = { settle: 0.05, cut: 0.5, cutDur: 0.5, caret: 0.2, line: 1.2, url: 1.2, urlDur: 0.3, gap: 50 };
 
 // review: the card's title, then its spec line typed in three parts (each part one state), then the line runs along
 // the card's foot as the export's progress (constant speed, a process), then the card squashes into the line.

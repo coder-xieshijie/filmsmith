@@ -1,8 +1,12 @@
 // sheets/checklist.js — INSPECTION RECORD. A requirement table ticked row by row, a large count computed from
 // the rows (never typed), a dashed note, a footer rule with a stop symbol, and an inspection stamp beside the
 // count (line colour: the verification is a machine's; it never covers the count or its caption).
+// The probe run (2026-10-19): the rows are not ticked by hand. A lamp crosses the record at a machine's feed
+// (film.js draws lib/transitions blueprint-expose over the frame, s.scan from timeline.js) and each row's result is
+// drafted the moment the lamp passes it; the count reads the rows passed.
 import { E, fontStr } from '../fx.js';
 import { X0, X1, CW, F, MIN, up, header, sz, union, fitStamp } from './common.js';
+import { CHECK_TABLE, checkRows } from '../choreography.js';
 
 export const plan = (pen, env, s) => {
   const { c, P } = env;
@@ -16,7 +20,8 @@ export const plan = (pen, env, s) => {
   const n = items.length;
   if (n < 3 || n > 8) env.err('items needs 3–8 entries');
   const pass = items.filter((x) => x.ok).length;
-  const tx = X0, ty = 430, tw = 760, hh = 48, rh = Math.min(45, Math.floor(315 / Math.max(n, 1)) + 0), th = hh + n * rh + 12;
+  const { rh, yc: rowY } = checkRows(n);
+  const tx = X0, ty = CHECK_TABLE.y, tw = 760, hh = CHECK_TABLE.head, th = hh + n * rh + 12;
   const tt = c('table');
   pen.rect(tx, ty, tw, th, tt, 0.5, 's1');
   pen.seg(tx, ty + hh, tx + tw, ty + hh, tt + 0.1, 0.3, 's1');
@@ -26,10 +31,11 @@ export const plan = (pen, env, s) => {
   pen.text(up(head[0]), 176, ty + 34, F.tag, tt + 0.1, 0.3, { col: 'line' });
   pen.text(up(head[1] || ''), 630, ty + 34, F.tag, tt + 0.15, 0.3, { col: 'line' });
   const fid = { fam: 'mono', w: 400, size: 35 };
-  const chk = items.map((_, i) => c('chk' + i));
+  // each row's result is drafted as the probe run's lamp passes it (timeline.js s.scan.rows, from choreography.js)
+  const chk = items.map((_, i) => s.scan?.rows?.[i] ?? c('scan'));
   items.forEach((it, i) => {
     env.lim(`items[${i}].id`, it.id, 8);
-    const yc = ty + hh + rh * (i + 0.5) + 6;
+    const yc = rowY[i];
     pen.text(it.id, 176, yc + 9, fid, tt + 0.15 + i * 0.05, 0.25);
     if (i < n - 1) pen.seg(tx, ty + hh + rh * (i + 1) + 6, tx + tw, ty + hh + rh * (i + 1) + 6, tt + 0.15 + i * 0.05, 0.25, 'sg');
     if (it.ok) pen.line([[642, yc], [652, yc + 11], [674, yc - 11]], chk[i], 0.14, 's2', { ease: E.quadOut, width: 4 });

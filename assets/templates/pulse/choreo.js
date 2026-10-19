@@ -225,20 +225,47 @@ export const needOf = (s, p, B, x, reading) => {
   return end + leadSec(x.outKind, B);
 };
 
+// The landing of each step, in seconds from the scene's start: a still hold starts at each.
+const marksOf = (s, p) => (() => {
+  switch (s.type) {
+    case 'ask': return p.states.flatMap((st) => [st.land + (st.ap && st.ap !== 'invert' ? C.apLeadSec : 0), st.param && st.paramAt > st.land ? st.typed : null]);
+    case 'search': return [0, ...p.hops.map((h) => h.t), p.lock, p.result != null ? p.result + C.apLeadSec : null, p.summaryTyped];
+    case 'data': return [...p.rows.flatMap((r) => [r.land, r.resolved, r.labelIn]), p.queryTyped];
+    case 'reveal': return [C.shockSec, p.lineAt + C.riseSec, p.typed];
+    case 'name': return [p.nameIn, p.lineAt + C.riseSec, p.typed];
+    default: return [0];
+  }
+})().filter((v) => v != null).sort((a, b) => a - b).filter((v, k, a) => k === 0 || v - a[k - 1] > 1e-6);
+
+// The beat pop (T0): when the grid, a turn's pad or the phrase share leave the last step of an ask, a verdict or a
+// data scene holding still over two beats, the scene's focus (the last word, the verdict, the last figure) pops on
+// the beat that splits the hold: the hop's pop (3.5 %, decaying over 0.12 s), scaled about the anchor point, so no
+// new text and nothing moves off the anchor. `dur` is the scene's fitted seconds; at the need there is no slack and
+// no pop. Seconds from the scene's start; film.js draws them, timeline.js reports them as micro.
+export const POP = { scale: 0.035, sec: 0.12 };
+export const popsOf = (s, p, B, outKind, dur) => {
+  if (dur == null || !(s.type === 'ask' || s.type === 'data' || (s.type === 'search' && p.result != null))) return [];
+  const marks = marksOf(s, p), m = marks.at(-1) ?? 0, stop = dur - leadSec(outKind, B);
+  const w = stop - m, cap = 2 * B, min = 0.2;
+  if (w <= cap + 1e-6) return [];
+  const n = Math.ceil(w / cap - 1e-9) - 1, pops = [];
+  for (let j = 1; j <= n; j++) {
+    const target = m + (j * w) / (n + 1), prev = pops.at(-1) ?? m;
+    // on the nearest beat that keeps both holds within [0.2 s, 2 beats]; off the grid only if no beat does
+    const ok = (t) => t - prev >= min - 1e-9 && t - prev <= cap + 1e-6 && stop - t >= min - 1e-9 && stop - t <= (n - j + 1) * cap + 1e-6;
+    const beats = [Math.round(target / B), Math.floor(target / B), Math.ceil(target / B)].map((k) => k * B);
+    pops.push(beats.find(ok) ?? target);
+  }
+  return pops;
+};
+
 // The still hold after each step lands, for fit()'s ceilings (api 3: ≤ 2 beats; the reveal's claim ≤ 2 bars, a pause).
-export const stepsOf = (s, p, B, need, x) => {
+// `dur` (the fitted seconds, fit()'s ctx.dur) adds the beat pops that split the slack; without it, the holds at the need.
+export const stepsOf = (s, p, B, need, x, dur) => {
   const lead = leadSec(x.outKind, B);
-  const marks = (() => {
-    switch (s.type) {
-      case 'ask': return p.states.flatMap((st) => [st.land + (st.ap && st.ap !== 'invert' ? C.apLeadSec : 0), st.param && st.paramAt > st.land ? st.typed : null]);
-      case 'search': return [0, ...p.hops.map((h) => h.t), p.lock, p.result != null ? p.result + C.apLeadSec : null, p.summaryTyped];
-      case 'data': return [...p.rows.flatMap((r) => [r.land, r.resolved, r.labelIn]), p.queryTyped];
-      case 'reveal': return [C.shockSec, p.lineAt + C.riseSec, p.typed];
-      case 'name': return [p.nameIn, p.lineAt + C.riseSec, p.typed];
-      default: return [0];
-    }
-  })().filter((v) => v != null).sort((a, b) => a - b).filter((v, k, a) => k === 0 || v - a[k - 1] > 1e-6);
-  const stop = need - lead;
+  const pops = popsOf(s, p, B, x.outKind, dur);
+  const marks = [...marksOf(s, p), ...pops].sort((a, b) => a - b);
+  const stop = (dur ?? need) - lead;
   // an ask's word is still only until the next aperture starts covering it, 0.12 s before the next state lands
   const cover = s.type === 'ask' ? p.states.slice(1).map((st) => st.land - (st.ap && st.ap !== 'invert' ? C.apLeadSec : 0)) : [];
   return marks.map((m, k) => {

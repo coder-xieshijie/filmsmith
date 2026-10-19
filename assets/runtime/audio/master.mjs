@@ -69,33 +69,33 @@ const glue = (chs, sr, { ratio = 2, attack = 0.03, release = 0.2 } = {}) => {
 };
 
 // aacPeak(path, { bitrate }) → the true peak (dBTP) of `path` encoded to AAC the way HyperFrames delivers it: the
-// mixer encodes the mix to AAC 192k and a duration pad or trim may encode that again; the higher of the two
-// generations is returned (with both). An encode overshoots a PCM master's true peak, most on a hit out of near
+// mixer encodes the mix to AAC 192k, the duration pad or trim encodes it again and the mux a third time (phosphor's
+// demo measured −1.2 dBTP after three, 2026-10-19); the highest of the three generations is returned (with each). An encode overshoots a PCM master's true peak, most on a hit out of near
 // silence (+2 dB measured on ink's first slam, 2026-10-19).
 export const aacPeak = async (path, { bitrate = '192k' } = {}) => {
-  const a = `${path}.aac1.m4a`, b = `${path}.aac2.m4a`;
+  const gen = [1, 2, 3].map((n) => `${path}.aac${n}.m4a`);
   try {
-    for (const [src, dst] of [[path, a], [a, b]]) {
-      const r = ff(['-i', src, '-map', '0:a:0', '-vn', '-c:a', 'aac', '-b:a', bitrate, dst]);
+    gen.forEach((dst, i) => {
+      const r = ff(['-i', i ? gen[i - 1] : path, '-map', '0:a:0', '-vn', '-c:a', 'aac', '-b:a', bitrate, dst]);
       if (r.status !== 0) throw new Error(`master: AAC encode failed\n${r.stderr.slice(-1000)}`);
-    }
-    const p1 = measure(a).TP, p2 = measure(b).TP;
-    return { TP: Math.max(p1, p2), first: p1, second: p2 };
+    });
+    const [first, second, third] = gen.map((g) => measure(g).TP);
+    return { TP: Math.max(first, second, third), first, second, third };
   } finally {
-    await rm(a, { force: true }); await rm(b, { force: true });
+    for (const g of gen) await rm(g, { force: true });
   }
 };
 
 // The delivery check. HyperFrames lowers the whole mix when its AAC encode has a true peak over −1 dBTP ("Audio lowered
 // by X dB" in the render log), which took films that open on a hit to −15…−21 LUFS (2026-10-19). After the master,
-// the output is encoded to AAC 192k and measured (aacPeak); over `aac.ceiling` (−1.2 dBTP, 0.2 dB under the renderer's
+// the output is encoded to AAC 192k and measured (aacPeak); over `aac.ceiling` (−1.5 dBTP, check-film's delivery gate, under the renderer's
 // line) the master runs again with its true-peak target lowered by the excess, so the pre-limiter takes the peaks
 // down and the loudness stays on target; up to `aac.passes` (3) times. If it is still over, the gain is lowered by
 // the excess (the loudness drops, by much less than the renderer would take). aac: false skips the check.
 export const master = async (input, output, opts = {}) => {
   const { tp = -1.5, quiet = false, aac = {} } = opts;
   if (aac === false) return masterOnce(input, output, opts);
-  const ceiling = aac.ceiling ?? -1.2, passes = aac.passes ?? 3;
+  const ceiling = aac.ceiling ?? -1.5, passes = aac.passes ?? 3;
   const log = [];
   let tpUsed = tp, res, peak;
   for (let pass = 0; ; pass++) {

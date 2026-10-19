@@ -2,7 +2,7 @@
 // takes scene lengths, tempo and duration from lib/timing.js fit() with timing.rules.js).
 // Bed: the kit's `blueprint` preset (soft arpeggio, clock ticks, airy pad). Effects: one sound per drawn event —
 // pencil taps for lettering, knocks for boxes, ticks for checks and laps, a paper slide for each camera move,
-// a stamp thud (with a duck) on each of the four stamp beats, a box knock on the RELEASED status. Every camera
+// a stamp thud (with a duck) on each of the four stamp beats, a hum and a feed whoosh under the checklist's probe run, a box knock on the RELEASED status. Every camera
 // arrival and turn (key events of kind land / turn in timing.json) also gets a crisp drafting tick, so each
 // arrival has an onset above 1.5 kHz, and a soft set-down thud where nothing but a pencil tap sounds with it.
 // Writes assets/audio/mix.wav (−14 LUFS, true peak ≤ −1.5 dBTP) and assets/audio/measure.json.
@@ -11,7 +11,7 @@
 import { mkdir } from 'node:fs/promises';
 import content from './content.js';
 import { schedule } from './timeline.js';
-import { ROUTE_B, FLOOD_B, UNFOLD_B, SLOT_B } from './choreography.js';
+import { ROUTE_B, FLOOD_B, UNFOLD_B, SLOT_B, SCAN_B } from './choreography.js';
 import { events } from './lib/timing.js';
 import rules, { MUSIC } from './timing.rules.js';
 import { Score, master, writeMeasure } from './lib/audio/index.mjs';
@@ -61,6 +61,9 @@ for (const ev of S.sounds) {
     case 'reinterpret': for (let k = 0; k < 3; k++) s.play('tick', t + k * 0.1 * g.beat, { freq: 2900 + k * 260, decay: 0.01, seed: rr() }, { gain: -19, pan: -0.2 + k * 0.2, send: 0.12 }); break;
     case 'unfold': s.play('whoosh', t, { dur: 0.5 * UNFOLD_B * g.beat, up: false, lo: 300, hi: 2400, q: 0.9, peak: 0.5 }, { gain: -25, send: 0.25 }); for (let k = 0; k < 6; k++) s.play('rim', t + (0.5 + 0.025 * k) * UNFOLD_B * g.beat + 0.38 * UNFOLD_B * g.beat, { freq: 900 + k * 70, seed: rr() }, { gain: -24, send: 0.1 }); break;
     case 'slot': s.play('tick', t + 0.72 * SLOT_B * g.beat, { freq: 2400, decay: 0.012, seed: rr() }, { gain: -18, send: 0.12 }); s.play('thud', t + 0.72 * SLOT_B * g.beat, { freq: 110, decay: 0.06 }, { gain: -23 }); break;
+    // the probe run: the lamp's low hum and a soft feed whoosh across it; each row a short, quiet tick as it is passed
+    case 'scan': s.play('whoosh', t, { dur: 0.83 * SCAN_B * g.beat, up: true, lo: 400, hi: 3000, q: 1, peak: 0.55 }, { gain: -24, send: 0.2 }); s.play('swell', t, { freqs: ['E2', 'B2'], dur: 0.83 * SCAN_B * g.beat, cutoff: 500 }, { gain: -27, bus: 'music' }); break;
+    case 'probe': s.play('tick', t, { freq: 3000 + (n % 4) * 120, decay: 0.006, seed: rr() }, { gain: -21, pan: 0.15, send: 0.1 }); break;
     case 'rule': s.play('whoosh', t, { dur: g.beat, up: false, lo: 180, hi: 1600, q: 1.1, peak: 0.5 }, { gain: -19, send: 0.15 }); break;
     case 'route': s.play('swell', t, { freqs: ['E3', 'B3', 'D4', 'F#4'], dur: ROUTE_B * g.beat, cutoff: 2000 }, { gain: -21, send: 0.3, bus: 'music' }); s.play('chime', t + ROUTE_B * g.beat, { freq: 'B5', notes: 3, decay: 0.5 }, { gain: -25, send: 0.35 }); break;
     default: break;

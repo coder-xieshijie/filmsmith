@@ -161,9 +161,9 @@
       // the plakat-columns clip while the shutter passes (devices.js columnsAt), so the two never overwrite each other.
       const host = $('#scenes');
       const beat = g.beat;
-      // when each scene is on screen: from its start (or from the columns' window before it), until its end plus the
-      // part of its exit (or of the device covering it) that runs past the cut
-      const showFrom = laid.map((s) => (isColumns(s.enterBy) ? s.start + windowOf(s.enterBy, beat)[0] : s.start));
+      // when each scene is on screen: from its start (or from the columns' or the reblock's window before it), until its
+      // end plus the part of its exit (or of the device covering it) that runs past the cut
+      const showFrom = laid.map((s) => (isColumns(s.enterBy) || s.enterBy === 'reblock' ? s.start + windowOf(s.enterBy, beat)[0] : s.start));
       const hideAt = laid.map((s, i) => (i < laid.length - 1 ? s.end + (s.P.tail || 0) : D + 1));
       const apis = laid.map((s, i) => {
         const wrap = document.createElement('div');

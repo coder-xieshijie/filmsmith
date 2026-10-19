@@ -88,9 +88,9 @@
         dctx.globalAlpha = 1;
       }
       const mirror = (src, dst) => { const g = dst.getContext('2d'); g.setTransform(-1, 0, 0, 1, W, 0); g.drawImage(src, 0, 0); g.setTransform(1, 0, 0, 1, 0, 0); return dst; };
-      // Frame-level transitions (lib/transitions): token-sweep and trace-flow, two beats straddling a cut. Side A is the
-      // outgoing scene held at the cut, side B the incoming one held at the cut until it starts; both keep moving
-      // where they are not held. Colours by role (references/transitions.md, mode trace): the bars and the front in
+      // Frame-level transitions (lib/transitions): token-sweep and trace-flow, two beats straddling a cut (a scene's, or
+      // the probe's reveal beat with `reveal: 'flow'`). Side A is the outgoing scene held at the cut, side B the
+      // incoming one held at the cut until it starts; both keep moving where they are not held. Colours by role (references/transitions.md, mode trace): the bars and the front in
       // `learned`, never the active colour.
       const DEVICE = { sweep: 'token-sweep', flow: 'trace-flow' };
       function transition(w, t) {

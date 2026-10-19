@@ -17,7 +17,7 @@ export default {
     { type: 'loop', to: 3, caption: 'Same for every row.' },
     { type: 'loop', pace: 1, enter: 'path', caption: 'Repeat.' },
     { type: 'summary', enter: 'sweep', big: '{C0} → [[learned|{CN}]]' },
-    { type: 'probe', enter: 'flow', captions: ['A row with no runs:', 'Noise grows: [[unseen|{P0} → {P1} symbols]].'] },
+    { type: 'probe', reveal: 'flow', captions: ['A row with no runs:', 'Noise grows: [[unseen|{P0} → {P1} symbols]].'] },
     {
       type: 'thesis',
       lines: ['Count the [[active|run]].', 'Write it [[learned|once]].', 'Noise does not shrink.'],

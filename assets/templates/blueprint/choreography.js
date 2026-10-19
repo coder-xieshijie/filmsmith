@@ -61,6 +61,36 @@ export const RULE_B = 1;
 export const REINTERPRET_B = 1, UNFOLD_B = 2;
 // The stages sheet (X02): one word a beat through a slot between two dimension lines (slot-rails, SLOT_B each).
 export const SLOT_B = 1;
+// The checklist's probe run (2026-10-19, phase 3): the machine's inspection is a lamp crossing the record at a
+// machine's steady feed (lib/transitions blueprint-expose, develop: false: a reading, not an exposure, so the print
+// is still issued once, by a person). Each row's result is drafted as the lamp passes it; the count is the rows
+// passed. SCAN_B beats from the `scan` cue; the lamp has left the frame by 0.83 of it, before the push-in starts.
+export const SCAN_B = 1.5;
+// The inspection table's row centres (sheet px, y), shared with sheets/checklist.js so the picture, the sound and the
+// key events time each row from the same geometry.
+export const CHECK_TABLE = { y: 430, head: 48, rows: 315, rowMax: 45, tickX: 658 };
+export const checkRows = (n) => {
+  const rh = Math.min(CHECK_TABLE.rowMax, Math.floor(CHECK_TABLE.rows / Math.max(n, 1)));
+  return { rh, yc: [...Array(n).keys()].map((i) => CHECK_TABLE.y + CHECK_TABLE.head + rh * (i + 0.5) + 6) };
+};
+// blueprint-expose's lamp (lib/transitions/blueprint.js, develop: false): X = mix(−210, len + 210, e), e = mix(p,
+// cubicInOut(p), 0.45); a film pixel at coordinate a along the travel is passed when X reaches it. Returns that p.
+const cubicInOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2);
+export const lampPass = (a, len) => {
+  const want = (a + 210) / (len + 420);
+  let lo = 0, hi = 1;
+  for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; ((0.55 * m + 0.45 * cubicInOut(m)) < want ? (lo = m) : (hi = m)); }
+  return (lo + hi) / 2;
+};
+// The k-th probe run of a film crosses down the rows, the next across the columns, so two in a row are never the
+// same (api 3: one device twice in a row unchanged is an error). Beats after the scan cue at which each row is passed:
+// the sheet sits centred at rest, so a row's sheet y is its screen y (the drift's 1 % moves it < 2 px, a frame's
+// travel of the lamp).
+export const SCAN_DIRS = ['down', 'right'];
+export const scanRowBeats = (n, dir) => {
+  const { yc } = checkRows(n);
+  return yc.map((y) => SCAN_B * (dir === 'right' ? lampPass(CHECK_TABLE.tickX - 16, 1920) : lampPass(y - 11, 1080)));
+};
 
 // Choreography per type: cue name → beat after the camera arrives; N0 = beats until the last element
 // has landed (the build); stamp = the beat a stamp lands on (stamp types and the final overview).
@@ -97,11 +127,13 @@ export const CUES = {
     s.milestones.forEach((_, i) => (c['lap' + i] = 1.6 + (2.4 * (i + 1)) / n));
     return { N0: 4.5, c, sounds: [['title', 'pen'], ['loop', 'pen'], ['gate', 'box'], ['aside', 'pen'], ...s.milestones.map((_, i) => ['lap' + i, 'tick'])] };
   },
-  checklist: (s) => {
-    const n = s.items.length, c = { title: 0, sub: 0.5, table: 0.8, count: 1.4, label: 2.0, note: 3.0, footer: 3.3 };
-    s.items.forEach((_, i) => (c['chk' + i] = 1.6 + (n > 1 ? (1.4 * i) / (n - 1) : 0)));
-    return { N0: STAMP_N0, stamp: STAMP_B, c, sounds: [['title', 'pen'], ['table', 'pen'], ...s.items.map((_, i) => ['chk' + i, 'tick']), ['note', 'pen'], ['footer', 'pen']] };
-  },
+  // the record is drawn, the count stands at 0 / n, then the probe run's lamp crosses it (SCAN_B from `scan`) and each
+  // row's result is drafted as the lamp passes (scanRowBeats; timeline.js adds a tick sound per row at those times)
+  checklist: () => ({
+    N0: STAMP_N0, stamp: STAMP_B,
+    c: { title: 0, sub: 0.5, table: 0.8, count: 1.4, label: 1.6, scan: 2.0, note: 3.0, footer: 3.3 },
+    sounds: [['title', 'pen'], ['table', 'pen'], ['scan', 'scan'], ['note', 'pen'], ['footer', 'pen']],
+  }),
   assembly: () => ({
     N0: 4.5,
     c: { title: 0, axis: 0.5, ends: 0.7, nodes: 0.9, assemble: 2.25, brackets: 2.6, loop: 2.9, claim: 3.2, claimSub: 3.6 },

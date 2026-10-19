@@ -672,8 +672,9 @@ const TIMING = {
     return finish(T, rd);
   },
   // Title, then the install commands typed under a musical break; the steps land one per beat as soon as the
-  // commands are read; the music drops on the first bar line among them.
-  install(s, g, read) {
+  // commands are read; the music drops on the first bar line among them. `wait` (beats, from TIMING.install
+  // below) holds the terminal that much longer before the steps, and the terminal's bar and title dim in it.
+  install(s, g, read, wait = 0) {
     const B = g.beat, D = s.dur, rd = session(read), bar = B * (g.beatsPerBar ?? 4);
     const T = { title1: 0.1 * B, title2: 0.6 * B, term: 0.43 * B, cps: 90 };
     rd.move(T.title1, 0.5, 'the title decodes'); rd.move(T.title2, 0.45, 'its second half'); rd.move(T.term, 0.35, 'the terminal');
@@ -693,7 +694,19 @@ const TIMING = {
     // the first bar line among them (four beats always hold one), so a step lands on the drop and the
     // terminal never waits for a bar line
     const steps = (s.steps || []).slice(0, 4);
-    const s0 = onBeat(rd.done - 1.25 * B, B);
+    const s0 = onBeat(rd.done - 1.25 * B, B) + wait * B;
+    // the wait: the terminal's supporting elements dim on the beat (the tails' grammar), one group a dim, so no
+    // hold before the steps passes two beats
+    T.waits = [];
+    if (wait > 0 && steps.length) {
+      const E = Math.max(0, ...rd.moves.map(([, z]) => z)), cap = HOLD * B;
+      const absBeat = (t) => Math.round(((s.start ?? 0) + t) / B) * B - (s.start ?? 0);
+      const n = Math.ceil((s0 - E) / cap - 1e-6) - 1;
+      for (let k = 1; k <= n; k++) {
+        const t = absBeat(E + ((s0 - E) * k) / (n + 1));
+        if (t > E + 0.2 && t < s0 - 0.2 && !T.waits.some((x) => Math.abs(x - t) < 1e-6)) T.waits.push(rd.move(t, 0.1, 'the terminal dims'));
+      }
+    }
     T.stepsAt = steps.length ? Math.max(bar, Math.ceil(s0 / bar - 1e-6) * bar) : null;
     if (T.stepsAt != null && T.stepsAt > s0 + (steps.length - 1) * B + 1e-6) T.stepsAt = null; // no bar line among them: no drop
     T.steps = steps.map((_, i) => rd.move(s0 + i * B, 0.3, 'step'));
@@ -786,6 +799,19 @@ const TIMING = {
     T.micro = T.ticks.map((x) => [x, 'a chip lights']);
     return finish(T, rd);
   },
+};
+
+// The install leads into the closing tagline, whose claim is the climax: its step cards are the last composition
+// before the tunnel, and the run into the climax must be the shortest (principle 5, T3). So the time the fit adds
+// to the install (the grid, the pad before the tagline's bar line) goes to the terminal before the cards, in whole
+// beats, and the cards keep their own length: they land later, read, and cut. Less than a beat left over is held
+// on the cards (a tail dims it when it would pass two beats).
+const installAt = TIMING.install;
+TIMING.install = (s, g, read) => {
+  const T = installAt(s, g, read, 0);
+  if (!Number.isFinite(s.dur) || !T.steps.length) return T;
+  const k = Math.floor((s.dur - T.out - T.done) / g.beat + 1e-6);
+  return k > 0 ? installAt(s, g, read, k) : T;
 };
 
 // The candidates' hop schedule of the pick, from lib/handoffs roulette-lock itself: hop times in beats, the lock,

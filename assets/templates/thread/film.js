@@ -45,7 +45,7 @@ export const REGISTRY = {
   tracks: { tail: true, win: [-0.05, 0.05], blur: (D) => [[0.45, 1.05, 10], [D - 1.0, D - 0.02, 10]], still: (D) => [1.5, D - 1.0] },
   ink: { optional: true, win: [0, 0.05], still: (D) => [1.0, D - 0.2] },
   review: { tail: true, win: [-0.25, 0], blur: (D) => [[RC.gather, 0.9], [RC.collapse, RC.collapse + 0.5, 10], [D - CARD.squash, D, 10]] },
-  close: { win: [-0.1, 0], blur: () => [[0.15, 0.65]] },
+  close: { win: [-0.1, 0], blur: (D) => { const c = CLOSE.cut + CLOSE.cutDur, u2 = closeSecondMove(D); return [[0.15, 0.65], [c, c + CLOSE.caret, 6], ...(u2 == null ? [] : [[u2 - OPEN.flat, u2, 6]])]; } },
 };
 const ORDER = Object.keys(REGISTRY);
 const LIMITS = { phrase: 24, phraseWords: 5, wordMin: 4, wordMax: 7, stageName: 14, note: 40, track: 12, words: 14, count: 22, card: 4, name: 16, line: 52, url: 52 };
@@ -512,11 +512,12 @@ let PRESSH = null; // built in ready()
 const shiftOf = (S) => (S && S.prev && pressedName(laid, S.prev.i) ? PRESS.shift : 0);
 // rail-press with the thread's profile: the module draws the word and the bar, the band (the line itself) is drawn here
 // through threadRect, so a swelled thread stays swelled (a template-local extension: the module fills an even band).
-const railDraw = (c, h, q, ext = 0) => {
+// band: false draws the word and the bar only (the close, once its line has left the name).
+const railDraw = (c, h, q, band = true) => {
   const R = h.state(q), xl = h.params.x - R.half, w = 2 * R.half;
   c.save(); c.beginPath(); c.rect(0, 0, W, H); c.rect(xl - 2, R.yTop, w + 4, R.th); c.clip('evenodd');
   h.draw(c, q, { blur: false }); c.restore();
-  c.fillStyle = P.line; threadRect(c, xl, R.yTop, w + ext, R.th);
+  if (band) { c.fillStyle = P.line; threadRect(c, xl, R.yTop, w, R.th); }
 };
 const curves = {
   draw(ctx, u, S) {
@@ -799,14 +800,26 @@ const review = {
   bg: (u) => (u >= -0.05 && 1150 * expIn(clamp((u + 0.25) / 0.3)) > 900 && u < RC.recede - RECEDE ? 'line' : 'ground'),
 };
 
-// ---------- close: the ground opens from the line; the line is cut into the name and stays under it ----------
+// ---------- close: the ground opens from the line; the line is cut into the name and ends as the link ----------
 // The ground opens out of the line (the card's, or in the short chain the merge's rod); the line settles where the
-// name's band will be (baseline + 50, the underline's old place), thickens upward into a bar, and a blade cuts the bar
-// into the name, left to right (lib/handoffs rail-press, phase 'cut', 1 beat, landing on the beat: the lock-up). The band
-// stays under the name as its underline. Second move (principle 5, the closing scene): on the downbeat of the last bar
-// (shots.js closeSecondMove) the underline extends right by a fifth of its width and holds.
+// name's band will be (baseline + 50), thickens upward into a bar, and a blade cuts the bar into the name, left to right
+// (lib/handoffs rail-press, phase 'cut', 1 beat, landing on the beat: the lock-up). What is left of the line does not
+// stay under the name: as the name lands, the band contracts into the caret at the URL's start (the open's caret path
+// run back, caretToLine), the caret types the URL, and on the downbeat of the last bar (shots.js closeSecondMove, the
+// closing second move of principle 5) it falls flat into the URL's underline, as the caret fell flat under the brief.
+// The line that typed the request ends as the link to the product. Without a URL the band stays under the name.
 let CUT = null; // built in ready()
 const nameSize = (name) => Math.min(196, fitSize('disp', 800, -0.03, name, 1500, 196));
+const URL_Y = 870; // the URL's baseline (name 600 + 270)
+// The URL as typed (mono 500, ≤ 44 px, +0.02 em), its caret and its underline, in the open's proportions scaled to its size.
+const urlGeo = (url) => {
+  const size = Math.min(TYPE.body, fitSize('mono', 500, 0.02, url, 1500, TYPE.body)), k = size / TYPE.body;
+  const xs = adv('mono', 500, size, 0.02, url), w = textW('mono', 500, size, 0.02, url), x0 = 960 - w / 2;
+  const cps = Math.max(110, url.length / CLOSE.urlDur);
+  const caret = (n) => ({ x: x0 + (n ? xs[n] + 8 * k : 0), y: URL_Y - 48 * k, w: LINE.h, h: 64 * k });
+  const under = { x: 960 - (w + 48) / 2, y: URL_Y + OPEN.lift * k - LINE.h / 2, w: w + 48, h: LINE.h };
+  return { size, xs, w, x0, cps, caret, under };
+};
 const close = {
   draw(ctx, u, S) {
     const op = expOut(clamp(u / 0.3));
@@ -821,14 +834,19 @@ const close = {
     if (u < 0 && !rod) return;
     if (!CUT) return;
     const R0 = CUT.state(0), band = { x: 960 - R0.half, y: R0.yTop, w: 2 * R0.half, h: R0.th };
+    const url = S.url || '', UG = url.trim() ? urlGeo(url) : null, done = CLOSE.cut + CLOSE.cutDur;
     if (u < CLOSE.cut) { // the line settles where the band will be (an exact landing, so the cut starts on its rest)
       const e = settle(clamp((u - CLOSE.settle) / (CLOSE.cut - CLOSE.settle - 0.05)), 10);
       fillBox(ctx, boxLerp({ x: 960 - w0 / 2, y: y0 - LINE.h / 2, w: w0, h: LINE.h }, band, e));
-    } else if (u < CLOSE.cut + CLOSE.cutDur) {
+    } else if (u < done) {
       handoffDraw(ctx, CUT, (u - CLOSE.cut) / CLOSE.cutDur, CLOSE.cutDur / K, (c, q) => railDraw(c, CUT, q));
-    } else {
-      const u2 = closeSecondMove(S.D);
-      railDraw(ctx, CUT, 1, u2 == null ? 0 : 0.2 * band.w * land(u, u2, 22));
+    } else if (!UG) railDraw(ctx, CUT, 1);
+    else {
+      railDraw(ctx, CUT, 1, false);
+      const n = typedCount(u, CLOSE.url, UG.cps, url.length), u2 = closeSecondMove(S.D);
+      const fall0 = u2 == null ? CLOSE.url + url.length / UG.cps + OPEN.flatDelay : u2 - OPEN.flat;
+      if (u < done + CLOSE.caret) fillBox(ctx, caretToLine(UG.caret(0), band, 1 - (u - done) / CLOSE.caret)); // the band contracts into the caret
+      else fillBox(ctx, caretToLine(UG.caret(n), UG.under, clamp((u - fall0) / OPEN.flat))); // types the URL, then falls flat under it
     }
     const y = 600;
     if (u >= CLOSE.line) {
@@ -836,8 +854,7 @@ const close = {
       ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = P.text; setFont(ctx, 'serif', 400, sz, 0); ctx.textAlign = 'center';
       ctx.fillText(S.line || '', 960, y + 150 + (1 - a) * 20); ctx.restore();
     }
-    const url = S.url || '', usz = Math.min(TYPE.body, fitSize('mono', 500, 0.02, url, 1500, TYPE.body));
-    typed(ctx, url, 960, y + 270, CLOSE.url, u, { size: usz, cps: Math.max(110, url.length / CLOSE.urlDur), align: 'center', ls: 0.02, color: P.text }); // typed in CLOSE.urlDur: holds ≥ 3 s
+    if (UG) typed(ctx, url, 960, URL_Y, CLOSE.url, u, { size: UG.size, cps: UG.cps, align: 'center', ls: 0.02, color: P.text }); // typed in CLOSE.urlDur: holds ≥ 3 s
   },
 };
 

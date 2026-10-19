@@ -33,7 +33,7 @@ export default {
     { type: 'loop', to: 4, caption: 'Recount, merge the winner.' },
     { type: 'loop', pace: 1, enter: 'path', caption: 'Repeat.' },
     { type: 'summary', enter: 'sweep', big: '{T0} → [[learned|{TN}]]' },
-    { type: 'probe', captions: ['An unseen word: [[unseen|{PROBE}]]', 'Learned pieces: [[learned|{ENC}]]'] },
+    { type: 'probe', reveal: 'flow', captions: ['An unseen word: [[unseen|{PROBE}]]', 'Learned pieces: [[learned|{ENC}]]'] },
     {
       type: 'thesis',
       lines: ['Count the [[active|most frequent pair]].', '[[learned|Merge]] it.', 'Repeat.'],

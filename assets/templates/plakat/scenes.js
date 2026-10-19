@@ -38,7 +38,7 @@ import { createHandoff } from './lib/handoffs/index.js';
 import { text as ctext, measure as cmeasure } from './lib/handoffs/util.js';
 import { expOut } from './lib/motion.js';
 import RULES from './timing.rules.js';
-import { ENTER, SLOT_BEATS, AP_BEATS, isColumns, linked, portalTarget, APERTURE_SHAPES } from './devices.js';
+import { ENTER, SLOT_BEATS, AP_BEATS, isColumns, linked, portalTarget, APERTURE_SHAPES, REBLOCK_LEAD } from './devices.js';
 
 // ---------- grid ----------
 export const COL = (i) => 96 + (i - 1) * 146; // left edge of column i (1..12): 96 px margins, 122 px columns, 24 px gutters
@@ -80,6 +80,23 @@ const isDiag = (s) => s.form === 'diagonal';
 const skew = (sign) => `transform:skewX(${(sign * LEAN_DEG).toFixed(4)}deg)`;
 const FIELD_OVER = 190;
 const CLAIM_EDGE = 814;
+
+// ---------- plakat-reblock (devices.js): the block that crosses the cut ----------
+// It leaves the outgoing page REBLOCK_LEAD u before the cut and lands REBLOCK_LAND u after it (1 beat, expo in-out),
+// drawn by the incoming scene's own element (the flow's first node, the tagline's bar) starting from the outgoing
+// block's rectangle; the outgoing block hides on the frame the move starts, so one block is on screen throughout.
+export const REBLOCK_LAND = (ENTER.reblock.at + ENTER.reblock.beats) / 2;
+const REBLOCK_EASE = 'expo.inOut';
+// the verify page's stop band, and the install page's command block, as rectangles (film px) with their lean
+const bandRect = (s) => { const bo = isDiag(s) ? Math.ceil(LEAN * 80) : 0; return { left: -bo, top: 780, width: 1920 + 2 * bo, height: 160, skewX: bo ? -LEAN_DEG : 0 }; };
+const commandRect = (s) => ({ left: 96, top: 350, width: 1728, height: 200, skewX: isDiag(s) ? -LEAN_DEG : 0 });
+// the incoming element is set on the outgoing block's rectangle from the film's start (its scene is hidden until the
+// move begins), then moves onto its own
+const reblockIn = (api, el, from, to) => {
+  const { tl, at, k } = api;
+  tl.set(el, { ...from, transformOrigin: '0% 50%' }, 0);
+  tl.to(el, { ...to, skewX: 0, duration: ENTER.reblock.beats * 0.5 * k, ease: REBLOCK_EASE }, at(-REBLOCK_LEAD));
+};
 
 // ---------- text ----------
 export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -200,6 +217,9 @@ export const TYPES = {
         show(idx[i], at(u), 0.2);
         rise(vals[i], at(u) + 0.18, 0.45);
         reveal(bars[i], at(P.flagT[i]), 0.3, 'expo.out', 'x');
+        // landed, the flag carries the value (its own copy in onInk); the ink original under it is hidden, so no check
+        // measures covered ink-on-ink text (it was hyperframes check's 1.01:1 on the example's first row)
+        tl.set(vals[i], { visibility: 'hidden' }, at(P.flagT[i]) + 0.3);
       });
       const wipe = $('.pb-wipe');
       if (!wipe) return;
@@ -703,7 +723,10 @@ export const TYPES = {
       const n = s.rows.length;
       const passT = s.rows.map((_, i) => 1.25 + 0.25 * i);
       const pe = passT[n - 1];
-      const P = { passT, flash: pe + 0.25, unflash: pe + 0.4, blind: pe + 0.5, band: pe + 0.75 };
+      // handing the band to the next scene (plakat-reblock), the band lands half a beat sooner when there is no blind
+      // line before it: its words sink before the band leaves, and that time comes out of the wait, not the reading
+      const early = s.exitBy === 'reblock' && !s.blind;
+      const P = { passT, flash: pe + 0.25, unflash: pe + 0.4, blind: pe + 0.5, band: pe + (early ? 0.5 : 0.75) };
       P.bt = P.band + 0.25;
       // primary: title, both box titles, the counter's n/N, the band. Glance: page caption, box labels, the head link
       // and the note, column heads, every row's check (the counter states the outcome; the rows are evidence to scan),
@@ -729,6 +752,7 @@ export const TYPES = {
         [P.band, 'wipe'], [P.bt, 'land'], [P.bt + 0.35, 'land'],
       ];
       P.peakAt = P.band;
+      P.reblockSink = 0.2; // s: the band's words sink before the band leaves as the next scene's block (plakat-reblock)
       return P;
     },
     build(api, s) {
@@ -752,10 +776,10 @@ export const TYPES = {
       h += `<div class="abs num h vf-n" style="left:1546px;top:392px;font-size:300px">0</div>`;
       h += `<div class="abs num h vf-of" style="left:1712px;top:532px;font-size:120px">/${s.rows.length}</div>`;
       h += `<div class="abs mono h vf-cs" style="left:1556px;top:660px;font-size:25px;width:268px;line-height:1.4" data-lines="3">${esc(s.counter.caption)}</div>`;
-      const bo = isDiag(s) ? Math.ceil(LEAN * 80) : 0;
+      const B = bandRect(s), bo = -B.left;
       h += bo
-        ? `<div class="abs vf-band" data-accent-field="${-bo},780,${1920 + 2 * bo},160,${LEAN}" data-layout-allow-overflow style="left:${-bo}px;top:780px;width:${1920 + 2 * bo}px;height:160px;background:var(--accent);transform-origin:0 50%"></div>`
-        : `<div class="abs vf-band" data-accent-field="0,780,1920,160" style="left:0;top:780px;width:1920px;height:160px;background:var(--accent);transform-origin:0 50%"></div>`;
+        ? `<div class="abs vf-band" data-accent-field="${B.left},${B.top},${B.width},${B.height},${LEAN}" data-layout-allow-overflow style="left:${B.left}px;top:${B.top}px;width:${B.width}px;height:${B.height}px;background:var(--accent);transform-origin:0 50%"></div>`
+        : `<div class="abs vf-band" data-accent-field="0,${B.top},1920,${B.height}" style="left:0;top:${B.top}px;width:1920px;height:${B.height}px;background:var(--accent);transform-origin:0 50%"></div>`;
       h += m(96, 841, 34, esc(s.band.a), { cls: 'disp vf-bt', style: `color:var(--on-accent);letter-spacing:-0.02em`, fit: `840,25` });
       h += m(972, 841, 34, esc(s.band.b), { cls: 'disp vf-bt', style: `font-weight:800;color:var(--on-accent);letter-spacing:-0.02em`, fit: `852,25` });
       api.html(h);
@@ -795,6 +819,13 @@ export const TYPES = {
       tl.set($$('.vf-bt'), { opacity: 0 }, 0);
       tl.set($$('.vf-bt'), { opacity: 1 }, at(P.bt) - 0.01);
       rise($$('.vf-bt'), at(P.bt), 0.55, 'expo.out', 0.35 * api.k);
+      // the band goes on as the flow's first node (plakat-reblock): its words sink through their masks first, then the
+      // band hides on the frame that node starts moving from the band's rectangle
+      if (s.exitBy === 'reblock') {
+        const t0 = at(s.D - REBLOCK_LEAD);
+        api.sink($$('.vf-bt'), t0 - P.reblockSink, P.reblockSink - 0.01, 0.01);
+        tl.set($('.vf-band'), { visibility: 'hidden' }, t0);
+      }
       leave(api, s.D);
     },
   },
@@ -808,7 +839,8 @@ export const TYPES = {
     plan(s, D, k = 1) {
       const { motion, mv } = motionOf(k);
       const n = s.nodes.length;
-      const nodeT = s.nodes.map((_, i) => 0.35 + 0.25 * i);
+      // entered by the reblock, the first node is the verify page's stop band arriving: it lands with the block
+      const nodeT = s.nodes.map((_, i) => (i === 0 && s.enterBy === 'reblock' ? REBLOCK_LAND : 0.35 + 0.25 * i));
       // after the last node: the bracket, the loop back, then the rule and the statement (one landing a half beat or so)
       const nb = nodeT[n - 1] + 0.4;
       const P = { nodeT, bracket: nb, brL: nb + 0.2, loop: nb + 0.5, loopL: nb + 0.85, loopH: nb + 1.25, r2: nb + 1.1, st: nb + 1.2, list: nb + 1.6 };
@@ -822,11 +854,13 @@ export const TYPES = {
       P.settled = P.list + 0.35 / k;
       Object.assign(P, LEAVE(k, s));
       mv(0, 0.6); mv(0.35, 1.4 * k, 1); nodeT.forEach((u) => mv(u, 0.25)); mv(P.bracket, 0.5, 0.85); mv(P.brL, 0.3);
+      if (s.enterBy === 'reblock') mv(-REBLOCK_LEAD, ENTER.reblock.beats * 0.5 * k, 1);
       mv(P.loop, 0.8, 0.85); mv(P.loopL, 0.3); mv(P.loopH, 0.1, 1); mv(P.r2, 0.6); mv(P.st, 0.5); mv(P.list, 0.35);
       P.motion = motion;
       P.walkFrom = P.settled;
       P.cues = [
         [0, 'land'],
+        ...(s.enterBy === 'reblock' ? [[-REBLOCK_LEAD, 'reblock', { dur: ENTER.reblock.beats * 0.5 * k }]] : []),
         ...nodeT.map((u, i) => (s.nodes[i].human ? [u, 'block', { i: i ? 2 : 0 }] : [u, 'tick'])),
         [P.bracket, 'draw'], [P.loop, 'draw'], [P.st, 'land'],
       ];
@@ -862,7 +896,15 @@ export const TYPES = {
       rise($('.fl-h'), at(0), 0.6, 'expo.out');
       grow($('.fl-line'), at(0.35), 1.4 * api.k, 'power1.inOut');
       const nodes = $$('.fl-n'), arr = $$('.fl-a');
-      nodes.forEach((nd, i) => show(nd, at(P.nodeT[i]), 0.25, { y: 18 }, s.nodes[i].human ? 'back.out(2)' : 'power3.out'));
+      nodes.forEach((nd, i) => {
+        if (i || s.enterBy !== 'reblock') return show(nd, at(P.nodeT[i]), 0.25, { y: 18 }, s.nodes[i].human ? 'back.out(2)' : 'power3.out');
+        // plakat-reblock: the stop band moves onto the node's rectangle; the node's words come in once it has landed
+        const r = { left: parseFloat(nd.style.left), top: parseFloat(nd.style.top), width: parseFloat(nd.style.width), height: parseFloat(nd.style.height) };
+        api.tl.set(nd, { opacity: 1 }, 0);
+        api.tl.set(Array.from(nd.children), { opacity: 0 }, 0);
+        reblockIn(api, nd, bandRect(s), r);
+        show(Array.from(nd.children), at(P.nodeT[0]), 0.25, { y: 8 }, 'power2.out', 0.05);
+      });
       arr.forEach((a, i) => show(a, at(0.5 + 0.25 * i), 0.15, { x: -8 }));
       draw($('.fl-br'), at(P.bracket), 0.5, 'power2.inOut');
       show($('.fl-brL'), at(P.brL), 0.3, { y: 8 });
@@ -953,6 +995,8 @@ export const TYPES = {
         grow(r[i], at(P.rules) + 0.08 * i, 0.35, 'expo.out');
         show(st[i], at(u) + 0.05, 0.3, { y: 16 }, 'expo.out');
       });
+      // the block goes on as the tagline's bar (plakat-reblock): it hides, with its commands, as the bar starts moving
+      if (s.exitBy === 'reblock') tl.set($('.in-box'), { visibility: 'hidden' }, at(s.D - REBLOCK_LEAD));
       leave(api, s.D);
     },
   },
@@ -965,12 +1009,15 @@ export const TYPES = {
     plan(s, D, k = 1) {
       const { motion, mv } = motionOf(k);
       // the lines are the film's claim (≤ 8 words, read in a pause hold of ≤ 2 bars); glance: the label under the bar
-      const P = { bar: 0.6, lab: 1.0, exit: D - EXIT_LEAD / k, reads: [...s.lines.map((l, i) => [0.25 * i, [{ text: l, claim: true }]]), [1.0, [s.label], G]], ...(s.last ? { out: 0, tail: 0 } : { out: EXIT_LEAD / k, tail: EXIT - EXIT_LEAD }) };
-      P.settled = Math.max(P.bar + 0.7 / k, P.lab + 0.45 / k);
-      mv(0, 0.65 + 0.25 * k * (s.lines.length - 1)); mv(P.bar, 0.7, 0.85); mv(P.lab, 0.45);
+      // entered by the reblock, the bar is the install page's command block arriving: it lands with the block
+      const rb = s.enterBy === 'reblock';
+      const P = { bar: rb ? REBLOCK_LAND : 0.6, lab: 1.0, exit: D - EXIT_LEAD / k, reads: [...s.lines.map((l, i) => [0.25 * i, [{ text: l, claim: true }]]), [1.0, [s.label], G]], ...(s.last ? { out: 0, tail: 0 } : { out: EXIT_LEAD / k, tail: EXIT - EXIT_LEAD }) };
+      P.settled = Math.max(rb ? P.bar : P.bar + 0.7 / k, P.lab + 0.45 / k);
+      mv(0, 0.65 + 0.25 * k * (s.lines.length - 1)); mv(P.lab, 0.45);
+      if (rb) mv(-REBLOCK_LEAD, ENTER.reblock.beats * 0.5 * k, 1); else mv(P.bar, 0.7, 0.85);
       P.motion = motion;
       P.pause = [0, D];
-      P.cues = [[0, 'land'], ...(s.lines.length > 1 ? [[0.25, 'land']] : []), [P.bar, 'wipe', { short: true }], ...(s.last ? [] : [[P.exit, 'slide', { exit: true }]])];
+      P.cues = [[0, 'land'], ...(s.lines.length > 1 ? [[0.25, 'land']] : []), rb ? [-REBLOCK_LEAD, 'reblock', { dur: ENTER.reblock.beats * 0.5 * k, ink: true }] : [P.bar, 'wipe', { short: true }], ...(s.last ? [] : [[P.exit, 'slide', { exit: true }]])];
       P.peakAt = 0;
       return P;
     },
@@ -986,7 +1033,8 @@ export const TYPES = {
     animate(api, s, P) {
       const { tl, at, $, $$, rise, sink, grow } = api;
       rise($$('.tg-t'), at(0), 0.65, 'expo.out', 0.25 * api.k);
-      grow($('.tg-bar'), at(P.bar), 0.7, 'expo.inOut');
+      if (s.enterBy === 'reblock') { const b = $('.tg-bar'); reblockIn(api, b, commandRect(s), { top: parseFloat(b.style.top), height: 28, left: 96, width: 1728 }); }
+      else grow($('.tg-bar'), at(P.bar), 0.7, 'expo.inOut');
       rise($('.tg-lab'), at(P.lab), 0.45);
       if (s.last || P.covered) return;
       sink([...$$('.tg-t'), $('.tg-lab')], at(P.exit), EXIT - 0.06, 0.03);
@@ -1371,8 +1419,13 @@ export const planScene = (s, D, k, { fill = true } = {}) => {
   if (!T) return { cues: [], reads: [], settled: 0, out: 0, motion: [], moves: [], micro: [], shots: [], stills: [] };
   const P = T.plan(s, D, k);
   P.motion ||= []; P.moves ||= []; P.micro ||= []; P.shots ||= [];
+  // handing a block to the next scene (plakat-reblock): its own exit stays; what it reads is done before the block leaves
+  if (s.exitBy === 'reblock' && !s.last) {
+    P.out = Math.max(P.out ?? 0, REBLOCK_LEAD + (P.reblockSink ?? 0) / k);
+    if (P.reblockSink) P.motion.push([D - P.out, P.reblockSink]);
+  }
   // covered by the next scene's device: no exit of its own, at rest until covered
-  if (s.exitBy && !s.last) {
+  else if (s.exitBy && !s.last) {
     const half = s.exitBy === 'columns' ? ENTER.columns.beats / 4 : s.exitBy === 'portal' ? ENTER.portal.beats / 2 : 0; // u inside this scene
     P.out = half;
     P.tail = s.exitBy === 'columns' ? (ENTER.columns.beats / 2) * (k / 2) : s.exitBy === 'aperture' ? (AP_BEATS * k) / 2 : 0;

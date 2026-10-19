@@ -780,7 +780,7 @@ export const tiers = (d, limits = DEFAULTS, api = 3) => {
     const c = climaxes[0], pos = c.t / D;
     climax = { t: c.t, at: r2(pos), kind: c.kind };
     if (pos < clo - eps || pos > chi + eps) note('T3', 'error', `climax at ${ts(c.t)} is ${Math.round(pos * 100)} % of the film; ${Math.round(clo * 100)}–${Math.round(chi * 100)} %`, c.scene);
-    const k = segs.findIndex((x) => c.t >= x.start - eps && c.t < x.end - eps);
+    const k = segs.findIndex((x) => c.t >= x.start - near && c.t < x.end - near); // starts are rounded to 1e-4 s
     const before = k > 0 ? segs.slice(Math.max(0, k - 2), k).map((x) => x.len) : [];
     if (before.length && t1med != null) {
       const bm = before.reduce((a, b) => a + b, 0) / before.length;

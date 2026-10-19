@@ -1,7 +1,7 @@
 // timeline.js — the fitted film as one list of moments: every scene's plan placed at its start, the key events
 // and the four pacing tiers for renders/timing.json (timing.rules.js events()), and the sound cues score.mjs
 // plays. film.js draws from the same scene plans, so a word, its sound and its key can never drift apart.
-import { C, planAt, leadSec, tailSec } from './choreo.js';
+import { C, planAt, leadSec, tailSec, popsOf } from './choreo.js';
 import { outOf, inOf, factsFor, TRANSITIONS, CANVAS } from './registry.js';
 
 // Device ids of the expressive transitions (runtime/transitions and runtime/handoffs naming, PLAN batch 4 §3).
@@ -28,7 +28,10 @@ export const timelineOf = (scenes, g, content) => {
     // a search into a reveal turns any time the fit added past its need into extra highlight laps
     const extra = s.type === 'search' && outOf(scenes, i) === 'build' && Number.isFinite(s.need) ? Math.max(0, s.end - s.start - s.need) : 0;
     const p = planAt(scenes, i, B, f, form, memo, extra);
-    return { ...s, i, plan: p, inKind: inOf(scenes, i), outKind: outOf(scenes, i) };
+    const outKind = outOf(scenes, i);
+    // the beat pops that split a last hold the fitted length stretched past two beats (choreo.js popsOf)
+    const pops = popsOf(s, p, B, outKind, s.end - s.start);
+    return { ...s, i, plan: p, inKind: inOf(scenes, i), outKind, pops };
   });
   const D = laid.at(-1)?.end ?? 0;
   const keys = [], holds = [], handoffs = [], micro = [], shots = [], expressive = [], peaks = [], cues = [];
@@ -51,6 +54,7 @@ export const timelineOf = (scenes, g, content) => {
       if (k === 'aperture') cue(t0, 'aperture');
       if (k === 'build') cue(a, 'build', { dur: C.build * B });
     }
+    sc.pops.forEach((t) => mic(T(t), i, 'beat pop'));
     switch (sc.type) {
       case 'ask':
         p.states.forEach((st) => {

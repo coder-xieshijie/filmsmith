@@ -108,6 +108,12 @@ const fx = {
   },
   // counter-portal: a rising whoosh landing on the beat where the push ends
   portal: (t, o) => { s.play('whoosh', t, { dur: o.dur, up: true, lo: 250, hi: 6500, q: 0.9, peak: 0.92 }, { gain: -12, send: 0.2 }); s.play('thud', t + o.dur, { freq: 58, decay: 0.2 }, { gain: -12 }); },
+  // plakat-reblock: a swept whoosh while the block crosses the cut; an ink block (the tagline's bar) lands with a low
+  // thud on the beat, the accent block (the flow's YOU node) with the block cue's marimba stroke on the same beat
+  reblock: (t, o) => {
+    s.play('whoosh', t - 0.04, { dur: o.dur + 0.04, lo: 300, hi: 4200, q: 1.0, peak: 0.8 }, { gain: -14, send: 0.18 });
+    if (o.ink) s.play('thud', t + o.dur, { freq: 66, decay: 0.16 }, { gain: -14 });
+  },
   // slot-rails: a soft tick per word through the slot
   rail: (t, o) => s.play('rim', t, { freq: 1650 + 90 * ((o.i ?? 0) % 5), seed: (o.i ?? 0) % 4 }, { gain: -14, pan: 0.15, send: 0.1 }),
   // aperture-swap: a muted kick and a tick per word on the beat (the accent ground, the person, takes the block's marimba)

@@ -4,6 +4,7 @@
 import { clamp, lerp, cubicOut, quintOut, expOut, smooth } from './lib/motion.js';
 import * as fx from './fx.js';
 import { LIGHT_SPAN, CHART_LIGHT_SPAN, lightStep, lightEnd, WORD_STEP, listOf } from './timeline.js';
+import { MARK_REACH } from './marks.js';
 
 export const ROLE = { hidden: 0, base: 1, rest: 2, accent: 3 };
 export const MX = 96, RX = 1824, CW = RX - MX; // margins, content width
@@ -12,6 +13,8 @@ export const TITLE_Y = 206, SUB_Y = 256, TOP = 330; // baselines and the top of 
 // captions 32 / 40, titles 64, big numbers 150 / 210 / 273 (the closing protagonist, 210 × 1.3) / 300.
 // Text that carries information is never under 25 px (full-screen landscape on a phone ≈ 11 pt).
 export const TYPE = { label: 25, value: 28, caption: 32, lead: 40, title: 64, titleMin: 44 };
+// A revealed square (split matches, close beads) pops to 1 + REVEAL_POP of its side as it lights up (squares.js).
+export const REVEAL_POP = 0.45;
 
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 const placement = (N) => ({
@@ -44,6 +47,11 @@ const gridGeo = (n) => {
 export const LIST = { band: 600, lh: 64, /* = lib/handoffs stream-brake's lineHeight, so its speed() is in these px */ top: 330, bottom: 930, square: 18 };
 // A line's (or a square's) opacity by its distance from the window's edges: lines fade out 70 px before they leave.
 export const listFade = (y) => smooth((y - LIST.top) / 70) * smooth((LIST.bottom - y) / 70);
+
+// The close's column (baselines and the rule's centre, px; layouts.close measures the stack from these): the numbers,
+// their labels, the rule (at least), the closing line (at least); a bead's side and pitch; the gap between the
+// stacked parts, and between the rule and the beads under it.
+const CLOSE = { number: 560, label: 616, rule: 660, line: 770, bead: 14, pitch: 18, gap: 24, beadGap: 6 };
 
 // ---------- text styles ----------
 const st = (pal, o) => ({ weight: 500, size: TYPE.label, fam: fx.SANS, ls: 0, color: { plain: pal.text, accent: pal.accent, strong: pal.text }, ...o });
@@ -666,23 +674,37 @@ export const LAYOUTS = {
 
   // ---------------------------------------------------------------- close: up to three numbers; the squares become a rule
   // The accent number is the protagonist: 1.3 × the others' 210 px, the others drop to 150 px (principle 3).
-  // Its own squares land on the rule as neutral beads and light up one by one on the downbeat of the film's
+  // Its own squares land under the rule as neutral beads and light up one by one on the downbeat of the film's
   // last bar: the closing lock-up's one secondary move. Without beads, an accent rule draws under its label.
+  // The column is a measured stack, top to bottom: the numbers' labels (baseline CLOSE.label, the label font's
+  // descent), the rule, the beads (one or two rows, measured at their largest: the reveal pop of the widest mark),
+  // the closing line (the line font's ascent). Each keeps a gap from the next, so in no preset or mark does the
+  // rule run through a bead, nor a bead touch the labels or the line (2026-10-19: the rule crossed the beads).
   close: {
     place(E, ch) {
-      const { m } = E, N = m.n, P = placement(N);
+      const { m, ctx } = E, N = m.n, P = placement(N);
       const nums = ch.numbers || [];
       const K = nums.length, colW = CW / Math.max(1, K);
-      const ruleY = 660;
       const hero = nums.findIndex((n) => n.accent);
       const heroSel = hero >= 0 && nums[hero].sel ? m.match(nums[hero].sel) : null;
       const heroUnits = heroSel ? m.units.filter(heroSel).map((u) => u.k) : [];
-      const perRow = Math.max(1, Math.floor((colW - 56) / 18));
+      const { bead, pitch: bp } = CLOSE;
+      const perRow = Math.max(1, Math.floor((colW - 56) / bp));
       const beads = heroUnits.length > 0 && heroUnits.length <= 2 * perRow ? heroUnits : []; // two rows at most
       const isBead = new Set(beads);
       const ruleUnits = m.units.filter((u) => !isBead.has(u.k)).map((u) => u.k);
       const pitch = CW / Math.max(1, ruleUnits.length);
       const sz = clamp(pitch * 0.9, 2, 6);
+      // the stack: the labels are at most TYPE.lead (fitted down to TYPE.caption), the rule is ≥ 6 px thick where
+      // the no-bead accent rule draws over it, a bead reaches (pop × widest mark − 1) / 2 of its side past its cell
+      const lab = fx.vmetrics(ctx, fx.font(600, TYPE.lead, fx.SANS)); // the labels' and the closing line's font
+      const half = Math.max(sz, 6) / 2;
+      const ruleY = Math.max(CLOSE.rule, Math.ceil(CLOSE.label + lab.desc + CLOSE.gap + half));
+      const reach = (bead * ((1 + REVEAL_POP) * MARK_REACH - 1)) / 2;
+      const rows = Math.ceil(beads.length / perRow);
+      const beadY = Math.ceil(ruleY + half + CLOSE.beadGap + reach);
+      const below = rows ? beadY + (rows - 1) * bp + bead + reach : ruleY + half;
+      const lineY = Math.max(CLOSE.line, Math.ceil(below + CLOSE.gap + lab.asc));
       ruleUnits.forEach((k, r) => {
         P.x[k] = MX + r * pitch; P.y[k] = ruleY - sz / 2; P.s[k] = sz;
         P.role[k] = ROLE.rest; P.group[k] = 0; P.rank[k] = r / ruleUnits.length;
@@ -692,11 +714,11 @@ export const LAYOUTS = {
       const step = lightStep(beads.length);
       P.reveal.set(P.role);
       beads.forEach((k, r) => {
-        P.x[k] = MX + hero * colW + 6 + (r % perRow) * 18; P.y[k] = ruleY - 7 + Math.floor(r / perRow) * 18; P.s[k] = 14;
+        P.x[k] = MX + hero * colW + 6 + (r % perRow) * bp; P.y[k] = beadY + Math.floor(r / perRow) * bp; P.s[k] = bead;
         P.role[k] = ROLE.base; P.reveal[k] = ROLE.accent; P.revealAt[k] = r * step;
         P.group[k] = 0; P.rank[k] = 1;
       });
-      ch.geo = { colW, ruleY, hero, beads: beads.length };
+      ch.geo = { colW, ruleY, hero, beads: beads.length, lineY };
       return P;
     },
     draw(E, ch, t, a) {
@@ -716,20 +738,20 @@ export const LAYOUTS = {
         const sc = hero ? 1 + 0.12 * pulse(t, t0 + 0.05, 0.4) : 1;
         ctx.globalAlpha = a * cubicOut(u * 1.6);
         ctx.save();
-        ctx.translate(x, 560 - (1 - cubicOut(u)) * 40);
+        ctx.translate(x, CLOSE.number - (1 - cubicOut(u)) * 40);
         ctx.scale(sc, sc);
         fx.drawTabular(ctx, fmt(value * expOut((E.tf - t0) / 0.9)), -size * 0.03, 0, fx.font(800, size, fx.SANS), hero ? pal.accent : pal.text);
         ctx.restore();
         const ls = labSty(hero);
         ls.size = fx.fitSize(ctx, m.fill(nm.label), ls, G.colW - 40, TYPE.caption);
-        fx.drawRich(ctx, m.fill(nm.label), x + 4, 616, ls);
+        fx.drawRich(ctx, m.fill(nm.label), x + 4, CLOSE.label, ls);
       });
       // no beads: the closing move is an accent rule drawn under the protagonist's label
       if (!G.beads && G.hero >= 0 && T.light != null) {
         const w = (G.colW - 56) * cubicOut((t - T.light) / (LIGHT_SPAN * T.beat));
         if (w > 0) { ctx.globalAlpha = a; ctx.fillStyle = pal.accent; ctx.fillRect(MX + G.hero * G.colW + 4, G.ruleY - 3, w, 6); }
       }
-      if (ch.line) drawLine(E, ch, 'line', MX + 4, 770, st(pal, { weight: 600, size: TYPE.lead, ls: -0.3, color: { plain: pal.muted, accent: pal.accent, strong: pal.text } }), t, a, { rise: 12 });
+      if (ch.line) drawLine(E, ch, 'line', MX + 4, G.lineY, st(pal, { weight: 600, size: TYPE.lead, ls: -0.3, color: { plain: pal.muted, accent: pal.accent, strong: pal.text } }), t, a, { rise: 12 });
       ctx.globalAlpha = 1;
     },
   },

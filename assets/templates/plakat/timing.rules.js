@@ -26,8 +26,9 @@
 //                   declare a second composition; `max` is the 6 s composition ceiling at the fitted tempo, raised for
 //                   those two types only (the T1 check holds each composition to 6 s)
 //   T2 expressive   the scene entrances by device (devices.js): plakat-columns (three variants), counter-portal,
-//                   step-wipe; and the problem's full accent wipe (the mode's own device, `plakat-accent-wipe`: fit
-//                   warns that it is not a library id). The aperture and the slot are T0 and are not declared
+//                   step-wipe, and the mode's own plakat-reblock (verify → flow, install → tagline); and the problem's
+//                   full accent wipe (the mode's own `plakat-accent-wipe`). The two own ids are listed in `devices`,
+//                   so fit knows them. The aperture and the slot are T0 and are not declared
 //   T3 peaks        the first scene's peak (`hook`) and the last scene's (`lockup`) by default; any scene may set
 //                   `peak: 'hook' | 'claim' | 'reveal' | 'lockup'` and one of them `climax: true`
 import { TYPES, planScene } from './scenes.js';
@@ -129,7 +130,7 @@ const sceneEvents = (s, g, scenes, i, content) => {
 
 export default {
   api: 3,
-  devices: ['plakat-accent-wipe'], // the mode's own T2 device (lib/fit.mjs knows it; CONTRACT.md, api 3 T2)
+  devices: ['plakat-accent-wipe', 'plakat-reblock'], // the mode's own T2 devices (lib/fit.mjs knows them; CONTRACT.md, api 3 T2)
   // 120 BPM is the source film's tempo and the swiss bed's home (borrowed); ±6.7 % keeps marimba runs and the
   // half-beat counters crisp (derived).
   bpm: { default: 120, min: 112, max: 128 },

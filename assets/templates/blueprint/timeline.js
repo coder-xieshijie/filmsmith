@@ -6,8 +6,8 @@
 // measured text, so Node computes the same cue times as the browser.
 import { grid } from './lib/beat.js';
 import { fit } from './lib/timing.js';
-import rules, { outSec, pushBeats, ruleEntry } from './timing.rules.js';
-import { TYPES, CUES, SHEETS_MIN, SHEETS_MAX, EXCERPT_MIN, HOLD_S, URL_HOLD_S, LEAD_B, PANEL_OUT_B, FLOOD_AFTER_B, FLOOD_B, RULE_B, stampBeat, endBuild } from './choreography.js';
+import rules, { outSec, pushBeats, ruleEntry, scanDir } from './timing.rules.js';
+import { TYPES, CUES, SHEETS_MIN, SHEETS_MAX, EXCERPT_MIN, HOLD_S, URL_HOLD_S, LEAD_B, PANEL_OUT_B, FLOOD_AFTER_B, FLOOD_B, RULE_B, SCAN_B, scanRowBeats, stampBeat, endBuild } from './choreography.js';
 
 export { TYPES, SHEETS_MIN, SHEETS_MAX, HOLD_S, URL_HOLD_S };
 
@@ -94,6 +94,13 @@ export const schedule = (content) => {
       if (pu && eb !== null) out.push = { ...out.push, hold: s.end, back: Infinity, end: true };
       // the issue: the stamp's outline floods the frame into the print (film.js; lib/transitions shape-flood)
       if (s.issue === true) out.flood = { t0: out.stampT + FLOOD_AFTER_B * g.beat, dur: FLOOD_B * g.beat };
+    }
+    // the checklist's probe run: a lamp crosses the record (lib/transitions blueprint-expose, film.js); each row's
+    // result is drafted, and ticks, as the lamp passes it
+    if (s.type === 'checklist' && cue.scan !== undefined) {
+      const dir = scanDir(laid, i);
+      out.scan = { t0: cue.scan, dur: SCAN_B * g.beat, dir, rows: scanRowBeats((s.items || []).length, dir).map((b) => cue.scan + b * g.beat) };
+      out.scan.rows.forEach((t) => out.sounds.push({ t, kind: 'probe' }));
     }
     // the release entered from the final overview under the parallel rule (lib/transitions occluder-pass)
     if (ruleEntry(s, laid[i - 1])) out.rule = { t0: s.start - RULE_B * g.beat, dur: RULE_B * g.beat };

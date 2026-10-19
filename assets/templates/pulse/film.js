@@ -8,7 +8,7 @@
 import FILM from './content.js';
 import PALETTES, { onGround, groundHex, isLight } from './palettes.js';
 import { plan, windowOf } from './plan.js';
-import { C, APERTURES } from './choreo.js';
+import { C, APERTURES, POP } from './choreo.js';
 import { clamp, lerp, expOut, smooth, progress, mixColor } from './lib/motion.js';
 import { hash } from './lib/rng.js';
 import { grainTile, drawGrain } from './lib/canvas.js';
@@ -105,6 +105,18 @@ const rise = (ctx, s, x, y, u, t0, o) => {
   ctx.save();
   ctx.beginPath(); ctx.rect(o.align === 'center' ? x - W : x - 20, y - h, 2 * W, h + Math.round(o.size * 0.3)); ctx.clip();
   txt(ctx, s, x, y + (1 - k) * h, o);
+  ctx.restore();
+};
+// the beat pop (choreo.js popsOf): the focus scales up 3.5 % on the beat and settles in 0.12 s, about its anchor point
+const popAt = (sc, u) => {
+  let t0 = null;
+  for (const t of sc.pops || []) if (u >= t - 1e-9) t0 = t;
+  return t0 == null ? 1 : 1 + POP.scale * (1 - expOut(progress(u, t0, POP.sec)));
+};
+const popped = (ctx, s, x, y, o, k) => {
+  if (k === 1) { txt(ctx, s, x, y, o); return; }
+  ctx.save(); ctx.translate(x, y); ctx.scale(k, k); ctx.translate(-x, -y);
+  txt(ctx, s, x, y, o);
   ctx.restore();
 };
 const fillGround = (ctx, hex) => { ctx.fillStyle = hex; ctx.fillRect(-W, -H, 3 * W, 3 * H); };
@@ -209,7 +221,7 @@ const paintAskState = (ctx, sc, k, u, opt) => {
       if (d > 0.01) ctx.filter = `blur(${(10 * d).toFixed(2)}px)`;
       txt(ctx, st.text, X0, ANCHOR_Y, COND(size, col.text));
       ctx.restore(); ctx.filter = 'none';
-    } else txt(ctx, st.text, X0, ANCHOR_Y, COND(size, col.text));
+    } else popped(ctx, st.text, X0, ANCHOR_Y, COND(size, col.text), k === p.states.length - 1 ? popAt(sc, u) : 1);
   }
   drawQuery(ctx, queryText(sc, u), col.quiet);
 };
@@ -287,7 +299,7 @@ const paintSearchRow = (ctx, sc, u, opt) => {
 const paintVerdict = (ctx, sc, u, opt) => {
   const p = sc.plan, col = onGround(PAL, 'r1');
   if (!opt.noGround) fillGround(ctx, groundHex(PAL, 'r1'));
-  txt(ctx, p.resultText, X0, ANCHOR_Y, COND(sc.L.verdict, col.text));
+  popped(ctx, p.resultText, X0, ANCHOR_Y, COND(sc.L.verdict, col.text), popAt(sc, u));
   if (p.summary) drawQuery(ctx, typed(p.summary, u, p.summaryAt), col.quiet);
 };
 const paintSearch = (ctx, sc, u, opt = {}) => {
@@ -322,7 +334,7 @@ const paintData = (ctx, sc, u, opt = {}) => {
   p.rows.forEach((r, k) => {
     if (u < r.land - 1e-9 && !r.instant) return;
     const y = L.ys[k], o = COND(L.size, col.text);
-    if (r.instant || u >= r.resolved) txt(ctx, r.value, X0, y, o);
+    if (r.instant || u >= r.resolved) popped(ctx, r.value, X0, y, o, k === p.rows.length - 1 ? popAt(sc, u) : 1);
     else if (r.count) {
       // the count rolls in the target's own slots, right-aligned: every digit stays in its column
       const target = Number(String(r.value).replace(/[^\d.]/g, ''));

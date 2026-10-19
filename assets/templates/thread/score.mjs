@@ -231,8 +231,11 @@ laid.forEach((S, i) => {
 const Cl = by('close');
 if (Cl) {
   fx('impact', at(Cl, 0), { freq: 49, decay: 0.6 }, { gain: -22 }); // the bed resolves here too (kick, bell): keep the sum under +6 LU (−22 since the card hold shortened, 2026-10-19)
-  const u2 = closeSecondMove(Cl.D);
-  if (u2 != null) fx('bell', at(Cl, u2), { freq: note('A6'), dur: 1.6, index: 1.0 }, { gain: -23, send: 0.4 }); // the underline's second move, last downbeat
+  const u2 = closeSecondMove(Cl.D), hasUrl = !!String(Cl.url || '').trim();
+  if (u2 != null && hasUrl) { // the caret falls flat into the URL's underline, landing on the last downbeat (a tick as it starts, as in the open)
+    fx('tick', at(Cl, u2 - OPEN.flat), { freq: 2600 }, { gain: -25 });
+    fx('bell', at(Cl, u2), { freq: note('A6'), dur: 1.6, index: 1.0 }, { gain: -23, send: 0.4 });
+  }
   // the line thickens into a bar (a short swell), the blade cuts it into the name left to right (a pluck per letter as
   // the blade passes, rail-press's cut phase 0.55–0.97 of its beat), the name lands on the beat (a tick and a bell)
   const c0 = CLOSE.cut, cd = CLOSE.cutDur, done = c0 + cd;
@@ -242,6 +245,7 @@ if (Cl) {
   fx('tick', at(Cl, done), { freq: 3800, decay: 0.01 }, { gain: -19 });
   fx('kick', at(Cl, done), { decay: 0.2 }, { gain: -19, send: 0 }); // the landing must stand out over the outro (check-film keys: sound)
   fx('bell', at(Cl, done), { freq: note('D6'), dur: 3.5 }, { gain: -25, send: 0.4 }); // −25 (was −22): the same loudness jump, 2026-10-18
+  if (hasUrl) fx('whoosh', at(Cl, done), { dur: CLOSE.caret / K, up: false, lo: 900, hi: 4500, peak: 0.6 }, { gain: -27 }); // the band contracts into the caret
   fx('bell', at(Cl, CLOSE.line), { freq: note('A5'), dur: 2.5 }, { gain: -24, send: 0.4 });
   const url = String(Cl.url || ''), cps = Math.max(110, url.length / CLOSE.urlDur);
   for (let i = 0; i < url.length; i += 4) fx('typeKey', at(Cl, CLOSE.url + i / cps), { seed: 100 + i }, { gain: -28, send: 0.05 });

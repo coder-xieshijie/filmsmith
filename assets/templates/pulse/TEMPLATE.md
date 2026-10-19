@@ -42,6 +42,13 @@ held frame. The film is rounded up to a 2-bar phrase: whole bars before the reve
 the climax moves later, not the lock-up longer), the rest to the closing `name`, whose ground flips once more on
 the downbeat of its last bar.
 
+Grid slack: rounding to the beat grid (and a phrase share) can leave an `ask`, a verdict or a `data` scene a little
+longer than its need, all of it on the last step. When that last hold would pass two beats, the scene's focus (the
+last word, the verdict, the last figure) pops on the beat that splits it: the hop's pop, 3.5 % for 0.12 s, scaled
+about the anchor point, no new text (`choreo.js` `popsOf`, drawn by `film.js`, reported as `micro` "beat pop").
+`steps()` reads `ctx.dur`, so `fit()` checks every hold at the fitted length as the picture draws it, the laps of a
+search into a reveal included (2026-10-19).
+
 Per scene type (beats at the tempo unless marked s; values in `choreo.js` `C`, tags on the mode card):
 
 | type | what lands, from the scene start | reading (primary, unless glance) | leaves |

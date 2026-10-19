@@ -35,7 +35,7 @@
 // the drawing frame; the camera leaves at least 1.5 beats before the end into or out of an overview, 1 beat between
 // sheets, 1 beat out of the final overview into a release entered under the rule, and not at all from the last scene.
 import { units, reader } from './lib/timing.js';
-import { CUES, TYPES, stampBeat, endBuild, HOLD_S, URL_HOLD_S, MOVE_B, MOVE_OV_B, LEAD_B, PANEL_OUT_B, STATUS_DUR_B, PUSH_BACK_B, FLOOD_AFTER_B, FLOOD_B, RULE_B, REINTERPRET_B, UNFOLD_B, SLOT_B, ROUTE_B } from './choreography.js';
+import { CUES, TYPES, stampBeat, endBuild, HOLD_S, URL_HOLD_S, MOVE_B, MOVE_OV_B, LEAD_B, PANEL_OUT_B, STATUS_DUR_B, PUSH_BACK_B, FLOOD_AFTER_B, FLOOD_B, RULE_B, REINTERPRET_B, UNFOLD_B, SLOT_B, ROUTE_B, SCAN_B, SCAN_DIRS, scanRowBeats } from './choreography.js';
 import { CONTENT_MASK } from './hud.js';
 import palettes from './palettes.js';
 
@@ -47,6 +47,8 @@ const isOv = (s) => s?.type === 'overview';
 const leadB = (ctx) => (ctx.i === 0 && ctx.content?.excerpt !== true ? LEAD_B : 0);
 // the release after the final overview enters under a parallel rule (occluder-pass) unless enter: 'push'
 export const ruleEntry = (s, prev) => s?.type === 'release' && prev?.type === 'overview' && prev.final === true && s.enter !== 'push';
+// the checklist's probe run crosses down the rows, the next one in the film across them (choreography.js SCAN_DIRS)
+export const scanDir = (scenes, i) => SCAN_DIRS[scenes.slice(0, i).filter((x) => x.type === 'checklist').length % SCAN_DIRS.length];
 // the shortest move out (beats); a sheet's rounding remainder lengthens it (timeline.js)
 export const outMinB = (s, next) => (!next ? 0 : ruleEntry(next, s) ? RULE_B : isOv(s) || isOv(next) ? MOVE_OV_B : MOVE_B);
 const outB = (s, ctx) => outMinB(s, ctx.next);
@@ -268,6 +270,12 @@ const sheetEvents = (s, g, ctx) => {
     if (t >= 0 && t < dur - 1e-6) micro.push({ t, what: name });
   }
   if (s.type === 'stages') (s.stages || []).forEach((w, k) => micro.push({ t: (lead + snap(def.c['stage' + k]) + SLOT_B) * b, what: `${w} lands` }));
+  if (s.type === 'checklist') {
+    // T2: the probe run, a machine's lamp crossing the record; T0: each row's result as the lamp passes it
+    const dir = scanDir(ctx.scenes, i), t0 = (lead + snap(def.c.scan)) * b;
+    expressive.push({ t: t0, dur: SCAN_B * b, device: 'blueprint-expose', variant: `${dir} · glow · no development (the probe run)` });
+    scanRowBeats((s.items || []).length, dir).forEach((rb, k) => micro.push({ t: t0 + rb * b, what: `${s.items[k].id} checked` }));
+  }
   if (next) micro.push({ t: moveOut, what: isOv(next) ? 'the camera pulls out' : ruleEntry(next, s) ? 'the rule enters' : 'the route draws to the next sheet' });
   if (sb !== null) {
     const st = (lead + sb) * b;
@@ -334,6 +342,9 @@ const validate = (content) => {
     else if (s.type !== 'detail') errs.push(`${s.type}: only a detail sheet (a person's amber stamp) can issue the print`);
     else if (!s.stamp) errs.push('detail: issue: true needs its stamp');
   }
+  // the issue changes the drawing from its pencil original into the print: without an original there is nothing to
+  // issue. To start in the print from the first frame, leave out both (mode card, Signature transformations).
+  if (issues.length && content.original === undefined) errs.push("issue: true needs original (e.g. 'vellum'), the pencil original the stamp issues as the print; to start in the print from the first frame, leave out both original and issue");
   if (issues.length > 1) errs.push(`${issues.length} sheets marked issue: true; the print is issued once`);
   if (content.original !== undefined && !issues.length) errs.push('original is set but no detail sheet has issue: true; the original is printed only at a signature');
   if (content.original !== undefined && !palettes[content.original]) errs.push(`unknown original "${content.original}"; presets: ${Object.keys(palettes).join(', ')}`);

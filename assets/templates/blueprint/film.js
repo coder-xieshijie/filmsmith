@@ -4,7 +4,7 @@ import palettes from './palettes.js';
 import { boot } from './lib/boot.js';
 import { fontsReady } from './lib/text.js';
 import { grainTile, drawGrain, subframes } from './lib/canvas.js';
-import { createTransitions } from './lib/transitions/index.js'; // shape-flood (the issue), occluder-pass (the rule)
+import { createTransitions } from './lib/transitions/index.js'; // shape-flood (the issue), blueprint-expose (the probe run), occluder-pass (the rule)
 import { createHandoff } from './lib/handoffs/index.js'; // stroke-reinterpret, net-unfold, slot-rails (sheets)
 import { schedule } from './timeline.js';
 import { ROUTE_B, EXCERPT_HUD_PRE, EXCERPT_SHEET_PRE } from './choreography.js';
@@ -68,8 +68,11 @@ export const start = () => {
       if (!palettes[oid]) print.errs.push(`unknown original "${oid}"; presets: ${Object.keys(palettes).join(', ')}`);
       else orig = await build({ S, palId: oid, linework: 'pencil', primary: false });
     }
-    const tx = issueSc || ruleSc ? createTransitions(null, { width: SW, height: SH }) : null;
-    if ((issueSc || ruleSc) && !tx) console.warn('[blueprint] no WebGL: the flood and the rule cut at their midpoint');
+    // the checklists' probe runs: the lamp over the frame; the rows are drafted on their own as it passes them
+    const scans = S.scenes.filter((sc) => sc.scan).map((sc) => sc.scan);
+    const glNeeded = issueSc || ruleSc || scans.length;
+    const tx = glNeeded ? createTransitions(null, { width: SW, height: SH }) : null;
+    if (glNeeded && !tx) console.warn('[blueprint] no WebGL: the flood and the rule cut at their midpoint, the probe run has no lamp');
     tx?.warm();
     const off = () => { const c = document.createElement('canvas'); c.width = SW; c.height = SH; return [c, c.getContext('2d')]; };
     const [cA, gA] = off(), [cB, gB] = off();
@@ -102,6 +105,16 @@ export const start = () => {
         const p = (t - rule.t0) / rule.dur;
         if (tx) ctx.drawImage(tx.draw('occluder-pass', cA, cB, p, { dur: rule.dur, fps: 30, colors: { ground: RP.bg, ink: RP.line } }), 0, 0);
         else ctx.drawImage(p < 0.5 ? cA : cB, 0, 0);
+        return;
+      }
+      // the probe run: one frame of the drawing (its rows are drafted at the lamp's pass times, sheets/checklist.js)
+      // under the lamp of blueprint-expose without development, so A and B are the same frame: a reading, not an
+      // exposure (the print is issued once, by a person). Light paper takes the line colour as the lamp's (a UV lamp)
+      const scan = scans.find((x) => t >= x.t0 && t < x.t0 + x.dur);
+      if (scan && tx) {
+        W.drawFrame(gA, t);
+        const P = W.P;
+        ctx.drawImage(tx.draw('blueprint-expose', cA, cA, (t - scan.t0) / scan.dur, { direction: scan.dir, develop: false, lamp: 'glow', colors: { ground: P.bg, ink: P.line, paper: P.dark ? P.ink : P.line } }), 0, 0);
         return;
       }
       // motion blur only while the camera travels fast (lib/canvas.js subframes: exact sum, sub-frames ≤ 2 px apart)

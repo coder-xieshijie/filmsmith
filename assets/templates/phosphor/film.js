@@ -869,6 +869,9 @@ BUILD.install = (s, sec) => {
     inn(el, at(T.steps[i]), { y: 30, scale: 0.94 }, 0.3, 'expo.out');
     tl.to(el, { borderColor: PAL.muted, duration: 0.1 }, at(T.steps[i] + 0.05));
   });
+  // the wait before the steps (events.js TIMING.install): the window bar, then the title, dim in two frames
+  const waitDims = [[term.firstElementChild], [h]];
+  (T.waits || []).forEach((t, k) => tl.fromTo(waitDims[Math.min(k, 1)], { filter: 'brightness(1)' }, { filter: 'brightness(0.6)', duration: 2 / FPS, ease: 'none', ...IR }, at(t)));
   // the title and the terminal leave on the first step's beat: the cards land alone (a new composition)
   if (els.length) tl.set([h, term], { opacity: 0 }, at(T.steps[0]));
   return { dims: [els.map((e) => $(e, '.n')), els.map((e) => $(e, '.c'))] };
