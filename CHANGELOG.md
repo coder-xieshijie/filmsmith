@@ -69,3 +69,4 @@
 - templates: `render` takes `--workers ${HF_WORKERS:-auto}` so a shared machine can cap render workers.
 - handoffs: `rail-press` `drawLine`, `path-type` `line: false` / `drawLine`, `counter-portal` `glyph.draw: 'counter'`; defaults unchanged, verified pixel for pixel.
 - The repository root is now the skill (`SKILL.md`, `references/`, `assets/`, `scripts/`); the `skills/filmsmith/` level is gone. The README gains badges, a still of all ten styles (`assets/showcase.jpg`), install and update messages to send to an agent, and example requests; `.github/` adds issue and pull-request templates and a CI check.
+- Ten demos, one per style (30–60 s each, made with the skill), published as MP4s in the v0.1.0 release; the README's style table shows a six-second animated preview of each (`docs/previews/`) linking to its film.

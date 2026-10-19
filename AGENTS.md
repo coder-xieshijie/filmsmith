@@ -7,6 +7,7 @@ Public repository of one agent skill, **Filmsmith**; the repository root is the 
 - `SKILL.md`, `references/`, `assets/`, `scripts/`: the skill. The repository root is its single maintained source; installs link to it.
 - `README.md`, `README.zh-CN.md`: the gallery of styles, install and quick start.
 - `THIRD-PARTY.md`: what is downloaded at setup and under which licence. `CONTRIBUTING.md`: how to change the skill.
+- `docs/previews/`: six-second animated previews of each style's demo for the README; the full demos are MP4s in the Releases.
 - `assets/showcase.jpg`: the README's still of all ten styles (one still per mode from `references/modes/stills/`).
 - `.github/`: issue and pull-request templates, and a CI check (script syntax and the timing tests).
 
