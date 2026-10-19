@@ -1,0 +1,73 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>transitions self-test</title></head>
+<body>
+<script type="module">
+// selftest.html — for every transition: p = 0 equals `from` and p = 1 equals `to`, pixel for pixel (random-noise
+// frames, so any blend, offset or warp shows); p just inside the ends is close to them (no pop at the start or the
+// end); a frame drawn twice, with other frames in between, is identical (pure function of p). Also times one frame
+// at 1920 × 1080. Results in window.__selftest and the page title. Run with node test/run.mjs.
+import { createTransitions, list } from '../index.js';
+const W = 1920, H = 1080;
+const noise = (seed) => {
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d'); const im = g.createImageData(W, H);
+  let x = seed >>> 0;
+  for (let i = 0; i < im.data.length; i += 4) {
+    x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0;
+    im.data[i] = x & 255; im.data[i + 1] = (x >>> 8) & 255; im.data[i + 2] = (x >>> 16) & 255; im.data[i + 3] = 255;
+  }
+  g.putImageData(im, 0, 0);
+  return { c, px: im.data };
+};
+const A = noise(1), B = noise(2);
+const out = document.createElement('canvas'); out.width = W; out.height = H;
+const tx = createTransitions(out);
+const gl = tx.gl;
+const buf = new Uint8Array(W * H * 4);
+const read = () => { gl.readPixels(0, 0, W, H, gl.RGBA, gl.UNSIGNED_BYTE, buf); return buf; };
+// readPixels is bottom-up; compare against the top-down 2D image
+const diff = (ref) => {
+  let max = 0, sum = 0, bad = 0;
+  for (let y = 0; y < H; y++) {
+    const ro = (H - 1 - y) * W * 4, so = y * W * 4;
+    for (let x = 0; x < W * 4; x += 4) {
+      let d = 0;
+      for (let k = 0; k < 3; k++) d = Math.max(d, Math.abs(buf[ro + x + k] - ref[so + x + k]));
+      if (d) bad++;
+      if (d > max) max = d;
+      sum += d;
+    }
+  }
+  return { max, mean: sum / (W * H), bad };
+};
+const colors = { ink: '#2B3BFF', accent: '#FFB71C', ground: '#0B111F', paper: '#EFEEE8' };
+const results = [];
+for (const t of list) {
+  await new Promise((res) => setTimeout(res, 0));   // yield, so the runner's polling is answered between transitions
+  const r = { name: t.name };
+  try {
+    const draw = (p) => { tx.draw(t.name, A.c, B.c, p, { seed: 7, colors }); return read(); };
+    draw(0); r.p0 = diff(A.px);
+    draw(1); r.p1 = diff(B.px);
+    // one frame in from each end: only a small part of the frame may have changed yet
+    draw(1 / 300); r.near0 = diff(A.px);
+    draw(1 - 1 / 300); r.near1 = diff(B.px);
+    // purity: p = 0.5 drawn twice, other frames in between
+    const first = new Uint8Array(draw(0.5));
+    draw(0.2); draw(0.9);
+    const second = draw(0.5);
+    let same = true;
+    for (let i = 0; i < first.length; i++) if (first[i] !== second[i]) { same = false; break; }
+    r.pure = same;
+    const t0 = performance.now();
+    for (const p of [0.3, 0.5, 0.7]) { tx.draw(t.name, A.c, B.c, p, { seed: 7, colors }); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4)); }
+    r.ms = Math.round((performance.now() - t0) / 3);
+    r.pass = r.p0.max === 0 && r.p1.max === 0 && r.pure;
+  } catch (e) { r.error = String(e && e.message || e); r.pass = false; }
+  results.push(r);
+  console.log(`${r.name} ${r.pass ? 'PASS' : 'FAIL'} ${r.ms} ms`);
+}
+window.__selftest = { renderer: tx.renderer, results, pass: results.every((r) => r.pass) };
+document.title = window.__selftest.pass ? 'PASS' : 'FAIL';
+</script>
+</body></html>

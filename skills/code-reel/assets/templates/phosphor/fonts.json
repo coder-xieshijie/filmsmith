@@ -1,0 +1,20 @@
+[
+  {
+    "family": "Inter",
+    "file": "Inter-VF.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf",
+    "weight": "100 900",
+    "style": "normal",
+    "license": "OFL-Inter.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt"
+  },
+  {
+    "family": "JetBrains Mono",
+    "file": "JetBrainsMono-VF.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+    "weight": "100 800",
+    "style": "normal",
+    "license": "OFL-JetBrainsMono.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt"
+  }
+]

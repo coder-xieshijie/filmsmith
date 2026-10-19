@@ -1,0 +1,27 @@
+[
+  {
+    "family": "Bricolage Grotesque",
+    "file": "BricolageGrotesque-Variable.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/BricolageGrotesque%5Bopsz,wdth,wght%5D.ttf",
+    "weight": "200 800",
+    "license": "OFL-BricolageGrotesque.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/OFL.txt"
+  },
+  {
+    "family": "Instrument Serif",
+    "file": "InstrumentSerif-Italic.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentserif/InstrumentSerif-Italic.ttf",
+    "weight": "400",
+    "style": "italic",
+    "license": "OFL-InstrumentSerif.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentserif/OFL.txt"
+  },
+  {
+    "family": "JetBrains Mono",
+    "file": "JetBrainsMono-Variable.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+    "weight": "100 800",
+    "license": "OFL-JetBrainsMono.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt"
+  }
+]

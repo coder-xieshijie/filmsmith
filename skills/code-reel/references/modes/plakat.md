@@ -1,0 +1,202 @@
+# Plakat · 招贴 (`plakat`)
+
+A series of International Typographic Style posters in motion: warm paper, ink, one signal accent, a visible 12-column grid, giant numerals beside 25 px mono labels, every cut on the beat. Aesthetic anchor: "like a Müller-Brockmann concert-poster series set as a product keynote".
+Theme: tech-product-launch · Template: `assets/templates/plakat/` · tempo 112–128 BPM, default 120 (length follows the copy; the placeholder example fits to 64 s, 32 bars at 120) · Source film accepted 2026-10-16 (dev-skills launch, Swiss version); template 2026-10-17; revised 2026-10-18 (accent narrowed, 25 px floor, timing api 2; batch 3: options settled, brisk pacing, exits straddle the cut, palette names); 2026-10-19 (form variant `diagonal`, `opening: 'set'`, the last scene holds, use cases; timing api 3 — the four tiers of change — with the batch 4 devices slot-rails, aperture-swap, counter-portal, step-wipe and plakat-columns' `angle` / `twoPhase`, and four new scene types `slot`, `bars`, `figure`, `words`)
+
+## Fits / does not fit
+
+Fits: products whose story is a clear claim plus a sequence of steps or decisions, with a human at the start and the end (developer workflows, review and approval tools, rollout and release tools, process products); audiences who like restraint; any length the copy needs — about 30 s for four or five short pages, 55–75 s for a full launch story. The mode is chosen by form (claim plus steps), so at least one page must be drawn from the product's real technical material — the install block's commands, real ids and numbers — to say "technical product" before any word is read (principle 9).
+Does not fit: products that need physical space, depth or spectacle (use a 3D or drafting mode); a pure teaser under 20 s (ink); numbers about many items (tally); a mechanism that must be watched running (trace); stories with no human decision to mark (the accent would have nothing to mean).
+
+## Use cases
+
+Each names a product and what its film says; the scene types are this template's. Settled 2026-10-19 (`draft`: chosen by the mode's accent rule and the films made so far; the owner has not compared them).
+
+| Use case | Example: product, and what the film says | Scenes |
+|---|---|---|
+| **An agent or automation whose output a person signs** (best fit) | tablewarden (fictional): an agent drafts Postgres migrations, a person signs each change. The unread `DROP COLUMN` is covered by the wipe, which becomes the field "YOU SIGN — Each change." (the showcase cut, 2026-10-19); the 46 s demo v2 carries the signature through the slot, the lock chart's limit, the replay's stop band and the 0's counter into "You read. / You *sign*. / It applies." | problem → claim, then slot, bars, verify, figure → words if longer |
+| A spec-first developer workflow | dev-skills (the source film, accepted 2026-10-16): the person answers the questions, signs the spec, agents build, the person accepts the result | claim, chapter + options, document, flow, install |
+| A staged rollout or release tool | gatewright (the template's placeholder): each stage widens only on a person's sign-off; an outside probe watches | the full chain, matrix and verify carrying the stages |
+| A review or approval queue | a code-review service (illustrative) that routes risky diffs to a named reviewer: what was flagged, who decides, what merges | problem, options, verify (the stop band is the reviewer's call) |
+
+The first is the best fit because every accent block in it is the person's decision, which is exactly what the accent means here (mode principle 2), and its strongest turn, problem → claim, says the whole product in two scenes, so it reads at 10 s.
+
+## Mode principles
+
+1. **The grid is visible and binding.** 12 columns, 96 px margins, 122 px columns, 24 px gutters; the column lines stay on screen at low contrast for the whole film and every left edge sits on one. Positions come from the grid, never nudged for one string; copy that does not fit is rewritten. *(Narrows 7, one system, and 3, one protagonist per frame.)*
+2. **The accent means the human and the human's decisions.** The input half, the chosen option and the confirm tick, the YOU nodes, the stop band where the person decides, a starred word that names the person, and the current bar of the progress strip. It appears only as a block or as type ≥ 132 px; text on it uses the palette's `onAccent`. What only needs weight — problem flags, rules, bars, the closing square — is ink. *(Narrows 7, one accent, one meaning, and 1, readable before beautiful.)*
+3. **Scale is the emphasis.** A 640 px numeral beside a 25 px mono label; the counter at 300 px; the tagline at 225 px. Three type tiers per page from one scale, plus the chrome and the numeral graphics (see Type scale). Nothing is emphasised by colour alone. *(Narrows 3, one protagonist per frame.)*
+4. **Type moves along the grid, behind masks.** Display lines slide up out of a mask and leave upward through it; rules draw along column widths; blocks wipe horizontally; a page without its own exit rolls up bottom-first (a clip, not a fade); a word in the slot passes between two grid baselines; a word on the anchor stays put while its ground changes. No fades on display type, no scaling of type, no rotation; everything lands and stops dead. The one scale is the camera push through a figure's counter (counter-portal): the whole poster scales as a camera move, never type on its own. *(Narrows 5, motion locked to the beat. Departs from 6, which asks for secondary motion on landings: print does not bounce; see principle 7.)*
+5. **Transitions are re-layouts, chapters turn the page.** Inside the claim and the pages an element of this page becomes the next: the headline shrinks into the table heading, the full accent wipe collapses into the input half, the promise returns as the tagline, a figure's counter becomes the next poster, a staircase front stays as the chart. A chapter turn is a page turn: the first three by the grid columns (an ink shutter up each column: upright, then leaning on the grid diagonal, then two-phase), later ones by the outgoing page rolling up (or its type sinking) in 0.25 s while the numeral already rises out of its mask. Exits are at most 2/3 of the entrances they answer and straddle the cut, overlapping the next page's first rise by about a quarter beat (brisk turns, principle 5, 2026-10-18). *(Narrows 4, transform at the turns, and departs from it at the chapter turns: a poster series turns its pages, it does not morph one poster into the next. The turns that carry meaning still transform — problem → claim, where the accent wipe becomes the human's input half, and claim → tagline, where the promise returns at poster size. A departure at layer 3, written down as foundations "Who decides" allows; source film accepted 2026-10-16, flow review 2026-10-18.)*
+6. **Cut on the beat, count in whole numbers, change on every beat or two.** Cuts on beats, landings on beats or half beats, claim and tagline on a bar line, counters step 0 → N one per half beat. Timing API 3 (principles 4 and 5, the four tiers, owner-approved 2026-10-19): at most five primary words enter at once (eight for a claim, read in a pause), so every multi-part slot enters part by part; something new lands about every beat (never more than 4 beats apart); a composition lasts at most 6 s, 2–3 s in the median; an expressive transition every 8–12 s; two or three peaks with the climax at 60–85 %. No still window lasts more than 2 beats (2 bars where a claim is read): a longer hold carries a stepped hold move on a beat — an ink frame steps over the page's items in reading order, the claim's arrow pushes a gutter, the install cursor blinks, the last word's ground inverts, the chapter numeral steps 6 px, the URL is underlined on the last downbeat. *(Narrows 5, beat lock and dwell.)*
+7. **Flat print.** No glow, gradient, shadow, scanline, glitch, blur or 3D. The only texture is a static paper tooth that never moves. *(Narrows 8, the picture is technical: graphic and typographic. Departs from 6, texture: no sub-frame motion blur and no secondary motion on landings, because printed paper neither blurs nor bounces; the full wipe (0.45 s), the 0.2–0.25 s exits and the cursor hops (0.1–0.12 s) are short enough to read unblurred at 30 fps, every move eases in or out (expo / power curves), and the texture is the paper tooth and the type itself. The one second move is the closing underline on the last downbeat, a stepped print move, not a bounce. The library hand-offs (slot-rails, step-wipe, counter-portal) are drawn without their sub-frame blur for the same reason (2026-10-19). Principle 6 allows this departure for flat-print modes; fit and texture review 2026-10-18.)*
+
+## Palette presets
+
+| id | name | fits | paper | ink | grey | accent | onAccent | promptOnInk |
+|---|---|---|---|---|---|---|---|---|
+| `signal` | Swiss red (source) | default; warm, decisive | `#F2EFE8` | `#111111` | `#5E5A53` | `#FF3B1F` | `#111111` | `#FF3B1F` |
+| `ikb` | Ultramarine signal | cooler, institutional; design and research tools | `#F2EFE8` | `#111111` | `#5E5A53` | `#1E40D8` | `#F2EFE8` | `#8EA2FF` |
+| `orange` | Safety orange (ANSI hue) | operations, infrastructure, stories with a stop | `#F2EFE8` | `#111111` | `#5E5A53` | `#D36F01` | `#111111` | `#D36F01` |
+| `night` | Night print (inverted) | dark rooms, keynote screens | `#141414` | `#EDEAE3` | `#A39E94` | `#FF4A2E` | `#141414` | `#C4311A` |
+
+Contrast (`standard`, WCAG 2.2, computed): ink/paper ≥ 15.3, grey/paper ≥ 6.0, onInk/ink ≥ 15.3 (the problem's ink flags), mutedOnInk/ink ≥ 5.7, onAccent/accent ≥ 5.3 in every preset; accent/paper 3.1 (`signal`), 6.6 (`ikb`), 3.0 (`orange`), 5.5 (`night`), so in `signal` and `orange` the accent is for blocks and large type only. The install prompt glyph (`promptOnInk` on the ink block, 36 px regular, large type, gate 3:1) measures 4.6 in `night` (darkened from `#C8321A`, 4.45, on 2026-10-18 so it passes 4.5:1 as text) and 5.3 or more in the others. Header and footer text over an accent field (the claim's accent half, the problem's full wipe, the verify band) switches to `onAccent` character by character at the field edge, so chrome on accent measures onAccent/accent (≥ 5.3) in every preset instead of ink/accent (2.5 in `ikb`). `hyperframes check` contrast with no warnings: 517/517 on the placeholder example in each of the four presets (2026-10-18). `signal` hexes are the source film's (`borrowed`); the others `derived`. Names and sources (2026-10-18, settled by theory; the owner did not object; ids unchanged): `signal` is "Swiss red", approximating the hue of the Swiss federal design manual's red `#FF0000` (ΔE00 3.8); it is not RAL 3001 Signal red, a different, darker colour, so the old name is dropped. `ikb` is "Ultramarine signal": `#1E40D8` is not Klein's IKB (which has no published value; the web's `#002FA7` is ΔE00 8.1 away), and it is only 2.5:1 against ink, so what separates it from ink is its chroma, not lightness. `orange` takes the ANSI Z535 Safety Orange hue (5.0YR 6.0/15, about `#E27700`, which reaches only 2.66:1 on paper) darkened to `#D36F01`, just past 3:1 (was `#E85500`, ΔE00 10.8 off the ANSI hue). Recomputed: `orange` accent/paper 3.03, ink on it 5.43, its prompt glyph on the ink block 5.43.
+
+## Variants
+
+Two independent axes; one value of each per film.
+
+- **Colour**: the four presets in the table above (`palette`).
+- **Form** (`form`, 2026-10-19): how the large fields are cut. Type, rules, the grid and every mode principle stay the same in both values.
+
+| `form` | What changes | Pick it when | Source |
+|---|---|---|---|
+| `square` (default) | Every block, field and wipe is a rectangle on the 12-column grid | The default; pages dense with tables; an institutional or careful tone | Müller-Brockmann's strict column grid (*Grid Systems in Graphic Design*, 1981) and the source film, 2026-10-16 (`borrowed`) |
+| `diagonal` | Solid fields wider than four columns (the problem's ink bars and wipe, the claim's field and band, the verify band, the install block) lean 19.2°: their vertical edges move one column pitch (146 px) across half the content band (420 px) and cross their column line at mid-height; wipes travel with a leaning front edge. The claim's edge joins the gutter between columns 6 and 7 on the header rule to the gutter between 4 and 5 on the footer rule. Type stays upright; the claim's input lines are capped at 729 px (one line) or 682 px (two) and its arrow is shortened so both stay inside the field | A launch that should feel quicker and more forward (deploys, releases, a reel cut); films that open on problem → claim, where the lean is largest. Little changes on the table pages, so a film of mostly options, document and matrix pages gains nothing from it | Müller-Brockmann's 1955 concert poster for the Tonhalle-Gesellschaft Zürich is built on "horizontal and vertical lines set at a 30 degree angle" in its composition drawing (I Love Typography, 2013), so its diagonal is constructed from a grid, not drawn freely (`borrowed` device; the 19.2° slope `derived` from this mode's column pitch and content band) |
+
+Values considered and not taken (2026-10-19): setting the type itself on a diagonal breaks mode principle 4 (no rotation) and the grid of mode principle 1, and costs reading time; Weingart's layering overlaps text and texture, against core principle 4 (never two contents over each other) and the flat print of mode principle 7; Ruder's asymmetric open page (one protagonist in a large empty field) fits every principle but needs a second layout of every page type, so it is left for later. `diagonal` is `draft` until the owner has compared the two values side by side.
+
+## Accent role
+
+The accent marks **the human and the human's decisions** (principle 7: one kind of thing): the input half of the claim, the chosen option and the confirm tick, the YOU nodes, the stop band where the person decides, a starred word that names the person, the person's word in the slot, the limit the person set over a chart, a `words` state that is the person (its ground), the portal inside a figure's counter when the scene behind it is the person's, and the current bar of the progress strip. Everything else that needs weight is ink. The mode has no status, category or effect colours: the stop band marks where the person decides, not an error. As a mark the accent covers well under 10 % of the frame. It becomes a full-frame ground once, in the problem's closing wipe (0.45 s, the cut into the claim), which is kept because it grows straight into the human's input half; the claim's input half then holds about 47 % of the frame until beat 3 of the claim's second bar, when it collapses into an 80 px band behind the input label (4.8 % of the content area), so wipe and half together hold the ground under 2 bars (settled 2026-10-18).
+
+## Type
+
+| Role | Family | Licence | Sizes (px) |
+|---|---|---|---|
+| Display, numerals, body | Inter Tight 500–800, display 800 at −0.045 em, numerals −0.06 em, line-height 0.82 | OFL | graphics off the scale: 640 chapter numeral · 400 side numeral · 300 counter; on the scale: 225 chapter title, tagline, end name · 164 headline · 120 page head, page and flow titles, claim lines, /N · 88 problem row labels · 47 problem values, end items · 34 every body line (questions, rows, rail steps, strip, band, claim name and description, node names, box titles, captions) · 25 labels |
+| Commands, ids, labels, chrome | IBM Plex Mono 400 / 500 / 600, labels caps +0.08 em | OFL | 47 URL · 34 commands and step commands · 25 labels, chrome, notes, ids, refs, lists, hashes |
+
+Minimum 25 px for every string that carries information (about 11 pt on a 6.1-inch phone played landscape full screen, the publishing case the owner chose 2026-10-18; `derived`). Measured on the placeholder example in the browser, every visible text node at the hold of every page renders at 25 px or more. No text below 25 px is registered as decoration. Main text (questions, the claim's description, row and rail lines, body lines, commands) targets 40 px but runs at the scale's 34 px body tier (settled 2026-10-18 with the scale; the next step up, 47, does not fit the source film's table and rail layouts). Display slots shrink to fit their span down to ≈ 0.75 × nominal, never further; labels and mono text do not shrink. Plex Mono has no ✓: ticks are drawn. Scale `borrowed` from the source film; contrast minimums `standard`.
+
+## Type scale
+
+One modular scale, 25 × 1.3685ⁿ: 25 · 34 · 47 · 64 · 88 · 120 · 164 · 225 (· 308 · 421). The ratio puts the 25 px floor and the 120 px page head five steps apart (`derived`). Each page sets three tiers of it — display, body 34, label 25 — with the 640 chapter numeral, 400 side numeral and 300 counter as graphics off the scale, and the chrome at its own sizes. A display line that does not fit steps down the scale, never 2 px at a time. Settled 2026-10-18 (batch 2 `type: 'three'`, the source film's 35 sizes deleted): accepted on the recommendation; the owner did not compare it shot by shot. Sizes per page: template `TEMPLATE.md`, Settled options.
+
+## Frame and grid
+
+1920 × 1080. Column left edges `96 + 146 (i − 1)`, both edges of every column drawn as 1 px lines at ink 8.5 % (`gridAlpha`), dropping in from the top in the first 0.7 s. Header (25 px mono caps): brand (28 px heavy) · tag (column 3) · current section (column 8) · licence (column 11), over a 2 px ink rule at y 116; no timecode — the header carries real information only. Footer: URL · platforms (column 5) · one progress cell per bar from column 8 to the margin (past bars ink, current bar accent), over a rule at y 962. Page head on content pages: numeral at x 90 and title at column 3 (120 px), caption from column 8, rule at y 300. Paper texture: static seeded tooth and fibre, soft-light, `paper: 0.5`. Content area for motion checks: `[0, 120, 1920, 840]`, between the two rules.
+
+## Scenes
+
+| Type | Purpose | Bars at 120 BPM (example / ceiling) |
+|---|---|---|
+| `problem` | Headline, then a table of what is broken; ink flags one per row; full-screen accent wipe | 3 / 4 (two compositions) |
+| `claim` | Input (accent half, collapsing to a band) → output (paper half), arrow, name and one line; starts on a bar line; closing a film, the name takes the output side | 2.5 / 4 (two compositions) |
+| `chapter` | 640 px numeral + title, ink rule, caption; the first three entered by the grid columns | 1 / 6 s |
+| `options` | Questions with two options; the pick fills accent; summary; confirm block | 2.5 / 6 s |
+| `document` | Two framed documents fill with numbered cells; check → confirm → freeze → hand-off rail | 3 / 6 s |
+| `matrix` | Steps × milestones filled by an accent cursor on half beats; side numeral; strip | — / 6 s |
+| `verify` | Two-box check diagram, rows pass on half beats, counter 0 → N, accent stop band | 2.5 / 6 s |
+| `flow` | Human → steps → human on one line, bracket, loop back, rule, list | 2.5 / 6 s |
+| `install` | Commands typed in an ink block, numbered steps, cursor blinking on the beat | 2.25 / 6 s |
+| `slot` | A sequence of steps through a slot between two grid baselines; the person's step in the accent (slot-rails) | 2.25 / 6 s |
+| `bars` | One measured quantity per item as columns, arriving as a staircase of its own values; the person's limit as an accent rule (step-wipe) | 1.5 / 6 s |
+| `figure` | One number at 640 px and what it counts; the next scene waits in its counter (counter-portal) | 1.5 / 6 s |
+| `words` | One- to three-word states on one anchor, each on its own ground: paper, ink, or the accent for the person (aperture-swap) | 1.5 / 6 s |
+| `tagline` | The promise at 225 px, ink bar; starts on a bar line | 1.25 / 6 s |
+| `end` | Name, parts in columns, ink square + URL, underline on the last downbeat | 2.75 / closing rest |
+
+Bars are fitted from the copy (`npm run fit`); the ceiling is the api 3 composition limit (6 s at the fitted tempo; problem and claim hold two compositions each). Slots, limits, the per-type timing table, devices and fixed parts: `TEMPLATE.md`.
+
+## Signature transformations
+
+- headline → table heading: the two-line headline scales to 50 % about its first letter and moves up 32 px while the table rules draw under it (`borrowed`, source).
+- problem → claim: a full-screen accent wipe (0.45 s, expo in-out) ends on the bar line; the next frame is the same accent field, which collapses to the left half and becomes the INPUT side (`borrowed`, source). The wipe is the one full-frame accent outside the claim: it is kept because it grows directly into the human's input half, so it already means "what the person brings".
+- chapter → page: the numeral, kicker and title leave upward through their masks in 0.25 s across the cut while the page head already rises into the same top band with the numeral at 120 px (`borrowed`, source; a page turn, see mode principle 5; overlap `derived`, 2026-10-18).
+- page → next: a page without its own exit rolls up bottom-first in 0.25 s (power2-in clip on the whole page), from 0.125 s before the cut, under the next page's first rise (`derived`, 2026-10-18).
+- confirm: an ink block wipes in under the options, "You confirm." rises inside it, the accent tick draws (`borrowed`).
+- documents → frozen: every cell fills ink bottom-up on a 25 ms stagger, frames thicken 2 → 7 px, stamps land at 1.3 → 1 scale (`borrowed`).
+- tagline: the claim from the second scene returns at poster size (`borrowed`).
+- chapter turns by the grid columns (plakat-columns, T2): an ink shutter runs up each of the twelve columns and the composed card is behind it; three variants in a film: upright, leaning 19.2° on the grid diagonal (`angle`), two-phase (`twoPhase`: the frame is solid ink for a moment) (`borrowed` device from the library; slope `derived` from the `diagonal` form; 2026-10-19).
+- slot (slot-rails, T0): two grid baselines are the top and bottom of a slot; each step leaves up through the top as the next rises from the bottom; the person's step is the accent (`borrowed` device, 2026-10-19).
+- staircase → chart (step-wipe, T2): the front's steps are the chart's own values; landed, it is the chart (`borrowed` device, 2026-10-19).
+- figure → the person (counter-portal, T2): the accent shows inside the counter of a figure's 0 from its first frame; the camera pushes through it onto the accent ground of the next scene (`borrowed` device, 2026-10-19).
+- words on grounds (aperture-swap, T0): the word holds its anchor while the next ground opens as a band, closing bars or a circle; grounds are paper, ink, and the accent only for the person (`borrowed` device; grounds `derived` from the palette's roles; 2026-10-19).
+
+## Motion
+
+| Value | Setting | Tag |
+|---|---|---|
+| Rise (display, lines) | yPercent 118 → 0, 0.5–0.7 s expo-out, stagger 0.07–0.25 s | borrowed (source film; expo-out ease, Material "emphasized decelerate" family) |
+| Sink (exit) | yPercent 0 → −118, 0.19–0.25 s power3-in, stagger 0.01–0.03 s, from 0.125–0.15 s before the cut | borrowed (exits faster than entrances, Material); timing `derived` (≤ 2/3 of the entrance, overlap about a quarter beat, brief 2026-10-18) |
+| Page exit | clip `inset(0 0 0 0)` → `inset(0 0 100% 0)`, 0.25 s power2-in, from 0.125 s before the cut; the page stays visible until the clip ends | derived (2026-10-18) |
+| Rules | scaleX 0 → 1 from the left, 0.45–0.8 s expo-out / in-out | borrowed (source) |
+| Accent block reveal | clip from the left, 0.3 s expo-out; label inside re-coloured for the accent | borrowed (source), clip technique `derived` (palette-safe) |
+| Full wipe | scaleX 0 → 1, 0.45 s expo in-out, ending on the bar line | borrowed (source) |
+| Cursor hop (matrix, flow) | 0.1–0.12 s power2-out, one hop per half beat | borrowed (source) / flow walk `draft` |
+| Counters | whole numbers, one step per half beat; one accent flash 0.25 beat after N | borrowed (source) |
+| Small elements | opacity + 8–18 px shift, 0.2–0.35 s power2/power3-out | borrowed (source) |
+| Chapter numeral drift | 6 px a beat, one 0.12 s power2-out step on every beat (continuous and linear until 2026-10-19: at 0.4 px a frame it read as still to the pixel measure) | derived (source drifted 30–36 px across 0.5–0.75-bar cards; kept, verdict 2026-10-18; stepped 2026-10-19 for api 3) |
+| Hold moves | any still window past 2 beats gets one on a beat, 0.3–0.8 u into it: an ink frame (3 px) steps over the page's items in reading order, 0.12 s power2-out; the claim's arrow pushes one gutter (24 px, 0.35 s expo-out, at most three out, then back to one); the install cursor blinks on every beat (silent); the last word of a run stays on its anchor while its ground inverts (a cut) | derived (principle 5, api 3: a hold ≤ 2 beats; 2026-10-19); `draft` until the owner has seen them |
+| plakat-columns | 2 beats, half before the cut; each column quint in-out over 40 % of it, columns 5 % apart; `block` 200, `rise` 0; `angle` −19.2° on the second card, `twoPhase` on the third | borrowed (library defaults); `rise` 0 and the CSS-clip drawing derived (TEMPLATE.md, Transitions) |
+| counter-portal | the last 1.5 beats of the figure; exponential zoom, cubic-bezier (0.7, 0, 0.3, 1), parallax 0.55, landed at 94 % | borrowed (library defaults) |
+| step-wipe | the first beat of a bars scene; front cubic in-out | borrowed (library defaults) |
+| slot-rails | 1 beat a word; out accelerating over 32 %, in expo out from 24 %, rails a landing spring | borrowed (library defaults); rails on the grid baselines derived |
+| aperture-swap | 0.44 beat a state, cubic out; band, closing bars, circle in turn | borrowed (library defaults) |
+| Closing move | the URL's ink underline draws in 0.4 s expo-out and reaches 90 % on the downbeat of the film's last bar | derived (the closing page ends on a move, not on padding; landing = 90 % of an ease-out) |
+| Timing | every in-scene time in u = 2 beats, scaled by 120 / bpm; entrances from the scene start, exits before its end; tween durations in seconds | derived |
+| Tempo range | 112–128 BPM, default 120 | default `borrowed` (source film and swiss bed); range `draft` (±6.7 %, chosen so half-beat counters and marimba runs stay crisp; not yet compared by ear) |
+| Scene length | `need = max(primary reading done, glance done, held text done, last landing + 1 beat) + the exit's part before the cut`, whole beats; claim and tagline start on a bar line (their pad goes to the scene before); film rounded to a whole bar | `derived` (`timing.rules.js`, `lib/timing.js` api 3) |
+| Reading | three tiers through the shared reader: primary 0.3 s a word, one string after another, legible 0.25 s after a landing starts (0.1 s on the aperture, 0.2 s in the slot); glance (≤ 6 words, repeated elsewhere or safe to delete) ≥ 1 s fully still, in parallel; URL ≥ 3 s | rates `standard`; tiers per slot and settle `derived` |
+| Reading-paced builds | problem lines and rows, options questions, matrix and figure lines, document rail, install steps, slot words, word states land when the previous one has been read, on half beats or beats | `derived` |
+| The four tiers | ≤ 5 primary words a state (8 for a claim: the tagline, the figure); holds 0.2 s–2 beats (a pause ≤ 2 bars); compositions ≤ 6 s, median 2–3 s, CV ≥ 0.3, two in the first 5 s; T0 median ≤ 2 beats, gaps ≤ 4 beats; T2 one every 8–12 s, one device ≤ 3 times, never twice in a row unchanged, ≤ 2 beats; T3 2–3 peaks, climax at 60–85 % | `draft` values approved by the owner 2026-10-19 (principles 4 and 5; lib/timing.js DEFAULTS); measured on the example: T0 median 1 beat, max 2.5; T1 18 compositions, median 3 s, CV 0.38; T2 6; T3 3, climax 76 % |
+| Motion blur | none (print look; DOM type stops dead; moves are short) | a written departure from principle 6, see mode principle 7 |
+
+## Sound
+
+Bed: `swiss` preset (120 BPM, C major, marimba melody from seeded rhythm cells, marimba bass, woodblock, shaker, log drum, light muted kick; three chord parts). Sections from the scene list: problem and claim `build`, the chapter pages `drop` (consecutive drops share a section; the chord parts alternate by 4-bar phrase and the progression runs on across chapters), `install` the film's one pad-only `break`, whose last two bars step back in (an intro bar, then a build bar) so the tagline's `drop` does not return from silence, `end` `outro`. Energy rises with every chapter and peaks on the tagline; a drop page whose primary text takes 60 % or more of its length is a reading drop (the marimba line rests; wood, bass and kick stay). Bed at −4 dB. Effects from the same plan as the picture, levels set by stem measurement and lowered on 2026-10-18 so that landings no longer jump over the bed (values in `score.mjs`): accent blocks — the human's decisions — swish into a marimba stroke; ink blocks and rules (problem flags, claim underline, chapter rule, closing square) only a soft swish; full wipes swept noise + low landing; low landings a tom and thud with the bed ducking under them; stamps with a duck; counters a marimba walking up C pentatonic; rows and cells a woodblock under the bed; display landings a soft thud; chapter numerals a log drum; typing keys; cursor hops, arrow pushes and the closing underline a high woodblock; every turn key a high woodblock as well, so each turn has an onset above 1.5 kHz. Master −14 LUFS, true peak ≤ −1.5 dBTP. Optional generated bed: `bed: { file, offset }` at the measured tempo.
+
+## Factory defaults
+
+Motifs the template produces untouched (principle 10); `new-film.mjs` copies this list into each film's `PLAN.md` as its ban list. Keep one only with a reason written in the plan.
+
+- The placeholder copy and its sentence shapes: the two short problem lines, the claim's two-line halves (and the earlier "Who … ?" hook and "X in. / Y out." claim), the comma tagline.
+- The `signal` palette: warm paper, ink, signal red.
+- The full chain in example order: problem table → accent wipe → INPUT/OUTPUT claim → four chapter/page pairs → flow line → install block → tagline → end.
+- The 640 px chapter numeral alternating left and right, with a mono kicker, a 225 px title, an ink rule and a caption.
+- The page head: 120 px numeral and title, caption from column 8, full-width rule.
+- The claim as an accent half and a paper half with a long arrow between.
+- The options table with accent-filled picks, a decision-summary box and a black "You confirm." block with a tick.
+- Two framed documents with numbered cells, a FROZEN-style stamp and a four-step rail.
+- The steps × milestones matrix with a side numeral; the PASS list with a 300 px n/N counter and a full-width accent band.
+- The flow line YOU → steps → YOU with a bracket over it and a loop under it.
+- The ink install block with typed commands, a blinking block cursor and numbered steps.
+- The end page: name, four parts in columns, square + URL, a two-part foot.
+- The columns into the first three chapter cards in the order upright, lean, two-phase; the slot of the plan's steps with the person's step in the accent; the figure "0" whose counter opens onto a run of three words on accent, ink and paper (the example's shapes since 2026-10-19).
+- The persistent frame: brand, tag, section and licence over a rule at the top; URL, platforms and a bar-by-bar progress strip at the bottom; visible column lines and the static paper tooth.
+
+## Don'ts
+
+- No accent on what the machine does or on what is broken: problem flags, rules, bars and closing marks are ink. The accent means the person; spent on a machine step it stops meaning anything (principle 7).
+- No accent on small text on paper, and no `*word*` on punctuation, numbers or things: `signal` and `orange` reach only 3.1–3.2:1 on paper, and a coloured question mark emphasises by colour alone (principles 1 and 3).
+- No decorative timecode, BPM, frame counter or "n / N" numbering: a persistent frame carries only real information, and a running timecode is a factory-default motif (principles 7 and 10).
+- No glow, gradient, shadow, blur, scanline, glitch or 3D; no fades, scaling or rotation of display type: the look is flat print, and type that fades or scales stops reading as printed (mode principles 4 and 7).
+- No position nudged off the grid for one string, and no text shrunk below its floor or below 25 px: the grid is the system, and small type fails on a phone; cut the copy or split the page (mode principle 1, principle 1).
+- No sentence the viewer must read in a glance slot: glance text gets 1 s, not reading time, so it stays within six words and repeats something shown elsewhere (principle 1).
+- No copy, product name or sentence shape carried over from the placeholder example: every film made from the template would share it (principle 10).
+
+## Checks
+
+- **P0**: `npm run fit` reports no errors (api 3: ≤ 5 primary words a state, ≤ 8 for a claim; no still window over 2 beats outside a pause; compositions ≤ 6 s with median and CV in range; T0, T2 and T3 counts); `npm run validate` and `hyperframes check` 0 errors (no overflow past the fit floor, no stale `data-duration`, fonts loaded); contrast passes; every string that carries information renders at ≥ 25 px; every number agrees across scenes (summary = picks, counter N = rows, `{added}` = added cells, cell ids numbered in order); no element left at scale ≠ 1 or partly masked after its landing; chapter numeral fully inside its mask at rest (check the card mid-hold); loudness −14 ± 1 LUFS, true peak ≤ −1.5 dBTP; the same frame renders identically twice.
+- **P1**: the accent marks only the human and the human's decisions (plus the progress cell and the registered exceptions under Known issues), including a `words` state on the accent ground and the portal; `*word*` only on a person or a decision; `check-film` tier rows PASS and `scene stills` 0 over; one device ≤ 3 times and varied between uses; key events on the beat (`fit` checks `renders/timing.json`); every accent block and counter step has its sound on the same frame; the break sits under the reading-heavy scene and the drop on the promise; the URL holds ≥ 3 s; no example copy or its sentence shapes left in the film.
+- **P2**: grid lines visible but quiet; paper texture visible on accent fields, invisible as noise on paper; staggers read left to right, top to bottom; no two neighbouring pages share the same layout type twice in a row.
+
+## Known issues
+
+- The source film's bed was one generated track looped about 2.5×; the template synthesises a multi-part `swiss` bed whose chord part changes per chapter. It was verified by levels and spectrogram only, not by listening. The effects stood 7–11 LU above the bed at the wipe and the chapter landings (legibility review 2026-10-18); the sound pass of 2026-10-18 lowered them and reworked the break before the tagline, and check-film now reports no momentary jump over 6 LU, but nobody has listened to it.
+- The accent still marks a few things that are not strictly the human: the gap-check scan line and the added cells on the document page, the matrix cursor and its milestone underline, and the counter flash (source look, kept); the document rail marks its current step in accent like the progress strip.
+- Main text runs at the 34 px body tier, below the 40 px target (see Type). check-film still estimates four levels on some hold frames (25 · 32–36 · 44 · 122 px on the options page; pixel estimates ±15 %, graphics can count as text; not traced to an element).
+- Turns overlap by about a quarter beat (exits straddle the cut), so `check-film` finds few hard cuts (the aperture's, on a run of words); scene starts are still checked on the beat. Two keys show no standing-out picture event: the claim (a hand-off: the accent field carries across) and the tagline's turn (the install page's roll-up is already moving when the tagline rises). The claim → chapter overlap puts the sinking input lines under the rising 640 px numeral for about three frames.
+- Chapter numeral: at rest it is fully inside its mask (frames checked mid-card); during the 0.25 s exit it is cut by the mask on purpose, and a contact-sheet tile that lands there looks cropped. Every scaled entrance ends at 1. The right-side numeral bleeds past the right margin by design (source look).
+- Turn pads: the claim or the tagline waits for the bar line, and the scene before it holds up to 3 beats longer; the hold moves fill the extra, so no pad holds still past 2 beats.
+- Length: the placeholder example runs 64 s (32 bars at 120; batch 3's api 2 example ran 62 s with 14 scenes, batch 1 82 s). Under api 3 it holds 16 scenes and 18 compositions (median 3 s). The owner's "text switching is slow" (batch 1, 0:26.2) was answered by batch 3 ("不再慢了", 2026-10-18); the api 3 density has not been reviewed on this template yet.
+- Devices drawn by CSS (2026-10-19): plakat-columns and aperture-swap are WebGL functions of two frames; a DOM page cannot be their texture, so `devices.js` draws the same shapes from the modules' own numbers as CSS clip paths. The new poster takes the module's `rise: 0`, not its default 40 px.
+- `plakat-accent-wipe` (the problem's full wipe) is declared as a T2 with the template's own id, so `npm run fit` warns that it is not a library id.
+- `hyperframes check` reports one contrast warning (about 1:1) on a header glyph on the frame where the columns' shutter edge crosses it: the chrome switches to the paper colour by the glyph's centre, so a glyph cut by the edge is half on each. The old wipe frame had the same kind of warning.
+- The example's claim (6.4 s) measures a momentary loudness rise of 6.9 LU over the 2 s before (check-film WARN, limit 6): the problem now has two rows and three bars, so the 2 s before the wipe are quieter. Not tuned by ear.
+- The paper texture canvas is drawn at twice its deviation and shown at opacity 0.5 (same pixels under soft-light): at full opacity the layout audit counts it as an opaque cover of every text, and pages long enough to span two check samples turn those notes into errors.
+- The document rail is a fixed four-step chain; only its labels change.
+- The 2 px header and footer rules stay ink where they cross an accent field (decorative lines, not text).
+- **Fixed 2026-10-19: the chrome text blinked at the start of opening `'draw'`** (the default). The header and footer text was visible on the first frames, dropped to transparent at 0.3 s and faded in over the next 0.3 s, because its entrance is a `fromTo` that does not render before it starts. It is now hidden from 0 s, so it first appears as it fades in (0.3–0.84 s with the stagger). In the example only frames before 0.54 s change; stills from 0.567 s on are pixel-identical. `opening: 'set'` never had it.
+- `form: 'diagonal'`: the leaning bars and the install block cross the right margin (and the install block the left one) by up to 35 px at their corners, because they lean about their middle; the problem bars' bottom-left corner comes within 10 px of a row label that fills its whole span.

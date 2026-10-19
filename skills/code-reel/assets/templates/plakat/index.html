@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>plakat</title>
+    <script src="lib/vendor/gsap.min.js"></script>
+    <!-- fonts come only from fonts.css (written by npm run setup from fonts.json) and are verified by lib/text.js fontsReady -->
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <style>
+      /* palette roles are written from palettes.js at init */
+      :root { --paper: #f2efe8; --ink: #111111; --grey: #5e5a53; --accent: #ff3b1f; --on-accent: #111111; --on-ink: #f2efe8; --muted-on-ink: #bdb8ae; --prompt-on-ink: #ff3b1f; --hair: rgba(17, 17, 17, 0.12); --gridline: rgba(17, 17, 17, 0.085); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper); color: var(--ink); font-family: "Inter Tight", sans-serif; }
+
+      .abs { position: absolute; }
+      .mono { font-family: "IBM Plex Mono", monospace; }
+      .disp { font-family: "Inter Tight", sans-serif; font-weight: 800; letter-spacing: -0.045em; line-height: 1; white-space: nowrap; }
+      .lbl { font-family: "IBM Plex Mono", monospace; font-size: 25px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); white-space: nowrap; }
+      .h { opacity: 0; }
+      .acc { color: var(--accent); }
+      .grey { color: var(--grey); }
+      /* masked line: wrapper clips, inner slides */
+      .m { position: absolute; overflow: hidden; padding: 0 0.06em 0.14em 0; }
+      .mi { display: block; white-space: nowrap; }
+      .rule { position: absolute; height: 2px; background: var(--ink); transform-origin: 0 50%; }
+      .hair { position: absolute; height: 1px; background: var(--hair); transform-origin: 0 50%; }
+      .sq { display: inline-block; width: 22px; height: 22px; background: var(--accent); }
+      .layer { position: absolute; inset: 0; }
+
+      #grid { position: absolute; inset: 0; z-index: 1; }
+      #paper { position: absolute; inset: 0; z-index: 25; pointer-events: none; mix-blend-mode: soft-light; opacity: 0.5; }
+      #grid i { position: absolute; top: 0; width: 1px; height: 1080px; background: var(--gridline); display: block; transform-origin: 50% 0; }
+      .tx { position: absolute; inset: 0; z-index: 5; }
+      .scene { position: absolute; inset: 0; z-index: 5; }
+      #shutter { position: absolute; inset: 0; z-index: 24; background: var(--ink); pointer-events: none; clip-path: polygon(0px 0px, 0px 0px, 0px 0px); }
+      .walk { position: absolute; border: 3px solid var(--ink); opacity: 0; z-index: 4; pointer-events: none; }
+      #chrome { position: absolute; inset: 0; z-index: 30; pointer-events: none; }
+      #chrome .t { position: absolute; top: 58px; font-size: 25px; white-space: nowrap; }
+      #hBrand { left: 96px; top: 56px !important; font-family: "Inter Tight", sans-serif; font-weight: 800; font-size: 28px !important; letter-spacing: -0.03em; }
+      #fTicks { position: absolute; left: 1118px; top: 990px; width: 706px; height: 14px; display: flex; gap: 6px; }
+      #fTicks span { flex: 1; height: 14px; display: block; border: 1.5px solid var(--ink); background: transparent; }
+      #chrome .f { position: absolute; top: 982px; font-size: 25px; white-space: nowrap; }
+
+      .num { font-family: "Inter Tight", sans-serif; font-weight: 800; letter-spacing: -0.06em; line-height: 0.82; white-space: nowrap; font-variant-numeric: tabular-nums; }
+      .cap { font-family: "Inter Tight", sans-serif; font-weight: 500; font-size: 36px; line-height: 1.25; letter-spacing: -0.01em; }
+      .pcap { font-family: "Inter Tight", sans-serif; font-weight: 500; font-size: 27px; line-height: 1.3; letter-spacing: -0.005em; color: var(--ink); }
+
+      .box { position: absolute; border: 2px solid var(--ink); }
+      .fill { position: absolute; inset: 0; background: var(--ink); transform-origin: 0 50%; }
+      .opt { position: absolute; width: 268px; height: 66px; border: 2px solid var(--ink); }
+      .opt span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 27px; letter-spacing: -0.01em; white-space: nowrap; }
+      .cell { position: absolute; width: 80px; height: 56px; border: 2px solid var(--ink); }
+      .cell span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 25px; }
+    </style>
+    <script>
+      // Async build gate: HyperFrames waits for every promise in __hf.buildReady before the first frame.
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady.swiss = new Promise((r) => (window.__swissResolve = r));
+    </script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60" data-width="1920" data-height="1080">
+      <div id="grid"></div>
+      <div id="scenes"></div>
+      <!-- plakat-columns' ink shutter (devices.js columnsAt) -->
+      <div id="shutter" data-layout-allow-occlusion></div>
+      <canvas id="paper" width="1920" height="1080" data-layout-allow-occlusion></canvas>
+      <div id="chrome">
+        <div class="rule" id="hRule" style="left:96px;top:116px;width:1728px"></div>
+        <div class="t" id="hBrand"></div>
+        <div class="t lbl" id="hTag" style="left:388px;color:var(--ink)"></div>
+        <div class="t lbl" id="hSect" style="left:1118px;color:var(--ink)"></div>
+        <div class="t lbl" id="hLic" style="left:1556px;color:var(--ink)"></div>
+        <div class="rule" id="fRule" style="left:96px;top:962px;width:1728px"></div>
+        <div class="f lbl" id="fUrl" style="left:96px;color:var(--ink)"></div>
+        <div class="f lbl" id="fRuns" style="left:680px;color:var(--ink)"></div>
+        <div id="fTicks"></div>
+      </div>
+      <audio id="mix" src="assets/audio/mix.wav" data-start="0" data-duration="60" data-track-index="20" data-volume="1"></audio>
+    </div>
+
+    <script type="module">
+      import FILM from './content.js';
+      import PALETTES from './palettes.js';
+      import { planFilm, TYPES, COL, esc, SERIES } from './scenes.js';
+      import { ENTER, isColumns, windowOf, columnsAt, polyCss, apertureCss } from './devices.js';
+      import { mulberry32, fbm } from './lib/rng.js';
+      import { fontsReady } from './lib/text.js';
+
+      const FPS = 30;
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+      const report = (window.__swiss = { errors: [], warnings: [] });
+      const fail = (msg) => { report.errors.push(msg); console.error('[plakat] ' + msg); };
+
+      // ---------- palette ----------
+      const pal = PALETTES[FILM.palette];
+      if (!pal) fail(`palette "${FILM.palette}" not in palettes.js (${Object.keys(PALETTES).join(', ')})`);
+      const P0 = pal || PALETTES.signal;
+      const rgbA = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; };
+      const vars = { paper: P0.paper, ink: P0.ink, grey: P0.grey, accent: P0.accent, 'on-accent': P0.onAccent, 'on-ink': P0.onInk, 'muted-on-ink': P0.mutedOnInk, 'prompt-on-ink': P0.promptOnInk, hair: rgbA(P0.ink, P0.hairAlpha), gridline: rgbA(P0.ink, P0.gridAlpha) };
+      for (const [k, v] of Object.entries(vars)) document.documentElement.style.setProperty('--' + k, v);
+
+      // ---------- plan (shared with score.mjs): scene starts, bars, bpm and duration from lib/timing.js fit() ----------
+      // data-duration above is stamped by `npm run fit` (lib/fit.mjs); a stale value is reported here.
+      const plan = planFilm(FILM);
+      plan.errors.forEach(fail);
+      plan.warnings.forEach((w) => { report.warnings.push(w); console.warn('[plakat] ' + w); });
+      const { g, k, laid } = plan;
+      const D = plan.duration;
+      const stamped = Number($('#root').dataset.duration);
+      if (Math.abs(stamped - D) > 1e-3) fail(`index.html data-duration ${stamped} ≠ fitted ${D.toFixed(3)} s — run npm run fit`);
+      $('#mix').setAttribute('data-duration', String(D));
+
+      // ---------- grid: 12 columns, both edges of every column ----------
+      $('#grid').innerHTML = Array.from({ length: 12 }, (_, i) => `<i style="left:${COL(i + 1)}px"></i><i style="left:${COL(i + 1) + 121}px"></i>`).join('');
+
+      // ---------- paper: a static, seeded print texture over the whole sheet (0 = flat) ----------
+      // Fine tooth plus broad fibre clouds, centred on mid-grey and soft-light blended, so the average tone of
+      // paper, ink and accent is unchanged (contrast holds) while the surface reads as printed. Drawn once: it never moves.
+      // Soft-light is linear in the overlay's distance from mid-grey, so the canvas is drawn at twice the deviation and
+      // shown at opacity 0.5: the same pixels, and the layout audit no longer counts the overlay as an opaque cover.
+      (function paper(amount) {
+        const cv = $('#paper');
+        if (!amount) { cv.remove(); return; }
+        const ctx = cv.getContext('2d');
+        const W = 1920, H = 1080, r = mulberry32(FILM.seed || 1);
+        const lo = document.createElement('canvas'); lo.width = 240; lo.height = 135;
+        const lctx = lo.getContext('2d'), li = lctx.createImageData(240, 135);
+        for (let y = 0; y < 135; y++) for (let x = 0; x < 240; x++) {
+          const v = fbm(x / 22, y / 22, (FILM.seed || 1) + 5, 4);
+          const o = (y * 240 + x) * 4;
+          li.data[o] = li.data[o + 1] = li.data[o + 2] = 128 + (0.5 - v) * 112 * amount; li.data[o + 3] = 255;
+        }
+        lctx.putImageData(li, 0, 0);
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(lo, 0, 0, W, H);
+        const img = ctx.getImageData(0, 0, W, H);
+        for (let i = 0; i < img.data.length; i += 4) {
+          const n = (r() - 0.5) * 140 * amount;
+          img.data[i] = img.data[i + 1] = img.data[i + 2] = Math.max(0, Math.min(255, img.data[i] + n));
+        }
+        ctx.putImageData(img, 0, 0);
+      })(FILM.paper ?? 0.5);
+
+      // ---------- chrome ----------
+      const C = FILM.chrome || {};
+      $('#hBrand').textContent = C.brand || '';
+      $('#hTag').textContent = C.tag || '';
+      $('#hLic').textContent = C.license || '';
+      $('#fUrl').textContent = C.url || '';
+      $('#fRuns').textContent = C.platforms || '';
+      const nBars = Math.ceil(plan.bars - 1e-6);
+      $('#fTicks').innerHTML = Array.from({ length: nBars }, () => '<span></span>').join('');
+
+      // ---------- scenes: DOM ----------
+      // Each scene is a <section> inside a wrapper: the section takes the page's own clip (the roll-up exit), the wrapper
+      // the plakat-columns clip while the shutter passes (devices.js columnsAt), so the two never overwrite each other.
+      const host = $('#scenes');
+      const beat = g.beat;
+      // when each scene is on screen: from its start (or from the columns' window before it), until its end plus the
+      // part of its exit (or of the device covering it) that runs past the cut
+      const showFrom = laid.map((s) => (isColumns(s.enterBy) ? s.start + windowOf(s.enterBy, beat)[0] : s.start));
+      const hideAt = laid.map((s, i) => (i < laid.length - 1 ? s.end + (s.P.tail || 0) : D + 1));
+      const apis = laid.map((s, i) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'tx';
+        const sec = document.createElement('section');
+        sec.className = 'scene';
+        sec.id = `sc${i}`;
+        sec.style.visibility = i === 0 ? 'visible' : 'hidden';
+        wrap.appendChild(sec);
+        host.appendChild(wrap);
+        return { sec, wrap, scene: s, P: s.P, next: laid[i + 1], k, pal: P0, fail, html: (h) => (sec.innerHTML = h), $: (q) => $(q, sec), $$: (q) => $$(q, sec), at: (u) => s.start + u * k };
+      });
+      laid.forEach((s, i) => TYPES[s.type]?.build(apis[i], s, s.P));
+
+      // ---------- fonts, then measured fit ----------
+      // every family and weight the film draws must come from fonts.css and actually load; a fallback font would
+      // shift every measured fit. fontsReady logs, paints a banner and raises a page error on a failure.
+      const fontErrors = await fontsReady([
+        { family: 'Inter Tight', weight: 500 }, { family: 'Inter Tight', weight: 800 },
+        { family: 'IBM Plex Mono', weight: 400 }, { family: 'IBM Plex Mono', weight: 500 }, { family: 'IBM Plex Mono', weight: 600 },
+      ]);
+      fontErrors.forEach((e) => report.errors.push(`font: ${e}`));
+
+      const fit = (root) => {
+        for (const el of $$('[data-fit]', root)) {
+          const [maxW, min] = el.dataset.fit.split(',').map(Number);
+          const inner = el.firstElementChild;
+          let size = parseFloat(el.style.fontSize);
+          // step down the modular scale (scenes.js SERIES), never below the scale step at or under the floor, so every
+          // fitted size stays on the scale
+          const floor = Math.max(...SERIES.filter((v) => v <= Math.max(min, SERIES[0])));
+          const steps = SERIES.filter((v) => v < size && v >= floor).reverse();
+          while (inner.scrollWidth > maxW && size > floor) { size = steps.shift() ?? floor; el.style.fontSize = size + 'px'; }
+          if (inner.scrollWidth > maxW) fail(`text does not fit (${Math.round(inner.scrollWidth)} > ${maxW}px at the ${floor}px minimum): "${inner.textContent}" — rewrite shorter`);
+        }
+        for (const el of $$('[data-lines]', root)) {
+          const lh = parseFloat(getComputedStyle(el).lineHeight);
+          const lines = Math.round(el.scrollHeight / lh);
+          if (lines > Number(el.dataset.lines)) fail(`text runs to ${lines} lines (max ${el.dataset.lines}): "${el.textContent}" — rewrite shorter`);
+        }
+        for (const el of $$('[data-fitw]', root)) if (el.scrollWidth > Number(el.dataset.fitw)) fail(`text too wide (${el.scrollWidth}px > ${el.dataset.fitw}px): "${el.textContent}"`);
+        for (const el of $$('[data-fitrow]', root)) if (el.scrollWidth > Number(el.dataset.fitrow)) fail(`row too wide (${el.scrollWidth}px > ${el.dataset.fitrow}px): "${el.textContent}"`);
+      };
+      fit(document);
+      for (const el of $$('#chrome .t, #chrome .f')) {
+        const r = el.getBoundingClientRect();
+        if (r.right > 1824.5) fail(`header/footer text runs past the right margin: "${el.textContent}"`);
+      }
+      // the hand-offs measure text and sample glyphs: they are created once the fonts are in
+      for (let i = 0; i < laid.length; i++) {
+        try { await TYPES[laid[i].type]?.prepare?.(apis[i], laid[i], laid[i].P); }
+        catch (e) { fail(`scene ${i + 1} (${laid[i].type}): ${e?.message ?? e}`); }
+      }
+
+      // ---------- one paused timeline, built from content ----------
+      const tl = gsap.timeline({ paused: true });
+      const IR = { immediateRender: false };
+      // Per scene: a scene entered by the columns is composed behind the shutter, so a tween that would start before
+      // P.set.before is set at the shutter's start instead (planScene; the shutter is the entrance).
+      const helpersFor = (api) => {
+        const S = api.P.set, setAt = S ? api.at(S.from) : 0, before = S ? api.at(S.before) - 1e-6 : -Infinity;
+        const T = (t, d) => (t < before ? [setAt, 0.001, 0] : [t, d, null]);
+        const rise = (el, t, d = 0.55, ease = 'expo.out', stagger = 0) => { const [a, b, st] = T(t, d); tl.set(el, { yPercent: 118 }, 0); tl.fromTo(el, { yPercent: 118 }, { yPercent: 0, duration: b, ease, stagger: st ?? stagger, ...IR }, a); };
+        const sink = (el, t, d = 0.28, stagger = 0) => tl.to(el, { yPercent: -118, duration: d, ease: 'power3.in', stagger }, t);
+        const show = (el, t, d = 0.3, from = {}, ease = 'power2.out', stagger = 0) => { const [a, b, st] = T(t, d); tl.fromTo(el, { opacity: 0, ...from }, { opacity: 1, x: 0, y: 0, scale: 1, duration: b, ease, stagger: st ?? stagger, ...IR }, a); };
+        const grow = (el, t, d = 0.5, ease = 'expo.inOut', axis = 'scaleX', stagger = 0) => { const [a, b, st] = T(t, d); tl.set(el, { [axis]: 0 }, 0); tl.fromTo(el, { [axis]: 0 }, { [axis]: 1, duration: b, ease, stagger: st ?? stagger, ...IR }, a); };
+        const clipIn = (el, t, d = 0.5, ease = 'expo.inOut', from = 'inset(0% 100% 0% 0%)') => { const [a, b] = T(t, d); tl.set(el, { clipPath: from }, 0); tl.fromTo(el, { clipPath: from }, { clipPath: 'inset(0% 0% 0% 0%)', duration: b, ease, ...IR }, a); };
+        const draw = (p, t, d = 0.5, ease = 'power2.inOut') => { const [a, b] = T(t, d); const L = Math.ceil(p.getTotalLength()) + 2; p.style.strokeDasharray = L + ' ' + L; tl.set(p, { strokeDashoffset: L }, 0); tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: b, ease, ...IR }, a); };
+        const typeText = (el, text, t0, cps = 60) => { const ch = [...text]; tl.set(el, { textContent: '' }, 0); for (let i = 1; i <= ch.length; i++) tl.set(el, { textContent: ch.slice(0, i).join('') }, t0 + i / cps); return t0 + ch.length / cps; };
+        const drift = (el, t, d, dx) => tl.fromTo(el, { x: 0 }, { x: dx, duration: d, ease: 'none', ...IR }, t);
+        // reveal: a fill layer (with its own copy of the label in the contrast colour) wipes in from the left ('x') or bottom ('y')
+        const reveal = (els, t, d, ease, dir, stagger = 0) => [].concat(els).forEach((e, i) => clipIn(e, t + i * stagger, d, ease, dir === 'x' ? 'inset(0% 100% 0% 0%)' : 'inset(100% 0% 0% 0%)'));
+        return { tl, rise, sink, show, grow, clipIn, draw, typeText, drift, reveal };
+      };
+      const G0 = helpersFor({ P: {}, at: (u) => u });
+
+      // opening 'draw' (default): grid lines drop in, chrome draws. 'set': the grid and the chrome are already on the
+      // first frame, for a film that is cut into a reel or opens on a transition from another film (2026-10-19)
+      if ((FILM.opening ?? 'draw') === 'draw') {
+        G0.grow($$('#grid i'), 0, 0.7, 'expo.out', 'scaleY', 0.018);
+        G0.grow([$('#hRule'), $('#fRule')], 0.1, 0.8, 'expo.inOut');
+        tl.set($$('#hBrand, #hTag, #hSect, #hLic, #fUrl, #fRuns, #fTicks'), { opacity: 0 }, 0);
+        G0.show($$('#hBrand, #hTag, #hSect, #hLic, #fUrl, #fRuns, #fTicks'), 0.3, 0.3, { y: -8 }, 'power2.out', 0.04);
+      }
+
+      // time-driven chrome: bar progress (past bars ink, current bar accent). No timecode.
+      const tickEls = $$('#fTicks span');
+      const proxy = { t: 0 };
+      tl.fromTo(proxy, { t: 0 }, {
+        t: D, duration: D, ease: 'none', ...IR,
+        onUpdate() {
+          const t = Math.round(proxy.t * FPS) / FPS;
+          const bar = Math.min(nBars - 1, Math.floor(t / g.bar + 1e-6));
+          tickEls.forEach((e, i) => { e.style.background = i < bar ? P0.ink : i === bar ? P0.accent : 'transparent'; e.style.borderColor = i === bar ? P0.accent : P0.ink; });
+        },
+      }, 0);
+
+      // scenes: visibility, section label, choreography, hold moves
+      let lastLabel = null;
+      laid.forEach((s, i) => {
+        const api = { ...apis[i], ...helpersFor(apis[i]) };
+        apis[i].helpers = api;
+        if (i > 0) tl.set(api.sec, { visibility: 'visible', ...IR }, showFrom[i]);
+        if (i < laid.length - 1) tl.set(api.sec, { visibility: 'hidden', ...IR }, hideAt[i]);
+        if (s.sectionLabel !== lastLabel) { tl.set('#hSect', { textContent: s.sectionLabel }, s.start); lastLabel = s.sectionLabel; }
+        const T = TYPES[s.type];
+        T?.animate(api, s, s.P);
+        // hold move 'frame': an ink frame steps over the page's items in reading order, one hop per move (planScene)
+        if (T?.walk === 'frame' && s.P.moves.length) {
+          const fr = document.createElement('div');
+          fr.className = 'walk';
+          api.sec.appendChild(fr);
+          const root = $('#root').getBoundingClientRect(), inset = T.walkInset ?? 10;
+          const boxes = T.walkBoxes(api).map((el) => { const r = el.getBoundingClientRect(); return { left: r.left - root.left - inset, top: r.top - root.top - inset, width: r.width + 2 * inset, height: r.height + 2 * inset }; });
+          tl.set(fr, { opacity: 0 }, 0);
+          s.P.moves.forEach((u, j) => {
+            const b = boxes[j % boxes.length];
+            if (!j) tl.set(fr, { opacity: 1, ...b }, api.at(u) - 0.06);
+            else tl.to(fr, { ...b, duration: 0.12, ease: 'power2.out' }, api.at(u) - 0.06);
+          });
+        }
+      });
+
+      // ---------- chrome over an accent field: on-accent colour ----------
+      // The claim's accent half, the problem's full wipe and the verify band run under the header and footer. Chrome
+      // text over them takes the palette's onAccent, split per character at the field edge.
+      const glyphs = [];
+      for (const el of $$('#hBrand, #hTag, #hLic, #fUrl, #fRuns')) {
+        el.innerHTML = [...el.textContent].map((c) => `<span>${esc(c)}</span>`).join('');
+        for (const sp of el.children) { const r = sp.getBoundingClientRect(); glyphs.push({ el: sp, x0: r.left + r.width / 2, x1: r.left + r.width / 2, y: r.top + r.height / 2, on: false }); }
+      }
+      glyphs.push({ el: $('#hSect'), x0: 1118, x1: 1118 + 24 * 17, y: 74, on: false, base: $('#hSect').style.color });
+      const tickBoxes = tickEls.map((e) => { const r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+      const fields = $$('[data-accent-field]').map((f) => { const [x, y, w, h, lean = 0] = f.dataset.accentField.split(',').map(Number); return { f, sc: f.closest('.scene'), x, y, w, h, lean }; });
+      const inside = (rs, x, y) => rs.some((r) => { const d = r.lean ? r.lean * (r.cy - y) : 0; return x >= r.left + d && x <= r.right + d && y >= r.top && y <= r.bottom; });
+
+      // ---------- the devices, per frame: columns clips and shutter, apertures, the hand-off canvas ----------
+      const columns = laid.filter((s) => isColumns(s.enterBy)).map((s) => { const [a, b] = windowOf(s.enterBy, beat); return { i: s.index, t0: s.start + a, dur: b - a, opts: ENTER[s.enterBy].opts }; });
+      const shutter = $('#shutter');
+      // the hand-offs (slot-rails, step-wipe, counter-portal) draw into their scene's own canvas (scenes.js HAND)
+      const hands = apis.map((api) => api.sec.querySelector('canvas.hand')?.getContext('2d') ?? null);
+      const css = new Map(); // element → last clip written (no layout work when unchanged)
+      const setClip = (el, v) => { if (css.get(el) !== v) { el.style.clipPath = v; css.set(el, v); } };
+      let shutterPoly = null;
+      const paintFrame = (t) => {
+        const wrapClip = laid.map(() => 'all');
+        let ink = null;
+        for (const c of columns) {
+          const p = (t - c.t0) / c.dur;
+          if (p <= 0 || p >= 1) continue;
+          const G = columnsAt(p, c.opts);
+          if (c.i > 0) wrapClip[c.i - 1] = G.a;
+          wrapClip[c.i] = G.b;
+          ink = G.ink;
+        }
+        apis.forEach((api, i) => setClip(api.wrap, polyCss(wrapClip[i])));
+        setClip(shutter, ink ? polyCss(ink) : 'polygon(0px 0px, 0px 0px, 0px 0px)');
+        shutterPoly = ink;
+        for (const s of laid) for (const c of s.P.clips || []) setClip(c.layer, c.open ? 'none' : apertureCss((t - c.t0) / c.dur, c.shape, c.origin));
+        laid.forEach((s, i) => {
+          const ctx = hands[i];
+          if (!ctx) return;
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.clearRect(0, 0, 1920, 1080);
+          if (t < showFrom[i] || t >= hideAt[i]) return;
+          ctx.save();
+          TYPES[s.type].paint(ctx, t, apis[i].helpers, s, s.P);
+          ctx.restore();
+        });
+      };
+      // chrome text over the ink shutter takes the palette's onInk (point in the shutter's polygon)
+      const inPoly = (pts, x, y) => { let c = false; for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) { const [xi, yi] = pts[i], [xj, yj] = pts[j]; if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c; } return c; };
+
+      tl.eventCallback('onUpdate', () => {
+        const t = tl.time();
+        paintFrame(t);
+        // a field grows from its left edge (scaleX) and may collapse about its middle (scaleY + y: the claim's collapse into a band)
+        const rs = fields.filter((F) => F.sc.style.visibility !== 'hidden').map((F) => {
+          const sy = gsap.getProperty(F.f, 'scaleY'), top = F.y + (F.h * (1 - sy)) / 2 + gsap.getProperty(F.f, 'y');
+          return { left: F.x, top, right: F.x + F.w * gsap.getProperty(F.f, 'scaleX'), bottom: top + F.h * sy, lean: F.lean, cy: top + (F.h * sy) / 2 };
+        }).filter((r) => r.right - r.left > 1 && r.bottom - r.top > 1);
+        for (const gl of glyphs) {
+          const on = shutterPoly && inPoly(shutterPoly, gl.x0, gl.y) && inPoly(shutterPoly, gl.x1, gl.y) ? 'ink' : inside(rs, gl.x0, gl.y) && inside(rs, gl.x1, gl.y) ? 'accent' : false;
+          if (on !== gl.on) { gl.el.style.color = on === 'ink' ? P0.onInk : on ? P0.onAccent : gl.base ?? ''; gl.on = on; }
+        }
+        tickBoxes.forEach((b, i) => {
+          if (!inside(rs, b.x, b.y)) return;
+          const e = tickEls[i], past = e.style.background && e.style.background !== 'transparent';
+          e.style.borderColor = P0.onAccent;
+          e.style.background = past ? P0.onAccent : 'transparent';
+        });
+      });
+      paintFrame(0);
+
+      window.__timelines.main = tl;
+      if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
+      window.__swissResolve();
+    </script>
+  </body>
+</html>

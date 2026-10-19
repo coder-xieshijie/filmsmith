@@ -1,0 +1,81 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>hand-offs self-test</title></head>
+<body>
+<script type="module">
+// selftest.html — for every hand-off (defaults, plus each stage or variant): p = 0 paints exactly its `from` rest and
+// p = 1 exactly its `to` rest (max channel difference 0); a frame drawn twice with other frames in between is identical
+// (pure function of p), also with motion blur on; the defaults draw something; the landing is settled (the fastest point
+// moves ≤ 2 px in the last frame; p = 1 itself is never blurred). Also reports how much of the frame changes one frame in
+// from each end (a cut by design shows there) and the time per frame. Results in window.__selftest. Run: node run.mjs.
+import { createHandoff, list } from '../index.js';
+
+const W = 1920, H = 1080;
+const VARIANTS = {
+  'rail-press': [{ phase: 'press' }, { phase: 'cut' }],
+  'arc-curl': [{ from: 'ring', to: 'node' }, { from: 'node', to: 'box' }, { from: 'ring', to: 'line' }],
+  'stroke-reinterpret': [{ direction: 'remove' }],
+  'net-unfold': [{ stage: 'unfold' }, { stage: 'arrange' }],
+  're-encode': [{ direction: 'bars' }],
+  'anchor-swap': [{ swap: 'iris' }, { swap: 'pull' }],
+  'squash-to-path': [{ stage: 'squash' }, { stage: 'run' }, { stage: 'straighten' }],
+  'field-morph': [{ step: 'quantize' }, { step: 'resolve' }],
+};
+const cases = list.flatMap((m) => [{ name: m.name, params: {} }, ...(VARIANTS[m.name] || []).map((v) => ({ name: m.name, params: v, label: `${m.name} ${Object.values(v).join('/')}` }))]);
+
+const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c.getContext('2d', { willReadFrequently: true }); };
+const A = mk(), B = mk();
+const grab = (ctx, fn) => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, H); fn(ctx); return ctx.getImageData(0, 0, W, H).data; };
+const diff = (a, b) => {
+  let max = 0, bad = 0;
+  for (let i = 0; i < a.length; i += 4) {
+    let d = 0;
+    for (let k = 0; k < 4; k++) d = Math.max(d, Math.abs(a[i + k] - b[i + k]));
+    if (d) bad++;
+    if (d > max) max = d;
+  }
+  return { max, bad };
+};
+const same = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; };
+
+const results = [];
+for (const c of cases) {
+  const r = { name: c.label || c.name };
+  try {
+    const h = await createHandoff(c.name, c.params);
+    const dur = (h.beats * 60) / 120;
+    const draw = (p, opts) => (ctx) => h.draw(ctx, p, opts);
+    const f0 = grab(A, draw(0)), s0 = new Uint8ClampedArray(grab(B, (x) => h.still(x, 'from')));
+    r.p0 = diff(f0, s0).max;
+    const f1 = grab(A, draw(1)), s1 = new Uint8ClampedArray(grab(B, (x) => h.still(x, 'to')));
+    r.p1 = diff(f1, s1).max;
+    r.near0 = diff(grab(A, draw(1 / 300)), s0).bad;
+    r.near1 = diff(grab(A, draw(1 - 1 / 300)), s1).bad;
+    // the defaults draw something besides the ground
+    const mid = new Uint8ClampedArray(grab(A, draw(0.5)));
+    const g = mid.slice(0, 4);
+    let drawn = 0;
+    for (let i = 0; i < mid.length; i += 4) if (mid[i] !== g[0] || mid[i + 1] !== g[1] || mid[i + 2] !== g[2]) drawn++;
+    r.drawn = drawn;
+    grab(A, draw(0.2)); grab(A, draw(0.9));
+    r.pure = same(mid, grab(A, draw(0.5)));
+    // purity with motion blur, at the fastest of a few sampled p
+    let pf = 0.5, vmax = -1;
+    for (let k = 1; k < 20; k++) { const v = h.speed(k / 20, 1 / (60 * dur)); if (v > vmax) { vmax = v; pf = k / 20; } }
+    const b1 = new Uint8ClampedArray(grab(A, draw(pf, { dur })));
+    grab(A, draw(0.1, { dur }));
+    r.blurPure = same(b1, grab(A, draw(pf, { dur })));
+    // px the fastest point moves during the last frame before landing (≤ 2: nothing visibly still moving at the landing)
+    r.endSpeed = h.speed(1, 1 / (30 * dur)) / (30 * dur);
+    const t0 = performance.now();
+    for (const p of [0.3, 0.5, 0.7]) grab(A, draw(p));
+    r.ms = Math.round((performance.now() - t0) / 3);
+    r.pass = r.p0 === 0 && r.p1 === 0 && r.pure && r.blurPure && r.drawn > 0 && r.endSpeed <= 2;
+  } catch (e) {
+    r.error = String(e && e.stack || e); r.pass = false;
+  }
+  results.push(r);
+}
+window.__selftest = { results, pass: results.every((r) => r.pass) };
+document.title = window.__selftest.pass ? 'PASS' : 'FAIL';
+</script>
+</body></html>

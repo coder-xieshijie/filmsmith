@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>tally</title>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <script src="lib/vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    </style>
+  </head>
+  <body>
+    <!-- data-duration is the fitted length: `npm run fit` stamps it from lib/timing.js fit(content, timing.rules.js) -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+      <canvas id="film" class="clip" width="1920" height="1080" data-start="0" data-duration="30" data-track-index="0"></canvas>
+      <audio id="mix" class="clip" src="assets/audio/mix.wav" data-start="0" data-duration="30" data-track-index="1"></audio>
+    </div>
+    <script>
+      // HyperFrames lints for this registration; lib/boot.js replaces it with the scrubbing timeline once fonts are in.
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+    <script type="module">
+      import FILM from './content.js';
+      import PALETTES from './palettes.js';
+      import { boot } from './lib/boot.js';
+      import { grainTile, drawGrain } from './lib/canvas.js';
+      import { clamp, cubicOut, smooth } from './lib/motion.js';
+      import { hash } from './lib/rng.js';
+      import { fontsReady } from './lib/text.js';
+      import { model } from './compute.js';
+      import { fit } from './lib/timing.js';
+      import RULES from './timing.rules.js';
+      import { plan, STAGGER, FLIGHT, EXIT, EXIT_OVER, WAVE } from './timeline.js';
+      import { LAYOUTS, ROLE, MX, RX, CW, TYPE } from './layouts.js';
+      import { makeSquares } from './squares.js';
+      import { createHandoff } from './lib/handoffs/index.js';
+      import { createTransitions } from './lib/transitions/index.js';
+      import { highlightOf } from './compute.js';
+      import * as fx from './fx.js';
+      import { markOf, drawMark, legendOf } from './marks.js';
+
+      const W = 1920, H = 1080, FPS = 30;
+      const MK = markOf(FILM); // the mark variant: square (default), dot or an Isotype glyph (marks.js)
+      const FADE = (FILM.edges ?? 'fade') !== 'cut'; // 'cut': no fade from or to the edge colour; the film starts and ends on its picture
+      const pal = PALETTES[FILM.palette];
+      if (!pal) throw new Error(`unknown palette ${FILM.palette}`);
+      const m = model(FILM);
+      // Length follows content: scene starts, bars, bpm and the film's duration all come from fit().
+      const FIT = fit(FILM, RULES);
+      FIT.notes.forEach((n) => console[n.level === 'error' ? 'error' : 'warn'](`fit: ${n.scene != null ? `scene ${n.scene}: ` : ''}${n.msg}`));
+      const DUR = FIT.duration;
+      const PL = plan(FILM, m, FIT);
+      const CH = PL.chapters, BEAT = PL.g.beat, N = m.n;
+      const XD = EXIT + EXIT_OVER; // beats: every exit (0.4 beat ≤ 2/3 of a 0.35 s entrance)
+
+      const main = document.getElementById('film');
+      const mctx = main.getContext('2d');
+      const buf = document.createElement('canvas');
+      buf.width = W; buf.height = H;
+      const ctx = buf.getContext('2d');
+      const bufA = document.createElement('canvas'); // the outgoing frame of a frame-level entry (tally-flip, dither-sweep)
+      bufA.width = W; bufA.height = H;
+      const actx = bufA.getContext('2d');
+      let P = [], START = [], bg, grain, TX = null;
+      // E: what the layouts read; E.roulette / E.stream / E.reencode / E.stepwipe: the hand-offs of lib/handoffs per
+      // chapter, created once the fonts are in (their state(p) drives the picture; re-encode also paints its points
+      // and curve over the scene)
+      const E = { ctx, pal, m, content: FILM, landTimes: [], P, chapters: CH, roulette: {}, stream: {}, reencode: {}, stepwipe: {} };
+      const qy = (q, k) => (q.ay ? q.ay[k] : q.y[k]); // where a chapter's squares rest when the next one starts
+
+      let squares = () => {}; // squares.js, once the placements are built
+
+      function build() {
+        fx.clearMeasure();
+        // background: radial glow, drawn once
+        bg = document.createElement('canvas');
+        bg.width = W; bg.height = H;
+        const b = bg.getContext('2d');
+        b.fillStyle = pal.edge; b.fillRect(0, 0, W, H);
+        b.save(); b.translate(W * 0.62, H * 0.42); b.scale(1, 900 / 1400);
+        const gr = b.createRadialGradient(0, 0, 0, 0, 0, 1400);
+        gr.addColorStop(0, pal.glow); gr.addColorStop(0.48, pal.ground); gr.addColorStop(1, pal.edge);
+        b.fillStyle = gr; b.fillRect(-W, -H * 2, W * 3, H * 4); b.restore();
+        grain = grainTile((FILM.seed || 1) * 31 + 7, 256, 26);
+        // placements, chapter by chapter; hidden squares stay where they were, dropped 40 px
+        CH.forEach((ch, i) => {
+          const p = LAYOUTS[ch.type].place(E, ch);
+          for (let k = 0; k < N; k++) {
+            if (p.role[k] !== ROLE.hidden) continue;
+            const q = P[i - 1];
+            p.x[k] = q ? q.x[k] : RX; p.y[k] = (q ? qy(q, k) : H) + 40; p.s[k] = q ? q.s[k] : 4;
+            if (p.ay) p.ay[k] = p.y[k];
+          }
+          p.final = p.reveal || p.role; // each square's role when the chapter ends (after a reveal)
+          if (ch.type === 'trend') p.final = p.role.map((r) => (r === ROLE.base ? ROLE.rest : r)); // re-encoded: stepped back
+          // a closing chart scene: on the last downbeat every square that is not the protagonist steps back to rest
+          if (ch.S.closing) p.light = p.final.map((r) => (r === ROLE.accent || r === ROLE.hidden ? r : ROLE.rest));
+          P.push(p);
+          // per-unit departure time; first chapter: a wave in dataset order
+          const st = new Float32Array(N);
+          for (let k = 0; k < N; k++) {
+            st[k] = ch.T.first
+              ? ch.start + (WAVE.from + (k / N) * WAVE.spread) * BEAT
+              : ch.T.step ? ch.T.step[0] + ch.T.step[1] - FLIGHT * BEAT // the staircase lands the chart at once
+              : ch.start + (ch.T.delay[p.group[k]] + (p.rank[k] * 0.8 + hash(k, 11 + i) * 0.2) * STAGGER) * BEAT;
+          }
+          START.push(st);
+          const groups = Math.max(1, ch.groups);
+          const lt = Array.from({ length: groups }, () => []);
+          for (let k = 0; k < N; k++) if (p.role[k] !== ROLE.hidden) lt[p.group[k]]?.push(st[k] + (ch.T.first ? WAVE.grow : FLIGHT) * BEAT);
+          E.landTimes.push(lt.map((a) => a.sort((x, y) => x - y)));
+        });
+      }
+
+      const active = (t) => { let i = 0; CH.forEach((c, j) => { if (t >= c.start) i = j; }); return i; };
+
+      // The key for the accent (P-12): top right, "HIGHLIGHTED: <what the accent marks>" from the moment the
+      // accent appears; on a change of protagonist the old key leaves with the unmark, the new one arrives with
+      // the mark. Text: scene `highlight`, else the accent's category, flag, series or number label.
+      const KEYS = CH.map((ch) => {
+        const text = highlightOf(ch, m);
+        if (!text) return null;
+        const T = ch.T;
+        const at = ch.type === 'timeline' || ch.type === 'axis' || ch.type === 'trend' || ch.type === 'list' || (ch.type === 'columns' && T.roulette) ? T.reveal
+          : ch.type === 'close' ? T.nums[Math.max(0, (ch.numbers || []).findIndex((x) => x.accent))]
+          : ch.start + (T.mark ?? 0) * BEAT;
+        return { text: `highlighted: ${text}`.toUpperCase(), at };
+      });
+
+      function frame(t) {
+        const i = active(t), ch = CH[i], n = CH.length;
+        const two = (v) => String(v).padStart(2, '0');
+        const a0 = FADE ? cubicOut((t - 0.15) / 0.5) : 1; // without the fade the frame is there from frame 0
+        // the chapter row leaves over the last 0.4 beat of its chapter and the next one enters on the boundary
+        const ca = (i === 0 ? a0 : cubicOut((t - ch.start) / 0.35)) * (i === n - 1 ? 1 : 1 - smooth((t - (ch.end - XD * BEAT)) / (XD * BEAT)));
+        const mono = (w, s) => fx.font(w, s, fx.MONO);
+        const L = TYPE.label;
+        ctx.textBaseline = 'alphabetic';
+        ctx.letterSpacing = '3px';
+        ctx.globalAlpha = ca;
+        // chapter number and name, both neutral (the accent marks the protagonist only)
+        ctx.font = mono(500, L); ctx.fillStyle = pal.muted; ctx.textAlign = 'left';
+        ctx.fillText(two(i + 1), MX, 82);
+        const nw = fx.measure(ctx, two(i + 1), mono(500, L), 3);
+        ctx.font = mono(400, L); ctx.fillStyle = pal.muted;
+        ctx.fillText(m.fill(ch.name || '').toUpperCase(), MX + nw + 16, 82);
+        ctx.letterSpacing = '0px';
+        // accent key, top right
+        const keySty = { weight: 400, size: L, fam: fx.MONO, ls: 1, color: { plain: pal.muted, accent: pal.accent, strong: pal.text } };
+        const drawKey = (K, alpha) => {
+          if (!K || alpha <= 0.002) return;
+          ctx.globalAlpha = alpha;
+          const w = fx.drawRich(ctx, K.text, RX, 82, keySty, 'right');
+          ctx.fillStyle = pal.accent;
+          drawMark(ctx, MK, RX - w - 26, 82 - 17, 16, 3);
+        };
+        const prev = i > 0 ? KEYS[i - 1] : null, cur = KEYS[i];
+        const same = prev && cur && prev.text === cur.text;
+        if (prev && !same) drawKey(prev, 1 - smooth((t - (ch.start + (ch.T.unmark ?? ch.T.mark ?? 0) * BEAT)) / (XD * BEAT))); // leaves in 0.4 beat, 2/3 of its 0.35 s entrance
+        if (cur) drawKey(cur, same ? 1 : cubicOut((t - cur.at) / 0.35));
+        // progress rule; a tick per chapter replaces a "chapter n of N" label: reached ticks are brighter
+        ctx.globalAlpha = a0;
+        ctx.fillStyle = pal.rule; ctx.fillRect(MX, 986, CW, 2);
+        ctx.fillStyle = fx.withAlpha(pal.base, 0.7); ctx.fillRect(MX, 986, CW * clamp(t / DUR), 2);
+        CH.forEach((c, j) => { ctx.fillStyle = j <= i ? pal.muted : pal.rule; ctx.fillRect(MX + CW * (c.start / DUR), 980, 2, 14); });
+        ctx.fillStyle = pal.rule; ctx.fillRect(RX - 2, 980, 2, 14);
+        // source and method, always on, at label size; tools/validate.mjs rejects a line that does not fit
+        const srcSty = { weight: 400, strongWeight: 500, size: L, fam: fx.MONO, ls: 1, color: { plain: pal.muted, accent: pal.accent, strong: pal.text } };
+        const src = m.fill(FILM.source || '').toUpperCase();
+        const leg = m.fill(legendOf(FILM)).toUpperCase();
+        const legW = fx.measure(ctx, leg, mono(400, L), 1) + 26;
+        fx.drawRich(ctx, src, MX, 1040, srcSty);
+        // legend, while squares are on screen
+        const on = (c) => c.type !== 'axis';
+        const la = on(ch) ? (i > 0 && !on(CH[i - 1]) ? cubicOut((t - ch.start) / 0.4) : a0) : 1 - cubicOut((t - ch.start) / 0.25);
+        ctx.globalAlpha = la;
+        ctx.fillStyle = pal.base;
+        drawMark(ctx, MK, RX - legW, 1040 - 17, 16, 3);
+        fx.drawRich(ctx, leg, RX, 1040, srcSty, 'right');
+        ctx.globalAlpha = 1;
+      }
+
+      function scene(t) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.globalAlpha = 1;
+        ctx.drawImage(bg, 0, 0);
+        const i = active(t), ch = CH[i];
+        const last = i === CH.length - 1;
+        // text leaves over 0.4 beat from EXIT beats before its chapter's end, EXIT_OVER beats into the next one
+        const out = (c) => 1 - smooth((t - (c.end - EXIT * BEAT)) / (XD * BEAT));
+        squares(t);
+        // the previous chapter's text leaves across the boundary; a frame-level entry carries it in its outgoing frame
+        if (i > 0 && t < ch.start + EXIT_OVER * BEAT && !ch.T.entry) LAYOUTS[CH[i - 1].type].draw(E, CH[i - 1], t, out(CH[i - 1]));
+        LAYOUTS[ch.type].draw(E, ch, t, last ? 1 : out(ch));
+        frame(t);
+      }
+
+      // where a frame-level entry starts from (content `enterFrom`; default: flip top-left, dither bottom-left)
+      const ENTRY_ORIGIN = { 'top-left': [0, 0], 'top-right': [W, 0], 'bottom-left': [0, H], 'bottom-right': [W, H], centre: [W / 2, H / 2] };
+      // fast moves get 6 sub-frames over half a frame; still frames render once
+      const busy = (t) => CH.some((c) => c.T.busy.some(([a, b]) => t >= a - 0.05 && t <= b) || (c.T.reveal != null && t >= c.T.reveal - 0.05 && t <= c.T.reveal + 0.6) || (c.T.nums || []).some((x) => t >= x - 0.05 && t <= x + 0.6));
+      function render(t) {
+        if (!bg) return; // a seek can arrive before fonts and placements are ready
+        E.tf = t;
+        mctx.globalAlpha = 1;
+        mctx.globalCompositeOperation = 'source-over';
+        const en = CH.find((c) => c.T.entry && t >= c.T.entry.t0 && t < c.T.entry.t0 + c.T.entry.dur);
+        if (en && TX) {
+          // a frame-level entry (T2): the previous chapter's last full frame (before its text leaves) turns into this
+          // chapter's live frame; both are pure functions of time, so the transition is too
+          const prev = CH[en.i - 1], tA = prev.end - EXIT * BEAT - 1 / FPS;
+          E.tf = tA; scene(tA); actx.drawImage(buf, 0, 0);
+          E.tf = t; scene(t);
+          const o = ENTRY_ORIGIN[en.enterFrom ?? (en.T.entry.kind === 'flip' ? 'top-left' : 'bottom-left')] ?? [0, 0];
+          const out = TX.draw(en.T.entry.device, bufA, buf, (t - en.T.entry.t0) / en.T.entry.dur, { seed: (FILM.seed || 1) + en.i, origin: o, colors: { accent: pal.base, ground: pal.ground } });
+          mctx.drawImage(out, 0, 0);
+        } else {
+          // a streaming list moves hundreds of px a frame: more sub-frames, so its lines blur into streaks, not copies
+          const sc = CH.find((c) => c.T.stream && t >= c.T.stream[0] && t < c.T.stream[0] + c.T.stream[1] * 0.8);
+          const v = sc ? E.stream[sc.i].speed(Math.min(1, (t - sc.T.stream[0]) / sc.T.stream[1])) / (sc.T.stream[1] * FPS) : 0; // px per frame (lines are LIST.lh = the module's 64 px apart)
+          const n = sc ? clamp(Math.ceil((v * 0.5) / 10), 6, 24) : busy(t) ? 6 : 1;
+          for (let s = 0; s < n; s++) {
+            const ts = n === 1 ? t : t + (s / (n - 1) - 0.5) * (0.5 / FPS);
+            scene(clamp(ts, 0, DUR - 1e-4));
+            mctx.globalAlpha = 1 / (s + 1);
+            mctx.drawImage(buf, 0, 0);
+          }
+        }
+        mctx.globalAlpha = 1;
+        drawGrain(mctx, grain, t, { alpha: pal.grain ?? 0.05, fps: FPS, mode: 'overlay' });
+        // fade in from and out to the edge colour
+        const f = FADE ? Math.max(1 - cubicOut(t / 0.5), smooth((t - (DUR - 0.6)) / 0.6)) : 0;
+        if (f > 0.002) { mctx.globalAlpha = f; mctx.fillStyle = pal.edge; mctx.fillRect(0, 0, W, H); mctx.globalAlpha = 1; }
+      }
+
+      const FONTS = [
+        { family: fx.SANS, weight: 400 }, { family: fx.SANS, weight: 600 }, { family: fx.SANS, weight: 700 }, { family: fx.SANS, weight: 800 },
+        { family: fx.MONO, weight: 400 }, { family: fx.MONO, weight: 500 },
+      ];
+      // the hand-offs of lib/handoffs that drive the chapters' devices (PLAN §4: X07 re-encode, X10 roulette-lock,
+      // X14 stream-brake, X24 step-wipe), and the frame-level entries of lib/transitions (tally-flip, dither-sweep)
+      async function devices() {
+        for (const ch of CH) {
+          const T = ch.T, G = ch.geo;
+          if (T.roulette) E.roulette[ch.i] = await createHandoff('roulette-lock', T.roulette.P);
+          if (T.stream) E.stream[ch.i] = await createHandoff('stream-brake', { count: G.count, start: G.start, k: 4.5 });
+          if (T.step) E.stepwipe[ch.i] = await createHandoff('step-wipe', {});
+          if (T.reencode) E.reencode[ch.i] = await createHandoff('re-encode', {
+            values: G.tops, max: 1, height: 1, x0: MX, width: CW, base: G.base, barWidth: 0, dot: 9, curveWidth: 6, axis: false, ground: false,
+            colors: { ground: pal.ground, base: pal.text, accent: pal.accent, rule: pal.rule },
+          });
+        }
+        if (CH.some((c) => c.T.entry)) TX = createTransitions(null, { width: W, height: H });
+      }
+      boot({ id: 'main', duration: DUR, ready: async () => { await fontsReady(FONTS); build(); await devices(); squares = makeSquares({ E, CH, P, START, MK, active }); }, render });
+    </script>
+  </body>
+</html>

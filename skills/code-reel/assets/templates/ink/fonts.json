@@ -1,0 +1,30 @@
+[
+  {
+    "family": "Archivo",
+    "file": "Archivo-VF.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivo/Archivo%5Bwdth,wght%5D.ttf",
+    "weight": "100 900",
+    "stretch": "62% 125%",
+    "style": "normal",
+    "license": "OFL-Archivo.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivo/OFL.txt"
+  },
+  {
+    "family": "IBM Plex Mono",
+    "file": "IBMPlexMono-Medium.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Medium.ttf",
+    "weight": "500",
+    "style": "normal",
+    "license": "OFL-IBMPlexMono.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/OFL.txt"
+  },
+  {
+    "family": "IBM Plex Mono",
+    "file": "IBMPlexMono-SemiBold.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-SemiBold.ttf",
+    "weight": "600",
+    "style": "normal",
+    "license": "OFL-IBMPlexMono.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/OFL.txt"
+  }
+]

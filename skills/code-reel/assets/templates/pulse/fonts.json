@@ -1,0 +1,38 @@
+[
+  {
+    "family": "Barlow Condensed",
+    "file": "BarlowCondensed-Black.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/BarlowCondensed-Black.ttf",
+    "weight": "900",
+    "style": "normal",
+    "license": "OFL-BarlowCondensed.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/OFL.txt"
+  },
+  {
+    "family": "Barlow",
+    "file": "Barlow-Bold.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/Barlow-Bold.ttf",
+    "weight": "700",
+    "style": "normal",
+    "license": "OFL-Barlow.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/OFL.txt"
+  },
+  {
+    "family": "Barlow",
+    "file": "Barlow-SemiBold.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/Barlow-SemiBold.ttf",
+    "weight": "600",
+    "style": "normal",
+    "license": "OFL-Barlow.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/OFL.txt"
+  },
+  {
+    "family": "JetBrains Mono",
+    "file": "JetBrainsMono-VF.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+    "weight": "100 800",
+    "style": "normal",
+    "license": "OFL-JetBrainsMono.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt"
+  }
+]

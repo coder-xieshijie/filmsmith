@@ -1,0 +1,19 @@
+[
+  {
+    "family": "Bricolage Grotesque",
+    "file": "BricolageGrotesque-Variable.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/BricolageGrotesque%5Bopsz,wdth,wght%5D.ttf",
+    "weight": "200 800",
+    "license": "OFL-BricolageGrotesque.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/OFL.txt"
+  },
+  {
+    "family": "IBM Plex Mono",
+    "file": "IBMPlexMono-Medium.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Medium.ttf",
+    "weight": "500",
+    "style": "normal",
+    "license": "OFL-IBMPlexMono.txt",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/OFL.txt"
+  }
+]

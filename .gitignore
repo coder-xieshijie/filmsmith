@@ -1,0 +1,20 @@
+# Media and fonts stay out of Git; finished videos go to Releases.
+*.mp4
+*.mov
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.ttf
+*.ttc
+*.otf
+*.woff
+*.woff2
+.hyperframes/
+.media/
+.thumbnails/
+.waveform-cache/
+renders/
+node_modules/
+.DS_Store

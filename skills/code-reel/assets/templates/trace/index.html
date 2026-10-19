@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>trace</title>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <script src="lib/vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    </style>
+  </head>
+  <body>
+    <!-- data-duration is stamped by `npm run fit` from the fitted length (lib/fit.mjs); do not edit by hand -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="36" data-width="1920" data-height="1080">
+      <canvas id="film" class="clip" width="1920" height="1080" data-start="0" data-duration="36" data-track-index="0"></canvas>
+      <audio id="mix" class="clip" src="assets/audio/mix.wav" data-start="0" data-duration="36" data-track-index="1"></audio>
+    </div>
+    <script>
+      // HyperFrames lints for this registration; lib/boot.js replaces it with the scrubbing timeline once fonts are in.
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // Hold the renderer until the fonts are measured, the hand-offs prepared and the WebGL transitions compiled
+      // (lib/boot.js settles this promise); registered here, synchronously, because the renderer's first readiness
+      // check can run before the module script below (CONTRACT.md, "Slow setup holds the renderer").
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {}; window.__hf.buildHold = window.__hf.buildHold || {};
+      window.__hf.buildReady.main = new Promise((r) => (window.__hf.buildHold.main = r));
+    </script>
+    <script type="module">
+      import FILM from './content.js';
+      import RULES from './timing.rules.js';
+      import { fit } from './lib/timing.js';
+      import PALETTES from './palettes.js';
+      import { boot } from './lib/boot.js';
+      import { grainTile, drawGrain } from './lib/canvas.js';
+      import { clamp } from './lib/motion.js';
+      import { fontsReady } from './lib/text.js';
+      import { loadRun } from './run.js';
+      import { plan } from './timeline.js';
+      import { createPieces, prepareHandoffs, W, H } from './pieces.js';
+      import { createTransitions, progressAt } from './lib/transitions/index.js';
+      import * as fx from './fx.js';
+
+      const FPS = 30;
+      // the film's length follows its content (timing.rules.js); plan() lays the scenes out from the same fit
+      const DUR = fit(FILM, RULES).duration;
+      const pal = PALETTES[FILM.palette];
+      if (!pal) throw new Error(`unknown palette ${FILM.palette}`);
+      const main = document.getElementById('film');
+      const mctx = main.getContext('2d');
+      const canvas = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+      const buf = canvas(), bctx = buf.getContext('2d');
+      // the two sides of a frame-level transition, and their mirror images (a device's second use runs right to left)
+      const sideA = canvas(), sideB = canvas(), mirA = canvas(), mirB = canvas();
+      let P = null, S = null, TX = null, grain = null;
+
+      function scene(ctx, t, tf) {
+        P.setCtx(ctx);
+        ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.filter = 'none';
+        ctx.fillStyle = pal.ground; ctx.fillRect(0, 0, W, H);
+        const cam = P.camAt(t), f = P.focusAt(t);
+        ctx.setTransform(cam.z, 0, 0, cam.z, W / 2 - cam.x * cam.z, H / 2 - cam.y * cam.z);
+        P.board(t, f.board);
+        P.probe(t, tf);
+        P.histogram(t, tf, f.hist);
+        P.rules(t, f.rules, P.focusAt(t, true).hist);
+        P.bar(t, tf, f.bar);
+        P.summary(t);
+        P.captions(t);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        P.thesis(t);
+        P.hud(t, tf);
+      }
+
+      // motion blur: 8 samples over a 1/60 s shutter centred on the frame (source film), the scene's time held inside
+      // [lo, hi] (one side of a transition)
+      const SUB = [-7, -5, -3, -1, 1, 3, 5, 7].map((k) => k / 840);
+      function frame(dctx, t, lo = 0, hi = DUR) {
+        dctx.globalCompositeOperation = 'source-over';
+        for (let i = 0; i < SUB.length; i++) {
+          scene(bctx, clamp(t + SUB[i], lo, hi), clamp(t, lo, hi));
+          dctx.globalAlpha = 1 / (i + 1);
+          dctx.drawImage(buf, 0, 0);
+        }
+        dctx.globalAlpha = 1;
+      }
+      const mirror = (src, dst) => { const g = dst.getContext('2d'); g.setTransform(-1, 0, 0, 1, W, 0); g.drawImage(src, 0, 0); g.setTransform(1, 0, 0, 1, 0, 0); return dst; };
+      // Frame-level transitions (lib/transitions): token-sweep and trace-flow, two beats straddling a cut. Side A is the
+      // outgoing scene held at the cut, side B the incoming one held at the cut until it starts; both keep moving
+      // where they are not held. Colours by role (references/transitions.md, mode trace): the bars and the front in
+      // `learned`, never the active colour.
+      const DEVICE = { sweep: 'token-sweep', flow: 'trace-flow' };
+      function transition(w, t) {
+        frame(sideA.getContext('2d'), t, 0, w.cut - 1e-3);
+        frame(sideB.getContext('2d'), t, w.cut, DUR);
+        const A = w.mirror ? mirror(sideA, mirA) : sideA, B = w.mirror ? mirror(sideB, mirB) : sideB;
+        const out = TX.draw(DEVICE[w.name], A, B, progressAt(t, w.t0, w.dur), { seed: (FILM.seed || 1) * 7 + w.scene, colors: { ink: pal.learned, ground: pal.ground } });
+        if (w.mirror) { mctx.setTransform(-1, 0, 0, 1, W, 0); mctx.drawImage(out, 0, 0); mctx.setTransform(1, 0, 0, 1, 0, 0); }
+        else mctx.drawImage(out, 0, 0);
+      }
+      function render(t) {
+        if (!P) return; // a seek can arrive before fonts and the run are ready
+        t = clamp(t, 0, DUR - 1e-4);
+        mctx.globalCompositeOperation = 'source-over';
+        const w = TX && S.windows.find((x) => DEVICE[x.name] && t >= x.t0 && t < x.t0 + x.dur);
+        if (w) transition(w, t);
+        else frame(mctx, t);
+        mctx.globalAlpha = 1;
+        drawGrain(mctx, grain, t, { alpha: pal.grain ?? 0.035, fps: FPS, mode: 'overlay' });
+        // the film fades in from the ground and out to it; edges 'cut' (a film cut into a reel, 2026-10-19) opens on its
+        // first frame and holds its settled last frame instead
+        const f = FILM.edges === 'cut' ? 0 : Math.max(1 - clamp(t / 0.4), clamp((t - (DUR - 0.5)) / 0.5));
+        if (f > 0.002) { mctx.globalAlpha = f; mctx.fillStyle = pal.ground; mctx.fillRect(0, 0, W, H); mctx.globalAlpha = 1; }
+      }
+
+      const FONTS = [
+        { family: fx.SERIF, weight: 600 }, { family: fx.SERIF, weight: 700 }, { family: fx.SERIF, weight: 400, style: 'italic' },
+        { family: fx.MONO, weight: 500 }, { family: fx.MONO, weight: 600 }, { family: fx.SANS, weight: 500 }, { family: fx.SANS, weight: 600 },
+      ];
+      boot({
+        id: 'main', duration: DUR, render,
+        ready: async () => {
+          await fontsReady(FONTS);
+          fx.clearMeasure();
+          const run = await loadRun(FILM);
+          S = plan(FILM, run);
+          const paths = await prepareHandoffs({ pal, S, fills: run.fills });
+          if (S.windows.some((x) => DEVICE[x.name])) {
+            TX = createTransitions(null);
+            if (!TX) throw new Error('WebGL is not available: the token-sweep and trace-flow transitions cannot be drawn');
+            TX.warm();
+          }
+          P = createPieces({ pal, run, S, content: FILM, fills: run.fills, paths });
+          grain = grainTile((FILM.seed || 1) * 31 + 3, 256, 24);
+        },
+      });
+    </script>
+  </body>
+</html>
