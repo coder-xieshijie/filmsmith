@@ -217,7 +217,7 @@ if (opt.dir) {
   work = resolve(opt.dir);
   if ((await readdir(work).catch(() => [])).length) { console.error(`selftest: ${work} is not empty`); process.exit(2); }
   await mkdir(work, { recursive: true });
-} else work = await mkdtemp(join(tmpdir(), 'code-reel-selftest-'));
+} else work = await mkdtemp(join(tmpdir(), 'filmsmith-selftest-'));
 await mkdir(join(work, 'logs'), { recursive: true });
 
 const COLS = ['new-film', 'fit', 'check', 'stills', ...(opt.variants ? ['variants'] : []), ...(opt.render ? ['render'] : [])];
@@ -377,7 +377,7 @@ if (envOk) {
 // ---------------------------------------------------------------- report
 const pad = (s, n) => String(s).padEnd(n);
 const out = [];
-out.push(`CodeReel selftest  started ${new Date(t0).toISOString().slice(0, 16).replace('T', ' ')} UTC  ${process.platform}-${process.arch}`);
+out.push(`Filmsmith selftest  started ${new Date(t0).toISOString().slice(0, 16).replace('T', ' ')} UTC  ${process.platform}-${process.arch}`);
 out.push(`films: ${work}${opt.keep ? ' (kept)' : ' (removed; --keep to retain)'}`);
 out.push('', 'environment');
 for (const e of env) out.push(`  ${e.ok ? 'PASS' : 'FAIL'}  ${pad(e.name, 26)} ${e.detail}`);

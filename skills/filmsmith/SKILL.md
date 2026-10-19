@@ -1,13 +1,13 @@
 ---
-name: code-reel
+name: filmsmith
 description: Short technical films made by any coding agent, drawn and scored entirely in code (HyperFrames) from a mode template. Ten modes — Thread, Ink, Plakat, Blueprint, Phosphor, Tally, Trace, Morph, Halftone, Pulse — each with palette presets, a form variant, a scene registry and a renderable template; length follows the content, pace is brisk, every render is measured. Use when asked to make, remake or restyle a launch, promo, teaser, showreel, data story or explainer video for a technical product, or to choose a visual style for one.
 descriptions:
   zh-Hans: 任何编码 Agent 都能用的技术短片制作：画面和配乐全部由代码生成（HyperFrames），从模式模板出发。十种模式：一线 Thread、落墨 Ink、招贴 Plakat、蓝图 Blueprint、荧屏 Phosphor、算筹 Tally、演算 Trace、一笔 Morph、网点 Halftone、节拍 Pulse，各带配色预设、形态变体、登记场景库和可直接渲染的模板；片长由内容决定，节奏轻快，每次渲染都有测量。用于给技术产品制作、重做或换风格的发布片、宣传片、预告、showreel、数据片、讲解片，或为一支片选视觉风格。
 displayNames:
-  zh-Hans: 代码胶片 CodeReel
+  zh-Hans: 片匠 Filmsmith
 ---
 
-# CodeReel
+# Filmsmith
 
 Ten ways to film your code. Makes a short technical film — a technology demo, a technical report or explainer, a technical product launch — from a brief, its length computed from the content, with no person on screen: pick a **mode**, copy its template, fill `content.js`, render. Every picture is drawn in code and every sound is synthesised in code (a generated music track can replace the bed), so a film needs only a coding agent that can run shell commands. The skill stands on a theory of taste ([foundations](references/foundations.md)), ten [core principles](references/principles.md) derived from it and from the owner's verdicts, one shared [system](references/system.md) of colours, type, space and motion, and ten modes that apply them to one visual language each.
 
@@ -130,7 +130,7 @@ Full text, theory and evidence in [references/principles.md](references/principl
 ## Files
 
 ```
-code-reel/
+filmsmith/
 ├── SKILL.md
 ├── references/
 │   ├── foundations.md      theory: style vs taste, three layers of taste, the six-layer pyramid, where values come from

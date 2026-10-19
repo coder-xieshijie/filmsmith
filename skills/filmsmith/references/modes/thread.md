@@ -194,7 +194,7 @@ What the template produces untouched. A film's `PLAN.md` ban list starts here; t
 - The film ends on the name, underlined (cut out of the line by a blade, in the line colour).
 - The fixed chain order; the 4 × 4 contact sheet of the film's own frames.
 - A small mono label `nn / NN NAME` with an italic note in the top-left corner.
-- The example copy: the code-reel skill explaining its own pipeline in six stages (Prompt, Colour, Boards, Physics, Cut, Output), brief `explain our pipeline` / `in {seconds} seconds`, word `Plan.`, ink words `pure code`, card `MP4`.
+- The example copy: the filmsmith skill explaining its own pipeline in six stages (Prompt, Colour, Boards, Physics, Cut, Output), brief `explain our pipeline` / `in {seconds} seconds`, word `Plan.`, ink words `pure code`, card `MP4`.
 
 ## Don'ts
 

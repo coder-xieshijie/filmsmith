@@ -5,13 +5,13 @@
 // Optional: bpm (112–128, default 120) or target (seconds; the tempo moves inside that range to meet it).
 // Numbers about the film itself are placeholders filled at run time: {seconds} {frames} {fps} {width} {height}.
 // This mode fits only a reel for a video, motion or rendering tool (see the mode card); the example is the
-// code-reel skill explaining its own pipeline.
+// filmsmith skill explaining its own pipeline.
 export default {
   fps: 30, // keep 30: the render command uses 30 and the counter shows ceil(duration × fps)
   palette: 'vermilion',
   thread: 'rule', // the line's profile: 'rule' (even weight, the default) or 'swell' (a swelled rule); mode card "Variants"
   seed: 5150,
-  meta: { title: 'code-reel: how a film gets built', url: 'github.com/coder-xieshijie/shijie-video-skill' },
+  meta: { title: 'filmsmith: how a film gets built', url: 'github.com/coder-xieshijie/filmsmith' },
   scenes: [
     { type: 'open', stage: { name: 'Prompt', note: 'one sentence sets the brief' }, brief: ['explain our pipeline', 'in {seconds} seconds'] },
     { type: 'word', word: 'Plan.' },
@@ -22,6 +22,6 @@ export default {
     { type: 'tracks', stage: { name: 'Cut', note: 'sound and picture share one clock' }, tracks: ['SHOTS', 'GL PASSES', 'MUSIC', 'TITLES'] },
     { type: 'ink', stage: { name: 'Output', note: 'no camera and no stock footage' }, words: 'pure code' },
     { type: 'review', stage: { name: 'Output', note: '{frames} frames, each one inspected' }, count: 'FRAMES RENDERED', card: 'MP4' },
-    { type: 'close', name: 'code-reel', line: 'Every film is code: scored, timed and checked.', url: 'github.com/coder-xieshijie/shijie-video-skill' },
+    { type: 'close', name: 'filmsmith', line: 'Every film is code: scored, timed and checked.', url: 'github.com/coder-xieshijie/filmsmith' },
   ],
 };

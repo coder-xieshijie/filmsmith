@@ -1,10 +1,10 @@
-# CodeReel · 代码胶片
+# Filmsmith · 片匠
 
 English | [简体中文](README.zh-CN.md)
 
 **Ten ways to film your code.**
 
-CodeReel is an agent skill that makes short technical films — launches, teasers, showreels, data stories, explainers — with every frame drawn in code and every sound synthesised in code. Pick a style, fill one file, render. It runs in any coding agent that can use a shell.
+Filmsmith is an agent skill that makes short technical films — launches, teasers, showreels, data stories, explainers — with every frame drawn in code and every sound synthesised in code. Pick a style, fill one file, render. It runs in any coding agent that can use a shell.
 
 ## Ten styles
 
@@ -12,16 +12,16 @@ Each style is one visual language with palette presets, one form variant, a scen
 
 | | Style | Looks like | Best for |
 |---|---|---|---|
-| <img src="skills/code-reel/references/modes/stills/thread.jpg" width="320"> | **[Thread · 一线](skills/code-reel/references/modes/thread.md)** | One line that becomes everything in turn — caret, swatches, storyboard, glossy spheres, edit tracks — with no cuts | Showreels of a video, motion or rendering tool |
-| <img src="skills/code-reel/references/modes/stills/ink.jpg" width="320"> | **[Ink · 落墨](skills/code-reel/references/modes/ink.md)** | Heavy type slammed on every beat; an ink drop unfurls like sumi in water and floods the frame with colour | Name reveals, launch stings, one-line claims |
-| <img src="skills/code-reel/references/modes/stills/plakat.jpg" width="320"> | **[Plakat · 招贴](skills/code-reel/references/modes/plakat.md)** | International-style posters in motion: paper, ink, one signal colour, a visible 12-column grid | A claim plus steps, and the person who decides |
-| <img src="skills/code-reel/references/modes/stills/blueprint.jpg" width="320"> | **[Blueprint · 蓝图](skills/code-reel/references/modes/blueprint.md)** | One engineering drawing drafted sheet by sheet; amber stamps approve each part | Systems and workflows with parts and sign-offs |
-| <img src="skills/code-reel/references/modes/stills/phosphor.jpg" width="320"> | **[Phosphor · 荧屏](skills/code-reel/references/modes/phosphor.md)** | A night-time terminal running a launch: one phosphor accent, light drawn in code, a HUD frame | CLIs and developer tools |
-| <img src="skills/code-reel/references/modes/stills/tally.jpg" width="320"> | **[Tally · 算筹](skills/code-reel/references/modes/tally.md)** | One square per item; the same squares regroup from grid to bars, chart to chart | Counts, shares, dataset stories |
-| <img src="skills/code-reel/references/modes/stills/trace.jpg" width="320"> | **[Trace · 演算](skills/code-reel/references/modes/trace.md)** | A dark live diagram: an algorithm runs and the picture is its state | How a mechanism or algorithm works |
-| <img src="skills/code-reel/references/modes/stills/morph.jpg" width="320"> | **[Morph · 一笔](skills/code-reel/references/modes/morph.md)** | One ink shape that never leaves the frame and climbs a dimension per scene — point, line, plane, solid, interface, mark — with no cuts | Developer tools and interface products: one source becomes every surface |
-| <img src="skills/code-reel/references/modes/stills/halftone.jpg" width="320"> | **[Halftone · 网点](skills/code-reel/references/modes/halftone.md)** | A two-ink print in motion: newsprint, black and one process ink; a piece of the mark holds still while every world is printed round it, then the camera pulls back to the whole mark | Model and product launches: a few features, one number, the name |
-| <img src="skills/code-reel/references/modes/stills/pulse.jpg" width="320"> | **[Pulse · 节拍](skills/code-reel/references/modes/pulse.md)** | A question run as a query: one word a beat, grounds flipping along one hue, a highlight hopping over real candidates, one whiteout slamming the answer in on the drop | Version releases and benchmark answers: one measured conclusion |
+| <img src="skills/filmsmith/references/modes/stills/thread.jpg" width="320"> | **[Thread · 一线](skills/filmsmith/references/modes/thread.md)** | One line that becomes everything in turn — caret, swatches, storyboard, glossy spheres, edit tracks — with no cuts | Showreels of a video, motion or rendering tool |
+| <img src="skills/filmsmith/references/modes/stills/ink.jpg" width="320"> | **[Ink · 落墨](skills/filmsmith/references/modes/ink.md)** | Heavy type slammed on every beat; an ink drop unfurls like sumi in water and floods the frame with colour | Name reveals, launch stings, one-line claims |
+| <img src="skills/filmsmith/references/modes/stills/plakat.jpg" width="320"> | **[Plakat · 招贴](skills/filmsmith/references/modes/plakat.md)** | International-style posters in motion: paper, ink, one signal colour, a visible 12-column grid | A claim plus steps, and the person who decides |
+| <img src="skills/filmsmith/references/modes/stills/blueprint.jpg" width="320"> | **[Blueprint · 蓝图](skills/filmsmith/references/modes/blueprint.md)** | One engineering drawing drafted sheet by sheet; amber stamps approve each part | Systems and workflows with parts and sign-offs |
+| <img src="skills/filmsmith/references/modes/stills/phosphor.jpg" width="320"> | **[Phosphor · 荧屏](skills/filmsmith/references/modes/phosphor.md)** | A night-time terminal running a launch: one phosphor accent, light drawn in code, a HUD frame | CLIs and developer tools |
+| <img src="skills/filmsmith/references/modes/stills/tally.jpg" width="320"> | **[Tally · 算筹](skills/filmsmith/references/modes/tally.md)** | One square per item; the same squares regroup from grid to bars, chart to chart | Counts, shares, dataset stories |
+| <img src="skills/filmsmith/references/modes/stills/trace.jpg" width="320"> | **[Trace · 演算](skills/filmsmith/references/modes/trace.md)** | A dark live diagram: an algorithm runs and the picture is its state | How a mechanism or algorithm works |
+| <img src="skills/filmsmith/references/modes/stills/morph.jpg" width="320"> | **[Morph · 一笔](skills/filmsmith/references/modes/morph.md)** | One ink shape that never leaves the frame and climbs a dimension per scene — point, line, plane, solid, interface, mark — with no cuts | Developer tools and interface products: one source becomes every surface |
+| <img src="skills/filmsmith/references/modes/stills/halftone.jpg" width="320"> | **[Halftone · 网点](skills/filmsmith/references/modes/halftone.md)** | A two-ink print in motion: newsprint, black and one process ink; a piece of the mark holds still while every world is printed round it, then the camera pulls back to the whole mark | Model and product launches: a few features, one number, the name |
+| <img src="skills/filmsmith/references/modes/stills/pulse.jpg" width="320"> | **[Pulse · 节拍](skills/filmsmith/references/modes/pulse.md)** | A question run as a query: one word a beat, grounds flipping along one hue, a highlight hopping over real candidates, one whiteout slamming the answer in on the drop | Version releases and benchmark answers: one measured conclusion |
 
 Every style comes in variants: colour presets (Phosphor in ice, green, amber, cyan or violet, for example) and one form axis — Thread's line even or swelled, Ink's type compressed or extended, Plakat square or diagonal, Blueprint in ink or pencil, Phosphor on a CRT raster or a flat panel, Tally in squares, dots or Isotype glyphs, Trace drawn as vectors or sketched, Morph with round or cut corners, Halftone in round, square or line screens, Pulse with cut or round apertures. Each style card lists its use cases with a worked example.
 
@@ -30,29 +30,29 @@ Every style comes in variants: colour presets (Phosphor in ice, green, amber, cy
 Install the skill (the [skills CLI](https://github.com/vercel-labs/skills) asks which agents to install it for; observed 2026-10):
 
 ```bash
-npx skills add coder-xieshijie/shijie-video-skill
+npx skills add coder-xieshijie/filmsmith
 ```
 
 Or clone and link the folder into your agent's skills folder:
 
 ```bash
-git clone https://github.com/coder-xieshijie/shijie-video-skill.git
-ln -s "$PWD/shijie-video-skill/skills/code-reel" <your agent's skills folder>/code-reel
+git clone https://github.com/coder-xieshijie/filmsmith.git
+ln -s "$PWD/filmsmith/skills/filmsmith" <your agent's skills folder>/filmsmith
 ```
 
-Or tell the agent to read `skills/code-reel/SKILL.md`. Then, in a new session:
+Or tell the agent to read `skills/filmsmith/SKILL.md`. Then, in a new session:
 
-> Use code-reel. Make a launch video for &lt;your project&gt;. Source: &lt;link or text&gt;.
+> Use filmsmith. Make a launch video for &lt;your project&gt;. Source: &lt;link or text&gt;.
 
 The agent proposes a style and a palette, writes a plan, renders key frames for you to check, renders the film and measures it. Under the hood:
 
 ```bash
-node skills/code-reel/scripts/new-film.mjs ink my-film --palette cobalt   # scaffold a film from a style
+node skills/filmsmith/scripts/new-film.mjs ink my-film --palette cobalt   # scaffold a film from a style
 cd my-film && npm run film                                            # fit → audio → check → render
-node ../skills/code-reel/scripts/check-film.mjs renders/film.mp4 --film-dir .
+node ../skills/filmsmith/scripts/check-film.mjs renders/film.mp4 --film-dir .
 ```
 
-Requirements: Node.js 22+, FFmpeg, and network access while a film is set up (fonts, GSAP, the first HyperFrames run). `node skills/code-reel/scripts/selftest.mjs` checks your machine and all ten templates.
+Requirements: Node.js 22+, FFmpeg, and network access while a film is set up (fonts, GSAP, the first HyperFrames run). `node skills/filmsmith/scripts/selftest.mjs` checks your machine and all ten templates.
 
 ## How a film is made
 
@@ -72,7 +72,7 @@ theory of taste ──▶ ten principles ──▶ ten styles ──▶ template
 
 | | |
 |---|---|
-| [Skill](skills/code-reel/SKILL.md) | `code-reel`: the workflow, theory, principles, the ten styles and their templates, the transition library, the runtime and the measuring scripts. |
+| [Skill](skills/filmsmith/SKILL.md) | `filmsmith`: the workflow, theory, principles, the ten styles and their templates, the transition library, the runtime and the measuring scripts. |
 
 ## Limits
 

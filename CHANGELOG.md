@@ -59,3 +59,4 @@
 - tally: phrases of ≤ 5 words, glints keep holds ≤ 2 beats, whole-beat grid, one-bar phrase; new scene types trend (re-encode) and list (stream-brake), `pick: 'roulette'` on columns (roulette-lock), chapter entries `enter: 'flip' | 'dither' | 'step'` (tally-flip, dither-sweep, step-wipe); example 32.1 s.
 - trace: captions enter phrase by phrase, steps speed up into a `pace: 1` loop, the unseen input resolves letter by letter (scramble-resolve), scenes may enter by path-type, token-sweep or trace-flow (`enter`); examples at 100 bpm, 36 s; the shortest cut is now five scenes, 16 s.
 - `timing.js` `tiers()`: a composition start is assigned to its scene with the same 1e-4 s tolerance it is rounded to (a start could fall into the previous scene and raise a false T1 error).
+- Renamed the skill to Filmsmith (`filmsmith`, 片匠), formerly CodeReel: `skills/code-reel/` is now `skills/filmsmith/` and the repository is now `filmsmith`.

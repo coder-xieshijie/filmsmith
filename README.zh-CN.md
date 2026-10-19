@@ -1,10 +1,10 @@
-# CodeReel · 代码胶片
+# Filmsmith · 片匠
 
 [English](README.md) | 简体中文
 
 **十种拍代码的方法。**
 
-CodeReel 是一个 Agent Skill，用来做技术短片：发布片、预告、showreel、数据片、讲解片。每一帧画面都由代码绘制，每一个声音都由代码合成。选一种风格，填一个文件，渲染即可。任何能跑 shell 的编码 Agent 都能用。
+Filmsmith 是一个 Agent Skill，用来做技术短片：发布片、预告、showreel、数据片、讲解片。每一帧画面都由代码绘制，每一个声音都由代码合成。选一种风格，填一个文件，渲染即可。任何能跑 shell 的编码 Agent 都能用。
 
 ## 十种风格
 
@@ -12,16 +12,16 @@ CodeReel 是一个 Agent Skill，用来做技术短片：发布片、预告、sh
 
 | | 风格 | 看起来 | 最适合 |
 |---|---|---|---|
-| <img src="skills/code-reel/references/modes/stills/thread.jpg" width="320"> | **[一线 · Thread](skills/code-reel/references/modes/thread.md)** | 一根线依次变成一切：光标、色板、分镜、光泽小球、剪辑轨道，全片不切 | 视频、动效、渲染工具的 showreel |
-| <img src="skills/code-reel/references/modes/stills/ink.jpg" width="320"> | **[落墨 · Ink](skills/code-reel/references/modes/ink.md)** | 粗重的字随节拍砸在纸上；一滴墨像入水的墨汁那样卷开，铺满整屏颜色 | 名字揭晓、发布片头、一句话主张 |
-| <img src="skills/code-reel/references/modes/stills/plakat.jpg" width="320"> | **[招贴 · Plakat](skills/code-reel/references/modes/plakat.md)** | 会动的国际主义海报：纸、油墨、一个信号色，12 栏网格始终可见 | 一个主张加几个步骤，以及拍板的人 |
-| <img src="skills/code-reel/references/modes/stills/blueprint.jpg" width="320"> | **[蓝图 · Blueprint](skills/code-reel/references/modes/blueprint.md)** | 一张工程图纸逐张绘制，琥珀色印章逐项批准 | 有部件、有签字环节的系统与流程 |
-| <img src="skills/code-reel/references/modes/stills/phosphor.jpg" width="320"> | **[荧屏 · Phosphor](skills/code-reel/references/modes/phosphor.md)** | 深夜终端里的发布会：一个荧光强调色、代码画出的光、HUD 边框 | CLI 与开发者工具 |
-| <img src="skills/code-reel/references/modes/stills/tally.jpg" width="320"> | **[算筹 · Tally](skills/code-reel/references/modes/tally.md)** | 一个方块代表一条数据；同一批方块从网格重组成条形，一图接一图 | 计数、占比、数据集故事 |
-| <img src="skills/code-reel/references/modes/stills/trace.jpg" width="320"> | **[演算 · Trace](skills/code-reel/references/modes/trace.md)** | 深色的实时图解：算法在运行，画面就是它的状态 | 机制和算法是怎么工作的 |
-| <img src="skills/code-reel/references/modes/stills/morph.jpg" width="320"> | **[一笔 · Morph](skills/code-reel/references/modes/morph.md)** | 一个形从头到尾不离开画面，每场升一个维度：点、线、面、体、界面、标志，全片不切 | 开发工具和界面产品：一个源头变成整个产品 |
-| <img src="skills/code-reel/references/modes/stills/halftone.jpg" width="320"> | **[网点 · Halftone](skills/code-reel/references/modes/halftone.md)** | 会动的双墨印刷：新闻纸、黑版和一种印刷色；取自标志的一小块始终不动，周围的世界一个个印出来，最后拉远露出整个标志 | 模型和产品发布：几个特性、一个数字、一个名字 |
-| <img src="skills/code-reel/references/modes/stills/pulse.jpg" width="320"> | **[节拍 · Pulse](skills/code-reel/references/modes/pulse.md)** | 把一个问题演成一次查询：一拍一个词，底色在一个色相的明度阶上翻转，高亮在真实候选间跳，答案随一次闪白砸进来 | 版本发布、基准测试的答案：一个测出来的结论 |
+| <img src="skills/filmsmith/references/modes/stills/thread.jpg" width="320"> | **[一线 · Thread](skills/filmsmith/references/modes/thread.md)** | 一根线依次变成一切：光标、色板、分镜、光泽小球、剪辑轨道，全片不切 | 视频、动效、渲染工具的 showreel |
+| <img src="skills/filmsmith/references/modes/stills/ink.jpg" width="320"> | **[落墨 · Ink](skills/filmsmith/references/modes/ink.md)** | 粗重的字随节拍砸在纸上；一滴墨像入水的墨汁那样卷开，铺满整屏颜色 | 名字揭晓、发布片头、一句话主张 |
+| <img src="skills/filmsmith/references/modes/stills/plakat.jpg" width="320"> | **[招贴 · Plakat](skills/filmsmith/references/modes/plakat.md)** | 会动的国际主义海报：纸、油墨、一个信号色，12 栏网格始终可见 | 一个主张加几个步骤，以及拍板的人 |
+| <img src="skills/filmsmith/references/modes/stills/blueprint.jpg" width="320"> | **[蓝图 · Blueprint](skills/filmsmith/references/modes/blueprint.md)** | 一张工程图纸逐张绘制，琥珀色印章逐项批准 | 有部件、有签字环节的系统与流程 |
+| <img src="skills/filmsmith/references/modes/stills/phosphor.jpg" width="320"> | **[荧屏 · Phosphor](skills/filmsmith/references/modes/phosphor.md)** | 深夜终端里的发布会：一个荧光强调色、代码画出的光、HUD 边框 | CLI 与开发者工具 |
+| <img src="skills/filmsmith/references/modes/stills/tally.jpg" width="320"> | **[算筹 · Tally](skills/filmsmith/references/modes/tally.md)** | 一个方块代表一条数据；同一批方块从网格重组成条形，一图接一图 | 计数、占比、数据集故事 |
+| <img src="skills/filmsmith/references/modes/stills/trace.jpg" width="320"> | **[演算 · Trace](skills/filmsmith/references/modes/trace.md)** | 深色的实时图解：算法在运行，画面就是它的状态 | 机制和算法是怎么工作的 |
+| <img src="skills/filmsmith/references/modes/stills/morph.jpg" width="320"> | **[一笔 · Morph](skills/filmsmith/references/modes/morph.md)** | 一个形从头到尾不离开画面，每场升一个维度：点、线、面、体、界面、标志，全片不切 | 开发工具和界面产品：一个源头变成整个产品 |
+| <img src="skills/filmsmith/references/modes/stills/halftone.jpg" width="320"> | **[网点 · Halftone](skills/filmsmith/references/modes/halftone.md)** | 会动的双墨印刷：新闻纸、黑版和一种印刷色；取自标志的一小块始终不动，周围的世界一个个印出来，最后拉远露出整个标志 | 模型和产品发布：几个特性、一个数字、一个名字 |
+| <img src="skills/filmsmith/references/modes/stills/pulse.jpg" width="320"> | **[节拍 · Pulse](skills/filmsmith/references/modes/pulse.md)** | 把一个问题演成一次查询：一拍一个词，底色在一个色相的明度阶上翻转，高亮在真实候选间跳，答案随一次闪白砸进来 | 版本发布、基准测试的答案：一个测出来的结论 |
 
 每种风格都有变体。一是配色预设，例如荧屏有冰白、绿、琥珀、青、紫五套；二是一条形态轴：一线的线可以等宽或膨线，落墨的字可以压缩或扩展，招贴可以方正或斜向，蓝图可以是针管笔或铅笔，荧屏可以是 CRT 扫描线或平板，算筹可以用方块、圆点或 Isotype 图形符号，演算可以是矢量或手绘，一笔可以是圆角或切角，网点可以是圆点、方点或线网，节拍的光圈可以是切角或圆形。每张风格卡都列出适用场景，并附具体例子。
 
@@ -30,29 +30,29 @@ CodeReel 是一个 Agent Skill，用来做技术短片：发布片、预告、sh
 安装 Skill（[skills CLI](https://github.com/vercel-labs/skills) 会问装给哪些 Agent；2026-10 实测）：
 
 ```bash
-npx skills add coder-xieshijie/shijie-video-skill
+npx skills add coder-xieshijie/filmsmith
 ```
 
 或者 clone 下来，把目录链接进 Agent 的 skills 目录：
 
 ```bash
-git clone https://github.com/coder-xieshijie/shijie-video-skill.git
-ln -s "$PWD/shijie-video-skill/skills/code-reel" <你的 Agent 的 skills 目录>/code-reel
+git clone https://github.com/coder-xieshijie/filmsmith.git
+ln -s "$PWD/filmsmith/skills/filmsmith" <你的 Agent 的 skills 目录>/filmsmith
 ```
 
-或者让 Agent 直接读 `skills/code-reel/SKILL.md`。然后在新会话里说：
+或者让 Agent 直接读 `skills/filmsmith/SKILL.md`。然后在新会话里说：
 
-> 用 code-reel，给 <你的项目> 做一支发布片。资料：<链接或文字>。
+> 用 filmsmith，给 <你的项目> 做一支发布片。资料：<链接或文字>。
 
 Agent 会推荐风格和配色、写好计划、先出关键帧给你看，再渲染成片并测量。背后是这几条命令：
 
 ```bash
-node skills/code-reel/scripts/new-film.mjs ink my-film --palette cobalt   # 从一种风格建工程
+node skills/filmsmith/scripts/new-film.mjs ink my-film --palette cobalt   # 从一种风格建工程
 cd my-film && npm run film                                            # 定长 → 配乐 → 检查 → 渲染
-node ../skills/code-reel/scripts/check-film.mjs renders/film.mp4 --film-dir .
+node ../skills/filmsmith/scripts/check-film.mjs renders/film.mp4 --film-dir .
 ```
 
-环境要求：Node.js 22+、FFmpeg；建工程时需要联网（字体、GSAP、第一次运行 HyperFrames）。`node skills/code-reel/scripts/selftest.mjs` 可以检查本机环境和全部十个模板。
+环境要求：Node.js 22+、FFmpeg；建工程时需要联网（字体、GSAP、第一次运行 HyperFrames）。`node skills/filmsmith/scripts/selftest.mjs` 可以检查本机环境和全部十个模板。
 
 ## 一支片怎么做出来
 
@@ -72,7 +72,7 @@ node ../skills/code-reel/scripts/check-film.mjs renders/film.mp4 --film-dir .
 
 | | |
 |---|---|
-| [Skill](skills/code-reel/SKILL.md) | `code-reel`：流程、理论、原则、十种风格及其模板、转场库、运行库和测量脚本。 |
+| [Skill](skills/filmsmith/SKILL.md) | `filmsmith`：流程、理论、原则、十种风格及其模板、转场库、运行库和测量脚本。 |
 
 ## 限制
 
