@@ -129,6 +129,7 @@ const sceneEvents = (s, g, scenes, i, content) => {
 
 export default {
   api: 3,
+  devices: ['plakat-accent-wipe'], // the mode's own T2 device (lib/fit.mjs knows it; CONTRACT.md, api 3 T2)
   // 120 BPM is the source film's tempo and the swiss bed's home (borrowed); ±6.7 % keeps marimba runs and the
   // half-beat counters crisp (derived).
   bpm: { default: 120, min: 112, max: 128 },

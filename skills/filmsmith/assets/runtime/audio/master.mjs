@@ -1,9 +1,10 @@
-// master.mjs — loudness master with ffmpeg: two-pass loudnorm in linear mode, then a verification pass.
-// master(in, out, { lufs: -14, tp: -1.5, tone }) → { I, TP, LRA, Smax, limiting, normalization, preLimit, ok, ... }
+// master.mjs — loudness master with ffmpeg: two-pass loudnorm in linear mode, then a verification pass, then the
+// delivery check: the master encoded to AAC 192k (as the renderer delivers it) must keep its true peak ≤ −1.2 dBTP.
+// master(in, out, { lufs: -14, tp: -1.5, tone, aac }) → { I, TP, LRA, Smax, limiting, normalization, preLimit, aac, ok, ... }
 // writeMeasure(dir, result) → writes <dir>/assets/audio/measure.json, the measured numbers a film may print.
 
 import { spawnSync } from 'node:child_process';
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, rm, rename, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { readAudio, writeWav } from './wav.mjs';
 import { limit } from './fx.mjs';
@@ -67,10 +68,70 @@ const glue = (chs, sr, { ratio = 2, attack = 0.03, release = 0.2 } = {}) => {
   return max;
 };
 
+// aacPeak(path, { bitrate }) → the true peak (dBTP) of `path` encoded to AAC the way HyperFrames delivers it: the
+// mixer encodes the mix to AAC 192k and a duration pad or trim may encode that again; the higher of the two
+// generations is returned (with both). An encode overshoots a PCM master's true peak, most on a hit out of near
+// silence (+2 dB measured on ink's first slam, 2026-10-19).
+export const aacPeak = async (path, { bitrate = '192k' } = {}) => {
+  const a = `${path}.aac1.m4a`, b = `${path}.aac2.m4a`;
+  try {
+    for (const [src, dst] of [[path, a], [a, b]]) {
+      const r = ff(['-i', src, '-map', '0:a:0', '-vn', '-c:a', 'aac', '-b:a', bitrate, dst]);
+      if (r.status !== 0) throw new Error(`master: AAC encode failed\n${r.stderr.slice(-1000)}`);
+    }
+    const p1 = measure(a).TP, p2 = measure(b).TP;
+    return { TP: Math.max(p1, p2), first: p1, second: p2 };
+  } finally {
+    await rm(a, { force: true }); await rm(b, { force: true });
+  }
+};
+
+// The delivery check. HyperFrames lowers the whole mix when its AAC encode has a true peak over −1 dBTP ("Audio lowered
+// by X dB" in the render log), which took films that open on a hit to −15…−21 LUFS (2026-10-19). After the master,
+// the output is encoded to AAC 192k and measured (aacPeak); over `aac.ceiling` (−1.2 dBTP, 0.2 dB under the renderer's
+// line) the master runs again with its true-peak target lowered by the excess, so the pre-limiter takes the peaks
+// down and the loudness stays on target; up to `aac.passes` (3) times. If it is still over, the gain is lowered by
+// the excess (the loudness drops, by much less than the renderer would take). aac: false skips the check.
+export const master = async (input, output, opts = {}) => {
+  const { tp = -1.5, quiet = false, aac = {} } = opts;
+  if (aac === false) return masterOnce(input, output, opts);
+  const ceiling = aac.ceiling ?? -1.2, passes = aac.passes ?? 3;
+  const log = [];
+  let tpUsed = tp, res, peak;
+  for (let pass = 0; ; pass++) {
+    res = await masterOnce(input, output, { ...opts, tp: tpUsed, quiet: true });
+    peak = await aacPeak(output, aac);
+    log.push({ tp: Number(tpUsed.toFixed(2)), I: Number(res.I.toFixed(2)), TP: Number(res.TP.toFixed(2)), aacTP: Number(peak.TP.toFixed(2)) });
+    if (!(peak.TP > ceiling) || pass >= passes) break;
+    tpUsed -= peak.TP - ceiling + 0.1;
+  }
+  let trimmed = 0;
+  if (peak.TP > ceiling) { // the limiter could not hold it: lower the gain by the excess
+    trimmed = Number((ceiling - 0.05 - peak.TP).toFixed(2));
+    const tmp = `${output}.aactrim.wav`;
+    const r = ff(['-i', output, '-af', `volume=${trimmed}dB`, '-c:a', 'pcm_s24le', '-fflags', '+bitexact', '-flags:a', '+bitexact', tmp]);
+    if (r.status !== 0) throw new Error(`master: ffmpeg failed\n${r.stderr.slice(-2000)}`);
+    await rename(tmp, output);
+    const v = measure(output);
+    Object.assign(res, { I: v.I, TP: v.TP, LRA: v.LRA, Smax: v.Smax, Mmax: v.Mmax });
+    peak = await aacPeak(output, aac);
+    res.ok = Math.abs(res.I - (opts.lufs ?? -14)) <= (opts.tolerance ?? 0.5) && res.TP <= tp;
+  }
+  res.target = { lufs: opts.lufs ?? -14, tp };
+  res.aac = { TP: Number(peak.TP.toFixed(2)), ceiling, tp: Number(tpUsed.toFixed(2)), passes: log.length, trim: trimmed, log };
+  res.ok = res.ok && !(peak.TP > ceiling);
+  if (!quiet) {
+    const v = res, p2 = res.normalization, preLimit = res.preLimit;
+    console.log(`master: ${output}  I ${v.I.toFixed(1)} LUFS  TP ${v.TP.toFixed(1)} dBTP  LRA ${v.LRA.toFixed(1)} LU  Smax ${v.Smax.toFixed(1)} LUFS  (${p2}${preLimit ? `, pre-limited at ${preLimit.ceiling.toFixed(1)} dBFS, ${preLimit.reduction} dB` : ''}${res.tone === 'v2' ? `, tone v2, glue ${res.glue} dB` : ''})  AAC 192k TP ${res.aac.TP.toFixed(1)} dBTP${log.length > 1 ? ` after ${log.length - 1} re-master(s) at TP ${res.aac.tp.toFixed(1)}` : ''}${trimmed ? `, gain ${trimmed} dB` : ''}  ${res.ok ? 'OK' : 'OUT OF SPEC'}`);
+  }
+  if (!res.ok) console.warn(`master: target ${res.target.lufs} LUFS / TP <= ${tp} dBTP / AAC TP <= ${ceiling} dBTP not met`);
+  return res;
+};
+
 // tone: 'v2' — the mastering-chain trial (D4), off by default: low band soft clip and glue compression before
 // the loudness stage, then a pre-limit ceiling that uses the headroom the true-peak check leaves (TP target
 // −0.6 dB instead of −1.5 dB) with a slower release (150 ms instead of 60 ms), so accents lose less.
-export const master = async (input, output, { lufs = -14, tp = -1.5, lra = 20, sr = 48000, quiet = false, tolerance = 0.5, tone = null } = {}) => {
+const masterOnce = async (input, output, { lufs = -14, tp = -1.5, lra = 20, sr = 48000, quiet = false, tolerance = 0.5, tone = null } = {}) => {
   await mkdir(dirname(output), { recursive: true });
   const v2 = tone === 'v2';
   const tpTarget = tp - 0.3; // headroom for the 192 kHz → 48 kHz resample after loudnorm
@@ -140,7 +201,7 @@ export const master = async (input, output, { lufs = -14, tp = -1.5, lra = 20, s
   if (!quiet) {
     console.log(`master: ${output}  I ${v.I.toFixed(1)} LUFS  TP ${v.TP.toFixed(1)} dBTP  LRA ${v.LRA.toFixed(1)} LU  Smax ${v.Smax.toFixed(1)} LUFS  (${p2.normalization_type}${preLimit ? `, pre-limited at ${preLimit.ceiling.toFixed(1)} dBFS, ${preLimit.reduction} dB` : ''}${v2 ? `, tone v2, glue ${glueDb} dB` : ''})  ${ok ? 'OK' : 'OUT OF SPEC'}`);
   }
-  if (!ok) console.warn(`master: target ${lufs} LUFS / TP <= ${tp} dBTP not met`);
+  if (!ok && !quiet) console.warn(`master: target ${lufs} LUFS / TP <= ${tp} dBTP not met`);
   return res;
 };
 

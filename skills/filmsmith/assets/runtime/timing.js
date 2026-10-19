@@ -40,7 +40,8 @@
 //             T1 scene   a new composition: median 2–3 s, a scene ≤ 6 s (rest, or climax with a reason, excepted),
 //                        ≥ 2 scenes in the first 5 s, scene-length CV ≥ 0.3 with a run that speeds up or slows down
 //             T2         expressive transitions (devices of runtime/transitions and runtime/handoffs, full-frame
-//                        ground changes): one every 8–12 s, the same device ≤ 3 times a film and never twice in a
+//                        ground changes): one every 8–12 s (the count; a gap over 12 s between two, or from the
+//                        film's start or to its end, warns), the same device ≤ 3 times a film and never twice in a
 //                        row unchanged, each ≤ 2 beats long
 //             T3 peaks   hook, claim or reveal, lock-up: 2–3 a film; the one marked climax at 60–85 % of the length
 //             holds      a declared still window is ≥ 0.2 s and ≤ 2 beats; one marked pause (a claim being read)
@@ -64,6 +65,7 @@
 //   },
 //   events: (scenes, g, content) => ({ keys, holds, handoffs, mask, micro, shots, expressive, peaks }), // see events()
 //   accent: '#FF3B1F',            // optional (or content => hex); else content.accent, else palettes.js
+//   devices: ['plakat-accent-wipe'],  // optional: the template's own T2 device ids, so lib/fit.mjs knows them
 // }
 //
 // Per type:
@@ -77,7 +79,12 @@
 //              ctx.reading(items), so every mode reads with the same reader
 //   steps(s, g, ctx)   seconds the picture holds still after each step lands (at the fitted `need`);
 //              each must be ≤ maxStillBars, the last ≤ lastStillBars. api 3: each ≤ holdMaxBeats (2 beats); an
-//              entry may be { still, pause: true } for a reading pause (a claim), ≤ pauseMaxBars (2 bars)
+//              entry may be { still, pause: true } for a reading pause (a claim), ≤ pauseMaxBars (2 bars).
+//              Called again once the grid, the pad and the phrase share are added, with ctx.dur = the scene's
+//              fitted seconds (undefined in the first call): a type that reads ctx.dur returns its holds at that
+//              length and they are checked as returned (warnings); otherwise the slack counts on the last step
+//   fillsSlack true: the type fills whatever the grid, the pad and the phrase share add with moves of its own (tail
+//              moves), so the slack is not counted as a still hold; its events() holds and the T0 gaps measure it
 //   min / max  bars; max defaults to 2, up to pageMaxBars with steps, past it only with rest or climax + reason.
 //              api 3: max defaults to sceneMaxSec (6 s) in whole units at the fitted tempo; a type that splits
 //              its scene into several compositions (events() `shots`) may raise it, and every composition is
@@ -89,7 +96,7 @@
 //   absorb     takes what is left of the phrase rounding (default: the last scene)
 //   events(s, g, ctx)  key events of this scene, times in seconds from the scene start
 // Callbacks get ctx = { i, scenes, prev, next, content, lang }; need() and steps() also get
-// ctx.read (seconds of primary reading of `read`), ctx.wordSec and ctx.reading(items).
+// ctx.read (seconds of primary reading of `read`), ctx.wordSec and ctx.reading(items); steps() ctx.dur (see above).
 // A scene may set `bars` by hand: accepted when it lies in [need, max], otherwise reported, so a hand
 // value can lengthen a scene for rhythm but never cut it below reading time.
 
@@ -302,6 +309,7 @@ const sizeScenes = (scenes, rules, bpm, content) => {
   // api 3: the cap on a step's still hold, in bars (pause: a claim being read)
   const stepCap = (k, n, pause) => (v3 ? (pause ? o.pauseMaxBars : o.holdMaxBeats / beatsPerBar) : k === n - 1 ? o.lastStillBars : o.maxStillBars);
   const sceneMax = Math.max(unit, Math.floor(o.sceneMaxSec / bar / unit + 1e-9) * unit); // api 3 default ceiling, bars
+  const ctxs = []; // per scene: the type and the ctx steps() was called with, for the check at the fitted length
   const sized = scenes.map((s, i) => {
     const r = rules.types?.[s.type];
     const ctx = { i, scenes, prev: scenes[i - 1], next: scenes[i + 1], content, lang };
@@ -323,6 +331,7 @@ const sizeScenes = (scenes, rules, bpm, content) => {
     const base = read(r.read ? r.read(s, ctx) : []);
     const reading = (list, extra) => { const res = read(list, extra); calls.push(res); return res; };
     const full = { ...ctx, read: base.primary, wordSec: o.wordSec, reading };
+    ctxs[i] = { r, s, full };
 
     const need = r.need
       ? r.need(s, g, full)
@@ -460,15 +469,37 @@ const sizeScenes = (scenes, rules, bpm, content) => {
     });
   }
 
-  // ---- after the grid, the pad and the phrase: the last step's hold, and the page ceilings
+  // ---- after the grid, the pad and the phrase: the step holds at the scene's fitted length, and the page ceilings.
+  // The grid, a turn's pad and the phrase share make a scene longer than its need. steps() is called again with
+  // ctx.dur = the fitted seconds: a type that reads ctx.dur returns its holds at that length (it may have filled the
+  // slack with moves) and each is checked as returned. A type that does not read it is assumed to hold the slack on
+  // its last step. A type with fillsSlack: true fills any slack with moves of its own; it is not checked here (its
+  // events() holds and the T0 gaps measure it).
   sized.forEach((s, i) => {
-    const T = s.timing;
-    if (!T || T.rest) return;
-    if (T.still?.length) {
-      const n = T.still.length, cap = stepCap(n - 1, n, T.pause?.[n - 1]);
-      const last = T.still[n - 1] + (s.bars * bar - s.need);
-      if (last > cap * bar + 1e-6) notes.push({ level: 'warn', scene: i, msg: `${s.type}: the last step holds still ${v3 ? `${(last / beat).toFixed(2)} beats` : `${(last / bar).toFixed(2)} bars`} once the grid${T.phraseShare ? ' and the phrase share' : ''} are added; at most ${v3 ? `${tidy(cap * beatsPerBar)} beats` : cap}` });
+    const T = s.timing, C = ctxs[i];
+    if (!T || T.rest || !T.still?.length || C?.r?.fillsSlack === true) return;
+    const dur = s.bars * bar, slack = dur - s.need;
+    if (slack <= 1e-6) return; // nothing added: the holds were checked at the need
+    const extra = [T.phraseShare && 'the phrase share', T.pad && "the turn's pad"].filter(Boolean);
+    const added = `once the grid${extra.length ? ` and ${extra.join(' and ')}` : ''} are added`;
+    const show = (x) => (v3 ? `${(x / beat).toFixed(2)} beats` : `${(x / bar).toFixed(2)} bars`);
+    const capOf = (cap) => (v3 ? `${tidy(cap * beatsPerBar)} beats` : cap);
+    let used = false, raw = null;
+    const c = { ...C.full };
+    Object.defineProperty(c, 'dur', { get: () => { used = true; return dur; }, enumerable: false });
+    try { raw = C.r.steps(C.s, g, c) || []; } catch (e) { notes.push({ level: 'warn', scene: i, msg: `${s.type}: steps() threw at the fitted length (${String(e?.message ?? e)})` }); return; }
+    if (used) {
+      const still = raw.map((x) => Number(x && typeof x === 'object' ? x.still : x));
+      const pause = raw.map((x) => !!(x && typeof x === 'object' && x.pause === true));
+      still.forEach((x, k) => {
+        const cap = stepCap(k, still.length, pause[k]);
+        if (x > cap * bar + 1e-6) notes.push({ level: 'warn', scene: i, msg: `${s.type}: step ${k + 1} holds still ${show(x)} at the scene's fitted length (${added}); at most ${capOf(cap)}` });
+      });
+      return;
     }
+    const n = T.still.length, cap = stepCap(n - 1, n, T.pause?.[n - 1]);
+    const last = T.still[n - 1] + slack;
+    if (last > cap * bar + 1e-6) notes.push({ level: 'warn', scene: i, msg: `${s.type}: the last step holds still ${show(last)} ${added}; at most ${capOf(cap)} (if the type fills the slack with moves, let steps() read ctx.dur or declare fillsSlack: true)` });
   });
   if (!v3) sized.forEach((s, i) => {
     const T = s.timing;
@@ -553,8 +584,8 @@ export const fit = (content, rulesOrFn) => {
 //   shots       [{ t, scene, what }]   T1: a new composition inside a scene (a camera move to a new region, a page
 //                                      turn inside one type); every scene start is one already
 //   expressive  [{ t, dur, device, variant, scene }]   T2: an expressive transition starting at t, lasting dur
-//                                      seconds (or `beats`); device: an id from runtime/transitions or
-//                                      runtime/handoffs (lib/fit.mjs warns on an unknown id); variant: what
+//                                      seconds (or `beats`); device: an id from runtime/transitions,
+//                                      runtime/handoffs or rules.devices (lib/fit.mjs warns on any other id); variant: what
 //                                      changed from its last use (direction, origin, colour role), so a repeat
 //                                      is not "unchanged"
 //   peaks       [{ t, kind, climax, scene }]   T3: kind hook | claim | reveal | lockup; climax: true on one
@@ -727,6 +758,17 @@ export const tiers = (d, limits = DEFAULTS, api = 3) => {
     else if (x.dur > o.expressiveMaxBeats * beat + eps) note('T2', 'error', `expressive ${x.device} at ${ts(x.t)} lasts ${r2(x.dur / beat)} beats; at most ${o.expressiveMaxBeats}`, x.scene);
   }
   const egaps = expressive.slice(1).map((x, k) => x.t - expressive[k].t);
+  // spacing: the count alone lets transitions bunch up; two neighbours (or the film's start and the first, the last
+  // and the film's end) more than ehi seconds apart leave a stretch without one (a warning: shape, not a rule)
+  if (expressive.length) {
+    const marks = [{ t: 0, edge: 'the start' }, ...expressive.map((x) => ({ t: x.t, x })), { t: D, edge: 'the end' }];
+    for (let k = 1; k < marks.length; k++) {
+      const a = marks[k - 1], b = marks[k], gap = b.t - a.t;
+      if (gap <= ehi + eps) continue;
+      const name = (m) => (m.edge ? `${m.edge} of the film` : `${m.x.device ?? '?'} at ${ts(m.t)}`);
+      note('T2', 'warn', `${r2(gap)} s between ${name(a)} and ${name(b)} without an expressive transition; one every ${elo}–${ehi} s`, (b.x ?? a.x)?.scene);
+    }
+  }
 
   // ---- T3: peaks
   const [plo, phi] = o.peakCount, [clo, chi] = o.climaxAt;
@@ -764,6 +806,20 @@ export const tiers = (d, limits = DEFAULTS, api = 3) => {
     return { summary, notes: [{ level: 'info', tier: 'all', msg: `api 3 tiers not enforced at api ${api}: ${n ? `${n} would be error(s) (${Object.entries(by).map(([k, v]) => `${k} ${v}`).join(', ')})` : 'all would pass'}; ${tierLine(summary)}` }] };
   }
   return { summary, notes };
+};
+
+// deviceNotes(expressive, known, rules) → warnings for T2 device ids that are neither in `known` (the ids of
+// runtime/transitions and runtime/handoffs, which lib/fit.mjs collects) nor in rules.devices, the template's own T2
+// devices (e.g. devices: ['plakat-accent-wipe']). A rules `devices` that is not an array of strings is reported too.
+export const deviceNotes = (expressive, known, rules = {}) => {
+  const notes = [], own = rules?.devices;
+  const ok = new Set(known ?? []);
+  if (own != null && !(Array.isArray(own) && own.every((x) => typeof x === 'string' && x))) notes.push({ level: 'warn', msg: 'rules.devices must be an array of device ids (strings); ignored' });
+  else for (const d of own ?? []) ok.add(d);
+  for (const d of new Set((expressive || []).map((x) => x.device).filter(Boolean))) {
+    if (!ok.has(d)) notes.push({ level: 'warn', msg: `expressive device "${d}" is not an id of runtime/transitions or runtime/handoffs, nor one of the rules' own devices (rules.devices)` });
+  }
+  return notes;
 };
 
 // One line of the tier measures, for the fit table and the INFO note.

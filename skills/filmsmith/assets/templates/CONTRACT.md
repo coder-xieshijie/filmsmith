@@ -54,13 +54,17 @@ At 120 BPM one beat is 0.5 s; every limit in beats follows the tempo. Every valu
 | Tier | Declared as | Limit (`DEFAULTS` key) | Checked by |
 |---|---|---|---|
 | Text per state | `read()` items; items sharing an `at` (to the frame) enter together; `claim: true` on a claim | primary words entering together ≤ 5 (`stateWords`), ≤ 8 with a claim (`claimWords`); glance and word-at-a-time items are not counted | `fit()`: error |
-| Step holds | `steps()` returns seconds, or `{ still, pause: true }` for a step where a claim is read | each ≤ 2 beats (`holdMaxBeats`), a pause ≤ 2 bars (`pauseMaxBars`) | `fit()`: error; after the grid and phrase share: warning |
+| Step holds | `steps()` returns seconds, or `{ still, pause: true }` for a step where a claim is read | each ≤ 2 beats (`holdMaxBeats`), a pause ≤ 2 bars (`pauseMaxBars`) | `fit()`: error at the need; after the grid, a turn's pad and the phrase share: warning (see below) |
 | Scene ceiling | `max` (bars) | default `sceneMaxSec` (6 s) in whole units at the fitted tempo; no 2- or 4-bar page ceilings, no 12-word page cap | `fit()`: error when the reading need exceeds it |
 | Holds | `holds: [{ from, to, scene, pause }]` | ≥ 0.2 s (`holdMinSec`), ≤ 2 beats; `pause: true` ≤ 2 bars; more than 2 pauses a film warns (`claimsMax`); rest scenes excepted | `events()`: error; check-film FAIL on the pixels (longest still per scene, pauses excepted) |
 | T0 micro | `micro: [{ t, scene, what }]`; keys, scene starts, shots, expressive starts and peaks count as onsets too | median gap ≤ 2 beats (`microMedianBeats`), every gap ≤ 4 beats (`microMaxGapBeats`) outside rest scenes and pause holds; no `micro` at all warns | `events()`: error; check-film FAIL on the declared events, picture onsets INFO |
 | T1 scene | scene starts plus `shots: [{ t, scene, what }]` (a new composition inside a scene) | median 2–3 s (`sceneMedianSec`; over the top error, under the bottom warning); each ≤ 6 s (`sceneMaxSec`) unless its scene is a rest, or a climax with a `reason`; ≥ 2 in the first 5 s (`firstScenes`, `firstSec`); CV ≥ 0.3 (`sceneCV`); no run of 3 that speeds up or slows down warns | `events()`: error; check-film FAIL |
-| T2 expressive | `expressive: [{ t, dur, device, variant, scene }]` (`beats` instead of `dur` is converted) | count in [floor(D / 12), ceil(D / 8)] (`expressiveEverySec` [8, 12]); one `device` ≤ 3 times (`expressiveSameMax`); the same device with the same `variant` twice in a row is an error; `dur` ≤ 2 beats (`expressiveMaxBeats`), a missing `dur` warns; a `device` that is not an id of `runtime/transitions` or `runtime/handoffs` warns | `events()` and `lib/fit.mjs`: error; check-film FAIL, large-area changes INFO |
+| T2 expressive | `expressive: [{ t, dur, device, variant, scene }]` (`beats` instead of `dur` is converted) | count in [floor(D / 12), ceil(D / 8)] (`expressiveEverySec` [8, 12]); one `device` ≤ 3 times (`expressiveSameMax`); the same device with the same `variant` twice in a row is an error; `dur` ≤ 2 beats (`expressiveMaxBeats`), a missing `dur` warns; two neighbours (or the film's start and the first, the last and the film's end) more than 12 s apart warn; a `device` that is not an id of `runtime/transitions` or `runtime/handoffs`, nor listed in the rules' `devices`, warns | `events()` and `lib/fit.mjs`: error; check-film FAIL, large-area changes INFO |
 | T3 peaks | `peaks: [{ t, kind, climax, scene }]`, kind `hook` \| `claim` \| `reveal` \| `lockup` | 2–3 a film (`peakCount`); at most one `climax: true`, at 60–85 % of the length (`climaxAt`); no climax marked, a run into it that is not the shortest, or no release after it warn | `events()`: error; check-film FAIL, the loudest moment INFO |
+
+**Steps at the fitted length.** The grid, a turn's pad and the phrase share make a scene longer than its need. `fit()` then calls `steps()` again with `ctx.dur`, the scene's fitted seconds (`ctx.dur` is undefined in the first call, at the need). A type that reads `ctx.dur` returns its holds at that length, so slack it fills with moves (tail moves, a second highlight) is not counted, and each hold is checked as returned; a type that does not read it gets the slack added to its last step's hold. A type that always fills the slack with moves of its own may declare `fillsSlack: true` instead: it is not checked after the grid, and its `events()` holds and the T0 gaps measure it. These are warnings; the holds at the need stay errors (2026-10-19).
+
+**Template devices.** A template that owns a T2 device the libraries do not have (plakat's full accent wipe, phosphor's fibre burst) lists its ids in the rules: `devices: ['plakat-accent-wipe']`. `lib/fit.mjs` then knows them; any other unknown id warns.
 
 What the tiers cannot see stays on the checklist: each T0 brings one new piece of information; a new topic enters only at a scene change; a related transformation is the default change; reading time counts while the text is readable and still, so other things may change during it only if they are not new text and do not cross it. A turn's `pad` and the phrase share can lengthen a scene past 6 s; the T1 check catches it.
 
@@ -93,7 +97,7 @@ What the tiers cannot see stays on the checklist: each T0 brings one new piece o
   // api 3 tiers (see "api 3: the four tiers"); any api may give them, below 3 they are INFO
   micro: [{ t, scene, what }],   // T0 changes
   shots: [{ t, scene, what }],   // T1 compositions inside a scene
-  expressive: [{ t, dur, device, variant, scene }],  // T2 transitions; device: an id of runtime/transitions or runtime/handoffs
+  expressive: [{ t, dur, device, variant, scene }],  // T2 transitions; device: an id of runtime/transitions, runtime/handoffs or rules.devices
   peaks: [{ t, kind, climax, scene }],               // T3: hook | claim | reveal | lockup
 }
 ```
@@ -224,7 +228,7 @@ The switches differ because the templates do; a later version may unify them und
     "audio": "node lib/fit.mjs . && node score.mjs",
     "check": "npx --yes hyperframes@0.8.163 check",
     "snapshot": "node lib/fit.mjs . && npx --yes hyperframes@0.8.163 snapshot",
-    "render": "npx --yes hyperframes@0.8.163 render --fps 30 --output renders/film.mp4",
+    "render": "npx --yes hyperframes@0.8.163 render --fps 30 --workers ${HF_WORKERS:-auto} --output renders/film.mp4",
     "film": "npm run audio && npm run check && npm run render"
   }
 }
@@ -232,6 +236,8 @@ The switches differ because the templates do; a later version may unify them und
 
 `check` needs `assets/audio/mix.wav`, so run `npm run audio` (or `npm run film`) once before a bare `npm run check`.
 
+`HF_WORKERS` caps the render's parallel workers (each a Chrome process of about 256 MB): `HF_WORKERS=2 npm run film` on a machine others render on too. Unset, HyperFrames picks (`auto`). The `${HF_WORKERS:-auto}` form needs a POSIX shell, which npm uses for scripts on macOS and Linux (ink adds its `bloom-bake.mjs` step before the render).
+
 ## Sound
 
-`score.mjs` imports `./lib/audio/index.mjs` (see `assets/runtime/audio/README.md`): a beat-grid sequencer, synthesised voices, a bed preset per mode, and a master that normalises to −14 LUFS, true peak ≤ −1.5 dBTP. Every picture event that deserves a sound (a landing, a stamp, a cut) gets one at the same beat. An optional generated music file can replace the bed: put it at `assets/audio/bed.wav`, set `bed: { file: 'assets/audio/bed.wav', offset: <s> }` in content.js, and keep the bpm equal to the measured tempo.
+`score.mjs` imports `./lib/audio/index.mjs` (see `assets/runtime/audio/README.md`): a beat-grid sequencer, synthesised voices, a bed preset per mode, and a master that normalises to −14 LUFS, true peak ≤ −1.5 dBTP. The master then encodes the mix to AAC 192k as the renderer does and keeps that encode's true peak ≤ −1.2 dBTP (re-mastering with a lower true-peak target if needed); otherwise HyperFrames lowers the whole mix to stay under −1 dBTP ("Audio lowered by X dB" in the render log) and the film misses −14 LUFS. Every score fades in over 60 ms by default, so a film that opens on a hit does not hand the encoder a full-scale first transient (2026-10-19). Every picture event that deserves a sound (a landing, a stamp, a cut) gets one at the same beat. An optional generated music file can replace the bed: put it at `assets/audio/bed.wav`, set `bed: { file: 'assets/audio/bed.wav', offset: <s> }` in content.js, and keep the bpm equal to the measured tempo.

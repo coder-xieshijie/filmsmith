@@ -16,7 +16,7 @@
 //   flashes     ≤ 3 flashes in any 1 s in any 1/3- or 1/4-frame window; red flashes counted separately
 //   cuts        hard cuts against the beat grid; scene starts on a beat, `turn` scenes on a bar line
 //   keys        each key event on a beat (turn and claim on a bar line) within 2 frames; a picture event
-//               that stands out at the key (onset or start; settle or stop for land, end and turn); an
+//               that stands out at the key (onset or start; settle or stop for land, end, turn and claim); an
 //               audio onset (broadband) for land, stamp, accent and turn
 //   stills      per scene, the longest still stretch inside the mask, against a noise floor per colour and
 //               per block (grain, ambient drift); over `lastStillBars` bars on a scene that is not a rest is
@@ -159,11 +159,13 @@ if (scenes.length && beat) {
 // Key events. Only kinds that land something carry a sound of their own (land, stamp, accent, turn);
 // claim and end keys without an onset are listed but not warned.
 const SOUND_KINDS = ['land', 'stamp', 'accent', 'turn'];
+// Kinds that arrive by landing: the picture settles or stops at the key (a claim lands, 2026-10-19).
+const LANDING_KINDS = ['land', 'end', 'turn', 'claim'];
 const keyRows = keys.map((k) => {
   const unit = ['turn', 'claim'].includes(k.kind) ? bar : beat;
   const g = unit ? nearestGrid(k.t, unit) : { off: NaN };
   const f = Math.round(k.t * fps);
-  const pe = pictureEvent(MC, E, f, { landing: ['land', 'end', 'turn'].includes(k.kind) });
+  const pe = pictureEvent(MC, E, f, { landing: LANDING_KINDS.includes(k.kind) });
   let au = null;
   let hf = null;
   if (onsets) for (let d = -1; d <= 1; d++) {
@@ -182,7 +184,7 @@ if (!hasEvents || !keys.length) {
   const first = keyRows.filter((k) => k.t * fps < 2), firstNote = first.length ? `; not measurable (no frame before them): ${first.map((k) => `${k.kind}@${ts(k.t)}`).join(', ')}` : '';
   const judged = keyRows.filter((k) => !first.includes(k));
   const np = judged.filter((k) => !k.picture);
-  add('keys: picture', !judged.length ? 'N/A' : np.length ? 'WARN' : 'PASS', `${judged.length - np.length}/${judged.length}`, (np.length ? 'no picture event standing out at the key (onset or start; settle or stop for land, end and turn): ' + np.map((k) => `${k.kind}@${ts(k.t)}`).join(', ') + '; ' : '') + maskNote + firstNote, 'P1 cuts and landings');
+  add('keys: picture', !judged.length ? 'N/A' : np.length ? 'WARN' : 'PASS', `${judged.length - np.length}/${judged.length}`, (np.length ? `no picture event standing out at the key (onset or start; settle or stop for ${LANDING_KINDS.join(', ')}): ` + np.map((k) => `${k.kind}@${ts(k.t)}`).join(', ') + '; ' : '') + maskNote + firstNote, 'P1 cuts and landings');
   const need = judged.filter((k) => k.needsSound), na = need.filter((k) => !k.audio), quiet = judged.filter((k) => !k.needsSound && !k.audio);
   const hfCount = keyRows.filter((k) => k.audioHigh).length;
   add('keys: sound', !onsets ? 'N/A' : !need.length ? 'N/A' : na.length ? 'WARN' : 'PASS', `${need.length - na.length}/${need.length}`,

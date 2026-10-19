@@ -13,7 +13,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { fit, report, events, timingJson } from './timing.js';
+import { fit, report, events, timingJson, deviceNotes } from './timing.js';
 
 const args = process.argv.slice(2);
 const noPlan = args.includes('--no-plan');
@@ -39,7 +39,8 @@ try {
 }
 for (const n of ev.notes) t.notes.push(n);
 // T2 devices name entries of the transition library (runtime/transitions) or the hand-off library
-// (runtime/handoffs); an unknown id is a warning (a mode may own a device of its own), never an error.
+// (runtime/handoffs), or a device of the template's own that its rules list in `devices`; any other id is a
+// warning (lib/timing.js deviceNotes), never an error.
 if (ev.expressive?.length) {
   const known = new Set();
   for (const lib of ['./transitions/index.js', './handoffs/index.js']) {
@@ -48,9 +49,7 @@ if (ev.expressive?.length) {
       for (const x of m.list ?? []) if (x?.name ?? x?.id) known.add(x.name ?? x.id);
     } catch { /* library absent in this lib/ copy */ }
   }
-  if (known.size) for (const d of new Set(ev.expressive.map((x) => x.device).filter(Boolean))) {
-    if (!known.has(d)) t.notes.push({ level: 'warn', msg: `expressive device "${d}" is not an id of runtime/transitions or runtime/handoffs` });
-  }
+  if (known.size) for (const n of deviceNotes(ev.expressive, known, t.rules)) t.notes.push(n);
 }
 Object.defineProperty(t, 'tiers', { value: ev.tiers ?? null, enumerable: false, configurable: true });
 console.log(report(t));

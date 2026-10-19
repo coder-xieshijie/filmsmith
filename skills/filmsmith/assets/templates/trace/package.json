@@ -10,7 +10,7 @@
     "audio": "node lib/fit.mjs . && node score.mjs",
     "check": "npx --yes hyperframes@0.8.163 check",
     "snapshot": "node lib/fit.mjs . && npx --yes hyperframes@0.8.163 snapshot",
-    "render": "npx --yes hyperframes@0.8.163 render --fps 30 --output renders/film.mp4",
+    "render": "npx --yes hyperframes@0.8.163 render --fps 30 --workers ${HF_WORKERS:-auto} --output renders/film.mp4",
     "film": "npm run audio && npm run check && npm run render"
   }
 }

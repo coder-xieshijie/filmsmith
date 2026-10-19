@@ -60,3 +60,11 @@
 - trace: captions enter phrase by phrase, steps speed up into a `pace: 1` loop, the unseen input resolves letter by letter (scramble-resolve), scenes may enter by path-type, token-sweep or trace-flow (`enter`); examples at 100 bpm, 36 s; the shortest cut is now five scenes, 16 s.
 - `timing.js` `tiers()`: a composition start is assigned to its scene with the same 1e-4 s tolerance it is rounded to (a start could fall into the previous scene and raise a false T1 error).
 - Renamed the skill to Filmsmith (`filmsmith`, 片匠), formerly CodeReel: `skills/code-reel/` is now `skills/filmsmith/` and the repository is now `filmsmith`.
+- runtime: `master()` encodes the master to AAC 192k as the renderer does and re-masters at a lower true-peak target until that encode stays ≤ −1.2 dBTP, so HyperFrames no longer lowers the whole mix; scores fade in over 60 ms by default.
+- timing: a gap over 12 s between two expressive transitions, or from the film's start to the first or from the last to the end, warns.
+- timing: after the grid, `steps()` runs again with `ctx.dur` (the scene's fitted seconds); a type that fills the slack with moves can instead declare `fillsSlack: true` (phosphor does).
+- timing: `rules.devices` lists a template's own T2 device ids (plakat `plakat-accent-wipe`; phosphor `fibre-burst`, `glitch-cut`, `tunnel-fold`).
+- check-film: a `claim` key may arrive by landing (settle or stop).
+- audio: the `diagram` bed's call bar ends with a soft pickup on its fourth beat, so a landing on the next bar no longer jumps +6 LU.
+- templates: `render` takes `--workers ${HF_WORKERS:-auto}` so a shared machine can cap render workers.
+- handoffs: `rail-press` `drawLine`, `path-type` `line: false` / `drawLine`, `counter-portal` `glyph.draw: 'counter'`; defaults unchanged, verified pixel for pixel.

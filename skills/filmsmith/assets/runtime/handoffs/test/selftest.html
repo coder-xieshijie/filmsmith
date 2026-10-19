@@ -11,7 +11,12 @@ import { createHandoff, list } from '../index.js';
 
 const W = 1920, H = 1080;
 const VARIANTS = {
-  'rail-press': [{ phase: 'press' }, { phase: 'cut' }],
+  // a template drawing the line itself: `drawLine: false` / `line: false` leaves it out, a function draws it (here in ink)
+  'rail-press': [{ phase: 'press' }, { phase: 'cut' }, { drawLine: false, label: 'drawLine false' },
+    { drawLine: (ctx, b) => { ctx.fillStyle = '#EDEAE2'; ctx.fillRect(b.x, b.y, b.w, b.h); }, label: 'drawLine fn' }],
+  'path-type': [{ line: false, label: 'line false' },
+    { drawLine: (ctx, l) => { ctx.beginPath(); l.pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.strokeStyle = '#EDEAE2'; ctx.lineWidth = 14; ctx.stroke(); }, label: 'drawLine fn' }],
+  'counter-portal': [{ glyph: { draw: 'counter' }, from: (ctx, P) => { ctx.fillStyle = P.colors.ink; ctx.fillRect(96, 900, 300, 90); }, label: 'glyph counter only' }],
   'arc-curl': [{ from: 'ring', to: 'node' }, { from: 'node', to: 'box' }, { from: 'ring', to: 'line' }],
   'stroke-reinterpret': [{ direction: 'remove' }],
   'net-unfold': [{ stage: 'unfold' }, { stage: 'arrange' }],
@@ -20,7 +25,7 @@ const VARIANTS = {
   'squash-to-path': [{ stage: 'squash' }, { stage: 'run' }, { stage: 'straighten' }],
   'field-morph': [{ step: 'quantize' }, { step: 'resolve' }],
 };
-const cases = list.flatMap((m) => [{ name: m.name, params: {} }, ...(VARIANTS[m.name] || []).map((v) => ({ name: m.name, params: v, label: `${m.name} ${Object.values(v).join('/')}` }))]);
+const cases = list.flatMap((m) => [{ name: m.name, params: {} }, ...(VARIANTS[m.name] || []).map(({ label, ...v }) => ({ name: m.name, params: v, label: `${m.name} ${label ?? Object.values(v).join('/')}` }))]);
 
 const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c.getContext('2d', { willReadFrequently: true }); };
 const A = mk(), B = mk();

@@ -626,8 +626,13 @@ export const diagram = (s, opts = {}) => {
     build: { gain: -17, cutoff: 1900 }, drop: { gain: -16, cutoff: 2300 },
     break: { gain: -14, cutoff: 1700 }, outro: { gain: -16, cutoff: 1900, release: 2.5, chord: 'Ebmaj9' },
   } });
-  // The motif: beat positions and chord-tone indices from the top; the second bar of each pair answers.
+  // The motif: beat positions and chord-tone indices from the top; the second bar of each pair answers. The first bar's
+  // last note is 2.5 beats in, so a soft pickup on its fourth beat (2 dB under the motif, 0.7 beat long, so it has
+  // died away before the downbeat and the answer's onset stays clear) leads into the answer: without it the bar's last
+  // beat and a half was the pad alone, up to 8 LU under the rest of the bar, and a landing on the next bar jumped
+  // +6 LU (trace, 2026-10-19). The pickup takes no turn in the keys' round robin, so every other note keeps its sample.
   const motif = [[[0, 3], [1, 2], [1.5, 3], [2.5, 1]], [[0, 2], [1, 1], [2, 0], [3, 1]]];
+  const PICKUPS = [{ at: 3, k: 2, gain: -2, len: 0.7 }];
   const dip = A.v2 ? { dip: [280, -2.5] } : {};
   for (const c of A.chunks()) {
     const kind = c.sec.kind;
@@ -645,6 +650,16 @@ export const diagram = (s, opts = {}) => {
       const st = { beat: (c.bar + b / A.bpb) * A.bpb };
       const [buf, acc] = A.vox(st, 'keys', { freqs: [mtof(m)], dur: A.g.beat * 0.9, hardness: 0.75, seed: k, ...dip });
       s.add(buf, t, { gain: g + acc, pan: 0.15, send: 0.35, bus: 'music' });
+    }
+    // not in a drop that starts inside the bar (a reveal on beat 4): the drop's hit owns the bar's end, and a pickup
+    // under it took its onset under 3 dB (trace, 2026-10-19)
+    if (n % 2 === 0 && !(kind === 'drop' && c.start > c.bar + 1e-6)) for (const pk of PICKUPS) {
+      const t = t0 + pk.at * A.g.beat;
+      if (t < A.t(c.start) - 1e-6 || t >= A.t(c.end) - 1e-6) continue;
+      const m = top[Math.max(0, top.length - 1 - pk.k)], lv = metricLevel(pk.at, A.bpb);
+      const o = { freqs: [mtof(m)], dur: A.g.beat * (pk.len ?? 0.9), hardness: 0.75, seed: pk.k, ...dip };
+      const buf = A.vary ? s.vary('keys', o, { vel: VEL[lv], rr: false }) : s.voice('keys', o);
+      s.add(buf, t, { gain: g + (A.vary ? ACCENT[lv] : 0) + pk.gain, pan: 0.15, send: 0.35, bus: 'music' });
     }
   }
   A.steps(2, (st) => {

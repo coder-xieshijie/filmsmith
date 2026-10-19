@@ -1,8 +1,31 @@
 // rail-press — the mode's own line presses a word into itself, takes its weight (thickens) and recovers; then the line
 // thickens upward into a bar and a blade cuts the bar, left to right, into the next word. Theory: good continuation and
 // object constancy, the line never leaves the screen. references/transitions.md#rail-press.
+// A template whose line is not an even band (thread's swelled rule) passes `drawLine: false` and draws the band itself,
+// or `drawLine(ctx, band, P)`, called where the module would fill it: band = { x, y, w, h } (the line's rectangle at this
+// frame, h its thickness while it takes the word's weight), plus state (the module's state: yTop, th, half, barTop,
+// blade, cutting) and color. The module still draws the word, the bar above the band and the cut word.
 
 import { seg, settle, lerp, clamp, expOut, expInOut, text, measure, scratch, ground } from './util.js';
+
+// The band drawn by the template (drawLine false or a function): the module fills only the bar above the band (right of
+// the blade once it cuts), hands the band over, then draws the cut word.
+const paintOwnLine = (ctx, S, P, xl, xr) => {
+  const C = P.colors;
+  const bar = (a, b) => { if (b > a && S.yTop > S.barTop) ctx.fillRect(a, S.barTop, b - a, S.yTop - S.barTop); };
+  if (!S.cutting) bar(xl, xr);
+  else if (S.blade < xr) bar(S.blade, xr);
+  if (typeof P.drawLine === 'function') {
+    ctx.save();
+    P.drawLine(ctx, { x: xl, y: S.yTop, w: xr - xl, h: S.th, state: S, color: C.accent }, P);
+    ctx.restore();
+  }
+  if (!S.cutting) return;
+  ctx.save();
+  ctx.beginPath(); ctx.rect(0, 0, S.blade, ctx.canvas.height); ctx.clip();
+  text(ctx, P.to.text, P.x, P.baseline, P.font, { color: C.accent, align: 'center' });
+  ctx.restore();
+};
 
 // phases as windows of p: press (cubic in), weight recovery (landing), bar grows (expo out), cut (expo in-out)
 const PHASES = {
@@ -30,6 +53,7 @@ export default {
     from: { text: 'tracewire' },
     to: { text: 'rewind' },
     line: { width: 8, gap: 6, above: 30, pad: 24, padTo: 10 },
+    drawLine: true,                      // false: the template draws the band; a function (ctx, band, P) draws it instead
     colors: { ground: '#0B0B0D', ink: '#EDEAE2', accent: '#EE4938' },
   },
   prepare(P) {
@@ -77,6 +101,7 @@ export default {
     }
     const xl = cx - S.half, xr = cx + S.half, lineBot = S.yTop + S.th;
     ctx.fillStyle = C.accent;
+    if (P.drawLine !== true && P.drawLine != null) return paintOwnLine(ctx, S, P, xl, xr);
     if (!S.cutting) { ctx.fillRect(xl, S.barTop, xr - xl, lineBot - S.barTop); return; }
     // right of the blade the bar is still solid; left of it only the word's glyphs and the line band remain
     if (S.blade < xr) ctx.fillRect(S.blade, S.barTop, xr - S.blade, lineBot - S.barTop);

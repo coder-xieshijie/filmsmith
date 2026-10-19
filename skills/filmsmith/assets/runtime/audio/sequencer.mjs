@@ -1,7 +1,7 @@
 // sequencer.mjs — Score: a fixed-length stereo timeline on the film's beat grid.
 // Named stereo buses, each with a mono reverb send. 'fx' (default for add) is never ducked; every other bus
 // ('music', and 'pump' which beds use for pads that breathe with the kick) counts as music for duck().
-// render() mixes dry + reverb, applies fades and a gentle limiter; write() saves a 24-bit WAV.
+// render() mixes dry + reverb, applies fades (a 60 ms fade-in by default) and a gentle limiter; write() saves a 24-bit WAV.
 
 import { SR, db, len, biquad, clamp } from './dsp.mjs';
 import { reverb, limit } from './fx.mjs';
@@ -40,7 +40,10 @@ export class Score {
     this.reverbOpts = rv;
     this.ceiling = ceiling;
     this.highpass = highpass;
-    this.fadeIn = 0;
+    // 60 ms: a film that opens on a hit (sample 0) made the render's AAC encode overshoot the true peak by 4–8 dB and
+    // the renderer lowered the whole mix by as much (thread and ink, 2026-10-19); the fade softens the first transient
+    // only. fade({ in }) can lengthen it (the longest request wins), never shorten it.
+    this.fadeIn = 0.06;
     this.fadeOut = 0.05;
     this.events = [];
     this._cache = new Map();
@@ -129,7 +132,7 @@ export class Score {
   // signal before the mix ('music' = every bus except 'fx'). Off unless called.
   eq(bus, bands) { this.eqs.push({ bus, bands }); return this; }
 
-  // fade({ in, out }) — seconds; the longest request wins.
+  // fade({ in, out }) — seconds; the longest request wins. Defaults: in 0.06, out 0.05.
   fade({ in: fi = 0, out: fo = 0 } = {}) { this.fadeIn = Math.max(this.fadeIn, fi); this.fadeOut = Math.max(this.fadeOut, fo); return this; }
 
   // addFile(path, t, { offset, gain, pan, send, bus }) — decode any audio file with ffmpeg and place it.

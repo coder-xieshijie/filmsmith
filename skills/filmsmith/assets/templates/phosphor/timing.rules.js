@@ -43,7 +43,8 @@
 // five bars; every composition inside it stays ≤ 6 s, which the T1 check enforces (lib/timing.js tiers).
 import { need, steps, exportEvents, plan } from './events.js';
 
-const t = (o) => ({ ...o, need: (s, g, ctx) => need(s, g, ctx.reading, ctx.scenes, ctx.i), steps: (s, g, ctx) => steps(s, g, ctx.reading, ctx.scenes, ctx.i) });
+// fillsSlack: every phosphor type fills the slack the grid adds with tail moves (dims on the beat), so the post-grid last-step check does not apply
+const t = (o) => ({ fillsSlack: true, ...o, need: (s, g, ctx) => need(s, g, ctx.reading, ctx.scenes, ctx.i), steps: (s, g, ctx) => steps(s, g, ctx.reading, ctx.scenes, ctx.i) });
 
 // The music's drops, for the keys' drop: true (check-film allows the loudness jump there). The same sections
 // score.mjs builds: a scene's music kind is its `music`, else MUSIC[type]; a drop scene with `musicRest` (a held
@@ -79,6 +80,7 @@ const events = (scenes, g, content) => {
 
 export default {
   api: 3,
+  devices: ['fibre-burst', 'glitch-cut', 'tunnel-fold'], // the mode's own T2 devices (crt-collapse is runtime/transitions')
   // 128 is the bed's written tempo and the source film's measured one; ±6 % keeps the 16th pulse from
   // dragging (below 120) or turning frantic (above 136), and keeps half-beat typing and counter steps
   // between 0.22 s and 0.25 s.

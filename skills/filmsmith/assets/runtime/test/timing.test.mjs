@@ -4,7 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fit, events, tiers, timingJson, readingStates, reader, TIMING_API, DEFAULTS } from '../timing.js';
+import { fit, events, tiers, timingJson, readingStates, reader, deviceNotes, TIMING_API, DEFAULTS } from '../timing.js';
 
 const errors = (notes) => notes.filter((n) => n.level === 'error');
 const has = (notes, re, level = 'error') => notes.some((n) => n.level === level && re.test(n.msg));
@@ -165,6 +165,60 @@ test('tiers T2: count per length, device repeats, back to back unchanged, two be
   assert.ok(has(tiers(d, DEFAULTS, 3).notes, /back to back unchanged/));
   d.expressive = [{ t: 4, dur: 1.5, device: 'ink-drop' }, { t: 14, dur: 1, device: 'dot-iris' }];
   assert.ok(has(tiers(d, DEFAULTS, 3).notes, /lasts 3 beats; at most 2/));
+});
+
+test('tiers T2 spacing: a gap over 12 s between two, or from the start or to the end, warns', () => {
+  const warns = (d) => tiers(d, DEFAULTS, 3).notes.filter((n) => n.tier === 'T2' && n.level === 'warn' && /without an expressive transition/.test(n.msg));
+  const d = good(); // 4, 14, 23 in 31 s: gaps 4, 10, 9, 8
+  assert.deepEqual(warns(d), []);
+  d.expressive = [{ t: 4, dur: 1, device: 'ink-drop' }, { t: 20, dur: 1, device: 'dot-iris' }, { t: 26, dur: 1, device: 'ink-drop', variant: 'close' }];
+  const mid = warns(d);
+  assert.equal(mid.length, 1);
+  assert.match(mid[0].msg, /^16 s between ink-drop at 4\.00 s and dot-iris at 20\.00 s/);
+  assert.equal(errors(tiers(d, DEFAULTS, 3).notes).length, 0); // spacing is shape, not an error
+  d.expressive = [{ t: 13, dur: 1, device: 'ink-drop' }, { t: 18, dur: 1, device: 'dot-iris' }];
+  const edges = warns(d).map((n) => n.msg);
+  assert.ok(edges.some((m) => /^13 s between the start of the film and ink-drop at 13\.00 s/.test(m)));
+  assert.ok(edges.some((m) => /^13 s between dot-iris at 18\.00 s and the end of the film/.test(m)));
+  d.expressive = [];
+  assert.deepEqual(warns(d), []); // no transitions at all: the count error says it
+  assert.equal(tiers(d, DEFAULTS, 2).notes.length, 1); // below api 3 still one INFO note
+});
+
+test('fit: after the grid, steps() runs again with ctx.dur; a type that reads it is checked as returned; fillsSlack skips', () => {
+  // one-bar grid at 120 BPM: a 1.05 s need becomes 2 s, 0.95 s of slack
+  const rules = (steps, extra = {}) => ({ api: 3, bpm: { default: 120 }, beatsPerBar: 4, unit: 1, phrase: 1,
+    types: { tail: { in: 1, out: 0.5, read: (s) => [s.text], steps, ...extra }, end: { in: 1, read: () => ['x.dev'], hold: 3, rest: true, absorb: true, reason: 'closing card' } } });
+  const content = { scenes: [{ type: 'tail', text: 'one' }, { type: 'end' }] };
+  const warn = (t) => t.notes.filter((n) => n.level === 'warn' && n.scene === 0 && /holds still/.test(n.msg));
+  // does not read ctx.dur: the slack is counted on the last step (0.8 + 0.95 s = 3.5 beats)
+  const plain = fit(content, rules(() => [0.8]));
+  assert.equal(plain.scenes[0].bars, 1);
+  assert.match(warn(plain)[0]?.msg ?? '', /the last step holds still 3\.50 beats once the grid are added; at most 2 beats/);
+  // reads ctx.dur (undefined while sizing) and fills the slack with a tail move: no warning
+  const seen = [];
+  const filled = fit(content, rules((s, g, ctx) => { seen.push(ctx.dur); return ctx.dur == null ? [0.8] : [0.8, ctx.dur - 1.05] /* 1.9 beats */; }));
+  assert.deepEqual(seen, [undefined, 2]);
+  assert.deepEqual(warn(filled), []);
+  // reads ctx.dur and really holds: warned at the fitted length, per step
+  const held = fit(content, rules((s, g, ctx) => [0.8 + (ctx.dur == null ? 0 : ctx.dur - 1.05)]));
+  assert.match(warn(held)[0]?.msg ?? '', /step 1 holds still 3\.50 beats at the scene's fitted length/);
+  // fillsSlack: true: not checked here
+  assert.deepEqual(warn(fit(content, rules(() => [0.8], { fillsSlack: true }))), []);
+  // the first pass is unchanged: a step over two beats at the need is still an error
+  assert.ok(has(fit(content, rules(() => [1.2], { fillsSlack: true })).notes, /step 1 holds still 2\.40 beats/));
+});
+
+test('deviceNotes: library ids and the rules\' own devices are known; anything else warns', () => {
+  const ex = [{ device: 'ink-drop' }, { device: 'plakat-accent-wipe' }, { device: 'glitch-cut' }, { device: 'ink-drop' }];
+  const known = new Set(['ink-drop', 'dot-iris']);
+  const without = deviceNotes(ex, known, {});
+  assert.deepEqual(without.map((n) => n.msg.match(/"([^"]+)"/)[1]), ['plakat-accent-wipe', 'glitch-cut']);
+  assert.ok(without.every((n) => n.level === 'warn'));
+  assert.deepEqual(deviceNotes(ex, known, { devices: ['plakat-accent-wipe', 'glitch-cut'] }), []);
+  const bad = deviceNotes(ex, known, { devices: 'glitch-cut' });
+  assert.ok(bad.some((n) => /rules\.devices must be an array/.test(n.msg)));
+  assert.equal(bad.filter((n) => /is not an id/.test(n.msg)).length, 2);
 });
 
 test('tiers T3: two or three peaks, one climax at 60–85 %', () => {

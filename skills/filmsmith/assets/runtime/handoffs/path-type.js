@@ -2,6 +2,10 @@
 // letters along its arc length; the text runs round the loop and out of the far end while the next sentence follows it
 // in from the near end; the loop opens back into a straight baseline under the new sentence. Text is readable only
 // while the line is straight. Theory: good continuation (Wertheimer 1923). references/transitions.md#path-type.
+// A template whose line is not an even stroke (thread's swelled rule) passes `line: false` and draws the line itself, or
+// `drawLine(ctx, geometry, P)`, called where the module would stroke it: geometry = { pts (the bent line, 481 points),
+// along(s) → [x, y, angle] at arc length s, b (0 straight … 1 full loop), radius (R·b), y0 (the straight line's y),
+// x, length, lineWidth, color }. The letters are drawn after it either way.
 
 import { seg, smooth, clamp, cubicInOut, fontOf, scratch, ground } from './util.js';
 
@@ -68,6 +72,8 @@ export default {
     length: 1560, radius: 190,           // line length, full loop radius
     lift: 14,                            // letters' baseline above the line
     lineWidth: 6,
+    line: true,                          // false: the module does not draw the line (the template does)
+    drawLine: null,                      // (ctx, geometry, P) => draws the line instead of the module's even stroke
     font: { family: 'sans-serif', weight: 600, size: 78, spacing: -1 },
     colors: { ground: '#0B0B0D', ink: '#EDEAE2', accent: '#EE4938' },
   },
@@ -88,10 +94,16 @@ export default {
     ground(ctx, P);
     const C = P.colors, L = P.length, cx = P.x;
     const { y0, pts, along, o2 } = layout(S, P, D);
-    ctx.beginPath();
-    pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
-    ctx.strokeStyle = C.accent; ctx.lineWidth = P.lineWidth; ctx.lineJoin = 'round'; ctx.lineCap = 'butt';
-    ctx.stroke();
+    if (typeof P.drawLine === 'function') {
+      ctx.save();
+      P.drawLine(ctx, { pts, along, b: S.b, radius: P.radius * S.b, y0, x: cx, length: L, lineWidth: P.lineWidth, color: C.accent }, P);
+      ctx.restore();
+    } else if (P.line !== false) {
+      ctx.beginPath();
+      pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
+      ctx.strokeStyle = C.accent; ctx.lineWidth = P.lineWidth; ctx.lineJoin = 'round'; ctx.lineCap = 'butt';
+      ctx.stroke();
+    }
     // Letters by their centre's arc length, turned to the tangent. No glyph may land on another, so each stretch draws
     // through its own hard mask: left tail only left of the tangent point, right tail only right of it, the loop only
     // through a wedge around its bottom (closed while the loop is too small to carry letters).

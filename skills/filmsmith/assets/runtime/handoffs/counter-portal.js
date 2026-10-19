@@ -2,6 +2,8 @@
 // from the first frame; the camera pushes into the counter (exponential zoom, the counter sliding to frame centre, the
 // far scene growing slower: parallax) until the counter is the frame. Theory: the title-design zoom-through; a window
 // present from frame one is a preview, not a surprise. references/transitions.md#counter-portal.
+// glyph.draw: 'counter' draws only the letter that carries the counter (at its place in glyph.text), so the template's
+// `from` painter can draw the other letters itself (in another face, colour or motion); default 'all' draws the text.
 
 import { seg, bez, measure, scratch, canvasOf, text, ground } from './util.js';
 
@@ -20,7 +22,7 @@ export default {
   summary: 'The next scene waits inside a letter\'s counter; the camera pushes through the counter until it is the frame.',
   theory: 'The zoom-through of title design; z-axis motion shared by both scenes; the window is visible from the first frame, so it previews.',
   defaults: {
-    glyph: { text: '2.0', counter: null, counterAt: [0.5, 0.5] },   // counter: index of the char (default: the last with a counter)
+    glyph: { text: '2.0', counter: null, counterAt: [0.5, 0.5], draw: 'all' },   // counter: index of the char (default: the last with a counter); draw: 'all' | 'counter'
     x: 96, baseline: 990,
     font: { family: 'sans-serif', weight: 900, size: 760, spacing: -30 },
     parallax: 0.55,                      // the far scene's growth exponent (1 = no parallax)
@@ -69,7 +71,7 @@ export default {
         S = Math.max(S, Math.hypot(dx, dy) / rAt(Math.atan2(dy, dx)));
       }
     }
-    return { Cx, Cy, rho, N, S: S * 1.03 };
+    return { Cx, Cy, rho, N, S: S * 1.03, ci, ch, x0 };
   },
   rest(side) { return { w: side === 'from' ? 0 : 1 }; },
   at(p) { const w = seg(p, 0, 0.94); return { w: w >= 1 ? 1 : ZEASE(w) }; },   // lands a frame or two early: still by p = 1
@@ -98,7 +100,8 @@ export default {
     ctx.restore();
     // scene A's ink: the glyph and the template's other marks
     aT();
-    text(ctx, P.glyph.text, P.x, P.baseline, P.font, { color: C.ink });
+    if (P.glyph.draw === 'counter') text(ctx, D.ch, D.x0, P.baseline, P.font, { color: C.ink });
+    else text(ctx, P.glyph.text, P.x, P.baseline, P.font, { color: C.ink });
     if (P.from) P.from(ctx, P);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   },

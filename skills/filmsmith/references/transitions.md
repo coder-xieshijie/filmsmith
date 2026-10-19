@@ -310,7 +310,7 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Looks**: the mode's line drops from above a word to just under its baseline and presses the word into itself; the line takes the word's weight (thickens) and recovers. Then (`cut`) the line thickens upward into a bar the height of the next word, and a blade crossing left to right cuts the bar into that word, leaving the line under it.
 - **Tier**: T2.
 - **Use**: a name becoming a line (the product's name pressed into the reel's thread), and a line becoming the next name. **Not for**: a sentence (one word at a time).
-- **Parameters**: `phase` `both` (2 beats) | `press` (1) | `cut` (1); `from.text`, `to.text`; `x` 960, `baseline` 600; `font`; `line` `{ width 8, gap 6, above 30, pad 24, padTo 10 }`. Roles: `ground`; `ink` (the pressed word); `accent` (the line, the bar and the cut word: the mode's line colour, e.g. thread `line`, morph `accent`).
+- **Parameters**: `phase` `both` (2 beats) | `press` (1) | `cut` (1); `from.text`, `to.text`; `x` 960, `baseline` 600; `font`; `line` `{ width 8, gap 6, above 30, pad 24, padTo 10 }`; `drawLine` `false` (the template draws the line itself) or `(ctx, band, P)` (draw it in the template's own shape, e.g. thread's swelled line); the word and the bar above the band are still the module's. Roles: `ground`; `ink` (the pressed word); `accent` (the line, the bar and the cut word: the mode's line colour, e.g. thread `line`, morph `accent`).
 - **Theory**: good continuation (Wertheimer 1923) and object constancy (Heer & Robertson 2007): the line never leaves the screen; the word becomes part of it, then comes out of it.
 - **Modes**: thread, morph, plakat.
 - **Length and easing**: press cubic in, weight recovery a landing spring, bar expo out, cut expo in-out ending at p = 0.97.
@@ -387,7 +387,7 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Looks**: a sentence lies on the line. The line rolls up a loop from its middle (its length kept), carrying the letters along its arc; the text runs round the loop and out of the far end while the next sentence follows it in; the loop opens back into a straight baseline under the new sentence. Letters show only through hard masks, so no glyph ever lands on another.
 - **Tier**: T2.
 - **Use**: when the loop is the content (a retry, a cycle, a round trip). Text is read only while the line is straight; the bend is the change.
-- **Parameters**: `from.text`, `to.text`; `x` 960, `y` 560; `length` 1560, `radius` 190; `lift` 14; `lineWidth` 6; `font`. Roles: `ground`, `ink` (letters), `accent` (the line).
+- **Parameters**: `from.text`, `to.text`; `x` 960, `y` 560; `length` 1560, `radius` 190; `lift` 14; `lineWidth` 6; `font`; `line: false` (no line) or `drawLine(ctx, geometry, P)` (the template draws it along the same path). Roles: `ground`, `ink` (letters), `accent` (the line).
 - **Theory**: good continuation (Wertheimer 1923): the eye stays on the line through the bend.
 - **Modes**: thread, trace.
 - **Length and easing**: 2 beats (the approved sample ran 4; pass a longer length if the sentences are long); bend and open smootherstep, flow cubic in-out, the loop gone by p = 0.95.
@@ -497,7 +497,7 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Looks**: the next scene is visible from the first frame inside a letter's counter (the 0 of a version number, an O, a D); the camera pushes into the counter, exponentially, the counter sliding to the frame's centre and the far scene growing more slowly (parallax), until the counter is the frame.
 - **Tier**: T2.
 - **Use**: a counter in the product's own name or version number; the far scene is the number's meaning. **Not for**: letters without a closed counter.
-- **Parameters**: `glyph` `{ text, counter (index; default the last letter with a counter), counterAt [0.5, 0.5] }`; `x` 96, `baseline` 990; `font`; `parallax` 0.55; painters `from(ctx, params)` (scene A's other marks, no ground) and `to(ctx, params)` (scene B; its ground is filled for it). Roles: `ground` (A's paper), `ink` (the glyph), `portal` (B's ground: plakat's red).
+- **Parameters**: `glyph` `{ text, counter (index; default the last letter with a counter), counterAt [0.5, 0.5], draw }` (`draw: 'counter'` paints only the glyph that carries the counter, so `from` can lay out and exit the rest); `x` 96, `baseline` 990; `font`; `parallax` 0.55; painters `from(ctx, params)` (scene A's other marks, no ground) and `to(ctx, params)` (scene B; its ground is filled for it). Roles: `ground` (A's paper), `ink` (the glyph), `portal` (B's ground: plakat's red).
 - **Theory**: the zoom through a letter of title design; motion along the shared z-axis; a window visible from the first frame previews the change instead of surprising.
 - **Modes**: plakat, ink, pulse.
 - **Length and easing**: 1.5 beats; cubic-bezier (0.7, 0, 0.3, 1) on a log scale of zoom, landed at p = 0.94.
