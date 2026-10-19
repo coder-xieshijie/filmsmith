@@ -1,0 +1,20 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax of every script and runtime module
+        run: |
+          find scripts assets/runtime assets/templates -name '*.mjs' -o -name '*.js' | grep -v '/test/' | while read -r f; do node --check "$f" || exit 1; done
+      - name: Timing runtime tests
+        run: node --test assets/runtime/test/timing.test.mjs

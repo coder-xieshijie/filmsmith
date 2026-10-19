@@ -1,0 +1,21 @@
+name: Style or transition request
+description: Propose a new style (mode), a variant, or a transition.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: content
+    attributes:
+      label: What kind of content needs it
+      description: A new style has to point at a kind of technical content none of the ten covers (principle 9 in references/principles.md).
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Films, pages or prints that show the look or the move. Name what you would borrow (the grammar) and what you would not (an author's layout, palette, motifs).
+  - type: textarea
+    id: theory
+    attributes:
+      label: Why it works
+      description: The perceptual, physical or design-history reason, if you know one.

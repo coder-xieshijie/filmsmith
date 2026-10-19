@@ -1,0 +1,32 @@
+name: Bug report
+description: A film fails to scaffold, fit, render or pass check-film, or renders wrong.
+labels: [bug]
+body:
+  - type: input
+    id: mode
+    attributes:
+      label: Style (mode) and palette
+      placeholder: "ink, cobalt"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The command you ran, what you expected and what you got. Attach a still or the contact sheet for visual problems.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The relevant part of `npm run fit`, `npm run film` or `check-film` output.
+      render: text
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Node version, FFmpeg version, and the output of `node scripts/selftest.mjs --modes <mode>`.
+      render: text
+    validations:
+      required: true

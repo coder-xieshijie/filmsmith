@@ -68,3 +68,4 @@
 - audio: the `diagram` bed's call bar ends with a soft pickup on its fourth beat, so a landing on the next bar no longer jumps +6 LU.
 - templates: `render` takes `--workers ${HF_WORKERS:-auto}` so a shared machine can cap render workers.
 - handoffs: `rail-press` `drawLine`, `path-type` `line: false` / `drawLine`, `counter-portal` `glyph.draw: 'counter'`; defaults unchanged, verified pixel for pixel.
+- The repository root is now the skill (`SKILL.md`, `references/`, `assets/`, `scripts/`); the `skills/filmsmith/` level is gone. The README gains badges, a still of all ten styles (`assets/showcase.jpg`), install and update messages to send to an agent, and example requests; `.github/` adds issue and pull-request templates and a CI check.
