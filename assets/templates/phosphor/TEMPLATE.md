@@ -119,6 +119,8 @@ A scene with a `chapter` gets a chapter card: number `nn / NN` (counted automati
 
 Limits are characters unless they say words. Character limits are measured against the layout at the type sizes of the mode card; text that does not fit prints a red banner naming the slot and does not shrink below 25 px (display slots shrink a little first). Word limits keep every state inside api 3's five words and every type inside its ceiling at 120–136 BPM (checked with worst-case copy, 2026-10-19); glance slots are six words at most. Rewrite shorter instead of fighting the banner. The 12-words-a-page budget of 2026-10-18 is gone (api 3 counts words per state).
 
+A slot written as a pair or a list that enters at one moment is read as one sentence: its parts are joined with spaces before the words are counted, so a word limit marked "together" is for the whole pair (`flow.command`, `run.key`, `compare.meta`, `decide.confirm`), and so is "each" on a list of pairs (`install.steps`: command + label ≤ 6 words, `audit.rows`: `word` + `bad`). A two-part `title` (`ends`, `install`) is set on one line with a space between the parts (a space already at the join is kept). `npm run fit` checks the shapes the code indexes into before they turn into a bare TypeError: `window` is an array `[title, right label]`, `ends.title` and `install.title` are arrays of two strings, `run.key` an object `{ mark, text }`, `run.stream` an object `{ count, line }`, `run.after` an array (`after: ['…']`, not a string).
+
 **boot** — `prompt` 40 (mono, after `› `; typed and read in chunks of five words) · `question` 30, ≤ 5 words (display, one line) · `stress` one word of `question` · `problems` 0–3 × `[WORD, note]`, each ≤ 3 words (*api 3*: was 22 characters), together ≤ 22 characters on one row.
 
 **audit** — `command` 56 · `fix` 60 · `rows` 4 × `{ word 12, bad 14, good 34 }`, `word` + `bad` and `word` + `good` ≤ 5 words each.
@@ -137,15 +139,15 @@ Limits are characters unless they say words. Character limits are measured again
 
 **compare** — `left` / `right` `{ label 16, name 14 (≤ 2 words), desc 28 (≤ 6 words), items 3 × 28 }` · `middle` `{ label 14, name 10 (1 word), desc 14, may hold `{head}` }` · `counter` `{ label 16 (≤ 3 words), items 1–8 ids, verdict 6 }` (N = number of items; one step per half beat) · `meta` 1–2 × 40, ≤ 5 words together (they enter together).
 
-**run** — `window` `[30, 20]` (the command that runs, the project) · `stream` `{ count 1–60, line }`: the lines before the key line; `line` is a pattern with `{n}` (run number), `{seed}` (6 hex digits from the film's seed) and `{ms}` (a time from the film's seed), ≤ 60 characters, never read · `key` `{ mark 6, text 40 }`, ≤ 5 words together: the line it brakes on; a mark of `FAIL`, `ERR` or `✕` (or `status: 'fail'`) takes `bad`, anything else the accent (passed) · `after` 0–1 × 48, ≤ 6 words: what the tool did with the key line.
+**run** — `window` `[30, 20]` (the command that runs, the project) · `stream` `{ count 1–60, line }`: the lines before the key line; `line` is a pattern with `{n}` (run number), `{seed}` (6 hex digits from the film's seed) and `{ms}` (a time from the film's seed), each replaced wherever it occurs, ≤ 60 characters, never read · `key` `{ mark 6, text 40 }`, ≤ 5 words together: the line it brakes on; a mark of `FAIL`, `ERR` or `✕` (or `status: 'fail'`) takes `bad`, anything else the accent (passed) · `after` an array of 0–1 strings × 48, ≤ 6 words: what the tool did with the key line.
 
 **pick** — `window` `[30, 20]` · `question` 40, ≤ 5 words · `candidates` 2–6 labels × 12 (≤ 2 words each) · `answer` one of the candidates · `laps` 0 or 1 (default 1; with `laps: 1` at most 4 candidates) · `result` 40, ≤ 5 words (resolves left to right).
 
 **scope** — `window` `[30, 20]` · `runs` 2–100 (the time base: one blip per run) · `from` `{ failed: [run numbers], label ≤ 5 words }`: the old trace and its reading · `to` `{ failed: [run numbers], label ≤ 7 words }`: the new trace and the reveal (read in a pause) · `beats` optional, the beam's hand-off (default 1.5, ≤ 2 as a T2 device). The labels must agree with the traces (README: the number of failed runs is not computed for you).
 
-**ends** — `title` `[first part, last part]` 28 together, ≤ 5 words · `sub` ≤ 6 words · `nodes` 4–6 × `{ tag 8, name 8, sub 16 }` (mark the first and last `you: true`) · `bracket` ≤ 6 words · `loop` ≤ 6 words.
+**ends** — `title` `[first part, last part]` 28 together, ≤ 5 words, one line (a space joins the parts) · `sub` ≤ 6 words · `nodes` 4–6 × `{ tag 8, name 8, sub 16 }` (mark the first and last `you: true`) · `bracket` ≤ 6 words · `loop` ≤ 6 words.
 
-**install** — `title` `[plain, rest]` 30, ≤ 3 words · `window` `[24, 20]` · `commands` ≤ 2 × 40, ≤ 4 words each · `steps` ≤ 4 × `[command 18, label 20]`, each ≤ 6 words.
+**install** — `title` `[plain, rest]` 30, ≤ 3 words, one line (a space joins the parts) · `window` `[24, 20]` · `commands` ≤ 2 × 40, ≤ 4 words each · `steps` ≤ 4 × `[command 18, label 20]`, command + label ≤ 6 words together (a pair is one glance item).
 
 **horizon-tagline** — `lines` 2 × 20, ≤ 6 words together (the 2026-10-18 warning above 128 BPM is gone: a pause may hold two bars) · `stress` one word of line 2 (set 1.12 × larger).
 

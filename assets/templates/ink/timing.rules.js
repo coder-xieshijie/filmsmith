@@ -369,10 +369,15 @@ for (const r of Object.values(rules.types)) r.events = withDrop(r.events);
 //                  film without a name or claim marks its opening as the hook
 // plan.js imports these rules, so it is loaded when events() first runs (lib/fit.mjs awaits validate() first).
 let planOf = null;
+// When the plan cannot be built, fit or validate has already reported why: the tiers are skipped (lib/timing.js
+// events() reads `skip`) rather than measured on no events at all.
 rules.events = (scenes, g, content) => {
-  if (!planOf) return {};
+  if (!planOf) return { skip: 'plan.js is not loaded (lib/fit.mjs loads it through validate())' };
   let P;
-  try { P = planOf(content); } catch { return {}; } // fit or validate already reports why
+  try { P = planOf(content); } catch (e) {
+    const head = String(e?.message ?? e).split('\n')[0].replace(/:$/, '');
+    return { skip: `plan.js could not build the film (${head.startsWith('timing') ? 'fit reports an error' : head.startsWith('content.js') || head.startsWith('reading time') ? `${head} errors` : head})` };
+  }
   return P.tiers;
 };
 
@@ -383,7 +388,8 @@ rules.validate = async (content) => {
   planOf = plan;
   try { plan(content); return []; } catch (e) {
     const msg = String(e?.message ?? e);
-    return msg.startsWith('content.js') ? msg.split('\n').slice(1).map((l) => l.trim()) : msg.startsWith('reading time') ? msg.split('\n').slice(1).map((l) => l.trim()) : [];
+    if (msg.startsWith('content.js') || msg.startsWith('reading time')) return msg.split('\n').slice(1).map((l) => l.trim());
+    return msg.startsWith('timing (npm run fit)') ? [] : [`plan.js: ${msg}`]; // fit() reports its own errors
   }
 };
 // plan.js registers itself when it is imported first (the page, score.mjs)

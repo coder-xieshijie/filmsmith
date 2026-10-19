@@ -23,18 +23,22 @@ const content = await load('content.js');
 const rules = await load('timing.rules.js');
 const t = fit(content, rules);
 // A template may give validate(content) (sync or async) on its rules: each returned string (or a thrown error) is an error of the
-// film, so copy over a slot's limit stops here instead of at render time.
+// film, so copy over a slot's limit stops here instead of at render time. Its errors are listed first: they name the slot,
+// where a scene's callback that tripped over the same slot can only quote the exception.
 if (typeof rules.validate === 'function') {
-  try { for (const msg of (await rules.validate(content)) ?? []) t.notes.push({ level: 'error', msg }); }
-  catch (e) { t.notes.push({ level: 'error', msg: String(e?.message ?? e) }); }
+  const v = [];
+  try { for (const msg of (await rules.validate(content)) ?? []) v.push({ level: 'error', msg }); }
+  catch (e) { v.push({ level: 'error', msg: String(e?.message ?? e) }); }
+  t.notes.unshift(...v);
 }
 
-// Key events: a throwing events() is an error of the film, not a crash of the tool.
+// Key events: a throwing events() is an error of the film, not a crash of the tool. events() itself turns a
+// mode's throwing events() into an error naming the scene and skips the tiers; this catch is for the rest.
 let ev;
 try {
   ev = events(t);
 } catch (e) {
-  ev = { keys: [], holds: [], handoffs: [], mask: null, micro: [], shots: [], expressive: [], peaks: [], notes: [] };
+  ev = { keys: [], holds: [], handoffs: [], mask: null, micro: [], shots: [], expressive: [], peaks: [], notes: [], tiersSkipped: 'events() threw' };
   t.notes.push({ level: 'error', msg: `events() threw: ${e?.stack?.split('\n').slice(0, 3).join(' | ') ?? e}` });
 }
 for (const n of ev.notes) t.notes.push(n);

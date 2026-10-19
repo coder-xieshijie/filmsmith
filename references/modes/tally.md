@@ -8,6 +8,8 @@ Theme: tech-explainer · Template: `assets/templates/tally/` · Length follows c
 Fits: counts of many items (40–2,000) — how many, which kinds, what share, which subset, how it changed over a few periods; dataset or survey stories; a Proof section built from real counts.
 Does not fit: continuous measures (latency, revenue, temperature) — squares only count; a single headline number (use ink or phosphor); more than ~2,000 items (squares fall under 3 px); stories that need a map or a line over many time steps; anything whose numbers cannot be computed in the project.
 
+Limits that shape the plan (`TEMPLATE.md` slots): `columns` and `share` show at most 9 bands, the folded rest band included, so "every one of 24 kinds" becomes 8 bands + one rest band; a per-item ledger goes to `list`, which keeps about 8 lines readable at the lock (the key, 3 above, 4 below; with `key: 'last'` only the key and 3 above) and streams the rest past unread; `timeline` takes ≤ 24 periods; `axis` 2–8 series; `close` 1–3 numbers, beads only for ≤ ~56 items.
+
 ## Use cases
 
 What the squares are made for: one public list of items, each with a field that sorts it, where the story is which group is large and which one matters (2026-10-19).
@@ -200,7 +202,7 @@ What the template produces untouched. A film's `PLAN.md` ban list starts here; t
 - The closing light falls while the closing line is still being read (at least a beat after it enters); a long closing line therefore reads under the beads' move.
 - The glints are a template choice to keep API 3's 2-beat holds on long reading windows; they have not been seen by the owner. If they read as fidgeting, the alternative is shorter copy per scene.
 - The device sounds (roulette ticks, stream roll, re-encode swell, step ticks, flip roll, dither glitch, glint pluck, the climax impact) were checked by levels only, not by ear.
-- A `trend` after a `timeline` with an accent returns the lit squares to `rest`; its `highlight` defaults to "trend" (set it). `list` shows at most about 9 lines at a time; a key line over 5 words is an error (choose another key).
+- A `trend` after a `timeline` with an accent returns the lit squares to `rest`; its `highlight` defaults to "trend" (set it). `list` keeps about 8 lines readable when it locks (3 above the key, 4 below), fewer with `key: 'last'`; a key line over 5 words is an error (choose another key).
 - The step-wipe works only from `columns` into `timeline`, the one pair whose staircase is real data in this template (the column counts); other pairs fall back to the plain flight (validate reports it).
 - During a frame-level entry the incoming frame is live (its title enters at beat 0.25 inside the flip); the outgoing frame is the old chapter's last full frame, frozen.
 - `hyperframes lint` warned at 360 lines of `index.html`; the squares moved to `squares.js` (264 lines now, 0 warnings).

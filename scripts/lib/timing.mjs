@@ -5,7 +5,8 @@
 //     pad, phraseShare, reading: { primary, glance }, rest, turn, climax, reason? }], keys: [{ t, kind, scene }],
 //     holds: [{ from, to, scene, pause? }], handoffs: [{ t, scene }], mask: [x, y, w, h], notes,
 //     micro: [{ t }], shots: [{ t }], expressive: [{ t, dur, device, variant }], peaks: [{ t, kind, climax }],
-//     tiers, limits: { maxStillBars, lastStillBars, holdMaxBeats, ... }, accent? }
+//     tiers, tiersSkipped?, limits: { maxStillBars, lastStillBars, holdMaxBeats, ... }, accent? }
+// tiersSkipped: why fit skipped the tier checks (a scene's callback threw, or the mode could not build its events).
 // rulesApi (missing in api 2 files: 2) is the api the template's rules declare; ≥ 3 makes the tier checks FAIL.
 // Fallback for films made before it: content.js (+ timing.rules.js and lib/timing.js fit()) gives tempo,
 // length and the scene table, but no events, holds, handoffs or mask; checks built on those report N/A.
@@ -42,6 +43,7 @@ const normalise = (t, warnings) => {
     api: t.api ?? null, rulesApi: num(t.rulesApi) ?? (t.api === 2 ? 2 : null), duration: num(t.duration), bpm, beatsPerBar, beat, bar: beat ? beat * beatsPerBar : null,
     t0: num(t.t0) ?? 0, unit: num(t.unit), scenes, keys, holds, handoffs, mask, micro, shots, expressive, peaks, limits: t.limits ?? null,
     maxStillBars: num(t.limits?.maxStillBars) ?? num(t.maxStillBars) ?? 1, lastStillBars: num(t.limits?.lastStillBars) ?? num(t.lastStillBars) ?? 1.5, accent: t.accent ?? null, notes: t.notes ?? [],
+    tiersSkipped: typeof t.tiersSkipped === 'string' ? t.tiersSkipped : null,
   };
 };
 

@@ -310,10 +310,16 @@ const sizeScenes = (scenes, rules, bpm, content) => {
   const stepCap = (k, n, pause) => (v3 ? (pause ? o.pauseMaxBars : o.holdMaxBeats / beatsPerBar) : k === n - 1 ? o.lastStillBars : o.maxStillBars);
   const sceneMax = Math.max(unit, Math.floor(o.sceneMaxSec / bar / unit + 1e-9) * unit); // api 3 default ceiling, bars
   const ctxs = []; // per scene: the type and the ctx steps() was called with, for the check at the fitted length
+  const failed = []; // callbacks that threw: { scene, type, fn, msg }
+  const threw = (i, type, fn, e) => {
+    const msg = String(e?.message ?? e).split('\n')[0];
+    failed.push({ scene: i, type, fn, msg });
+    notes.push({ level: 'error', scene: i, msg: `${type}: ${fn} threw: ${msg}` });
+  };
   const sized = scenes.map((s, i) => {
     const r = rules.types?.[s.type];
     const ctx = { i, scenes, prev: scenes[i - 1], next: scenes[i + 1], content, lang };
-    if (!r) { notes.push({ level: 'error', scene: i, msg: `unknown scene type "${s.type}"` }); return { ...s, bars: s.bars ?? 1, need: 0, timing: { pad: 0, phraseShare: 0, reading: { primary: 0, glance: 0 }, rest: false, turn: false, climax: false } }; }
+    if (!r) { notes.push({ level: 'error', scene: i, msg: `unknown scene type "${s.type}"` }); failed.push({ scene: i, type: s.type, fn: 'type', msg: 'unknown scene type' }); return { ...s, bars: s.bars ?? 1, need: 0, timing: { pad: 0, phraseShare: 0, reading: { primary: 0, glance: 0 }, rest: false, turn: false, climax: false } }; }
 
     if (s.rest !== undefined && typeof s.rest !== 'boolean') notes.push({ level: 'warn', scene: i, msg: `${s.type}: field "rest" is ${JSON.stringify(s.rest)}; only rest: true marks a rest, so rename this field (it no longer lifts the ceiling)` });
     const rest = r.rest === true || s.rest === true;
@@ -328,14 +334,22 @@ const sizeScenes = (scenes, rules, bpm, content) => {
       for (const d of res.demoted) if (!seen.has(d)) { seen.add(d); notes.push({ level: 'warn', scene: i, msg: `${s.type}: glance text "${d}" has more than ${o.glanceMaxWords} words; counted as primary (shorten it or delete it)` }); }
       return res;
     };
-    const base = read(r.read ? r.read(s, ctx) : []);
+    let listed = [];
+    try { listed = r.read ? r.read(s, ctx) : []; } catch (e) { threw(i, s.type, 'read()', e); }
+    const base = read(listed);
     const reading = (list, extra) => { const res = read(list, extra); calls.push(res); return res; };
     const full = { ...ctx, read: base.primary, wordSec: o.wordSec, reading };
     ctxs[i] = { r, s, full };
 
-    const need = r.need
-      ? r.need(s, g, full)
-      : ((r.in ?? 1) + (r.out ?? 0)) * beat + Math.max(base.end, r.hold ?? 0) + (r.extra ? r.extra(s, g, ctx) : 0);
+    // A callback that throws is an error of this scene (named, with the message), not a crash of fit(); the tier
+    // checks are skipped for the film (events() reads `failed`), since they would run on a scene that was never built.
+    let need;
+    try {
+      need = r.need
+        ? r.need(s, g, full)
+        : ((r.in ?? 1) + (r.out ?? 0)) * beat + Math.max(base.end, r.hold ?? 0) + (r.extra ? r.extra(s, g, ctx) : 0);
+    } catch (e) { need = 0; threw(i, s.type, r.need ? 'need()' : 'extra()', e); }
+    if (!Number.isFinite(need)) { threw(i, s.type, r.need ? 'need()' : 'extra()', new Error(`returned ${need}, not a number of seconds`)); need = 0; }
     const used = calls.length ? calls : [base];
     // from: 'reader' when need() read through ctx.reading() or the default formula ran; 'read' when a
     // need() override ignored the reader and the table can only show what read() lists
@@ -366,8 +380,10 @@ const sizeScenes = (scenes, rules, bpm, content) => {
 
     // steps: the still hold after each step, each ≤ maxStillBars (api 3: ≤ holdMaxBeats, a pause ≤ pauseMaxBars)
     let still = null, pause = null;
-    if (r.steps) {
-      const raw = r.steps(s, g, full) || [];
+    let raw = null;
+    const broken = failed.some((f) => f.scene === i); // need() or read() threw: steps() would only repeat it
+    if (r.steps && !broken) try { raw = r.steps(s, g, full) || []; } catch (e) { threw(i, s.type, 'steps()', e); }
+    if (raw) {
       still = raw.map((x) => Number(x && typeof x === 'object' ? x.still : x));
       pause = raw.map((x) => !!(x && typeof x === 'object' && x.pause === true));
       if (!rest) still.forEach((x, k) => {
@@ -477,7 +493,7 @@ const sizeScenes = (scenes, rules, bpm, content) => {
   // events() holds and the T0 gaps measure it).
   sized.forEach((s, i) => {
     const T = s.timing, C = ctxs[i];
-    if (!T || T.rest || !T.still?.length || C?.r?.fillsSlack === true) return;
+    if (!T || T.rest || !T.still?.length || C?.r?.fillsSlack === true || failed.some((f) => f.scene === i)) return;
     const dur = s.bars * bar, slack = dur - s.need;
     if (slack <= 1e-6) return; // nothing added: the holds were checked at the need
     const extra = [T.phraseShare && 'the phrase share', T.pad && "the turn's pad"].filter(Boolean);
@@ -487,7 +503,7 @@ const sizeScenes = (scenes, rules, bpm, content) => {
     let used = false, raw = null;
     const c = { ...C.full };
     Object.defineProperty(c, 'dur', { get: () => { used = true; return dur; }, enumerable: false });
-    try { raw = C.r.steps(C.s, g, c) || []; } catch (e) { notes.push({ level: 'warn', scene: i, msg: `${s.type}: steps() threw at the fitted length (${String(e?.message ?? e)})` }); return; }
+    try { raw = C.r.steps(C.s, g, c) || []; } catch (e) { threw(i, s.type, 'steps() at the fitted length', e); return; }
     if (used) {
       const still = raw.map((x) => Number(x && typeof x === 'object' ? x.still : x));
       const pause = raw.map((x) => !!(x && typeof x === 'object' && x.pause === true));
@@ -509,7 +525,7 @@ const sizeScenes = (scenes, rules, bpm, content) => {
   // below api 3 the reading measures go into events()' INFO note, not into fit()'s notes (templates log those)
   const previewMsg = !v3 && (preview.states.length || preview.steps) ? `reading: ${preview.states.length} scene(s) with a state over ${o.stateWords} primary words${preview.states.length ? ` (${preview.states.slice(0, 6).join(', ')}${preview.states.length > 6 ? ', …' : ''})` : ''}, ${preview.steps} step hold(s) over ${o.holdMaxBeats} beats` : null;
 
-  return { sized, notes, g, previewMsg };
+  return { sized, notes, g, previewMsg, failed };
 };
 
 // fit(content, rules) → { api, rulesApi, bpm, beat, bar, beatsPerBar, unit, phrase, scenes, bars, duration, notes }
@@ -565,17 +581,19 @@ export const fit = (content, rulesOrFn) => {
   Object.defineProperty(t, 'limits', { value: o, enumerable: false });
   Object.defineProperty(t, 'content', { value: content, enumerable: false });
   Object.defineProperty(t, 'preview', { value: best.previewMsg ?? null, enumerable: false });
+  Object.defineProperty(t, 'failed', { value: best.failed, enumerable: false }); // callbacks that threw (events() skips the tiers)
   return t;
 };
 
 // ---------- events and renders/timing.json ----------
 
-// events(t) → { keys, holds, handoffs, mask, micro, shots, expressive, peaks, tiers, notes }
+// events(t) → { keys, holds, handoffs, mask, micro, shots, expressive, peaks, tiers, tiersSkipped?, notes }
 // Sources: rules.events(scenes, g, content) with absolute times, and per type events(s, g, ctx) with times
 // in seconds from the scene start (ctx = { i, scenes, content }). A key may carry drop: true (the music's
 // drop, where check-film allows the loudness jump). Every turn scene's start is a key of kind
 // 'turn' whether or not the mode exports events. Keys must sit on a beat (± keyFrames frames); turn and
-// claim keys on a bar line. Throws when a mode's events() throws (lib/fit.mjs reports it).
+// claim keys on a bar line. An events() that throws is an error note naming the scene, and the tiers are then
+// skipped (tiersSkipped says why), as they are when a scene's need(), steps() or read() threw in fit().
 //
 // The tier arrays (api 3; any api may give them, they are reported as INFO below api 3):
 //   micro       [{ t, scene, what }]   T0: a word or phrase enters, a highlight jumps, a count ticks, a morph
@@ -610,11 +628,29 @@ export const events = (t, content = t.content, rulesOrFn = t.rules) => {
     for (const m of ev.peaks || []) peaks.push(at(m, off, scene));
     if (ev.mask) mask = ev.mask;
   };
+  // A scene whose need(), steps() or read() threw in fit() (t.failed), or an events() that throws here, leaves the
+  // tier arrays incomplete: the tiers are skipped with a pointer to that error instead of failing on missing data.
+  // events() may also return { skip: 'reason' } when it cannot build its events for a cause already reported
+  // (e.g. a plan that refuses a fit with errors); with no error reported anywhere, the skip is itself an error.
+  const skipped = (t.failed ?? []).map((f) => `scene ${f.scene + 1} (${f.type}): ${f.fn} threw`);
+  const call = (fn, label, scene) => {
+    try {
+      const ev = fn();
+      if (ev && typeof ev.skip === 'string') { skipped.push(`${label}: ${ev.skip}`); return null; }
+      return ev;
+    } catch (e) {
+      const msg = String(e?.message ?? e).split('\n')[0];
+      notes.push({ level: 'error', ...(scene != null ? { scene } : {}), msg: `${scene != null ? `${t.scenes[scene].type}: ` : ''}events() threw: ${msg}` });
+      skipped.push(`${scene != null ? `scene ${scene + 1} (${t.scenes[scene].type}): ` : 'rules.'}events() threw`);
+      return null;
+    }
+  };
   t.scenes.forEach((s, i) => {
     const r = rules.types?.[s.type];
-    if (r?.events) add(r.events(s, g, { i, scenes: t.scenes, content }), s.start, i);
+    if (r?.events && !(t.failed ?? []).some((f) => f.scene === i)) add(call(() => r.events(s, g, { i, scenes: t.scenes, content }), `scene ${i + 1} (${s.type}) events()`, i), s.start, i);
   });
-  if (rules.events) add(rules.events(t.scenes, g, content));
+  // the film-wide events() would trip over the same broken scene: one error per cause is enough
+  if (rules.events && !(t.failed ?? []).length) add(call(() => rules.events(t.scenes, g, content), 'rules.events()', null));
   t.scenes.forEach((s, i) => {
     if (s.timing?.turn && !keys.some((k) => k.kind === 'turn' && Math.abs(k.t - s.start) < 1e-6)) keys.push({ t: s.start, kind: 'turn', scene: i });
   });
@@ -640,6 +676,12 @@ export const events = (t, content = t.content, rulesOrFn = t.rules) => {
   for (const h of holds) if (!(h.to > h.from)) notes.push({ level: 'warn', scene: h.scene, msg: `hold ${h.from}–${h.to} s is empty` });
   if (mask && !(Array.isArray(mask) && mask.length === 4 && mask.every(Number.isFinite))) { notes.push({ level: 'warn', msg: 'mask must be [x, y, w, h]; ignored' }); mask = null; }
 
+  if (skipped.length) {
+    const reported = [...(t.notes ?? []), ...notes].some((n) => n.level === 'error');
+    const why = [...new Set(skipped)].join('; ');
+    notes.push({ level: reported ? 'warn' : 'error', tier: 'all', msg: `tier checks (T0–T3, holds) skipped: ${why}${reported ? '; fix the error(s) above and run fit again' : ''}` });
+    return { keys, holds, handoffs, mask, micro, shots, expressive, peaks, tiers: null, tiersSkipped: why, notes };
+  }
   const tr = tiers({
     duration: t.duration, beat: g.beat, bar: g.bar,
     scenes: t.scenes.map((s, i) => ({ i, type: s.type, start: s.start, end: s.end, rest: !!s.timing?.rest, climax: !!s.timing?.climax, reason: s.timing?.reason })),
@@ -865,6 +907,7 @@ export const timingJson = (t, ev = events(t), extra = {}) => ({
   keys: ev.keys, holds: ev.holds, handoffs: ev.handoffs, mask: ev.mask,
   micro: ev.micro ?? [], shots: ev.shots ?? [], expressive: ev.expressive ?? [], peaks: ev.peaks ?? [],
   ...(ev.tiers ? { tiers: ev.tiers } : {}),
+  ...(ev.tiersSkipped ? { tiersSkipped: ev.tiersSkipped } : {}),
   notes: [...t.notes, ...(ev.notes || [])],
 });
 

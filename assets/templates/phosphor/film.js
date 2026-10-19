@@ -800,11 +800,17 @@ BUILD.compare = (s, sec) => {
 };
 
 // Both ends: a pipeline whose first and last nodes are you; the middle is bracketed; gaps loop back.
+// A title in two parts ([first part, last part]) is set on one line: a space joins them unless one is already there.
+const halves = (t) => {
+  const [a = '', b = ''] = t || [];
+  return a && b && !/\s$/.test(a) && !/^\s/.test(b) ? [a + ' ', b] : [a, b];
+};
+
 BUILD.ends = (s, sec) => {
-  const T = s.T, at = (x) => s.start + x;
+  const T = s.T, at = (x) => s.start + x, title = halves(s.title);
   const h = html(sec, `<div class="abs ends-h disp stripe"><span class="sw"></span><span class="sw"></span></div>`);
   const [ha, hb] = $$(h, 'span');
-  ha.textContent = s.title[0]; hb.textContent = s.title[1];
+  ha.textContent = title[0]; hb.textContent = title[1];
   fit(h, 1700, 108, 94);
   ha.textContent = ''; hb.textContent = '';
   const sub = html(sec, `<div class="abs ends-sub mono a">${esc(s.sub || '')}</div>`);
@@ -831,8 +837,8 @@ BUILD.ends = (s, sec) => {
   const loopLab = s.loop ? html(sec, `<div class="abs lab-c mono a" style="left:0;width:1920px;top:850px;color:${PAL.muted}">${esc(s.loop)}</div>`) : null;
   if (loopLab) fit(loopLab, 1700, 25, 25);
   fit(sub, 1700, 25, 25);
-  scramble(ha, s.title[0], at(T.title1), 0.5);
-  scramble(hb, s.title[1], at(T.title2), 0.45);
+  scramble(ha, title[0], at(T.title1), 0.5);
+  scramble(hb, title[1], at(T.title2), 0.45);
   inn(sub, at(T.sub), { y: 10 }, 0.35);
   els.forEach((el, i) => inn(el, at(T.nodes[i]), { y: 30 }, 0.3, nodes[i].you ? 'back.out(2)' : 'power3.out'));
   tl.fromTo($$(svg, '.bl'), { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ...IR }, at(T.links));
@@ -846,10 +852,10 @@ BUILD.ends = (s, sec) => {
 
 // Install: a terminal with the install steps typed in, then the slash commands land on the drop.
 BUILD.install = (s, sec) => {
-  const T = s.T, at = (x) => s.start + x;
+  const T = s.T, at = (x) => s.start + x, title = halves(s.title);
   const h = html(sec, `<div class="abs in-h disp stripe"><span class="sw"></span><span class="sw"></span></div>`);
   const [ha, hb] = $$(h, 'span');
-  ha.textContent = s.title[0]; hb.textContent = s.title[1];
+  ha.textContent = title[0]; hb.textContent = title[1];
   fit(h, 1700, 108, 94);
   ha.textContent = ''; hb.textContent = '';
   const term = html(sec, `<div class="win a in-term">${winBar(s.window?.[0] || '', s.window?.[1])}</div>`);
@@ -861,8 +867,8 @@ BUILD.install = (s, sec) => {
     fit($(el, '.c'), 270, 25, 25); fit($(el, '.l'), 316, 25, 25);
     return el;
   });
-  scramble(ha, s.title[0], at(T.title1), 0.5);
-  scramble(hb, s.title[1], at(T.title2), 0.45);
+  scramble(ha, title[0], at(T.title1), 0.5);
+  scramble(hb, title[1], at(T.title2), 0.45);
   inn(term, at(T.term), { y: 24 }, 0.35);
   cmds.forEach((el, i) => typeText($(el, '.t'), s.commands[i], at(T.cmds[i].a), T.cmds[i].cps));
   els.forEach((el, i) => {
@@ -1079,7 +1085,7 @@ BUILD.run = async (s, sec) => {
   const cv = $(win, 'canvas'), ctx = cv.getContext('2d');
   const fail = s.key?.status ? s.key.status !== 'pass' : /FAIL|ERR|✕/i.test(s.key?.mark || '');
   const LH = 54, BAND = 300, line = String(s.stream?.line || '{n}');
-  const fmt = (i) => line.replace('{n}', String(i + 1).padStart(2, '0')).replace('{seed}', hexOf(i)).replace('{ms}', msOf(i));
+  const fmt = (i) => line.replaceAll('{n}', String(i + 1).padStart(2, '0')).replaceAll('{seed}', hexOf(i)).replaceAll('{ms}', msOf(i));
   const mono = { family: 'JetBrains Mono', weight: 500, size: 32 };
   const h = await createHandoff('stream-brake', {
     count: Math.max(1, s.stream?.count ?? 36), line: fmt, key: { mark: s.key?.mark ?? '', text: s.key?.text ?? '' }, after: [], start: 0,

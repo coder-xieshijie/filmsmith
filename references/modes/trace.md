@@ -5,8 +5,8 @@ Theme: tech-explainer · Template: `assets/templates/trace/` (timing API 3) · l
 
 ## Fits / does not fit
 
-Fits: one mechanism or algorithm that can run on a tiny input in the browser — tokenisation, compression, sorting or searching, counting, scheduling, any "repeat a simple rule" process; a proof that a method works on a case it never saw.
-Does not fit: claims without a mechanism (use a launch mode); processes too large to show on ≤ 6 rows of chips; continuous maths that needs plots and curves (the pieces are discrete); anything whose numbers cannot be computed by a run module in the project.
+Fits: one mechanism or algorithm that can run on a tiny input in the browser and whose state merges, sorts or reduces — tokenisation, compression, sorting or searching, counting, any "repeat a simple rule" process whose steps fuse pieces and shrink a total; a proof that a method works on a case it never saw.
+Does not fit: claims without a mechanism (use a launch mode); processes too large to show on ≤ 6 rows of chips; continuous maths that needs plots and curves (the pieces are discrete); anything whose numbers cannot be computed by a run module in the project; mechanisms whose state is a reassignment or a mapping rather than a merge, a sort or a reduction — consistent hashing, load balancing, scheduling, routing, where items move from one owner to another and nothing fuses. The scene registry (count, step, loop, summary, probe) only fuses chips, counts them in a histogram and shrinks a token bar, so such a run can only be forced into merge-type scenes, and fusing chips then says the wrong thing (a consistent-hashing explainer, 2026-10-19 test: keys "collapsing" into a server). No trace scene shows reassignment yet. Use blueprint when the point is the parts and where each item goes (owners as parts, items as inputs and outputs), or tally when the point is how many items move (items as squares in one band per owner, the moved ones as a flag a `split` sorts first).
 
 ## Use cases
 

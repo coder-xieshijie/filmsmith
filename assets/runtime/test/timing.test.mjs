@@ -268,3 +268,53 @@ test('events(): tier arrays from types are offset by the scene start; beats conv
   assert.equal(j.rulesApi, 3);
   assert.equal(j.expressive.length, 1);
 });
+
+test('a throwing steps(), need() or events() is an error naming the scene; the tiers are skipped, not failed on missing data', () => {
+  const boom = (what) => () => { throw new Error(`${what} went wrong`); };
+  const base = rulesOf(3);
+  const content = { scenes: [{ type: 'card', text: 'one two' }, { type: 'stack', lines: ['a b', 'c d'] }, { type: 'end', url: 'x.dev' }] };
+  const falseTier = (notes) => notes.some((n) => n.tier && n.tier !== 'all' && n.level === 'error');
+
+  // steps() throws: the first call (at the need) and the fitted-length call are both caught
+  const t1 = fit(content, { ...base, types: { ...base.types, stack: { ...base.types.stack, steps: boom('steps') } } });
+  const e1 = errors(t1.notes);
+  assert.equal(e1.length, 1);
+  assert.equal(e1[0].scene, 1);
+  assert.match(e1[0].msg, /^stack: steps\(\) threw: steps went wrong$/);
+  const ev1 = events(t1);
+  assert.equal(ev1.tiers, null);
+  assert.ok(!falseTier(ev1.notes), 'no T0–T3 errors computed on a scene that was never built');
+  const skip = ev1.notes.find((n) => n.tier === 'all');
+  assert.equal(skip.level, 'warn'); // the error above is the cause; the skip points at it
+  assert.match(skip.msg, /tier checks \(T0–T3, holds\) skipped: scene 2 \(stack\): steps\(\) threw/);
+  const j1 = timingJson(t1, ev1);
+  assert.ok(!('tiers' in j1));
+  assert.match(j1.tiersSkipped, /scene 2 \(stack\)/);
+
+  // steps() that only throws at the fitted length (ctx.dur set)
+  const late = { ...base.types.stack, steps: (s, g, ctx) => { if (ctx.dur != null) throw new Error('late'); return [0.5, 0.5]; } };
+  const t2 = fit({ scenes: [{ type: 'stack', lines: ['a', 'b'] }, { type: 'card', text: 'x' }] }, { ...base, types: { ...base.types, stack: late } });
+  assert.ok(t2.scenes[0].bars * t2.bar > t2.scenes[0].need + 1e-6); // the grid adds slack, so steps() is called again
+  assert.ok(errors(t2.notes).some((n) => n.scene === 0 && /stack: steps\(\) at the fitted length threw: late/.test(n.msg)));
+  assert.equal(events(t2).tiers, null);
+
+  // need() throws
+  const t3 = fit(content, { ...base, types: { ...base.types, card: { ...base.types.card, need: boom('need') } } });
+  assert.ok(errors(t3.notes).some((n) => n.scene === 0 && /^card: need\(\) threw: need went wrong$/.test(n.msg)));
+  assert.ok(!falseTier(events(t3).notes));
+
+  // a type's events() throws: error with the scene and type; tiers skipped
+  const t4 = fit(content, { ...base, types: { ...base.types, card: { ...base.types.card, events: boom('events') } } });
+  assert.equal(errors(t4.notes).length, 0);
+  const ev4 = events(t4);
+  assert.ok(errors(ev4.notes).some((n) => n.scene === 0 && /^card: events\(\) threw: events went wrong$/.test(n.msg)));
+  assert.equal(ev4.tiers, null);
+  assert.ok(!falseTier(ev4.notes));
+
+  // rules.events() returns { skip }: with nothing reported elsewhere the skip itself is an error
+  const t5 = fit(content, { ...base, events: () => ({ skip: 'the plan could not be built' }) });
+  const ev5 = events(t5);
+  const s5 = ev5.notes.find((n) => n.tier === 'all');
+  assert.equal(s5.level, 'error');
+  assert.match(s5.msg, /skipped: rules\.events\(\): the plan could not be built/);
+});

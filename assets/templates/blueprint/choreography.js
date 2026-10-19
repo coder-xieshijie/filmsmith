@@ -41,7 +41,10 @@ export const HOLD_S = 1.0;
 export const URL_HOLD_S = 3; // the release URL stays readable at least this long
 
 // A stamp sheet: the camera pushes in over [STAMP_B − 1.5, STAMP_B − 0.5], the stamp lands on STAMP_B, the push
-// holds one beat and returns in PUSH_BACK_B; the build ends on the next whole beat.
+// holds at least one beat and returns in PUSH_BACK_B, landing on the build's end, the next whole beat (N0). The
+// return lands there rather than earlier, so the sheet's two-beat hold starts where the camera settles: a return
+// landing 0.4 beat before N0 left the picture still 0.1–0.24 s before the declared hold, and check-film measured
+// the hold 1–2 frames over two beats (2026-10-19 test film t4). timing.rules.js pushBeats() times it.
 export const STAMP_B = 5;
 export const PUSH_BACK_B = 0.6; // a stamp push-in returns in 0.6 of its 1-beat entrance
 const STAMP_N0 = Math.ceil(STAMP_B + 1 + PUSH_BACK_B); // 7
@@ -50,7 +53,7 @@ const STAMP_N0 = Math.ceil(STAMP_B + 1 + PUSH_BACK_B); // 7
 // 'vellum', in pencil line work) until a person signs its plan. The `detail` sheet marked issue: true is that
 // signature: one beat after its amber stamp lands, the stamp's own outline floods the frame (lib/transitions
 // shape-flood, FLOOD_B beat) and inside it is the same drawing as the print (content.palette, content.linework).
-// The camera stays pushed in until the flood has closed, then returns, so the build ends a beat later.
+// The camera stays pushed in until the flood has closed, then returns (landing on N0), so the build ends a beat later.
 export const FLOOD_AFTER_B = 1, FLOOD_B = 1;
 const ISSUE_N0 = Math.ceil(STAMP_B + FLOOD_AFTER_B + FLOOD_B + PUSH_BACK_B); // 8
 // The release entered from the final overview under a parallel rule (lib/transitions occluder-pass): the rule
@@ -153,12 +156,16 @@ export const CUES = {
     // the regions' lettering (0.3 s) and the panel furniture have landed by N0
     return { N0: land + 1.5, c, sounds: [['title', 'pen'], ['hex', 'pen'], ['reinterpret', 'reinterpret'], ['unfold', 'unfold'], ...[0, 1, 2, 3, 4, 5].map((k) => ['region' + k, k % 2 ? 'tick' : 'pen'])] };
   },
-  // a sequence of stages through one slot: the rails draft, then one word a beat (each hand-off lands on its beat)
+  // a sequence of stages through one slot: the rails draft, then one word a beat (each hand-off lands on its beat).
+  // The build ends as the last word lands (N0 = 1 + n): the hand-off settles there and the counter steps on that beat,
+  // so the hold starts where the picture is still (a quarter beat more held the sheet still before its declared hold,
+  // 2026-10-19 test film t4). The note wipes in (0.5 s, under a beat at 92–108 BPM) with the last hand-off, so it has
+  // landed by N0 too.
   stages: (s) => {
     const n = (s.stages || []).length, c = { title: 0, sub: 0.4, rails: 0.5 };
     for (let k = 0; k < n; k++) c['stage' + k] = 1 + k * SLOT_B; // hand-off k starts here, its word lands SLOT_B later
-    c.note = 1 + n * SLOT_B;
-    return { N0: 1 + n * SLOT_B + 0.25, c, sounds: [['title', 'pen'], ['rails', 'pen'], ...[...Array(n).keys()].map((k) => ['stage' + k, 'slot']), ['note', 'mark']] };
+    c.note = 1 + Math.max(0, n - 1) * SLOT_B;
+    return { N0: 1 + n * SLOT_B, c, sounds: [['title', 'pen'], ['rails', 'pen'], ...[...Array(n).keys()].map((k) => ['stage' + k, 'slot']), ['note', 'mark']] };
   },
   release: (s) => {
     const c = { kicker: 0, name: 0.2, urlBox: 1.5, url: 1.6, key: 1.2, foot: 2.4 };

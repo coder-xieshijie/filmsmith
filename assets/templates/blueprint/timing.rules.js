@@ -243,12 +243,15 @@ export const outSec = (sc, g, ctx) => {
 };
 
 // The camera's push-in on a stamp, in beats from the scene start (timeline.js builds the same windows): in over
-// [stamp − 1.5, stamp − 0.5], held still to `hold`, back over PUSH_BACK_B. An issue sheet holds until its flood has
-// closed. An excerpt's last stamp sheet stays pushed in.
+// [stamp − 1.5, stamp − 0.5], held still to `hold`, back over PUSH_BACK_B, landing on the build's end (N0), where
+// the sheet's two-beat hold starts: the declared hold begins where the camera settles. The push holds at least a
+// beat after the stamp; an issue sheet at least until its flood has closed. An excerpt's last stamp sheet stays
+// pushed in.
 export const pushBeats = (s, lead) => {
   const sb = stampBeat(s);
   if (sb === null || isOv(s)) return null;
-  const st = lead + sb, hold = st + (s.issue === true ? FLOOD_AFTER_B + FLOOD_B : 1);
+  const st = lead + sb, back = lead + CUES[s.type](s).N0;
+  const hold = Math.max(st + (s.issue === true ? FLOOD_AFTER_B + FLOOD_B : 1), back - PUSH_BACK_B);
   return { from: st - 1.5, at: st - 0.5, stamp: st, hold, back: hold + PUSH_BACK_B };
 };
 

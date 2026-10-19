@@ -31,7 +31,7 @@ Ask what the content *is*, then pick (principle 9, the style points at the conte
 | A system: parts, flow between them, inputs and outputs | blueprint |
 | A tool used from a terminal, a CLI, a CI step | phosphor |
 | Numbers about many items: how many, which kinds, what share | tally |
-| A mechanism or algorithm a viewer should understand | trace |
+| A mechanism or algorithm a viewer should understand, whose state merges, sorts or reduces (a reassignment such as consistent hashing or scheduling: trace's "Does not fit") | trace |
 | One source that becomes a whole product surface (a spec into docs, a schema into SDKs), with an interface to show | morph |
 | A model or product launch with a mark: a few features, one number, the name | halftone |
 | A question with a measured answer: which build, config or option passes a limit | pulse |

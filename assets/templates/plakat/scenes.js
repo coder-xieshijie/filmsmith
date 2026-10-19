@@ -563,7 +563,7 @@ export const TYPES = {
         }
       });
       const addedN = R.groups.reduce((a, g) => a + (g.added || 0), 0);
-      if (R.note) h += `<div class="abs mono h dc-note" style="left:30px;top:${166 + 130 * R.groups.length - 2}px;font-size:25px;white-space:nowrap"><span class="sq" style="width:14px;height:14px"></span>&nbsp; ${esc(R.note.replace('{added}', addedN))}</div>`;
+      if (R.note) h += `<div class="abs mono h dc-note" style="left:30px;top:${166 + 130 * R.groups.length - 2}px;font-size:25px;white-space:nowrap"><span class="sq" style="width:14px;height:14px"></span>&nbsp; ${esc(R.note.replaceAll('{added}', addedN))}</div>`;
       h += `</div>`;
       (s.hashes || []).forEach((x, i) => (h += `<div class="abs mono h dc-sha grey" style="left:${i ? 680 : 96}px;top:858px;font-size:25px;white-space:pre">${esc(x)}</div>`));
       h += `<div class="rule dc-scan" style="left:80px;top:340px;width:1322px;height:4px;background:var(--accent);opacity:0"></div>`;

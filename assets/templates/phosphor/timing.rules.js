@@ -78,8 +78,35 @@ const events = (scenes, g, content) => {
   return ev;
 };
 
+// Slot shapes the schedule (events.js) and the picture (film.js) index into, checked by `npm run fit` (lib/fit.mjs)
+// before they turn into a bare TypeError or a title cut to its first letters. Slot lengths stay with the red banner.
+const isStr = (x) => typeof x === 'string';
+const strList = (x, lo, hi) => Array.isArray(x) && x.length >= lo && x.length <= hi && x.every(isStr);
+const WINDOWED = ['qa', 'run', 'pick', 'scope', 'install'];
+export const validate = (content) => {
+  const err = [];
+  (content.scenes || []).forEach((s, i) => {
+    const at = `scenes[${i}] (${s.type})`;
+    if (WINDOWED.includes(s.type) && s.window != null && !strList(s.window, 1, 2)) err.push(`${at}: window must be an array [title, right label] of strings, got ${JSON.stringify(s.window)}`);
+    if ((s.type === 'ends' || s.type === 'install') && !strList(s.title, 2, 2)) err.push(`${at}: title must be an array of two strings [${s.type === 'ends' ? 'first part, last part' : 'plain, rest'}], set on one line, got ${JSON.stringify(s.title)}`);
+    if (s.type !== 'run') return;
+    if (s.after != null && !strList(s.after, 0, 1)) err.push(`${at}: after must be an array of at most one string, e.g. after: ['${isStr(s.after) ? s.after : 'what the tool did with it'}'], got ${JSON.stringify(s.after)}`);
+    if (s.key == null || typeof s.key !== 'object' || Array.isArray(s.key) || !isStr(s.key.text) || (s.key.mark != null && !isStr(s.key.mark))) err.push(`${at}: key must be an object { mark, text } of strings (the line the stream brakes on), got ${JSON.stringify(s.key)}`);
+    if (s.stream != null) {
+      const st = s.stream;
+      if (typeof st !== 'object' || Array.isArray(st)) err.push(`${at}: stream must be an object { count, line }, got ${JSON.stringify(st)}`);
+      else {
+        if (st.count != null && !(Number.isInteger(st.count) && st.count >= 1 && st.count <= 60)) err.push(`${at}: stream.count must be a whole number 1–60, got ${JSON.stringify(st.count)}`);
+        if (st.line != null && !isStr(st.line)) err.push(`${at}: stream.line must be a string pattern ({n}, {seed}, {ms}), got ${JSON.stringify(st.line)}`);
+      }
+    }
+  });
+  return err;
+};
+
 export default {
   api: 3,
+  validate,
   devices: ['fibre-burst', 'glitch-cut', 'tunnel-fold'], // the mode's own T2 devices (crt-collapse is runtime/transitions')
   // 128 is the bed's written tempo and the source film's measured one; ±6 % keeps the 16th pulse from
   // dragging (below 120) or turning frantic (above 136), and keeps half-beat typing and counter steps

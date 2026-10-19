@@ -29,6 +29,7 @@
 //               lib/timing.js tiers(): T0 gaps between changes, T1 composition lengths (median, max, CV, first 5 s),
 //               T2 expressive transitions (count, device repeats, length), T3 peaks (count, climax position), hold
 //               lengths. FAIL / WARN only when the rules declare api 3 (timing.json rulesApi); INFO otherwise.
+//               When fit skipped them (timing.json tiersSkipped: a scene's callback threw), each reads "skipped".
 //               Pixel estimates, always INFO: picture onsets per second and the longest gap between them (T0),
 //               large-area changes (T2), the loudest short-term moment as a share of the length (T3)
 //   INFO        type-size levels, smallest text and worst text contrast on hold frames (pixel estimates),
@@ -271,7 +272,10 @@ if (scenes.length >= 2) {
 const TIER_ITEMS = { T0: 'P1 T0 micro changes', T1: 'P1 T1 scene changes', T2: 'P1 T2 expressive transitions', T3: 'P1 T3 peaks', hold: 'P1 holds' };
 let tierSummary = null;
 const tierStatus = (ns) => (!v3 ? 'INFO' : ns.some((n) => n.level === 'error') ? 'FAIL' : ns.some((n) => n.level === 'warn') ? 'WARN' : 'PASS');
-if (hasEvents && scenes.length && beat) {
+if (hasEvents && T.tiersSkipped) {
+  // fit could not build the tier arrays: measuring them would report missing events as failures
+  for (const [n, it] of [['T0 changes (declared)', 'T0'], ['T1 compositions', 'T1'], ['T2 expressive', 'T2'], ['T3 peaks', 'T3'], ['hold lengths', 'hold']]) add(n, v3 ? 'FAIL' : 'INFO', 'skipped', `npm run fit skipped the tier checks: ${T.tiersSkipped}; fix the error fit reports and run it again`, TIER_ITEMS[it]);
+} else if (hasEvents && scenes.length && beat) {
   const TR = tierMeasures({ duration: T.duration ?? duration, beat, bar, scenes, keys, holds, micro: T.micro, shots: T.shots, expressive: T.expressive, peaks: T.peaks }, L, 3);
   const S = tierSummary = TR.summary;
   const msgs = (tier) => TR.notes.filter((n) => n.tier === tier);
