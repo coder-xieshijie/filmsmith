@@ -463,7 +463,7 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 
 - **Looks**: a line resolves left to right: each cell flickers through the content's own alphabet (hex, token pieces), re-rolled at a fixed rate, until its lock time; the lock order is the reading order; a cursor rides behind the last locked cell.
 - **Tier**: T0.
-- **Use**: a hash, an id, a signature or a short status line. **Not for**: prose.
+- **Use**: a hash, an id, a signature or a short status line. **Not for**: prose, or a quantity scrambling through other digits (a still would show a plausible wrong number, principle 2): keep a value's digits fixed or scramble them through symbols, as phosphor and pulse do.
 - **Parameters**: `text`, `alphabet` '0123456789abcdef', `accentFrom` (substring or index locked in the accent), `x`, `y`; `per` 0.035 s, `scramble` 0.35 s, `appear` 0.012 s, `rate` 24 re-rolls/s (at 120 BPM; they scale with the beats); `cursor`; `seed`; `mono`. Length follows the text (`beatsOf`). Roles: `ground`, `ink`, `deep` (scrambling cells), `accent`.
 - **Theory**: locking in reading order does not compete with reading; progressive refinement of a known slot.
 - **Modes**: phosphor, trace.

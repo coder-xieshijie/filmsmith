@@ -29,6 +29,18 @@ How an accent is chosen (`derived`):
 3. Searched for collisions with known brands (ΔE00 < 5 is a collision); a collision goes to the owner, who decides.
 4. Small accents read best on a ground of contrasting hue (amber on Prussian blue, green on black): a measured preference, not a rule of harmony.
 
+### A preset from a brand colour
+
+When the user asks for a product's own colour, it becomes a new preset in the mode's `palettes.js`; `content.js` still names a preset id. The brand collision of step 3 above is the point here, and the user's request settles it. Steps (`derived`; the `coral` preset in six modes, 2026-10-19/20, accepted with six films):
+
+1. **Base.** The brand guide's flat (single) colour is the accent, unchanged wherever it passes the mode's contrast check on the grounds it lands on. The preset's comment cites the guide.
+2. **Where it fails**, move it along its own OKLCH hue and chroma, lightness only, until it passes; record the new value, its contrast and its ΔE00 from the brand value. Past about ΔE00 10 it stops reading as the brand (a coral lightened that far reads as salmon): then keep the brand value and narrow the grounds it may land on instead (pulse's `accentOn`).
+3. **Grounds and neutrals** stay the mode's, or lean toward the accent's hue under the neutral rules above. A ground of the accent's own hue may replace one that makes the accent vibrate (a red accent on blueprint blue moved to an oxblood ground).
+4. **Gradients.** A brand gradient is used only where the mode already draws two stops or a highlight; a flat mode uses the flat colour.
+5. **Collisions inside the preset.** A status or effect colour within ΔE00 10 of the new accent changes hue (phosphor's red `bad` moved to violet next to a coral accent).
+6. **Names.** The id and name describe the colour (`coral`, "Coral red"), never the brand; the brand, its guide and the film are named only in the film's README. Add the preset's row to the mode card's palette table and to `TEMPLATE.md`, and run the mode's palette check.
+7. **Meaning.** The accent keeps the mode's one meaning (principle 7). When the brief asks the brand colour to mark the product's results and the mode's accent means a person, use the card's variant for a film where no person decides (plakat, blueprint).
+
 ### Named colours, with provenance
 
 A name is only used when its value can be traced; otherwise the preset gets a plain descriptive name. Use this pool before inventing a hue.

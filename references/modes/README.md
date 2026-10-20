@@ -51,7 +51,7 @@ Theme: <theme> · Template: assets/templates/<mode>/ · Tempo range; length from
 ## Fits / does not fit
 ## Use cases          3–4 concrete uses, each with an example product and what its film says; mark the best fit
 ## Mode principles      5–7 rules; break one and the look collapses. Each names the core principle it narrows, or the departure it takes and why.
-## Palette presets      table: id, name, fits, role → hex. Choose one; no custom hex values.
+## Palette presets      table: id, name, fits, role → hex. Choose one; no custom hex values (a brand colour is added as a preset: system.md, "A preset from a brand colour").
 ## Variants             the colour presets above plus one form axis set by a content.js field: value, what changes, when to choose it, its source; the default value renders exactly as before
 ## Accent role          the one kind of thing the accent marks in this mode, from the four colour roles of principle 7; which colours are status, category or effect colours, and their conditions; where the accent becomes a full-frame ground and for how long
 ## Type                 role → family → licence; minimum sizes (information text ≥ 25 px; main text ≥ 40 px, or why not); every use below 25 px listed as decoration

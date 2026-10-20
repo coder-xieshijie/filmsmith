@@ -18,7 +18,7 @@ npm run film                                               # fit → audio → c
 | File | Edit? | What it is |
 |---|---|---|
 | `content.js` | yes | Palette, brand, scenes and copy; optional `bpm`, `target` |
-| `palettes.js` | no | Presets `ice` (default), `phosphor`, `amber`, `cyan`, `violet` |
+| `palettes.js` | no | Presets `ice` (default), `phosphor`, `amber`, `cyan`, `violet`, `coral` |
 | `timing.rules.js` | no | Timing API 3: the tempo range, the reading tier of every slot and why it qualifies, per-type ceilings, the music's drops |
 | `events.js` | no | Every event time inside a scene, from content only; read by the picture, the sound and the rules; how each scene hands over to the next (`exitsOf`); the key events, holds, hand-offs and the four tiers (micro, shots, expressive, peaks) written to `renders/timing.json` |
 | `film.js` | no | Builds the DOM and one paused GSAP timeline from content; draws per-frame values; drives the library hand-offs (`lib/handoffs`) and transitions (`lib/transitions`) the pages use (Transitions below) |
@@ -73,7 +73,7 @@ A turn scene starts a chapter, carries the claim, or is one of the batch 4 pages
 
 | Slot | Limit | Notes |
 |---|---|---|
-| `palette` | id | `phosphor`, `amber`, `ice`, `cyan`, `violet` — never a hex value (mode card, Palette presets) |
+| `palette` | id | `phosphor`, `amber`, `ice`, `cyan`, `violet`, `coral` — never a hex value (mode card, Palette presets) |
 | `screen` | id | `crt` (default: scanlines, striped display type, vignette) or `flat` (a flat panel: none of the three); nothing else changes (mode card, Variants). Any other value prints a red banner |
 | `seed` | int | All randomness (scramble glyphs, fibres, grain, sound) |
 | `brand.name` | 14 | HUD and end card |
@@ -171,7 +171,7 @@ The mode's devices come from the shared libraries (`lib/handoffs`, `lib/transiti
 
 | Device | Tier | Where | How the template uses it |
 |---|---|---|---|
-| `scramble-resolve` (X15) | T0 | every decode: titles, the claim, readings, hashes, results | its model (seeded glyph per cell, re-rolled 24 times a second, cells lock in reading order; `scramble`, `per`, `appear`, `rate` read from the module's defaults), the alphabet taken from the line itself (hex for hashes). Cells are DOM text, because display type here is DOM (gradient, stripes, the RGB split) |
+| `scramble-resolve` (X15) | T0 | every decode: titles, the claim, readings, hashes, results | its model (seeded glyph per cell, re-rolled 24 times a second, cells lock in reading order; `scramble`, `per`, `appear`, `rate` read from the module's defaults), the alphabet taken from the line itself (hex for hashes); digits never scramble into other digits: a line with letters keeps its digits in place, a numeral decodes through symbols with its point and unit fixed (`numberSafe`). Cells are DOM text, because display type here is DOM (gradient, stripes, the RGB split) |
 | `stream-brake` (X14) | T1 | `run` | the module draws the stream into a canvas in the terminal window (mono 32 px, line height 54), braking exactly on the key line |
 | `roulette-lock` (X10) | T1 | `pick` | the module's state (cell, pop, step-back, wrap slide) drives the mode's DOM cells and frame; the hop schedule comes from its own `prepare()`; the frame is neutral while it searches and takes the accent when it locks |
 | `container-morph` (X06) | T1 | a windowed page into the page that continues it (`qa` → `decide`, `run` → `pick`) | the module's state (size, radius on a damped landing, content out then in) drives a DOM window shell; local extension: the centre follows the same landing, because our windows share x but not y |

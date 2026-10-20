@@ -21,7 +21,7 @@ npm run snapshot -- --at 0.6,2.55,7.6,9.42,13.6,19.7,20.03,21.6,23.0,27.6,31.5
 | File | What it is |
 |---|---|
 | `content.js` | The film. The only file edited for an ordinary film. No duration, no bars. Optional `aperture` (form variant). |
-| `palettes.js` | Presets `indigo` (default, the owner-accepted sample), `petrol`, `graphite`; `onGround()` decides every text colour on every ground; `npm run palettes` checks each pair. |
+| `palettes.js` | Presets `indigo` (default, the owner-accepted sample), `petrol`, `graphite`, `coral` (its optional `accentOn` lists the grounds the accent may land on, here `r0` and `r1`); `onGround()` decides every text colour on every ground; `npm run palettes` checks each pair. |
 | `registry.js` | Scene registry (slot limits, item counts), transitions and their tier, `{fact}` values computed from the searches, validation. |
 | `choreo.js` | When everything happens inside each scene type, in seconds from its start: one table for picture, sound, timing and reading. |
 | `timeline.js` | The fitted film as moments: key events, holds, the portal hand-off, the four pacing tiers (micro, shots, expressive, peaks) and the sound cues. |
@@ -135,7 +135,7 @@ mixes them), and `counter-portal` from `lib/handoffs`. Two things stay in `film.
 
 - **The search's roulette and its scrambling value.** `roulette-lock` frames labels on a fixed track and locks one;
   a pulse search also reveals each candidate's measured value under it as the highlight arrives, dims the ones that
-  fail the limit, keeps an empty slot, and scrambles the answer's digits in their own proportional slots (the
+  fail the limit, keeps an empty slot, and scrambles the answer's digits through symbols (`#&*@`, never other digits) in their own proportional slots (the
   library's `scramble-resolve` sets a mono line). The roulette is about 60 lines of cells; the digits use the
   seeded `hash` of `lib/rng.js`.
 - **Framing inside the counter.** `counter-portal` centres the far scene's frame centre on the counter; pulse

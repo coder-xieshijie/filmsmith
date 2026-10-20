@@ -50,7 +50,7 @@ Skip what the user already gave; ask the rest, the mode first. Ask in plain conv
 | 1 | What is the content: a tool, a claim with steps, a system, a name, a reel, numbers, a mechanism? | Decides the mode ([selection table](references/modes/README.md#choosing-a-mode)); propose one and say why |
 | 2 | Where do the facts come from (repo, doc, dataset, algorithm)? | Every fact on screen comes from it; every number is computed |
 | 3 | Platform, and a target length if any? | Length is computed from the content ([principle 5](references/principles.md)); a target moves the tempo inside the mode's range, then scenes are cut or added |
-| 4 | Which palette preset? | Presets only, listed on the mode card; no custom hex values |
+| 4 | Which palette preset? | Presets only, listed on the mode card; no custom hex values. A brand colour the user asks for becomes a new preset first ([system](references/system.md#a-preset-from-a-brand-colour)) |
 | 5 | Hard constraints (must show, must not show, URL, name)? | Avoid rework |
 | 6 | Music: can this agent call a music-generation API? | If yes, a generated bed at the film's tempo replaces the synthesised one ([system](references/system.md#sound-recipes)); if not, the synthesised bed is used and the hand-over says so |
 
@@ -117,7 +117,7 @@ Only for whoever maintains this skill's source; a film's maker stops at step 7. 
 Full text, theory and evidence in [references/principles.md](references/principles.md). Premise: technical videos, no person on screen. Gates first; a film that fails one is not shown. Where a verdict and the theory disagree, the theory wins ([who decides](references/foundations.md#who-decides)).
 
 1. **Readable before beautiful** — information text ≥ 25 px (main text ≥ 40 px), contrast ≥ 4.5:1, reading by tier (primary 0.3 s a word in order, glance ≥ 1 s, word-at-a-time), −14 LUFS with short-term loudness ≤ integrated + 5 LU and a restrained arrangement.
-2. **Precision is a gate** — aligned, consistent, computed; exact text, numbers and logos in code.
+2. **Precision is a gate** — aligned, consistent, computed; exact text, numbers and logos in code; quoted numbers keep their source's terms; no number animates through other digits.
 3. **One idea per beat, one protagonist per frame** — at most three type levels (within 15 % is one level, neighbours ≥ 1.25 apart); emphasis by scale and isolation.
 4. **Transform at the turns, grow every state out of the last** — related transformations are the default change, a cut where there is no relation; expressive devices (T2) about every 8–12 s, one device ≤ 3 times and never twice in a row unchanged; 2–3 marked peaks (T3); transitions stay clean. Prefer a hand-off from `runtime/handoffs/`, else a frame-level transition from `runtime/transitions/` ([transitions.md](references/transitions.md)).
 5. **Motion is a function of time, locked to the beat, and brisk** — key events on the beat, other cuts on any beat; four tiers of change: a micro change (T0) at a median of ≤ 2 beats and never > 4 beats apart, compositions (T1) a median 2–3 s and ≤ 6 s, holds 0.2 s to 2 beats; reading stays 0.3 s a word with ≤ 5 primary words per state (a claim ≤ 8, in a pause); length follows content, phrase rounding spread over the scenes.

@@ -128,7 +128,7 @@ The expressive transitions are declared under the library's ids (`events().expre
 
 ## Palettes
 
-`navy-amber` (source), `paper-red`, `night-teal`. Each is one accent plus neutrals: `base` for the comparison group, `rest` for "not it". All pass `npm run palettes` (text ≥ 4.5:1, graphics ≥ 3:1, accent vs neutrals ΔE ≥ 15 normal and ≥ 8 under protan/deutan). The frame-level entries mark tiles and cells in `base`, never the accent (references/transitions.md, Colour roles).
+`navy-amber` (source), `paper-red`, `night-teal`, `coral`. Each is one accent plus neutrals: `base` for the comparison group, `rest` for "not it". All pass `npm run palettes` (text ≥ 4.5:1, graphics ≥ 3:1, accent vs neutrals ΔE ≥ 15 normal and ≥ 8 under protan/deutan). The frame-level entries mark tiles and cells in `base`, never the accent (references/transitions.md, Colour roles).
 
 ## Length and tempo
 

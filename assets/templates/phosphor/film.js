@@ -185,9 +185,20 @@ const alphabetOf = (text) => {
   const u = [...new Set([...String(text)].filter((c) => /[\p{L}\p{N}]/u.test(c)))].join('');
   return /^[0-9a-f]+$/i.test(u) && u.length > 2 ? HEX : u.length >= 5 ? u : u + HEX;
 };
+// Numbers never pass through wrong values (principle 2): a still mid-decode must not show a plausible wrong number.
+// A line with letters keeps its digits in place and scrambles only its letters; a numeral (no letters: "60.3",
+// "$0.045") decodes its digits through symbols (NUMSYM), its point, sign and unit fixed. Hex (hashes, ids) is a
+// name, not a value, and scrambles as before. 2026-10-20: "60.3" read "60.9" on a contact-sheet frame.
+const NUMSYM = '#%&*@';
+const noDigits = (a) => { const x = a.replace(/[0-9]/g, ''); return x.length >= 5 ? x : x + 'XKQZW'; };
+const numberSafe = (text, alphabet) => {
+  if (alphabet === HEX) return HEX;
+  if (!/\p{L}/u.test(String(text))) return NUMSYM;
+  return noDigits(alphabet || alphabetOf(text));
+};
 function scramble(el, text, t0, dur, alphabet) {
   const list = decodes.get(el) || [];
-  list.push({ t0, dur, text: String(text), alphabet: alphabet || alphabetOf(text), seed: ((C.seed | 0) * 131 + SEED++) % 997 });
+  list.push({ t0, dur, text: String(text), alphabet: numberSafe(text, alphabet), seed: ((C.seed | 0) * 131 + SEED++) % 997 });
   list.sort((a, b) => a.t0 - b.t0);
   decodes.set(el, list);
   if (el.classList.contains('rgb')) el.setAttribute('data-text', text);
@@ -201,7 +212,8 @@ const decodedAt = (d, t) => {
   for (let i = 0; i < n; i++) {
     if (!(tau > i * ap)) break;
     const ch = chars[i];
-    out += ch === ' ' || tau >= sc + i * per ? ch : d.alphabet[Math.floor(hash(i + 1000 * d.seed, frame) * d.alphabet.length)];
+    const fixed = ch === ' ' || (d.alphabet === NUMSYM ? !/\d/.test(ch) : /\d/.test(ch) && !d.alphabet.includes(ch));
+    out += fixed || tau >= sc + i * per ? ch : d.alphabet[Math.floor(hash(i + 1000 * d.seed, frame) * d.alphabet.length)];
   }
   return out;
 };

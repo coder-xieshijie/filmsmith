@@ -22,7 +22,7 @@ npm run snapshot -- --at 1.3,3.2,8.3,12.5,16.6,20.6,26.0,27.6,29.6,33.8
 | File | What it is |
 |---|---|
 | `content.js` | The film. The only file edited for an ordinary film. No duration, no bars. Optional `typeWidth` (see Variants). |
-| `palettes.js` | Presets `cobalt` (default, source film), `vermilion`, `forest`, `carbon` (inverted: dark paper, light night). |
+| `palettes.js` | Presets `cobalt` (default, source film), `vermilion`, `forest`, `carbon` (inverted: dark paper, light night), `coral` (inverted like `carbon`, a flat coral dot). |
 | `timing.rules.js` | How long each scene type needs, measured from its choreography (format: `lib/timing.js`, api 3), the choreography constants `C` that `plan.js` uses, and `events()`, which hands `lib/fit.mjs` the four tiers that `plan.js` computes. |
 | `registry.js` | Scene registry (ground, slot limits), transitions, `{fact}` values, the reading word count. |
 | `plan.js` | Validation, `fit()` → scene starts, beat times inside each scene, text windows, reading-time cross-check, sound events, the resting dot's bounces, and the four tiers (`micro`, `holds`, `shots`, `expressive`, `peaks`). Shared by picture, sound and `npm run fit`. |

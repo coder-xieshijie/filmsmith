@@ -64,6 +64,7 @@ Both values pass this card's P0 and the clean-transition checks C1–C8 on the w
 - **Inspection stamps** (VERIFIED, FROZEN, SEALED, RESTORED: a machine's check) use the line colour, same shape as the amber stamps, so the stamp still lands but does not say "a person decided" (check 2026-10-18 C10, P-10). The section sheet's dimension repeats the stamp word in the line colour.
 - No status, category or effect colours: an open item is an amber revision mark because a reviewer raised it, not a warning colour.
 - The accent never becomes a ground.
+- **Variant: no person decides** (2026-10-20). When the film's subject acts on its own (a model, a service), the accent marks **the product and its results** instead: its name, its column, its path through a sheet, its scores and the stamps that certify them (a rank, a pass). The film then starts in the print (no `original`, no `issue`), uses no line-colour inspection stamps and no APPROVED stamp, since nothing is signed by a person; the title block's APPROVED BY cell is left to the product's id, a film-local change today. `PLAN.md` and the README state the variant. Taken by one film here and one in plakat, both accepted.
 
 ## Type
 

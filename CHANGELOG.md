@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 0.3.0 — 2026-10-20
+
+- runtime: `master()`'s AAC delivery ceiling is −1.9 dBTP, 0.4 dB under check-film's −1.5 gate: against eight renders the three-encode estimate ran 0.6 dB high to 0.4 dB low, so two films had lowered their own `tp` to pass. `audio/README.md` no longer says −1.2 and two encodes.
+- Principle 2 and the checklist: numbers quoted from another party keep its terms (who measured them, `~` on chart readings, ranks and ties computed from reported values, quantities named by what they measure, offers in official wording, no cost compared alone against a higher score); no number animates through other digits.
+- phosphor: a decode keeps a line's digits in place and decodes a numeral through symbols (`numberSafe`), so no still shows a wrong number ("60.3" through "609f" before); pulse: a scrambling answer or figure shows symbols in its digit slots, never other digits. `transitions.md` scramble-resolve says the same.
+- plakat: a `figure` that opens no portal no longer needs a letter with a counter (`$111` failed with "no letter with a counter").
+- `system.md`: "A preset from a brand colour", the steps the six `coral` presets followed; `SKILL.md` step 1, the mode card format and `CONTRIBUTING.md` point to it.
+- plakat and blueprint cards: a variant for a film where no person decides (the accent marks the product and its results); tech-product-launch rule 2 names it.
+- Checklist T3 and tech-product-launch rule 7: a tagline followed by an end card lands past 85 %, so the tagline is the lock-up and the climax is the strongest proof before it.
+- tech-product-launch: a candidate skeleton for a model release measured on benchmarks.
+- `TEMPLATE.md` of ink, pulse, phosphor, blueprint and tally list the `coral` preset (pulse with `accentOn`).
+
 ## 0.2.0 — 2026-10-20
 
 - `SKILL.md`, the mode cards and the Chinese README drop the Chinese style names; the styles go by their English names everywhere.

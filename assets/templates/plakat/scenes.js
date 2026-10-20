@@ -1310,7 +1310,8 @@ export const TYPES = {
       };
       let U = 0;
       P.hand = await createHandoff('counter-portal', {
-        glyph: { text: s.value, counter: null, counterAt: [0.5, 0.5] }, x: P.box.x, baseline: P.box.base, font: P.font, parallax: 0.55, ground: false,
+        glyph: { text: s.value, counter: portal ? null : 0, counterAt: [0.5, 0.5] }, x: P.box.x, // no portal: the module only draws the numeral, so a value without a counter ("$111") is fine
+        baseline: P.box.base, font: P.font, parallax: 0.55, ground: false,
         colors: { ground: pal.paper, ink: pal.ink, portal: portal ? pal.accent : pal.paper },
         from: (c) => P.marks(c, U), to: () => {},
       });

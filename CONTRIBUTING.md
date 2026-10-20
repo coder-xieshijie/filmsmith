@@ -20,4 +20,4 @@ A new style is a card in `references/modes/` that follows the card template in i
 
 ## What will not be merged
 
-People on screen, generated photoreal footage, custom hex values outside a preset, and anything that trades legibility for effect (principle 1).
+People on screen, generated photoreal footage, custom hex values outside a preset (a brand colour becomes a preset by [system.md](references/system.md#a-preset-from-a-brand-colour)), and anything that trades legibility for effect (principle 1).

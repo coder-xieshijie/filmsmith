@@ -1,5 +1,5 @@
 // master.mjs — loudness master with ffmpeg: two-pass loudnorm in linear mode, then a verification pass, then the
-// delivery check: the master encoded to AAC 192k (as the renderer delivers it) must keep its true peak ≤ −1.2 dBTP.
+// delivery check: the master encoded to AAC 192k (as the renderer delivers it) must keep its true peak ≤ −1.9 dBTP.
 // master(in, out, { lufs: -14, tp: -1.5, tone, aac }) → { I, TP, LRA, Smax, limiting, normalization, preLimit, aac, ok, ... }
 // writeMeasure(dir, result) → writes <dir>/assets/audio/measure.json, the measured numbers a film may print.
 
@@ -88,14 +88,16 @@ export const aacPeak = async (path, { bitrate = '192k' } = {}) => {
 
 // The delivery check. HyperFrames lowers the whole mix when its AAC encode has a true peak over −1 dBTP ("Audio lowered
 // by X dB" in the render log), which took films that open on a hit to −15…−21 LUFS (2026-10-19). After the master,
-// the output is encoded to AAC 192k and measured (aacPeak); over `aac.ceiling` (−1.5 dBTP, check-film's delivery gate, under the renderer's
-// line) the master runs again with its true-peak target lowered by the excess, so the pre-limiter takes the peaks
+// the output is encoded to AAC 192k and measured (aacPeak); over `aac.ceiling` the master runs again with its true-peak target lowered by the excess, so the pre-limiter takes the peaks
 // down and the loudness stays on target; up to `aac.passes` (3) times. If it is still over, the gain is lowered by
 // the excess (the loudness drops, by much less than the renderer would take). aac: false skips the check.
+// The ceiling is check-film's −1.5 dBTP delivery gate less 0.4 dB: the estimate is not the renderer's own encode, and
+// against eight renders it ran 0.6 dB high to 0.4 dB low (tally's first render, estimated within the gate, measured
+// −1.1 dBTP; phosphor's estimated −1.9, measured −1.6; 2026-10-20). The loudness stays on target; only the limiter works harder.
 export const master = async (input, output, opts = {}) => {
   const { tp = -1.5, quiet = false, aac = {} } = opts;
   if (aac === false) return masterOnce(input, output, opts);
-  const ceiling = aac.ceiling ?? -1.5, passes = aac.passes ?? 3;
+  const ceiling = aac.ceiling ?? -1.9, passes = aac.passes ?? 3;
   const log = [];
   let tpUsed = tp, res, peak;
   for (let pass = 0; ; pass++) {

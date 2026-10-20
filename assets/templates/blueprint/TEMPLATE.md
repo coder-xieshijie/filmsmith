@@ -43,7 +43,7 @@ Scenes are elastic only where it is safe: every part lands a fixed number of bea
 
 ```js
 export default {
-  palette: 'cyanotype',  // cyanotype | diazo | blueline | graphite (vellum is the pencil original's paper)
+  palette: 'cyanotype',  // cyanotype | diazo | blueline | graphite | coral (vellum is the pencil original's paper)
   seed: 7,               // paper, grain, stamp wear, sound round-robin
   // optional: original: 'vellum' — the pencil original the film is drafted on until the detail sheet marked
   //           issue: true; its stamp floods the drawing into the print ("The issue" below)
@@ -148,7 +148,7 @@ Each sheet type has its own drawing type, so no two detail sheets share a layout
 
 Spans: where a slot accepts spans, pass `[['MIT', 'ink'], [' · text', 'muted']]`; roles are palette keys (`ink`, `line`, `muted`, `accent`).
 
-**The accent means "a person annotated or approved".** On the pencil original (`vellum`) it is the same role in its own hue (`#A85200`), so the signature is amber before and after the flood. It is used by the CONFIRMED and APPROVED stamps (`detail`, final `overview`), the revision triangles and underline (`problem`), the answer bracket (`detail`), the `YOU` ends and their brackets (`assembly`). The `section` and `checklist` stamps mark a machine's check and are drawn in the line colour. Do not put the accent anywhere else; there is no slot that colours arbitrary text amber except spans, and spans should not use `accent` for anything a machine did.
+**The accent means "a person annotated or approved".** On the pencil original (`vellum`) it is the same role in its own hue (`#A85200`), so the signature is amber before and after the flood. It is used by the CONFIRMED and APPROVED stamps (`detail`, final `overview`), the revision triangles and underline (`problem`), the answer bracket (`detail`), the `YOU` ends and their brackets (`assembly`). The `section` and `checklist` stamps mark a machine's check and are drawn in the line colour. Do not put the accent anywhere else; there is no slot that colours arbitrary text amber except spans, and spans should not use `accent` for anything a machine did. The one exception is the mode card's variant for a film where no person decides (Accent role): then the accent is the product and its results, and the film starts in the print.
 
 ## Example (shipped content.js)
 
@@ -162,6 +162,7 @@ A placeholder: "tidepool", an invented backup tool, drafted in pencil on `vellum
 | `diazo` | `#050B18` / `#0A1630` | `#E6EDF8`, `#8EB4E8` | `#FFB547` | darker, for dark-mode platforms |
 | `blueline` | `#C5CED9` / `#F3F5F1` | `#14306A`, `#2D5CA3` | `#A85200` | white print, for light pages and documents |
 | `graphite` | `#0F1114` / `#1A1E23` | `#ECEEF1`, `#A9B6C3` | `#FFB547` | neutral, when blue clashes with the brand |
+| `coral` | `#220A0B` / `#311414` | `#FAF1EE` ink, `#BACAD4` line | `#FF6452` | a coral or pink-red product colour: an oxblood ground in the accent's hue, cool silver lines |
 | `vellum` | `#D7D8D3` / `#F4F3EE` | `#2B2E33`, `#565C64` | `#A85200` | the pencil original (`original`): graphite on drafting film, before the issue |
 
 All roles pass 4.5:1 on paper (`npm run contrast`).

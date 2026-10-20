@@ -28,8 +28,11 @@ const off = (name) => {
   if (!c) { c = document.createElement('canvas'); c.width = W; c.height = H; offs.set(name, c); }
   return c;
 };
-// a digit drawn from a seeded hash 24 times a second (X15): digits in fixed slots, nothing jitters
-const scrambleChar = (c, f, seed) => String(Math.floor(hash(c * 7919 + f * 104729, seed) * 10));
+// a scrambling digit's slot shows a symbol drawn from a seeded hash 24 times a second (X15): fixed slots, nothing
+// jitters, and never another digit, so no still shows a plausible wrong number (principle 2; 2026-10-20: a still
+// before the whiteout read random digits as the answer)
+const SCRAMBLE = '#&*@';
+const scrambleChar = (c, f, seed) => SCRAMBLE[Math.floor(hash(c * 7919 + f * 104729, seed) * SCRAMBLE.length)];
 let TX = null; // lib/transitions on its own WebGL canvas
 // Draw a library transition from scene A to scene B: each painter fills one scratch canvas, the shader mixes them.
 const glx = (ctx, name, paintA, paintB, p, opts = {}) => {
