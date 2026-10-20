@@ -5,7 +5,7 @@
 - `docs/social-preview.jpg`: a 2:1 social preview card with the ten styles.
 - README: a section on why the skill runs in any agent with any model (a shell, Node.js and FFmpeg; no generation model; the template does the heavy lifting).
 - References no longer name a particular coding agent or generation model; the skill is described only by what it needs (a shell, Node.js, FFmpeg).
-- Palette preset `coral` (coral red, flat accent) for plakat, blueprint, tally, phosphor and pulse (pulse adds an optional `accentOn` list of grounds where the accent may land).
+- Palette preset `coral` (coral red, flat accent) for plakat, blueprint, tally, phosphor, pulse and ink (pulse adds an optional `accentOn` list of grounds where the accent may land).
 - halftone: the anchor is any mark — TEMPLATE.md "The mark" gains a how-to (choose the anchor, draw the mark, `box`/`anchorBox`, `lambda`/`ringAt`, fields by product), and `examples/text-model.content.js` adds a text-model film with a cursor anchor (32 s).
 - tally: the closing column is a measured stack (labels, rule, beads, line), so the rule no longer runs through the accent number's beads in any preset or mark; two rows of beads push the closing line down 4 px.
 - trace: a probe can turn into its reveal with a trace-flow (`reveal: 'flow'`), used by both examples, so the film's last 12 s no longer go without an expressive transition (last T2 to the end 16.8 s → 10.8 s).

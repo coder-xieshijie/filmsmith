@@ -46,6 +46,22 @@ export const PALETTES = {
     night: '#EEEDE6', nightInk: '#16161A', nightSoft: '#55565B', nightAccent: '#C23A16',
     mis: '#2B3BFF',
   },
+  // `coral` (2026-10-20): carbon's dark paper and light night with a brand guide's flat coral accent #FF6452
+  // (OKLCH 0.699 0.192 29.4°), used unchanged: 6.18:1 on the dark paper, and the paper is the type on its field
+  // (onAccent 6.18). On the light night the flat coral reaches only 2.49:1, so nightAccent is the same colour
+  // darkened along its own OKLCH hue and chroma to #EB5141 (0.643 0.193 29.3°, ΔE00 5.8 from #FF6452, 6.8 between
+  // #FF6452 and carbon's #FF5B2E) until it passes 3:1 with a little margin (3.09; nightInk on it 4.97). soft and
+  // nightSoft are carbon's greys tinted toward the coral's CIELAB hue (35°) at the same L* and C* about 3:
+  // #C0B8B6 9.26:1 on paper, #5B5553 6.24:1 on night. mis stays blue (#2B3BFF), so the ghost never reads as a
+  // second red. The same guide's two-stop gradient (#FF3763 → #FF7038) is not used: the bloom is one pigment.
+  coral: {
+    name: 'Coral red (inverted)',
+    fits: 'Night launches whose brand colour is a coral or pink-red; dark paper, light night section',
+    paper: '#16161A', ink: '#EEEDE6', soft: '#C0B8B6',
+    accent: '#FF6452', onAccent: '#16161A',
+    night: '#EEEDE6', nightInk: '#16161A', nightSoft: '#5B5553', nightAccent: '#EB5141',
+    mis: '#2B3BFF',
+  },
 };
 export default PALETTES;
 
