@@ -8,7 +8,7 @@ A series of International Typographic Style posters in motion: warm paper, ink, 
 |---|---|---|
 | `PLAN.md` | concept sentence, through-line, banned factory defaults, nearest reference (written by `new-film.mjs`; `npm run fit` refuses to run without it) | yes, first |
 | `content.js` | palette, chrome, sound, `scenes`; optional `bpm`, `target`, `form`, `opening` | yes |
-| `palettes.js` | five presets (names, sources and contrast in its header); pick one by id | no |
+| `palettes.js` | six presets (names, sources and contrast in its header); pick one by id | no |
 | `timing.rules.js` | `lib/timing.js` **api 3**: per type its `need` (reading through the shared reader), `steps` (every still window), turns; the events of the four tiers (`micro`, `shots`, `expressive`, `peaks`), keys, holds, hand-offs and the content mask for `renders/timing.json` | no (a new type adds a rule) |
 | `scenes.js` | the scene registry: per type its counts, character limits, timing plan (landings, reading schedule, motion table, hold move; shared by picture, sound and `fit()`) and DOM build; `planScene()` applies a scene's links and fills its long still windows with hold moves; `planFilm()` lays the fitted scenes out | no (add a type here) |
 | `devices.js` | how a scene is entered and how it ends: which library device (plakat-columns, counter-portal, step-wipe, aperture-swap, slot-rails), its window in beats, and the exact clip geometry of the two frame-level ones | no |

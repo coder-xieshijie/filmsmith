@@ -1,4 +1,4 @@
-# Morph · 一笔 (`morph`)
+# Morph (`morph`)
 
 One ink shape that never leaves the frame and is promoted one dimension per scene — a point, a line, a plane, a solid, an interface, a mark — with no cuts; a violet accent marks only the part that is changing now and is handed on like a baton. Aesthetic anchor: "like an API's whole docs site drawn in one stroke, without lifting the pen".
 Theme: tech-product-launch · Template: `assets/templates/morph/` · tempo 112–128 BPM, default 120 (length follows the copy; the shipped example fits 16 bars = 32.0 s) · timing API 3 · Status: owner-accepted 2026-10-19 (batch 4 style sample: "这个非常帅，我很喜欢。"; the sample's interface text was too small and its logo generic, both rebuilt here, see Known issues); template 2026-10-19

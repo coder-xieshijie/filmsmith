@@ -4,18 +4,18 @@ A mode is one visual language made repeatable: a mode card (this folder) that st
 
 ## Index
 
-| Mode | 中文 | Looks like | Best for | Tempo (default) · example length · shortest cut | Source film (owner-accepted) |
-|---|---|---|---|---|---|
-| [thread](thread.md) | 一线 | One vermilion line that becomes everything in turn: cursor, word, swatches, storyboard, spheres, curves, tracks, the film's own contact sheet | Showreels of a video, motion or rendering toolchain itself | 112–128 bpm (120) · 40 s · shortest cut storyboard → merge → close, 12 s | genre demo 05 (2026-10-17, best texture) |
-| [ink](ink.md) | 落墨 | Heavy condensed type slammed onto paper on every beat; an ink dot hops between words as the full stop, opens each next ground, bursts, blooms into colour, and ends as the cursor of the closing command; one claim on a whiteout | Launch teasers, one-line claims, naming moments | 120–136 bpm (124) · 35 s · shortest cut bloom → name → cta, 10.6 s | genre demo 02 (2026-10-17) |
-| [plakat](plakat.md) | 招贴 | A series of international-style posters in motion: warm paper, ink, one signal red, visible 12-column grid | Products with a clear claim and a step list; decisions and the people who make them | 112–128 bpm (120) · 64 s · shortest cut problem → claim, 11.3 s | dev-skills launch, Swiss version (2026-10-16) |
-| [blueprint](blueprint.md) | 蓝图 | One engineering drawing being drafted sheet by sheet; amber stamps approve each part | Workflows and systems with parts, inputs and outputs; anything with "architecture" | 92–108 bpm (100) · 48 s · shortest cut 2 sheets, 9.6 s | dev-skills launch, blueprint version (2026-10-16) |
-| [phosphor](phosphor.md) | 荧屏 | A night-time terminal running a launch: black, one phosphor accent (ice by default; green, amber, cyan, violet), mono and heavy display type, HUD frame | CLI tools, developer workflows, anything that runs in a terminal | 120–136 bpm (128) · 71 s · shortest cut boot → end, 10.6 s | dev-skills launch, terminal version (2026-10-16) |
-| [tally](tally.md) | 算筹 | One square per item; the same squares regroup from grid to bands, eras, a trend and a list, chapter by chapter | Counts, distributions, registry or dataset stories | 104–120 bpm (112) · 32 s · shortest cut count → columns, 12 s | genre demo 08 (2026-10-17) |
-| [trace](trace.md) | 演算 | Dark 3Blue1Brown-style diagram; an algorithm runs live and the picture is its state | How a mechanism or algorithm works, step by step | 88–104 bpm (100) · 36 s · shortest cut five scenes, 16 s | genre demo 06 (2026-10-17) |
-| [morph](morph.md) | 一笔 | One ink shape on cool grey that never leaves the frame and is promoted a dimension per scene; violet marks only the part changing now | Launches of developer tools and interface products where one source becomes the whole product | 112–128 bpm (120) · 32 s · shortest cut solid → unfold → mark, 12 s | batch 4 style sample (2026-10-19) |
-| [halftone](halftone.md) | 网点 | Newsprint, a black plate and one process ink; dots vary in size, never in grey; an anchor from the product's mark holds one point while every world is printed round it, and the pull-back lands it in the whole mark | Launches and teasers of a model or product with a mark | 112–128 bpm (120) · 32 s · shortest cut card → lockup, 12 s (8 s name only) | batch 4 style sample (2026-10-19) |
-| [pulse](pulse.md) | 节拍 | A question acted out as a query: one word a beat at a fixed anchor, grounds flipping along one hue's ramp, a highlight hopping over real candidates, one whiteout slamming the answer in amber on the drop | Version releases that answer one benchmark question; a single measured conclusion | 112–120 bpm (120) · 32 s · shortest cut ask → ask → search → reveal, 12 s | batch 4 style sample (2026-10-19) |
+| Mode | Looks like | Best for | Tempo (default) · example length · shortest cut | Source film (owner-accepted) |
+|---|---|---|---|---|
+| [thread](thread.md) | One vermilion line that becomes everything in turn: cursor, word, swatches, storyboard, spheres, curves, tracks, the film's own contact sheet | Showreels of a video, motion or rendering toolchain itself | 112–128 bpm (120) · 40 s · shortest cut storyboard → merge → close, 12 s | genre demo 05 (2026-10-17, best texture) |
+| [ink](ink.md) | Heavy condensed type slammed onto paper on every beat; an ink dot hops between words as the full stop, opens each next ground, bursts, blooms into colour, and ends as the cursor of the closing command; one claim on a whiteout | Launch teasers, one-line claims, naming moments | 120–136 bpm (124) · 35 s · shortest cut bloom → name → cta, 10.6 s | genre demo 02 (2026-10-17) |
+| [plakat](plakat.md) | A series of international-style posters in motion: warm paper, ink, one signal red, visible 12-column grid | Products with a clear claim and a step list; decisions and the people who make them | 112–128 bpm (120) · 64 s · shortest cut problem → claim, 11.3 s | dev-skills launch, Swiss version (2026-10-16) |
+| [blueprint](blueprint.md) | One engineering drawing being drafted sheet by sheet; amber stamps approve each part | Workflows and systems with parts, inputs and outputs; anything with "architecture" | 92–108 bpm (100) · 48 s · shortest cut 2 sheets, 9.6 s | dev-skills launch, blueprint version (2026-10-16) |
+| [phosphor](phosphor.md) | A night-time terminal running a launch: black, one phosphor accent (ice by default; green, amber, cyan, violet), mono and heavy display type, HUD frame | CLI tools, developer workflows, anything that runs in a terminal | 120–136 bpm (128) · 71 s · shortest cut boot → end, 10.6 s | dev-skills launch, terminal version (2026-10-16) |
+| [tally](tally.md) | One square per item; the same squares regroup from grid to bands, eras, a trend and a list, chapter by chapter | Counts, distributions, registry or dataset stories | 104–120 bpm (112) · 32 s · shortest cut count → columns, 12 s | genre demo 08 (2026-10-17) |
+| [trace](trace.md) | Dark 3Blue1Brown-style diagram; an algorithm runs live and the picture is its state | How a mechanism or algorithm works, step by step | 88–104 bpm (100) · 36 s · shortest cut five scenes, 16 s | genre demo 06 (2026-10-17) |
+| [morph](morph.md) | One ink shape on cool grey that never leaves the frame and is promoted a dimension per scene; violet marks only the part changing now | Launches of developer tools and interface products where one source becomes the whole product | 112–128 bpm (120) · 32 s · shortest cut solid → unfold → mark, 12 s | batch 4 style sample (2026-10-19) |
+| [halftone](halftone.md) | Newsprint, a black plate and one process ink; dots vary in size, never in grey; an anchor from the product's mark holds one point while every world is printed round it, and the pull-back lands it in the whole mark | Launches and teasers of a model or product with a mark | 112–128 bpm (120) · 32 s · shortest cut card → lockup, 12 s (8 s name only) | batch 4 style sample (2026-10-19) |
+| [pulse](pulse.md) | A question acted out as a query: one word a beat at a fixed anchor, grounds flipping along one hue's ramp, a highlight hopping over real candidates, one whiteout slamming the answer in amber on the drop | Version releases that answer one benchmark question; a single measured conclusion | 112–120 bpm (120) · 32 s · shortest cut ask → ask → search → reveal, 12 s | batch 4 style sample (2026-10-19) |
 
 ## Choosing a mode
 
@@ -43,7 +43,7 @@ Every mode chosen by form (ink, plakat, thread) still draws at least one scene f
 ## Mode card template
 
 ```markdown
-# <Name> · <中文名> (`<id>`)
+# <Name> (`<id>`)
 
 One line: what it looks like. Aesthetic anchor: "like <reference>".
 Theme: <theme> · Template: assets/templates/<mode>/ · Tempo range; length from content · Status and verdict dates

@@ -1,4 +1,4 @@
-# Tally · 算筹 (`tally`)
+# Tally (`tally`)
 
 One square per item; the same squares regroup from a grid into category bands, a sorted grid, the axis of a bar chart and a rule under the closing numbers, chapter by chapter. Aesthetic anchor: "like a data-journalism unit chart that keeps its marbles between charts".
 Theme: tech-explainer · Template: `assets/templates/tally/` · Length follows content: 104–120 bpm (default 112), whole beats per scene, 1-bar phrase, timing API 3 (≤ 5 primary words a state, holds ≤ 2 beats, compositions ≤ 6 s, an entry every 8–12 s); the example fits to 15 bars, 32.1 s (30.0 s under API 2) · Accepted 2026-10-17 (genre demo 08: "I really like the squares-to-bar-chart effect"); pacing tiers and transitions owner-approved 2026-10-19 (batch 4)
@@ -45,7 +45,7 @@ Checked by `npm run palettes` (`standard`): text ≥ 4.5:1 and graphics ≥ 3:1 
 
 ## Variants
 
-**Colour**: the three palette presets above (`navy-amber`, `paper-red`, `night-teal`); the accent keeps its one meaning in each. **Form**: one content field, `mark`, the shape of one item, independent of the palette (2026-10-19; `TEMPLATE.md` Film-level slots).
+**Colour**: the four palette presets above (`navy-amber`, `paper-red`, `night-teal`, `coral`); the accent keeps its one meaning in each. **Form**: one content field, `mark`, the shape of one item, independent of the palette (2026-10-19; `TEMPLATE.md` Film-level slots).
 
 | `mark` | What changes | Choose it when | Source |
 |---|---|---|---|

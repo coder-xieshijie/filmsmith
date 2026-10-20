@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.0 — 2026-10-20
+
+- `SKILL.md`, the mode cards and the Chinese README drop the Chinese style names; the styles go by their English names everywhere.
+- Mode cards and `TEMPLATE.md` count the `coral` preset (plakat, blueprint, tally, phosphor, pulse, ink); pulse's card explains `accentOn`.
+- README: the ten demos' music has been listened to and signed off (2026-10-20), so the "not yet signed off by ear" limit is gone.
 - `docs/social-preview.jpg`: a 2:1 social preview card with the ten styles.
 - README: a section on why the skill runs in any agent with any model (a shell, Node.js and FFmpeg; no generation model; the template does the heavy lifting).
 - References no longer name a particular coding agent or generation model; the skill is described only by what it needs (a shell, Node.js, FFmpeg).

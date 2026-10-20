@@ -1,4 +1,4 @@
-# Pulse · 节拍 (`pulse`)
+# Pulse (`pulse`)
 
 A question acted out as a query: huge condensed type asks it one word per beat at a fixed anchor while the ground flips along one hue's lightness ramp, a highlight hops over the real candidates, the answer locks, and the film's one whiteout slams it in amber on the music's drop; the camera then pushes through the answer's own 0 into the figures that explain it, and the name lands again. Aesthetic anchor: "like a benchmark query run live, cut to a beat".
 Theme: tech-product-launch · Template: `assets/templates/pulse/` · tempo 112–120 BPM, default 120 (length follows the copy; the shipped example fits 16 bars = 32.0 s, the shortest cut 6 bars = 12 s) · timing API 3 · Status: owner-accepted 2026-10-19 (batch 4 style sample); template 2026-10-19
@@ -43,7 +43,7 @@ Checked by `npm run palettes` (`standard`, WCAG 2.2): every text role on every g
 
 ## Variants
 
-**Colour**: the three presets above (`indigo` default; `petrol`; `graphite`).
+**Colour**: the four presets above (`indigo` default; `petrol`; `graphite`; `coral`, whose optional `accentOn` lists the grounds the accent may land on, here `r0` and `r1`: the flat brand coral cannot also clear 3:1 on `r2`, see the header of `palettes.js`).
 
 **Form: `aperture`**, the shape of every mark that opens or holds something (2026-10-19, not yet seen by the owner; the default renders as the template did before the field existed). Choreography, timing, type and colours are the same.
 

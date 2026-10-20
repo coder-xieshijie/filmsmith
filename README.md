@@ -31,7 +31,7 @@ Each style is one visual language with palette presets, one form variant, a scen
 | <a href="https://youtu.be/raqJMXgK4vU"><img src="docs/previews/filmsmith-halftone-preview.webp" width="320"></a> | **[Halftone](references/modes/halftone.md)** | A two-ink print in motion: newsprint, black and one process ink; a piece of the mark holds still while every world is printed round it, then the camera pulls back to the whole mark | Model and product launches: a few features, one number, the name |
 | <a href="https://youtu.be/XrFmTVEyi94"><img src="docs/previews/filmsmith-pulse-preview.webp" width="320"></a> | **[Pulse](references/modes/pulse.md)** | A question run as a query: one word a beat, grounds flipping along one hue, a highlight hopping over real candidates, one whiteout slamming the answer in on the drop | Version releases and benchmark answers: one measured conclusion |
 
-Every style comes in variants: colour presets (Phosphor in ice, green, amber, cyan or violet, for example) and one form axis — Thread's line even or swelled, Ink's type compressed or extended, Plakat square or diagonal, Blueprint in ink or pencil, Phosphor on a CRT raster or a flat panel, Tally in squares, dots or Isotype glyphs, Trace drawn as vectors or sketched, Morph with round or cut corners, Halftone in round, square or line screens, Pulse with cut or round apertures. Each style card lists its use cases with a worked example.
+Every style comes in variants: colour presets (Phosphor in ice, green, amber, cyan, violet or coral, for example) and one form axis — Thread's line even or swelled, Ink's type compressed or extended, Plakat square or diagonal, Blueprint in ink or pencil, Phosphor on a CRT raster or a flat panel, Tally in squares, dots or Isotype glyphs, Trace drawn as vectors or sketched, Morph with round or cut corners, Halftone in round, square or line screens, Pulse with cut or round apertures. Each style card lists its use cases with a worked example.
 
 ## Any agent, any model
 
@@ -115,7 +115,6 @@ theory of taste ──▶ ten principles ──▶ ten styles ──▶ template
 
 - Landscape 16:9 at 1920×1080 only.
 - On-screen text is English in this version.
-- The synthesised music has been measured, not yet signed off by ear.
 
 ## License
 

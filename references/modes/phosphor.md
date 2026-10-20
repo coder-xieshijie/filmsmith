@@ -1,4 +1,4 @@
-# Phosphor · 荧屏 (`phosphor`)
+# Phosphor (`phosphor`)
 
 A product launch inside a night-time terminal: near-black ground, one phosphor accent for what passed, mono code against heavy display type, a HUD frame running the whole film, energy shots drawn as light, cut brisk. Aesthetic anchor: "like a CI run going green on a CRT, cut as a keynote opener".
 Theme: tech-product-launch · Template: `assets/templates/phosphor/` (timing API 3) · length follows the copy, 120–136 BPM (default 128); the example fits to 38 bars, 71.25 s; the demo (reseed) 22 bars, 42.6 s at 124 · Source film accepted 2026-10-16 (dev-skills launch, terminal version, English v2); code-only shots matched it in a blind comparison 2026-10-16; template 2026-10-17; reading tiers, type scale and the split question page 2026-10-18; batch 2 options settled, brisk limits, two more presets 2026-10-18; `ice` chosen as default by the owner 2026-10-18; the four tiers of pacing and the batch 4 transitions approved 2026-10-19, migrated the same day (`run`, `pick`, `scope` pages; glitch cut as a counted T2 device)
@@ -70,7 +70,7 @@ Contrast (`standard`, WCAG 2.2, computed on bg / panel):
 
 ## Variants
 
-**Colour**: the five presets above (`ice` default; `phosphor`, `amber`, `cyan`, `violet`), with their contrast and collision checks.
+**Colour**: the six presets above (`ice` default; `phosphor`, `amber`, `cyan`, `violet`, `coral`), with their contrast and collision checks.
 
 **Form: `screen`**, the display the terminal is shown on (2026-10-19, not yet seen by the owner). Palette, type, sizes, layout, choreography, timing, sound and the energy shots stay; only the display's own marks change.
 

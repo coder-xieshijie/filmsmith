@@ -1,4 +1,4 @@
-# Halftone · 网点 (`halftone`)
+# Halftone (`halftone`)
 
 A two-ink print in motion: newsprint, one black plate and one process ink; dots that vary in size, never in grey; one anchor — a piece of the product's mark, printed in the process ink — holds one point of the screen while every world is printed round it, until the camera pulls back and the anchor lands in the whole mark. Aesthetic anchor: "like a newspaper's launch-day insert watched through a loupe, pulled back to arm's length on the last beat".
 Theme: tech-product-launch · Template: `assets/templates/halftone/` · tempo 112–128 BPM, default 120 (length follows the copy; the shipped example fits 16 bars = 32.0 s) · timing API 3 · Status: owner-accepted 2026-10-19 (batch 4 style sample; the first screen's dot grid was judged too dense and is rebuilt here, see Known issues); template 2026-10-19

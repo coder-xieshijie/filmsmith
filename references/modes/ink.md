@@ -1,4 +1,4 @@
-# Ink · 落墨 (`ink`)
+# Ink (`ink`)
 
 Heavy extra-condensed type slammed onto warm paper on every beat; an ink dot hops between the words as their full stop, then transforms — it opens each next ground under a word, splits into stops, swallows a word and bursts into the next, sinks and blooms into an accent field, holds still while the world is scanned in round it, stretches into a wipe, punches an iris — and ends as the cursor of the closing URL or command. The claim lands on the film's one whiteout, and the camera leaves through a counter of its type. Aesthetic anchor: "like a letterpress teaser where the full stop is the protagonist".
 Theme: tech-product-launch · Template: `assets/templates/ink/` · length fitted from content at 124 bpm (range 120–136); timing API 3 (the four tiers of change, 2026-10-19); the shipped example fits 18 bars = 34.8 s (api 2: 16 bars = 31.0 s) · Accepted 2026-10-17 (genre demo 02: "the first half an anchor (ink dot) hops between words; then the anchor's motion turns into a blue colour field. Good — explore more of these effects for transitions between scenes")
@@ -43,7 +43,7 @@ Checked by `npm run palettes` (`standard`): text ≥ 4.5:1 (ink, soft, onAccent 
 
 ## Variants
 
-**Colour**: the four presets above (`cobalt` default; `vermilion`, `forest`, `carbon` inverted).
+**Colour**: the five presets above (`cobalt` default; `vermilion`, `forest`, `carbon` and `coral` inverted).
 
 **Form: `typeWidth`**, which end of Archivo's width axis carries the display type (2026-10-19, not yet seen by the owner). Family, weight, sizes, floors, grid, the dot, the choreography and the timing stay; only the width, the tracking and word space that width needs, and the direction of the name's width jumps change.
 

@@ -2,7 +2,7 @@
 name: filmsmith
 description: Short technical films made by any coding agent, drawn and scored entirely in code (HyperFrames) from a mode template. Ten modes — Thread, Ink, Plakat, Blueprint, Phosphor, Tally, Trace, Morph, Halftone, Pulse — each with palette presets, a form variant, a scene registry and a renderable template; length follows the content, pace is brisk, every render is measured. Use when asked to make, remake or restyle a launch, promo, teaser, showreel, data story or explainer video for a technical product, or to choose a visual style for one.
 descriptions:
-  zh-Hans: 任何编码 Agent 都能用的技术短片制作：画面和配乐全部由代码生成（HyperFrames），从模式模板出发。十种模式：一线 Thread、落墨 Ink、招贴 Plakat、蓝图 Blueprint、荧屏 Phosphor、算筹 Tally、演算 Trace、一笔 Morph、网点 Halftone、节拍 Pulse，各带配色预设、形态变体、登记场景库和可直接渲染的模板；片长由内容决定，节奏轻快，每次渲染都有测量。用于给技术产品制作、重做或换风格的发布片、宣传片、预告、showreel、数据片、讲解片，或为一支片选视觉风格。
+  zh-Hans: 任何编码 Agent 都能用的技术短片制作：画面和配乐全部由代码生成（HyperFrames），从模式模板出发。十种模式：Thread、Ink、Plakat、Blueprint、Phosphor、Tally、Trace、Morph、Halftone、Pulse，各带配色预设、形态变体、登记场景库和可直接渲染的模板；片长由内容决定，节奏轻快，每次渲染都有测量。用于给技术产品制作、重做或换风格的发布片、宣传片、预告、showreel、数据片、讲解片，或为一支片选视觉风格。
 displayNames:
   zh-Hans: 片匠 Filmsmith
 ---
@@ -22,18 +22,18 @@ The house style for every mode: **brisk, direct and clean** — something change
 
 ## Modes
 
-| Mode | 中文 | Looks like | Form variant | Pick it for |
-|---|---|---|---|---|
-| [thread](references/modes/thread.md) | 一线 | One line that becomes everything, no cuts | `thread`: even rule or swelled line | Showreels of a video, motion or rendering toolchain |
-| [ink](references/modes/ink.md) | 落墨 | Heavy type slammed on every beat, an ink dot that blooms into colour | `typeWidth`: compressed or extended type | Name reveals, launch stings, one-line claims |
-| [plakat](references/modes/plakat.md) | 招贴 | Moving international-style posters, one signal colour | `form`: square or diagonal fields | A claim plus steps and the person who decides |
-| [blueprint](references/modes/blueprint.md) | 蓝图 | One engineering drawing drafted sheet by sheet, amber stamps | `linework`: ink or pencil | Systems and workflows with parts and sign-offs |
-| [phosphor](references/modes/phosphor.md) | 荧屏 | Night terminal, one phosphor accent, launch HUD | `screen`: CRT raster or flat | CLI and developer tools |
-| [tally](references/modes/tally.md) | 算筹 | One square per item, regrouping chart to chart | `mark`: square, dot or Isotype glyph | Counts, shares, dataset stories |
-| [trace](references/modes/trace.md) | 演算 | Dark live diagram of an algorithm's state | `stroke`: vector or sketch | How a mechanism or algorithm works |
-| [morph](references/modes/morph.md) | 一笔 | One ink shape climbing point → line → plane → solid → interface → mark, no cuts | `corners`: round or cut | Developer tools and interface products: one source becomes every surface |
-| [halftone](references/modes/halftone.md) | 网点 | Two-ink print: a piece of the mark holds still while every world is printed round it, then pulls back to the whole mark | `dot`: round, square or line screen | Model and product launches: a few features, one number, the name |
-| [pulse](references/modes/pulse.md) | 节拍 | A question acted out as a query: one word a beat, grounds flipping along one hue, one whiteout for the answer | `aperture`: cut or round | Version releases and benchmark answers: one measured conclusion |
+| Mode | Looks like | Form variant | Pick it for |
+|---|---|---|---|
+| [thread](references/modes/thread.md) | One line that becomes everything, no cuts | `thread`: even rule or swelled line | Showreels of a video, motion or rendering toolchain |
+| [ink](references/modes/ink.md) | Heavy type slammed on every beat, an ink dot that blooms into colour | `typeWidth`: compressed or extended type | Name reveals, launch stings, one-line claims |
+| [plakat](references/modes/plakat.md) | Moving international-style posters, one signal colour | `form`: square or diagonal fields | A claim plus steps and the person who decides |
+| [blueprint](references/modes/blueprint.md) | One engineering drawing drafted sheet by sheet, amber stamps | `linework`: ink or pencil | Systems and workflows with parts and sign-offs |
+| [phosphor](references/modes/phosphor.md) | Night terminal, one phosphor accent, launch HUD | `screen`: CRT raster or flat | CLI and developer tools |
+| [tally](references/modes/tally.md) | One square per item, regrouping chart to chart | `mark`: square, dot or Isotype glyph | Counts, shares, dataset stories |
+| [trace](references/modes/trace.md) | Dark live diagram of an algorithm's state | `stroke`: vector or sketch | How a mechanism or algorithm works |
+| [morph](references/modes/morph.md) | One ink shape climbing point → line → plane → solid → interface → mark, no cuts | `corners`: round or cut | Developer tools and interface products: one source becomes every surface |
+| [halftone](references/modes/halftone.md) | Two-ink print: a piece of the mark holds still while every world is printed round it, then pulls back to the whole mark | `dot`: round, square or line screen | Model and product launches: a few features, one number, the name |
+| [pulse](references/modes/pulse.md) | A question acted out as a query: one word a beat, grounds flipping along one hue, one whiteout for the answer | `aperture`: cut or round | Version releases and benchmark answers: one measured conclusion |
 
 Every mode has colour presets (on its card) and one form variant, both set in `content.js`; the default renders as before. Every card lists its use cases with a worked example and marks the best fit. The names before 2026-10-19 (`thread-reel`, `ink-beat`, `swiss-poster`, `blueprint-drafting`, `terminal-launch`, `unit-data`, `diagram-explainer`) still work in `new-film`.
 

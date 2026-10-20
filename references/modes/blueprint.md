@@ -1,4 +1,4 @@
-# Blueprint · 蓝图 (`blueprint`)
+# Blueprint (`blueprint`)
 
 One engineering drawing drafted sheet by sheet: 6–9 sheets on one large blueprint, the camera travelling the drafting route between them, every line and letter drawing itself, and stamps landing on the beat. Aesthetic anchor: "like a drawing office's general arrangement, detail and assembly sheets, filmed while being drawn".
 Theme: tech-product-launch · Template: `assets/templates/blueprint/` · Length follows content at 92–108 BPM (default 100), scenes in whole beats, 2-bar phrase (timing API 3, the four tiers of change); the shipped placeholder example fits to 48 s (20 bars at 100 BPM; api 2: 52.8 s; batch 1: 86.4 s) · Source film accepted 2026-10-16 (dev-skills launch, blueprint version); this code template rebuilt 2026-10-17, revised 2026-10-18 after the check of the seven modes, and made brisk 2026-10-18 after the owner's review of batch 1 ("the waits between sheets are far too long"); the brisk version is not yet reviewed by the owner. 2026-10-19: the `linework` form variant and the excerpt (a 2–9 sheet cut-down, 9.6 s for the shortest), neither yet seen by the owner. 2026-10-19 (batch 4, after the owner approved the four tiers and the 26 transition samples): timing API 3, the pencil original issued as the print by a person's stamp (`original`, `issue`, the `vellum` preset), two sheet types built on library hand-offs (`interface`, `stages`), the release entered under a parallel rule; not yet seen by the owner. 2026-10-19 (owner's review of the ten demos: "satisfied overall", asked only why it starts white and turns blue; the owner kept the white → blue as the default, reason under Signature transformations): the checklist's probe run (a lamp crossing the inspection record, `blueprint-expose`), a fifth T2 that closes the 19.8 s gap between the flood and the rule; not yet seen by the owner.
@@ -43,7 +43,7 @@ Every text role ≥ 4.5:1 on paper (ink 10.7–15.2, line 6.0–10.1, accent 4.9
 
 ## Variants
 
-**Colour and print process**: the four presets above (`cyanotype` default; `diazo`, `blueline`, `graphite`).
+**Colour and print process**: the six presets above (`cyanotype` default; `diazo`, `blueline`, `vellum`, `coral`, `graphite`).
 
 **Form: `linework`**, the drafting instrument the sheets are drawn with (2026-10-19, not yet seen by the owner). The palette, the HUD, the lettering, the stamps, the choreography, the timing and the sound stay; only how each line of a sheet and of the route is drawn changes. Every line ends where and when it does in `ink`, so `npm run fit` gives the same table and every landing keeps its frame.
 

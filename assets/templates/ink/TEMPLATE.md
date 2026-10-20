@@ -191,7 +191,7 @@ first sound, the drip, is at beat 0.08).
 
 ## Variants
 
-Colour: the four presets in `palettes.js`. Form: `typeWidth`, which end of Archivo's `wdth` axis carries the
+Colour: the five presets in `palettes.js`. Form: `typeWidth`, which end of Archivo's `wdth` axis carries the
 display type (mode card, Variants). Default `'compressed'` renders exactly as before the option existed
 (stills compared pixel for pixel, 2026-10-19).
 

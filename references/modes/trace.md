@@ -1,4 +1,4 @@
-# Trace · 演算 (`trace`)
+# Trace (`trace`)
 
 A dark 3Blue1Brown-style diagram in which an algorithm runs live and the picture is its state: chips fuse, a histogram counts, a rule list grows, a token bar shrinks. Aesthetic anchor: "like a 3Blue1Brown scene where the numbers are produced on screen by the actual run".
 Theme: tech-explainer · Template: `assets/templates/trace/` (timing API 3) · length follows content, 88–104 bpm (default 96); the example fits to 36 s (15 bars at 100 bpm, scenes 4–7 beats) · Accepted 2026-10-17 (genre demo 06: "this motion style is also good, and its music is quite good")

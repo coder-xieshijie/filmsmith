@@ -1,4 +1,4 @@
-# Thread · 一线 (`thread`)
+# Thread (`thread`)
 
 One vermilion line that becomes everything in turn: caret, the loop that carries the brief round, word, swatches, storyboard, glossy spheres, the ruler that presses the stage name into itself, easing curves, edit tracks and playhead, marbled ink, a colour flood, the film's own contact sheet, a file card, the bar a blade cuts into the name, and the caret that types the URL and underlines it. Aesthetic anchor: "like a motion designer's reel cut as one unbroken transformation, where every link is a step of the tool being shown".
 Theme: tech-product-launch / reel · Template: `assets/templates/thread/` · length fitted to the copy at 112–128 bpm (default 120), timing API 3 (2026-10-19); the example fits to 40 s (20 bars at 120), the short chain to 6 bars (12 s at 120) · Accepted 2026-10-17 (genre demo 05: "the best overall texture of all; many transitions and they are very smooth. I don't know what it is trying to say, but I like this motion and form")
