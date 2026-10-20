@@ -19,9 +19,10 @@
 //   ikb     ink/paper 16.4  grey/paper 6.0  accent/paper 6.6                       onAccent(paper)/accent 6.6
 //   orange  ink/paper 16.4  grey/paper 6.0  accent/paper 3.0 (large/blocks only)  onAccent(ink)/accent 5.4
 //   clay    ink/paper 16.4  grey/paper 6.0  accent/paper 3.05 (large/blocks only) onAccent(ink)/accent 5.4
+//   coral   ink/paper 16.4  grey/paper 6.0  accent/paper 3.05 (large/blocks only) onAccent(ink)/accent 5.4
 //   night   ink/paper 15.3  grey/paper 6.9  accent/paper 5.5                       onAccent(paper)/accent 5.5
-//   promptOnInk on the ink block: signal 5.3, ikb 7.9, orange 5.4, clay 5.4, night 4.6 (all >= 4.5, 2026-10-18;
-//   clay 2026-10-19)
+//   promptOnInk on the ink block: signal 5.3, ikb 7.9, orange 5.4, clay 5.4, coral 5.4, night 4.6 (all >= 4.5,
+//   2026-10-18; clay and coral 2026-10-19)
 //
 // Names and sources (2026-10-18, theory 05 §5.2; ids unchanged). `signal` is "Swiss red": #FF3B1F approximates the
 // hue of the Swiss federal design manual's red #FF0000 (ΔE00 3.8); it is not RAL 3001 Signal red, a different,
@@ -32,6 +33,11 @@
 // 2026-10-19 from the sample #D97757 (OKLCH 0.672 0.131 38.8°, only 2.72:1 on paper), darkened along its own
 // OKLCH hue and chroma to #CF6E4E (0.643 0.131 38.9°, ΔE00 3.1 from the sample) until it passes 3:1 on paper with
 // a little margin (3.05). Ink stays the text on it (5.39), so it is the prompt glyph as well (5.39 on ink).
+// `coral` is "Coral red" (2026-10-19), from a brand guide's flat accent #FF6452 (OKLCH 0.699 0.192 29.4°, only
+// 2.54:1 on paper), darkened along its own OKLCH hue and chroma to #EE5444 (0.652 0.192 29.2°, ΔE00 4.8 from the
+// sample, 5.8 from `signal`, 8.2 from `clay`) until it passes 3:1 on paper with the same margin as `clay` (3.05).
+// Ink is the text on it (5.38) and it is the prompt glyph (5.38 on ink). The same guide's gradient (#FF3763 →
+// #FF7038) is not used: the mode is flat print (no gradients).
 
 export default {
   signal: {
@@ -64,6 +70,14 @@ export default {
     paper: '#F2EFE8', ink: '#111111', grey: '#5E5A53',
     accent: '#CF6E4E', onAccent: '#111111',
     onInk: '#F2EFE8', mutedOnInk: '#BDB8AE', promptOnInk: '#CF6E4E',
+    gridAlpha: 0.085, hairAlpha: 0.12,
+  },
+  coral: {
+    name: 'Coral red',
+    fits: 'A bright warm red-coral; launches whose brand colour is a coral or pink-red. #FF6452 darkened to pass 3:1.',
+    paper: '#F2EFE8', ink: '#111111', grey: '#5E5A53',
+    accent: '#EE5444', onAccent: '#111111',
+    onInk: '#F2EFE8', mutedOnInk: '#BDB8AE', promptOnInk: '#EE5444',
     gridAlpha: 0.085, hairAlpha: 0.12,
   },
   night: {

@@ -39,6 +39,7 @@ Best fit: the registry is a process told in a terminal — questions, locks, a r
 | `ice` | P4 ice white (default) | any terminal tool; security, data, cloud | `#04080C` / `#0B1724` | `#E6EEF6` · `#AAB0B6` · `#848C94` | `#88BFFF` · `#DCEBFF` · `#3F86D6` | `#03101C` | `#FF7070` · `#F2CF6B` · `#C9B4FF` | `#EEF6FD` · `#A7B6C4` |
 | `cyan` | ANSI cyan | networking, containers, APIs, observability | `#040A0B` / `#051A1D` | `#E5F1F2` · `#97B3B6` · `#749297` | `#05D8E3` · `#B9ECF3` · `#009BA4` | `#001416` | `#FF6B6B` · `#F2CF6B` · `#C9B4FF` | `#EBF7F8` · `#A5B9BC` |
 | `violet` | Theme violet | AI and agent tools, editors | `#09070D` / `#181321` | `#EFEEF3` · `#AEABB4` · `#8E8A94` | `#C9BCF3` · `#E8E1F7` · `#9086AF` | `#120C1C` | `#FF7070` · `#F2CF6B` · `#8FD0FF` | `#F5F4FC` · `#B6B2BB` |
+| `coral` | Coral red | a product whose own colour is a coral or pink-red (`bad` moves to violet) | `#0D0706` / `#21110F` | `#F7EBEA` · `#BFA6A2` · `#A08480` | `#FF6452` · `#FEC3AD` · `#FF3763` | `#1C0A07` | `#C9B4FF` · `#F2CF6B` · `#8FD0FF` | `#FEF2F1` · `#C2B0AC` |
 
 Also per preset: `bgLo` corners, `line` panel borders (decorative, ≈1.5:1), `panel` fill. `titleHi` and `titleLo` are the top and bottom stops of the neutral headline gradient.
 

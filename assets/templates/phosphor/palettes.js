@@ -23,6 +23,7 @@
 //   ice       ink 17.1/16.2  muted 9.2/8.7  dim 5.9/5.6  accent 10.5/9.9   hi 16.6/15.7  bad 7.5/7.1  find 13.3/12.6  key 11.0/10.4  on/accent 10.0
 //   cyan      ink 17.3/16.5  muted 9.0/8.5  dim 6.0/5.7  accent 11.3/10.8  hi 15.5/14.8  bad 7.2/6.9  find 13.2/12.6  key 10.9/10.4  on/accent 10.7
 //   violet    ink 17.4/16.7  muted 8.9/8.5  dim 5.9/5.7  accent 11.4/11.0  hi 15.8/15.1  bad 7.4/7.1  find 13.3/12.7  key 12.1/11.6  on/accent 10.9
+//   coral     ink 17.2/16.5  muted 8.8/8.4  dim 5.8/5.6  accent 6.9/6.6   hi 13.0/12.5  bad 10.9/10.5 find 13.2/12.7  key 12.0/11.6  on/accent 6.6
 //   Panel borders (line) are decorative, about 1.5:1; nothing is read from them. The grounds are unchanged
 //   (proposal T2, lifting them toward #121212, was not taken: it weakens the night-time terminal).
 //
@@ -45,6 +46,17 @@
 //   cyan and violet derive every other role from the accent with phosphor's relations: neutrals keep phosphor's
 //   OKLCH lightness and chroma with the hue turned to the accent's (violet's text tones at 0.45–0.6 of that
 //   chroma, so muted stays ΔE00 ≥ 15 from the accent, as ice does); hi / deep / on as above.
+//   coral    #FF6452: "Coral red" (2026-10-19), a brand guide's flat accent taken as is (OKLCH 0.699 0.192 29.4°,
+//            ΔE00 0 from the guide); 6.9:1 on bg, the lowest accent here but above 4.5 for text of any size. The same
+//            guide's gradient #FF3763 → #FF7038 gives the gradient roles: `deep` is its first stop #FF3763 as is
+//            (OKLCH 0.658 0.232 14.8°, 5.7:1 on bg, large type only, as every `deep`), `hi` keeps phosphor's
+//            relation (L moved 55 % of the way to white, chroma × 0.39) at the hue of its last stop (40.4°, not
+//            +5°), so the headline and glow gradient runs from the guide's orange end to its pink end. Neutrals,
+//            `on` and `titleHi` with phosphor's relations at the accent's hue (text tones at full chroma: muted
+//            already sits ΔE00 22.5 from the accent). `bad` leaves red, which would read as the accent (phosphor's
+//            #FF6B6B is ΔE00 5.7 from it): violet #C9B4FF (ΔE00 38 from the accent), with `key` the blue
+//            #8FD0FF (ΔE00 20.9 from bad), so the RGB split is cool against the warm accent. Nearest other
+//            accent: amber, ΔE00 27.6.
 
 export default {
   phosphor: {
@@ -96,5 +108,15 @@ export default {
     accent: '#C9BCF3', hi: '#E8E1F7', deep: '#9086AF', on: '#120C1C',
     bad: '#FF7070', find: '#F2CF6B', key: '#8FD0FF',
     titleHi: '#F5F4FC', titleLo: '#B6B2BB',
+  },
+  coral: {
+    name: 'Coral red',
+    fits: 'A product whose own colour is a coral or pink-red; the whole film warm. The accent still means passed.',
+    bg: '#0D0706', bgHi: '#21110F', bgLo: '#080404',
+    ink: '#F7EBEA', muted: '#BFA6A2', dim: '#A08480',
+    line: '#412723', panel: '#170C0B',
+    accent: '#FF6452', hi: '#FEC3AD', deep: '#FF3763', on: '#1C0A07',
+    bad: '#C9B4FF', find: '#F2CF6B', key: '#8FD0FF',
+    titleHi: '#FEF2F1', titleLo: '#C2B0AC',
   },
 };

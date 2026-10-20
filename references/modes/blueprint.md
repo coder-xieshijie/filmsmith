@@ -37,8 +37,9 @@ Best fit: the mode's two meanings of a stamp (amber for a person's decision, lin
 | `blueline` | Blueline print | light pages, documentation, print-like | `#C5CED9` · `#F3F5F1` · `#14306A` · `#2D5CA3` · `#3C5479` · `#A85200` |
 | `graphite` | Graphite film | when blue clashes with the brand | `#0F1114` · `#1A1E23` · `#ECEEF1` · `#A9B6C3` · `#BCC4CD` · `#FFB547` |
 | `vellum` | Vellum original | the pencil original before an issue (`original`), not a print | `#D7D8D3` · `#F4F3EE` · `#2B2E33` · `#565C64` · `#474C54` · `#A85200` |
+| `coral` | Coral red (oxblood ground) | a brand whose colour is a warm red; a blue ground would make a red accent vibrate | `#220A0B` · `#311414` · `#FAF1EE` · `#BACAD4` · `#DCCDC9` · `#FF6452` |
 
-Every text role ≥ 4.5:1 on paper (ink 10.7–15.2, line 6.0–8.4, accent 4.9–10.2); accent ≥ 90° of hue from the line colour. Grid: 40 px fine and 200 px major lines in the line colour at the preset's alpha; the fine grid fades out below 0.82× to avoid moiré. *(Source palette: `borrowed (source)`; other presets: `draft`; `vellum` 2026-10-19: ink 12.3, line 6.1, muted 7.8, accent 4.9 on its paper, `draft`.)*
+Every text role ≥ 4.5:1 on paper (ink 10.7–15.2, line 6.0–10.1, accent 4.9–10.2); accent ≥ 90° of hue from the line colour. Grid: 40 px fine and 200 px major lines in the line colour at the preset's alpha; the fine grid fades out below 0.82× to avoid moiré. *(Source palette: `borrowed (source)`; other presets: `draft`; `vellum` 2026-10-19: ink 12.3, line 6.1, muted 7.8, accent 4.9 on its paper, `draft`; `coral` 2026-10-19: a brand guide's flat coral `#FF6452` used exactly (ΔE00 0; its gradient is not used, the accent is one flat ink), on a deep oxblood ground in the accent's own hue with cool silver line work 163° of hue away; ink 15.2, line 10.1, muted 11.0, accent 5.8 on its paper, `derived`.)*
 
 ## Variants
 

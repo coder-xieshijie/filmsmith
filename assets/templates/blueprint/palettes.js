@@ -65,6 +65,31 @@ export default {
     vignette: { color: '#5A5C58', alpha: 0.22 },
     dark: false,
   },
+  // `coral` is "Coral red" (2026-10-19), for a brand whose colour is a warm red. The accent is a brand guide's flat
+  // coral #FF6452 (OKLCH 0.699 0.192 29.4°), used exactly (ΔE00 0): on this ground it passes as text (5.8:1), so it is
+  // not darkened. A cool blue ground makes a red accent vibrate, so the ground keeps the mode's logic (a reprographic
+  // negative: light lines in two weights on a dark ground, one accent) on a deep oxblood drawing ground in the
+  // accent's own hue (paper OKLCH 0.235 0.048 20°, bg 0.185 0.040 20°): the accent stands out by lightness and chroma,
+  // not by a clash of hues. The line work is a cool silver (OKLCH 0.83 0.022 235°), 163° of hue from the accent (the
+  // contrast tool's hue), so a line never reads as a mark; ink and muted are warm whites. The guide's gradient (#FF3763 → #FF7038) is not used:
+  // the mode's accent is one flat ink (stamps, brackets, marks). There is no red negative process in reprography; the
+  // hue is the brand's, the logic the cyanotype's (`derived`). Contrast on paper: ink 15.2, line 10.1, muted 11.0,
+  // accent 5.8, onAccent (paper) on accent 5.8; paper / bg 1.11.
+  coral: {
+    name: 'Coral red (oxblood ground)',
+    bg: '#220A0B',
+    paper: '#311414',
+    ink: '#FAF1EE',
+    line: '#BACAD4',
+    muted: '#DCCDC9',
+    accent: '#FF6452',
+    onAccent: '#311414',
+    grid: [0.06, 0.13],
+    texture: { mode: 'screen', alpha: 0.4 },
+    lamp: { color: '#FFD1C1', alpha: 0.06, mode: 'screen' },
+    vignette: { color: '#0F0203', alpha: 0.55 },
+    dark: true,
+  },
   graphite: {
     name: 'Graphite film (pencil on dark drafting film)',
     bg: '#0F1114',

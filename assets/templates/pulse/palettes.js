@@ -10,6 +10,9 @@
 //   dim          candidates that failed, the quiet query line on ramp[0]
 //   accent       the answer, and nothing else: the locked cell, the revealed value, the version in the lock-up.
 //                Lands only on the three dark steps (amber on a light step fails 3:1)
+//   accentOn     optional: the dark grounds the accent may land on, default ['r0', 'r1', 'r2']. The template draws the
+//                accent on r0 (the search, the reveal, the lock-up's last flip) and r1 (the lock-up) only; a preset
+//                whose accent is darker than amber may list just those two, and then is not checked on r2
 //
 // Which colour sets which text on which ground is decided in one place, `onGround()` below; film.js asks it
 // for every frame, and `PAIRS` checks every pair it can return.
@@ -35,6 +38,24 @@ export const PALETTES = {
     white: '#F5F5F6', ink: '#0E0F11', dim: '#8E939C',
     accent: '#FFC53D',
   },
+  // `coral` is "Coral red" (2026-10-19), from a brand guide: flat accent #FF6452 (OKLCH 0.699 0.192 29.4°) and the
+  // gradient #FF3763 → #FF7038 (OKLCH hue 14.8° → 40.4°). The accent is the flat colour itself, unchanged. The ramp
+  // is the guide's red pushed toward the gradient's cool end, OKLCH hue 10° at lightness 0.17 / 0.31 / 0.52 / 0.93
+  // (chroma 0.036 / 0.096 / 0.170 / 0.026), so the grounds read as wine and raspberry and the answer as the warmer
+  // coral: the mid step #B42F52 is ΔE00 24.9 from the accent, darker (2.07:1) and 19° cooler. Why not on r2: three
+  // pairs bind one colour, the highlight on ramp[0] (≥ 3), the accent on ramp[2] (≥ 3) and white on ramp[2] (≥ 4.5);
+  // the first two need an accent of relative luminance ≥ 0.40 even on a black ramp[0], and #FF6452 is 0.31. The
+  // lightest coral on its own OKLCH hue that would pass is #FF9484 (ΔE00 10.3, a salmon that no longer reads as the
+  // brand red), so the preset keeps #FF6452 and lists the two grounds the template draws the accent on (`accentOn`).
+  // Measured: accent on ramp[0] 6.61, on ramp[1] 4.70; ink on the accent 6.61; highlight on ramp[0] 3.18; white on
+  // ramp[2] 5.63; quiet (ramp[3]) on ramp[2] 4.87, the weakest text pair.
+  coral: {
+    name: 'Coral red',
+    fits: 'Launches whose brand colour is a coral or pink-red; wine and raspberry grounds, the flat coral answers',
+    ramp: ['#1C080C', '#561525', '#B42F52', '#F8E1E4'],
+    white: '#FCF5F5', ink: '#1C080C', dim: '#AD9093',
+    accent: '#FF6452', accentOn: ['r0', 'r1'],
+  },
 };
 export default PALETTES;
 
@@ -47,11 +68,12 @@ export const groundHex = (P, g) => (g === 'white' ? P.white : P.ramp[Number(g.sl
 // candidates that already failed are `dim` on r0 only), `accent` (null where the accent may not land: the light
 // grounds), `accentInk` (type on an accent fill), `hop` (the highlight fill of a candidate), `rule` (cell outlines,
 // 3 px, decoration: the cell is named by its label).
+const accentOn = (P, g) => ((P.accentOn ?? ['r0', 'r1', 'r2']).includes(g) ? P.accent : null);
 export const onGround = (P, g) => {
   switch (g) {
-    case 'r0': return { text: P.white, quiet: P.dim, dim: P.dim, accent: P.accent, accentInk: P.ink, hop: P.ramp[2], rule: P.ramp[1] };
-    case 'r1': return { text: P.white, quiet: P.ramp[3], dim: P.ramp[3], accent: P.accent, accentInk: P.ink, hop: P.ramp[2], rule: P.ramp[2] };
-    case 'r2': return { text: P.white, quiet: P.ramp[3], dim: P.ramp[3], accent: P.accent, accentInk: P.ink, hop: P.ramp[1], rule: P.ramp[1] };
+    case 'r0': return { text: P.white, quiet: P.dim, dim: P.dim, accent: accentOn(P, 'r0'), accentInk: P.ink, hop: P.ramp[2], rule: P.ramp[1] };
+    case 'r1': return { text: P.white, quiet: P.ramp[3], dim: P.ramp[3], accent: accentOn(P, 'r1'), accentInk: P.ink, hop: P.ramp[2], rule: P.ramp[2] };
+    case 'r2': return { text: P.white, quiet: P.ramp[3], dim: P.ramp[3], accent: accentOn(P, 'r2'), accentInk: P.ink, hop: P.ramp[1], rule: P.ramp[1] };
     case 'r3': return { text: P.ink, quiet: P.ink, dim: P.ramp[1], accent: null, accentInk: P.ink, hop: P.ramp[1], rule: P.ramp[1] };
     case 'white': return { text: P.ramp[1], quiet: P.ramp[1], dim: P.ramp[1], accent: null, accentInk: P.ink, hop: P.ramp[1], rule: P.ramp[1] };
     default: throw new Error(`unknown ground ${g}`);
