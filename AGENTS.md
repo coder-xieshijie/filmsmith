@@ -9,6 +9,7 @@ Public repository of one agent skill, **Filmsmith**; the repository root is the 
 - `THIRD-PARTY.md`: what is downloaded at setup and under which licence. `CONTRIBUTING.md`: how to change the skill.
 - `docs/previews/`: six-second animated previews of each style's demo for the README; the full demos are MP4s in the Releases.
 - `assets/showcase.jpg`: the README's still of all ten styles (one still per mode from `references/modes/stills/`).
+- `docs/social-preview.jpg`: the repository's social preview (1280×640 at 2×, the ten stills under the name), uploaded by hand in the GitHub settings.
 - `.github/`: issue and pull-request templates, and a CI check (script syntax and the timing tests).
 
 ## Rules
