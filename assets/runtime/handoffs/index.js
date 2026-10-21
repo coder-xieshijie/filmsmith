@@ -22,6 +22,11 @@
 // `seed`. `ground: false` draws the hand-off as a layer over the template's own scene instead of on its ground.
 // Defaults render a neutral sample; a template passes its own content and palette. references/transitions.md
 // documents each one (tier, when to use, parameters, theory, modes).
+//
+// Asset hand-offs (lift-out … mark-to-chrome) take real images: `asset: { image, crop: [x, y, w, h] }` with an img,
+// ImageBitmap or canvas and boxes in the image's own px. They only crop, scale and uniformly veil an asset, never
+// recolour it; rings, bands, lines and cards are code in the accent. Without an image they draw a neutral placeholder.
+// asset.js: views, windows, rings, the zoom cap (MAX_SCALE, zoomCap) and the accent check (deltaE00, ringContrast).
 
 import { subframes } from '../canvas.js';
 import { merge, maxDisp } from './util.js';
@@ -46,11 +51,22 @@ import fieldMorph from './field-morph.js';
 import counterPortal from './counter-portal.js';
 import stepWipe from './step-wipe.js';
 import beamTrace from './beam-trace.js';
+// asset hand-offs: real screenshots, interfaces, charts and logos (asset.js holds what they share)
+import liftOut from './lift-out.js';
+import bezelPullback from './bezel-pullback.js';
+import viewportPush from './viewport-push.js';
+import spotlightBand from './spotlight-band.js';
+import valueCarry from './value-carry.js';
+import cameraTruck from './camera-truck.js';
+import deviceFlip from './device-flip.js';
+import tetherLink from './tether-link.js';
+import markToChrome from './mark-to-chrome.js';
 
 const MODULES = [
   railPress, slotRails, arcCurl, strokeReinterpret, netUnfold, containerMorph, reEncode, pathType, signalRelay,
   rouletteLock, collapseBurst, convergeMark, anchorSwap, streamBrake, scrambleResolve, squashToPath, fieldMorph,
   counterPortal, stepWipe, beamTrace,
+  liftOut, bezelPullback, viewportPush, spotlightBand, valueCarry, cameraTruck, deviceFlip, tetherLink, markToChrome,
 ];
 const BY_NAME = Object.fromEntries(MODULES.map((m) => [m.name, m]));
 

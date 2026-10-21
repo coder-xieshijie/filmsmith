@@ -1,6 +1,6 @@
 # Modes
 
-A mode is one visual language made repeatable: a mode card (this folder) that states its look, principles, presets and checks, and a template (`assets/templates/<mode>/`) that renders a complete film from `content.js`. Every mode applies the [core principles](../principles.md); its own principles narrow them for one look. A mode may depart from a principle only at layers 3–4 (flow, unity), and only where its card states the departure and the reason ([who decides](../foundations.md#who-decides)). Modes do not mix: a film uses one mode's template, palette and scene registry from start to end.
+A mode is one visual language made repeatable: a mode card (this folder) that states its look, principles, presets and checks, and a template (`assets/templates/<mode>/`) that renders a complete film from `content.js`. Every mode applies the [core principles](../principles.md); its own principles narrow them for one look. A mode may depart from a principle only at layers 3–4 (flow, unity), and only where its card states the departure and the reason ([who decides](../foundations.md#who-decides)). In standard use a film runs one mode's template, palette and scene registry from start to end. Creative use keeps one base mode's visual system and composes scene ideas from other cards and transitions from the whole catalogue; mixing two systems (two palettes, two type scales, two accents) stays out in both ([creative.md](../creative.md)).
 
 ## Index
 
@@ -36,7 +36,7 @@ Ask what the content *is*, then pick (principle 9, the style points at the conte
 | A model or product launch with a mark: a few features, one number, the name | halftone |
 | A question with a measured answer: which build, config or option passes a limit | pulse |
 | The owner asks for "something with impact" for a developer product | ink or phosphor; show a 5 s sample of each |
-| None of the above fits | Say so; propose the nearest mode and what would change. Do not improvise a new look inside a film |
+| None of the above fits | Use creative mode ([creative.md](../creative.md)): pick the nearest mode as the base system and compose; say so. Do not improvise a second visual system inside a film |
 
 Every mode chosen by form (ink, plakat, thread) still draws at least one scene from a real technical artefact of the product (principle 9).
 

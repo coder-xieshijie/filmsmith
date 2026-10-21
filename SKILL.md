@@ -37,17 +37,22 @@ The house style for every mode: **brisk, direct and clean** — something change
 
 Every mode has colour presets (on its card) and one form variant, both set in `content.js`; the default renders as before. Every card lists its use cases with a worked example and marks the best fit. The names before 2026-10-19 (`thread-reel`, `ink-beat`, `swiss-poster`, `blueprint-drafting`, `terminal-launch`, `unit-data`, `diagram-explainer`) still work in `new-film`.
 
-Choosing rules and the mode card format: [references/modes/README.md](references/modes/README.md). Modes do not mix. Themes (narrative skeletons and rules by kind of film): [tech-product-launch](references/themes/tech-product-launch/README.md) for thread, ink, plakat, blueprint, phosphor, morph, halftone and pulse, [tech-explainer](references/themes/tech-explainer/README.md) for tally and trace.
+Choosing rules and the mode card format: [references/modes/README.md](references/modes/README.md). In standard mode a film uses one mode as it ships; in creative mode it recombines scene ideas and every transition inside one base mode's visual system ([creative.md](references/creative.md)). Themes (narrative skeletons and rules by kind of film): [tech-product-launch](references/themes/tech-product-launch/README.md) for thread, ink, plakat, blueprint, phosphor, morph, halftone and pulse, [tech-explainer](references/themes/tech-explainer/README.md) for tally and trace.
 
 ## Workflow
 
 ### 1. Clarify
 
+First decide how the skill is used, and say which:
+
+- **Standard mode** (default): one existing mode as it ships, its template, presets, scenes and transitions. Choose it when the content matches a mode's "Pick it for" line.
+- **Creative mode**: when no mode fits, the user asks for something custom, or the subject's real assets call for their own grammar. Styles and transitions are separate layers: pick a base mode for the visual system, then compose scene ideas from any card and transitions from the whole catalogue, under the rules in [creative.md](references/creative.md) (one system, one accent, one through-line, a composition sheet in `PLAN.md`).
+
 Skip what the user already gave; ask the rest, the mode first. Ask in plain conversation, at most three questions at a time; when a gap does not block the start, assume and say so. Every film is 16:9, 1920×1080, for landscape full-screen playback; when asked for a vertical or square film, say the skill does not make one.
 
 | # | Question | Why |
 |---|---|---|
-| 1 | What is the content: a tool, a claim with steps, a system, a name, a reel, numbers, a mechanism? | Decides the mode ([selection table](references/modes/README.md#choosing-a-mode)); propose one and say why |
+| 1 | What is the content: a tool, a claim with steps, a system, a name, a reel, numbers, a mechanism? Are there real assets (screenshots, product UI, official charts, logos)? | Decides the mode ([selection table](references/modes/README.md#choosing-a-mode)) and standard or creative use; propose one and say why |
 | 2 | Where do the facts come from (repo, doc, dataset, algorithm)? | Every fact on screen comes from it; every number is computed |
 | 3 | Platform, and a target length if any? | Length is computed from the content ([principle 5](references/principles.md)); a target moves the tempo inside the mode's range, then scenes are cut or added |
 | 4 | Which palette preset? | Presets only, listed on the mode card; no custom hex values. A brand colour the user asks for becomes a new preset first ([system](references/system.md#a-preset-from-a-brand-colour)) |
@@ -138,7 +143,8 @@ filmsmith/
 │   ├── system.md           the shared layer: neutrals, accents, named colours with provenance, type pairing and scales, space, corners and strokes, motion and sound recipes
 │   ├── checklist.md        P0/P1/P2 for every film
 │   ├── ai-tells.md         dated list of devices that make a film read as made by default; every ban list includes them
-│   ├── transitions.md      both transition layers, their tiers, the mode → transitions table and the borrowing rule
+│   ├── transitions.md      both transition layers, their tiers, the mode → transitions table, the real-asset rules and the borrowing rule
+│   ├── creative.md         creative mode: composing scene ideas and transitions inside one base mode's system
 │   ├── modes/              mode index, selection table, one card per mode
 │   └── themes/             per-theme narrative skeletons and rules (tech-product-launch, tech-explainer)
 ├── assets/

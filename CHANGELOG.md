@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Two ways to use the skill: standard mode (one mode as it ships) and creative mode (one base mode's visual system, scene ideas from any card, transitions from the whole catalogue, a composition sheet in `PLAN.md`); new `references/creative.md`.
+
+- runtime: nine hand-offs for real assets (screenshots, interfaces, charts, logos) — `lift-out`, `bezel-pullback`, `viewport-push`, `spotlight-band`, `value-carry`, `camera-truck`, `device-flip` (T2, a hidden cut inside one object, not counted as a hand-off), `tether-link`, `mark-to-chrome` — and `handoffs/asset.js` (views, windows, rings, the zoom cap `MAX_SCALE` / `zoomCap`, `deltaE00` / `ringContrast`); `lift-out` can also hand off into the next scene (`backdrop: false`, `view`, a cell's `land`: the values rise out of the asset and land in the next scene's own places). The hand-off self-test runs each on its defaults and on an image file drawn in code (`test/asset.png`, `test/make-asset.mjs`), 60 cases. `transitions.md`: their catalogue, a "Real assets" column in the mode table and a "Real assets" section (asset text is evidence, the 0.75 source px zoom cap, crop, scale and uniform dimming only, annotations in an accent ΔE00 ≥ 20 from the ringed colours, no people).
+
 ## 0.3.0 — 2026-10-20
 
 - runtime: `master()`'s AAC delivery ceiling is −1.9 dBTP, 0.4 dB under check-film's −1.5 gate: against eight renders the three-encode estimate ran 0.6 dB high to 0.4 dB low, so two films had lowered their own `tp` to pass. `audio/README.md` no longer says −1.2 and two encodes.

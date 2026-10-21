@@ -3,9 +3,9 @@
 How one state of a film becomes the next, in two layers:
 
 - **Frame-level transitions** (`assets/runtime/transitions/`, 17): a pixel function of two whole frames, A → B, drawn by WebGL. Use when the two scenes do not share an object, or when the change is the frame itself (a lamp, an aperture, a push, a flash).
-- **Hand-offs** (`assets/runtime/handoffs/`, 20): one object of scene A carries the eye into scene B: a line presses a word, a card shrinks into a node, a dot bursts into the next word. Drawn in Canvas2D as a pure function of progress, with the template's own content, geometry and palette. Use them first: a change the eye can follow costs the viewer least (principle 4).
+- **Hand-offs** (`assets/runtime/handoffs/`, 29, nine of them for real assets): one object of scene A carries the eye into scene B: a line presses a word, a card shrinks into a node, a dot bursts into the next word, a ringed cell of a screenshot lifts out and becomes code. Drawn in Canvas2D as a pure function of progress, with the template's own content, geometry and palette. Use them first: a change the eye can follow costs the viewer least (principle 4).
 
-new-film copies the runtime into every film as `lib/` (`lib/transitions/`, `lib/handoffs/`). Every entry passes the clean-transition criteria C1–C8 (workshop theory 07). The 26 added on 2026-10-19 (six frame-level, twenty hand-offs) were approved by the owner as samples that day; their values are `draft` until a film has used them. Proof: workshop `works/skill-modes-v1/batch4/transitions/library-proof/` (contact sheets of every module at p = 0, 0.25, 0.5, 0.75, 1 rendered through this library, a side-by-side with the approved sample clips, a low-resolution reel).
+new-film copies the runtime into every film as `lib/` (`lib/transitions/`, `lib/handoffs/`). Every entry passes the clean-transition criteria C1–C8 (workshop theory 07). The 26 added on 2026-10-19 (six frame-level, twenty hand-offs) were approved by the owner as samples that day; their values are `draft` until a film has used them. The nine asset hand-offs (`lift-out` … `mark-to-chrome`, added 2026-10-20) were approved the same way on sample clips over real screenshots, a chart and a logo; their values are `draft` too. Proof of the 2026-10-19 set: workshop `works/skill-modes-v1/batch4/transitions/library-proof/` (contact sheets of every module at p = 0, 0.25, 0.5, 0.75, 1 rendered through this library, a side-by-side with the approved sample clips, a low-resolution reel).
 
 ## Tiers
 
@@ -65,11 +65,22 @@ else press.still(ctx, 'to');                       // scene B's rest
 - `drawHandoff(ctx, name, p, params, opts)` is the one-call form for hand-offs whose preparation is synchronous. `list`: `[{ name, tier, beats, roles, summary, theory, modes, from, to, interpolates }]`; `beatsOf(name, params)` and `durationOf(name, bpm, params)` for those whose length follows their content (roulette-lock, scramble-resolve) or stage.
 - `lib/handoffs/halftone.js` is the halftone mode's print screen (`screen`, `knockText`), used by anchor-swap and field-morph and free for scenes.
 
-**Self-test** (`node lib/handoffs/test/run.mjs`, puppeteer-core and Chrome): every hand-off with its defaults and each stage or variant (36 cases); p = 0 equals the `from` rest and p = 1 the `to` rest (max channel difference 0); a frame drawn twice with other frames between is identical, with motion blur on as well; the defaults draw something; the fastest point moves ≤ 2 px during the last frame before landing. Result 2026-10-19: PASS, 2–33 ms per 1920 × 1080 frame without blur (field-morph's full-frame screen is the slowest).
+**Self-test** (`node lib/handoffs/test/run.mjs`, puppeteer-core and Chrome): every hand-off with its defaults and each stage or variant, and every asset hand-off once more on an image file (`test/asset.png`, drawn in code by `test/make-asset.mjs`) (60 cases); p = 0 equals the `from` rest and p = 1 the `to` rest (max channel difference 0); a frame drawn twice with other frames between is identical, with motion blur on as well; the defaults draw something; the fastest point moves ≤ 2 px during the last frame before landing. Result 2026-10-20: PASS, 2–34 ms per 1920 × 1080 frame without blur (field-morph's full-frame screen is the slowest; the asset hand-offs take 4–13 ms).
 
 ### Motion blur
 
 `lib/canvas.js` `subframes(ctx, draw, t, { speed, fps, shutter, step, threshold, maxN })` renders sub-frames over the shutter and sums them exactly (integers, premultiplied alpha, fixed order: bit-identical every time, transparent layers keep clean edges). `speed` is the fastest edge in px per frame (a number or a function of t): below `threshold` (1 px) the frame is drawn once, sharp, so nothing blurs while settled or after landing; above it the sub-frames are at most `step` px apart (2), so a fast thin line becomes a streak, not a row of ghost copies, and when even `maxN` (32) cannot keep that spacing the shutter shortens. The older form `{ n, fps, shutter }` (a fixed n, running average) still works as before. Motion streaks are how the eye records real speed (Geisler 1999), so the blur describes the move rather than decorating it; on only above the threshold, it never softens a still frame.
+
+### Real assets
+
+Screenshots, interface captures, official charts and logos enter a film through the nine asset hand-offs and `lib/handoffs/asset.js`. Their rules:
+
+- **Asset text is evidence, not information.** What the viewer must read is either pushed in until it is at least 25 px (`viewport-push`) or redrawn in code at 25 px or more (`lift-out`, `value-carry`); main text outside the asset stays at 40 px or more (principle 1).
+- **Zoom cap.** No output px may map to less than 0.75 source px: `MAX_SCALE = 1 / 0.75` film px per source px, `zoomCap(fit) = MAX_SCALE / fit` for a view that shows the asset at `fit`. Capture screenshots at 2× so the cap leaves room. `viewport-push` clamps to the cap and logs it; `lift-out` and `value-carry` swap pixels for code before it (at 1.2× by default).
+- **Only cropped, scaled and uniformly dimmed.** An asset is never recoloured, retouched or redrawn to pass as itself; dimming is a ground-coloured veil laid evenly over it. A generated or rebuilt interface is not a real asset.
+- **Annotations are code, in the accent.** Rings, bands, tethers and cards are drawn by the hand-off, in the mode's accent; the asset's own colours are content and do not count toward the accent's area (principle 7). The accent must differ from every colour that fills a real share of the ringed region by ΔE00 ≥ 20, or the ring reads as part of the asset: `ringContrast(image, box, accent)` in `asset.js` returns the smallest ΔE00 (colours covering ≥ 2 % of the box); below 20, ring a wider region or use another accent role.
+- **No people.** A crop leaves out avatars, photos of people and account rows (principle 8).
+- Each asset is recorded with its source page, capture date, crop and the claim it proves, and every number it shows is checked against the film's data.
 
 ## Colour roles
 
@@ -93,19 +104,19 @@ Why these: each mode keeps one accent with one meaning (principle 7). plakat's a
 
 ## Which transition for which mode
 
-| Mode | Hand-offs | Frame-level |
-|---|---|---|
-| thread | `rail-press`, `arc-curl`, `path-type`, `signal-relay`; links still never cut: the line itself changes shape | `thread-split` (open, close, join), `ink-wash` |
-| ink | `collapse-burst`, `anchor-swap`, `counter-portal` | `ink-drop` at a chapter turn, `dot-iris` into and out of the dot, `aperture-swap` (a word per beat in the slam), `whiteout-slam` (one peak), `ink-wash` |
-| plakat | `slot-rails`, `counter-portal`, `step-wipe` | `plakat-columns`, `aperture-swap` |
-| blueprint | `slot-rails` (the rails are dimension lines), `stroke-reinterpret`, `net-unfold` | `blueprint-expose` (open, close; hairline to re-ink a sheet), `shape-flood`, `occluder-pass` |
-| phosphor | `container-morph`, `roulette-lock`, `stream-brake`, `scramble-resolve`, `beam-trace` | `crt-collapse`, `slice-smear`, `dither-sweep`, `whip-push` |
-| tally | `re-encode`, `roulette-lock`, `stream-brake`, `step-wipe` | `tally-flip`, `dither-sweep` |
-| trace | `re-encode`, `path-type`, `signal-relay`, `stream-brake`, `scramble-resolve`, `squash-to-path` | `trace-flow`, `token-sweep` |
-| morph | `arc-curl`, `rail-press`, `stroke-reinterpret`, `net-unfold`, `container-morph`; the film never cuts, every state grows out of the last | `shape-flood`, `occluder-pass` |
-| halftone | `anchor-swap`, `field-morph`, `collapse-burst` | `whip-push` (a feature card per beat), `whiteout-slam` |
-| pulse | `roulette-lock`, `scramble-resolve`, `counter-portal` | `aperture-swap` (one word per beat), `whiteout-slam` (the one flash, on the drop), `slice-smear`, `whip-push` |
-| every mode | `converge-mark` at the lock-up (T3) | — |
+| Mode | Hand-offs | Frame-level | Real assets |
+|---|---|---|---|
+| thread | `rail-press`, `arc-curl`, `path-type`, `signal-relay`; links still never cut: the line itself changes shape | `thread-split` (open, close, join), `ink-wash` | `camera-truck` along one strip, `tether-link` (the line traces between a claim and its source) |
+| ink | `collapse-burst`, `anchor-swap`, `counter-portal` | `ink-drop` at a chapter turn, `dot-iris` into and out of the dot, `aperture-swap` (a word per beat in the slam), `whiteout-slam` (one peak), `ink-wash` | `value-carry` (a number carried from one source to the next) |
+| plakat | `slot-rails`, `counter-portal`, `step-wipe` | `plakat-columns`, `aperture-swap` | `camera-truck` across the grid's image blocks |
+| blueprint | `slot-rails` (the rails are dimension lines), `stroke-reinterpret`, `net-unfold` | `blueprint-expose` (open, close; hairline to re-ink a sheet), `shape-flood`, `occluder-pass` | `lift-out` (the detail view of engineering drawing), `camera-truck` across the drawing table; references pinned to the sheet, their source in the title block |
+| phosphor | `container-morph`, `roulette-lock`, `stream-brake`, `scramble-resolve`, `beam-trace` | `crt-collapse`, `slice-smear`, `dither-sweep`, `whip-push` | `lift-out` from the ringed evidence into the redrawn reading, `mark-to-chrome`, `device-flip` (T2) |
+| tally | `re-encode`, `roulette-lock`, `stream-brake`, `step-wipe` | `tally-flip`, `dither-sweep` | `lift-out` (one cell taken out to read), `value-carry`, `device-flip` (T2) |
+| trace | `re-encode`, `path-type`, `signal-relay`, `stream-brake`, `scramble-resolve`, `squash-to-path` | `trace-flow`, `token-sweep` | `tether-link` (nodes are real icons, edges link a claim to its source) |
+| morph | `arc-curl`, `rail-press`, `stroke-reinterpret`, `net-unfold`, `container-morph`; the film never cuts, every state grows out of the last | `shape-flood`, `occluder-pass` | `bezel-pullback` (the frame grows out of the asset); never `device-flip` (morph does not cut) |
+| halftone | `anchor-swap`, `field-morph`, `collapse-burst` | `whip-push` (a feature card per beat), `whiteout-slam` | logos and interfaces only; a chart is never screened (the dots would change its readings) |
+| pulse | `roulette-lock`, `scramble-resolve`, `counter-portal` | `aperture-swap` (one word per beat), `whiteout-slam` (the one flash, on the drop), `slice-smear`, `whip-push` | `viewport-push` and `spotlight-band`, one move a beat |
+| every mode | `converge-mark` at the lock-up (T3) | — | `viewport-push`, `spotlight-band`, `tether-link`, `lift-out`, `bezel-pullback` (an asset's first appearance), `mark-to-chrome` (the logo into the product), all in the mode's own accent |
 
 thread, blueprint and morph are one continuous space by their own principles (no cuts inside the chain; one drawing; one shape): their frame-level transitions open or close the film or join it to another, never between links, sheets or states; inside, use their hand-offs.
 
@@ -525,10 +536,113 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Length and easing**: 3 beats; afterglow 3.2 e-foldings over 42 %; beam 30–78 %; new reading from 80 %, settled exactly at p = 1.
 - **Sound**: a faint hum with the beam, a `tick` when the reading lands.
 
+## Catalogue: asset hand-offs
+
+Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each takes `asset: { image, crop }` (or several), boxes in the image's own px, `title` (the source shown in the window's bar), `font` / `mono`, and colours by role: `ground`, `panel` (window), `line` (window edge, dots), `ink`, `dim` (bar text), `accent` (every annotation), plus `paper` / `onPaper` where a piece of the asset is redrawn (sampled from the asset when not given). Lengths are at 120 BPM.
+
+### lift-out
+
+- **Looks**: the ringed cells of an asset (three values of an official table, say) rise in place and grow, one after another; each ring is the edge of its card. While a card grows its pixels are the asset's; on the frame it passes 1.2× its size, inside its motion blur and before the bitmap would soften, the value is redrawn in code at the same place and height on the cell's own paper. The card then widens to take its label. The asset stays underneath under a ground veil.
+- **Tier**: T1; T2 at a claim.
+- **Use**: an official table or page whose few numbers carry the claim: the evidence is shown as captured, then the numbers become the film's own reading. As the hand-off from an evidence page to its code-drawn redraw, give each cell a `land` (the value's place in the next scene) and `backdrop: false` (the template draws the page): the values rise out of the asset and land where the next scene reads them, so the evidence page needs no cut. **Not for**: a region with no printed value to redraw (use `viewport-push`).
+- **Parameters**: `asset`, `title`; `window` `{ x 210, y (null: centred), w 1500 }` (content width; height follows the crop); `cells` `[{ box, glyph, value, label }]` (`box` the cell, `glyph` the printed digits, image px); `card` `{ x (null: right of the cells), h 132, gap 20, rise 40, pad 28, labelSize 34 }`; `swapAt` 1.2 (capped at the zoom cap); `dim` 0.55; `stagger` 0.08; `ringPad` 6, `ringStyle` `{ width 3, radius 10, halo, haloWidth 9, glow }` (a halo colour under the ring holds it on a white page). As a hand-off into the next scene: `backdrop` false, `view` `{ a, bx, by }` (film px = a · image px + b, read from the template's own window), a cell's `land` `{ x, y, w, h, cx, baseline, size }` (film px, measured from the next scene's element) and `land` `{ font, paper, paperAlpha 0, ink, ring false, swapAt 0.12, turn [0.5, 1] }` (the landing look; the card keeps the asset's paper and ink over the asset and turns in `turn` of the flight). Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent` (rings), `paper` (null: sampled per cell), `onPaper` (#111111).
+- **Theory**: one object changes material, not identity (object constancy, Heer & Robertson 2007); the detail view of engineering drawing; the redraw keeps the value sharp past the source's resolution (principle 2). Borrowed from a reading-app launch film (a table and a formula lifted out of a paper page) and a clinic-software film (a row lifted from a schedule).
+- **Modes**: phosphor (replaces the cut from a ringed evidence page to its redrawn reading), blueprint, tally; any mode with an official table.
+- **Length and easing**: 2 beats (as a hand-off into the next scene 1–1.5 beats is enough); veil 0–30 % cubic in-out; each lift a landing spring over 46 % of p, 8 % apart; each widening a landing spring of 26 %, the last landing at p = 0.98. A card's pixels are always scaled uniformly, never stretched.
+- **Sound**: a soft `tick` per card landing.
+
+### bezel-pullback
+
+- **Looks**: the asset first fills the frame (covered to 16:9); the camera pulls back, and as the asset shrinks its window grows outward from the asset's own edges: a rim on three sides and the title bar naming the source thicken from nothing while the corners round.
+- **Tier**: T1. Values `draft`.
+- **Use**: an asset's first appearance, when its content matters more than where it is from: the viewer reads it first, then sees the source. **Not for**: an asset whose crop is much narrower than 16:9 (the cover crop would lose most of it).
+- **Parameters**: `asset`, `title`; `window` `{ cx 960, cy 540, w 1440 }` (landed content width); `focus` (image px the full-frame view centres on; null: crop centre); `rim` 10; `radius` 14. Roles: `ground`, `panel`, `line`, `dim`.
+- **Theory**: content before container, a reverse reveal; one zoom about the point both views share reads as one camera move (Heer & Robertson 2007). Borrowed from a phone-app launch film (a full-frame lock screen shrinks while the phone's bezel grows round it) and a "device dive" component, reversed.
+- **Modes**: any mode with real assets; morph (the frame grows out of the asset).
+- **Length and easing**: 1.25 beats; zoom on a log scale, cubic in-out; the frame grows with the same curve.
+- **Sound**: a soft `whoosh` out.
+
+### viewport-push
+
+- **Looks**: the window holds still; the asset inside it pushes in and pans to the region to read, one zoom about the point both views share; a ring draws round the mark as it lands. The bar can show the live zoom and the cap.
+- **Tier**: T0.
+- **Use**: source text too small to read at the fit: push until it is at least 25 px. The push stops at the zoom cap, so a low-resolution capture cannot be pushed into blur; if the cap is reached first, redraw instead (`lift-out`).
+- **Parameters**: `asset`, `title`; `window` `{ x 310, y, w 1300 }`; `region` (image px to frame); `mark` (image px to ring; null: the region); `ring` true; `readout` true. Roles: `ground`, `panel`, `line`, `dim`, `accent`. `prepare` computes `D.cap` and `D.zoom` and logs them.
+- **Theory**: a still frame holds the viewer's place while the camera moves inside it (common region, Palmer 1992); the push brings evidence to the 25 px floor without enlarging it past 0.75 source px per output px (principles 1, 2). Borrowed from a fitness-app film (in-device zoom, 16 frames) and a paper-figure tool's film (in-window zoom, 15–17 frames).
+- **Modes**: every mode with real assets.
+- **Length and easing**: 4/3 beats (20 frames); push 0–80 % cubic in-out (16 frames); ring 72–100 %.
+- **Sound**: none, or a soft `tick` on the ring.
+
+### spotlight-band
+
+- **Looks**: the asset is veiled to half its brightness except one hard-edged horizontal band, which stays as captured, an accent tick at its left end; the band moves (top and height) to the next region to read.
+- **Tier**: T0; used several times in a row on one asset.
+- **Use**: walking down the rows of a table or the panels of a page in reading order. **Not for**: regions that are not horizontal bands (ring them, or push).
+- **Parameters**: `asset`, `title`; `window` `{ x 160, y, w 1600 }`; `from.band`, `to.band` (`[_, y, _, h]` in image px); `veil` 0.5; `tick` 6 px. Roles: `ground` (veil), `panel`, `line`, `dim`, `accent` (tick).
+- **Theory**: attention follows the one region left lit (Posner 1980); the asset stays still so its layout is learned once; hard edges keep the lit data exact. Borrowed from a fitness-app film (a lit band moving between four charts) and ring-and-dim evidence pages.
+- **Modes**: every mode with real assets; tally.
+- **Length and easing**: 0.8 beats (12 frames), cubic in-out.
+- **Sound**: none.
+
+### value-carry
+
+- **Looks**: the ringed cell of one asset lifts off as a chip (its pixels, then the value redrawn in code at 1.2×), waits at the top of the frame while the camera trucks one screen to a second asset, and drops onto that asset's own printing of the same value: position, height, paper, ink and weight move to match; on landing the chip leaves the asset's glyphs and the ring opens round the label.
+- **Tier**: T1.
+- **Use**: one number found in two official sources (a table and a chart). The value never changes on the way. **Not for**: two different numbers (that is a comparison, not a carry).
+- **Parameters**: `from` `{ asset, title, window { w }, box, glyph, value, weight }`; `to` `{ asset, title, window { w }, glyph, ring, weight }`; `spacing` 1920; `cy` 540; `carry` `{ cx 960, cy 150, h 150 }`; `swapAt` 1.2. Roles: `ground`, `panel`, `line`, `dim`, `accent`, `paper` / `onPaper` (null: sampled from asset 1), `paper2` / `onPaper2` (null: sampled from asset 2).
+- **Theory**: a shared element carries the eye across a change of place (object constancy, Heer & Robertson 2007); the same value in two official places is the claim's proof (principle 2). Borrowed from a finance app's film (an amount rises from a list, rides the pan, lands in an invoice table) and a shared-element thumbnail-to-hero transition.
+- **Modes**: ink, tally, phosphor.
+- **Length and easing**: 2 beats; lift a landing spring 0–30 %; pan 18–78 % cubic in-out; land 64–92 % cubic in-out; the chip leaves at 94 %.
+- **Sound**: a `whoosh` with the pan, a `tick` on landing.
+
+### camera-truck
+
+- **Looks**: several assets live side by side on one plane; the camera trucks about one screen width from one to the next, with sub-frame motion blur only while an edge moves more than 1 px a frame; assets away from the camera recede under a veil that follows their distance.
+- **Tier**: T1.
+- **Use**: a sequence of sources whose order is the story (the table, then its chart, then the product). **Not for**: one asset (use `viewport-push`).
+- **Parameters**: `items` `[{ asset, title, w }]`; `gap` 220; `from`, `to` (indices); `cy` 540; `veil` 0.55. Roles: `ground`, `panel`, `line`, `dim`.
+- **Theory**: one world coordinate for all evidence makes place read as relation (Tversky 1993); motion streaks record real speed (Geisler 1999) and are off once settled. Borrowed from a design-review tool's film (one pan across a comment card, a site and a board, 12 frames) and a finance app's film (a camera on one surface).
+- **Modes**: blueprint (the drawing table), plakat, thread.
+- **Length and easing**: 1 beat (15 frames) cubic in-out; a truck longer than about one screen needs more beats to keep the last frame's movement ≤ 2 px.
+- **Sound**: a short `whoosh`.
+
+### device-flip
+
+- **Looks**: the window turns about its vertical axis until it is edge-on (ease in), its content and title are swapped on the frame where no face shows, and it turns on from the other side to face the camera (ease out), darkening as it turns away. Drawn as vertical strips of a perspective projection.
+- **Tier**: T2. **It is a hidden cut inside one object, not a hand-off**: nothing carries the eye from one content to the other, so it does not count as one where a template or check counts hand-offs; it counts as an expressive transition.
+- **Use**: the next page of the same source or the next product screen, when the two have no shared element. The same direction at most three times a film. **Not for**: morph (the film never cuts) or two contents with a shared element (hand it off instead).
+- **Parameters**: `window` `{ cx 960, cy 540, w 1300, h 700 }` (each asset is cover-cropped to it); `from`, `to` `{ asset, title, focus }`; `perspective` 2200; `shade` 0.6; `strips` 120. Roles: `ground` (shade), `panel`, `line`, `dim`.
+- **Theory**: one object with a new face keeps the viewer's place; the swap happens where no face shows, so two contents never overlap (C5). Borrowed from a fitness-app film (a phone turns edge-on and back with the next tab, 13 + 17 frames) and a reading-app film (the same with a change of format).
+- **Modes**: phosphor, tally; not morph.
+- **Length and easing**: 2 beats; turn out 0–43 % cubic in (13 frames), turn back 43–100 % cubic out (17 frames).
+- **Sound**: a `whoosh` landing on the beat as it faces the camera.
+
+### tether-link
+
+- **Looks**: an accent line, led by a small dot, draws on a gentle arc from a code-drawn claim to the region of a real asset that supports it; a ring closes round the region and the dot rests at the ring.
+- **Tier**: T0.
+- **Use**: a number or sentence on screen and the place in the source it comes from, side by side. **Not for**: two places far apart in different scenes (use `value-carry`).
+- **Parameters**: `claim` `{ x, lines: [{ text, y, size, weight, color (role), anchor }] }` (the line starts after the `anchor` line); `target` `{ asset, title, window { x, y, w }, box }`; `bend` 0.18; `gapStart` 28; `ringPad` 8; `dot` 8; `width` 3. Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent`.
+- **Theory**: connectedness groups more strongly than proximity (Palmer & Rock 1994); the dot gives the line a direction (claim → source). Borrowed from an editor's launch film (a line from each typed source line to its rendered line) and a "tracing beam" component.
+- **Modes**: every mode with real assets; trace, thread.
+- **Length and easing**: 1 beat; line 0–62 % by arc length, cubic in-out; ring 55–92 %.
+- **Sound**: a soft `tick` when the ring closes.
+
+### mark-to-chrome
+
+- **Looks**: the official logo (a PNG, scaled only) shrinks on a log scale and flies to the top left, accelerating, and lands as the title of a window's bar; the window then opens from that corner to the bottom right on a landing spring, uncovering the product screenshot anchored inside it; the source in the bar is uncovered as the bar widens.
+- **Tier**: T1.
+- **Use**: from the brand to the product's first screen (an opening), or back into the product after a title. **Not for**: a logo that does not appear in the product's own chrome.
+- **Parameters**: `logo` `{ asset, from { cx 960, cy 540, w 1100 }, h 26 }` (`h`: height in the bar); `content` `{ asset }`; `window` `{ x 240, y, w 1440 }`; `title`. Roles: `ground`, `panel`, `line`, `dim`.
+- **Theory**: the mark is carried into the interface where it really appears (object constancy); a throw eases in and lands, the opening eases out (Thomas & Johnston 1981). Borrowed from an editor's launch film (the wordmark shrinks into the title bar, the window unfolds from there); a logo that flies off and lands nowhere, seen in another film, is what it avoids.
+- **Modes**: phosphor; any mode's opening into the product.
+- **Length and easing**: 1.5 beats; flight 0–40 % cubic in; window width 40–84 %, height 46–95 %, landing springs.
+- **Sound**: a `tick` as the logo lands in the bar.
+
 ## Adding one
 
 **A frame-level transition**: one entry in a file of `assets/runtime/transitions/` (`name`, `mode`, `tier`, `beats`, `ease`, `roles`, `summary`, `frag`, `uniforms`), registered in its `index.js`: `frag` defines `vec3 transition(vec2 s, float p)` with `s` in film pixels and `A(s)`, `B(s)`, `cover()`, the easings and the noise of `glsl.js` (do not redeclare its uniforms: `uRes`, `uScale`, `uP`, `uSeed`, `uOrigin`, the four role colours); anything at p = 0 and p = 1 is handled by the shared `main`.
 
-**A hand-off**: a module in `assets/runtime/handoffs/` registered in its `index.js`, exporting `{ name, tier, beats, modes, roles, from, to, interpolates, summary, theory, defaults, prepare?, rest(side, P, D), at(p, P, D), paint(ctx, S, P, D), track? }`: `at` and `rest` return plain numbers, `paint` draws a state, `track` returns the moving points that decide when motion blur is on. Land exactly (a raw spring never reaches its target: use `settle` from `util.js`), no `Math.random` or `Date`, colours by role.
+**A hand-off**: a module in `assets/runtime/handoffs/` registered in its `index.js` (an asset hand-off builds on `asset.js` and adds an image case to the self-test), exporting `{ name, tier, beats, modes, roles, from, to, interpolates, summary, theory, defaults, prepare?, rest(side, P, D), at(p, P, D), paint(ctx, S, P, D), track? }`: `at` and `rest` return plain numbers, `paint` draws a state, `track` returns the moving points that decide when motion blur is on. Land exactly (a raw spring never reaches its target: use `settle` from `util.js`), no `Math.random` or `Date`, colours by role.
 
 Then run both self-tests, render it through the library on a contact sheet, read the frames, and add its entry here with its tier, theory and modes, and the borrowing note.

@@ -28,7 +28,7 @@ const findChrome = async () => {
   throw new Error('no Chrome found; set CHROME=/path/to/chrome');
 };
 
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript' };
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.png': 'image/png' };
 const server = createServer(async (req, res) => {
   try {
     const path = join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname));

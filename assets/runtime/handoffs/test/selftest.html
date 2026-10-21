@@ -2,12 +2,28 @@
 <html><head><meta charset="utf-8"><title>hand-offs self-test</title></head>
 <body>
 <script type="module">
-// selftest.html — for every hand-off (defaults, plus each stage or variant): p = 0 paints exactly its `from` rest and
+// selftest.html — for every hand-off (defaults, plus each stage or variant, plus an image file for the asset hand-offs): p = 0 paints exactly its `from` rest and
 // p = 1 exactly its `to` rest (max channel difference 0); a frame drawn twice with other frames in between is identical
 // (pure function of p), also with motion blur on; the defaults draw something; the landing is settled (the fastest point
 // moves ≤ 2 px in the last frame; p = 1 itself is never blurred). Also reports how much of the frame changes one frame in
 // from each end (a cut by design shows there) and the time per frame. Results in window.__selftest. Run: node run.mjs.
 import { createHandoff, list } from '../index.js';
+
+// the asset hand-offs also run on a real image file: asset.png, drawn in code by make-asset.mjs (LAYOUT there)
+const image = await createImageBitmap(await (await fetch('asset.png')).blob());
+const asset = (crop) => ({ image, crop });
+const cell = (r, value, label) => ({ box: [442, 164 + 140 * r, 196, 132], glyph: [490, 212 + 140 * r, 100, 36], value, label });
+const ASSET_CASES = {
+  'lift-out': { asset: asset(), cells: [cell(0, '48.0', 'First'), cell(1, '71.5', 'Second'), cell(4, '33.2', 'Fifth')] },
+  'bezel-pullback': { asset: asset(), title: 'example.com/page' },
+  'viewport-push': { asset: asset(), region: [420, 300, 400, 300], mark: cell(1).box },
+  'spotlight-band': { asset: asset(), from: { band: [0, 160, 0, 140] }, to: { band: [0, 580, 0, 140] } },
+  'value-carry': { from: { asset: asset(), box: cell(0).box, glyph: cell(0).glyph, value: '48.0' }, to: { asset: asset([300, 300, 900, 560]), glyph: cell(2).glyph, ring: cell(2).box } },
+  'camera-truck': { items: [{ asset: asset(), w: 1300 }, { asset: asset([0, 160, 1600, 700]), w: 1300 }, { asset: asset([400, 0, 1200, 1000]), w: 1100 }], from: 0, to: 1 },
+  'device-flip': { from: { asset: asset() }, to: { asset: asset([400, 160, 1200, 840]) } },
+  'tether-link': { target: { asset: asset(), window: { x: 1000, y: null, w: 820 }, box: cell(1).box } },
+  'mark-to-chrome': { logo: { asset: asset([60, 40, 360, 80]), from: { cx: 960, cy: 540, w: 1000 }, h: 30 }, content: { asset: asset() } },
+};
 
 const W = 1920, H = 1080;
 const VARIANTS = {
@@ -16,6 +32,10 @@ const VARIANTS = {
     { drawLine: (ctx, b) => { ctx.fillStyle = '#EDEAE2'; ctx.fillRect(b.x, b.y, b.w, b.h); }, label: 'drawLine fn' }],
   'path-type': [{ line: false, label: 'line false' },
     { drawLine: (ctx, l) => { ctx.beginPath(); l.pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.strokeStyle = '#EDEAE2'; ctx.lineWidth = 14; ctx.stroke(); }, label: 'drawLine fn' }],
+  // lift-out as a hand-off into the next scene: the template draws the asset (`backdrop: false`), the cells land in its places
+  'lift-out': [{ backdrop: false, view: { a: 0.75, bx: 210, by: 160 }, land: { font: { family: 'monospace', weight: 700 }, paperAlpha: 0, ink: '#EDEFF2', ring: false },
+    cells: [{ box: [640, 184, 340, 138], glyph: [680, 222, 200, 62], value: '48.0', land: { x: 900, y: 700, w: 170, h: 42, cx: 985, baseline: 730, size: 25 } },
+      { box: [640, 338, 340, 138], glyph: [680, 376, 200, 62], value: '71.5', land: { x: 900, y: 742, w: 170, h: 42, cx: 985, baseline: 772, size: 25 } }], label: 'land' }],
   'counter-portal': [{ glyph: { draw: 'counter' }, from: (ctx, P) => { ctx.fillStyle = P.colors.ink; ctx.fillRect(96, 900, 300, 90); }, label: 'glyph counter only' }],
   'arc-curl': [{ from: 'ring', to: 'node' }, { from: 'node', to: 'box' }, { from: 'ring', to: 'line' }],
   'stroke-reinterpret': [{ direction: 'remove' }],
@@ -25,7 +45,8 @@ const VARIANTS = {
   'squash-to-path': [{ stage: 'squash' }, { stage: 'run' }, { stage: 'straighten' }],
   'field-morph': [{ step: 'quantize' }, { step: 'resolve' }],
 };
-const cases = list.flatMap((m) => [{ name: m.name, params: {} }, ...(VARIANTS[m.name] || []).map(({ label, ...v }) => ({ name: m.name, params: v, label: `${m.name} ${label ?? Object.values(v).join('/')}` }))]);
+const cases = list.flatMap((m) => [{ name: m.name, params: {} }, ...(VARIANTS[m.name] || []).map(({ label, ...v }) => ({ name: m.name, params: v, label: `${m.name} ${label ?? Object.values(v).join('/')}` })),
+  ...(ASSET_CASES[m.name] ? [{ name: m.name, params: ASSET_CASES[m.name], label: `${m.name} image` }] : [])]);
 
 const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c.getContext('2d', { willReadFrequently: true }); };
 const A = mk(), B = mk();
