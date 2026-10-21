@@ -2,10 +2,11 @@
 // film's beat grid, plus one effect for each picture event, all placed from choreo.js plans at the fitted scene
 // lengths (the module film.js draws from), so picture and sound cannot drift. `npm run audio` runs lib/fit.mjs first,
 // which stamps the fitted length onto index.html. Writes assets/audio/mix.wav (−14 LUFS, true peak ≤ −1.5 dBTP after
-// the renderer's AAC) and assets/audio/measure.json.
+// the renderer's AAC; mastered to −2.0, since the hard cut's tick runs the render's encode up to 0.6 dB over the
+// master's own estimate) and assets/audio/measure.json.
 //
-// Arrangement, from the scenes: the opening is the intro; the readings are the build with the reading drop (the
-// marimba line rests while text is read); from the carry (or the bar before the measure) the drop, so the measured
+// Arrangement, from the scenes: the opening is the intro; from the first travel the build with the reading drop (the
+// marimba line rests while text is read); from the match (or the bar before the measure) the drop, so the measured
 // gap, the climax, lands inside it; the lock-up is the outro, its home chord ringing to the end.
 // content.sound = { bed: 'swiss', seed } picks another bed preset or seed; content.bed = { file, offset, gain }
 // replaces the synthesised bed with a generated one.
@@ -28,11 +29,11 @@ const snd = film.sound || {};
 
 // ---------- the bed ----------
 const bar = (t) => t / BAR;
-const firstRead = S.find((x) => x.type === 'read');
-const carry = S.find((x) => x.type === 'carry'), meas = S.find((x) => x.type === 'measure');
+const second = S[1];
+const match = S.find((x) => x.type === 'match'), meas = S.find((x) => x.type === 'measure');
 const lock = S.at(-1);
-const dropAt = carry ? carry.start : meas ? Math.max(0, meas.start - BAR) : lock.start - 2 * BAR;
-const buildAt = firstRead ? firstRead.start : Math.min(dropAt, BAR * 2);
+const dropAt = match ? match.start : meas ? Math.max(0, meas.start - BAR) : lock.start - 2 * BAR;
+const buildAt = second && second !== lock ? Math.min(second.start, dropAt) : Math.min(dropAt, BAR * 2);
 if (film.bed?.file) await s.addFile(film.bed.file, 0, { offset: film.bed.offset || 0, gain: film.bed.gain ?? -3 });
 else {
   const sections = [
@@ -60,8 +61,18 @@ for (const sc of S) {
     land(at(P.landAt));
     if (P.capAt != null) pop(at(P.capAt), 480);
   }
+  if (sc.type === 'travel') {
+    const [a0, a1] = P.move, d = a1 - a0;
+    tick(at(a0), 3400, -15);
+    if (P.moveId === 'grid-hop') {
+      s.play('whoosh', at(a0), { dur: 0.36 * d, up: false, lo: 250, hi: 3800, peak: 0.6 }, { gain: -19, send: 0.2 });   // out over the desk
+      tick(at(a0 + 0.36 * d), 4200, -16);                                                                            // the ring hops
+      s.play('whoosh', at(a0 + 0.55 * d), { dur: 0.42 * d, up: true, lo: 300, hi: 5000, peak: 0.7 }, { gain: -19, send: 0.15 });   // the dive
+    } else s.play('whoosh', at(a0), { dur: d - 0.05, up: true, lo: 300, hi: 4500, peak: 0.5 }, { gain: -19, send: 0.15 });
+    land(at(P.landAt));
+    if (P.capAt != null) pop(at(P.capAt), 560 + 40 * (popK++ % 3));
+  }
   if (sc.type === 'read') {
-    if (P.travel) { tick(at(0), 3400, -15); s.play('whoosh', at(0), { dur: P.travel[1] - 0.05, up: true, lo: 300, hi: 4500, peak: 0.5 }, { gain: -19, send: 0.15 }); land(at(P.travel[1])); }
     P.rings.forEach(([a], k) => pencil(at(a), k));
     tick(at(P.lift[0]), 3400, -15); lift(at(P.lift[0]));
     tick(at(P.lift[0] + 0.25 * (P.lift[1] - P.lift[0])), 4200, -19);   // the values turn to code
@@ -70,13 +81,13 @@ for (const sc of S) {
     if (P.capAt != null) pop(at(P.capAt), 560 + 40 * (popK++ % 3));
     down(at(P.back[0])); pencil(at(P.unring[0]), -2);
   }
-  if (sc.type === 'carry') {
+  if (sc.type === 'match') {
     pencil(at(0), 2);
-    tick(at(P.carry[0]), 3400, -12);
-    s.play('stamp', at(P.carry[0]), { freq: 1100, to: 250, decay: 0.06 }, { gain: -14 });
-    s.play('whoosh', at(P.carry[0]), { dur: P.carry[1] - P.carry[0] - 0.05, up: true, lo: 300, hi: 5000, peak: 0.55 }, { gain: -19, send: 0.15 });
+    s.play('riser', at(P.move[0]), { dur: P.cut - P.move[0] - 0.02, lo: 400, hi: 3000, tone: 0.2 }, { gain: -27 });   // the push in
+    tick(at(P.cut), 3800, -10); s.play('stamp', at(P.cut), { freq: 1100, to: 250, decay: 0.05 }, { gain: -14 });   // the hard cut
+    s.play('whoosh', at(P.cut + 0.05), { dur: P.move[1] - P.cut - 0.1, up: false, lo: 300, hi: 3500, peak: 0.4 }, { gain: -22, send: 0.1 });
     land(at(P.landAt));
-    if (P.card) { lift(at(P.card[0]), 0.3); pop(at(P.valueAt), 700); if (P.lineAt != null) pop(at(P.lineAt), 660); }
+    if (P.capAt != null) pop(at(P.capAt), 660);
   }
   if (sc.type === 'measure') {
     if (P.unringM) pencil(at(P.unringM[0]), -1);
@@ -107,6 +118,6 @@ for (const k of events(T).keys) {
 
 await mkdir('assets/audio', { recursive: true });
 await s.write('assets/audio/mix-raw.wav');
-const mastered = await master('assets/audio/mix-raw.wav', 'assets/audio/mix.wav', { lufs: -14, tp: -1.5, tone: 'v2' });
+const mastered = await master('assets/audio/mix-raw.wav', 'assets/audio/mix.wav', { lufs: -14, tp: -2.0, tone: 'v2' });
 await writeMeasure('.', mastered, { duration: D, bpm: T.bpm });
 console.log(`exhibit: ${S.length} scenes, ${T.bars} bars at ${T.bpm} bpm = ${D.toFixed(3)} s; build ${buildAt.toFixed(2)} s, drop ${dropAt.toFixed(2)} s, outro ${lock.start.toFixed(2)} s`);

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>split</title>
+    <script src="lib/vendor/gsap.min.js"></script>
+    <!-- fonts come only from fonts.css (lib/setup-fonts.mjs from fonts.json) and are verified by lib/text.js fontsReady -->
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <style>
+      html, body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #film { position: absolute; inset: 0; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <!-- data-duration is the fitted length, stamped by `npm run fit` (lib/fit.mjs); never edit it by hand -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="32" data-width="1920" data-height="1080" data-fps="30">
+      <canvas id="film" width="1920" height="1080" data-layout-allow-overflow></canvas>
+      <audio id="mix" src="assets/audio/mix.wav" data-start="0" data-duration="32" data-track-index="9"></audio>
+    </div>
+    <script>
+      // lib/boot.js replaces this with the paused timeline that drives render(t) once fonts and layout are ready
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // Hold the renderer until fonts are verified and the type is measured (lib/boot.js settles this promise);
+      // registered here, synchronously, because the renderer's first readiness check can run before the module below.
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {}; window.__hf.buildHold = window.__hf.buildHold || {};
+      window.__hf.buildReady.main = new Promise((r) => (window.__hf.buildHold.main = r));
+    </script>
+    <script type="module">
+      import { boot } from './lib/boot.js';
+      import { canvas2d } from './lib/canvas.js';
+      import { fontsReady, errorBanner } from './lib/text.js';
+
+      // content.js that breaks the registry or a slot limit makes film.js throw on import: show it on every frame
+      // (and as a page error for `hyperframes check`) instead of rendering a blank film.
+      let film;
+      try { film = await import('./film.js'); } catch (e) {
+        const msg = String(e?.message ?? e);
+        console.error('[split] ' + msg);
+        errorBanner(['CONTENT.JS INVALID — run npm run fit', ...msg.split('\n').slice(1, 7)], 'hf-content-error');
+        const duration = Number(document.getElementById('root').dataset.duration) || 1;
+        boot({ id: 'main', duration, render: () => {} });
+      }
+      if (film) {
+        const ctx = canvas2d('film');
+        film.setContext(ctx);
+        boot({
+          id: 'main',
+          duration: film.duration,
+          ready: async () => { await fontsReady(film.fonts); await film.ready(ctx); },
+          render: (t) => film.render(ctx, t),
+        });
+      }
+    </script>
+  </body>
+</html>

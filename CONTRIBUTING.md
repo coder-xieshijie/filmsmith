@@ -16,7 +16,7 @@ A style gets colour presets (in its `palettes.js`, contrast computed on the card
 
 ## Adding a style
 
-A new style is a card in `references/modes/` that follows the card template in its `README.md`, and a template in `assets/templates/` that follows `CONTRACT.md`: a complete, renderable example in `content.js`, length fitted from the content, key events exported for `check-film`, no binary assets. It has to point at a kind of content none of the thirteen covers (principle 9 in `references/principles.md`).
+A new style is a card in `references/modes/` that follows the card template in its `README.md`, and a template in `assets/templates/` that follows `CONTRACT.md`: a complete, renderable example in `content.js`, length fitted from the content, key events exported for `check-film`, no binary assets except small example assets for a real-asset mode (each under 200 KB, recorded in `THIRD-PARTY.md`). It has to point at a kind of content none of the sixteen covers (principle 9 in `references/principles.md`).
 
 ## What will not be merged
 

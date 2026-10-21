@@ -7,7 +7,8 @@
 // The arrangement follows the scenes: an intro under the wake, a build under the pushes, the groove from the first band
 // or scroll to the claim (its melodic layer dropped while the claim is read), a build after it and an outro under the
 // lock-up. The sounds belong to the device: a tick and a soft low body on each landing, a short sweep and a muted thock
-// on a flip's swap frame (moves.js `swap`; device-flip's edge-on frame), a sweep under a page scroll, an impact and a rolled chime on the claim with a duck
+// on a flip's swap frame (moves.js `swap`; device-flip's edge-on frame), a flick sweep under a scroll, a short rising
+// sweep under a feed, an impact and a rolled chime on the claim with a duck
 // before it, a bell on the lock-up. No whoosh under every move.
 import { mkdir } from 'node:fs/promises';
 import film from './content.js';
@@ -26,8 +27,8 @@ const snd = film.sound || {};
 const M = movesOf(film);
 
 // ---------------------------------------------------------------- the bed (sections in bars, from the fitted scenes)
-const KIND = { wake: 'intro', push: 'build', cut: 'build', flip: 'build', band: 'drop', scroll: 'drop', claim: 'drop', lockup: 'outro' };
-const ENERGY = { wake: 0.35, push: 0.5, cut: 0.55, flip: 0.62, band: 0.72, scroll: 0.75, claim: 0.9, lockup: 0.5 };
+const KIND = { wake: 'intro', push: 'build', cut: 'build', flip: 'build', feed: 'build', band: 'drop', scroll: 'drop', claim: 'drop', lockup: 'outro' };
+const ENERGY = { wake: 0.35, push: 0.5, cut: 0.55, flip: 0.62, feed: 0.6, band: 0.72, scroll: 0.75, claim: 0.9, lockup: 0.5 };
 const firstDrop = S.findIndex((x) => KIND[x.type] === 'drop');
 const sections = S.map((x, i) => {
   let kind = KIND[x.type];
@@ -49,7 +50,13 @@ for (const x of S) {
     if (m.kind === 'flip') {
       fx('whoosh', t0, { dur: 0.42, up: m.variant === 'right', lo: 400, hi: 3800 }, { gain: -20, pan: m.variant === 'right' ? 0.3 : -0.3 });
       fx('thud', t0 + (M.flip.swap ?? 0.5) * m.dur, { freq: 82, decay: 0.1 }, { gain: -13 });
-    } else if (m.kind === 'scroll') fx('whoosh', t0 + 0.08, { dur: m.dur * 0.82, up: m.variant === 'up', lo: 500, hi: 6000, peak: 0.5 }, { gain: -19 });
+    } else if (m.kind === 'scroll') {
+      // scroll-reel: a flick (the sweep peaks early, at the release) and a long coast to the stop
+      fx('whoosh', t0 + 0.04, { dur: m.dur * 0.6, up: m.variant === 'up', lo: 500, hi: 6000, peak: 0.18 }, { gain: -19 });
+    } else if (m.kind === 'feed') {
+      // feed-stack: the next capture rises (a short upward sweep); the landing gets its tick and body below
+      fx('whoosh', t0, { dur: m.dur * 0.75, up: true, lo: 300, hi: 2600, peak: 0.35 }, { gain: -21 });
+    }
     else fx('whoosh', t0, { dur: m.dur * 0.9, lo: 600, hi: 4200 }, { gain: -27 });
   }
   for (const k of x.keys ?? []) {

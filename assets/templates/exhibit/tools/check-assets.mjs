@@ -9,11 +9,12 @@
 //     only, never an edit); over 200 KB is a WARN (fine in a film, not in a template);
 //   - macOS Vision (tools/ocr.swift) reads the crop the film shows: every `expect` string is found, no `forbid` string
 //     is, and no face is detected (people: 'none');
-//   - every number the film redraws is printed where the film says: each read cell's value inside its box, a carried
-//     value inside its source box and inside the target's ring, a measure's two values somewhere in the crop (unless
-//     the point says printed: false, e.g. a plotted point with no label);
-//   - the zoom cap (an output pixel covers ≥ 0.75 source pixels): each exhibit's scale on the desk, the opening's
-//     full-frame cover, a lock-up mark; the lift-out and the carry swap bitmap for code before the cap by themselves;
+//   - every number the film redraws or matches is printed where the film says: each read cell's value inside its box,
+//     a match's value inside its box in both prints, a measure's two values somewhere in the crop (unless the point
+//     says printed: false, e.g. a plotted point with no label);
+//   - a chip's value is printed in the part of its print the mount shows (unless it starts with ~, read off);
+//   - the zoom cap (an output pixel covers ≥ 0.75 source pixels): each print in its mount, at full frame where the
+//     opening or a grid-hop shows it so, a lock-up mark; lift-out and match-cut keep under it by themselves;
 //   - the accent rule: the content's pencil differs from every colour inside each ringed region by ΔE00 ≥ 20.
 // Off macOS the reads are INFO (not checked) and the hashes, the zoom cap and the accent rule still run.
 // The OCR is a reader, not a judge: a miss is reported with what it did read.
@@ -78,10 +79,10 @@ let prev = null;
     const r = found(s.exhibit, c.box, c.value);
     say(r.ok ? 'PASS' : 'FAIL', `${at} cell ${k + 1}: "${c.value}" ${r.ok ? 'printed in its box' : `not found in box [${c.box.join(', ')}]; read: ${r.read}`}`);
   });
-  if (canOcr && s.type === 'carry' && A[s.exhibit] && A[prev]) {
-    const r1 = found(prev, s.from.box, s.from.value), r2 = found(s.exhibit, s.to.ring, s.from.value);
-    say(r1.ok ? 'PASS' : 'FAIL', `${at}: "${s.from.value}" ${r1.ok ? `printed in ${prev}'s source box` : `not found in ${prev} [${s.from.box.join(', ')}]; read: ${r1.read}`}`);
-    say(r2.ok ? 'PASS' : 'FAIL', `${at}: "${s.from.value}" ${r2.ok ? `printed inside ${s.exhibit}'s ring (the twin it lands on)` : `not found in ${s.exhibit}'s ring [${s.to.ring.join(', ')}]; read: ${r2.read}`}`);
+  if (canOcr && s.type === 'match' && A[s.exhibit] && A[prev]) {
+    const r1 = found(prev, s.from.box, s.from.value), r2 = found(s.exhibit, s.to.box, s.from.value);
+    say(r1.ok ? 'PASS' : 'FAIL', `${at}: "${s.from.value}" ${r1.ok ? `printed in ${prev}'s box` : `not found in ${prev} [${s.from.box.join(', ')}]; read: ${r1.read}`}`);
+    say(r2.ok ? 'PASS' : 'FAIL', `${at}: "${s.from.value}" ${r2.ok ? `printed in ${s.exhibit}'s box (the cut matches the same value)` : `not found in ${s.exhibit}'s box [${s.to.box.join(', ')}]; read: ${r2.read}`}`);
   }
   if (canOcr && s.type === 'measure' && A[s.exhibit]) {
     const all = ocr(fileOf(s.exhibit), A[s.exhibit].crop).map((l) => norm(l.text)).join(' ');
@@ -94,20 +95,36 @@ let prev = null;
   if (s.exhibit) prev = s.exhibit;
 });
 
+// ---------- the chips: a chip's value is printed in the part of its print the mount shows (a value read off a
+// chart starts with ~ and is reported, not searched)
+if (canOcr) {
+  const Wc = L.world(content);
+  for (const e of Wc.list) {
+    if (!e.chip) continue;
+    const v = String(e.chip[1]);
+    if (v.startsWith('~')) { say('INFO', `${e.id}: chip "${v}" is read off the asset (~), not printed`); continue; }
+    // the number is what must be printed (a unit may stand in a column of its own); a chip without a number whole
+    const want = norm(v.match(/[-−]?\d[\d.,/]*/)?.[0] ?? v);
+    const all = ocr(fileOf(e.id), e.region.map((x) => Math.round(x))).map((l) => norm(l.text)).join(' ');
+    say(all.includes(want) ? 'PASS' : 'FAIL', `${e.id}: chip "${v}" ${all.includes(want) ? `("${want}") printed in the part the mount shows` : `("${want}") not found in the part the mount shows (a chip carries what the print shows)`}`);
+  }
+}
+
 // ---------- the zoom cap ----------
 const WD = L.world(content);
-for (const e of WD.list) say(e.a <= L.CAP + 1e-9 ? 'PASS' : 'FAIL', `${e.id}: ${e.a.toFixed(3)} output px per source px on the desk (cap ${L.CAP.toFixed(3)})`);
-const open = (content.scenes || [])[0];
-if (open?.type === 'open' && A[open.exhibit]) {
-  const [, , cw, ch] = A[open.exhibit].crop, w = cw / ch > 16 / 9 ? ch * 16 / 9 : cw, a0 = 1920 / w;
-  say(a0 <= L.CAP + 1e-9 ? 'PASS' : 'FAIL', `opening: the full-frame cover shows ${a0.toFixed(3)} output px per source px (cap ${L.CAP.toFixed(3)})${a0 > L.CAP ? '; capture the asset larger or crop it closer to 16:9' : ''}`);
+for (const e of WD.list) {
+  say(e.a <= L.CAP + 1e-9 ? 'PASS' : 'FAIL', `${e.id}: ${e.a.toFixed(3)} output px per source px in its mount (cap ${L.CAP.toFixed(3)}; the mount shows [${e.region.map((v) => Math.round(v)).join(', ')}])`);
+  // the opening shows its print at full frame, 1920 px wide: its region must be ≥ 1440 px wide (grid-hop's tiles
+  // are drawn onto the mounts, so they never pass the mount's own scale)
+  const full = 1920 / e.region[2];
+  if ((content.scenes || [])[0]?.exhibit === e.id) say(full <= L.CAP + 1e-9 ? 'PASS' : 'FAIL', `${e.id}: ${full.toFixed(3)} output px per source px at full frame (the opening; cap ${L.CAP.toFixed(3)})${full > L.CAP ? '; capture it larger' : ''}`);
 }
 const lock = (content.scenes || []).find((s) => s.type === 'lockup');
 if (lock?.mark && A[lock.mark]) {
   const a = 100 / A[lock.mark].crop[3];
   say(a <= L.CAP + 1e-9 ? 'PASS' : 'FAIL', `lock-up mark: ${a.toFixed(3)} output px per source px (100 px tall; cap ${L.CAP.toFixed(3)})`);
 }
-say('INFO', 'lift-out and value-carry redraw a value in code before its bitmap passes the cap (lib/handoffs: swap = min(1.2, cap / scale))');
+say('INFO', 'lift-out redraws a value in code before its bitmap passes the cap, and match-cut pushes in no further than the cap (lib/handoffs)');
 
 // ---------- the accent rule ----------
 try {

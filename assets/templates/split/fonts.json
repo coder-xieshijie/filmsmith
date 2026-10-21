@@ -1,0 +1,4 @@
+[
+  { "family": "Archivo", "file": "Archivo-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivo/Archivo%5Bwdth,wght%5D.ttf", "weight": "100 900", "stretch": "62% 125%", "style": "normal", "license": "OFL-Archivo.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivo/OFL.txt" },
+  { "family": "JetBrains Mono", "file": "JetBrainsMono-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf", "weight": "100 800", "style": "normal", "license": "OFL-JetBrainsMono.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt" }
+]

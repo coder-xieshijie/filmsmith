@@ -30,12 +30,23 @@ export const tagOf = (ex, kind, where) => {
 };
 
 // The sheet of exhibit scene i: scale, outer box, the asset's rect inside it, the sticker and the mapping source → local.
+const fitOf = (content, i) => {
+  const s = content.scenes[i], [, , cw, ch] = s.crop;
+  const maxW = (isSpread(content.scenes, i) ? SPREAD_W : READ_W) - 2 * M, maxH = BOTTOM - Y0 - (TAG_H - TAG_OVER) - 2 * M;
+  return Math.min(ZOOM_CAP, maxW / cw, maxH / ch);
+};
+const nextExhibit = (scenes, i) => { for (let k = i + 1; k < scenes.length; k++) if (scenes[k].type === 'exhibit') return k; return -1; };
 export const sheetOf = (content, i) => {
   const s = content.scenes[i], A = content.assets[s.asset];
   const [cx, cy, cw, ch] = s.crop;
   const spread = isSpread(content.scenes, i);
-  const maxW = (spread ? SPREAD_W : READ_W) - 2 * M, maxH = BOTTOM - Y0 - (TAG_H - TAG_OVER) - 2 * M;
-  const scale = Math.min(ZOOM_CAP, maxW / cw, maxH / ch);
+  // a match cut needs the value printed at one size on both sides of the cut: each sheet is scaled so its box (`match`
+  // from / to) is as tall as the smaller of the two at their fits
+  let scale = fitOf(content, i);
+  const j = nextExhibit(content.scenes, i), k = sheetIndex(content.scenes, i - 1);
+  const matched = (a, b, m) => Math.min(fitOf(content, a) * m.from[3], fitOf(content, b) * m.to[3]);
+  if (j >= 0 && content.scenes[j].enter === 'match-cut' && content.scenes[j].match) scale = Math.min(scale, matched(i, j, content.scenes[j].match) / content.scenes[j].match.from[3]);
+  if (s.enter === 'match-cut' && k >= 0 && s.match) scale = Math.min(scale, matched(k, i, s.match) / s.match.to[3]);
   const aw = Math.round(cw * scale), ah = Math.round(ch * scale);
   const w = aw + 2 * M, h = ah + 2 * M;
   const tag = tagOf(s.ex, A.kind, s.where);

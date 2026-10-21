@@ -71,12 +71,15 @@ Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `set
 | Inter | neo-grotesque | display and text on screens | phosphor |
 | Inter Tight | neo-grotesque, tight | display and text in print-like modes | plakat, tally, trace (UI text) |
 | IBM Plex Sans Condensed | condensed grotesque | drafting titles and values | blueprint |
-| Archivo (wdth axis) | grotesque on its width axis: extra-condensed (default) or extended (`typeWidth`) | slammed display type | ink |
+| Archivo (wdth axis) | grotesque on its width axis: extra-condensed (default) or extended (`typeWidth`) | slammed display type; semi-expanded claims beside a seam | ink, split |
 | Bricolage Grotesque | expressive grotesque | display in a reel | thread |
 | Instrument Serif | display serif | one editorial line | thread |
 | Source Serif 4 | text serif | explainer titles and thesis | trace |
-| JetBrains Mono | monospace | real code, commands | phosphor, thread, trace |
+| JetBrains Mono | monospace | real code, commands | phosphor, thread, trace, split |
 | IBM Plex Mono | monospace | labels, data, commands | plakat, blueprint, ink, tally |
+| Hanken Grotesk | grotesque (variable, wght axis) | intertitles, labels and the name on a light box | strip |
+| Schibsted Grotesk | news grotesque (variable, wght axis) | quotes, the hook and the name over a long page | scroll |
+| DM Mono | monospace | measured values: lengths, the address | strip, scroll |
 
 ### Pairing rules
 
@@ -99,6 +102,9 @@ One series per mode; sizes within 15 % are one level, neighbouring levels ≥ 1.
 | thread | ratio ≈ 1.3: 26 · 34 · 44 · 58 · 76 · 98; display fitted to its slot | derived |
 | tally | 25 · 32 · 40 · 64 · 150 · 210 · 273 · 300 | derived |
 | trace | 26 · 40 · 54 · 76/82 (label · text · display) | derived |
+| strip | 4/3 from 25: 25 · 33 · 44 · 59 · 79 · 105 · 140; intertitle 79 / labels 59 / the sheet's names and lengths 33, the name 140 | derived |
+| split | 4/3 from 25: 25 · 33 · 44 · 59 · 79 · 105; claims 59 / request and command 44 / code 33 / labels 25, the name 105 | derived |
+| scroll | 25 × 1.4ⁿ: 25 · 35 · 49 · 69 · 96 · 134; hook 96 / quotes 69 / slot and claim 49 / label 25, the name 134 · address 35 | derived |
 
 A new mode picks a named series (ISO 3098 for drawings, a modular ratio ≥ 1.25 from the 25 px floor otherwise) before it sets any size.
 

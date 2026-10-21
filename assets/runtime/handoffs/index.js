@@ -23,10 +23,15 @@
 // Defaults render a neutral sample; a template passes its own content and palette. references/transitions.md
 // documents each one (tier, when to use, parameters, theory, modes).
 //
-// Asset hand-offs (lift-out … mark-to-chrome) take real images: `asset: { image, crop: [x, y, w, h] }` with an img,
-// ImageBitmap or canvas and boxes in the image's own px. They only crop, scale and uniformly veil an asset, never
-// recolour it; rings, bands, lines and cards are code in the accent. Without an image they draw a neutral placeholder.
-// asset.js: views, windows, rings, the zoom cap (MAX_SCALE, zoomCap) and the accent check (deltaE00, ringContrast).
+// Asset hand-offs (lift-out … mark-to-chrome, scroll-reel … match-cut) take real images: `asset: { image, crop: [x, y,
+// w, h] }` with an img, ImageBitmap or canvas and boxes in the image's own px. They only crop, scale, translate and
+// uniformly veil an asset, never recolour it; rings, bands, lines and cards are code in the accent. Without an image they
+// draw a neutral placeholder. asset.js: views, windows, rings, the zoom cap (MAX_SCALE, zoomCap) and the accent check
+// (deltaE00, ringContrast); stage.js: cover and contain views, the flick, cast shadows, placeholders.
+// Material hand-offs move one physical object the whole film is made of: a page (scroll-reel, scroll-fling,
+// section-lock, unfold, roll), a strip of film (strip-advance, gate-punch, sheet-pick; strip.js) or a seam
+// (split-open, louvre, wipe-line, split-branch, diff-slider; seam.js). Those that take painters (`paint(ctx, dx, dy)`,
+// `page(ctx, off, P, R)`) instead of assets also run without prepare(), so a film may call at / rest / paint itself.
 
 import { subframes } from '../canvas.js';
 import { merge, maxDisp } from './util.js';
@@ -61,12 +66,37 @@ import cameraTruck from './camera-truck.js';
 import deviceFlip from './device-flip.js';
 import tetherLink from './tether-link.js';
 import markToChrome from './mark-to-chrome.js';
+// added 2026-10-21: other axes for real assets (vertical scroll and feeds, seams and slats, masks, grids, paper, a cut)
+// and the material hand-offs of the scroll, strip and split modes
+import scrollReel from './scroll-reel.js';
+import scrollFling from './scroll-fling.js';
+import sectionLock from './section-lock.js';
+import unfold from './unfold.js';
+import roll from './roll.js';
+import feedStack from './feed-stack.js';
+import stripAdvance from './strip-advance.js';
+import gatePunch from './gate-punch.js';
+import sheetPick from './sheet-pick.js';
+import splitOpen from './split-open.js';
+import louvre from './louvre.js';
+import wipeLine from './wipe-line.js';
+import splitBranch from './split-branch.js';
+import diffSlider from './diff-slider.js';
+import typeWindow from './type-window.js';
+import gridHop from './grid-hop.js';
+import mosaicAssemble from './mosaic-assemble.js';
+import tickerWipe from './ticker-wipe.js';
+import parallaxSlide from './parallax-slide.js';
+import sheetShuffle from './sheet-shuffle.js';
+import matchCut from './match-cut.js';
 
 const MODULES = [
   railPress, slotRails, arcCurl, strokeReinterpret, netUnfold, containerMorph, reEncode, pathType, signalRelay,
   rouletteLock, collapseBurst, convergeMark, anchorSwap, streamBrake, scrambleResolve, squashToPath, fieldMorph,
   counterPortal, stepWipe, beamTrace,
   liftOut, bezelPullback, viewportPush, spotlightBand, valueCarry, cameraTruck, deviceFlip, tetherLink, markToChrome,
+  scrollReel, scrollFling, sectionLock, unfold, roll, feedStack, stripAdvance, gatePunch, sheetPick, splitOpen, louvre,
+  wipeLine, splitBranch, diffSlider, typeWindow, gridHop, mosaicAssemble, tickerWipe, parallaxSlide, sheetShuffle, matchCut,
 ];
 const BY_NAME = Object.fromEntries(MODULES.map((m) => [m.name, m]));
 

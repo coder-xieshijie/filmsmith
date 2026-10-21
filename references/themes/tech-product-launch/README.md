@@ -53,9 +53,15 @@ The climax is the cost claim or the offer. Every score follows principle 2's ter
 | [blueprint](../../modes/blueprint.md) | One engineering drawing drafted sheet by sheet, amber stamps | Accepted 2026-10-16 |
 | [ink](../../modes/ink.md) | Type slammed on the beat, an ink dot that floods into colour | Accepted 2026-10-17 |
 | [thread](../../modes/thread.md) | One line that becomes everything | Accepted 2026-10-17; its example is the skill's own promo film (2026-10-18) |
-| [handset](../../modes/handset.md) | One locked-off device whose screen shows only real captures; copy in the margin, level with the evidence | Accepted 2026-10-21 (sample film, its sound included) |
-| [exhibit](../../modes/exhibit.md) | Real assets on one desk under an overhead camera; one pencil ring lifts each claim out as a code-drawn reading | Accepted 2026-10-21 (sample film, its sound included) |
-| [dossier](../../modes/dossier.md) | An evidence file on a dark mat: claims struck where they are printed, tied to exhibit stickers, one figure carried onto a worksheet | Accepted 2026-10-21 (sample film, its sound included) |
+| [morph](../../modes/morph.md) | One ink shape that never leaves the frame, promoted a dimension per scene: point, line, plane, solid, interface, mark | Accepted 2026-10-19 (style sample) |
+| [halftone](../../modes/halftone.md) | A two-ink print: a piece of the mark holds still while every world is printed round it, then the pull-back to the whole mark | Accepted 2026-10-19 (style sample) |
+| [pulse](../../modes/pulse.md) | A question acted out as a query: one word a beat, grounds flipping along one hue, one whiteout for the answer | Accepted 2026-10-19 (style sample) |
+| [handset](../../modes/handset.md) | One locked-off device whose screen shows only real captures, its content moving vertically; copy in the margin, level with the evidence | Accepted 2026-10-21 (sample film, its sound included); its own axis of motion the same day (`scroll-reel`, `feed-stack`, one flip at most) |
+| [exhibit](../../modes/exhibit.md) | Real assets on a desk under an overhead camera, in three planes: the camera slides with parallax, pulls back over the whole desk or cuts on a shared value; one pencil ring, a lift-out at the claim | Accepted 2026-10-21 (sample film, its sound included); rebuilt the same day on its own axis of motion (camera travel and depth), not yet seen by the owner |
+| [dossier](../../modes/dossier.md) | An evidence file on a dark mat: claims struck where they are printed, tied to exhibit stickers, one figure carried onto a worksheet; pages change by paper handling and editorial cuts | Accepted 2026-10-21 (sample film, its sound included); yellow kept as the default, its own page changes the same day |
+| [strip](../../modes/strip.md) | One strip of film through a fixed gate: real frames stop registered, a contact sheet of the films' real lengths, one grease-pencil pick that runs | Accepted 2026-10-21 (sample film) |
+| [split](../../modes/split.md) | One movable seam between what is written and the real result it makes; one changed line over two renders at the climax | Accepted 2026-10-21 (sample film, its sound included) |
+| [scroll](../../modes/scroll.md) | One long vertical sheet of the product's own page: flicked and locked section by section, its headings pinned as chapters, one row unfolding in place | Accepted 2026-10-21 (sample film) |
 
 ## Ruled out
 

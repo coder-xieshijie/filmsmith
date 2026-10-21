@@ -1,6 +1,6 @@
 // tools/regions.mjs — the accent rule of the Exhibit mode: the pencil must differ from every colour inside each
 // region the film rings by ΔE00 ≥ 20, so a ring never reads as part of the evidence. Each ringed region of content.js
-// (a lifted cell, a carried value's source and target, the region a dimension spans) is decoded with ffmpeg; its
+// (a lifted cell, both sides of a match, the region a dimension spans) is decoded with ffmpeg; its
 // chromatic colours (CIELAB C* ≥ 12, at least 0.5 % of the region's pixels after 4-bit quantising) are compared with
 // the accent of every preset. Used by `npm run palettes` and tools/check-assets.mjs.
 import { spawnSync } from 'node:child_process';
@@ -65,9 +65,9 @@ export const ringedRegions = (content) => {
   (content.scenes || []).forEach((s, i) => {
     const a = A[s.exhibit];
     if (s.type === 'read' && a) (s.cells || []).forEach((c, k) => out.push({ where: `scene ${i + 1} read, cell ${k + 1} (${c.value})`, file: a.file, box: c.box }));
-    if (s.type === 'carry' && a && A[prev]) {
-      out.push({ where: `scene ${i + 1} carry, source (${s.from?.value})`, file: A[prev].file, box: s.from?.box });
-      out.push({ where: `scene ${i + 1} carry, target`, file: a.file, box: s.to?.ring });
+    if (s.type === 'match' && a && A[prev]) {
+      out.push({ where: `scene ${i + 1} match, source (${s.from?.value})`, file: A[prev].file, box: s.from?.box });
+      out.push({ where: `scene ${i + 1} match, target`, file: a.file, box: s.to?.box });
     }
     if (s.type === 'measure' && a) {
       const [p, q] = [s.a?.point, s.b?.point];

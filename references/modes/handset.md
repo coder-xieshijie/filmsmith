@@ -1,11 +1,11 @@
 # Handset (`handset`)
 
 One code-drawn device — a laptop for a desktop or web product, a phone for a mobile one — sits head-on and locked off on the left of the frame from the first frame to the last; everything that changes, changes on its screen, and the screen shows only real captures: the product's own pages and UI states, its docs, its official charts. The words live in a margin to the right, riding level with the part of the screen in play; the device's chin names where the screen's state comes from. Aesthetic anchor: "like a product demo shot on one locked-off camera, with the presenter's notes pinned in the margin — except every pixel on the screen was captured, none drawn".
-Theme: tech-product-launch (a release that can be seen on the product's own surface) · Template: `assets/templates/handset/` · tempo 112–128 BPM, default 120 (length follows the copy; the shipped example fits 15 bars = 30.0 s) · timing API 3 · Status: owner-accepted 2026-10-21 (sample film, its sound included); template 2026-10-21. Values are tagged `standard` / `borrowed` / `derived` / `owner` / `draft` as in [foundations](../foundations.md#where-values-come-from).
+Theme: tech-product-launch (a release that can be seen on the product's own surface) · Template: `assets/templates/handset/` · tempo 112–128 BPM, default 120 (length follows the copy; the shipped example fits 14 bars = 28.0 s) · timing API 3 · Status: owner-accepted 2026-10-21 (sample film, its sound included); template 2026-10-21; its own axis of motion 2026-10-21 (the device stays, the screen's content moves vertically: `scroll-reel`, `feed-stack`; one flip at most). Values are tagged `standard` / `borrowed` / `derived` / `owner` / `draft` as in [foundations](../foundations.md#where-values-come-from).
 
 ## Fits / does not fit
 
-Fits: a launch whose claim can be **seen on the product's own surface** — a model that ships as the default in an app's picker, a feature that is one new panel, a price on the pricing page, a score on the official chart, a line in the docs — and a product that has real, current captures of those surfaces (2× or 3× device pixels). 25–60 s; a 12 s sting is `wake` → `flip` → `lockup`.
+Fits: a launch whose claim can be **seen on the product's own surface** — a model that ships as the default in an app's picker, a feature that is one new panel, a price on the pricing page, a score on the official chart, a line in the docs — and a product that has real, current captures of those surfaces (2× or 3× device pixels). 25–60 s; a 12 s sting is `wake` → `feed` → `lockup`.
 
 Does not fit:
 - a product with no screen (a library, an API with no console: phosphor or morph);
@@ -18,20 +18,20 @@ Does not fit:
 
 | Use | Example (made-up product) | Chain |
 |---|---|---|
-| **A model or feature that ships inside an app, 30–45 s** (best fit) | an editor's new default model: the download page; a push onto the picker that reads the model's name; a flip to the official benchmark chart, the light on the model's series; back to the download page for the lock-up | `wake` → `push` → `flip` → `band` → `claim` → `lockup` |
-| **A tool shown through its own docs** (the shipped example) | Filmsmith filming its own README: the lede, the style stills, the guide's requirements, the pace line, the loudness check (30 s) | `wake` → `push` → `push` → `flip` → `band` → `scroll` → `claim` → `lockup` |
-| A pricing or plan change, 15–25 s | a new tier on a pricing page: the page at rest → the light on the tier → a push onto the price, repeated in the margin → a flip to the checkout page | `wake` → `push` → `claim` → `lockup` |
+| **A model or feature that ships inside an app, 30–45 s** (best fit) | an editor's new default model: the download page; a push onto the picker that reads the model's name; the official benchmark chart rises over it (a feed), the light on the model's series; the device turns back to the download page for the lock-up | `wake` → `push` → `feed` → `band` → `claim` → `lockup` |
+| **A tool shown through its own docs** (the shipped example) | Filmsmith filming its own README: the lede, the style stills, the guide's requirements, the pace line, the loudness check (28 s) | `wake` → `push` → `push` → `feed` → `band` → `scroll` → `claim` → `lockup` |
+| A pricing or plan change, 15–25 s | a new tier on a pricing page: the page at rest → the light on the tier → a push onto the price, repeated in the margin → the checkout page rises over it | `wake` → `push` → `claim` → `lockup` |
 | A number that changes on the same screen | a dashboard before and after a release: two captures of the same view, a registered `cut` on the beat, so only the number changes | `wake` → `push` → `cut` → `lockup` |
 
 ## Mode principles
 
-1. **One device, locked off.** The device is on screen from the first frame to the last, head-on, at one size and place; the camera never moves. Only the screen's viewport moves (push, pull, pan, scroll) and the light on it. The device itself moves in two ways only: the opening wake, and a flip to change surface (≤ 3 a film; two flips in a row turn opposite ways). *(Narrows 7, a through-line object, and 4, keep the followed object on screen; object constancy. Locking it off, with no tilt and no swing-in, is this mode's own.)*
+1. **One device, locked off.** The device is on screen from the first frame to the last, head-on, at one size and place; the camera never moves. The screen's content moves instead, mostly vertically: the page is flicked to its next stop, the next capture rises over the current one, the viewport pushes, the light hops. The device itself moves in two ways only: the opening wake, and at most one flip a film to change surface (`owner`, 2026-10-21: the real-asset modes' transitions looked cut from one mould, lift and flip; Handset's axis is the screen's vertical). *(Narrows 7, a through-line object, and 4, keep the followed object on screen; object constancy. Locking it off, with no tilt and no swing-in, is this mode's own.)*
 2. **The screen shows only real states.** Every screen state is a real capture of a real surface, saved unedited (sha256 in the manifest) with the region the film may show (`public`). A motion between two states is re-enacted only when both states were captured; a state that was not captured is not drawn, however simple. Code draws marks on the screen (the light, the ring) and the hardware round it — never a window, a control, a page or a chart. *(Narrows 2, precision, and 9, the style points at the content; `owner` 2026-10-20: real assets carry the key content.)*
 3. **The device holds the evidence; the margin holds the words.** Text in a capture is evidence: it may be small, and it is never what the viewer must read. Anything the viewer must read is set in code in the margin, ≥ 25 px (main lines ≥ 40 px), clear of the device, and every number in it is read off the capture by the check. *(Narrows 1, readable before beautiful, and 3, one protagonist: the device is the picture, the margin the text.)*
 4. **Push under the cap.** A push enlarges a capture until one output pixel covers no less than 0.75 source pixels (output / source ≤ 1.333): the screen never shows interpolated pixels. Captures are taken at 2× or 3× to buy that headroom; the code clamps every view to the cap. *(Narrows 1 and 2.)*
 5. **One fixed accent per preset, apart from what it rings; it marks only the region in play.** The accent is the preset's, never computed per film. A film may use a preset only if its accent differs by **ΔE00 ≥ 20 from every colour filling ≥ 2 % of each region it rings**; a film whose captures fail that takes another preset. It is drawn only on code marks — the ring, the level tick — never on copy, never on a capture; on a white page it rides on a 9 px under-stroke of the ground so it reads at any brightness. *(Narrows 7, one accent, one meaning; `owner` 2026-10-20.)*
-6. **Level rail.** The level tick on the device's right edge sits at the height of the ringed region, and the margin's copy block rides level with the lit region: when a push, a scroll or a hop moves the region, the copy moves with it. Word and evidence are read across one horizontal. *(Narrows 3, signalling; spatial contiguity.)*
-7. **The chin names the source.** The device's chin (under the phone: a line beneath it) shows where the screen's state comes from, host and path in mono 25 px; it changes only with the screen, on a flip's swap frame. It is the persistent frame and carries nothing else. *(Narrows 2, a quoted number keeps its source, and 7, a persistent frame carries real information only.)*
+6. **Level rail.** The level tick on the device's right edge sits at the height of the ringed region, and the margin's copy block rides level with the lit region: when a push or a hop moves the region, the copy moves with it. Word and evidence are read across one horizontal. *(Narrows 3, signalling; spatial contiguity.)*
+7. **The chin names the source.** The device's chin (under the phone: a line beneath it) shows where the screen's state comes from, host and path in mono 25 px; it changes only with the screen: half way through a feed, on the flip's swap frame. It is the persistent frame and carries nothing else. *(Narrows 2, a quoted number keeps its source, and 7, a persistent frame carries real information only.)*
 
 ## Rules for real assets
 
@@ -107,11 +107,12 @@ Information text ≥ 25 px, main lines 49 px (`standard`, principle 1). Text ins
 | `wake` | opens (T3 hook): the lid's edge draws from the camera dot, the screen lights on the first capture on beat 1, the name enters; the source line appears on the chin | 3.0 s |
 | `push` | viewport-push to a region (≤ cap); the light; value, note and line; the ring and the tick | 2.5 s |
 | `cut` | a hard cut on the beat to another capture of the same screen, registered on the region | about 2 s |
-| `flip` | device-flip to another surface; chin and screen change on the swap frame (T2) | 3.0 s |
-| `scroll` | the page's own scroll to another stop of the same capture (T2) | 3.0 s |
+| `feed` | the next capture rises over the current one, which steps back (T2); the usual change of surface | 2.5 s |
+| `flip` | device-flip to another surface; chin and screen change on the swap frame (T2); once a film at most, usually the lock-up's | 3.0 s |
+| `scroll` | the page flicked to another stop of the same capture, at its width (T2) | 3.0 s |
 | `band` | the light hops row to row on a still capture; each row its own copy | 4.5 s (2 rows) |
-| `claim` | the region lit, the lead read; the push lands on the bar line with the value (T3 climax), read in a pause | 5.0 s |
-| `lockup` | back to the product's surface at rest, veiled; the name, the line, the URL (≥ 3 s); the region ringed again on the last downbeat | 6.5 s (takes the bar rounding) |
+| `claim` | the region lit, the lead read; the push lands on the bar line with the value (T3 climax), read in a pause | 3.5 s |
+| `lockup` | back to the product's surface at rest (the film's one flip, else a feed), veiled; the name, the line, the URL (≥ 3 s); the region ringed again on the last downbeat | 6.5 s (takes the bar rounding) |
 
 Slots and limits: `assets/templates/handset/TEMPLATE.md`.
 
@@ -122,13 +123,14 @@ The moves are pluggable (TEMPLATE.md, Moves): each role is an adapter over a han
 - **viewport-push** (role `push`, T0–T1): one zoom about the point both views share, log scale, the module's curve (the move takes 0.8 of its beat, cubic in-out), so the region travels on a straight line; pans are the same at equal zoom; the light and the ring are drawn in source pixels through the same view and are carried exactly. `borrowed` (shared hand-off).
 - **spotlight veil** (role `hop`, T0): a dim of the ground with a hole: a padded box, or a full-width band for rows of a list or paragraph; the band hops row to row in one beat with the shared `spotlight-band` curve. `borrowed` / `derived`.
 - **level-rail** (T0): the margin's copy block slides on the same ease to stay level with the lit region; the tick sits at the ringed region's height. `derived`.
-- **device-flip** (role `flip`, T2): the whole device, painted as a texture, turns about its vertical axis to edge-on (ease in), the screen state and the chin change on that frame, and it lands from the other side (ease out), darkening as it turns; 2 beats, swap at 0.433. ≤ 3 a film; two flips in a row turn opposite ways (`right`, `left`); two contents are never visible together. `borrowed` (shared hand-off).
-- **page-scroll** (role `scroll`, T2, this template's own): the screen re-enacts the page's own scroll through one captured page segment, 2 beats cubic in-out, motion-blurred; it carries the viewer between two stops on the same page where a flip would claim a change of surface. `derived`.
+- **scroll-reel** (role `scroll`, T2; the mode's own axis): window-less inside the screen, the page at its own width is flicked — the speed ramps for a tenth of the move, is let go and coasts on friction to an exact stop at the next section — and pulls back a little while fast (scale 1 − 0.32 · (speed / peak)^0.8, back to 1 as it stops), motion-blurred vertically. The module's offset and scale become a view of the capture, so the light, the ring and the level rail follow the page and only the public region is drawn. 2 beats (the module's 3, cut to the T2 limit). It carries the viewer between two stops on the same page where a change of surface would claim another source. `borrowed` (shared hand-off).
+- **feed-stack** (role `feed`, T2; the mode's own axis): the next capture rises from below the screen on a landing spring, like the next post in a vertical feed; the current one steps back a level of the deck (5 % smaller about its top centre, 34 px up, veiled up to 40 %). Window-less: the cards are the captures, edge to edge with the screen, no title bar and no shadow (principle 2); the chin changes half way. 1 beat (the module's 1.5, cut so the card lands on a beat). The usual change of surface. `borrowed` (shared hand-off; the window-less use is this mode's).
+- **device-flip** (role `flip`, T2): the whole device, painted as a texture, turns about its vertical axis to edge-on (ease in), the screen state and the chin change on that frame, and it lands from the other side (ease out), darkening as it turns; 2 beats, swap at 0.433. Once a film at most, usually the turn back for the lock-up; two contents are never visible together. `borrowed` (shared hand-off).
 - **in-frame cut** (T0): a hard cut on a beat between two captures of the same screen, registered so the changing element keeps its place. `derived`.
 - **slot-rails** (system): the margin's lines enter up through their rail (0.36 s, expo out) and leave (0.2 s). `borrowed` (system).
 - **screen-wake** (T3 hook): the 2 px edge draws from the camera dot both ways (0.45 s); on beat 1 the first capture comes up from black over 0.3 s, monotonic, no overshoot; `edges: 'cut'` starts on the lit device. `derived`.
 
-**Against the nearest references** (principle 10, the mode's fixed grammar, checked once here; 2026-10-20): app-demo launch films with a phone on the left and big type on the right, in-device zoom, flips and a spotlight band. Shared (4 of 13): device left and large text right as a fixed template; in-device zoom; a flip to change screen; a spotlight band. Not shared (9): a tilted phone with a drop shadow on a light ground (head-on, no shadow), a second accent for callouts (one accent), a tab label on the screen (the chin names the source), a cube swarm becoming a chart, one phone becoming three fanned isometric, an icon route diagram, a dip to the ground between sections, an app-store badge and QR end card, a pulse under everything. Under half. Not in the references: the cap and the capture rules, the level rail, the chin's provenance, re-enactments only between captured states, the locked-off device.
+**Against the nearest references** (principle 10, the mode's fixed grammar, checked once here; 2026-10-20): app-demo launch films with a phone on the left and big type on the right, in-device zoom, flips and a spotlight band. Shared (4 of 13): device left and large text right as a fixed template; in-device zoom; a flip to change screen (here once at most; the screen's content moves instead); a spotlight band. Not shared (9): a tilted phone with a drop shadow on a light ground (head-on, no shadow), a second accent for callouts (one accent), a tab label on the screen (the chin names the source), a cube swarm becoming a chart, one phone becoming three fanned isometric, an icon route diagram, a dip to the ground between sections, an app-store badge and QR end card, a pulse under everything. Under half. Not in the references: the cap and the capture rules, the level rail, the chin's provenance, re-enactments only between captured states, the locked-off device.
 
 ## Motion
 
@@ -137,25 +139,26 @@ The moves are pluggable (TEMPLATE.md, Moves): each role is an adapter over a han
 | Copy group | value on the landing; note and line one beat later; the ring one beat after that | `derived` |
 | Push | 1 beat, the module's curve (move in 0.8 of it, cubic in-out); the light 0.4 beat in | `borrowed` (module) / `draft` |
 | Hop | 1 beat, `spotlight-band` | `borrowed` (module) |
-| Flip | 2 beats, edge-on at 0.433, perspective 2200 px about the device's centre | `borrowed` (module) |
-| Scroll | 2 beats, cubic in-out | `draft` |
+| Scroll | 2 beats, scroll-reel's flick (release at 0.1, 5 e-foldings of friction), pull-back 0.32 | `borrowed` (module) / `draft` (the length) |
+| Feed | 1 beat, feed-stack's landing spring; the deck step 5 %, peek 34 px, veil 0.4 | `borrowed` (module) / `draft` (the length) |
+| Flip | 2 beats, edge-on at 0.433, perspective 2200 px about the device's centre; once a film | `borrowed` (module); `owner` (once, 2026-10-21) |
 | Ring | draw-on 0.25 s from the top-left corner; the tick follows it | `draft` |
 | Margin text | slot-rails, enter 0.36 s, leave 0.2 s | `borrowed` (system) |
 | Holds | after each landing the picture holds only once its text has landed; every still stretch is a declared hold (0.2 s to 2 beats; the claim's a pause) | `standard` (principle 5) |
-| Motion blur | `subframes` on every frame whose fastest point (the screen's corners in a push or scroll, the device's edges in a flip) moves over 1 px a frame; shutter half a frame | `borrowed` (system) |
+| Motion blur | `subframes` on every frame whose fastest point (the screen's corners in a push or scroll, the cards' corners in a feed, the device's edges in a flip) moves over 1 px a frame; shutter half a frame | `borrowed` (system) |
 | Ambient | none: the device is locked off and a still screen is the point | `derived` |
 | Tempo | 120 BPM default (112–128) | `draft` |
 
 ## Sound
 
-Bed: the kit's `data` preset (a soft muted four-on-the-floor, a plucked up-down arpeggio, a warm pad, a round bass) at 120 BPM in F, `mix: 'v2'` (`owner`, 2026-10-21: approved on the sample film). The arrangement follows the scenes: an intro under the wake, a build under the pushes and flips, the groove from the first band or scroll to the claim (its melodic layer dropped while the claim is read), a build after it and an outro under the lock-up. The sounds belong to the device: a tick and a soft low body on each landing, a short sweep and a muted thock on a flip's swap frame, a sweep under a page scroll, an impact and a rolled chime with a duck before the claim, a chime on the screen lighting, a bell on the lock-up. Master −14 LUFS, true peak ≤ −1.5 dBTP after the renderer's AAC, `tone: 'v2'`.
+Bed: the kit's `data` preset (a soft muted four-on-the-floor, a plucked up-down arpeggio, a warm pad, a round bass) at 120 BPM in F, `mix: 'v2'` (`owner`, 2026-10-21: approved on the sample film). The arrangement follows the scenes: an intro under the wake, a build under the pushes and changes of surface, the groove from the first band or scroll to the claim (its melodic layer dropped while the claim is read), a build after it and an outro under the lock-up. The sounds belong to the device: a tick and a soft low body on each landing, a short sweep and a muted thock on the flip's swap frame, a flick sweep (peaking at the release) under a scroll, a short rising sweep under a feed, an impact and a rolled chime with a duck before the claim, a chime on the screen lighting, a bell on the lock-up. Master −14 LUFS, true peak ≤ −1.5 dBTP after the renderer's AAC, `tone: 'v2'`.
 
 ## Factory defaults
 
 What the template produces untouched; a film's `PLAN.md` ban list starts here.
 
 - The `graphite` preset: the head-on graphite laptop on the left, the margin on the right, focus lime on the ring and the tick.
-- The chain wake → push → push → flip → band → scroll → claim → lockup, with two flips that turn opposite ways.
+- The chain wake → push → push → feed → band → scroll → claim → lockup, the lock-up reached by the film's one flip.
 - The copy group (value, then note and line, then the ring) in every state.
 - The `data` bed in F at 120 BPM.
 - The example copy: Filmsmith filming its own README (`Every frame`, `drawn in code`, `Its frames`, `drawn, not filmed`, `Any agent`, `No API key`, `One file`, `2–3 s`, `−14 LUFS`, `loudness, checked`, `an agent skill`).
@@ -177,19 +180,21 @@ What the template produces untouched; a film's `PLAN.md` ban list starts here.
 - Do not push past the cap to make capture text "readable"; set the line in the margin instead (principles 3, 4).
 - Do not put the accent on copy, on a capture or on two regions; do not keep a preset that fails the accent rule (principle 5).
 - Do not let the light's edge cut a word: size the region's box or band round it.
-- Do not flip more than three times, or twice the same way in a row (principle 1).
+- Do not flip the device more than once; change surface with a feed (principle 1).
 - Do not use a capture whose words disagree with the copy: re-capture or drop the scene (rules for real assets).
 - Do not crop people in, and do not show anything outside `public`.
 
 ## Checks
 
-- **P0**: `npm run assets` 0 FAIL (hashes, sizes, `people`, every view inside the public region and under the cap, every margin number in its region's `reads`, OCR of `reads` where available, the accent ≥ 20 ΔE00 from every ringed region); `npm run fit` reports no errors (API 3: T0 gaps ≤ 4 beats, compositions median 2–3 s and ≤ 6 s, CV ≥ 0.3, 2–4 expressive transitions in 30 s, 2–3 peaks with the climax at 60–85 %); `npm run palettes` passes; the margin text ≥ 25 px and ≥ 4.5:1 on the ground; `hyperframes check` 0 errors; loudness −14 ± 1 LUFS, true peak ≤ −1.5 dBTP; `check-film` 0 FAIL; no person, avatar or account name on any frame; the device never leaves the frame.
-- **P1**: the banned look absent; the motif count against the nearest references stays under half; something changes about every beat; ≤ 3 flips, alternating; each landing puts the copy level with the region; the claim has its pause.
-- **P2**: no word cut by the light's edge; the ring closes exactly on its start; no ghost of the old state on a flip; the chin changes on the swap frame, not before.
+- **P0**: `npm run assets` 0 FAIL (hashes, sizes, `people`, every view inside the public region and under the cap, every margin number in its region's `reads`, OCR of `reads` where available, the accent ≥ 20 ΔE00 from every ringed region); `npm run fit` reports no errors (API 3: T0 gaps ≤ 4 beats, compositions median 2–3 s and ≤ 6 s, CV ≥ 0.3, 2–4 expressive transitions in 30 s, at most one device flip, 2–3 peaks with the climax at 60–85 %); `npm run palettes` passes; the margin text ≥ 25 px and ≥ 4.5:1 on the ground; `hyperframes check` 0 errors; loudness −14 ± 1 LUFS, true peak ≤ −1.5 dBTP; `check-film` 0 FAIL; no person, avatar or account name on any frame; the device never leaves the frame.
+- **P1**: the banned look absent; the motif count against the nearest references stays under half; something changes about every beat; the screen's content carries the motion, the device turns once at most; each landing puts the copy level with the region; the claim has its pause.
+- **P2**: no word cut by the light's edge; the ring closes exactly on its start; no ghost of the old state on a flip; the chin changes on the swap frame, not before; a feed's cards show no window, bar or shadow.
 
 ## Known issues
 
-- **Transitions alike across modes** (`owner`, 2026-10-21: the sample films' moves felt too similar, flip and lift): the four moves are pluggable (TEMPLATE.md, Moves) so a more varied set (a momentum scroll, a feed of stacked screens) can replace them; none is swapped yet.
+- **Transitions alike across modes** (`owner`, 2026-10-21: the sample films' moves felt too similar, flip and lift): addressed the same day — the screen's content now moves vertically (`scroll-reel`, `feed-stack`) and the device turns once at most; the five moves stay pluggable (TEMPLATE.md, Moves). The new vocabulary has not been judged on a film yet.
+- **Pull-back while scrolling**: scroll-reel's speed pull-back shows the glass at both sides of the page for a few frames; it is the module's look (a long scroll stays legible as a shape), not judged here.
+- **Before the climax**: the example's compositions before the claim average 2.75 s against a median of 2.5 s (a `fit` and `check-film` shape warning).
 - **Flip edge**: the device has no side face, so the edge-on frames show only a hairline, and the perspective makes the near edge tall for a frame. A later version could draw a 10–14 px side.
 - **The margin blurs while it rides a move** (the level rail moves it with the push, and the sub-frame blur takes the whole frame); a later version could draw the margin outside the blurred layer.
 - **Captures are scarce**: a tap re-enactment needs two consecutive captured states of one control; the template has no tap type yet.

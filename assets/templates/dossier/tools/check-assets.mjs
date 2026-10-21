@@ -101,10 +101,14 @@ else {
   const nums = new Set();
   for (const [i, v] of words) for (const m of String(v).matchAll(/[−-]?\d+(?:[.,]\d+)*/g)) nums.add(`${i}|${m[0]}`);
   const corpus = allText.join('\n');
+  // numbers the film computes or takes from elsewhere are declared in content.derived with how they were obtained
+  const derived = (content.derived ?? []).map((d) => ({ ...d, n: norm(d.value) }));
   for (const k of nums) {
     const [i, n] = k.split('|');
     if (/^\d$/.test(n) && scenes[i].type === 'ledger') continue; // an exhibit number
-    ok(corpus.includes(norm(n)), `scene ${+i + 1}: the number ${n} is printed in a crop`);
+    if (corpus.includes(norm(n))) { say('PASS', `scene ${+i + 1}: the number ${n} is printed in a crop`); continue; }
+    const d = derived.find((x) => x.n.includes(norm(n)));
+    ok(!!d, `scene ${+i + 1}: the number ${n} ${d ? `is derived: ${d.how}` : 'is printed in no crop (print it, or declare it in content.derived with how it was obtained)'}`);
   }
   // leaders: the part over the page crosses no text
   let sheet = null;

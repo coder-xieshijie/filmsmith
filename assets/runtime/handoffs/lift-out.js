@@ -37,7 +37,7 @@ export default {
   name: 'lift-out',
   tier: 'T1',
   beats: 2,
-  modes: ['blueprint', 'tally', 'phosphor'],
+  modes: ['blueprint', 'tally', 'phosphor', 'exhibit (at the claim, at most twice)'],
   roles: ['ground', 'panel', 'line', 'ink', 'dim', 'accent', 'paper', 'onPaper'],
   from: 'a real asset in its window with regions ringed in the accent (cells of an official table)',
   to: 'the same asset dimmed, the ringed regions lifted above it as cards with the values redrawn in code; or, with `land`, those values in their place in the next scene',

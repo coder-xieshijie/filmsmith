@@ -200,6 +200,9 @@ Besides its palette presets, every template takes one form variant in `content.j
 | handset | `device` | `'laptop'`, `'phone'` |
 | exhibit | `desk` | `'plain'`, `'mat'` |
 | dossier | `highlight` | `'band'`, `'underline'` |
+| strip | `perfs` | `'double'`, `'single'` |
+| split | `seam` | `'straight'`, `'stitched'` |
+| scroll | `minimap` | `'on'`, `'off'` |
 
 ## Cut-downs for a reel
 
@@ -217,9 +220,12 @@ A film that is cut into a longer one (a showcase, a launch film's sting, a demo 
 | morph | open on `solid`; keep the closing `cmd` | solid → unfold → mark, 12 s at 120 bpm |
 | halftone | `edges: 'cut'` | card → lockup, 12 s at 120 bpm (8 s with the name alone) |
 | pulse | ask → ask → search → reveal (`rest: true`) | 12 s at 120 bpm |
-| handset | `edges: 'cut'` (the first frame is the lit device); keep a `flip` or `scroll` | wake → flip → lockup, 12 s at 120 bpm |
+| handset | `edges: 'cut'` (the first frame is the lit device); keep a `feed`, `scroll` or `flip` | wake → feed → lockup, 12 s at 120 bpm |
 | exhibit | `open` → `lockup` (no reads; the first frame is the asset at the cover zoom) | 12 s at 120 bpm, 11.25 s at 128 |
 | dossier | `exhibit` → `claim` → `lockup` (one page, two claims; the first frame is already the page on the mat) | 12 s at 120 bpm |
+| strip | `edges: 'cut'` (the first frame is an intertitle registered in the gate); `titles` → `frames` → `lockup` | 12 s at 120 bpm |
+| split | `edges: 'cut'`: may open on a `file` (the first frame is already code over its result) and end on a `diff` (the claim's pause settles the last half second); `file` → `render` → `diff` | 16 s at 120 bpm, 15 s at 128 |
+| scroll | `open` → `lockup` (no fling: the sheet is already at its top and the name replaces the hook; the first frame is the paper roll on the ground, already unrolling the page; the roll-up lands on the last downbeat) | 12 s at 120 bpm |
 
 The switches differ because the templates do; a later version may unify them under `edges`.
 

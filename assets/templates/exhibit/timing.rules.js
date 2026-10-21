@@ -8,35 +8,51 @@
 //            it and is safe to delete; each stays still ≥ 1 s
 // Grid: one beat. No scene is a turn, so no scene waits for a bar line (a pad would be a still frame); the phrase
 // rounding goes to the lock-up, a rest, whose second move lands on the last downbeat.
-import { plan, words, C } from './choreo.js';
+import { plan, words, C, travelMove } from './choreo.js';
 import { moveOf } from './moves.js';
+import { world } from './layout.js';
 
 const LIMITS = {
   caption: 5, claim: 8,            // words (principle 5: ≤ 5 primary words a state, a claim ≤ 8)
   cells: [1, 3], valueChars: 8, cardWords: 3, labelChars: 16, noteWords: 6,
-  cardLine: 5, meta: 6, name: 16, line: 6, url: 40,
+  chipLabel: 28, chipValue: 10, reads: 2, name: 16, line: 6, url: 40,
 };
-const TYPES = ['open', 'read', 'carry', 'measure', 'lockup'];
+const TYPES = ['open', 'travel', 'read', 'match', 'measure', 'lockup'];
+const NEIGHBOUR = ['parallax-slide', 'camera-truck'];   // travel moves that go to the next print in the row only
 
 // Copy that breaks the registry or a slot limit; returns error strings (npm run fit stops on them, film.js shows a banner)
 export const validate = (content) => {
   const errs = [], A = content.assets || {}, S = content.scenes || [];
   const box4 = (b) => Array.isArray(b) && b.length === 4 && b.every((v) => Number.isFinite(v));
-  const inCrop = (id, b, what) => {
-    const a = A[id];
-    if (!a || !box4(b)) return errs.push(`${what}: a box is [x, y, w, h] in the file's pixels`);
-    const [cx, cy, cw, ch] = a.crop;
-    if (b[0] < cx || b[1] < cy || b[0] + b[2] > cx + cw || b[1] + b[3] > cy + ch) errs.push(`${what}: box ${JSON.stringify(b)} lies outside ${id}'s crop ${JSON.stringify(a.crop)}`);
-  };
-  const nw = (t) => words(t).length;
+  let Wd = null;
   for (const [id, a] of Object.entries(A)) {
     if (!a.file || !box4(a.crop)) errs.push(`assets.${id}: needs file and crop [x, y, w, h]`);
     if (!a.source) errs.push(`assets.${id}: needs source (shown on its mount)`);
     if (a.people !== 'none') errs.push(`assets.${id}: people must be 'none' (crop people out; tools/check-assets.mjs looks for faces)`);
+    if (a.focus != null && !(Array.isArray(a.focus) && a.focus.length === 2)) errs.push(`assets.${id}: focus is [x, y] in file px`);
+    if (a.chip != null) {
+      if (!Array.isArray(a.chip) || a.chip.length !== 2) errs.push(`assets.${id}: chip is [label, value]`);
+      else {
+        if (String(a.chip[0]).length > LIMITS.chipLabel || words(a.chip[0]).length > 6) errs.push(`assets.${id}: chip label "${a.chip[0]}" over ${LIMITS.chipLabel} characters or 6 words`);
+        if (String(a.chip[1]).length > LIMITS.chipValue || words(a.chip[1]).length > 2) errs.push(`assets.${id}: chip value "${a.chip[1]}" over ${LIMITS.chipValue} characters or 2 words`);
+      }
+    }
   }
+  if (!errs.length) { try { Wd = world(content); } catch (e) { errs.push(`assets: ${e.message}`); } }
+  // a box must lie in the part of the crop the mount shows (the crop's 16:9 region round `focus`)
+  const inRegion = (id, b, what) => {
+    const e = Wd?.E[id];
+    if (!e) return;
+    if (!box4(b)) return errs.push(`${what}: a box is [x, y, w, h] in the file's pixels`);
+    const [rx, ry, rw, rh] = e.region;
+    if (b[0] < rx - 0.5 || b[1] < ry - 0.5 || b[0] + b[2] > rx + rw + 0.5 || b[1] + b[3] > ry + rh + 0.5) errs.push(`${what}: box ${JSON.stringify(b)} lies outside the part of ${id} the mount shows, [${e.region.map((v) => Math.round(v)).join(', ')}] (move the asset's focus or its crop)`);
+  };
+  const nw = (t) => words(t).length;
   if (!S.length) errs.push('scenes: none');
   if (S[0] && S[0].type !== 'open') errs.push('scene 1 must be open (content first, then its mount)');
   if (S.length && S.at(-1).type !== 'lockup') errs.push(`the last scene must be lockup (got ${S.at(-1).type})`);
+  if (S[0]?.exhibit && A[S[0].exhibit]?.chip) errs.push(`assets.${S[0].exhibit}: the opening exhibit carries no chip (the opening is content first; its caption is its text)`);
+  if (S.filter((s) => s.type === 'read').length > LIMITS.reads) errs.push(`read: at most ${LIMITS.reads} a film (lift-out is the claim's move, not every exhibit's)`);
   let prev = null;
   S.forEach((s, i) => {
     const at = `scene ${i + 1} (${s.type})`;
@@ -44,33 +60,38 @@ export const validate = (content) => {
     if (s.type !== 'lockup' && !A[s.exhibit]) errs.push(`${at}: exhibit "${s.exhibit}" is not in assets`);
     const cap = s.claim ? LIMITS.claim : LIMITS.caption;
     if (s.caption && nw(s.caption) > cap) errs.push(`${at}: caption has ${nw(s.caption)} words; at most ${cap}${s.claim ? ' (a claim)' : ''}`);
+    if (s.caption && s.type === 'lockup') errs.push(`${at}: no caption on a lockup (the title block is its text)`);
     if (s.type === 'open' && i > 0) errs.push(`${at}: open only as the first scene`);
-    if (s.caption && (s.type === 'carry' || s.type === 'lockup')) errs.push(`${at}: no caption on a ${s.type} (the reading or the title block is its text)`);
+    if ((s.type === 'read' || s.type === 'measure') && s.exhibit !== prev) errs.push(`${at}: ${s.type} stays on the exhibit before it (travel or match there first)`);
+    if ((s.type === 'travel' || s.type === 'match') && s.exhibit === prev) errs.push(`${at}: ${s.type} goes to another exhibit than the one before`);
+    if (s.type === 'travel') {
+      let mv = null;
+      try { mv = travelMove(s, content); } catch (e) { errs.push(`${at}: ${e.message}`); }
+      const a = Wd?.E[prev], b = Wd?.E[s.exhibit];
+      if (mv && a && b && NEIGHBOUR.includes(mv.device) && Math.abs(a.i - b.i) !== 1) errs.push(`${at}: ${mv.device} goes to a neighbouring print (prints lie in the order they first appear); use move: 'grid-hop' to reach ${s.exhibit}`);
+    }
     if (s.type === 'read') {
       const cells = s.cells;
       if (!Array.isArray(cells) || cells.length < LIMITS.cells[0] || cells.length > LIMITS.cells[1]) errs.push(`${at}: cells must be an array of 1–3`);
       else cells.forEach((c, k) => {
         const w = `${at} cell ${k + 1}`;
-        inCrop(s.exhibit, c.box, `${w} box`); inCrop(s.exhibit, c.glyph, `${w} glyph`);
+        inRegion(s.exhibit, c.box, `${w} box`); inRegion(s.exhibit, c.glyph, `${w} glyph`);
         if (String(c.value ?? '').length > LIMITS.valueChars) errs.push(`${w}: value "${c.value}" over ${LIMITS.valueChars} characters`);
         if (nw(`${c.value} ${c.label ?? ''}`) > LIMITS.cardWords) errs.push(`${w}: value and label are ${nw(`${c.value} ${c.label}`)} words; at most ${LIMITS.cardWords} (one card is read in about a second)`);
         if (String(c.label ?? '').length > LIMITS.labelChars) errs.push(`${w}: label over ${LIMITS.labelChars} characters`);
         if (c.note && nw(c.note) > LIMITS.noteWords) errs.push(`${w}: note over ${LIMITS.noteWords} words (a glance)`);
       });
     }
-    if (s.type === 'carry') {
-      if (!prev || prev === s.exhibit) errs.push(`${at}: a carry goes from the previous exhibit to another one`);
-      if (prev && A[prev]) { inCrop(prev, s.from?.box, `${at} from.box`); inCrop(prev, s.from?.glyph, `${at} from.glyph`); }
-      inCrop(s.exhibit, s.to?.glyph, `${at} to.glyph`); inCrop(s.exhibit, s.to?.ring, `${at} to.ring`);
+    if (s.type === 'match') {
+      if (prev && A[prev]) inRegion(prev, s.from?.box, `${at} from.box`);
+      inRegion(s.exhibit, s.to?.box, `${at} to.box`);
       if (!s.from?.value) errs.push(`${at}: from.value (the value as printed in both exhibits)`);
-      if (s.card) {
-        if (nw(s.card.value) + nw(s.card.line) > LIMITS.cardLine + 1) errs.push(`${at}: card value and line over ${LIMITS.cardLine + 1} words`);
-        if (s.card.meta && nw(s.card.meta) > LIMITS.meta) errs.push(`${at}: card meta over ${LIMITS.meta} words (a glance)`);
-      }
     }
     if (s.type === 'measure') {
-      if (s.exhibit !== prev) errs.push(`${at}: measure stays on the exhibit before it`);
-      for (const k of ['a', 'b']) if (!Array.isArray(s[k]?.point) || !Number.isFinite(s[k]?.value)) errs.push(`${at}: ${k} = { point: [x, y] (file px), value: number as printed }`);
+      for (const k of ['a', 'b']) {
+        if (!Array.isArray(s[k]?.point) || !Number.isFinite(s[k]?.value)) errs.push(`${at}: ${k} = { point: [x, y] (file px), value: number as printed }`);
+        else inRegion(s.exhibit, [...s[k].point, 0, 0], `${at} ${k}.point`);
+      }
     }
     if (s.type === 'lockup') {
       if (!s.name || s.name.length > LIMITS.name) errs.push(`${at}: name, at most ${LIMITS.name} characters`);
@@ -111,11 +132,13 @@ const rules = {
   devices: ['exhibit-rise'],
   types: {
     open: type({ doc: { in: 'content at the cap, the camera rises 2 beats, the caption word by word' } }),
-    read: type({ max: 5, doc: { in: 'travel 2 beats when the exhibit changes; rings; lift-out 2 beats; cards read one by one; caption', out: 'readings go back, rings off: 1.5 beats' } }),
-    carry: type({ max: 4, doc: { in: 'ring 1 beat, value-carry 2 beats; the exhibit steps back; the reading lifts and is read' } }),
+    travel: type({ max: 5, doc: { in: 'parallax-slide or camera-truck 2 beats, grid-hop 3; the chip, then the caption' } }),
+    read: type({ max: 5, doc: { in: 'rings; lift-out 2 beats; cards read one by one; caption', out: 'readings go back, rings off: 1.5 beats' } }),
+    match: type({ max: 4, doc: { in: 'ring 1 beat; push, cut on beat 2, pull back (match-cut 2 beats); the chip, then the caption' } }),
     measure: type({ max: 4, doc: { in: 'the dimension draws 1.5 beats; its chip lands on beat 2; the claim' } }),
     lockup: type({ rest: true, absorb: true, max: 8, reason: 'closing card: the address holds ≥ 3 s; the phrase rounding lands here; the second move on the last downbeat', doc: { in: 'the camera rises 2 beats; name, line, address, rule, route' } }),
   },
+
 };
 rules.validate = (content) => validate(content);
 export default rules;

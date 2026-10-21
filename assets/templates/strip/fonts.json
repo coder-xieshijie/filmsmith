@@ -1,0 +1,4 @@
+[
+  { "family": "Hanken Grotesk", "file": "HankenGrotesk-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/hankengrotesk/HankenGrotesk%5Bwght%5D.ttf", "weight": "100 900", "style": "normal", "license": "OFL-HankenGrotesk.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/hankengrotesk/OFL.txt" },
+  { "family": "DM Mono", "file": "DMMono-Medium.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/DMMono-Medium.ttf", "weight": "500", "style": "normal", "license": "OFL-DMMono.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/OFL.txt" }
+]

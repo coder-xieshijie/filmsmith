@@ -3,9 +3,9 @@
 How one state of a film becomes the next, in two layers:
 
 - **Frame-level transitions** (`assets/runtime/transitions/`, 17): a pixel function of two whole frames, A → B, drawn by WebGL. Use when the two scenes do not share an object, or when the change is the frame itself (a lamp, an aperture, a push, a flash).
-- **Hand-offs** (`assets/runtime/handoffs/`, 29, nine of them for real assets): one object of scene A carries the eye into scene B: a line presses a word, a card shrinks into a node, a dot bursts into the next word, a ringed cell of a screenshot lifts out and becomes code. Drawn in Canvas2D as a pure function of progress, with the template's own content, geometry and palette. Use them first: a change the eye can follow costs the viewer least (principle 4).
+- **Hand-offs** (`assets/runtime/handoffs/`, 50: twenty drawn from the template's own content, thirty for real assets or for the material a film is made of): one object of scene A carries the eye into scene B: a line presses a word, a card shrinks into a node, a dot bursts into the next word, a ringed cell of a screenshot lifts out and becomes code, a long page is flicked to its next section, a strip of film advances through a gate, a seam opens. [Families](#families) groups them by the axis they move on. Drawn in Canvas2D as a pure function of progress, with the template's own content, geometry and palette. Use them first: a change the eye can follow costs the viewer least (principle 4).
 
-new-film copies the runtime into every film as `lib/` (`lib/transitions/`, `lib/handoffs/`). Every entry passes the clean-transition criteria C1–C8 (workshop theory 07). The 26 added on 2026-10-19 (six frame-level, twenty hand-offs) were approved by the owner as samples that day; their values are `draft` until a film has used them. The nine asset hand-offs (`lift-out` … `mark-to-chrome`, added 2026-10-20) were approved the same way on sample clips over real screenshots, a chart and a logo; their values are `draft` too. Proof of the 2026-10-19 set: workshop `works/skill-modes-v1/batch4/transitions/library-proof/` (contact sheets of every module at p = 0, 0.25, 0.5, 0.75, 1 rendered through this library, a side-by-side with the approved sample clips, a low-resolution reel).
+new-film copies the runtime into every film as `lib/` (`lib/transitions/`, `lib/handoffs/`). Every entry passes the clean-transition criteria C1–C8 (workshop theory 07). The 26 added on 2026-10-19 (six frame-level, twenty hand-offs) were approved by the owner as samples that day; their values are `draft` until a film has used them. The nine asset hand-offs (`lift-out` … `mark-to-chrome`, added 2026-10-20) were approved the same way on sample clips over real screenshots, a chart and a logo; their values are `draft` too. The twenty-one added on 2026-10-21 (`scroll-reel` … `match-cut`) went in on the owner's decision that day, from sample clips over real assets and from three style films whose signature moves they are (scroll, strip, split); where two implementations did the same thing they were merged into one module whose options cover both, and both sources render pixel for pixel as before; values `draft`. Proof of the 2026-10-19 set: workshop `works/skill-modes-v1/batch4/transitions/library-proof/` (contact sheets of every module at p = 0, 0.25, 0.5, 0.75, 1 rendered through this library, a side-by-side with the approved sample clips, a low-resolution reel).
 
 ## Tiers
 
@@ -65,7 +65,7 @@ else press.still(ctx, 'to');                       // scene B's rest
 - `drawHandoff(ctx, name, p, params, opts)` is the one-call form for hand-offs whose preparation is synchronous. `list`: `[{ name, tier, beats, roles, summary, theory, modes, from, to, interpolates }]`; `beatsOf(name, params)` and `durationOf(name, bpm, params)` for those whose length follows their content (roulette-lock, scramble-resolve) or stage.
 - `lib/handoffs/halftone.js` is the halftone mode's print screen (`screen`, `knockText`), used by anchor-swap and field-morph and free for scenes.
 
-**Self-test** (`node lib/handoffs/test/run.mjs`, puppeteer-core and Chrome): every hand-off with its defaults and each stage or variant, and every asset hand-off once more on an image file (`test/asset.png`, drawn in code by `test/make-asset.mjs`) (60 cases); p = 0 equals the `from` rest and p = 1 the `to` rest (max channel difference 0); a frame drawn twice with other frames between is identical, with motion blur on as well; the defaults draw something; the fastest point moves ≤ 2 px during the last frame before landing. Result 2026-10-20: PASS, 2–34 ms per 1920 × 1080 frame without blur (field-morph's full-frame screen is the slowest; the asset hand-offs take 4–13 ms).
+**Self-test** (`node lib/handoffs/test/run.mjs`, puppeteer-core and Chrome): every hand-off with its defaults and each stage or variant, and every asset hand-off once more on an image file (`test/asset.png`, drawn in code by `test/make-asset.mjs`) (123 cases); p = 0 equals the `from` rest and p = 1 the `to` rest (max channel difference 0); a frame drawn twice with other frames between is identical, with motion blur on as well; the defaults draw something; the fastest point moves ≤ 2 px during the last frame before landing. Result 2026-10-21: PASS, 2–34 ms per 1920 × 1080 frame without blur (field-morph's full-frame screen is the slowest; the asset and material hand-offs take 4–13 ms).
 
 ### Motion blur
 
@@ -73,7 +73,7 @@ else press.still(ctx, 'to');                       // scene B's rest
 
 ### Real assets
 
-Screenshots, interface captures, official charts and logos enter a film through the nine asset hand-offs and `lib/handoffs/asset.js`. Their rules:
+Screenshots, interface captures, official charts and logos enter a film through the asset hand-offs, `lib/handoffs/asset.js` and `lib/handoffs/stage.js`. Their rules:
 
 - **Asset text is evidence, not information.** What the viewer must read is either pushed in until it is at least 25 px (`viewport-push`) or redrawn in code at 25 px or more (`lift-out`, `value-carry`); main text outside the asset stays at 40 px or more (principle 1).
 - **Zoom cap.** No output px may map to less than 0.75 source px: `MAX_SCALE = 1 / 0.75` film px per source px, `zoomCap(fit) = MAX_SCALE / fit` for a view that shows the asset at `fit`. Capture screenshots at 2× so the cap leaves room. `viewport-push` clamps to the cap and logs it; `lift-out` and `value-carry` swap pixels for code before it (at 1.2× by default).
@@ -116,12 +116,36 @@ Why these: each mode keeps one accent with one meaning (principle 7). plakat's a
 | morph | `arc-curl`, `rail-press`, `stroke-reinterpret`, `net-unfold`, `container-morph`; the film never cuts, every state grows out of the last | `shape-flood`, `occluder-pass` | `bezel-pullback` (the frame grows out of the asset); never `device-flip` (morph does not cut) |
 | halftone | `anchor-swap`, `field-morph`, `collapse-burst` | `whip-push` (a feature card per beat), `whiteout-slam` | logos and interfaces only; a chart is never screened (the dots would change its readings) |
 | pulse | `roulette-lock`, `scramble-resolve`, `counter-portal` | `aperture-swap` (one word per beat), `whiteout-slam` (the one flash, on the drop), `slice-smear`, `whip-push` | `viewport-push` and `spotlight-band`, one move a beat |
-| handset | — (the margin's copy uses `slot-rails`) | — (the device never leaves the frame) | `viewport-push` (pushes, pulls, pans inside the screen), `spotlight-band` (the light hops row to row), `device-flip` (T2, a change of surface; two in a row turn opposite ways), the template's own `page-scroll` (T2); every move is an adapter in `moves.js`, so a later transition can replace any role; never `lift-out` (the asset is never lifted out of the screen) |
-| exhibit | the template's own `exhibit-rise` (T2, the camera rises over the whole desk into the lock-up); every other move is an asset hand-off, one adapter per role in `moves.js` (pluggable, TEMPLATE.md "Moves") | none: the film never cuts away from the desk | `bezel-pullback` (the opening), `lift-out` (the readings, played reversed when they go back), `camera-truck` (along the row), `value-carry` (a value to its twin); `tether-link`, `viewport-push` free for scenes |
-| dossier | none: the camera never moves; paper does (`deal`, the template's own) | `dossier-page-turn` (the sheet turns away over its top or left edge onto the page underneath; the template's own) or any frame-level transition named as an exhibit's `enter` (pluggable, TEMPLATE.md "Page changes"); `dossier-slip`, `dossier-stack` (the template's own) | `spotlight-band` and `tether-link` as template-local painters (a band struck with multiply, an ink-cased leader to the sticker), `lift-out` → `value-carry` as the paper slip |
+| handset | — (the margin's copy uses `slot-rails`) | — (the device never leaves the frame) | the device stays still and the screen's content moves, mostly vertically: `scroll-reel` (T2, window-less inside the screen: the page flicked to its next stop at its own width), `feed-stack` (T2, the next capture rises over the current one, which steps back; no window, no shadow), `viewport-push` (pushes, pulls, pans), `spotlight-band` (the light hops row to row); `device-flip` at most once a film (a change of surface, usually the lock-up); every move is an adapter in `moves.js`; never `lift-out` (the asset is never lifted out of the screen) |
+| exhibit | the template's own `exhibit-rise` (T2, the camera rises over the whole desk into the lock-up); every other move is an asset hand-off, one adapter per move in `moves.js` (pluggable, TEMPLATE.md "Moves"); its axis is camera travel and depth on the desk, changed between chapters | none: the film never leaves the desk; its one cut is `match-cut`, inside it | `bezel-pullback` (the opening), `parallax-slide` (the default travel: numerals, prints and chips at three depths), `grid-hop` (pull back over the whole desk, hop, dive), `match-cut` (a value two prints share), `camera-truck` (a travel without parallax), `lift-out` (at the claim only, at most twice); never `device-flip` or `value-carry` |
+| dossier | its own axis, paper and editorial cuts with the camera locked: `sheet-shuffle` (the top sheet drawn out and tucked under the pile), `louvre` (slats cut along the rows the page struck), `match-cut` (the same value printed in the next source, slid into register and cut on a still frame; paper moves, not a camera), `split-open` (the spread opens on a seam and the worksheet slides out of it); `value-carry` as the paper slip, once a film; `dossier-page-turn`, `dossier-stack` (the template's own); each pluggable through `changes.js` (TEMPLATE.md "Page changes") | any frame-level transition may be named as an exhibit's `enter`; none in the shipped example | `spotlight-band` and `tether-link` as template-local painters (a band struck with multiply, an ink-cased leader to the sticker); no lift, flip or camera move |
+| strip | `strip-advance` (film material: every move of the reel — the claw pull-down, the run-in brake, the run-out), `gate-punch` (a frame to the full frame, and the full frame into its place in the next scene), `sheet-pick` (the ringed cell to the full frame); each through an adapter in `moves.js` (pluggable, TEMPLATE.md "Moves") | none: the strip never cuts; the scene behind changes only while a full frame covers it | the frames are the real assets (only scaled, cropped, veiled; contact rows sampled blind every 4 s); never `camera-truck`, `bezel-pullback`, `device-flip` or `viewport-push` (the camera is locked) |
+| split | its own axis, the seam: `split-open` (the opening: the caret becomes the seam, the result slides out of it), `louvre` (the first change of result; with one slat the push), `wipe-line` (input and result change at once; down into a file, left into the lock-up), `split-branch` (two panes become three), `diff-slider` (the climax); each an adapter in `moves.js` (TEMPLATE.md "Moves"), all with `seam.js` (`colors.stitch` for the stitched form) | none: the seam is on screen from the first scene to the last | results only cropped and scaled, never dimmed (the seam says which side is in play); the chip beside the grip names each result's source |
+| scroll | the sheet's own moves, each an adapter in `moves.js` over a runtime module: `scroll-reel` (`momentum` curve: detents and reels), `scroll-fling` (the return to the top), `section-lock` (`tabsAt`: the page's headings as chapters), `unfold` (a row opens in place), `roll` (`drawRoll`: the unroll and the roll-up); the sheet itself is the template's own painter (strips, bands, splices and an unfolding panel in one column) | none: the film never cuts away from the sheet | the sheet is real captures at one scale, under the zoom cap; one ochre underline at a time; a uniform ground veil on rows to come and on a page flying past; never `lift-out`, `camera-truck`, `device-flip` (the siblings' marks), no zoom and no sideways move |
 | every mode | `converge-mark` at the lock-up (T3) | — | `viewport-push`, `spotlight-band`, `tether-link`, `lift-out`, `bezel-pullback` (an asset's first appearance), `mark-to-chrome` (the logo into the product), all in the mode's own accent |
 
-thread, blueprint, morph and exhibit are one continuous space by their own principles (no cuts inside the chain; one drawing; one shape; one desk): their frame-level transitions open or close the film or join it to another, never between links, sheets or states; inside, use their hand-offs.
+thread, blueprint, morph, exhibit, strip, split and scroll are one continuous space by their own principles (no cuts inside the chain; one drawing; one shape; one desk; one strip; one seam; one sheet): their frame-level transitions open or close the film or join it to another, never between links, sheets or states; inside, use their hand-offs.
+
+The table lists what each mode's template uses today. The later hand-offs (2026-10-21) also name, in their own entries, other modes they suit.
+
+## Families
+
+Every hand-off moves along one axis. A film that changes the axis between chapters reads as varied; one that uses several devices of one family reads as one device repeated, however different their names ([creative mode](creative.md) caps a composition at two from a family). The families, by the axis of motion:
+
+| Family | Axis | Hand-offs |
+|---|---|---|
+| Lift and flip | out of the plane: an object rises off its ground, turns edge-on, or flies off it | `lift-out`, `value-carry`, `device-flip`, `mark-to-chrome` |
+| Zoom and depth | along the view: the camera pushes, pulls or dives about one point | `bezel-pullback`, `viewport-push`, `counter-portal`, `anchor-swap`, `grid-hop`, `gate-punch`, `sheet-pick` |
+| Vertical scroll and stack | up and down: a page scrolls, a row opens, a card rises over a deck, a word leaves through a rail | `scroll-reel`, `scroll-fling`, `section-lock`, `unfold`, `feed-stack`, `slot-rails`, `stream-brake` |
+| Horizontal advance | sideways: a strip, a row of assets or a frame moves to the next item | `strip-advance`, `camera-truck`, `parallax-slide` (with depth), `roulette-lock` |
+| Split, wipe and louvre | a hard edge divides the frame and moves across it | `split-open`, `louvre`, `wipe-line`, `split-branch`, `diff-slider`, `step-wipe`, `ticker-wipe` |
+| Mask and type | in place: the next content shows through a shape (letters, tiles, a lit band, cells that resolve) | `type-window`, `mosaic-assemble`, `spotlight-band`, `scramble-resolve` |
+| Paper | a sheet is handled: drawn out and tucked under, rolled, folded open | `sheet-shuffle`, `roll`, `net-unfold` |
+| Edit cuts | none: the change is a cut, matched so the eye's object does not move | `match-cut` (and the hidden cut inside `device-flip`) |
+| Line and path | along a line: a line presses, carries, traces or links | `rail-press`, `path-type`, `signal-relay`, `tether-link`, `beam-trace`, `squash-to-path` |
+| Shape | in place: one shape morphs, bursts or converges into the next | `arc-curl`, `stroke-reinterpret`, `container-morph`, `re-encode`, `collapse-burst`, `converge-mark`, `field-morph` |
+
+Frame-level transitions sort the same way (`whip-push` horizontal, `aperture-swap` and `dot-iris` zoom and depth, `slice-smear` and `plakat-columns` split and wipe, `ink-drop` and `shape-flood` mask). Three modes are built on one family each: scroll on the vertical, strip on the horizontal advance, split on the seam; their other turns borrow from other families sparingly, so the signature axis stays theirs.
 
 ## Borrowing rule
 
@@ -550,7 +574,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: an official table or page whose few numbers carry the claim: the evidence is shown as captured, then the numbers become the film's own reading. As the hand-off from an evidence page to its code-drawn redraw, give each cell a `land` (the value's place in the next scene) and `backdrop: false` (the template draws the page): the values rise out of the asset and land where the next scene reads them, so the evidence page needs no cut. **Not for**: a region with no printed value to redraw (use `viewport-push`).
 - **Parameters**: `asset`, `title`; `window` `{ x 210, y (null: centred), w 1500 }` (content width; height follows the crop); `cells` `[{ box, glyph, value, label }]` (`box` the cell, `glyph` the printed digits, image px); `card` `{ x (null: right of the cells), h 132, gap 20, rise 40, pad 28, labelSize 34 }`; `swapAt` 1.2 (capped at the zoom cap); `dim` 0.55; `stagger` 0.08; `ringPad` 6, `ringStyle` `{ width 3, radius 10, halo, haloWidth 9, glow }` (a halo colour under the ring holds it on a white page). As a hand-off into the next scene: `backdrop` false, `view` `{ a, bx, by }` (film px = a · image px + b, read from the template's own window), a cell's `land` `{ x, y, w, h, cx, baseline, size }` (film px, measured from the next scene's element) and `land` `{ font, paper, paperAlpha 0, ink, ring false, swapAt 0.12, turn [0.5, 1] }` (the landing look; the card keeps the asset's paper and ink over the asset and turns in `turn` of the flight). Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent` (rings), `paper` (null: sampled per cell), `onPaper` (#111111).
 - **Theory**: one object changes material, not identity (object constancy, Heer & Robertson 2007); the detail view of engineering drawing; the redraw keeps the value sharp past the source's resolution (principle 2). Borrowed from a reading-app launch film (a table and a formula lifted out of a paper page) and a clinic-software film (a row lifted from a schedule).
-- **Modes**: exhibit (the signature: every reading), phosphor (replaces the cut from a ringed evidence page to its redrawn reading), dossier (the figure's pixels lift before the slip is set in code), blueprint, tally; any mode with an official table; never handset (the asset stays on the screen).
+- **Modes**: exhibit (at a claim, at most twice), phosphor (replaces the cut from a ringed evidence page to its redrawn reading), dossier (the figure's pixels lift before the slip is set in code), blueprint, tally; any mode with an official table; never handset (the asset stays on the screen).
 - **Length and easing**: 2 beats (as a hand-off into the next scene 1–1.5 beats is enough); veil 0–30 % cubic in-out; each lift a landing spring over 46 % of p, 8 % apart; each widening a landing spring of 26 %, the last landing at p = 0.98. A card's pixels are always scaled uniformly, never stretched.
 - **Sound**: a soft `tick` per card landing.
 
@@ -594,7 +618,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: one number found in two official sources (a table and a chart). The value never changes on the way. **Not for**: two different numbers (that is a comparison, not a carry).
 - **Parameters**: `from` `{ asset, title, window { w }, box, glyph, value, weight }`; `to` `{ asset, title, window { w }, glyph, ring, weight }`; `spacing` 1920; `cy` 540; `carry` `{ cx 960, cy 150, h 150 }`; `swapAt` 1.2. Roles: `ground`, `panel`, `line`, `dim`, `accent`, `paper` / `onPaper` (null: sampled from asset 1), `paper2` / `onPaper2` (null: sampled from asset 2).
 - **Theory**: a shared element carries the eye across a change of place (object constancy, Heer & Robertson 2007); the same value in two official places is the claim's proof (principle 2). Borrowed from a finance app's film (an amount rises from a list, rides the pan, lands in an invoice table) and a shared-element thumbnail-to-hero transition.
-- **Modes**: exhibit (a value to its twin in the next asset), dossier (the paper slip onto the worksheet), ink, tally, phosphor.
+- **Modes**: dossier (the paper slip onto the worksheet, once a film), ink, tally, phosphor; not exhibit (it cuts on a shared value with `match-cut`).
 - **Length and easing**: 2 beats; lift a landing spring 0–30 %; pan 18–78 % cubic in-out; land 64–92 % cubic in-out; the chip leaves at 94 %.
 - **Sound**: a `whoosh` with the pan, a `tick` on landing.
 
@@ -605,7 +629,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: a sequence of sources whose order is the story (the table, then its chart, then the product). **Not for**: one asset (use `viewport-push`).
 - **Parameters**: `items` `[{ asset, title, w }]`; `gap` 220; `from`, `to` (indices); `cy` 540; `veil` 0.55. Roles: `ground`, `panel`, `line`, `dim`.
 - **Theory**: one world coordinate for all evidence makes place read as relation (Tversky 1993); motion streaks record real speed (Geisler 1999) and are off once settled. Borrowed from a design-review tool's film (one pan across a comment card, a site and a board, 12 frames) and a finance app's film (a camera on one surface).
-- **Modes**: exhibit (along the desk), blueprint (the drawing table), plakat, thread.
+- **Modes**: exhibit (a travel without parallax), blueprint (the drawing table), plakat, thread.
 - **Length and easing**: 1 beat (15 frames) cubic in-out; a truck longer than about one screen needs more beats to keep the last frame's movement ≤ 2 px.
 - **Sound**: a short `whoosh`.
 
@@ -616,7 +640,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: the next page of the same source or the next product screen, when the two have no shared element. The same direction at most three times a film. **Not for**: morph (the film never cuts) or two contents with a shared element (hand it off instead).
 - **Parameters**: `window` `{ cx 960, cy 540, w 1300, h 700 }` (each asset is cover-cropped to it); `from`, `to` `{ asset, title, focus }`; `perspective` 2200; `shade` 0.6; `strips` 120. Roles: `ground` (shade), `panel`, `line`, `dim`.
 - **Theory**: one object with a new face keeps the viewer's place; the swap happens where no face shows, so two contents never overlap (C5). Borrowed from a fitness-app film (a phone turns edge-on and back with the next tab, 13 + 17 frames) and a reading-app film (the same with a change of format).
-- **Modes**: handset (a change of surface; two in a row turn opposite ways), phosphor, tally; not morph.
+- **Modes**: handset (a change of surface, at most once a film, usually into the lock-up), phosphor, tally; not morph, exhibit, dossier, strip or scroll.
 - **Length and easing**: 2 beats; turn out 0–43 % cubic in (13 frames), turn back 43–100 % cubic out (17 frames).
 - **Sound**: a `whoosh` landing on the beat as it faces the camera.
 
@@ -641,6 +665,241 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Modes**: phosphor; any mode's opening into the product.
 - **Length and easing**: 1.5 beats; flight 0–40 % cubic in; window width 40–84 %, height 46–95 %, landing springs.
 - **Sound**: a `tick` as the logo lands in the bar.
+
+## Catalogue: later hand-offs (2026-10-21)
+
+Twenty-one hand-offs on other axes of motion than the lifts, flips and pushes above: vertical scroll and stacks, a horizontal advance, seams and slats, masks, tiles, paper and a match cut. Most take real assets (the rules under [Real assets](#real-assets) hold: assets are only cropped, scaled, translated and uniformly veiled; every mark is code in the accent); the material ones move the one object a whole film is made of: a page (`scroll-reel`, `scroll-fling`, `section-lock`, `unfold`, `roll`), a strip of film (`strip-advance`, `gate-punch`, `sheet-pick`; `strip.js`) or a seam (`split-open`, `louvre`, `wipe-line`, `split-branch`, `diff-slider`; `seam.js`). Those that take painters instead of assets (`paint(ctx, dx, dy)` for a pane, `page(ctx, off, P, R)` for a page) also run without `prepare()`, so a film may call `at`, `rest` and `paint` itself. `stage.js` holds what the asset ones share (cover and contain views, the flick, cast shadows, placeholders, a fixed-seed hash). Lengths are at 120 BPM; values `draft`.
+
+### scroll-reel
+
+- **Looks**: a very long strip (a whole page capture, a README, or several assets stacked) is flicked through a still window and stops exactly on the next section at the window's reading line. While fast the page pulls back (scale 1 − pull · (speed / peak)^0.8, never above the rest fit), so its structure stays legible as a shape; a scrollbar shows the reel's length with the target ticked in the accent; the landed section is ringed; headings that reach the top stay pinned as chapters until the next one pushes them out. Vertical motion blur, speed-gated; the middle frames are streaks by design.
+- **Tier**: T1; T2 when long (several screens).
+- **Use**: any move along one long page: the evidence is one document, so the viewer keeps their place in it. Inside handset's screen, along a dossier exhibit, and as the scroll mode's through-line. **Not for**: two unrelated assets (stacking them fakes a page; use `feed-stack` or `split-open`).
+- **Parameters**: `items` `[{ asset, title }]` stacked top to bottom (or `asset`, or a painter `page(ctx, off, P, R)` with `length` in film px); `gap`; `window` `{ x 340, y 84, w 1240, h 880 }`; `chrome` true (false: a bare viewport); `from` / `to` `{ item, y }` (image px at the reading line; `to.mark` an image px box to ring) or a number (the offset in film px, 0 = the strip's top at the window's top); `line` 36; `curve` `'flick'` (`flick` `{ ramp 0.1, k 5 }`: speeds up for 10 % of the move, then coasts on exponential friction to an exact stop), `'momentum'` (`momentum` `{ k 6.5, rise 40 }`: at speed within a frame or two, then brakes by itself) or `'fling'` (`fling` `{ k 12 }`); `pull` 0.32 (0: off), `pullExp` 0.8; `scrollbar` true; `sections` `{ heads [{ item, y, h }], tab (ctx, i, y, P, { x, w, h, k }), rule true }` (a tab is the heading's own pixels unless `tab` draws it). Helpers: `momentum(p, k, rise)`, `fling(p, k)`, `paintPage(ctx, off, { view, colors }, { A })`. Roles: `ground`, `panel`, `line`, `dim`, `accent`.
+- **Theory**: momentum scrolling decays exponentially per unit time (touch scroll views multiply the velocity by a deceleration rate every millisecond); speed-dependent automatic zooming keeps a long document scroll legible (Igarashi & Hinckley 2000); sticky section headers keep the chapter in view (principle 7); the cue at the landing place directs attention before the content arrives (Posner 1980); streaks record speed (Geisler 1999). Borrowed from the scroll-to-section of long-form web stories and the momentum scrolling of reader apps; redrawn with the film's own page, window and accent tick.
+- **Modes**: scroll (the through-line: every move along the sheet), handset (inside the screen, replacing a film-local page scroll), dossier (a long exhibit), exhibit (a long print); any mode with a long page.
+- **Length and easing**: 3 beats at the defaults (1.5–2 for a short reel with `momentum`); flick release at 10 %, exact stop at 1; ring 86–100 % cubic in-out. A scroll of several screens is readable for its last ~10 frames only: land on the line the next scene reads.
+- **Sound**: a soft whoosh that follows the speed, a `tick` on the landing.
+
+### scroll-fling
+
+- **Looks**: the page travels back to its top: it accelerates, peaks a sixth of the way in, streaks past everything between and brakes softly onto the first section; pinned headings unpin in reverse order on the way.
+- **Tier**: T2.
+- **Use**: the return to the start before a lock-up, or "back to the top" of a long page: a known gesture, so it reads as a return, not as a new place. **Not for**: a move forward (use `scroll-reel`).
+- **Parameters**: those of `scroll-reel` with `curve` `'fling'`, `fling.k` 12, `from` `{ item 0, y 5200 }`, `to` `{ item 0, y 0 }`, `pull` 0 (a pull-back's last frames would still change scale: pass `pull` with 3 beats or more). `fling(p, k)` is the curve alone.
+- **Theory**: the scroll-to-top gesture of touch lists; motion streaks record speed (Geisler 1999). Light pages and dark panels streaking past can strobe: a long shutter or a speed-following ground veil holds the flash count (principle 9).
+- **Modes**: scroll (the return before the lock-up), handset; any mode with a long page.
+- **Length and easing**: 2 beats; velocity ∝ p² e^(−12p), normalised to land exactly.
+- **Sound**: a rising whoosh, a soft thud on the top.
+
+### section-lock
+
+- **Looks**: as a long page scrolls, each section heading that reaches the top of the viewport stays there, pinned, while its section passes under it; the next heading pushes it out, edge to edge. The tab is the heading's own pixels, cropped from the capture.
+- **Tier**: T1 (a detent scroll that pins a chapter).
+- **Use**: a short scroll that turns a heading into the chapter now in view; `tabsAt(off, heads, top)` is the rule alone, for a film that scrolls its page itself. `scroll-reel`'s `sections` draw the same rule inside a reel. **Not for**: a page without real headings.
+- **Parameters**: `view` `{ x 210, y 54, w 1500, h 1026 }`; `from`, `to` offsets (film px); `k` 6.5; `heads` `[{ y, h }]` (page px); painters `page(ctx, off, P)` and `tab(ctx, i, y, P)`. Roles: `ground`.
+- **Theory**: sticky section headers (the list sections of phone interfaces, CSS `position: sticky`): the persistent frame carries real information, the chapter in view (principle 7).
+- **Modes**: scroll (the page's headings as chapters), handset (a long page in the screen); any mode with a long page.
+- **Length and easing**: 1.5 beats; the momentum flick of `scroll-reel` (`momentum`, k 6.5).
+- **Sound**: a click as a tab locks.
+
+### unfold
+
+- **Looks**: a row of a page opens in place: the page splits along the row's lower edge, everything below slides down by the height of what opens, and the opened part is revealed from its top edge as the gap grows; nothing inside it moves while it opens. When it lands the page is simply longer.
+- **Tier**: T2.
+- **Use**: a table row or a line that carries more (a demo, a figure, a detail) opening under itself, so what opens belongs to the line it opens from. **Not for**: content unrelated to the row.
+- **Parameters**: `view`; `line` (the fold line's y, film px) 360; `height` 560; painters `above(ctx, P)`, `below(ctx, dy, P)`, `inside(ctx, rect, P)`. Roles: `ground`, `panel`, `dim`.
+- **Theory**: progressive disclosure (the disclosure triangle, the accordion row; Nielsen 2006); object constancy: the line the eye is on stays put while the page makes room (Heer & Robertson 2007).
+- **Modes**: scroll (a row of the page opens on the demo it describes); any mode whose page has rows that carry more.
+- **Length and easing**: 2 beats; gap height cubic in-out.
+- **Sound**: a soft drawer slide.
+
+### roll
+
+- **Looks**: the page's paper roll: `unroll` drops it from the sheet's top edge and it leaves the frame with a flick's momentum, the sheet hanging where it passed; `rollup` brings it back up from below and winds the sheet onto itself, stopping under the last thing left in view. The roll is a paper cylinder lit from above (highlight, core shadow, contact shadow, spiral end caps): the only object with volume in a flat film.
+- **Tier**: T1; T3 as an opening hook or the closing move.
+- **Use**: a film that is one long sheet opens and closes on its own material. **Not for**: a film with no sheet.
+- **Parameters**: `x`, `w` the sheet's span; `R` 30; `overhang` 22; `from`, `to` the roll centre's y; `k` 5; `sheet(ctx, clipBottom, P)`; `drawRoll(ctx, y, P)` the roll alone. Roles: `ground`, `roll`, `rollHi`, `rollShade`, `rollEdge` (tones of the paper).
+- **Theory**: the hanging scroll and the handscroll are read by unrolling, a long sheet's own way of showing itself one part at a time; a roll that keeps its identity is one object (Heer & Robertson 2007).
+- **Modes**: scroll.
+- **Length and easing**: 2 beats; the momentum flick (k 5).
+- **Sound**: a paper rustle, a soft thump as it lands.
+
+### feed-stack
+
+- **Looks**: the next screen rises from below the frame on a landing spring, over the current one, like the next post in a vertical feed; the current one steps back a level of a deck (−5 % size, 34 px up, 40 % veil), its title bar showing above; earlier cards step back with it.
+- **Tier**: T1.
+- **Use**: successive states of one app or one stream, where the history of what was seen matters. **Not for**: a move along one page (use `scroll-reel`).
+- **Parameters**: `from`, `to` `{ asset, title, focus }`; `behind` 1 (a count, or `[{ title }]` nearest first); `card` `{ x 360, y 150, w 1200, h 840 }`; `deck` `{ peek 34, scale 0.05, veil 0.4, maxShown 3 }`; `shadow` true. Roles: `ground`, `panel`, `line`, `dim`.
+- **Theory**: a stack keeps history in view: the previous item recedes instead of vanishing (depth from size and occlusion, Cutting & Vishton 1995); vertical paging is the native gesture of a phone feed. Borrowed from vertical feed paging and notification stacks.
+- **Modes**: handset (inside the screen), dossier (sheets dealt onto the pile), pulse.
+- **Length and easing**: 1.5 beats; one landing spring (w 8) drives the rise and the deck.
+- **Sound**: a soft swipe, a `tick` as it lands. The stepped-back card is veiled toward the ground: in a light mode pass the light ground.
+
+### strip-advance
+
+- **Looks**: frames on a strip of film move horizontally through a fixed gate and stop with the next frame registered in it; outside the gate the strip steps back, so the frame arriving brightens as it registers. Two materials: `film` (a black base drawn at any scale, sprocket holes, a variable-area optical track under each frame, title cards, frames veiled by their distance from the gate, the strip cut at its own ends) and `gate` (a band in the panel colour across the frame, a 16:9 gate with corner marks, an edge code under each frame, one veil outside the gate).
+- **Tier**: T1; a quarter-beat pull-down is a T0 (a film's ratchet), a `brake` or `run-out` at a chapter edge a T2.
+- **Use**: a sequence of frames (a film's frames, a run's screens, a reel of demos) read one at a time, with the reel as context. **Not for**: frames that are not a sequence.
+- **Parameters**: `material` `'film'` | `'gate'`; `from`, `to` (frames; fractional allowed); `curve` `'claw'` (one cubic in-out), `'brake'` (cubic out: a run that stops), `'run-out'` (accelerates off the frame; ends at speed by design), `'step'` (per frame a pull of `pull` 0.5 of its step, expo in-out, then a hold) or `'run'` (a flick, `flick` `{ ramp 0.2, k 6 }`); `beats` (null: 1, step ⅔ a frame, run 1.5). Film: `cells` `[{ kind: 'image', img, crop } | { kind: 'asset', asset, focus } | { kind: 'title', text, size }, env]`, `cx` 960, `top` 156, `k` 1 (frames 832 × 468 at an 860 px pitch), `veil` 0.5, `track` `{ lit, sweep }`, `start`, `end`, `fonts.title`. Gate: `frames` `[{ asset, label, focus }]`, `gate` `{ cx 960, cy 520, w 1120 }`, `frameLine` 26, `margin` 84, `holes` 10, `veil` 0.6, `mono`. Either: `marks` (gate corner marks; on for `gate`). `strip.js` draws the strip, a contact sheet (`paintSheet`), the punch (`zoomRect`) and the grease pencil (`pencilLoop`, `pencilUnderline`); `CURVES` the single-move curves. Roles: `ground`, `base`, `hole`, `title`, `titleInk`, `trackDim`, `trackLit` (film); `panel`, `ink`, `dim` (gate).
+- **Theory**: the projector's intermittent movement holds each frame still in the gate and the change between holds is what is seen (apparent motion, Wertheimer 1912); one object throughout (Heer & Robertson 2007); a fixed aperture keeps the viewer's place (common region, Palmer 1992); streaks record speed (Geisler 1999). Borrowed from the flatbed editing table's transport, contact-strip viewers and film-strip advances in title design.
+- **Modes**: strip (the through-line: every move of the reel), exhibit (a contact strip on the desk), pulse, thread, phosphor.
+- **Length and easing**: `claw` 1 beat at the defaults (a quarter beat in a strip film's ratchet, landing hard by design); `step` ⅔ beat a frame, the pull over half of it; `run` 1.5 beats.
+- **Sound**: a claw click on each pull-down; a motor whir under a run.
+
+### gate-punch
+
+- **Looks**: the frame registered in the gate (or one cell of a contact sheet) punches to the full frame in one log-scale zoom about the point the two rects share; `out` shrinks the full frame into its place in the next scene, which was laid underneath while the frame covered the screen. At the small end the frame is drawn from the picture the scene itself shows (a thumbnail), at every larger size from the full-resolution frame.
+- **Tier**: T2 (in), T1 (out).
+- **Use**: from a frame in context to that frame as the picture, and back. **Not for**: a frame that is not visible in the scene before.
+- **Parameters**: `rect` (the small end) `{ x 544, y 252, w 832, h 468 }`; `direction` `'in'` | `'out'`; `ease` `'out'` | `'inOut'`; `image`, `crop` (full resolution); `small` `{ img, crop }`; `under(ctx)` the scene behind. Roles: `ground`.
+- **Theory**: the punch-in (a cut-in to a detail) as a continuous zoom; a log-scale zoom reads as constant speed (van Wijk & Nuij 2003); a change under occlusion is accepted (Kanizsa 1979); object constancy (Heer & Robertson 2007). Never enlarges a source past 4/3 px per px.
+- **Modes**: strip (a frame to full and back), exhibit (a print to full frame); any mode with a frame in a gate or a cell of a sheet.
+- **Length and easing**: 1 beat; cubic out (in), cubic in-out (out).
+- **Sound**: a shutter-like thunk at the start.
+
+### sheet-pick
+
+- **Looks**: on a contact sheet a grease-pencil loop rings one cell (the editor's pick); the ringed cell punches to the full frame and the picked film runs on from that frame. The ring stays on the sheet behind it: the pick is the only cell that leaves.
+- **Tier**: T2; T3 at a climax.
+- **Use**: choosing one of many: the reel's films, a run's screens, the candidates of a comparison. **Not for**: a sheet with one item.
+- **Parameters**: `rect` the ringed cell; `ease` `'out'`; `seed` 3 (the loop's hand); `image`, `crop`, `small`, `under(ctx)` as `gate-punch`. Roles: `ground`, `accent` (the pencil).
+- **Theory**: the contact sheet and the editor's grease-pencil pick; a single isolated mark is remembered (von Restorff 1933) and cues where to look before the move (Posner 1980); the zoom as `gate-punch`.
+- **Modes**: strip (the pick on the contact sheet), exhibit (a contact sheet on the desk); any mode with a grid of thumbnails.
+- **Length and easing**: 1 beat; cubic out.
+- **Sound**: a pencil squeak as the loop closes (before the hand-off), the thunk of the punch.
+
+### split-open
+
+- **Looks**: a seam opens one content onto the next, in two stages. The seam arrives (an accent line drawn down the content at its own division, or the caret the request was typed with runs to the seam's place and stands up into it); then either `doors` (the current content's two halves, title bar included, slide apart into the frame's sides, uncovering the next content that was behind all along) or `drawer` (the next content slides out from behind the seam until it sits 1:1 in its place). Every pixel shows one content.
+- **Tier**: T1; T3 as an opening (the caret becomes the seam).
+- **Use**: two related contents: a table and the chart under it, input and result, two sheets of a spread (`open` < 1 leaves them side by side). **Not for**: two unrelated scenes.
+- **Parameters**: in a window of assets: `window` `{ x 240, y 132, w 1440, h 810 }`, `from` / `to` `{ asset, title, focus }`; in a pane: `pane` `{ x, y, w, h }`, `from` / `to` `{ paint(ctx, dx, dy) }` (drawn as a layer, never the ground). `reveal` `'doors'` | `'drawer'` (null: doors in a window, drawer in a pane); `caret` `{ x, y, h, w }` (null: the seam is drawn on); `axis` `'x'` | `'y'`; `seam` 0.5 (share of the content) or `{ x, y0, y1 }` (film px); `open` 1; `run` 0.26 (share of p for the seam or the caret's run); `seamWidth` (null: 3 in a window, 6 with a 2 px `key` in a pane). Roles: `ground`, `panel`, `line`, `dim`, `accent` (the seam), `key` (the seam's paper edge), `bench` (behind a drawer).
+- **Theory**: the wipe and split screen of film grammar ("a line passes across the screen, eliminating one shot as it goes", Bordwell & Thompson, Film Art); reveal by occlusion (Kanizsa 1979); the edit point becomes the boundary (object constancy, Heer & Robertson 2007). Borrowed from barn-door and split-screen wipes and before/after sliders.
+- **Modes**: split (the opening: the caret becomes the seam), dossier (the spread: the worksheet slides out of a seam), exhibit, plakat.
+- **Length and easing**: 1.5 beats (1.75 as split's opening); seam 0–26 %, doors or drawer 26–100 % cubic in-out.
+- **Sound**: a blade-like tick as the seam is cut, a slide as it opens.
+
+### louvre
+
+- **Looks**: the content is cut into horizontal slats and each slat pushes sideways in turn, edge to edge, bringing in a slice of the next content, top to bottom in reading order. In a window the slats follow the asset's own rows (a table's benchmark rows; the title bar is the first slat) and alternate direction; in a pane the next content slides out of the seam in each slat behind a copy of the seam riding the boundary. Slats slide; none turns in depth.
+- **Tier**: T2; with one slat in a pane, a plain seam push (T1).
+- **Use**: a table to its next exhibit, a result to the next result beside a seam. **Not for**: content without rows when the slats should mean something (a chart's slices are arbitrary bands for a few frames).
+- **Parameters**: `window` or `pane` and `from` / `to` as `split-open`; `rows` (window: the current asset's image px; pane: film px) or `count` 9 (`n` in a pane); `slide` 0.4 and `end` 0.95, or `stagger` (p between slat starts, each taking the rest); `alternate` (null: on in a window, off in a pane); `direction` 1 | −1; `edge` `'seam'` | `'none'` (null: seam in a pane). Roles: `ground`, `panel`, `line`, `dim`, `accent`, `key`.
+- **Theory**: the venetian-blind and slide wipes of film grammar (Film Art); slats on the content's own rows keep its form while it changes (as slice-smear keeps a terminal's lines); one rule applied to every slat reads as one operation, pairs by common fate, the order is the reading order (Wertheimer 1923). Borrowed from the louvre and comb wipes of broadcast switchers and slatted title sequences.
+- **Modes**: split (a change of result beside the seam), dossier (slats cut along the rows the page struck), tally (rows of a table), plakat.
+- **Length and easing**: 2 beats; each slat cubic in-out over 40 % of p, the last landing at 95 % (or `stagger` 0.07 with nine slats).
+- **Sound**: a quick ripple of ticks, one per slat.
+
+### wipe-line
+
+- **Looks**: a copy of the seam crosses the whole frame in one direction; behind it the next state, ahead of it the current one; when it leaves the frame the next state is complete.
+- **Tier**: T2.
+- **Use**: input and result change at once (the seam's own position too: the next state's seams were behind the line all along). **Not for**: a change of one pane only (use `louvre` with one slat).
+- **Parameters**: `dir` `'down'` | `'up'` | `'left'` | `'right'`; `from`, `to` `{ paint(ctx) }` (whole frames). Roles: `accent`, `key`.
+- **Theory**: a hard-edged wipe reads as replacement in one direction (film grammar); drawn as the film's own seam, it says the change is an edit.
+- **Modes**: split (input and result change at once), plakat, pulse; any mode whose frame is divided by a rule.
+- **Length and easing**: 2 beats; cubic in-out, the line starting and ending 12 px outside the frame.
+- **Sound**: a whoosh along the line.
+
+### split-branch
+
+- **Looks**: a horizontal seam moves to its new height, then a vertical branch runs from it to the frame's edge and the pane it cuts off opens behind the branch's tip: two panes become three.
+- **Tier**: T2.
+- **Use**: one result becomes two to compare (input above, two results below). **Not for**: panes that do not share the input.
+- **Parameters**: `y0` 420, `y1` 260 (the seam's heights), `x` 1440 (the branch), `y2` 1080 (where the branch ends), `stage` 0.5; `panes(ctx, S)` paints the panes for a state. Roles: `accent`, `key`.
+- **Theory**: staged change, one operation at a time; a new pane grows out of the seam the eye is on (Heer & Robertson 2007). Borrowed from the split-screen build of multi-camera broadcasts.
+- **Modes**: split (two panes become three), tally; any mode built of panes.
+- **Length and easing**: 2 beats; seam 0–50 %, branch 50–100 %, cubic in-out.
+- **Sound**: two ticks, one per stage.
+
+### diff-slider
+
+- **Looks**: two registered renders of the same frame either side of the seam (before left, after right); the seam travels and the after takes the frame over.
+- **Tier**: T2; T3 at a climax.
+- **Use**: a before/after whose only difference is one change (an edited line, a palette, a setting). **Not for**: two frames that are not registered pixel for pixel.
+- **Parameters**: `pane` `{ x 0, y 260, w 1920, h 820 }`; `x0` 1440, `x1` 620; `before`, `after` `{ paint(ctx, dx, dy) }`. Roles: `accent`, `key`.
+- **Theory**: registered comparison isolates the one variable (small multiples, compare like with like; Tufte 1990). Borrowed from before/after comparison sliders.
+- **Modes**: split (the before / after), dossier; any mode with two renders of one frame.
+- **Length and easing**: 2 beats; cubic in-out.
+- **Sound**: a slide.
+
+### type-window
+
+- **Looks**: the claim set large in code (a number, a name) becomes a window onto the asset that proves it: a hard line rises through the word and wipes the caption under it, and below the line the letters show the asset; then the letters swell (outline dilation, round joins) until they merge and cover the frame, which is the asset at rest. The asset never moves or scales; only the mask grows.
+- **Tier**: T2.
+- **Use**: from the claim in words to its evidence in pixels. Needs a dense asset behind the letters (a mostly white screenshot reads as white numerals). **Not for**: halftone charts (UI and logos only there).
+- **Parameters**: `word` '199'; `font` `{ family, weight 800 }`; `size` 600, `x` 960, `baseline` 690; `caption` `{ text, size 48, y 800, weight 500 }`; `to` `{ asset, focus }`; `rect` (where the asset rests) the full frame; `fill` [0, 0.34], `grow` [0.34, 1], `cover` 0.94. Roles: `ground`, `ink`, `dim`, `accent`.
+- **Theory**: the image seen through type (knockout lettering of mid-century title design); the claim leads to its evidence (principle 2); one object does one thing per stage. The covering radius comes from a distance transform of the word, so the last frames are exactly the asset.
+- **Modes**: plakat, pulse, ink, halftone (UI and logos only); any mode at a claim.
+- **Length and easing**: 2 beats; fill line 0–34 % cubic in-out; swell 34–100 % exponential in, covering at 94 % of its window.
+- **Sound**: a low swell under the growth.
+
+### grid-hop
+
+- **Looks**: one asset filling the frame pulls back into a contact grid of its siblings (a log zoom about the shared point), a ring hops to another tile, and the camera dives in until that tile fills the frame. Tiles away from the ring step back under a veil while the grid is open; labels stay at 25 px whatever the zoom.
+- **Tier**: T1.
+- **Use**: an overview of a set (a reel's films, a run's screens) between two of its members. **Not for**: a set of one or two.
+- **Parameters**: `tiles` `[{ asset, label }]`; `cols` 5; `from` 0, `to` 6; `gutter` `{ x 200, y 380 }` (world px; a tile is 1920 × 1080); `margin` 140; `veil` 0.5. Roles: `ground`, `line`, `ink`, `dim`, `accent` (the ring).
+- **Theory**: overview first, zoom and filter, details on demand (Shneiderman 1996); the photo library's pinch from a picture to its neighbours keeps the item's place in the collection (object constancy, Heer & Robertson 2007).
+- **Modes**: exhibit (pull back over the whole desk, hop, dive), tally, pulse.
+- **Length and easing**: 3 beats; pull back 0–36 %, hop 35–55 %, dive 55–97 %, each cubic in-out (the dive lands before p = 1, so the last frame is still).
+- **Sound**: a whoosh out, a tick on the hop, a whoosh in.
+
+### mosaic-assemble
+
+- **Looks**: the next asset's window is cut into near-square tiles that grow from points on a landing spring, in order of distance from the claim, assembling outward over the current asset. A tile is the next asset's own pixels, never above 1:1.
+- **Tier**: T2.
+- **Use**: the next asset arrives from the point the scene is about. **Not for**: halftone charts; tiles under ~100 px read as pixelation.
+- **Parameters**: `window`; `from`, `to` `{ asset, title, focus }`; `cols` 12; `origin` (image px of the next asset where it starts; null: its centre); `spread` 0.68, `pop` 0.32, `jitter` 0.05, `seed` 3. Roles: `ground`, `panel`, `line`, `dim`.
+- **Theory**: the order of assembly is a cue: the first tiles land where the viewer should look (Posner 1980); many small pieces moving alike group as one surface (common fate, Wertheimer 1923).
+- **Modes**: tally, halftone (UI only), plakat, exhibit.
+- **Length and easing**: 2 beats; tile starts spread over 68 % of p by distance, each a landing spring over 32 %.
+- **Sound**: a granular patter.
+
+### ticker-wipe
+
+- **Looks**: a crawl band drops from the top of the frame to its foot; above it the next asset is wiped in, below it the current one stays (the change always happens under the band). In the band the old source leaves under a fixed accent slug and the new one brakes into place as the caption, where the band stays.
+- **Tier**: T1.
+- **Use**: a change of source that names the new source as it arrives. **Not for**: handset (a device has no broadcast band).
+- **Parameters**: `from`, `to` `{ asset, focus, label }`; `rect` the full frame; `band` `{ h 128, size 52, weight 600, x 112, sep }`; `land` 0.78; `brake` 0.4; `font`. Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent` (the slug).
+- **Theory**: occlusion hides the cut (Kanizsa 1979, as occluder-pass); the news crawl carries text in the reading direction; the caption ends where the next scene reads it (principle 4).
+- **Modes**: pulse, phosphor, plakat.
+- **Length and easing**: 2 beats; the band's drop a landing spring over 0–78 %; the crawl constant, braking linearly from 40 % to a stop at 1. The band text blurs while it drops; it reads once landed.
+- **Sound**: a short sweep down, a tick as the caption stops.
+
+### parallax-slide
+
+- **Looks**: each exhibit is three layers: an index numeral far back (depth 0.3), the asset in its window (1), a caption chip with the claim in code in front (1.65). One sideways slide moves them at three rates and they land on the same frame.
+- **Tier**: T1.
+- **Use**: from one exhibit to the next in a row, with the claim read from the chip. **Not for**: a mode whose camera never moves (dossier).
+- **Parameters**: `items` `[{ asset, title, index, chip: [label, value], focus }]`; `from` 0, `to` 1; `window` `{ x 600, y 170, w 1200, h 676 }`; `chip` `{ x 130, y 690, w 600, h 190 }`; `numeral` `{ x 96, baseline 560, size 420 }`; `depth` `{ back 0.3, mid 1, front 1.65 }`; `spacing` 1920. Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent`.
+- **Theory**: motion parallax is a depth cue (Gibson 1950; Rogers & Graham 1979); the multiplane camera of 1930s animation gave flat artwork depth by moving layers at different speeds; depth, not colour, separates evidence from reading (principle 3).
+- **Modes**: exhibit (the default travel: numerals, prints and chips at three depths), blueprint, thread, plakat.
+- **Length and easing**: 1.5 beats; cubic in-out.
+- **Sound**: a soft whoosh.
+
+### sheet-shuffle
+
+- **Looks**: the evidence lies on the mat as sheets of paper with cast shadows, the next one already in the pile under the current one. The top sheet is drawn out to the side, tucked under the pile while the two do not overlap, and settles as the pile's corner (−2.2°); the sheet beneath squares up to 0° to be read.
+- **Tier**: T1.
+- **Use**: from one exhibit to the next in a dossier: the pile keeps the order. **Not for**: a mode with a moving camera.
+- **Parameters**: `from`, `to` `{ asset }`; `sheet` `{ cx 960, cy 540, w 1320, maxH 900, pad 26 }`; `pile` `{ dx −30, dy −26, rot −2.2 }`; `out` `{ dx 1560, dy −40, rot 5 }`. Roles: `ground`, `paper`, `line`. The sheet being read is always at 0°; only the one underneath tilts (≤ 2.2°, 5° while drawn out).
+- **Theory**: physical paper handling as the editorial metaphor of a dossier (the pile is the order; what is read is on top); occlusion and shadow as depth cues (Cutting & Vishton 1995); out, then under: one operation per stage.
+- **Modes**: dossier (the top sheet drawn out and tucked under the pile), ink.
+- **Length and easing**: 2 beats; out 0–46 %, under 50–100 %, square-up 30–84 %, each cubic in-out.
+- **Sound**: a paper slide and a soft tap.
+
+### match-cut
+
+- **Looks**: the camera pushes in on a value in the current asset until it sits at a set place and height, holds, and on one frame the window's content and title cut to the next asset framed so that its own printing of the value sits at exactly the same place and height; the ring round the value does not move across the cut. Then it pulls back.
+- **Tier**: T1.
+- **Use**: two sources that print the same value: the cut is the proof. **Not for**: values that differ, or one source.
+- **Parameters**: `window`; `from`, `to` `{ asset, title, focus, box }` (`box`: the value, image px); `match` `{ cx 960, cy 560, h 30 }` (clamped by the zoom cap); `cut` 0.5, `hold` 0.04; `ringPad` 12. Roles: `ground`, `panel`, `line`, `dim`, `accent` (the ring; check its ΔE00 against a coloured label).
+- **Theory**: the graphic match of film editing (Bordwell & Thompson, Film Art); the ring is the persistent element (object constancy, Heer & Robertson 2007); the same value in two official sources is the claim's proof (principle 2). The cut falls where both sides are still, so no motion blur spans it and two contents never mix.
+- **Modes**: dossier (paper slid into register, cut on a still frame), exhibit (a value two prints share: the default way between a source and the chart that prints it), phosphor, tally; any mode with two sources of one value.
+- **Length and easing**: 2 beats; push 0–46 % cubic in-out, hold, cut at 50 %, pull 54–100 %.
+- **Sound**: a hard tick on the cut.
 
 ## Adding one
 

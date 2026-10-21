@@ -20,19 +20,19 @@ Does not fit:
 | Use | Example (made-up product, except the shipped example) | Chain |
 |---|---|---|
 | **A launch whose claims are results on the vendor's own table and charts** (best fit) | `orrery-3`, a model: its row on the official benchmark table struck three times (two firsts, one tie), the price table, the cost chart's label carried as a slip onto a worksheet that computes "higher score at ~1/25 the cost per task" | exhibit → claim → claim → exhibit → exhibit → claim → worksheet → result → ledger → lockup |
-| **A release told by its own pages** (the shipped example) | the skill itself: the README's style list and its requirements, the changelog's loudness line carried onto a worksheet that computes the margin under the gate (32 s) | exhibit → exhibit → claim → exhibit → claim → worksheet → result → ledger → lockup |
+| **A release told by its own pages** (the shipped example) | the skill itself: the README's style list and its requirements, the audio kit's README and the changelog matched on the −1.9 dBTP both print, the changelog's loudness line carried onto a worksheet that computes the margin under the gate (32 s) | exhibit → exhibit (sheet-shuffle) → claim → exhibit (louvre) → exhibit (match-cut) → claim → worksheet (split-open) → result → ledger → lockup |
 | A paper's headline result | `fernwave`, a retrieval paper: the abstract's sentence struck, the leader to Table 2, the row carried onto a worksheet that states what the number measures | exhibit → exhibit → worksheet → result → lockup |
 | A price change across official pages | `quarrystore`, a database: last month's and this month's pricing pages, the per-hour prices carried onto a worksheet that computes one workload's monthly cost | exhibit → exhibit → worksheet → result → ledger → lockup |
 
 ## Mode principles
 
 1. **The source page is the protagonist and is never touched.** A page is cropped, scaled and veiled uniformly; its pixels are never recoloured, retouched, redrawn or blurred (motion blur during a move belongs to the move and is gone on the landing frame); a logo is never broken into parts; people are cropped out. Every mark (band, leader, sticker) lies above the page as its own layer. *(Narrows 2, precision, and 8, the picture is technical.)*
-2. **The camera never moves; paper does.** One sheet sits in the reading position at a time (a sheet and its worksheet in a spread); sheets arrive by being dealt onto the file or are uncovered when the sheet above turns away. No truck, orbit, zoom-through or tilt: the change comes to the eye where it already is. *(Narrows 3 and 4: the next page is already under the current one. What separates it from exhibit, whose camera travels.)*
+2. **The camera never moves; paper does.** One sheet sits in the reading position at a time (a sheet and its worksheet in a spread); pages change by paper handling and editorial cuts: shuffled under the pile, cut into slats along the struck rows, matched on a value two sources print, opened on a seam, dealt on, or turned away. No truck, orbit, zoom-through, lift or flip: the change comes to the eye where it already is. *(Narrows 3 and 4: the next page is already under the current one. What separates it from exhibit, whose camera travels.)*
 3. **One stroke per claim, exactly on the claim.** The highlighter covers the words or the number the claim rests on — the whole row when the claim is a rank ("first" needs its competitors in view), the label when the claim is a point on a chart — and nothing else; the rest of the page dims under a uniform veil, so the claim stands out by luminance, not by colour alone. A band lies over text and pale tints, never over a data mark. *(Narrows 3 and 7.)*
 4. **Every mark is tied to where it was published.** Each struck claim has a leader to its exhibit sticker, or is carried onto the worksheet; every exhibit carries a sticker in short form on two lines: "EX. n as published" (or "as captured" for a screen of an app) over "domain · page · capture date". Every worksheet cites its exhibit with a tab. A number keeps its source's terms (who measured it, `~` for a value read off a chart). `owner` (2026-10-20). *(Narrows 2.)*
 5. **Prove in pixels, read in code.** Text inside a page is evidence and is never counted as readable; whatever the viewer must read is set in code at ≥ 25 px (main text 50): the claim on the mat, the sticker, the worksheet. When a page's own figure must be read it is lifted out as a paper slip: its own pixels to at most 1.2 × the sheet's scale, then in one frame the same cell set in code on its own sampled paper and ink, registered on its ink box, carried to the worksheet and laid down there as a clipping. `owner` (2026-10-20: the slip replaced a jump from the page's face to the mode's serif). *(Narrows 1.)*
 6. **The arithmetic is on the page.** A comparison is never a bare ratio: the worksheet shows the carried values with their terms, a rule, and the result computed from them; a cost is compared only against a result that scored no higher. *(Narrows 2 and 9.)*
-7. **Flat paper, hard edges.** Sheets are flat: no soft shadow, glass, glow, bevel or tilt at rest; the depth of the file is two hard paper edges offset 7 and 14 px. The page turn is the one 3D move; it passes edge-on in one beat. The slip alone casts a small shadow while it is in the air. *(Narrows 6 and 7; paper does not bounce.)*
+7. **Flat paper, hard edges.** Sheets are flat: no soft shadow, glass, glow, bevel or tilt while read (only the pile's corner lies at −2.2°); the depth of the file is two hard paper edges offset 7 and 14 px. The page turn is the one 3D move; it passes edge-on in one beat. The slip alone casts a small shadow while it is in the air. *(Narrows 6 and 7; paper does not bounce.)*
 
 ## Rules for real assets
 
@@ -65,7 +65,7 @@ Contrast (`standard`, WCAG 2.2, `npm run palettes`): ink / paper 15.3, muted / p
 
 **`yellow`** (`derived`): public notes on annotated source documents are shown "as clickable yellow rectangles" ([MuckRock, 2020](https://www.muckrock.com/news/archives/2020/aug/24/documentcloud-page-note-embeds/)), and trial exhibit stickers are conventionally yellow for the plaintiff ([Courtroom Technology Wiki](https://www.courtroomtech.org/2018/09/12/electronic-exhibit-stickers/)). Fluorescent inks lie outside sRGB; `#FFE13B` is an approximation lowered a step so ink on it reads. The default (`owner`, 2026-10-20: yellow kept, a green preset dropped for sitting next to handset's lime).
 
-**`magenta`** (`owner`, 2026-10-21: "a colour closer to the subject" asked for over yellow on a launch film; built by the system's brand-colour steps): a brand guide's icon gradient starts at `#E21680` (OKLCH 0.599 0.236 357.7°). On a vendor benchmark table that stop measured ΔE00 19.1 against the table's red column rule (compression variants of it), under the rule, so it was moved along its own OKLCH hue to `#E20088`, 2.2 ΔE00 away, which keeps 20.7–24.9 from every chromatic pixel in that film's bands. The gradient's middle and warm stops sat 6–15 ΔE00 from red print and were not taken. Ink on `#E20088` is 3.77:1, so type on accent fills is a darker near-black (`onAccent` `#020202`, 4.53:1). **Rendered, not just the hex** (multiply over the page, measured on the frames): black page type under the stroke 3.8:1 on white, 3.55:1 on a pink table cell, 3.44:1 on the mount's paper — legible; but type printed in colour falls to 1.0–1.8:1 (a red price 1.02, a chart label 1.56). Such claims run **under the line** (`under: true`: a strip under the claim, the claim's own pixels untouched), which `npm run palettes` and `npm run assets` enforce.
+**`magenta`** (not the default; `owner`, 2026-10-21: asked for a colour closer to a launch film's subject, compared it rendered on the sample film, and kept **yellow** — the preset stays for a subject whose brand colour it is; built by the system's brand-colour steps): a brand guide's icon gradient starts at `#E21680` (OKLCH 0.599 0.236 357.7°). On a vendor benchmark table that stop measured ΔE00 19.1 against the table's red column rule (compression variants of it), under the rule, so it was moved along its own OKLCH hue to `#E20088`, 2.2 ΔE00 away, which keeps 20.7–24.9 from every chromatic pixel in that film's bands. The gradient's middle and warm stops sat 6–15 ΔE00 from red print and were not taken. Ink on `#E20088` is 3.77:1, so type on accent fills is a darker near-black (`onAccent` `#020202`, 4.53:1). **Rendered, not just the hex** (multiply over the page, measured on the frames): black page type under the stroke 3.8:1 on white, 3.55:1 on a pink table cell, 3.44:1 on the mount's paper — legible; but type printed in colour falls to 1.0–1.8:1 (a red price 1.02, a chart label 1.56). Such claims run **under the line** (`under: true`: a strip under the claim, the claim's own pixels untouched), which `npm run palettes` and `npm run assets` enforce.
 
 **`coral`** (`derived`, 2026-10-20): a brand guide's flat coral `#FF6452`, lightened along its OKLCH hue to `#FF7A63` so ink reads on it (6.74:1). It sits within 12 ΔE00 of red data: barred from pages that print data in red or coral.
 
@@ -82,7 +82,7 @@ Contrast (`standard`, WCAG 2.2, `npm run palettes`): ink / paper 15.3, muted / p
 
 ## Accent role
 
-- **Accent**: a published claim and its proof (one kind of thing): the stroke over the exact words or number, the leader's core and its dot, the exhibit sticker, the exhibit tabs on the worksheet and the index, the stroke on the result the worksheet computed, the band behind the struck name and the URL's underline at the close. As a mark it measured 2.7 % of the frame (median, shipped example), at most 3.6 %; never a ground.
+- **Accent**: a published claim and its proof (one kind of thing): the stroke over the exact words or number, the leader's core and its dot, the exhibit sticker, the exhibit tabs on the worksheet and the index, the stroke on the result the worksheet computed, the band behind the struck name and the URL's underline at the close. As a mark it measured 2.2 % of the frame (median, shipped example), at most 3.4 %; never a ground.
 - **Neutral**: all type, the mat, the paper, the paper edges, the veil.
 - **Status / category / effect**: none drawn by the mode: a disputed or superseded source is said in words on its sticker, never in red. Colours inside pages are content.
 
@@ -119,19 +119,24 @@ Slots and limits: `assets/templates/dossier/TEMPLATE.md`.
 
 ## Signature transformations
 
-The page changes are pluggable (TEMPLATE.md, Page changes): `changes.js` is a registry, so a new set of transitions plugs in by name without touching the choreography. The template is Canvas2D: page changes mix finished frames or project one sheet's canvas, motion blur needs sub-frames of a pure `render(t)`, and the highlighter is one multiply composite (`derived`, 2026-10-21; the sample film's DOM layout could do neither the frame-level changes nor exact sub-frame blur).
+The dossier's moves are its own axis: **paper handled and editorial cuts, the camera locked** (`owner`, 2026-10-21: the three real-asset modes' transitions felt too alike — lifts and flips — so each takes a different axis; this one has no lift, flip or camera move). A page change straddles the boundary between two scenes; each is a named entry in `changes.js`, a registry over the shared hand-offs, so a new one plugs in by name without touching the choreography (TEMPLATE.md, Page changes). The template is Canvas2D: a change draws both sheets (or mixes two finished frames), motion blur needs sub-frames of a pure `render(t)`, and the highlighter is one multiply composite (`derived`, 2026-10-21).
 
 | Move | What happens | Tier | Tag |
 |---|---|---|---|
-| `deal` | the sheet in the reading position slides off downward (y +900, 0.35 s power2 in); the next is dealt on from below (y +800 → 0, one beat expo out), motion-blurred while fast | T1 | `owner` (sample film, 2026-10-21) |
 | `spotlight-band` | the page dims (the mat at 50 %, 0.3 s); the highlighter strikes the claim left to right in one beat (a hand's rate, eased at its ends, chisel ends); on the same page the band, its veil hole and its leader move to the next claim in 0.4 s | T0 | `borrowed` (the shared module's veil and hard edges) / `owner` |
 | `tether-link` | a dot lands on the band's end; an ink-cased leader draws in orthogonal legs through the mount's margin to the sticker (0.35 s) | T0 | `borrowed` (module rule) / `derived` (straight legs, an editorial leader) |
 | `exhibit-stamp` | the sticker is there at 1.1 × on its key's frame and settles to 1 in 0.12 s; worksheet and index tabs the same | T0 | `owner` |
-| `dossier-slip` (`lift-out` → `value-carry`) | the figure's own pixels lift to 1.2 × the sheet's scale and 18 px up (half a beat); in one frame the same cell is set in code on its sampled paper and ink; it rises into the corridor between the claim's terms and the sheets' top edge at ≤ 0.55 of its landed size, crosses, and drops onto the worksheet on the beat; it stays there as a clipping | T2 | `borrowed` (module: swap at 1.2 ×, one frame, its own paper and ink) / `owner` |
-| `dossier-page-turn` | in the last beat before the next exhibit, the sheet turns away over its top edge (or, as a variant, its left edge) to 89° with a 2200 px perspective, power2 in, darkening as it tilts; the next page is already whole underneath, so no two contents are ever half-transparent over each other | T2 | `owner` |
-| any `lib/transitions` id | a frame-level transition in place of the turn (`enter: '<id>'`), colour roles from the palette | T2 | `borrowed` (library) |
+| `sheet-shuffle` | the next page lies in the pile under the current one; the top sheet is drawn out to the side (clear of the pile) and tucked under; the next squares up from −2.2° to be read; the old one stays as the pile's corner, veiled, until the next page leaves (2 beats: out 0–46 %, under 50–100 %, square-up 30–84 %) | T1 | `borrowed` (shared hand-off: timing and poses) / `draft` |
+| `louvre` | the page is cut into slats along the rows it struck (the bands' edges); slat by slat, top to bottom, the next page slides out of an ink seam and pushes the current one out (2 beats, each slat 40 % of it) | T2 | `borrowed` (shared hand-off, a pane of the template's painters) / `draft` |
+| `match-cut` | two sources print the same value: the page slides it half-way to where the next page prints it, and on one still frame the next page, its printing of the value in the same place and size, replaces it, already struck; then it slides home (2 beats, the cut at 50 %, 4 % holds on both sides: no motion blur spans the cut). Each sheet is scaled so the value prints at one height on both sides | T1 | `borrowed` (shared hand-off's timing; paper slides instead of a camera pushing) / `draft` |
+| `split-open` | the worksheet's arrival: a seam is cut down the gutter beside the exhibit (26 % of 1.5 beats), the worksheet slides out of it as from a drawer, and the two pages lie side by side; the seam stays as the spread's cut | T1 | `borrowed` (shared hand-off, a drawer in a pane) / `draft` |
+| `dossier-slip` (`lift-out` → `value-carry`) | at most once a film: the figure's own pixels lift to 1.2 × the sheet's scale and 18 px up (half a beat); in one frame the same cell is set in code on its sampled paper and ink; it rises into the corridor between the claim's terms and the sheets' top edge at ≤ 0.55 of its landed size, crosses, and drops onto the worksheet on the beat; it stays there as a clipping | T2 | `borrowed` (module: swap at 1.2 ×, one frame, its own paper and ink) / `owner` |
+| `dossier-page-turn` | one change among the others, not every change: the sheet turns away over its top or left edge to 89° with a 2200 px perspective, power2 in, darkening as it tilts, onto the page whole underneath (1 beat) | T2 | `owner` (sample film) |
+| `deal` | the sheet in the reading position slides off downward (y +900, 0.35 s power2 in); the next is dealt on from below (y +800 → 0, one beat expo out) | T1 | `owner` (sample film) |
 | `dossier-stack` | into the lockup: the index squares onto the file and slides off the mat in one beat | T2 | `owner` |
 | strike the name | the band behind the name and the name wipe in together in one beat (the lockup peak); the URL is underlined on the last downbeat | T3 | `owner` |
+
+Seams and slat edges are cuts, drawn in ink with a paper key, never in the accent (which marks only a published claim and its proof). A frame-level transition of `lib/transitions` may be named as an `enter`, but a full-frame change breaks the locked camera: the shipped example uses none.
 
 **Against the nearest references** (principle 10, the mode's fixed grammar, checked once here; 2026-10-20): annotated source documents in newsrooms, and the gallery's launch films over real assets. Shared with annotated documents (2 of 9): the page front-on, the yellow rectangle. Not shared: the dim, the leader to a source sticker, the code-drawn worksheet that computes, the locked camera with paper moving, the dark mat with hard paper edges, serif claims with mono identifiers, the struck name. Against exhibit: the locked camera, one page in the reading position, the leader and the sticker, the dark mat; against handset: no device, and the sources are publications, not the product's own UI.
 
@@ -147,9 +152,10 @@ The page changes are pluggable (TEMPLATE.md, Page changes): `changes.js` is a re
 | Leader | dot 0.12 s, line 0.35 s from 0.05 s | `owner` |
 | Sticker and tabs | on the key's frame at 1.1 ×, to 1 in 0.12 s (power3 out) | `owner` / `derived` (2026-10-21: the press starts on the key, so it stands out there) |
 | Slip | lift half a beat (power2 out), set in code on the next frame, the flight 1.5 beats (40 / 33 / 27 % for rise, cross, drop) | `borrowed` / `owner` |
+| Page changes | straddle the boundary, half in each scene; sheet-shuffle, louvre, match-cut 2 beats; the turn 1; split-open 1.5; the incoming page's stroke waits for the change to settle | `derived` / `draft` |
 | Page turn | one beat, power2 in, 89°, perspective 2200 px, strips of 3 px | `owner` |
 | Tail moves | where a landing would hold still over two beats, the scene's focus (the stroke, the slip, the last tab) is pressed again on a beat: 1 → 1.12 → 1 in 0.36 s | `derived` (principle 5) |
-| Motion blur | `lib/canvas.js` `subframes` on every frame where a sheet, the turn's far edge or the slip moves over 1 px a frame; shutter half a frame, exact sum, up to 16 sub-frames | `borrowed` (system) |
+| Motion blur | `lib/canvas.js` `subframes` on every frame where a sheet, a slat, the turn's far edge or the slip moves over 1 px a frame (never across a match cut, which falls where nothing moves); shutter half a frame, exact sum, up to 16 sub-frames | `borrowed` (system) |
 | Ambient | none | `derived` |
 | Easing | no overshoot (paper lands) | `derived` |
 
@@ -159,19 +165,20 @@ Bed: the kit's `diagram` preset (felt keys, pad, plucked pulse) in E♭ at the f
 - the stroke: a narrow band of noise (2.6–4.2 kHz) lasting the stroke; the URL underline a shorter one;
 - a sticker: a short falling stamp, a low thud and a 3 dB duck; an index tab a lighter stamp; a tail move the softest touch;
 - the page turn: falling air, then a rim flick and a thud on the beat the page is gone;
+- sheet-shuffle: paper drawn out, slid under, a soft tap as the next squares up; louvre: a ripple of paper ticks, one per slat; match-cut: a short slide and a hard tick on the cut; split-open: a blade-like tick as the seam is cut, then a slide;
 - a deal or exit: a soft swish; the stack heavier, with a thud;
 - the slip: a pop, air, and a light press as it is laid down (also the hook's landing);
 - the struck result and the struck name: a soft impact with a duck;
 - the leader and the band move: none / a faint high swish.
 
-Master −14 LUFS, true peak ≤ −1.5 dBTP after the renderer's AAC (shipped example, measured on the render: −14.0 LUFS, −2.2 dBTP). The sticker's click is the sharpest transient and the renderer's AAC encode can overshoot it more than the master's estimate, so `score.mjs` holds that estimate at −2.5 dBTP (`aac.ceiling`). Banned: typewriter clatter, camera shutter, ticking clock, a procedural-drama stinger.
+Master −14 LUFS, true peak ≤ −1.5 dBTP after the renderer's AAC (shipped example, measured on the render: −14.0 LUFS, −2.8 dBTP). The sticker's click is the sharpest transient and the renderer's AAC encode can overshoot it more than the master's estimate, so `score.mjs` holds that estimate at −2.5 dBTP (`aac.ceiling`). Banned: typewriter clatter, camera shutter, ticking clock, a procedural-drama stinger.
 
 ## Factory defaults
 
 What the template produces untouched; a film's `PLAN.md` ban list starts here:
 
 - the `yellow` preset on the near-black mat, `highlight: 'band'`;
-- the example chain: a cold open on a struck heading → a page turned over its top edge → a second claim on it → a page turned over its left edge as a spread → a claim with no leader → the slip onto a worksheet → the struck result → the index → the lockup;
+- the example chain: a cold open on a struck heading → sheet-shuffle → a second claim on that page → louvre along its two struck rows → match-cut on a value both sources print, into a spread → a claim with no leader → split-open and the slip onto a worksheet → the struck result → the index → the lockup; each move of the axis once;
 - a sticker at the lower right of every sheet; leaders through the left margin;
 - the worksheet at x 1240 with a 125 px figure under a rule; the "EX. n" tab at its top right;
 - the lockup: the name on a band, the URL, the capture line, the URL underlined;
@@ -201,7 +208,8 @@ Banned from every film in this mode (the gallery's tells around real assets and 
 
 ## Known issues
 
-- **Transitions alike across modes** (`owner`, 2026-10-21: the sample films' moves felt too similar): the page changes are pluggable (TEMPLATE.md, Page changes) so a more varied set can replace the turn; none is swapped yet.
+- **Transitions** (`owner`, 2026-10-21: too alike across the three real-asset modes): the dossier now has its own axis (sheet-shuffle, louvre, match-cut, split-open); the sample film re-rendered with them awaits a verdict. Their values are the shared library's `draft` values until a film is judged.
+- **The pile's corner** after a sheet-shuffle shows the page underneath, rotated and veiled; on a short sheet over a tall one most of the old page shows below.
 - **The slip's face**: the code copy is Inter Tight scaled to the cell's ink box, not the page's own face; the difference shows only on the swap frame.
 - **Small pages in a spread**: a wide page beside a worksheet is shown at about 0.8 × (the changelog in the example), so its text is evidence only; the claim on the mat carries it.
 - `magenta`, `coral` and `highlight: 'underline'` have been rendered on the example as stills only; the `magenta` under-the-line rule was judged on the sample film. The shipped example has no `mark` (the lockup's optional logo).

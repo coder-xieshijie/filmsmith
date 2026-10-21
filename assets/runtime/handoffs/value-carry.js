@@ -26,7 +26,7 @@ export default {
   name: 'value-carry',
   tier: 'T1',
   beats: 2,
-  modes: ['ink', 'tally', 'phosphor'],
+  modes: ['ink', 'tally', 'phosphor', 'dossier (the slip, once a film)'],
   roles: ['ground', 'panel', 'line', 'dim', 'accent', 'paper', 'onPaper'],
   from: 'asset 1 in its window, the cell holding the value ringed',
   to: 'asset 2 in its window one screen to the right, the same value ringed where asset 2 prints it',

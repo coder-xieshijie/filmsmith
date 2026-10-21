@@ -10,22 +10,19 @@ export const C = {
   wordSec: 0.3,         // a word enters every 0.3 s, the reading pace (principle 1); its entrance takes 0.15 s
   wordIn: 0.15,
   settle: 0.3,          // a landing holds at least this long before the next move (≥ 0.2 s, principle 5)
-  pullAt: 1, pull: 2,   // open: the content holds a beat at the zoom cap, then the camera rises for 2 beats
+  pullAt: 1,            // open: the content holds a beat at the zoom cap, then the camera rises
   capAt: 0.5,           // a caption's first word enters half a beat after the landing before it
-  travel: 2,            // beats of a camera move between exhibits
-  ringStep: 0.5, ringDraw: 1.5, // rings start half a beat apart and draw in 1.5 beats
-  lift: 2,              // beats of a lift-out (its labels land by 0.98 of it)
+  ringStep: 0.5, ringDraw: 1.5, // read: rings start half a beat apart and draw in 1.5 beats
   liftStagger: 0.08,    // the lift-out module's stagger between cells (p)
   noteAt: 1,            // a card's note enters a beat into its reading, or halfway through it when shorter
   back: 1, unring: 0.5, // the readings go back into their cells, then the rings come off (beats before the end)
-  ringIn: 1,            // carry: the ring draws round the value to be carried, then
-  carry: 2,             // beats of a value-carry
-  veilAt: 0.5, veil: 0.5, cardAt: 1, cardLift: 0.75, // carry: half a beat after the landing the target steps back outside its ring; a beat after it the reading lifts
-  unringM: 0.5, dimAt: 0.5, dim: 1.5,  // measure: the carry's ring comes off, the dimension draws, its chip lands on beat 2
+  ringIn: 1,            // match: the ring draws round the value in 1 beat, then the push, the cut and the pull
+  cutAt: 0.5,           // match: the cut, as a share of the move (match-cut's `cut`)
+  unringM: 0.5, dimAt: 0.5, dim: 1.5,  // measure: the match's ring comes off, the dimension draws, its chip lands on beat 2
   mcapAt: 2.5,          // measure: the claim enters half a beat after the chip
   pauseMin: 0.75,       // measure: the claim holds at least this long once read (a pause hold)
   rise: 2,              // lockup: the camera rises over the whole desk
-  nameAt: 1.5, lineAt: 3, urlCps: 40, // lockup: the name settles by beat 2, its line from beat 3, the address types at 40 characters a second
+  nameAt: 1.5, lineAt: 3, urlCps: 24, // lockup: the name settles by beat 2, its line from beat 3, the address types at 24 characters a second
   urlHold: 3,           // the address holds at least 3 s (principle 1)
 };
 
@@ -37,6 +34,10 @@ export const measureLabel = (s) => {
   const d = (s.b?.value ?? 0) - (s.a?.value ?? 0), r = (s.a?.value ? s.b.value / s.a.value : 0), k = s.digits ?? 1;
   return String(s.label ?? '{diff}').replace('{diff}', `${d >= 0 ? '' : '−'}${Math.abs(d).toFixed(k)}`).replace('{ratio}', Math.abs(r).toFixed(k));
 };
+// the move a travel scene uses: its own `move`, else content.moves.travel, else the first adapter (parallax-slide)
+export const travelMove = (s, content) => moveOf('travel', s.move ?? content?.moves?.travel);
+// the chip an exhibit carries ([label, value]) from content.assets
+const chipOf = (content, id) => content?.assets?.[id]?.chip ?? null;
 
 const wordTimes = (text, t0) => words(text).map((w, k) => ({ t: t0 + k * C.wordSec, w, k }));
 
@@ -51,6 +52,24 @@ export const plan = (s, ctx, B, dur, content = ctx?.content ?? {}) => {
   const scenes = ctx?.scenes ?? [];
   const i = ctx?.i ?? 0;
   const moves = content.moves ?? {};
+  const prev = exhibitBefore(scenes, i);
+  // a landing on an exhibit with a chip: the chip's label (glance) and value (primary) are read from the landing,
+  // then the caption; returns the caption's start
+  const landed = (at, id, extra = []) => {
+    const chip = chipOf(content, id);
+    const items = [
+      ...(chip ? [{ text: chip[0], tier: 'glance', at }, { text: chip[1], at }] : []),
+      ...extra,
+      ...(s.caption ? [{ text: s.caption, at: at + C.capAt * B, ...(s.claim ? { claim: true } : {}) }] : []),
+    ];
+    P.items = items;
+    P.r = read(items);
+    if (s.caption) {
+      const it = P.r.items.find((x) => x.text === s.caption && x.tier !== 'glance');
+      P.capAt = it ? it.from : at + C.capAt * B;
+      addWords(s.caption, P.capAt, s.claim ? 'claim' : 'caption');
+    }
+  };
 
   if (s.type === 'open') {
     const pull = moveOf('open', moves.open);
@@ -61,52 +80,57 @@ export const plan = (s, ctx, B, dur, content = ctx?.content ?? {}) => {
     P.landAt = P.pull[1];
     P.keys.push({ t: P.landAt, kind: 'land', what: 'the mount lands' });
     P.shots.push({ t: P.landAt, what: 'the exhibit in its mount' });
-    const capAt = P.landAt + C.capAt * B;
-    P.items = s.caption ? [{ text: s.caption, at: capAt }] : [];
-    P.r = read(P.items);
-    if (s.caption) { addWords(s.caption, capAt, 'caption'); P.capAt = capAt; if (i === 0) P.peaks.push({ t: capAt, kind: 'hook' }); }
-    P.need = Math.max(P.r.done, P.landAt) + C.settle;
+    landed(P.landAt, s.exhibit);
+    if (s.caption && i === 0) P.peaks.push({ t: P.capAt, kind: 'hook' });
+    P.need = Math.max(P.r.done, P.r.glanceDone ?? 0, P.landAt) + C.settle;
     P.device = pull.device;
   }
 
+  if (s.type === 'travel') {
+    const mv = travelMove(s, content), o = mv.beats * B;
+    P.move = [0, o];
+    P.moveId = mv.id;
+    span(0, o, `${mv.device}: ${prev} → ${s.exhibit}`);
+    micro(0, 'the camera leaves');
+    if (mv.device === 'grid-hop') { micro(0.36 * o, 'the whole desk; the ring hops'); micro(0.55 * o, 'the camera dives'); }
+    else micro(0.5 * o, 'the camera passes between the prints');
+    P.handoffs.push({ t: 0 });
+    if (mv.expressive) P.expressive.push({ t: 0, dur: o, device: mv.device, variant: `${prev} → ${s.exhibit}` });
+    P.landAt = o;
+    P.keys.push({ t: o, kind: 'land', what: 'the camera arrives' });
+    P.shots.push({ t: o, what: `${s.exhibit} at rest` });
+    landed(o, s.exhibit);
+    P.need = Math.max(P.r.done, P.r.glanceDone ?? 0, P.landAt) + C.settle;
+    P.device = mv.device;
+  }
+
   if (s.type === 'read') {
-    const n = (s.cells || []).length, prev = exhibitBefore(scenes, i);
-    const travel = prev && prev !== s.exhibit ? moveOf('travel', moves.travel) : null;
+    const n = (s.cells || []).length;
     const lift = moveOf('lift', moves.lift);
-    const o = travel ? travel.beats * B : 0;
-    P.travel = travel ? [0, o] : null;
-    if (travel) {
-      span(0, o, 'the camera travels');
-      P.expressive.push({ t: 0, dur: o, device: travel.device, variant: `${prev} → ${s.exhibit}` });
-      P.keys.push({ t: o, kind: 'land', what: 'the camera arrives' });
-      P.handoffs.push({ t: 0 });
-    }
-    P.rings = (s.cells || []).map((c, k) => [o + C.ringStep * k * B, o + (C.ringStep * k + C.ringDraw) * B]);
+    P.rings = (s.cells || []).map((c, k) => [C.ringStep * k * B, (C.ringStep * k + C.ringDraw) * B]);
     P.rings.forEach((r, k) => { span(...r, `ring ${k + 1}`); micro(r[0], `ring ${k + 1}`); });
-    const R = o + Math.ceil(C.ringStep * (n - 1) + C.ringDraw) * B;
-    P.lift = [R, R + lift.beats * B];
+    const Rt = Math.ceil(C.ringStep * (n - 1) + C.ringDraw) * B;
+    P.lift = [Rt, Rt + lift.beats * B];
     span(...P.lift, 'lift-out');
-    P.handoffs.push({ t: R });
-    P.expressive.push({ t: R, dur: lift.beats * B, device: lift.device, variant: `${s.exhibit}, ${n} cell${n > 1 ? 's' : ''}` });
+    P.handoffs.push({ t: Rt });
+    P.expressive.push({ t: Rt, dur: lift.beats * B, device: lift.device, variant: `${s.exhibit}, ${n} cell${n > 1 ? 's' : ''}` });
     P.landAt = P.lift[1];
     P.keys.push({ t: P.landAt, kind: 'land', what: 'the readings land' });
     P.shots.push({ t: P.landAt, what: 'the readings lifted' });
     // each card's label lands as the lift-out widens it (lift-out: 0.98 − 0.75 · stagger · (n − 1 − k) of the move)
-    P.labelAt = (s.cells || []).map((c, k) => R + lift.beats * B * (0.98 - 0.75 * C.liftStagger * (n - 1 - k)));
+    P.labelAt = (s.cells || []).map((c, k) => Rt + lift.beats * B * (0.98 - 0.75 * C.liftStagger * (n - 1 - k)));
     P.labelAt.forEach((t, k) => micro(t, `card ${k + 1} label`));
-    micro(R + 0.25 * lift.beats * B, 'the values turn to code');
+    micro(Rt + 0.25 * lift.beats * B, 'the values turn to code');
     const cards = (s.cells || []).map((c, k) => ({ text: `${c.value} ${c.label}`, at: P.labelAt[k] }));
     const first = read(cards);
     const capFrom = first.done;
     P.items = [...cards, ...(s.caption ? [{ text: s.caption, at: capFrom, ...(s.claim ? { claim: true } : {}) }] : [])];
-    // notes: glance, a beat into their card's reading (or halfway through it)
     P.reading = first.items.map((it) => [it.from, it.to]);
     P.noteAt = (s.cells || []).map((c, k) => (c.note ? P.reading[k][0] + Math.min(C.noteAt * B, (P.reading[k][1] - P.reading[k][0]) / 2) : null));
     (s.cells || []).forEach((c, k) => { if (c.note) { P.items.push({ text: c.note, tier: 'glance', at: P.noteAt[k] }); span(P.noteAt[k], P.noteAt[k] + C.wordIn, 'note'); micro(P.noteAt[k], `note ${k + 1}`); } });
-    // the reading moves from card to card: the card being read is lit, the others step back
     if (n > 1) P.reading.forEach(([a], k) => { span(a, a + 0.1, 'reading step'); micro(a, `reading card ${k + 1}`); });
     P.r = read(P.items);
-    if (s.caption) { addWords(s.caption, capFrom, 'caption'); P.capAt = capFrom; }
+    if (s.caption) { addWords(s.caption, capFrom, s.claim ? 'claim' : 'caption'); P.capAt = capFrom; }
     const done = Math.max(P.r.done, P.r.glanceDone, P.landAt);
     P.need = done + C.settle + (C.back + C.unring) * B;
     const D = dur ?? P.need;
@@ -119,50 +143,37 @@ export const plan = (s, ctx, B, dur, content = ctx?.content ?? {}) => {
     P.device = lift.device;
   }
 
-  if (s.type === 'carry') {
-    const carry = moveOf('carry', moves.carry);
+  if (s.type === 'match') {
+    const mv = moveOf('match', moves.match);
     P.ringIn = [0, C.ringIn * B];
     span(...P.ringIn, 'the ring draws round the value'); micro(0, 'the ring draws round the value');
-    P.carry = [C.ringIn * B, (C.ringIn + carry.beats) * B];
-    span(...P.carry, 'value-carry');
-    micro(P.carry[0], 'the value lifts'); micro(P.carry[0] + 0.5 * carry.beats * B, 'the value rides the pan');
-    P.handoffs.push({ t: P.carry[0] });
-    P.expressive.push({ t: P.carry[0], dur: carry.beats * B, device: carry.device, variant: `${exhibitBefore(scenes, i)} → ${s.exhibit}` });
-    P.landAt = P.carry[1];
-    P.keys.push({ t: P.landAt, kind: 'land', what: 'the value lands on its twin' });
-    P.veil = [P.landAt + C.veilAt * B, P.landAt + (C.veilAt + C.veil) * B];
-    span(...P.veil, 'the exhibit steps back'); micro(P.veil[0], 'the exhibit steps back outside the ring');
-    if (s.card) {
-      P.card = [P.landAt + C.cardAt * B, P.landAt + (C.cardAt + C.cardLift) * B];
-      span(...P.card, 'the reading lifts'); micro(P.card[0], 'the reading lifts');
-      P.shots.push({ t: P.card[1], what: 'the reading over the exhibit' });
-      const at = P.card[1];
-      const items = [
-        s.card.meta && { text: s.card.meta, tier: 'glance', at },
-        { text: s.card.value, at },
-        s.card.line && { text: s.card.line, at },
-      ].filter(Boolean);
-      P.r = read(items);
-      P.items = items;
-      const pr = P.r.items.filter((x) => x.tier !== 'glance');
-      P.valueAt = pr[0].from; addWords(s.card.value, P.valueAt, 'card value');
-      if (s.card.line) { P.lineAt = pr[1].from; addWords(s.card.line, P.lineAt, 'card line'); }
-      if (s.card.meta) { P.metaAt = at; span(at, at + C.wordIn, 'meta'); }
-    } else { P.items = []; P.r = read([]); }
-    P.need = Math.max(P.r.done, P.r.glanceDone, P.landAt + C.settle) + C.settle;
-    P.device = carry.device;
+    P.move = [C.ringIn * B, (C.ringIn + mv.beats) * B];
+    P.cut = P.move[0] + C.cutAt * mv.beats * B;
+    span(P.move[0], P.cut - 0.05, 'the camera pushes in on the value'); span(P.cut + 0.05, P.move[1], 'the camera pulls back');
+    micro(P.move[0], 'the push in'); micro(P.cut, 'the cut: the same value, the next source');
+    P.handoffs.push({ t: P.move[0] });
+    P.expressive.push({ t: P.move[0], dur: mv.beats * B, device: mv.device, variant: `${prev} → ${s.exhibit}` });
+    P.keys.push({ t: P.cut, kind: 'accent', what: 'the cut to the same value in the next source' });
+    P.landAt = P.move[1];
+    P.keys.push({ t: P.landAt, kind: 'land', what: 'the next source at rest, its value ringed' });
+    P.shots.push({ t: P.landAt, what: `${s.exhibit} at rest, the value ringed` });
+    landed(P.landAt, s.exhibit);
+    P.need = Math.max(P.r.done, P.r.glanceDone ?? 0, P.landAt) + C.settle;
+    P.device = mv.device;
   }
 
   if (s.type === 'measure') {
-    const after = scenes[i - 1]?.type === 'carry' && scenes[i - 1]?.exhibit === s.exhibit;
+    const after = ['match'].includes(scenes[i - 1]?.type) && scenes[i - 1]?.exhibit === s.exhibit;
     P.unringM = after ? [0, C.unringM * B] : null;
-    if (after) { span(...P.unringM, 'the carry ring comes off'); micro(0, 'the ring leaves the label'); }
+    if (after) { span(...P.unringM, 'the match ring comes off'); micro(0, 'the ring leaves the value'); }
     P.dim = [C.dimAt * B, (C.dimAt + C.dim) * B];
+    span(0, P.dim[0], 'a chip in the way steps aside');
     span(...P.dim, 'the dimension draws'); micro(P.dim[0], 'the dimension draws');
     P.landAt = P.dim[1];
     P.keys.push({ t: P.landAt, kind: 'accent', what: 'the measured gap lands' });
     P.peaks.push({ t: P.landAt, kind: 'reveal' });
     span(P.landAt - 0.2 * B, P.landAt, 'chip');
+    span(P.landAt - 0.2 * B, P.landAt + 0.3 * B, 'the rest of the print steps back'); micro(P.landAt - 0.2 * B, 'the print steps back round the gap');
     const capAt = C.mcapAt * B;
     P.items = s.caption ? [{ text: s.caption, at: capAt, ...(s.claim ? { claim: true } : {}) }] : [];
     P.r = read(P.items);
@@ -192,7 +203,7 @@ export const plan = (s, ctx, B, dur, content = ctx?.content ?? {}) => {
     P.items = [...items, { text: s.url, at: P.urlTyped }];
     P.r = read(P.items);
     P.rule = [P.urlTyped, P.urlTyped + B];
-    P.route = [P.rule[1], P.rule[1] + B];
+    P.route = [P.rule[1], P.rule[1] + 2 * B];
     span(...P.rule, 'the rule draws'); span(...P.route, 'the route draws');
     micro(P.rule[0], 'the rule draws'); micro(P.route[0], 'the route draws');
     const bar = 4 * B;

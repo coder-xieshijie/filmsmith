@@ -87,10 +87,11 @@ const group = (L, B, s, { ring = true, ringAt = null, claim = false } = {}) => {
 
 // ---------------------------------------------------------------- per type
 // Each returns { move, light, copy, reads, micro, keys, expressive, peaks, choreo } with times from the scene start.
-// move: { kind: 'set' | 'push' | 'flip' | 'scroll' | 'cut', t, dur, view, variant }; light: [{ t, region, ring, hop, off, all }].
+// move: { kind: 'set' | 'push' | 'feed' | 'flip' | 'scroll' | 'cut', t, dur, view, variant }; light: [{ t, region, ring, hop, off, all }].
 // `ctx`: { B, prevAsset, prevRegion, flips (flips before this scene), assets, D, startBeats (claim only), dur }.
 // Move lengths and T2 device names come from the adapters content.moves picks (moves.js); ctx.M holds them.
-export const movesOf = (content) => ({ push: moveOf(content, 'push'), hop: moveOf(content, 'hop'), scroll: moveOf(content, 'scroll'), flip: moveOf(content, 'flip') });
+export const movesOf = (content) => ({ push: moveOf(content, 'push'), hop: moveOf(content, 'hop'), scroll: moveOf(content, 'scroll'), feed: moveOf(content, 'feed'), flip: moveOf(content, 'flip') });
+export const MAX_FLIPS = 1;            // the device turns once a film at most (owner, 2026-10-21); the screen's content moves instead
 const regionOf = (ctx, s, name) => (name ? ctx.assets[s.asset]?.regions?.[name] : null);
 
 export const TYPES = {
@@ -153,7 +154,22 @@ export const TYPES = {
       choreo: g.last + (g.ring != null ? RING_DRAW : SETTLE) + 0.2,
     };
   },
-  // page-scroll (T2): the screen re-enacts the page's own scroll to another stop of the same capture.
+  // feed (T2): the next capture rises from below the screen over the current one, which steps back; the source line
+  // changes as it lands. A change of surface that keeps the device still (the flip's quieter twin).
+  feed(s, ctx) {
+    const { B, M } = ctx, L = M.feed.beats * B;
+    const g = group(L, B, s, { ring: !!s.region });
+    return {
+      move: { kind: 'feed', t: 0, dur: L, view: s.view ?? { region: s.region, zoom: s.zoom ?? 'rest', anchor: 'top' } },
+      light: [{ t: 0, off: true }, ...(s.region ? [{ t: L, region: s.region }, { t: g.ring, region: s.region, ring: true }] : [])],
+      copy: g.copy, reads: g.reads,
+      micro: [[0, `the next capture rises: ${s.asset}`, L], ...g.micro],
+      keys: [{ t: L, kind: 'land', what: `${s.asset} lands` }],
+      expressive: [{ t: 0, beats: M.feed.beats, device: M.feed.device }],
+      choreo: g.last + (g.ring != null ? RING_DRAW : SETTLE) + 0.2,
+    };
+  },
+  // scroll (T2): the page travels under the glass to another stop of the same capture, at the page's width.
   scroll(s, ctx) {
     const { B, M } = ctx, L = M.scroll.beats * B;
     const g = group(L, B, s, { ring: !!s.region });
@@ -204,7 +220,9 @@ export const TYPES = {
     const pre = [[0, hop ? `the band hops to ${s.region}` : `light on ${s.region}`, hop ? M.hop.beats * B : 0.2]];
     const copy = [], reads = [];
     if (s.lead) { copy.push({ role: 'line', text: s.lead, slot: 128, in: B, out: (P - 1) * B - TEXT_OUT }); reads.push({ text: s.lead, at: B + READABLE }); pre.push([B, `"${s.lead}" enters`, SETTLE]); }
-    if (s.note) { copy.push({ role: 'note', text: s.note, slot: 214, in: 3 * B, out: (P - 1) * B - TEXT_OUT }); reads.push({ text: s.note, tier: 'glance', at: 3 * B + READABLE }); pre.push([3 * B, `note "${s.note}" enters`, SETTLE]); }
+    // the note enters two beats after the lead when the preroll leaves room (P ≥ 6), else with it
+    const noteAt = P >= 6 ? 3 * B : B;
+    if (s.note) { copy.push({ role: 'note', text: s.note, slot: 214, in: noteAt, out: (P - 1) * B - TEXT_OUT }); reads.push({ text: s.note, tier: 'glance', at: noteAt + READABLE }); if (noteAt !== B || !s.lead) pre.push([noteAt, `note "${s.note}" enters`, SETTLE]); }
     if (P >= 6) pre.push([5 * B, 'the ring closes on the region', RING_DRAW]);
     const L = P * B;
     const post = [[L, `"${s.value}" lands (claim)`, SETTLE]];
@@ -228,9 +246,11 @@ export const TYPES = {
   lockup(s, ctx) {
     const { B, M } = ctx;
     const change = ctx.prevAsset !== s.asset;
-    const L = (change ? M.flip.beats : M.push.beats) * B;
+    // a change of capture: a flip if the film has not turned the device yet (or s.change says so), else a feed
+    const via = change ? (s.change ?? (ctx.flips < MAX_FLIPS ? 'flip' : 'feed')) : 'push';
+    const L = M[via].beats * B;
     const variant = ctx.flips % 2 ? 'left' : 'right';
-    const copy = [], reads = [], micro = [[0, change ? 'flip back' : 'pull back to rest', L]];
+    const copy = [], reads = [], micro = [[0, via === 'push' ? 'pull back to rest' : `${via} back`, L]];
     if (s.mark) { copy.push({ role: 'mark', asset: s.mark, slot: -150, in: L }); }
     copy.push({ role: 'display', text: s.name, slot: 0, in: L }); reads.push({ text: s.name, at: L + READABLE }); micro.push([L, 'the name enters', SETTLE]);
     if (s.line) { copy.push({ role: 'line', text: s.line, slot: 128, in: L + B }); reads.push({ text: s.line, at: L + B + READABLE }); micro.push([L + B, 'the line enters', SETTLE]); }
@@ -240,11 +260,11 @@ export const TYPES = {
     const end = ctx.dur ?? urlAt + 3.2 + ctx.bar;
     const second = Math.max(urlAt + 1.5, end - ctx.bar);
     return {
-      move: change ? { kind: 'flip', t: 0, dur: L, view: s.view ?? 'rest', variant } : { kind: 'push', t: 0, dur: L, view: s.view ?? 'rest' },
+      move: { kind: via, t: 0, dur: L, view: s.view ?? 'rest', ...(via === 'flip' ? { variant } : {}) },
       light: [{ t: 0, off: true }, { t: L, all: true }, ...(s.region ? [{ t: second, region: s.region }, { t: second, region: s.region, ring: true }] : [])],
       copy, reads, micro: [...micro, [second, 'second move', RING_DRAW]],
       keys: [{ t: L, kind: 'land', what: 'the lock-up lands' }, { t: second, kind: 'end', what: 'second move on the last downbeat' }],
-      expressive: change ? [{ t: 0, beats: M.flip.beats, device: M.flip.device, variant }] : [],
+      expressive: via === 'push' ? [] : [{ t: 0, beats: M[via].beats, device: M[via].device, ...(via === 'flip' ? { variant } : {}) }],
       peaks: [{ t: L, kind: 'lockup' }],
       choreo: urlAt + 3.2,
       second,
@@ -314,7 +334,7 @@ export const validate = (content) => {
   const S = content.scenes;
   if (S[0].type !== 'wake') e.push('scene 1 must be wake');
   if (S[S.length - 1].type !== 'lockup') e.push('the last scene must be lockup');
-  let cur = null;
+  let cur = null, flipsSeen = 0;
   S.forEach((s, i) => {
     const at = `scene ${i + 1} (${s.type})`;
     if (!TYPES[s.type]) { e.push(`${at}: unknown type; one of ${Object.keys(TYPES).join(', ')}`); return; }
@@ -322,8 +342,12 @@ export const validate = (content) => {
     const regs = A[s.asset].regions ?? {};
     const need = (r) => { if (!r || !regs[r]) e.push(`${at}: region '${r}' is not in assets.${s.asset}.regions`); };
     if (['push', 'cut', 'claim'].includes(s.type)) need(s.region);
-    if (s.type === 'flip' || s.type === 'scroll') need(s.region);   // after a change of surface the screen points at something
-    if (['push', 'band', 'claim', 'scroll'].includes(s.type) && cur && s.asset !== cur) e.push(`${at}: the screen shows '${cur}'; change capture with flip (another surface) or cut (the same screen later)`);
+    if (['flip', 'feed', 'scroll'].includes(s.type)) need(s.region);   // after a change the screen points at something
+    if (['push', 'band', 'claim', 'scroll'].includes(s.type) && cur && s.asset !== cur) e.push(`${at}: the screen shows '${cur}'; change capture with feed or flip (another surface) or cut (the same screen later)`);
+    if (['flip', 'feed'].includes(s.type) && s.asset === cur) e.push(`${at}: ${s.type} changes the capture; '${s.asset}' is already on screen (use push or scroll)`);
+    if (s.type === 'flip' || (s.type === 'lockup' && s.change === 'flip')) flipsSeen++;
+    if (s.type === 'lockup' && s.change != null && !['flip', 'feed'].includes(s.change)) e.push(`${at}: change '${s.change}': 'feed' or 'flip'`);
+    if (s.type === 'scroll' && s.zoom != null && s.zoom !== 'rest') e.push(`${at}: a scroll travels at the page's width: zoom 'rest' (push in after it lands)`);
     if (s.type === 'cut') {
       if (s.asset === cur) e.push(`${at}: cut needs another capture of the same screen`);
       else if (cur && !(A[cur].regions ?? {})[s.region]) e.push(`${at}: region '${s.region}' must exist on both captures (the cut is registered on it)`);
@@ -347,5 +371,20 @@ export const validate = (content) => {
     cur = s.asset;
   });
   if (S.filter((s) => s.type === 'claim').length > 1) e.push('one claim a film (the climax)');
+  if (flipsSeen > MAX_FLIPS) e.push(`${flipsSeen} device flips; at most ${MAX_FLIPS} a film: change capture with feed (the screen's content moves, the device stays)`);
+  if (e.length) return e;
+  // a scroll starts and lands at the page's width (scroll-reel's rest fit): the screen must not be pushed in before it,
+  // and the page must be taller than the screen
+  const D = deviceOf(content);
+  try {
+    const planned = plan(content, S.map((x) => ({ ...x })), 0.5, 2);
+    planned.forEach((T, i) => {
+      if (T.type !== 'scroll') return;
+      const A = content.assets[T.asset], k = coverK(A, D), P = publicOf(A), prev = i > 0 ? planned[i - 1].view : null;
+      // 2 % tolerance: a page within 2 % of the screen's aspect scrolls (almost) nowhere but does not pop
+      if ((k - D.screen.w / P[2]) / k > 0.02) e.push(`scene ${i + 1} (scroll): '${T.asset}' is not taller than the screen at its width; a scroll needs a long page`);
+      else if (prev && Math.abs(prev.k - k) / k > 0.02) e.push(`scene ${i + 1} (scroll): the screen is at ${prev.k.toFixed(2)} px per source px before it; a scroll starts at the page's width (${k.toFixed(2)}): pull back to zoom 'rest' first`);
+    });
+  } catch (err) { e.push(`plan: ${err.message}`); }
   return e;
 };

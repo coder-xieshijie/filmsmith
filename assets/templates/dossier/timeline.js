@@ -1,7 +1,7 @@
 // timeline.js — the fitted film as one list of moments: every scene's plan (choreo.js) placed at its start, the key
 // events and the four pacing tiers for renders/timing.json (timing.rules.js events()), and the sound cues score.mjs
 // plays. film.js draws from the same plans, so a stroke, its sound and its key can never drift apart.
-import { C, CB, planOf, popsOf, enterOf, isChange, deviceOf, outSec } from './choreo.js';
+import { C, CB, planOf, popsOf, enterOf, isChange, changeSpec, outSec } from './choreo.js';
 
 export const timelineOf = (scenes, g, content) => {
   const B = g.beat, bar = g.bar;
@@ -16,13 +16,15 @@ export const timelineOf = (scenes, g, content) => {
 
   laid.forEach((sc, i) => {
     const t0 = sc.start, T = (x) => t0 + x;
-    // the page change into this scene runs in the previous scene's last beat
+    // the page change into this scene runs in the previous scene's last beats (choreo.js CHANGES)
     if (i > 0 && isChange(sc.enter)) {
-      const a = t0 - CB.turn * B, device = deviceOf(sc.enter);
+      const spec = changeSpec(sc.enter), dur = spec.beats * B, a = t0 - dur / 2, device = spec.device;
       used[device] = (used[device] ?? 0) + 1;
       const variant = sc.enter === 'turn' ? { edge: sc.edge ?? 'top' } : { into: `exhibit ${sc.ex}`, use: used[device] };
-      expressive.push({ t: a, dur: CB.turn * B, device, variant, scene: i - 1 });
-      cues.push({ t: a, kind: 'turn', dur: CB.turn * B });
+      if (spec.tier === 'T2') expressive.push({ t: a, dur, device, variant, scene: i - 1 });
+      else micro.push({ t: a, scene: i - 1, what: `page change: ${device}` });
+      if (sc.enter === 'match-cut') { micro.push({ t: a + dur / 2, scene: i - 1, what: 'the cut, on the matched value' }); }
+      cues.push({ t: a, kind: spec.sound, dur });
     }
     for (const m of sc.plan.moments) {
       const t = T(m.t);

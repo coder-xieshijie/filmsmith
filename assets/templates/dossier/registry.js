@@ -16,9 +16,9 @@ const inside = ([x, y, w, h], [X, Y, W, H]) => x >= X && y >= Y && x + w <= X + 
 const overlap = ([ax, ay, aw, ah], [bx, by, bw, bh]) => ax < bx + bw && bx < ax + aw && ay < by + bh && by < ay + ah;
 export const LEADERS = ['down', 'left', 'right', false];
 
-// Frame-level transitions of lib/transitions a film may name as an exhibit's `enter` (the page change); the names are
-// checked in the browser against the library (changes.js), here only for shape.
-export const BUILTIN_ENTER = ['turn', 'deal'];
+// The page changes an exhibit may name as its `enter` (choreo.js CHANGES, drawn by changes.js); any other name must be a
+// frame-level transition of lib/transitions, checked in the browser against the library.
+export const BUILTIN_ENTER = ['deal', 'sheet-shuffle', 'louvre', 'match-cut', 'turn'];
 
 export const validate = (c) => {
   const e = [];
@@ -41,6 +41,7 @@ export const validate = (c) => {
     for (const k of ['expect', 'drawn', 'forbid']) if (a[k] != null && !Array.isArray(a[k])) e.push(`assets.${id}.${k}: an array of strings`);
     if (a.private != null && !(Array.isArray(a.private) && a.private.every(isRect))) e.push(`assets.${id}.private: an array of [x, y, w, h]`);
   }
+  if (c.derived != null && !(Array.isArray(c.derived) && c.derived.every((d) => typeof d?.value === 'string' && typeof d?.how === 'string' && d.how))) e.push('derived: an array of { value, how }: each number the film computes or takes from elsewhere, and how');
   const S = Array.isArray(c.scenes) ? c.scenes : (e.push('scenes: an array is required'), []);
   if (S.length && S[0].type !== 'exhibit') e.push('scenes[0]: the film opens cold on an exhibit (type "exhibit")');
   if (S.length && S.at(-1).type !== 'lockup') e.push(`scenes[${S.length - 1}]: the film closes on a "lockup"`);
@@ -65,7 +66,6 @@ export const validate = (c) => {
       if (asset?.private?.some((r) => isRect(sheet?.crop) && overlap(r, sheet.crop))) e.push(`${p}: the crop shows a private region of assets.${sheet.asset}`);
     };
     if (s.type === 'exhibit') {
-      sheet = s;
       const a = A[s.asset];
       if (!a) e.push(`${p}.asset: "${s.asset}" is not in assets`);
       if (!Number.isInteger(s.ex) || s.ex < 1 || s.ex > LIMITS.exMax) e.push(`${p}.ex: the exhibit number, 1–${LIMITS.exMax}`);
@@ -75,7 +75,16 @@ export const validate = (c) => {
       if (s.enter != null && (typeof s.enter !== 'string' || !s.enter)) e.push(`${p}.enter: a page change's name ('turn', 'deal', a lib/transitions id or a registered change)`);
       if (i > 0 && s.enter == null) e.push(`${p}.enter: how the page arrives, 'turn' (the page above turns away), 'deal' or a lib/transitions id`);
       if (s.enter === 'turn' && s.edge != null && !['top', 'left'].includes(s.edge)) e.push(`${p}.edge: 'top' or 'left'`);
+      if (s.enter === 'match-cut') {
+        // the same value printed in both pages: its box in the page before and in this one (each asset's own px)
+        if (!(s.match && isRect(s.match.from) && isRect(s.match.to))) e.push(`${p}.match: { from: [x, y, w, h], to: [x, y, w, h] }, the value's box in the exhibit before and in this one`);
+        else if (sheet && isRect(sheet.crop) && !inside(s.match.from, sheet.crop)) e.push(`${p}.match.from: inside the exhibit before's crop`);
+        if (!sheet) e.push(`${p}: a match cut needs an exhibit before it`);
+      }
+      if (s.enter === 'louvre' && s.rows != null && !(Array.isArray(s.rows) && s.rows.every(Number.isFinite))) e.push(`${p}.rows: slat edges in the page before's px (default: its struck rows)`);
       if (s.sticker != null && !['right', 'left'].includes(s.sticker)) e.push(`${p}.sticker: 'right' or 'left'`);
+      sheet = s;
+      if (s.enter === 'match-cut' && isRect(s.match?.to) && isRect(s.crop) && !inside(s.match.to, s.crop)) e.push(`${p}.match.to: inside this exhibit's crop`);
       band(a);
     } else if (s.type === 'claim') {
       if (!['exhibit', 'claim'].includes(last)) e.push(`${p}: follows an exhibit or a claim (the band moves on the same sheet)`);
@@ -84,6 +93,7 @@ export const validate = (c) => {
       if (!['exhibit', 'claim'].includes(last)) e.push(`${p}: follows an exhibit or a claim (it lies beside that sheet)`);
       str(s.title, `${p}.title`, LIMITS.title);
       if (s.carry != null) {
+        if (S.slice(0, i).some((x) => x.type === 'worksheet' && x.carry)) e.push(`${p}.carry: one slip a film (the carry is the mode's one value-carry)`);
         if (!isRect(s.carry.region) || !isRect(s.carry.ink)) e.push(`${p}.carry: { region, ink, text } with rectangles in the exhibit's asset px`);
         else if (sheet && isRect(sheet.crop) && !inside(s.carry.region, sheet.crop)) e.push(`${p}.carry.region: inside the exhibit's crop`);
         str(s.carry.text, `${p}.carry.text`, LIMITS.carryText);

@@ -6,7 +6,7 @@ A theme is a kind of film with its own audience, narrative skeleton and rules: a
 
 | Theme | Covers | Modes |
 |---|---|---|
-| [tech-product-launch](tech-product-launch/README.md) | Launch and promo films for technical products: open-source repositories, developer tools, APIs, agent skills | phosphor, plakat, blueprint, ink, thread, handset, exhibit, dossier |
+| [tech-product-launch](tech-product-launch/README.md) | Launch and promo films for technical products: open-source repositories, developer tools, APIs, agent skills | phosphor, plakat, blueprint, ink, thread, morph, halftone, pulse, handset, exhibit, dossier, strip, split, scroll |
 | [tech-explainer](tech-explainer/README.md) | Films that explain a mechanism, an algorithm or a dataset | trace, tally |
 
 ## A theme folder

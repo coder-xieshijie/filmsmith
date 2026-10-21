@@ -13,10 +13,21 @@ export const C = {
   bandMove: 0.4, exit: 0.35, rule: 0.4, header: 0.3,
   pop: 0.36, popScale: 0.12, // the tail move: the stroke pressed again
 };
-export const CB = { stroke: 1, deal: 1, turn: 1, slip: 2, stack: 1, lift: 0.5 };
+export const CB = { stroke: 1, deal: 1, turn: 1, slip: 2, stack: 1, lift: 0.5, open: 1.5 };
 // seconds each kind of moment is in motion (text moments: until their last word lands)
 const MOVE = { exit: C.exit, deal: 0.45, move: C.bandMove, veil: C.veil, leader: C.leader, land: C.stamp, stamp: C.stamp,
   header: C.header, tab: C.stamp, lift: 0.25, swap: 0.2, cross: 0.45, rule: C.rule, leave: 0.25, mark: 0.4, end: 0.4 };
+
+// The page changes (changes.js draws them; their lengths live here so Node and the browser agree). `tier` T2 counts as
+// an expressive transition; T1 changes are new compositions with a sound, not T2 devices. Any other `enter` is a
+// frame-level transition of lib/transitions: one beat, T2, its own id as the device.
+export const CHANGES = {
+  'sheet-shuffle': { beats: 2, device: 'sheet-shuffle', tier: 'T1', sound: 'shuffle' }, // the top sheet drawn out and tucked under the pile
+  louvre: { beats: 2, device: 'louvre', tier: 'T2', sound: 'louvre' },                  // slats cut along the struck rows
+  'match-cut': { beats: 2, device: 'match-cut', tier: 'T1', sound: 'match' },           // the same value, printed in two sources
+  turn: { beats: 1, device: 'dossier-page-turn', tier: 'T2', sound: 'turn' },           // the sheet turns away over an edge
+};
+export const changeSpec = (enter) => CHANGES[enter] ?? { beats: 1, device: enter, tier: 'T2', sound: 'turn' };
 
 // How a sheet arrives. 'open' (the first exhibit, already on the mat), 'deal' (slid onto the file from below),
 // 'turn' (the sheet above turns away over an edge in the previous scene's last beat; this one was underneath), or the id
@@ -25,9 +36,11 @@ const MOVE = { exit: C.exit, deal: 0.45, move: C.bandMove, veil: C.veil, leader:
 export const enterOf = (scenes, i) => (i === 0 ? 'open' : scenes[i].type === 'exhibit' ? scenes[i].enter ?? 'deal' : null);
 export const isChange = (enter) => enter != null && enter !== 'open' && enter !== 'deal';
 // the device id the timing events and the T2 checks name for a page change
-export const deviceOf = (enter) => (enter === 'turn' ? 'dossier-page-turn' : enter);
-// seconds at the end of scene i taken by the page change into scene i + 1
-export const outSec = (scenes, i, B) => (scenes[i + 1] && isChange(enterOf(scenes, i + 1)) ? CB.turn * B : 0);
+export const deviceOf = (enter) => changeSpec(enter).device;
+// A page change straddles the boundary: its first half ends the scene before (outSec), its second half opens the
+// exhibit (inBeats), whose claim already rises on the mat while the sheets settle. A match cut cuts on the boundary.
+export const inBeats = (scenes, i) => (isChange(enterOf(scenes, i)) ? changeSpec(enterOf(scenes, i)).beats / 2 : 0);
+export const outSec = (scenes, i, B) => (scenes[i + 1] ? inBeats(scenes, i + 1) * B : 0);
 
 const wordsOf = (s) => String(s ?? '').split(/\s+/).filter(Boolean);
 // the moment the last word of a line has landed (90 % of its rise)
@@ -53,18 +66,27 @@ export const planOf = (scenes, i, B) => {
     const a = enter === 'open' ? 0 : enter === 'deal' ? 1 : 0.25; // beats: the claim's entrance
     if (enter === 'deal') { mo(0, 'exit', 'the sheet before leaves', { sound: 'exit' }); mo(at(0.5), 'deal', 'the exhibit is dealt onto the file', { sound: 'deal' }); }
     if (i > 0) mo(at(enter === 'deal' ? 0.5 : 0), 'header', 'the page in hand changes');
-    const strokeAt = Math.ceil(a + 0.5), land = strokeAt + CB.stroke;
+    // a match cut arrives with its value already struck and the page already veiled: the highlight is what persists
+    // across the cut, so there is no stroke to draw; the sticker is pressed a beat later
+    const matched = enter === 'match-cut';
+    const half = inBeats(scenes, i); // the page change still settling at the scene's start
+    if (half) mo(0, 'change', 'the page change settles', { beats: half });
+    const strokeAt = matched ? 0 : Math.max(Math.ceil(a + 0.5), Math.ceil(half)), land = matched ? 0 : strokeAt + CB.stroke;
     const claimAt = at(a), claim = phrases(s.claim).join(' ');
     mo(claimAt, 'claim', `claim: ${claim}`);
-    mo(at(a + 0.5), 'veil', 'the rest of the page dims');
-    mo(at(strokeAt), 'stroke', 'the highlighter strikes the claim', { sound: 'stroke', beats: CB.stroke });
-    mo(at(land), 'land', 'the stroke lands', { key: i === 0 ? 'accent' : null, peak: i === 0 ? 'hook' : null, sound: i === 0 ? 'land' : null });
+    if (!matched) {
+      mo(at(a + 0.5), 'veil', 'the rest of the page dims');
+      mo(at(strokeAt), 'stroke', 'the highlighter strikes the claim', { sound: 'stroke', beats: CB.stroke });
+      mo(at(land), 'land', 'the stroke lands', { key: i === 0 ? 'accent' : null, peak: i === 0 ? 'hook' : null, sound: i === 0 ? 'land' : null });
+    }
     if (s.leader !== false) mo(at(land), 'leader', 'the leader runs to the sticker');
-    mo(at(land + 1), 'stamp', 'the exhibit sticker is pressed', { key: 'stamp', sound: 'stamp' });
-    mo(at(land + 1.5), 'terms', `terms: ${s.terms}`);
-    items.push({ text: claim, at: claimAt + C.settle, claim: true }, { text: s.terms, tier: 'glance', at: at(land + 1.5) + C.settle });
+    // the terms half a beat after the landing; the sticker pressed a beat after it, once the page is still
+    const st = Math.max(land + 1, Math.ceil(half)), tt = land + 0.5;
+    mo(at(tt), 'terms', `terms: ${s.terms}`);
+    mo(at(st), 'stamp', 'the exhibit sticker is pressed', { key: 'stamp', sound: 'stamp' });
+    items.push({ text: claim, at: claimAt + C.settle, claim: true }, { text: s.terms, tier: 'glance', at: at(tt) + C.settle });
     focus = 'band';
-    return { a, moments: m, items, marks: [landOf(claimAt, claim), at(land), at(land + 1) + C.stamp, landOf(at(land + 1.5), s.terms)].sort((x, y) => x - y), out, focus, enter };
+    return { a, moments: m, items, marks: [landOf(claimAt, claim), at(land), landOf(at(tt), s.terms), at(st) + C.stamp].sort((x, y) => x - y), out, focus, enter, stampAt: at(st) };
   }
   if (s.type === 'claim') {
     mo(0, 'move', 'the band moves to the next claim', { sound: 'move' });
@@ -77,11 +99,12 @@ export const planOf = (scenes, i, B) => {
     return { a: 0.25, moments: m, items, marks: [C.bandMove, landOf(at(0.25), claim), landOf(at(1.5), s.terms)], out, focus };
   }
   if (s.type === 'worksheet') {
-    mo(0, 'deal', 'the worksheet is dealt beside the exhibit', { sound: 'deal' });
+    // split-open: a seam is cut down the gutter beside the exhibit and the worksheet slides out of it (1.5 beats)
+    mo(0, 'open', 'the spread opens on a seam', { sound: 'seam', beats: CB.open });
     mo(0, 'header', 'the page in hand changes');
-    mo(at(0.75), 'tab', 'its exhibit tab is pressed', { sound: 'tab' });
-    let r0 = 1.5;
-    const marks = [at(0.5), at(0.75)];
+    mo(at(CB.open), 'tab', 'its exhibit tab is pressed', { sound: 'tab' });
+    let r0 = 2;
+    const marks = [at(CB.open), at(CB.open) + C.stamp];
     if (s.carry) {
       mo(at(1), 'lift', 'the figure lifts off the page', { sound: 'lift' });
       mo(at(1 + CB.lift), 'swap', 'the slip is set in code');
@@ -188,7 +211,8 @@ export const popsOf = (scenes, i, B, dur) => {
 export const stepsOf = (scenes, i, B, need, dur) => {
   const s = scenes[i], p = planOf(scenes, i, B);
   const stop = (dur ?? need) - p.out;
-  const iv = [...p.moments.map((m) => [m.t, m.t + m.d]), ...popsOf(scenes, i, B, dur).map((t) => [t, t + C.pop])].sort((a, b) => a[0] - b[0]);
+  // the tail moves fill the hold at the need as at the fitted length (a long claim read while the page is still)
+  const iv = [...p.moments.map((m) => [m.t, m.t + m.d]), ...popsOf(scenes, i, B, dur ?? need).map((t) => [t, t + C.pop])].sort((a, b) => a[0] - b[0]);
   const out = [];
   let end = iv.length ? iv[0][1] : 0;
   for (const [a, b] of iv.slice(1)) {

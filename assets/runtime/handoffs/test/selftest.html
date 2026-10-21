@@ -13,6 +13,13 @@ import { createHandoff, list } from '../index.js';
 const image = await createImageBitmap(await (await fetch('asset.png')).blob());
 const asset = (crop) => ({ image, crop });
 const cell = (r, value, label) => ({ box: [442, 164 + 140 * r, 196, 132], glyph: [490, 212 + 140 * r, 100, 36], value, label });
+const NEUTRAL = { ground: '#0D0E10', panel: '#17191D', line: '#30343B', ink: '#ECEDEE', dim: '#8E949C', accent: '#FF6452' };
+const FRAMES = [[0, 0, 1600, 900], [0, 100, 1600, 900], [160, 0, 1440, 810], [0, 190, 1440, 810], [160, 190, 1440, 810]];
+// a painter drawing the image as a page or pane: (ctx, dx, dy) shifted, or (ctx, off) scrolled; `x` moves it across
+const pageOf = (x) => (ctx, a = 0, b = 0) => {
+  if (typeof b === 'object') { for (let k = 0; k < 4; k++) ctx.drawImage(image, 210, 54 + k * 1000 - a, 1500, 938); return; }   // section-lock page(ctx, off, P)
+  ctx.fillStyle = '#F2F2EF'; ctx.fillRect(a, b, 1920, 1080); ctx.drawImage(image, 160 + x + a, 40 + b, 1600, 1000);
+};
 const ASSET_CASES = {
   'lift-out': { asset: asset(), cells: [cell(0, '48.0', 'First'), cell(1, '71.5', 'Second'), cell(4, '33.2', 'Fifth')] },
   'bezel-pullback': { asset: asset(), title: 'example.com/page' },
@@ -23,6 +30,33 @@ const ASSET_CASES = {
   'device-flip': { from: { asset: asset() }, to: { asset: asset([400, 160, 1200, 840]) } },
   'tether-link': { target: { asset: asset(), window: { x: 1000, y: null, w: 820 }, box: cell(1).box } },
   'mark-to-chrome': { logo: { asset: asset([60, 40, 360, 80]), from: { cx: 960, cy: 540, w: 1000 }, h: 30 }, content: { asset: asset() } },
+  // added 2026-10-21: the same image as a long page (three copies stacked), frames (16:9 crops), sheets and panes
+  'scroll-reel': { items: [{ asset: asset(), title: 'example.com/1' }, { asset: asset(), title: 'example.com/2' }, { asset: asset(), title: 'example.com/3' }], gap: 24,
+    from: { item: 0, y: 0 }, to: { item: 2, y: 440, mark: cell(2).box }, sections: { heads: [0, 1, 2].map((item) => ({ item, y: 0, h: 160 })) } },
+  'scroll-fling': { items: [{ asset: asset() }, { asset: asset() }, { asset: asset() }], from: { item: 2, y: 600 }, to: { item: 0, y: 0 },
+    sections: { heads: [0, 1, 2].map((item) => ({ item, y: 0, h: 160 })) } },
+  'section-lock': { page: pageOf(0), heads: [{ y: 0, h: 160 }, { y: 1000, h: 160 }, { y: 2000, h: 160 }], from: 0, to: 1060,
+    tab: (ctx, i, y, P) => { ctx.drawImage(image, 0, 0, 1600, 160, P.view.x, y, P.view.w, 150); } },
+  'unfold': { line: 420, height: 480, above: (ctx, P) => ctx.drawImage(image, 0, 0, 1600, 340, P.view.x, P.view.y, P.view.w, 366),
+    below: (ctx, dy, P) => ctx.drawImage(image, 0, 340, 1600, 660, P.view.x, P.line + dy, P.view.w, 711),
+    inside: (ctx, r, P) => ctx.drawImage(image, 400, 160, 960, 420, r.x + 270, r.y + 30, 960, 420) },
+  'roll': { sheet: (ctx, bottom, P) => { ctx.save(); ctx.beginPath(); ctx.rect(P.x, 54, P.w, Math.max(0, bottom - 54)); ctx.clip(); ctx.drawImage(image, P.x, 54, P.w, 938); ctx.restore(); } },
+  'feed-stack': { behind: [{ title: 'example.com/0' }], from: { asset: asset(), title: 'example.com/1' }, to: { asset: asset([0, 160, 1600, 840]), title: 'example.com/2' } },
+  'strip-advance': { material: 'gate', frames: FRAMES.map((c, i) => ({ asset: asset(c), label: `frame ${i + 1}` })), from: 1, to: 3, curve: 'step', colors: NEUTRAL },
+  'gate-punch': { image, crop: FRAMES[0] },
+  'sheet-pick': { image, crop: FRAMES[1], small: { img: image, crop: FRAMES[1] }, rect: { x: 432, y: 400, w: 96, h: 54 } },
+  'split-open': { from: { asset: asset(), title: 'example.com/table' }, to: { asset: asset([300, 160, 1300, 840]), title: 'example.com/detail' } },
+  'louvre': { rows: [300, 440, 580, 720, 860], from: { asset: asset(), title: 'example.com/table' }, to: { asset: asset([300, 160, 1300, 840]), title: 'example.com/detail' } },
+  'wipe-line': { from: { paint: pageOf(0) }, to: { paint: pageOf(400) } },
+  'split-branch': { panes: (ctx, S) => { ctx.drawImage(image, 0, 0, 1600, 1000, 0, S.y, 1920, 1200); } },
+  'diff-slider': { before: { paint: pageOf(0) }, after: { paint: pageOf(160) } },
+  'type-window': { to: { asset: asset() } },
+  'grid-hop': { tiles: FRAMES.map((c, i) => ({ asset: asset(c), label: `frame ${i + 1}` })), cols: 3, from: 0, to: 4 },
+  'mosaic-assemble': { from: { asset: asset() }, to: { asset: asset([300, 160, 1300, 840]) }, origin: [540, 444] },
+  'ticker-wipe': { from: { asset: asset(), label: 'EXAMPLE.COM / TABLE' }, to: { asset: asset([300, 160, 1300, 840]), label: 'EXAMPLE.COM / DETAIL' } },
+  'parallax-slide': { items: [{ asset: asset(), title: 'example.com/a', index: '01', chip: ['First', '48.0'] }, { asset: asset([300, 160, 1300, 840]), title: 'example.com/b', index: '02', chip: ['Second', '71.5'] }] },
+  'sheet-shuffle': { from: { asset: asset() }, to: { asset: asset([0, 160, 1600, 840]) } },
+  'match-cut': { from: { asset: asset(), box: cell(1).glyph }, to: { asset: asset([300, 160, 1300, 840]), box: cell(3).glyph }, match: { cx: 960, cy: 540, h: 30 } },
 };
 
 const W = 1920, H = 1080;
@@ -44,6 +78,22 @@ const VARIANTS = {
   'anchor-swap': [{ swap: 'iris' }, { swap: 'pull' }],
   'squash-to-path': [{ stage: 'squash' }, { stage: 'run' }, { stage: 'straighten' }],
   'field-morph': [{ step: 'quantize' }, { step: 'resolve' }],
+  // added 2026-10-21: the options of the merged and material hand-offs
+  'scroll-reel': [{ curve: 'momentum', pull: 0, chrome: false, scrollbar: false, label: 'momentum bare' },
+    { sections: { heads: [0, 1200, 2400, 3600, 4800].map((y) => ({ y, h: 200 })) }, label: 'sections' },
+    { page: (ctx, off, P, R) => { ctx.fillStyle = '#F2F2EF'; ctx.fillRect(R.x, R.y, R.w, R.h); ctx.fillStyle = '#9A9A96'; for (let y = Math.floor(off / 90) * 90; y < off + R.h; y += 90) ctx.fillRect(R.x + 60, R.y + y - off + 30, 400 + (y % 450), 26); },
+      length: 6000, from: 0, to: 3000, label: 'page' }],
+  'strip-advance': [{ curve: 'brake' }, { curve: 'step', cells: [1, 2, 3, 4, 5, 6].map((n) => ({ kind: 'title', text: String(n) })), from: 0, to: 3, label: 'step film' },
+    { material: 'gate', colors: NEUTRAL, label: 'gate' }, { material: 'gate', curve: 'run', from: 5, to: 1, colors: NEUTRAL, label: 'gate run' },
+    { marks: true, curve: 'brake', from: 2, to: 0, label: 'film marks' }],
+  'gate-punch': [{ direction: 'out', ease: 'inOut' }],
+  'split-open': [{ axis: 'y' }, { open: 0.5 }, { reveal: 'drawer', label: 'drawer window' }, { caret: { x: 400, y: 600, h: 52, w: 4 }, label: 'caret window' },
+    { pane: { x: 900, y: 0, w: 1020, h: 1080 }, caret: { x: 520, y: 584, h: 52, w: 4 }, seam: { x: 900, y0: 0, y1: 1080 }, run: 0.43, to: { paint: (ctx, dx) => { ctx.fillStyle = '#3A4A5A'; ctx.fillRect(900 + dx + 60, 200, 900, 600); } }, label: 'pane caret drawer' },
+    { pane: { x: 300, y: 100, w: 1320, h: 880 }, reveal: 'doors', from: { paint: (ctx, dx, dy) => { ctx.fillStyle = '#C9C9C4'; ctx.fillRect(300 + dx, 100 + dy, 1320, 880); } }, to: { paint: (ctx) => { ctx.fillStyle = '#3A4A5A'; ctx.fillRect(400, 200, 1120, 680); } }, label: 'pane doors' }],
+  'louvre': [{ edge: 'seam', alternate: false, direction: -1, label: 'seam edge, one way' },
+    { pane: { x: 900, y: 0, w: 1020, h: 1080 }, n: 9, stagger: 0.07, from: { paint: (ctx, dx) => { ctx.fillStyle = '#C9C9C4'; ctx.fillRect(900 + dx, 0, 1020, 1080); } }, to: { paint: (ctx, dx) => { ctx.fillStyle = '#3A4A5A'; ctx.fillRect(900 + dx, 0, 1020, 1080); } }, label: 'pane' },
+    { pane: { x: 900, y: 0, w: 1020, h: 1080 }, n: 1, stagger: 0, from: { paint: (ctx, dx) => { ctx.fillStyle = '#C9C9C4'; ctx.fillRect(900 + dx, 0, 1020, 1080); } }, to: { paint: (ctx, dx) => { ctx.fillStyle = '#3A4A5A'; ctx.fillRect(900 + dx, 0, 1020, 1080); } }, label: 'pane push' }],
+  'wipe-line': [{ dir: 'up' }, { dir: 'left' }, { dir: 'right' }],
 };
 const cases = list.flatMap((m) => [{ name: m.name, params: {} }, ...(VARIANTS[m.name] || []).map(({ label, ...v }) => ({ name: m.name, params: v, label: `${m.name} ${label ?? Object.values(v).join('/')}` })),
   ...(ASSET_CASES[m.name] ? [{ name: m.name, params: ASSET_CASES[m.name], label: `${m.name} image` }] : [])]);

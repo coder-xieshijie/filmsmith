@@ -7,7 +7,7 @@
 //   glance   the note under each value (≤ 6 words): it repeats or sources the evidence the screen shows, so it is safe to lose
 //
 // Tiers (api 3): every onset in TYPES is a micro event (T0): a move, the light, each line, the ring closing; a band row
-// is a new composition (T1 shot); device-flip and page-scroll are the expressive transitions (T2); the peaks (T3) are the
+// is a new composition (T1 shot); the feeds, the scrolls and the one flip are the expressive transitions (T2); the peaks (T3) are the
 // screen lighting (hook), the claim's landing (climax, on a bar line) and the lock-up. The still windows between onsets
 // are the holds; the claim's is a pause.
 import { TYPES, plan, needOf, validate, SETTLE } from './choreo.js';

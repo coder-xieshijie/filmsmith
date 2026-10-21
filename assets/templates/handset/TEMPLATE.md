@@ -1,6 +1,6 @@
 # handset template
 
-One code-drawn device (a laptop, or a phone) stays head-on and locked off on the left of the frame from the first frame to the last. Everything that changes, changes on its screen, and the screen shows only real captures of the product's own surfaces: its pages, its UI states, its docs. The screen's viewport pushes in under the zoom cap, the light moves from row to row, the page scrolls, the device flips to another surface. The words live in the margin to the right, level with the region in play; the chin names where the screen's state comes from. Mode card: `references/modes/handset.md`.
+One code-drawn device (a laptop, or a phone) stays head-on and locked off on the left of the frame from the first frame to the last. Everything that changes, changes on its screen, and the screen shows only real captures of the product's own surfaces: its pages, its UI states, its docs. The device does not move (one turn a film at most); the screen's content does, mostly vertically: the page is flicked to its next stop (`scroll-reel`), the next capture rises over the current one like the next post in a feed (`feed-stack`), the viewport pushes in under the zoom cap, the light moves from row to row. The words live in the margin to the right, level with the region in play; the chin names where the screen's state comes from. Mode card: `references/modes/handset.md`.
 
 ```bash
 node scripts/new-film.mjs handset <film-dir> [--palette <id>]
@@ -8,7 +8,7 @@ cd <film-dir>
 # write PLAN.md first (new-film made the skeleton; fit refuses to run without it)
 # capture the product's surfaces (tools/capture.mjs, below), list them in content.js `assets`, then write the scenes
 npm run fit           # the timing table, renders/timing.json, the duration stamped into index.html
-npm run snapshot -- --at 2.5,7,9.2,12.5,17,21,24.6,29.5     # key frames (times for the shipped example)
+npm run snapshot -- --at 2.5,7,8.2,9.5,12.5,15.4,16.5,20.6,27.5    # key frames (times for the shipped example)
 npm run assets        # the real-asset gate: hashes, sizes, people, private regions, zoom cap, numbers, OCR, the accent
 npm run film          # assets → fit → audio → check → render
 npm run palettes      # contrast of every preset, then each accent against every ringed region (ΔE00 ≥ 20)
@@ -23,7 +23,7 @@ export default {
   edges: 'full',         // 'full' (default): the lid draws on and the screen lights; 'cut': the first frame is the lit device (Short cut)
   seed: 3,               // grain
   // bpm: 120,           // optional, 112–128
-  // moves: { flip: 'device-flip' },   // optional: another adapter for a move role (Moves)
+  // moves: { scroll: 'page-scroll' }, // optional: another adapter for a move role (Moves)
   meta: { title, url },
   assets: { ... },       // the real captures and their manifest (below)
   scenes: [ ... ],       // the chain (registry below); no bars, no duration
@@ -58,20 +58,21 @@ It prints one JSON line with the file's sha256, bytes and size (and `--probe` bo
 
 ## Scene registry
 
-Each scene shows one capture (`asset`) and points at one region. The first scene is `wake`, the last is `lockup`; `push`, `band`, `claim` and `scroll` stay on the capture already on screen (change capture with `flip`, or `cut` for another capture of the same screen). At most one `claim`. Character limits are first filters; `film.js` also measures every line against the margin and paints a red banner for one that does not fit (Slots).
+Each scene shows one capture (`asset`) and points at one region. The first scene is `wake`, the last is `lockup`; `push`, `band`, `claim` and `scroll` stay on the capture already on screen (change capture with `feed`, with the one `flip` a film allows, or `cut` for another capture of the same screen). At most one `claim`; at most one device flip (a `flip` scene or the lock-up's turn). Character limits are first filters; `film.js` also measures every line against the margin and paints a red banner for one that does not fit (Slots).
 
 | type | purpose | fields | move |
 |---|---|---|---|
 | `wake` | Opens: the lid's edge draws out from the camera dot, the screen lights on the first capture on beat 1 (the hook); the name, then the note and line | `asset`, `name`, `note`, `line`, `region` (optional: ring it), `view` | — |
 | `push` | The viewport pushes (or pulls, or pans) to a region; the light finds it; value, note and line; the ring closes on it | `asset`, `region`, `zoom` (`'rest'` or ≤ 1.333), `value`, `note`, `line`, `ring: false` (optional) | push |
 | `cut` | A hard cut on the beat to another capture of the same screen, registered so the region keeps its place: the number changes, nothing else moves | `asset` (another capture), `region` (on both captures), `value`, `note`, `line` | — |
-| `flip` | The device turns edge-on and lands on another surface; screen and chin change on the swap frame (T2) | `asset`, `region`, `zoom` or `view`, `value`, `note`, `line` | flip |
-| `scroll` | The screen re-enacts the page's own scroll to another stop of the same capture (T2) | `asset`, `region`, `zoom` or `view`, `value`, `note`, `line` | scroll |
+| `feed` | The next capture rises from below the screen over the current one, which steps back a level and dims; the chin changes half way (T2). The usual change of surface | `asset` (another capture), `region`, `zoom` or `view`, `value`, `note`, `line` | feed |
+| `flip` | The device turns edge-on and lands on another surface; screen and chin change on the swap frame (T2). Once a film at most | `asset` (another capture), `region`, `zoom` or `view`, `value`, `note`, `line` | flip |
+| `scroll` | The page is flicked under the glass to another stop of the same capture and coasts to an exact stop, pulling back a little while fast (T2). It starts and lands at the page's width: the screen must be at zoom `'rest'` before it, and the page taller than the screen | `asset`, `region`, `view` (zoom `'rest'`), `value`, `note`, `line` | scroll |
 | `band` | The light hops from row to row on the still capture; each row brings its own copy (each row a composition) | `asset`, `rows`: 2–4 of `{ region, value, note, line }` (each region needs a `band`) | hop |
 | `claim` | The climax: the region is lit and the lead read; the push lands on the next bar line with the value, read in a pause | `asset`, `region`, `zoom`, `lead`, `note`, `value` (required), `line` | hop, push |
-| `lockup` | Back to the product's surface at rest (a flip when the capture changes, else a pull back), veiled; the name, the line, the URL (≥ 3 s); on the last downbeat the region is lit and ringed once more | `asset`, `region` (optional: the second move), `name` (required), `line`, `url`, `mark` (optional: an asset id drawn above the name) | flip or push |
+| `lockup` | Back to the product's surface at rest, veiled: the film's one flip when the capture changes and no flip was used yet, else a feed (`change: 'feed' | 'flip'` overrides), or a pull back on the same capture; the name, the line, the URL (≥ 3 s); on the last downbeat the region is lit and ringed once more | `asset`, `region` (optional: the second move), `name` (required), `line`, `url`, `mark` (optional: an asset id drawn above the name), `change` (optional) | flip, feed or push |
 
-`view` (any scene with a move): `'rest'` (the public region covering the screen, top-left), `{ region, zoom, anchor: 'top' }` (the region near the top of the screen: the reading position after a flip or a scroll), or `{ x, y, zoom }` (a top-left source point). Every view is clamped inside `public` and under the cap.
+`view` (any scene with a move): `'rest'` (the public region covering the screen, top-left), `{ region, zoom, anchor: 'top' }` (the region near the top of the screen: the reading position after a feed, a flip or a scroll), or `{ x, y, zoom }` (a top-left source point). Every view is clamped inside `public` and under the cap.
 
 ### Slots
 
@@ -88,7 +89,7 @@ The margin is 448 px wide on the laptop, 996 px on the phone. Every number in a 
 
 ### Short cut
 
-The shortest chain is `wake → flip → lockup` with `edges: 'cut'` (2026-10-21): the first frame is the lit device on the first capture, the name lands on beat 1 (the hook), the device flips to a second surface and back for the lock-up. It fits 6 bars = 12.0 s at 120 BPM; `npm run fit` reports no error and one shape warning a three-scene reel cannot avoid (no climax marked), and `check-film` passes. `wake → push → lockup` has no expressive transition (a T2 error at 12 s): a short cut needs a `flip` or a `scroll`. Its last half second is the settled lock-up, so it cuts into a longer reel.
+The shortest chain is `wake → feed → lockup` with `edges: 'cut'` (2026-10-21): the first frame is the lit device on the first capture, the name lands on beat 1 (the hook), the second capture rises over it, and the device turns back to the first for the lock-up (the film's one flip). It fits 6 bars = 12.0 s at 120 BPM; `npm run fit` reports no error and one shape warning a three-scene reel cannot avoid (no climax marked), and `check-film` passes. `wake → push → lockup` has no expressive transition (a T2 error at 12 s): a short cut needs a `feed`, a `scroll` or the flip. Its last half second is the settled lock-up, so it cuts into a longer reel.
 
 ## Length
 
@@ -101,21 +102,22 @@ Every state of the margin enters in the same order, the copy group: the value on
 | `wake` | lid draws 0, screen lights 1 (hook), name 2, note and line 3, ring 4 (with a region), source line one beat after the last; `edges: 'cut'`: name 1, note and line 2, source line 3 | name, line (primary); note (glance) | 3.0 s |
 | `push` | push 0–1, light 0.4, value 1, note and line 2, ring 3 | value, line; note | 2.5 s |
 | `cut` | cut 0 with the value, note and line 1, ring 2 | value, line; note | — |
-| `flip` | flip 0–2 (swap at 0.87), value 2, note and line 3, ring 4 | value, line; note | 3.0 s |
-| `scroll` | scroll 0–2, value 2, note and line 3, ring 4 | value, line; note | 3.0 s |
+| `feed` | the card rises 0–1 (a landing spring), value 1, note and line 2, ring 3 | value, line; note | 2.5 s |
+| `flip` | flip 0–2 (swap at 0.87), value 2, note and line 3, ring 4 | value, line; note | — |
+| `scroll` | flick and coast 0–2, value 2, note and line 3, ring 4 | value, line; note | 3.0 s |
 | `band` | per row from its start t: light (or hop, 1 beat) t, value t + 1, note and line t + 2, ring t + 3; the next row at t + 4; a row's copy leaves as the next hop starts | each row's value and line; notes | 4.5 s (2 rows) |
-| `claim` | light (a hop when the previous region was on the same capture) 0, lead 1, note 3, ring 5 (when the preroll is ≥ 6), the push lands on the next bar line P (4–7 beats) with the value (climax), line P + 1, then the pause | lead, value (`claim: true`), line; note | 5.0 s (P = 7) |
-| `lockup` | flip (or pull back) 0–2, all veiled, name 2, line 3, URL 4 (holds ≥ 3 s), the second move on the last bar's downbeat | name, line, URL | 6.5 s; a rest that takes the bar rounding |
+| `claim` | light (a hop when the previous region was on the same capture) 0, lead 1, note 3 (with the lead when P < 6), ring 5 (when the preroll is ≥ 6), the push lands on the next bar line P (4–7 beats) with the value (climax), line P + 1, then the pause | lead, value (`claim: true`), line; note | 3.5 s (P = 4) |
+| `lockup` | flip 0–2 (feed 0–1, pull back 0–1), all veiled, name 2, line 3, URL 4 (holds ≥ 3 s), the second move on the last bar's downbeat | name, line, URL | 6.5 s; a rest that takes the bar rounding |
 
 How the chain stays brisk under api 3 (`CONTRACT.md`, "api 3: the four tiers"):
 
 - **The copy group is compressed.** The note and the line enter together, so every state lands in about three beats and the median composition stays near 3 s; a line or lead over 4 words is refused (it could not be read inside one still of at most two beats).
-- **Every onset is a micro event** (`choreo.js` TYPES `micro`, including each line that leaves inside a scene), the still windows between them are the holds (the claim's is a pause), the flips and scrolls are the expressive transitions, and the peaks are the screen lighting (hook), the claim (climax) and the lock-up.
+- **Every onset is a micro event** (`choreo.js` TYPES `micro`, including each line that leaves inside a scene), the still windows between them are the holds (the claim's is a pause), the feeds, scrolls and the flip are the expressive transitions, and the peaks are the screen lighting (hook), the claim (climax) and the lock-up.
 - **The claim finds its bar line itself.** `timing.rules.js` plans the scenes before the claim while `fit()` sizes them, so the claim knows how many beats remain to the next bar line (its preroll P). Lengthen nothing by hand before a claim.
 - **Phrase of one bar, no shared rounding.** All the rounding goes to the closing `lockup` (a rest whose second move lands on the last downbeat).
-- **Two flips in a row turn opposite ways** (`right`, then `left`): the T2 rule "never twice in a row unchanged"; at most three flips a film.
+- **The device turns once at most** (owner, 2026-10-21: the real-asset modes' transitions looked cut from one mould, lift and flip); the changes of surface are feeds, and `validate()` refuses a second flip. With an adapter allowing more, two flips in a row turn opposite ways (`right`, then `left`).
 
-The shipped example fits 15 bars = 30.0 s at 120 BPM: `npm run fit` reports no error and no warning; T0 median gap 1 beat, longest 2; 9 compositions, median 3 s, CV 0.41; 3 expressive transitions; the climax at 73 %. `check-film --film-dir .` reports 0 WARN and 0 FAIL.
+The shipped example fits 14 bars = 28.0 s at 120 BPM: `npm run fit` reports no error and one shape warning (the compositions before the climax average 2.75 s against a median of 2.5 s); T0 median gap 1 beat, longest 2; 9 compositions, median 2.5 s, CV 0.41; 3 expressive transitions (feed-stack, scroll-reel, device-flip); the climax at 71 %. `check-film --film-dir .` reports 0 FAIL and that one WARN.
 
 ## Computed, never typed
 
@@ -126,7 +128,7 @@ The shipped example fits 15 bars = 30.0 s at 120 BPM: `npm run fit` reports no e
 | the chin's source line | the capture's `chin` |
 | the copy block's height on the margin | the lit region's height on the screen (the level rail) |
 | the display size (95 or 76 px) and every wrap | measured against the margin (`film.js` `fitCopy`) |
-| flip directions | alternate per flip (`choreo.js` `plan`) |
+| the lock-up's change | the flip if the film has not turned yet, else a feed (`choreo.js` `lockup`) |
 
 ## Form variant: `device`
 
@@ -153,26 +155,33 @@ The accent is the preset's, never computed per film: a film whose captures fail 
 
 ## Moves
 
-Four roles, each filled by one adapter in `moves.js`:
+The device never moves except for one turn; the screen's content moves, mostly vertically. Five roles, each filled by one adapter in `moves.js` over a module of the shared runtime:
 
 | Role | Default | What it does here |
 |---|---|---|
-| `push` | `viewport-push` (library) | the viewport moves on the log-zoom path between two views of the same capture (push, pull, pan); 1 beat |
-| `hop` | `spotlight-band` (library) | the light moves from one band region to the next on a still capture; 1 beat |
-| `scroll` | `page-scroll` (this template) | the page's own scroll to another stop of the same capture, cubic in-out; 2 beats, T2 |
-| `flip` | `device-flip` (library) | the whole device (both faces painted as textures) turns edge-on and lands on the other surface; the `left` variant mirrors the turn; 2 beats, T2 |
+| `scroll` | `scroll-reel` | window-less inside the screen (`chrome: false`, no scrollbar, no ring of its own, the reading line at the screen's top): the page, at its width, is flicked (the speed ramps, is let go, and coasts on friction to an exact stop) and pulls back a little while fast. The module's state (offset, scale) is turned into a view of the capture, so `film.js` draws it, only the public region is drawn, and the light, ring and level rail follow the page exactly. 2 beats (the module's 3 cut to 2, the T2 limit), T2 |
+| `feed` | `feed-stack` | the next capture rises from below the screen on the module's landing spring; the current one steps back a level of the deck (5 % smaller about its top centre, 34 px up, veiled up to 40 %). Window-less: the cards are the captures, edge to edge with the screen, no title bar, no shadow. 1 beat (the module's 1.5 cut to 1, so the card lands on a beat), T2 |
+| `push` | `viewport-push` | the viewport moves on the log-zoom path between two views of the same capture (push, pull, pan); 1 beat |
+| `hop` | `spotlight-band` | the light moves from one band region to the next on a still capture; 1 beat |
+| `flip` | `device-flip` | the whole device (both faces painted as textures) turns edge-on and lands on the other surface; the `left` variant mirrors the turn; 2 beats, T2; once a film |
 
-`content.moves = { scroll: 'other-id' }` picks another adapter for a role. The choreography reads only an adapter's `beats` and `device` (through `movesOf()`), so a swapped move keeps every timing check; `timing.rules.js` declares every adapter's T2 device to `lib/fit.mjs`. **Swapping a transition:** add the module to `lib/handoffs/` (or keep it in the film), then add an adapter to `ADAPTERS[role]` in `moves.js`:
+Also in `moves.js`: `scroll: 'page-scroll'`, the template's first scroll (one cubic in-out, no pull-back), kept to show a swap.
+
+`content.moves = { scroll: 'page-scroll' }` picks another adapter for a role. The choreography reads only an adapter's `beats` and `device` (through `movesOf()`), so a swapped move keeps every timing check; `timing.rules.js` declares every adapter's T2 device to `lib/fit.mjs`. **Swapping a transition:** add the module to `lib/handoffs/` (or keep it in the film), then add an adapter to `ADAPTERS[role]` in `moves.js`:
 
 ```js
-// a scroll that paints the screen itself (a momentum scroll, a feed of stacked screens)
+// scroll: the view of the capture at p (asset.js view: screen = a · img + b); film.js draws through it
 'my-scroll': {
-  device: 'my-scroll', beats: 3,               // T2 device name and length in beats
-  curve: (p) => p,                             // still used for the copy's level and the light
-  screen(g, p, env) { /* env: { from: { image, view, public }, to: {...}, w, h, colors, variant } */ },
+  device: 'my-scroll', beats: 2,               // T2 device name and length in beats (a T2 move is at most 2)
+  viewAt: (p, env) => view(a, bx, by),         // env: { from, to } views, public (the capture's public region), screen { w, h }
+},
+// feed: paints inside the screen (origin its top-left, clipped)
+'my-feed': {
+  device: 'my-feed', beats: 1,
+  paint(g, p, env) { env.draw(g, 'from', rect, dim); env.draw(g, 'to', rect, 0); },   // env: { w, h, colors, draw }
   track: (p, env) => [[x, y], ...],            // screen points, for the motion blur
 },
-// a change of surface
+// flip: a change of surface that moves the whole device
 'my-flip': {
   device: 'my-flip', beats: 2, swap: 0.5,      // swap: the p of the content change (score.mjs puts its sound there)
   paint(g, p, env) { /* env: { faces: [from, to] canvases of the whole device, box, screen (inside the box), colors, variant } */ },
@@ -180,20 +189,21 @@ Four roles, each filled by one adapter in `moves.js`:
 },
 ```
 
-At p = 0 and p = 1 an adapter must draw exactly what the template draws on either side (the device at rest with the from or to screen), or the move pops.
+At p = 0 and p = 1 an adapter must draw exactly what the template draws on either side (the device at rest with the from or to screen), or the move pops. A module whose own look draws a window, a title bar or a shadow is used through its motion only (its `at`, `prepare`, curves), as `feed-stack` and `scroll-reel` are here: code never draws a window round a capture (mode principle 2).
 
 ## Library and local code
 
-From the shared runtime (`lib/`): `lib/handoffs/viewport-push.js` (the push's curve), `lib/handoffs/spotlight-band.js` (the band hop), `lib/handoffs/device-flip.js` (the turn, the swap frame, the strip projection), `lib/handoffs/asset.js` (`view`, `zoomBetween`, `ring`, `ringContrast`, `deltaE00`), `lib/canvas.js` `subframes` (speed-gated motion blur, exact), `lib/timing.js`, `lib/audio`. Kept in this template, and why:
+From the shared runtime (`lib/`): `lib/handoffs/scroll-reel.js` (the flick, the coast and the pull-back), `lib/handoffs/feed-stack.js` (the landing spring), `lib/handoffs/viewport-push.js` (the push's curve), `lib/handoffs/spotlight-band.js` (the band hop), `lib/handoffs/device-flip.js` (the turn, the swap frame, the strip projection), `lib/handoffs/asset.js` (`view`, `zoomBetween`, `ring`, `ringContrast`, `deltaE00`), `lib/canvas.js` `subframes` (speed-gated motion blur, exact), `lib/timing.js`, `lib/audio`. Kept in this template, and why:
 
-- **page-scroll** (`moves.js`): no library module scrolls one captured page under a still frame; it is a view interpolation with its own T2 device name, so `fit` and `check-film` count it.
+- **the window-less use of `feed-stack`** (`moves.js`): the module draws its cards as windows with title bars and shadows; here the cards are the captures themselves, so the adapter takes the module's motion and deck values and paints the cards through `film.js`'s capture painter.
+- **page-scroll** (`moves.js`): the template's earlier scroll, kept as the alternative adapter.
 - **the device, the chin, the level tick and the margin rails** (`film.js`): the mode's own frame.
 - **the veil** (`film.js` `paintScreen`): an even-odd fill over the screen with the region's hole, drawn through the same view as the capture, so it is carried exactly by every move.
 - **`tools/check-assets.mjs`, `tools/rings.mjs`, `tools/capture.mjs`, `tools/ocr.swift`**: the real-asset gate and the capture tool; `ocr.swift` uses macOS Vision and is skipped (WARN) elsewhere.
 
 ## Sound
 
-`score.mjs` reads the same `fit()` and `choreo.js`. The bed is the kit's `data` preset (a soft muted four-on-the-floor, a plucked up-down arpeggio, a warm pad, a round bass) in F with `mix: 'v2'`, arranged from the scenes: an intro under the wake, a build under the pushes and flips, the groove from the first band or scroll to the claim (its melodic layer dropped while the claim is read), a build after it and an outro under the lock-up. The sounds belong to the device: a tick and a soft low body on each landing, a short sweep and a muted thock on a flip's swap frame, a sweep under a page scroll, a quiet sweep under a push, an impact and a rolled chime on the claim with a duck before it, a chime on the screen lighting, a bell on the lock-up. Master −14 LUFS, true peak ≤ −1.5 dBTP, `tone: 'v2'`, measured into `assets/audio/measure.json`. `content.sound = { key, tone }` changes the key or returns to tone v1.
+`score.mjs` reads the same `fit()` and `choreo.js`. The bed is the kit's `data` preset (a soft muted four-on-the-floor, a plucked up-down arpeggio, a warm pad, a round bass) in F with `mix: 'v2'`, arranged from the scenes: an intro under the wake, a build under the pushes and changes of surface, the groove from the first band or scroll to the claim (its melodic layer dropped while the claim is read), a build after it and an outro under the lock-up. The sounds belong to the device: a tick and a soft low body on each landing, a short sweep and a muted thock on the flip's swap frame, a flick sweep (peaking at the release) under a scroll, a short rising sweep under a feed, a quiet sweep under a push, an impact and a rolled chime on the claim with a duck before it, a chime on the screen lighting, a bell on the lock-up. Master −14 LUFS, true peak ≤ −1.5 dBTP, `tone: 'v2'`, measured into `assets/audio/measure.json`. `content.sound = { key, tone }` changes the key or returns to tone v1.
 
 ## Files
 
@@ -201,7 +211,7 @@ From the shared runtime (`lib/`): `lib/handoffs/viewport-push.js` (the push's cu
 |---|---|
 | `content.js` | the film (the only file edited for an ordinary film) |
 | `choreo.js` | the device geometry (`DEVICES`), views (`viewOf`), every time of every type (`TYPES`), `plan()`, `LIMITS` and `validate()` |
-| `moves.js` | the four move roles and their adapters (`ADAPTERS`, `moveOf`) |
+| `moves.js` | the five move roles and their adapters (`ADAPTERS`, `moveOf`) |
 | `timing.rules.js` | what each type needs, its key events, micro events, holds, shots, expressive transitions and peaks (api 3); the claim's preroll during sizing |
 | `palettes.js` | presets, their contrast check, and (as `npm run palettes`) the accent against every ringed region |
 | `film.js` | the camera, the light, the device, the margin, the pixel checks (red banner), frame assembly, motion blur, grain |
@@ -212,15 +222,15 @@ From the shared runtime (`lib/`): `lib/handoffs/viewport-push.js` (the push's cu
 
 ## Example (shipped content.js)
 
-The skill films its own README as rendered on its public repository page: two captures of the README article made with `tools/capture.mjs` on 2026-10-21 (no avatars, account rows or sidebar; the repository's own content, MIT; THIRD-PARTY.md). 30.0 s at 120 BPM, `graphite`, laptop:
+The skill films its own README as rendered on its public repository page: two captures of the README article made with `tools/capture.mjs` on 2026-10-21 (no avatars, account rows or sidebar; the repository's own content, MIT; THIRD-PARTY.md). 28.0 s at 120 BPM, `graphite`, laptop:
 
 | # | type | start | length | what the viewer sees |
 |---|---|---|---|---|
 | 1 | `wake` | 0.0 | 3.0 | the lid draws, the README lights (hook); Filmsmith, films made in code, its own README |
 | 2 | `push` | 3.0 | 2.5 | a push into the lede, "every frame drawn in code" lit and ringed; Every frame, drawn in code |
 | 3 | `push` | 5.5 | 2.5 | a pull back onto the row of style stills; Its frames, drawn, not filmed |
-| 4 | `flip` | 8.0 | 3.0 | the device turns to the README's guide section; Any agent, no special tools |
-| 5 | `band` | 11.0 | 4.5 | the light on the "needs no API key" row, then a hop to the "writes one `content.js`" row; No API key; One file, content.js |
-| 6 | `scroll` | 15.5 | 3.0 | the page scrolls down to "a new composition every 2–3 s"; 2–3 s |
-| 7 | `claim` | 18.5 | 5.0 | the light hops to the Measured row, each film measured; the push lands on the bar line (22.0): −14 LUFS (climax), loudness, checked |
-| 8 | `lockup` | 23.5 | 6.5 | the device turns back (the other way) to the README at rest, veiled; Filmsmith, an agent skill, the URL; the title ringed on the last downbeat |
+| 4 | `feed` | 8.0 | 2.5 | the README's guide rises over the top of the README, which steps back; Any agent, no special tools |
+| 5 | `band` | 10.5 | 4.5 | the light on the "needs no API key" row, then a hop to the "writes one `content.js`" row; No API key; One file, content.js |
+| 6 | `scroll` | 15.0 | 3.0 | the page is flicked down and coasts to "a new composition every 2–3 s"; 2–3 s |
+| 7 | `claim` | 18.0 | 3.5 | the light hops to the Measured row, each film measured; the push lands on the bar line (20.0): −14 LUFS (climax), loudness, checked |
+| 8 | `lockup` | 21.5 | 6.5 | the device turns (the film's one flip) back to the README at rest, veiled; Filmsmith, an agent skill, the URL; the title ringed on the last downbeat |

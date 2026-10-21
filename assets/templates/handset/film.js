@@ -4,9 +4,10 @@
 // last; everything that changes, changes on its screen, and the screen shows only real captures (content.assets),
 // cropped to their public region and pushed in no further than the zoom cap. The margin right of the device carries
 // the copy, level with the region in play (the level rail); the chin names where the screen's state comes from.
-// The four moves are pluggable (moves.js): by default viewport-push (pushes and pans), spotlight-band (the band hops),
-// device-flip (a change of surface) from the hand-off library, and page-scroll, this template's own device (TEMPLATE.md,
-// Moves). Fast frames get sub-frame motion blur (lib/canvas.js subframes, speed-gated). Every time comes from choreo.js.
+// The five moves are pluggable (moves.js; TEMPLATE.md, Moves): by default scroll-reel (the page flicked to its next stop)
+// and feed-stack (the next capture rises over the current one), both window-less inside the screen, viewport-push
+// (pushes and pans), spotlight-band (the band hops), and device-flip, the one turn a film allows. Fast frames get
+// sub-frame motion blur (lib/canvas.js subframes, speed-gated). Every time comes from choreo.js.
 import FILM from './content.js';
 import PALETTES, { report as contrastReport } from './palettes.js';
 import RULES from './timing.rules.js';
@@ -65,7 +66,8 @@ const blockY = (t) => {
 };
 
 // ---------------------------------------------------------------- camera
-// { asset, v } on a still or moving screen; { flip: { p, from, to, c } } inside a device-flip.
+// { asset, v } on a still or moving screen; { flip: { p, from, to, c } } inside a device-flip; { feed: { ... } } while
+// the next capture rises over the current one (the chin follows `asset`, the incoming one from half way).
 const camera = (t) => {
   let cur = CAMERA[0] ? { asset: CAMERA[0].asset, v: CAMERA[0].v } : null;
   for (const c of CAMERA) {
@@ -74,9 +76,13 @@ const camera = (t) => {
     if (!c.dur || t >= c.t + c.dur) { cur = next; continue; }
     const p = (t - c.t) / c.dur;
     if (c.kind === 'flip') return { flip: { p, from: cur, to: next, c } };
-    // the adapter's curve along the log-zoom path between the two views (moves.js push, scroll)
-    const u = c.kind === 'scroll' ? M.scroll.curve(p) : M.push.curve(p);
-    return { asset: c.asset, v: zoomBetween(cur.v, next.v, u), moving: c, p, from: cur, to: next };
+    if (c.kind === 'feed') return { feed: { p, from: cur, to: next, c }, asset: p < 0.5 ? cur.asset : next.asset };
+    // a scroll: the adapter's own view of the page (scroll-reel's flick and pull-back); a push: its curve along the
+    // log-zoom path between the two views
+    const v = c.kind === 'scroll'
+      ? M.scroll.viewAt(p, { from: cur.v, to: next.v, public: publicOf(FILM.assets[c.asset]), screen: { w: SCR.w, h: SCR.h } })
+      : zoomBetween(cur.v, next.v, M.push.curve(p));
+    return { asset: c.asset, v, moving: c, p };
   }
   return cur;
 };
@@ -126,21 +132,36 @@ const TEX = [document.createElement('canvas'), document.createElement('canvas')]
 for (const c of TEX) { c.width = BOX.w; c.height = BOX.h; }
 // what a flip adapter gets (moves.js): both faces of the device, its box, where its screen is inside the box, the palette
 const flipEnv = (variant) => ({ faces: TEX, box: BOX, screen: { x: SCR.x - BOX.x, y: SCR.y - BOX.y, w: SCR.w, h: SCR.h, r: SCR.r }, colors: C, variant });
-// what a scroll adapter with its own screen() gets: both views (image, view a·img + b, public region), the screen's size
-const scrollEnv = (cam) => ({ from: { image: IMG[cam.from.asset], view: cam.from.v, public: publicOf(FILM.assets[cam.from.asset]) }, to: { image: IMG[cam.to.asset], view: cam.to.v, public: publicOf(FILM.assets[cam.to.asset]) }, w: SCR.w, h: SCR.h, colors: C, variant: cam.moving.variant });
+// what a feed adapter gets (moves.js): the screen's size and a painter of either capture at rest into a rect, veiled
+const feedEnv = (cam) => ({
+  w: SCR.w, h: SCR.h, colors: C,
+  draw(g, side, r, dim) {
+    const st = cam.feed[side];
+    g.save(); g.beginPath(); g.rect(r.x, r.y, r.w, r.h); g.clip();
+    g.translate(r.x, r.y); g.scale(r.w / SCR.w, r.h / SCR.h);
+    g.fillStyle = C.glass; g.fillRect(0, 0, SCR.w, SCR.h);
+    drawCapture(g, st.asset, st.v);
+    if (dim > 0) { g.fillStyle = rgba(C.bg, dim); g.fillRect(0, 0, SCR.w, SCR.h); }
+    g.restore();
+  },
+});
+// a capture through a view, screen-local; only its public region is ever drawn
+const drawCapture = (g, asset, v) => {
+  const A = FILM.assets[asset], im = IMG[asset], [cx, cy, cw, ch] = publicOf(A);
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+  const x0 = Math.max(cx, -v.bx / v.a), y0 = Math.max(cy, -v.by / v.a);
+  const x1 = Math.min(cx + cw, (SCR.w - v.bx) / v.a), y1 = Math.min(cy + ch, (SCR.h - v.by) / v.a);
+  if (im && x1 > x0 && y1 > y0) g.drawImage(im, x0, y0, x1 - x0, y1 - y0, v.bx + x0 * v.a, v.by + y0 * v.a, (x1 - x0) * v.a, (y1 - y0) * v.a);
+};
 
 const paintScreen = (g, cam, L, t) => {
   g.save();
   rrect(g, 0, 0, SCR.w, SCR.h, SCR.r); g.clip();
   g.fillStyle = C.glass; g.fillRect(0, 0, SCR.w, SCR.h);
-  if (cam) {
-    const A = FILM.assets[cam.asset], im = IMG[cam.asset], v = cam.v, [cx, cy, cw, ch] = publicOf(A);
-    g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
-    // only the public region is ever drawn
-    const x0 = Math.max(cx, -v.bx / v.a), y0 = Math.max(cy, -v.by / v.a);
-    const x1 = Math.min(cx + cw, (SCR.w - v.bx) / v.a), y1 = Math.min(cy + ch, (SCR.h - v.by) / v.a);
-    if (cam.moving?.kind === 'scroll' && M.scroll.screen) M.scroll.screen(g, cam.p, scrollEnv(cam));
-    else if (im && x1 > x0 && y1 > y0) g.drawImage(im, x0, y0, x1 - x0, y1 - y0, v.bx + x0 * v.a, v.by + y0 * v.a, (x1 - x0) * v.a, (y1 - y0) * v.a);
+  if (cam?.feed) M.feed.paint(g, cam.feed.p, feedEnv(cam));          // the light is off while the next capture rises
+  else if (cam) {
+    const v = cam.v;
+    drawCapture(g, cam.asset, v);
     // backlight while waking: the first capture comes up from the glass over 0.3 s, monotonic
     const lit = CUT ? 1 : clamp((t - B) / 0.3);
     if (lit < 1) { g.fillStyle = rgba(C.glass, 1 - lit); g.fillRect(0, 0, SCR.w, SCR.h); }
@@ -234,7 +255,7 @@ const frame = (g, t) => {
   } else {
     g.save(); g.translate(BOX.x, BOX.y); paintDevice(g, cam, L, t); g.restore();
     // the level tick on the device's right edge, at the height of the ringed region
-    if (cam && L.ring && L.ring.asset === cam.asset && L.ring.alpha > 0) {
+    if (cam && !cam.feed && L.ring && L.ring.asset === cam.asset && L.ring.alpha > 0) {
       const R = FILM.assets[cam.asset].regions[L.ring.region].box, y = SCR.y + cam.v.by + (R[1] + R[3] / 2) * cam.v.a;
       if (y > SCR.y && y < SCR.y + SCR.h) {
         g.globalAlpha = L.ring.alpha * clamp(L.ring.draw * 3);
@@ -258,7 +279,11 @@ const speed = (t) => {
     const p1 = clamp((t - f.t) / f.dur), p0 = clamp((t - dt - f.t) / f.dur);
     return maxDisp(M.flip.track(p0, flipEnv(f.variant)), M.flip.track(p1, flipEnv(f.variant)));
   }
-  if (a.moving?.kind === 'scroll' && M.scroll.track && z.moving === a.moving) return maxDisp(M.scroll.track(z.p, scrollEnv(z)), M.scroll.track(a.p, scrollEnv(a)));
+  if (a.feed || z.feed) {
+    const f = (a.feed || z.feed).c, cam = a.feed ? a : z;
+    const p1 = clamp((t - f.t) / f.dur), p0 = clamp((t - dt - f.t) / f.dur);
+    return maxDisp(M.feed.track(p0, feedEnv(cam)), M.feed.track(p1, feedEnv(cam)));
+  }
   if ((!a.moving && !z.moving) || a.asset !== z.asset) return 0;
   const src = SCR_PTS.map(([x, y]) => [(x - a.v.bx) / a.v.a, (y - a.v.by) / a.v.a]);
   const scr = (v) => src.map(([x, y]) => [v.bx + x * v.a, v.by + y * v.a]);

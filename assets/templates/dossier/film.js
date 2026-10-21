@@ -12,12 +12,15 @@
 import FILM from './content.js';
 import PALETTES, { VEIL } from './palettes.js';
 import { plan } from './plan.js';
-import { C, CB } from './choreo.js';
+import { C, CB, changeSpec } from './choreo.js';
 import { W, H, M, X0, Y0, READ_W, BOTTOM, CLAIM_Y, TERMS_Y, HEADER_Y, WORK, sheetOf, bandOf, leaderOf, sheetIndex, ledgerBox } from './layout.js';
 import { clamp, lerp, expOut, progress } from './lib/motion.js';
 import { subframes } from './lib/canvas.js';
 import { errorBanner } from './lib/text.js';
 import { changeOf } from './changes.js';
+import splitOpen from './lib/handoffs/split-open.js';
+import { seamV } from './lib/handoffs/seam.js';
+import { merge } from './lib/handoffs/util.js';
 
 const P = PALETTES[FILM.palette] || PALETTES.yellow;
 const PL = plan(FILM);
@@ -152,22 +155,28 @@ const build = () => {
     const s = S[i], sh = sheetOf(FILM, i);
     const j = EXS[n + 1];
     const e = { i, sh, scene: s, bands: [], img: IMG[s.asset] };
-    // arrival
+    // arrival: open (the cold open), dealt on, or by a page change that straddles the scene's start (choreo.js)
     if (i === 0) e.inT = 0, e.inHow = 'open';
     else if (s.enter === 'deal') e.inT = s.start + 0.5 * B, e.inHow = 'deal';
-    else { const ch = changeOf(s.enter); e.inHow = ch?.level ?? 'missing'; e.inT = ch?.level === 'sheet' ? s.start - CB.turn * B : s.start; if (!ch) problems.push(`scene ${i + 1}: enter "${s.enter}" is not a page change (changes.js: 'turn', 'deal', a lib/transitions id, or a registered change)`); }
-    // departure
-    if (j != null) {
-      const sj = S[j];
-      if (sj.enter === 'deal') e.outT = sj.start, e.outHow = 'exit';
-      else { const ch = changeOf(sj.enter); e.outHow = ch?.level === 'sheet' ? 'change' : 'cut'; e.outT = ch?.level === 'sheet' ? sj.start - CB.turn * B : sj.start; e.change = ch; e.changeOpts = { edge: sj.edge ?? 'top' }; }
-    } else { e.outT = LEDGER ? LEDGER.start : LOCK.start; e.outHow = 'exit'; }
+    else {
+      const ch = changeOf(s.enter), dur = changeSpec(s.enter).beats * B;
+      if (!ch) problems.push(`scene ${i + 1}: enter "${s.enter}" is not a page change (changes.js: 'sheet-shuffle', 'louvre', 'match-cut', 'turn', 'deal', a lib/transitions id, or a registered change)`);
+      // drawn by the change during its window; on its own after it
+      e.inHow = ch?.level ?? 'missing'; e.inT = s.start + dur / 2;
+      const prev = EXS[n - 1];
+      if (ch) CHANGES.push({ ch, k: prev, j: i, a: s.start - dur / 2, b: s.start + dur / 2, opts: { edge: s.edge ?? 'top', rows: s.rows ?? null }, enter: s.enter });
+    }
+    // departure: slid off (the next is dealt on, or the index follows), or handed to the next page change
+    if (j != null && S[j].enter !== 'deal') { const dur = changeSpec(S[j].enter).beats * B; e.outT = S[j].start - dur / 2; e.outHow = changeOf(S[j].enter)?.level ?? 'frame'; e.outEnd = e.outHow === 'frame' ? S[j].start + dur / 2 : e.outT; }
+    else { e.outT = j != null ? S[j].start : LEDGER ? LEDGER.start : LOCK.start; e.outHow = 'exit'; e.outEnd = e.outT + C.exit; }
     // bands: the exhibit's own, then each claim scene's move on the same sheet
     for (let k = i; k < S.length && (k === i || S[k].type !== 'exhibit'); k++) {
       if (S[k].type !== 'exhibit' && S[k].type !== 'claim') continue;
       e.bands.push({ i: k, t0: k === i ? null : S[k].start, band: bandOf(FILM, sh, sc[k]), route: sc[k].leader ?? 'down', pops: S[k].plan.focus === 'band' ? S[k].pops.map((p) => S[k].start + p) : [] });
     }
     e.veilT = at(i, 'veil'); e.strokeT = at(i, 'stroke'); e.landT = at(i, 'land'); e.stampT = at(i, 'stamp');
+    // a match cut arrives already veiled and struck: the highlight is what persists across the cut
+    if (s.enter === 'match-cut') { e.veilT = e.strokeT = -1e3; e.landT = s.start; }
     const tw = Math.max(widthOf(`EX. ${s.ex}`, T.tag1) + 18 + widthOf(FILM.assets[s.asset].kind, T.tag2), widthOf(s.where, T.tag2));
     if (tw > sh.tag.w - 40) problems.push(`scene ${i + 1}: the sticker text is ${Math.round(tw)} px; the sticker holds ${sh.tag.w - 40}`);
     EX[i] = e;
@@ -190,7 +199,7 @@ const bandAt = (e, t) => {
 };
 
 // paint exhibit e's sheet at t, its top left at (x, y), with or without the stack edges
-const paintSheet = (g, e, t, x, y, { withEdges = true } = {}) => {
+const paintSheet = (g, e, t, x, y, { withEdges = true, bare = false } = {}) => {
   const { sh } = e, img = e.img;
   if (withEdges) edges(g, x, y, sh.w, sh.h);
   paper(g, x, y, sh.w, sh.h);
@@ -225,7 +234,7 @@ const paintSheet = (g, e, t, x, y, { withEdges = true } = {}) => {
   g.restore();
   // the leader: ink case, accent core, a dot on the band; drawn from the band to the sticker
   const t0 = B0.draw ?? e.landT;
-  const pts = B0.route === false ? null : leaderOf(sh, B0.band, B0.route);
+  const pts = B0.route === false || bare ? null : leaderOf(sh, B0.band, B0.route);
   if (pts && t >= t0 && B0.leaderA > 0) {
     const segs = pts.slice(1).map((p, k) => Math.hypot(p[0] - pts[k][0], p[1] - pts[k][1]));
     const L = segs.reduce((a, b) => a + b, 0);
@@ -243,8 +252,10 @@ const paintSheet = (g, e, t, x, y, { withEdges = true } = {}) => {
     g.restore();
   }
   // the exhibit sticker: pressed (1.1 → 1) on its beat
-  if (t >= e.stampT) {
-    const { a, s } = stampScale(t, e.stampT), tg = sh.tag;
+  if (t >= e.stampT && !bare) {
+    const { a, s: s0 } = stampScale(t, e.stampT), tg = sh.tag;
+    // a tail move presses the sticker again with the stroke (half as far), so the hold is broken where it shows
+    const s = s0 * (1 + 0.5 * (popScale(t, bandAt(e, t).cur.pops) - 1));
     g.save();
     g.translate(x + tg.x + tg.w / 2, y + tg.y + tg.h / 2); g.scale(s, s); g.translate(-tg.w / 2, -tg.h / 2);
     g.globalAlpha = a;
@@ -299,7 +310,7 @@ const buildWorksheet = () => {
     L.h = Math.max(WORK.h, L.ruleY + 20 + 125 + 50 + 40);
   } else L.h = Math.max(WORK.h, L.ruleY + 40);
   if (Y0 + L.h > BOTTOM) problems.push(`the worksheet is ${L.h} px tall; it must end above y ${BOTTOM}: fewer rows`);
-  L.inT = WS.start; L.outT = LEDGER ? LEDGER.start : LOCK.start;
+  L.inT = WS.start; L.openEnd = WS.start + CB.open * B; L.outT = LEDGER ? LEDGER.start : LOCK.start;
   WSL = L;
 };
 const paintWorksheet = (g, t, x, y) => {
@@ -478,7 +489,7 @@ const buildMat = () => {
   const clearAt = (i, slot) => {
     const s = S[i];
     if (s.type === 'worksheet') return null;
-    if (s.type === 'exhibit') return s.enter === 'deal' || i === 0 ? s.start : s.start - 0.5 * CB.turn * B;
+    if (s.type === 'exhibit') return s.enter === 'deal' || i === 0 ? s.start : s.start - (changeSpec(s.enter).beats * B) / 2; // the claim leaves as the page change starts
     if (s.type === 'claim') return slot === 'terms' ? s.start + (at(i, 'terms') - s.start) - 0.25 * B : s.start;
     if (s.type === 'result') return at(i, 'leave');
     return s.start;
@@ -524,14 +535,58 @@ const paintHeader = (g, t) => {
 // ---------- the frame ----------
 const off = (() => { const m = new Map(); return (name, w = W, h = H) => { let c = m.get(name); if (!c) { c = document.createElement('canvas'); m.set(name, c); } if (c.width !== w || c.height !== h) { c.width = w; c.height = h; } return c; }; })();
 
-// the y offset of exhibit e at t (Infinity: not on the mat), and whether it is mid-change
+// the y offset of exhibit e at t when it is drawn on its own (Infinity: not on the mat, or drawn by a page change)
 const exhibitY = (e, t) => {
-  if (t < e.inT) return Infinity;
-  if (e.outHow === 'exit') { if (t >= e.outT + C.exit) return Infinity; }
-  else if (t >= (e.outHow === 'change' ? e.outT + CB.turn * B : e.outT)) return Infinity;
+  if (t < e.inT || t >= e.outEnd) return Infinity;
+  if (e.outHow === 'pair' && t >= e.outT) return Infinity;
   const yIn = e.inHow === 'deal' ? dealY(t, e.inT) : 0;
   const yOut = e.outHow === 'exit' ? exitY(t, e.outT) : 0;
   return yIn + yOut;
+};
+
+// A sheet on its own canvas, for a page change: its top left at (MG, MG), the stack edges optional, and the sheet
+// lying under it in the pile (after a sheet-shuffle) drawn beneath, so the pile leaves with it.
+const MG = 64;
+const sheetCanvas = (name, e, t, { withEdges = true } = {}) => {
+  const c = off(name, e.sh.w + 2 * MG, e.sh.h + 90 + 2 * MG), g = c.getContext('2d');
+  g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height);
+  if (e.pile && t >= e.pile.t0) paintPile(g, e, t, MG - X0, MG - Y0);
+  paintSheet(g, e, t, MG, MG, { withEdges });
+  return { c, x: X0 - MG, y: Y0 - MG, ox: MG, oy: MG, w: e.sh.w, h: e.sh.h, H: e.sh.h + 90 };
+};
+// the same geometry without painting (motion-blur tracking)
+const sheetGeom = (e) => ({ c: { width: e.sh.w + 2 * MG, height: e.sh.h + 90 + 2 * MG }, x: X0 - MG, y: Y0 - MG, ox: MG, oy: MG, w: e.sh.w, h: e.sh.h, H: e.sh.h + 90 });
+// the sheet a sheet-shuffle tucked under this one, at its pile pose (screen px shifted by dx, dy)
+const paintPile = (g, e, t, dx = 0, dy = 0) => {
+  const u = e.pile, q = u.pose, s = u.e.sh;
+  g.save();
+  g.translate(q.x + dx + s.w / 2, q.y + dy + s.h / 2); g.rotate((q.rot * Math.PI) / 180); g.translate(-s.w / 2, -s.h / 2);
+  // the pile's corner: paper and page only (its sticker and leader went under with it), veiled like the context
+  paintSheet(g, u.e, t, 0, 0, { withEdges: false, bare: true });
+  g.globalAlpha = VEIL * 0.7; g.fillStyle = P.mat; g.fillRect(0, 0, s.w, s.h);
+  g.restore();
+};
+const CHANGES = []; // the page changes between exhibits: { ch, k, j, a, b, opts, enter }
+const changeArgs = (W, t, paint = true) => {
+  const k = EX[W.k], j = EX[W.j];
+  const A = paint ? sheetCanvas('change-from', k, t, { withEdges: W.ch.edges !== false && W.ch.fromEdges !== false }) : sheetGeom(k);
+  const Bs = paint ? sheetCanvas('change-to', j, t, { withEdges: W.ch.edges !== false }) : sheetGeom(j);
+  // match-cut: the value's rect on screen at rest in each page
+  if (W.enter === 'match-cut') {
+    const r = (e, b) => { const q = e.sh.rect(b); return [X0 + q[0], Y0 + q[1], q[2], q[3]]; };
+    A.box = r(k, j.scene.match.from); Bs.box = r(j, j.scene.match.to);
+  }
+  // louvre: slats cut along the rows the outgoing page struck (its bands' edges), unless content.js gives rows
+  const rows = W.opts.rows ? W.opts.rows.map((y) => Y0 + k.sh.pt(0, y)[1]) : k.bands.flatMap((b) => [Y0 + b.band.lit[1], Y0 + b.band.lit[1] + b.band.lit[3]]);
+  return { from: A, to: Bs, p: (t - W.a) / (W.b - W.a), opts: { ...W.opts, rows }, palette: P };
+};
+// after a sheet-shuffle the outgoing sheet lies under the incoming one as the pile's corner, until that one leaves
+const buildPairs = () => {
+  for (const W of CHANGES) {
+    if (W.enter !== 'sheet-shuffle' || W.ch.level !== 'pair') continue;
+    const pose = W.ch.pile(changeArgs(W, W.b, false));
+    EX[W.j].pile = { e: EX[W.k], pose, t0: W.b };
+  }
 };
 
 const paintFrame = (g, t) => {
@@ -543,18 +598,17 @@ const paintFrame = (g, t) => {
   for (const i of EXS) {
     const e = EX[i], y = exhibitY(e, t);
     if (!Number.isFinite(y)) continue;
-    const turning = e.outHow === 'change' && t >= e.outT;
-    items.push({ z: turning ? e.inT + 1e3 : e.inT, draw: () => {
-      if (!turning) return paintSheet(g, e, t, X0, Y0 + y);
-      const c = off('turn', e.sh.w, e.sh.h + 90), cg = c.getContext('2d');
-      cg.setTransform(1, 0, 0, 1, 0, 0); cg.clearRect(0, 0, c.width, c.height);
-      paintSheet(cg, e, t, 0, 0, { withEdges: false });
-      e.change.draw(g, { sheet: c, x: X0, y: Y0, w: c.width, h: c.height, p: (t - e.outT) / (CB.turn * B), opts: { ...e.changeOpts, shade: P.mat } });
-    } });
+    items.push({ z: e.inT, draw: () => { if (e.pile && t >= e.pile.t0) paintPile(g, e, t, 0, y); paintSheet(g, e, t, X0, Y0 + y); } });
   }
-  if (WSL && t >= WSL.inT) {
-    const y = dealY(t, WSL.inT) + exitY(t, WSL.outT);
-    if (t < WSL.outT + C.exit) items.push({ z: WSL.inT, draw: () => { paintWorksheet(g, t, WSL.x, WSL.y + y); } });
+  const W0 = CHANGES.find((x) => x.ch.level === 'pair' && t >= x.a && t < x.b);
+  if (W0) items.push({ z: W0.a, draw: () => W0.ch.draw(g, changeArgs(W0, t)) });
+  if (WSL && t >= WSL.inT && t < WSL.outT + C.exit) {
+    const y = exitY(t, WSL.outT);
+    items.push({ z: WSL.inT, draw: () => {
+      if (t < WSL.openEnd) { const Q = openParams(t); splitOpen.paint(g, splitOpen.at(clamp((t - WSL.inT) / (WSL.openEnd - WSL.inT)), Q), Q); return; }
+      paintWorksheet(g, t, WSL.x, WSL.y + y);
+      seamV(g, WSL.x, WSL.y + y, WSL.y + y + WSL.h, { key: P.paper, accent: P.ink }, 6); // the spread's seam stays
+    } });
   }
   if (SLIP && t >= SLIP.liftT && t < WSL.outT + C.exit) items.push({ z: 1e4, draw: () => paintSlip(g, t, exitY(t, WSL.outT)) });
   if (LG && t >= LG.inT && t < LG.outT + CB.stack * B) {
@@ -567,22 +621,24 @@ const paintFrame = (g, t) => {
   paintHeader(g, t);
 };
 
-// frame-level page changes: [from, to) windows, each mixing the frame as it runs with the next exhibit's first frame
-const FRAMES = [];
-const buildFrames = () => {
-  for (const i of EXS) {
-    const s = S[i];
-    if (i === 0 || s.enter === 'deal') continue;
-    const ch = changeOf(s.enter);
-    if (ch?.level === 'frame') FRAMES.push({ i, a: s.start - CB.turn * B, b: s.start, ch });
-  }
-};
+// split-open: the spread opens on a seam cut down the gutter; the worksheet slides out of it (lib/handoffs/split-open.js,
+// a drawer in a pane of painters, the seam in ink with a paper key: it is a cut, not a claim)
+const openParams = (t) => merge(splitOpen.defaults, {
+  pane: { x: WSL.x, y: WSL.y, w: WSL.w + 16, h: WSL.h + 16 }, reveal: 'drawer',
+  to: { paint: (ctx, dx, dy) => paintWorksheet(ctx, t, WSL.x + dx, WSL.y + dy) },
+  colors: { accent: P.ink, key: P.paper, bench: P.mat, ground: P.mat },
+});
 
-// px per frame of the fastest moving sheet or slip at t (for the motion blur)
+// px per frame of the fastest moving sheet, slat or slip at t (for the motion blur); every entry keeps its place
 const posAt = (t) => {
   const v = [];
-  for (const i of EXS) { const y = exhibitY(EX[i], t); v.push(Number.isFinite(y) ? Math.min(y, 1200) : 1200); const e = EX[i]; v.push(e.outHow === 'change' && e.change?.travel && t >= e.outT && t < e.outT + CB.turn * B ? e.change.travel({ w: e.sh.w, h: e.sh.h + 90, p: (t - e.outT) / (CB.turn * B), opts: e.changeOpts }) : 0); }
-  if (WSL) v.push(t >= WSL.inT ? Math.min(1200, dealY(t, WSL.inT) + exitY(t, WSL.outT)) : 1200);
+  for (const i of EXS) { const y = exhibitY(EX[i], t); v.push(Number.isFinite(y) ? Math.min(y, 1200) : 1200); }
+  for (const W of CHANGES) {
+    if (W.ch.level !== 'pair' || !W.ch.track) continue;
+    const tt = Math.min(W.b - 1e-4, Math.max(W.a, t));
+    v.push(...W.ch.track(changeArgs(W, tt, false)));
+  }
+  if (WSL) { const Q = openParams(t); v.push(...splitOpen.track(splitOpen.at(clamp((t - WSL.inT) / (WSL.openEnd - WSL.inT)), Q), Q).flat(), t >= WSL.inT ? Math.min(1200, exitY(t, WSL.outT)) : 1200); }
   if (SLIP) { const [x, y] = t >= SLIP.liftT ? slipAt(t) : [0, 0]; v.push(x, y); }
   if (LG) v.push(t >= LG.inT ? Math.min(1200, dealY(t, LG.inT) + exitY(t, LG.outT, CB.stack * B)) : 1200);
   return v;
@@ -599,7 +655,7 @@ export const ready = async () => {
     if (IMG[id] && (IMG[id].naturalWidth !== a.size[0] || IMG[id].naturalHeight !== a.size[1])) problems.push(`assets.${id}: the file is ${IMG[id].naturalWidth} × ${IMG[id].naturalHeight}, content.js says ${a.size.join(' × ')}`);
   }
   TOOTH = makeTooth();
-  build(); buildWorksheet(); buildSlip(); buildLedger(); buildLockup(); buildMat(); buildFrames();
+  build(); buildWorksheet(); buildSlip(); buildLedger(); buildLockup(); buildMat(); buildPairs();
   laidOut = true;
   if (problems.length) {
     const lines = ['DOSSIER: CONTENT DOES NOT FIT — see TEMPLATE.md', ...problems];
@@ -610,7 +666,7 @@ export const ready = async () => {
 };
 
 const frameAt = (g, t) => {
-  const f = FRAMES.find((x) => t >= x.a && t < x.b);
+  const f = CHANGES.find((x) => x.ch.level === 'frame' && t >= x.a && t < x.b);
   if (!f) return paintFrame(g, t);
   const A = off('change-A'), Bc = off('change-B');
   paintFrame(A.getContext('2d'), t);

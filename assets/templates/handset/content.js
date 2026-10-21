@@ -47,7 +47,7 @@ export default {
     { type: 'wake', asset: 'readme', name: 'Filmsmith', note: 'its own README', line: 'films made in code' },
     { type: 'push', asset: 'readme', region: 'lede', zoom: 1.3, value: 'Every frame', note: 'and every sound', line: 'drawn in code' },
     { type: 'push', asset: 'readme', region: 'stills', zoom: 0.9, value: 'Its frames', note: 'one still per style', line: 'drawn, not filmed' },
-    { type: 'flip', asset: 'guide', region: 'agents', view: { region: 'agents', zoom: 'rest', anchor: 'top' }, value: 'Any agent', note: 'a shell, Node and FFmpeg', line: 'no special tools' },
+    { type: 'feed', asset: 'guide', region: 'agents', view: { region: 'agents', zoom: 'rest', anchor: 'top' }, value: 'Any agent', note: 'a shell, Node and FFmpeg', line: 'no special tools' },
     { type: 'band', asset: 'guide', rows: [
       { region: 'nokey', value: 'No API key', note: 'no generation model', line: 'nothing is generated' },
       { region: 'onefile', value: 'One file', note: 'content.js', line: 'the agent writes' },
