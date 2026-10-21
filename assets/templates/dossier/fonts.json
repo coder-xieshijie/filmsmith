@@ -1,0 +1,7 @@
+[
+  { "family": "Source Serif 4", "file": "SourceSerif4-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/SourceSerif4%5Bopsz,wght%5D.ttf", "weight": "200 900", "style": "normal", "license": "OFL-SourceSerif4.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/OFL.txt" },
+  { "family": "Inter Tight", "file": "InterTight-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/intertight/InterTight%5Bwght%5D.ttf", "weight": "100 900", "style": "normal", "license": "OFL-InterTight.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/intertight/OFL.txt" },
+  { "family": "IBM Plex Mono", "file": "IBMPlexMono-Regular.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Regular.ttf", "weight": "400", "style": "normal", "license": "OFL-IBMPlexMono.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/OFL.txt" },
+  { "family": "IBM Plex Mono", "file": "IBMPlexMono-Medium.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Medium.ttf", "weight": "500", "style": "normal" },
+  { "family": "IBM Plex Mono", "file": "IBMPlexMono-SemiBold.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-SemiBold.ttf", "weight": "600", "style": "normal" }
+]

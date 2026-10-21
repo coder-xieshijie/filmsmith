@@ -1,0 +1,4 @@
+[
+  { "family": "Instrument Sans", "file": "InstrumentSans-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentsans/InstrumentSans%5Bwdth,wght%5D.ttf", "weight": "400 700", "stretch": "75% 100%", "style": "normal", "license": "OFL-InstrumentSans.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentsans/OFL.txt" },
+  { "family": "IBM Plex Mono", "file": "IBMPlexMono-Medium.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Medium.ttf", "weight": "500", "style": "normal", "license": "OFL-IBMPlexMono.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/OFL.txt" }
+]

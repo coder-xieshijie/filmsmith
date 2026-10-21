@@ -6,7 +6,7 @@ body:
     id: content
     attributes:
       label: What kind of content needs it
-      description: A new style has to point at a kind of technical content none of the ten covers (principle 9 in references/principles.md).
+      description: A new style has to point at a kind of technical content none of the thirteen covers (principle 9 in references/principles.md).
     validations:
       required: true
   - type: textarea

@@ -18,15 +18,19 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 |---|---|
 | Archivo (width axis) | ink |
 | Bricolage Grotesque | thread |
-| IBM Plex Mono | ink, plakat, tally, blueprint |
+| IBM Plex Mono | ink, plakat, tally, blueprint, handset, exhibit, dossier |
 | IBM Plex Sans Condensed | blueprint |
+| Instrument Sans (width axis) | exhibit |
 | Instrument Serif | thread |
 | Inter | phosphor |
-| Inter Tight | plakat, tally, trace |
+| Inter Tight | plakat, tally, trace, handset, dossier |
 | JetBrains Mono | phosphor, thread, trace |
-| Source Serif 4 | trace |
+| Source Serif 4 | trace, dossier |
 
 ## Data in examples
 
 - tally's 10-second demo counts the [PEP index](https://peps.python.org/api/peps.json) (Python Software Foundation, public domain / CC0-1.0 for PEP content), fetched 2026-10-19.
-- Every other example product (`grainlock`, `seedfield`, `tablewarden`, `shoring`, `rushes`, `reseed`, `loudgate`, `gatewright`, `tidepool`) is made up, and its numbers are illustrative.
+- handset's example assets (`assets/templates/handset/assets/real/readme-top.webp`, `readme-guide.webp`) are two captures of this repository's own README as rendered on its public GitHub page (https://github.com/coder-xieshijie/filmsmith), made 2026-10-21 with `tools/capture.mjs`, clipped to the README article (no avatars, account rows or sidebar). The text and the style stills in them are this repository's own content, under its licence; the page's typography is the host's rendering of it.
+- exhibit's example assets (`assets/templates/exhibit/assets/real/`) are the skill's own outputs, made 2026-10-21: the timing table `npm run fit` printed and the first 17 lines of the report `check-film` printed for the phosphor demo, captured as text in IBM Plex Mono (`tools/capture.mjs text`), and a chart of that render's short-term loudness drawn in code from `ffmpeg` `ebur128` measurements, labelled as a stand-in on its face. Released under this repository's licence.
+- dossier's example assets (`assets/templates/dossier/assets/real/readme-styles.webp`, `readme-any-agent.webp`, `changelog-0.3.0.webp`) are three captures of this repository's own README and CHANGELOG as rendered on its public GitHub pages (https://github.com/coder-xieshijie/filmsmith), made 2026-10-21 with `tools/capture.mjs`, clipped to the article column (no avatars, account rows or sidebar). The text and the style stills in them are this repository's own content, under its licence; the page's typography is the host's rendering of it.
+- Every other example product (`grainlock`, `seedfield`, `tablewarden`, `shoring`, `rushes`, `reseed`, `loudgate`, `gatewright`, `tidepool`, `vela-2`, `orrery-3`, `fernwave`, `quarrystore`) is made up, and its numbers are illustrative.

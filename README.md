@@ -3,20 +3,20 @@
 ![License](https://img.shields.io/github/license/coder-xieshijie/filmsmith?style=flat-square)
 ![GitHub stars](https://img.shields.io/github/stars/coder-xieshijie/filmsmith?style=flat-square)
 ![Agent Skill](https://img.shields.io/badge/Agent-Skill-111111?style=flat-square)
-![Styles](https://img.shields.io/badge/styles-10-E4353F?style=flat-square)
+![Styles](https://img.shields.io/badge/styles-13-E4353F?style=flat-square)
 ![HyperFrames](https://img.shields.io/badge/HyperFrames-0.8.163-0A7CFF?style=flat-square)
 
 [Read in Chinese](README.zh-CN.md)
 
-**Ten ways to film your code.**
+**Thirteen ways to film your code.**
 
 Filmsmith is an agent skill that makes short technical films — launches, teasers, showreels, data stories, explainers — with every frame drawn in code and every sound synthesised in code. Pick a style, fill one file, render. It runs in any coding agent that can use a shell.
 
 ![The ten styles](assets/showcase.jpg)
 
-## Ten styles
+## Thirteen styles
 
-Each style is one visual language with palette presets, one form variant, a scene registry and a template that renders a complete film. Every preview below is six seconds of a 30–60 s demo made with the skill itself; click it to watch the full film with sound on [YouTube](https://www.youtube.com/@world_0618); the MP4s are in the [v0.1.0 release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0). The products in the demos are made up, except Tally's, which counts the real Python PEP index.
+Each style is one visual language with palette presets, one form variant, a scene registry and a template that renders a complete film. Every preview below is six seconds of a 30–60 s demo made with the skill itself; click it to watch the full film with sound on [YouTube](https://www.youtube.com/@world_0618); the MP4s are in the [v0.1.0 release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0). The products in the demos are made up, except Tally's, which counts the real Python PEP index. Handset, Exhibit and Dossier film real assets (screenshots, charts, product UI); their demos are not published yet, so their rows show a still of the shipped example.
 
 | | Style | Looks like | Best for |
 |---|---|---|---|
@@ -30,8 +30,11 @@ Each style is one visual language with palette presets, one form variant, a scen
 | <a href="https://youtu.be/0AYkyN_dv_Q"><img src="docs/previews/filmsmith-morph-preview.webp" width="320"></a> | **[Morph](references/modes/morph.md)** | One ink shape that never leaves the frame and climbs a dimension per scene — point, line, plane, solid, interface, mark — with no cuts | Developer tools and interface products: one source becomes every surface |
 | <a href="https://youtu.be/raqJMXgK4vU"><img src="docs/previews/filmsmith-halftone-preview.webp" width="320"></a> | **[Halftone](references/modes/halftone.md)** | A two-ink print in motion: newsprint, black and one process ink; a piece of the mark holds still while every world is printed round it, then the camera pulls back to the whole mark | Model and product launches: a few features, one number, the name |
 | <a href="https://youtu.be/XrFmTVEyi94"><img src="docs/previews/filmsmith-pulse-preview.webp" width="320"></a> | **[Pulse](references/modes/pulse.md)** | A question run as a query: one word a beat, grounds flipping along one hue, a highlight hopping over real candidates, one whiteout slamming the answer in on the drop | Version releases and benchmark answers: one measured conclusion |
+| <img src="references/modes/stills/handset.jpg" width="320"> | **[Handset](references/modes/handset.md)** | One device, locked off: every change happens on its screen, which shows only real captures — the product's pages, its UI, its docs — pushed in under the zoom cap, with the words in the margin level with the evidence | Launches that can be seen on the product's own surface: a new default in an app, a panel, a price, a line in the docs |
+| <img src="references/modes/stills/exhibit.jpg" width="320"> | **[Exhibit](references/modes/exhibit.md)** | Real screenshots and charts mounted on one desk under an overhead camera; one pencil ring lifts each claim out as a code-drawn reading, carries a value to the next source and measures the gap; the camera rises over the whole desk at the end | Launches and reports whose claims are printed in tables, charts and product UI |
+| <img src="references/modes/stills/dossier.jpg" width="320"> | **[Dossier](references/modes/dossier.md)** | Real pages dealt onto a dark mat like an evidence file: a highlighter strikes each claim where it is printed, a leader ties it to an exhibit sticker with the source and date, and a figure is carried as a paper slip onto a worksheet that does the arithmetic | Launches, reports and changelogs whose claims are already published |
 
-Every style comes in variants: colour presets (Phosphor in ice, green, amber, cyan, violet or coral, for example) and one form axis — Thread's line even or swelled, Ink's type compressed or extended, Plakat square or diagonal, Blueprint in ink or pencil, Phosphor on a CRT raster or a flat panel, Tally in squares, dots or Isotype glyphs, Trace drawn as vectors or sketched, Morph with round or cut corners, Halftone in round, square or line screens, Pulse with cut or round apertures. Each style card lists its use cases with a worked example.
+Every style comes in variants: colour presets (Phosphor in ice, green, amber, cyan, violet or coral, for example) and one form axis — Thread's line even or swelled, Ink's type compressed or extended, Plakat square or diagonal, Blueprint in ink or pencil, Phosphor on a CRT raster or a flat panel, Tally in squares, dots or Isotype glyphs, Trace drawn as vectors or sketched, Morph with round or cut corners, Halftone in round, square or line screens, Pulse with cut or round apertures, Handset on a laptop or a phone, Exhibit on a plain desk or a cutting mat, Dossier's highlighter over the claim or under the line. Each style card lists its use cases with a worked example.
 
 ## Any agent, any model
 
@@ -89,13 +92,13 @@ cd my-film && npm run film                                            # fit → 
 node ../filmsmith/scripts/check-film.mjs renders/film.mp4 --film-dir .
 ```
 
-Requirements: Node.js 22+, FFmpeg, and network access while a film is set up (fonts, GSAP, the first HyperFrames run). `node scripts/selftest.mjs` checks your machine and all ten templates.
+Requirements: Node.js 22+, FFmpeg, and network access while a film is set up (fonts, GSAP, the first HyperFrames run). `node scripts/selftest.mjs` checks your machine and all thirteen templates.
 
 ## How a film is made
 
 ```
-theory of taste ──▶ ten principles ──▶ ten styles ──▶ template + content.js ──▶ npm run film ──▶ measured MP4
-(foundations.md)    (principles.md)    (modes/)         (assets/templates/)        (HyperFrames)    (check-film)
+theory of taste ──▶ ten principles ──▶ thirteen styles ──▶ template + content.js ──▶ npm run film ──▶ measured MP4
+(foundations.md)    (principles.md)    (modes/)              (assets/templates/)        (HyperFrames)    (check-film)
 ```
 
 - **Theory first.** A six-layer pyramid of good design (legible → clear → flowing → unified → fitting → fresh) gives ten core principles; every style rule and checklist item traces back to them, and where the author's taste and the theory disagree, the theory wins.
@@ -109,7 +112,7 @@ theory of taste ──▶ ten principles ──▶ ten styles ──▶ template
 
 | | |
 |---|---|
-| [Skill](SKILL.md) | `filmsmith`: the workflow, theory, principles, the ten styles and their templates, the transition library, the runtime and the measuring scripts. |
+| [Skill](SKILL.md) | `filmsmith`: the workflow, theory, principles, the thirteen styles and their templates, the transition library, the runtime and the measuring scripts. |
 
 ## Limits
 

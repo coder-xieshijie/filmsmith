@@ -116,9 +116,12 @@ Why these: each mode keeps one accent with one meaning (principle 7). plakat's a
 | morph | `arc-curl`, `rail-press`, `stroke-reinterpret`, `net-unfold`, `container-morph`; the film never cuts, every state grows out of the last | `shape-flood`, `occluder-pass` | `bezel-pullback` (the frame grows out of the asset); never `device-flip` (morph does not cut) |
 | halftone | `anchor-swap`, `field-morph`, `collapse-burst` | `whip-push` (a feature card per beat), `whiteout-slam` | logos and interfaces only; a chart is never screened (the dots would change its readings) |
 | pulse | `roulette-lock`, `scramble-resolve`, `counter-portal` | `aperture-swap` (one word per beat), `whiteout-slam` (the one flash, on the drop), `slice-smear`, `whip-push` | `viewport-push` and `spotlight-band`, one move a beat |
+| handset | — (the margin's copy uses `slot-rails`) | — (the device never leaves the frame) | `viewport-push` (pushes, pulls, pans inside the screen), `spotlight-band` (the light hops row to row), `device-flip` (T2, a change of surface; two in a row turn opposite ways), the template's own `page-scroll` (T2); every move is an adapter in `moves.js`, so a later transition can replace any role; never `lift-out` (the asset is never lifted out of the screen) |
+| exhibit | the template's own `exhibit-rise` (T2, the camera rises over the whole desk into the lock-up); every other move is an asset hand-off, one adapter per role in `moves.js` (pluggable, TEMPLATE.md "Moves") | none: the film never cuts away from the desk | `bezel-pullback` (the opening), `lift-out` (the readings, played reversed when they go back), `camera-truck` (along the row), `value-carry` (a value to its twin); `tether-link`, `viewport-push` free for scenes |
+| dossier | none: the camera never moves; paper does (`deal`, the template's own) | `dossier-page-turn` (the sheet turns away over its top or left edge onto the page underneath; the template's own) or any frame-level transition named as an exhibit's `enter` (pluggable, TEMPLATE.md "Page changes"); `dossier-slip`, `dossier-stack` (the template's own) | `spotlight-band` and `tether-link` as template-local painters (a band struck with multiply, an ink-cased leader to the sticker), `lift-out` → `value-carry` as the paper slip |
 | every mode | `converge-mark` at the lock-up (T3) | — | `viewport-push`, `spotlight-band`, `tether-link`, `lift-out`, `bezel-pullback` (an asset's first appearance), `mark-to-chrome` (the logo into the product), all in the mode's own accent |
 
-thread, blueprint and morph are one continuous space by their own principles (no cuts inside the chain; one drawing; one shape): their frame-level transitions open or close the film or join it to another, never between links, sheets or states; inside, use their hand-offs.
+thread, blueprint, morph and exhibit are one continuous space by their own principles (no cuts inside the chain; one drawing; one shape; one desk): their frame-level transitions open or close the film or join it to another, never between links, sheets or states; inside, use their hand-offs.
 
 ## Borrowing rule
 
@@ -334,7 +337,7 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Use**: a sequence of single words or stages in one slot (a pipeline's steps, a word per beat). **Not for**: words of very different lengths without moving `x` (the slot stays one width).
 - **Parameters**: `from` / `to` `{ text, size, accent }`; `x` 400 (left edge of the words), `rails` [340, 1540], `cy` 560, `pad` 12, `ticks` 30 px; `dimension` `{ x, unit }` or `false`; `font`, `mono`. Roles: `ground`, `ink` (words, number), `line` (rails, dimension), `accent` (a word marked `accent`: the human decision, the answer).
 - **Theory**: common region (Palmer 1992): the container groups the words that pass through it; number and geometry share one source (principle 2).
-- **Modes**: blueprint (the rails are dimension lines), plakat (two grid baselines), morph.
+- **Modes**: blueprint (the rails are dimension lines), plakat (two grid baselines), morph, handset (the margin's copy).
 - **Length and easing**: 1 beat; out accelerating over 32 %, in expo out from 24 %, rails a landing spring from 20 %.
 - **Sound**: a soft `tick` per word.
 
@@ -547,7 +550,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: an official table or page whose few numbers carry the claim: the evidence is shown as captured, then the numbers become the film's own reading. As the hand-off from an evidence page to its code-drawn redraw, give each cell a `land` (the value's place in the next scene) and `backdrop: false` (the template draws the page): the values rise out of the asset and land where the next scene reads them, so the evidence page needs no cut. **Not for**: a region with no printed value to redraw (use `viewport-push`).
 - **Parameters**: `asset`, `title`; `window` `{ x 210, y (null: centred), w 1500 }` (content width; height follows the crop); `cells` `[{ box, glyph, value, label }]` (`box` the cell, `glyph` the printed digits, image px); `card` `{ x (null: right of the cells), h 132, gap 20, rise 40, pad 28, labelSize 34 }`; `swapAt` 1.2 (capped at the zoom cap); `dim` 0.55; `stagger` 0.08; `ringPad` 6, `ringStyle` `{ width 3, radius 10, halo, haloWidth 9, glow }` (a halo colour under the ring holds it on a white page). As a hand-off into the next scene: `backdrop` false, `view` `{ a, bx, by }` (film px = a · image px + b, read from the template's own window), a cell's `land` `{ x, y, w, h, cx, baseline, size }` (film px, measured from the next scene's element) and `land` `{ font, paper, paperAlpha 0, ink, ring false, swapAt 0.12, turn [0.5, 1] }` (the landing look; the card keeps the asset's paper and ink over the asset and turns in `turn` of the flight). Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent` (rings), `paper` (null: sampled per cell), `onPaper` (#111111).
 - **Theory**: one object changes material, not identity (object constancy, Heer & Robertson 2007); the detail view of engineering drawing; the redraw keeps the value sharp past the source's resolution (principle 2). Borrowed from a reading-app launch film (a table and a formula lifted out of a paper page) and a clinic-software film (a row lifted from a schedule).
-- **Modes**: phosphor (replaces the cut from a ringed evidence page to its redrawn reading), blueprint, tally; any mode with an official table.
+- **Modes**: exhibit (the signature: every reading), phosphor (replaces the cut from a ringed evidence page to its redrawn reading), dossier (the figure's pixels lift before the slip is set in code), blueprint, tally; any mode with an official table; never handset (the asset stays on the screen).
 - **Length and easing**: 2 beats (as a hand-off into the next scene 1–1.5 beats is enough); veil 0–30 % cubic in-out; each lift a landing spring over 46 % of p, 8 % apart; each widening a landing spring of 26 %, the last landing at p = 0.98. A card's pixels are always scaled uniformly, never stretched.
 - **Sound**: a soft `tick` per card landing.
 
@@ -558,7 +561,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: an asset's first appearance, when its content matters more than where it is from: the viewer reads it first, then sees the source. **Not for**: an asset whose crop is much narrower than 16:9 (the cover crop would lose most of it).
 - **Parameters**: `asset`, `title`; `window` `{ cx 960, cy 540, w 1440 }` (landed content width); `focus` (image px the full-frame view centres on; null: crop centre); `rim` 10; `radius` 14. Roles: `ground`, `panel`, `line`, `dim`.
 - **Theory**: content before container, a reverse reveal; one zoom about the point both views share reads as one camera move (Heer & Robertson 2007). Borrowed from a phone-app launch film (a full-frame lock screen shrinks while the phone's bezel grows round it) and a "device dive" component, reversed.
-- **Modes**: any mode with real assets; morph (the frame grows out of the asset).
+- **Modes**: exhibit (the opening), any mode with real assets; morph (the frame grows out of the asset).
 - **Length and easing**: 1.25 beats; zoom on a log scale, cubic in-out; the frame grows with the same curve.
 - **Sound**: a soft `whoosh` out.
 
@@ -569,7 +572,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: source text too small to read at the fit: push until it is at least 25 px. The push stops at the zoom cap, so a low-resolution capture cannot be pushed into blur; if the cap is reached first, redraw instead (`lift-out`).
 - **Parameters**: `asset`, `title`; `window` `{ x 310, y, w 1300 }`; `region` (image px to frame); `mark` (image px to ring; null: the region); `ring` true; `readout` true. Roles: `ground`, `panel`, `line`, `dim`, `accent`. `prepare` computes `D.cap` and `D.zoom` and logs them.
 - **Theory**: a still frame holds the viewer's place while the camera moves inside it (common region, Palmer 1992); the push brings evidence to the 25 px floor without enlarging it past 0.75 source px per output px (principles 1, 2). Borrowed from a fitness-app film (in-device zoom, 16 frames) and a paper-figure tool's film (in-window zoom, 15–17 frames).
-- **Modes**: every mode with real assets.
+- **Modes**: handset (every push, pull and pan inside the screen), every mode with real assets.
 - **Length and easing**: 4/3 beats (20 frames); push 0–80 % cubic in-out (16 frames); ring 72–100 %.
 - **Sound**: none, or a soft `tick` on the ring.
 
@@ -580,7 +583,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: walking down the rows of a table or the panels of a page in reading order. **Not for**: regions that are not horizontal bands (ring them, or push).
 - **Parameters**: `asset`, `title`; `window` `{ x 160, y, w 1600 }`; `from.band`, `to.band` (`[_, y, _, h]` in image px); `veil` 0.5; `tick` 6 px. Roles: `ground` (veil), `panel`, `line`, `dim`, `accent` (tick).
 - **Theory**: attention follows the one region left lit (Posner 1980); the asset stays still so its layout is learned once; hard edges keep the lit data exact. Borrowed from a fitness-app film (a lit band moving between four charts) and ring-and-dim evidence pages.
-- **Modes**: every mode with real assets; tally.
+- **Modes**: dossier (the signature: every claim, the band also stroked in the accent with multiply), handset (the light hops row to row), every mode with real assets; tally.
 - **Length and easing**: 0.8 beats (12 frames), cubic in-out.
 - **Sound**: none.
 
@@ -591,7 +594,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: one number found in two official sources (a table and a chart). The value never changes on the way. **Not for**: two different numbers (that is a comparison, not a carry).
 - **Parameters**: `from` `{ asset, title, window { w }, box, glyph, value, weight }`; `to` `{ asset, title, window { w }, glyph, ring, weight }`; `spacing` 1920; `cy` 540; `carry` `{ cx 960, cy 150, h 150 }`; `swapAt` 1.2. Roles: `ground`, `panel`, `line`, `dim`, `accent`, `paper` / `onPaper` (null: sampled from asset 1), `paper2` / `onPaper2` (null: sampled from asset 2).
 - **Theory**: a shared element carries the eye across a change of place (object constancy, Heer & Robertson 2007); the same value in two official places is the claim's proof (principle 2). Borrowed from a finance app's film (an amount rises from a list, rides the pan, lands in an invoice table) and a shared-element thumbnail-to-hero transition.
-- **Modes**: ink, tally, phosphor.
+- **Modes**: exhibit (a value to its twin in the next asset), dossier (the paper slip onto the worksheet), ink, tally, phosphor.
 - **Length and easing**: 2 beats; lift a landing spring 0–30 %; pan 18–78 % cubic in-out; land 64–92 % cubic in-out; the chip leaves at 94 %.
 - **Sound**: a `whoosh` with the pan, a `tick` on landing.
 
@@ -602,7 +605,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: a sequence of sources whose order is the story (the table, then its chart, then the product). **Not for**: one asset (use `viewport-push`).
 - **Parameters**: `items` `[{ asset, title, w }]`; `gap` 220; `from`, `to` (indices); `cy` 540; `veil` 0.55. Roles: `ground`, `panel`, `line`, `dim`.
 - **Theory**: one world coordinate for all evidence makes place read as relation (Tversky 1993); motion streaks record real speed (Geisler 1999) and are off once settled. Borrowed from a design-review tool's film (one pan across a comment card, a site and a board, 12 frames) and a finance app's film (a camera on one surface).
-- **Modes**: blueprint (the drawing table), plakat, thread.
+- **Modes**: exhibit (along the desk), blueprint (the drawing table), plakat, thread.
 - **Length and easing**: 1 beat (15 frames) cubic in-out; a truck longer than about one screen needs more beats to keep the last frame's movement ≤ 2 px.
 - **Sound**: a short `whoosh`.
 
@@ -613,7 +616,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: the next page of the same source or the next product screen, when the two have no shared element. The same direction at most three times a film. **Not for**: morph (the film never cuts) or two contents with a shared element (hand it off instead).
 - **Parameters**: `window` `{ cx 960, cy 540, w 1300, h 700 }` (each asset is cover-cropped to it); `from`, `to` `{ asset, title, focus }`; `perspective` 2200; `shade` 0.6; `strips` 120. Roles: `ground` (shade), `panel`, `line`, `dim`.
 - **Theory**: one object with a new face keeps the viewer's place; the swap happens where no face shows, so two contents never overlap (C5). Borrowed from a fitness-app film (a phone turns edge-on and back with the next tab, 13 + 17 frames) and a reading-app film (the same with a change of format).
-- **Modes**: phosphor, tally; not morph.
+- **Modes**: handset (a change of surface; two in a row turn opposite ways), phosphor, tally; not morph.
 - **Length and easing**: 2 beats; turn out 0–43 % cubic in (13 frames), turn back 43–100 % cubic out (17 frames).
 - **Sound**: a `whoosh` landing on the beat as it faces the camera.
 
@@ -624,7 +627,7 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Use**: a number or sentence on screen and the place in the source it comes from, side by side. **Not for**: two places far apart in different scenes (use `value-carry`).
 - **Parameters**: `claim` `{ x, lines: [{ text, y, size, weight, color (role), anchor }] }` (the line starts after the `anchor` line); `target` `{ asset, title, window { x, y, w }, box }`; `bend` 0.18; `gapStart` 28; `ringPad` 8; `dot` 8; `width` 3. Roles: `ground`, `panel`, `line`, `ink`, `dim`, `accent`.
 - **Theory**: connectedness groups more strongly than proximity (Palmer & Rock 1994); the dot gives the line a direction (claim → source). Borrowed from an editor's launch film (a line from each typed source line to its rendered line) and a "tracing beam" component.
-- **Modes**: every mode with real assets; trace, thread.
+- **Modes**: dossier (a straight leader from the band to the exhibit sticker), every mode with real assets; trace, thread.
 - **Length and easing**: 1 beat; line 0–62 % by arc length, cubic in-out; ring 55–92 %.
 - **Sound**: a soft `tick` when the ring closes.
 

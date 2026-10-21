@@ -3,20 +3,20 @@
 ![License](https://img.shields.io/github/license/coder-xieshijie/filmsmith?style=flat-square)
 ![GitHub stars](https://img.shields.io/github/stars/coder-xieshijie/filmsmith?style=flat-square)
 ![Agent Skill](https://img.shields.io/badge/Agent-Skill-111111?style=flat-square)
-![Styles](https://img.shields.io/badge/styles-10-E4353F?style=flat-square)
+![Styles](https://img.shields.io/badge/styles-13-E4353F?style=flat-square)
 ![HyperFrames](https://img.shields.io/badge/HyperFrames-0.8.163-0A7CFF?style=flat-square)
 
 [English](README.md) | 简体中文
 
-**十种拍代码的方法。**
+**十三种拍代码的方法。**
 
 Filmsmith 是一个 Agent Skill，用来做技术短片：发布片、预告、showreel、数据片、讲解片。每一帧画面都由代码绘制，每一个声音都由代码合成。选一种风格，填一个文件，渲染即可。任何能跑 shell 的编码 Agent 都能用。
 
 ![十种风格](assets/showcase.jpg)
 
-## 十种风格
+## 十三种风格
 
-每种风格是一套视觉语言：配色预设、一个形态变体、登记好的场景库，以及一个能直接渲出完整成片的模板。下面每张动图是一支 30–60 秒 demo 里的 6 秒，demo 都是用这个 Skill 自己做的；点开在 [YouTube](https://www.youtube.com/@world_0618) 上看带声音的完整成片；MP4 原片在 [v0.1.0 Release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0) 里。demo 里的产品都是虚构的，只有 Tally 那支用的是真实的 Python PEP 索引。
+每种风格是一套视觉语言：配色预设、一个形态变体、登记好的场景库，以及一个能直接渲出完整成片的模板。下面每张动图是一支 30–60 秒 demo 里的 6 秒，demo 都是用这个 Skill 自己做的；点开在 [YouTube](https://www.youtube.com/@world_0618) 上看带声音的完整成片；MP4 原片在 [v0.1.0 Release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0) 里。demo 里的产品都是虚构的，只有 Tally 那支用的是真实的 Python PEP 索引。Handset、Exhibit 和 Dossier 拍的是真实素材（截图、图表、产品界面），它们的 demo 还没发布，表里先放模板自带示例的一张静帧。
 
 | | 风格 | 看起来 | 最适合 |
 |---|---|---|---|
@@ -30,8 +30,11 @@ Filmsmith 是一个 Agent Skill，用来做技术短片：发布片、预告、s
 | <a href="https://youtu.be/0AYkyN_dv_Q"><img src="docs/previews/filmsmith-morph-preview.webp" width="320"></a> | **[Morph](references/modes/morph.md)** | 一个形从头到尾不离开画面，每场升一个维度：点、线、面、体、界面、标志，全片不切 | 开发工具和界面产品：一个源头变成整个产品 |
 | <a href="https://youtu.be/raqJMXgK4vU"><img src="docs/previews/filmsmith-halftone-preview.webp" width="320"></a> | **[Halftone](references/modes/halftone.md)** | 会动的双墨印刷：新闻纸、黑版和一种印刷色；取自标志的一小块始终不动，周围的世界一个个印出来，最后拉远露出整个标志 | 模型和产品发布：几个特性、一个数字、一个名字 |
 | <a href="https://youtu.be/XrFmTVEyi94"><img src="docs/previews/filmsmith-pulse-preview.webp" width="320"></a> | **[Pulse](references/modes/pulse.md)** | 把一个问题演成一次查询：一拍一个词，底色在一个色相的明度阶上翻转，高亮在真实候选间跳，答案随一次闪白砸进来 | 版本发布、基准测试的答案：一个测出来的结论 |
+| <img src="references/modes/stills/handset.jpg" width="320"> | **[Handset](references/modes/handset.md)** | 一台正面放着、机位不动的设备，所有变化都发生在它的屏幕上；屏幕里只放真实截图（产品页面、界面、文档），推近不超过缩放上限，文字在右侧留白里和证据对齐 | 能在产品自己界面上看见的发布：应用里换了默认、多了一个面板、价格页、文档里的一句话 |
+| <img src="references/modes/stills/exhibit.jpg" width="320"> | **[Exhibit](references/modes/exhibit.md)** | 真实截图和图表装裱在同一张桌面上，相机从正上方俯拍；一支铅笔圈出每个主张所在的区域，把它提起来变成代码重画的读数，把一个数带到下一份来源里，再在图表自己的坐标轴上量出差距；最后相机升起，看到整张桌面 | 主张印在表格、图表和产品界面里的发布与报告 |
+| <img src="references/modes/stills/dossier.jpg" width="320"> | **[Dossier](references/modes/dossier.md)** | 真实网页像证据卷宗一样一页页发到深色台面上：荧光笔在原文印着的地方划出每条主张，引线连到写着来源和截取日期的证物标签，一个数字像纸条一样被剪下来，带到算草纸上算出结果 | 主张已经公开发布的发布、报告和更新日志 |
 
-每种风格都有变体。一是配色预设，例如 Phosphor 有冰白、绿、琥珀、青、紫、珊瑚红六套；二是一条形态轴：Thread 的线可以等宽或膨线，Ink 的字可以压缩或扩展，Plakat 可以方正或斜向，Blueprint 可以是针管笔或铅笔，Phosphor 可以是 CRT 扫描线或平板，Tally 可以用方块、圆点或 Isotype 图形符号，Trace 可以是矢量或手绘，Morph 可以是圆角或切角，Halftone 可以是圆点、方点或线网，Pulse 的光圈可以是切角或圆形。每张风格卡都列出适用场景，并附具体例子。
+每种风格都有变体。一是配色预设，例如 Phosphor 有冰白、绿、琥珀、青、紫、珊瑚红六套；二是一条形态轴：Thread 的线可以等宽或膨线，Ink 的字可以压缩或扩展，Plakat 可以方正或斜向，Blueprint 可以是针管笔或铅笔，Phosphor 可以是 CRT 扫描线或平板，Tally 可以用方块、圆点或 Isotype 图形符号，Trace 可以是矢量或手绘，Morph 可以是圆角或切角，Halftone 可以是圆点、方点或线网，Pulse 的光圈可以是切角或圆形，Handset 的设备可以是笔记本或手机，Exhibit 的桌面可以是素面或切割垫，Dossier 的荧光笔可以盖在主张上或划在行下。每张风格卡都列出适用场景，并附具体例子。
 
 ## 任何 Agent，任何模型
 
@@ -89,12 +92,12 @@ cd my-film && npm run film                                            # 定长 �
 node ../filmsmith/scripts/check-film.mjs renders/film.mp4 --film-dir .
 ```
 
-环境要求：Node.js 22+、FFmpeg；建工程时需要联网（字体、GSAP、第一次运行 HyperFrames）。`node scripts/selftest.mjs` 可以检查本机环境和全部十个模板。
+环境要求：Node.js 22+、FFmpeg；建工程时需要联网（字体、GSAP、第一次运行 HyperFrames）。`node scripts/selftest.mjs` 可以检查本机环境和全部十三个模板。
 
 ## 一支片怎么做出来
 
 ```
-品味理论 ──▶ 十条原则 ──▶ 十种风格 ──▶ 模板 + content.js ──▶ npm run film ──▶ 测量过的 MP4
+品味理论 ──▶ 十条原则 ──▶ 十三种风格 ──▶ 模板 + content.js ──▶ npm run film ──▶ 测量过的 MP4
 (foundations.md) (principles.md) (modes/)  (assets/templates/)     (HyperFrames)    (check-film)
 ```
 
@@ -109,7 +112,7 @@ node ../filmsmith/scripts/check-film.mjs renders/film.mp4 --film-dir .
 
 | | |
 |---|---|
-| [Skill](SKILL.md) | `filmsmith`：流程、理论、原则、十种风格及其模板、转场库、运行库和测量脚本。 |
+| [Skill](SKILL.md) | `filmsmith`：流程、理论、原则、十三种风格及其模板、转场库、运行库和测量脚本。 |
 
 ## 限制
 

@@ -53,6 +53,9 @@ The climax is the cost claim or the offer. Every score follows principle 2's ter
 | [blueprint](../../modes/blueprint.md) | One engineering drawing drafted sheet by sheet, amber stamps | Accepted 2026-10-16 |
 | [ink](../../modes/ink.md) | Type slammed on the beat, an ink dot that floods into colour | Accepted 2026-10-17 |
 | [thread](../../modes/thread.md) | One line that becomes everything | Accepted 2026-10-17; its example is the skill's own promo film (2026-10-18) |
+| [handset](../../modes/handset.md) | One locked-off device whose screen shows only real captures; copy in the margin, level with the evidence | Accepted 2026-10-21 (sample film, its sound included) |
+| [exhibit](../../modes/exhibit.md) | Real assets on one desk under an overhead camera; one pencil ring lifts each claim out as a code-drawn reading | Accepted 2026-10-21 (sample film, its sound included) |
+| [dossier](../../modes/dossier.md) | An evidence file on a dark mat: claims struck where they are printed, tied to exhibit stickers, one figure carried onto a worksheet | Accepted 2026-10-21 (sample film, its sound included) |
 
 ## Ruled out
 

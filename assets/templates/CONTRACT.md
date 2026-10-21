@@ -197,6 +197,9 @@ Besides its palette presets, every template takes one form variant in `content.j
 | morph | `corners` | `'round'`, `'cut'` |
 | halftone | `dot` | `'round'`, `'square'`, `'line'` |
 | pulse | `aperture` | `'cut'`, `'round'` |
+| handset | `device` | `'laptop'`, `'phone'` |
+| exhibit | `desk` | `'plain'`, `'mat'` |
+| dossier | `highlight` | `'band'`, `'underline'` |
 
 ## Cut-downs for a reel
 
@@ -214,6 +217,9 @@ A film that is cut into a longer one (a showcase, a launch film's sting, a demo 
 | morph | open on `solid`; keep the closing `cmd` | solid → unfold → mark, 12 s at 120 bpm |
 | halftone | `edges: 'cut'` | card → lockup, 12 s at 120 bpm (8 s with the name alone) |
 | pulse | ask → ask → search → reveal (`rest: true`) | 12 s at 120 bpm |
+| handset | `edges: 'cut'` (the first frame is the lit device); keep a `flip` or `scroll` | wake → flip → lockup, 12 s at 120 bpm |
+| exhibit | `open` → `lockup` (no reads; the first frame is the asset at the cover zoom) | 12 s at 120 bpm, 11.25 s at 128 |
+| dossier | `exhibit` → `claim` → `lockup` (one page, two claims; the first frame is already the page on the mat) | 12 s at 120 bpm |
 
 The switches differ because the templates do; a later version may unify them under `edges`.
 
