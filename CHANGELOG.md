@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.4.0 — 2026-10-22
+
 - Gallery: sixteen-style README and social overview images, plus six-second animated previews extracted from the existing Handset, Exhibit, Dossier, Strip, Split and Scroll films. The gallery distinguishes historical source snapshots from current templates and limits the v0.1.0 MP4 download claim to the original ten demos.
 
 - Six new modes for real assets (screenshots, charts, product UI, published pages, frames of real films, a product's own long page), sixteen in all; each has a card, a still, a timing API 3 template with a real-asset gate (`npm run assets`), capture or extraction tools, and moves or page changes that are pluggable adapters over the runtime's hand-offs, so a later transition set can replace a role without touching the choreography. Each moves on its own axis (owner 2026-10-21: the first versions of handset, exhibit and dossier, all lifts and flips, read as cut from one mould, and were reworked the same day): handset vertically inside a still device, exhibit by camera travel and depth on a desk, dossier by paper handling and editorial cuts with the camera locked, strip by the horizontal advance of a reel, split by one seam, scroll along one vertical sheet. `SKILL.md`, both READMEs, the mode index and choosing table, `CONTRACT.md` (form variant and cut-down rows), `transitions.md` (mode table and hand-off "Modes" lines), `system.md` (type families and scales of strip, split and scroll), the themes and `THIRD-PARTY.md` (fonts, example assets) list them.
