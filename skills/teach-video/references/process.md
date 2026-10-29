@@ -14,7 +14,7 @@ The user reviews a film three times, each time on one page (a video plus at most
 
 When the user cannot be asked (an unattended run), do not stop at a gate: take your recommended option, write down what you chose and why in the delivery note, and continue.
 
-The style kit shortens the route: a look that already has a kit (see `assets/kits/`) skips gate 1 unless the user asks for a new look, and a short film the user asked for directly can skip gate 2.
+The style kit shortens the route: a film whose topic suits an existing kit (see `assets/kits/`) skips gate 1; a topic no kit suits, or a user asking for a new look, goes through it, and a short film the user asked for directly can skip gate 2.
 
 The look a film follows is the look board written at gate 1; when gate 1 is skipped it is the kit's `CARD.md` and `ref/look.jpg`, and there is no look board.
 
