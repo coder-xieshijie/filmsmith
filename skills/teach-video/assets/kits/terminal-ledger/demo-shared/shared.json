@@ -1,0 +1,10 @@
+{
+ "_note": "Demo shared assets for the terminal-ledger kit's example segments (illustrative data). Regenerate: uv run <skill>/scripts/voice/voice.py all --dir .",
+ "contract": {
+  "size": [1920, 1080], "fps": "$fps", "total_frames": "$total_frames",
+  "caption_zone": {"y0": 880, "rule": "y >= 880 stays empty for two lines of subtitles"},
+  "avatar_zone": {"box": [1580, 560, 1880, 860], "shape": "circle, centre (1730, 710), diameter 280",
+                  "rule": "reserved for a presenter window; only the placeholder appears, only in these windows",
+                  "windows_s": {"opening": [0, 4.0]}}
+ }
+}

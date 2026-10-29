@@ -1,12 +1,12 @@
-name: Style or transition request
-description: Propose a new style (mode), a variant, or a transition.
+name: keynote-video style or transition request
+description: Propose a new keynote-video style (mode), a variant, or a transition.
 labels: [enhancement]
 body:
   - type: textarea
     id: content
     attributes:
       label: What kind of content needs it
-      description: A new style has to point at a kind of technical content none of the sixteen covers (principle 9 in references/principles.md).
+      description: A new style has to point at a kind of technical content none of the sixteen covers (principle 9 in skills/keynote-video/references/principles.md).
     validations:
       required: true
   - type: textarea

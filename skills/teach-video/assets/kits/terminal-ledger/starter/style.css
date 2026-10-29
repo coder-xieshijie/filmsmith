@@ -1,0 +1,96 @@
+/* terminal-ledger component styles. Values come from the CSS variables tokens.js writes; change colours and sizes in tokens.js. */
+@font-face { font-family: "WK"; src: url("assets/fonts/WenKai-film.ttf"); font-display: block; }
+@font-face { font-family: "Mono"; src: url("assets/fonts/IBMPlexMono-Medium.ttf"); font-display: block; }
+/* ✓ ▶ ⏸ … inside terminals use WenKai's glyphs */
+@font-face { font-family: "Mono"; src: url("assets/fonts/WenKai-film.ttf"); unicode-range: U+2713, U+25B6, U+23F8, U+2026; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
+#root { position: relative; width: 1920px; height: 1080px; font-family: "WK", serif; color: var(--ink); background: var(--paper); overflow: hidden; }
+#world, #cam, #scr, .seg { position: absolute; left: 0; top: 0; width: var(--stage-w); height: var(--stage-h); }
+/* Stage: k = 1 for a film; a web loop unit's 1200×675 logical canvas is scaled 1.6× to fill 1920×1080 (tokens.js) */
+#world { transform: scale(var(--stage-k)); transform-origin: 0 0; }
+#cam { transform-origin: 0 0; }
+.seg { pointer-events: none; }
+.abs { position: absolute; }
+.mono { font-family: "Mono", "WK", monospace; }
+.nw { white-space: nowrap; }
+svg.full { position: absolute; left: 0; top: 0; width: var(--stage-w); height: var(--stage-h); overflow: visible; }
+svg text { font-family: "WK", serif; }
+
+/* Chapter label (components/chapter.js): text + yellow underline, fixed to the screen */
+#chap { position: absolute; left: var(--sp-edge); top: var(--sp-top); height: 56px; }
+#chap .ct { position: absolute; left: 0; top: 0; font-size: var(--fs-chap); white-space: nowrap; color: var(--chap-ink); }
+#chap .ul { position: absolute; left: -6px; top: 50px; height: 4px; background: var(--chap-ul); border-radius: 2px; transform-origin: 0 50%; }
+
+/* Labels (components/labels.js) */
+.how { position: absolute; left: var(--sp-how-x); top: var(--sp-how-y); font-size: var(--fs-body); line-height: 40px; color: var(--ink); white-space: nowrap; border-bottom: 3px solid var(--rule); padding-right: 6px; }
+.tag { position: absolute; font-size: var(--fs-min); color: var(--mute); border: 2px dashed var(--stroke); padding: 0 10px; border-radius: 6px; background: #fffdf6; white-space: nowrap; line-height: 32px; }
+.lbl { position: absolute; white-space: nowrap; line-height: 1.15; }
+.chipc, .chipg { position: absolute; font-size: var(--fs-body); line-height: 40px; padding: 0 12px; border: 2px solid var(--cont-s); border-radius: 6px; background: #fbf7ee; white-space: nowrap; }
+.chipg { border-color: var(--rel-s); background: #f1f7ef; }
+.dg .d { display: inline-block; width: 0.6em; text-align: center; }
+.dg .s { display: inline-block; width: 0.4em; text-align: center; }
+
+/* Top-right counter (components/counter.js) */
+#counter { position: absolute; right: var(--sp-counter-r); top: var(--sp-top); width: 680px; height: 220px; text-align: right; }
+#c-num-wrap { position: absolute; right: 0; top: 0; font-size: var(--fs-count); line-height: 112px; height: 112px; white-space: nowrap; }
+#c-pre { font-size: var(--fs-count-pre); margin-right: 10px; display: inline-block; }
+#c-num { display: inline-block; }
+#c-rule { position: absolute; right: 0; top: 118px; height: 7px; width: 300px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform-origin: 100% 50%; }
+.cu { position: absolute; right: 0; top: 136px; font-size: var(--fs-unit); line-height: 40px; white-space: nowrap; color: var(--ink); }
+
+/* Light terminal (components/term.js) */
+.term { position: absolute; background: var(--body); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 8px 9px 0 rgba(43,40,36,.14); overflow: hidden; }
+.term > .bar { position: absolute; left: 0; top: 0; right: 0; height: 40px; border-bottom: 2.5px solid var(--ink); }
+.term > .bar i { position: absolute; top: 11px; width: 15px; height: 15px; border: 2px solid var(--ink); border-radius: 50%; display: block; }
+.term > .bar i:nth-child(1) { left: 16px; background: var(--dot-r); }
+.term > .bar i:nth-child(2) { left: 41px; background: var(--dot-y); }
+.term > .bar i:nth-child(3) { left: 66px; background: var(--dot-g); }
+.term > .bar .tt { position: absolute; left: 100px; top: 3px; font-size: var(--fs-note); color: var(--mute); white-space: nowrap; }
+.term > .bar .tr { position: absolute; right: 16px; top: 3px; font-size: var(--fs-note); color: var(--mute); white-space: nowrap; }
+.term > .bar .sq { position: absolute; left: 100px; top: 12px; width: 14px; height: 14px; border-radius: 3px; }
+.term > .bar .sq + .tt, .term.sqd > .bar .tt { left: 124px; }
+.term .ln { position: absolute; left: 0; height: 34px; line-height: 34px; font-family: "Mono", "WK"; font-size: var(--fs-log); color: var(--mute); white-space: nowrap; }
+.term .ln.ok { color: var(--ok); }
+.term .ln.me { color: var(--me); font-family: "WK"; }
+.term .ln.stop { color: var(--me); }
+.term .logbox { position: absolute; overflow: hidden; }
+.term .logbox .lg { position: absolute; left: 0; top: 0; width: 100%; }
+.term .q { position: absolute; font-size: var(--fs-head); line-height: 64px; white-space: nowrap; }
+.ch { display: inline-block; white-space: pre; overflow: hidden; vertical-align: bottom; }
+.caret { display: inline-block; width: 4px; height: 40px; background: var(--ink); vertical-align: -6px; margin-left: 4px; }
+.pill { position: absolute; font-family: "Mono"; font-size: var(--fs-min); border: 2px solid var(--ink); border-radius: 8px; padding: 0 12px; line-height: 38px; background: #f2ede2; white-space: nowrap; }
+.bar-prog { position: absolute; height: 12px; border-radius: 6px; background: var(--grey); overflow: hidden; }
+.bar-prog b { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: var(--ink); transform-origin: 0 50%; display: block; }
+
+/* Prompt card (components/prompt-card.js) */
+.prompt .q { font-size: var(--fs-quote); }
+
+/* Wall of small windows (components/wall.js) */
+.mw { position: absolute; left: 0; top: 0; width: 150px; height: 96px; background: var(--body); border: 2px solid var(--ink); border-radius: 7px; box-shadow: 4px 4px 0 rgba(43,40,36,.12); overflow: hidden; }
+.mw .b { position: absolute; left: 0; right: 0; top: 0; height: 18px; border-bottom: 1.5px solid var(--ink); }
+.mw .b i { position: absolute; top: 5px; width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--ink); display: block; }
+.mw .b i:nth-child(1) { left: 7px; background: var(--dot-r); } .mw .b i:nth-child(2) { left: 18px; background: var(--dot-y); } .mw .b i:nth-child(3) { left: 29px; background: var(--dot-g); }
+.mw .r { position: absolute; left: 12px; height: 7px; border-radius: 4px; background: #d9d2c4; }
+.mw .ck { position: absolute; right: 7px; top: -3px; font-size: 18px; color: var(--agent); line-height: 22px; }
+.mk { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%; background: var(--base); border: 2.5px solid var(--ink); }
+.rd { position: absolute; left: 0; top: 0; width: 166px; height: 112px; border: 4px solid var(--agent); border-radius: 11px; }
+.agentTag { position: absolute; left: 0; top: 0; font-size: var(--fs-min); color: #fff; background: var(--agent); border-radius: 8px; padding: 0 12px; line-height: 36px; white-space: nowrap; }
+.icoM, .icoD { display: inline-block; border-radius: 50%; background: var(--base); margin-right: 10px; }
+.icoM { width: 22px; height: 22px; border: 2.5px solid var(--ink); vertical-align: -3px; }
+.icoD { width: 15px; height: 15px; border: 1.2px solid var(--base-s); vertical-align: 0; }
+
+/* Ledger page (components/ledger.js): transform-origin 0 0, page coordinates = screen coordinates at full page */
+.led { position: absolute; left: 0; top: 0; width: var(--stage-w); height: var(--stage-h); transform-origin: 0 0; }
+.led .frame { position: absolute; inset: 0; border: 9px solid var(--ink); border-radius: 30px; background: var(--paper); box-shadow: 26px 30px 0 rgba(43,40,36,.14); }
+.led .title { position: absolute; left: 130px; top: 40px; font-size: 96px; color: var(--mute); white-space: nowrap; }
+.led .rules { position: absolute; left: 0; top: 95px; width: var(--rule-end); height: calc(var(--stage-h) - 310px);
+  background: repeating-linear-gradient(to bottom, rgba(64,104,140,.14) 0, rgba(64,104,140,.14) 1.5px, transparent 1.5px, transparent 48px);
+  -webkit-mask-image: linear-gradient(to right, #000 92%, transparent); mask-image: linear-gradient(to right, #000 92%, transparent); }
+.led .margin { position: absolute; left: 84px; top: 0; width: 8px; height: calc(var(--stage-h) - 214px); border-left: 1.5px solid rgba(196,84,62,.38); border-right: 1.5px solid rgba(196,84,62,.38); }
+
+/* Presenter placeholder window (components/avatar.js; centre 1730,710, diameter 280) */
+.av { position: absolute; left: 1590px; top: 570px; width: 280px; height: 280px; }
+.av .c { position: absolute; inset: 0; border-radius: 50%; background: #e2dccf; border: 3px dashed rgba(90,84,76,.55); }
+.av .t { position: absolute; left: 0; right: 0; top: 122px; text-align: center; font-size: var(--fs-note); color: #7c766b; white-space: nowrap; }
+.av .avi { position: absolute; inset: 0; }

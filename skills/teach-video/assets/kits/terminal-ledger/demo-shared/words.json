@@ -1,0 +1,425 @@
+{
+"_note": "Word timestamps: each vo/<id> transcribed on its own, plus the line start (scripts/voice/voice.py words). Use the times only; the text of record is narration.json (the transcript mishears characters and spells numbers as read).",
+"words": [
+{
+"line": "a1",
+"text": "这",
+"start": 1.06,
+"end": 1.17
+},
+{
+"line": "a1",
+"text": "一",
+"start": 1.17,
+"end": 1.5
+},
+{
+"line": "a1",
+"text": "周,",
+"start": 1.5,
+"end": 2.0
+},
+{
+"line": "a1",
+"text": "三",
+"start": 2.0,
+"end": 2.09
+},
+{
+"line": "a1",
+"text": "个",
+"start": 2.09,
+"end": 2.16
+},
+{
+"line": "a1",
+"text": "邮",
+"start": 2.16,
+"end": 2.4
+},
+{
+"line": "a1",
+"text": "箱",
+"start": 2.4,
+"end": 2.64
+},
+{
+"line": "a1",
+"text": "一",
+"start": 2.64,
+"end": 2.71
+},
+{
+"line": "a1",
+"text": "共",
+"start": 2.71,
+"end": 2.72
+},
+{
+"line": "a1",
+"text": "收",
+"start": 2.84,
+"end": 2.88
+},
+{
+"line": "a1",
+"text": "到",
+"start": 2.88,
+"end": 2.96
+},
+{
+"line": "a1",
+"text": "1200",
+"start": 2.96,
+"end": 3.88
+},
+{
+"line": "a1",
+"text": "封",
+"start": 3.99,
+"end": 4.18
+},
+{
+"line": "a1",
+"text": "邮",
+"start": 4.18,
+"end": 4.41
+},
+{
+"line": "a1",
+"text": "件",
+"start": 4.41,
+"end": 4.605
+},
+{
+"line": "a1",
+"text": "全部",
+"start": 4.605,
+"end": 4.8
+},
+{
+"line": "a1",
+"text": "读",
+"start": 4.8,
+"end": 5.1
+},
+{
+"line": "a1",
+"text": "完",
+"start": 5.1,
+"end": 5.2
+},
+{
+"line": "a1",
+"text": "要",
+"start": 5.2,
+"end": 5.27
+},
+{
+"line": "a1",
+"text": "将",
+"start": 5.27,
+"end": 5.55
+},
+{
+"line": "a1",
+"text": "近",
+"start": 5.55,
+"end": 5.83
+},
+{
+"line": "a1",
+"text": "3000",
+"start": 5.83,
+"end": 6.77
+},
+{
+"line": "a1",
+"text": "分",
+"start": 6.77,
+"end": 6.87
+},
+{
+"line": "a1",
+"text": "钟",
+"start": 6.87,
+"end": 7.02
+},
+{
+"line": "a2",
+"text": "我们",
+"start": 7.966,
+"end": 7.976
+},
+{
+"line": "a2",
+"text": "让",
+"start": 7.976,
+"end": 8.086
+},
+{
+"line": "a2",
+"text": "程",
+"start": 8.086,
+"end": 8.196
+},
+{
+"line": "a2",
+"text": "序",
+"start": 8.196,
+"end": 8.526
+},
+{
+"line": "a2",
+"text": "把",
+"start": 8.526,
+"end": 8.636
+},
+{
+"line": "a2",
+"text": "每",
+"start": 8.636,
+"end": 8.746
+},
+{
+"line": "a2",
+"text": "封",
+"start": 8.746,
+"end": 9.076
+},
+{
+"line": "a2",
+"text": "邮",
+"start": 9.076,
+"end": 9.406
+},
+{
+"line": "a2",
+"text": "件",
+"start": 9.406,
+"end": 9.496
+},
+{
+"line": "a2",
+"text": "读",
+"start": 9.576,
+"end": 9.786
+},
+{
+"line": "a2",
+"text": "一",
+"start": 9.836,
+"end": 9.946
+},
+{
+"line": "a2",
+"text": "遍,",
+"start": 9.946,
+"end": 10.456
+},
+{
+"line": "a2",
+"text": "挑",
+"start": 10.456,
+"end": 10.626
+},
+{
+"line": "a2",
+"text": "出",
+"start": 10.626,
+"end": 10.716
+},
+{
+"line": "a2",
+"text": "可能",
+"start": 10.716,
+"end": 10.976
+},
+{
+"line": "a2",
+"text": "要",
+"start": 10.976,
+"end": 11.106
+},
+{
+"line": "a2",
+"text": "处",
+"start": 11.106,
+"end": 11.486
+},
+{
+"line": "a2",
+"text": "理",
+"start": 11.496,
+"end": 11.616
+},
+{
+"line": "a2",
+"text": "的,",
+"start": 11.616,
+"end": 11.856
+},
+{
+"line": "a2",
+"text": "一",
+"start": 11.856,
+"end": 11.946
+},
+{
+"line": "a2",
+"text": "共",
+"start": 11.946,
+"end": 12.036
+},
+{
+"line": "a2",
+"text": "600",
+"start": 12.036,
+"end": 12.466
+},
+{
+"line": "a2",
+"text": "封。",
+"start": 12.636,
+"end": 12.756
+},
+{
+"line": "a3",
+"text": "其",
+"start": 13.956,
+"end": 13.996
+},
+{
+"line": "a3",
+"text": "中",
+"start": 13.996,
+"end": 14.246
+},
+{
+"line": "a3",
+"text": "一",
+"start": 14.246,
+"end": 14.496
+},
+{
+"line": "a3",
+"text": "半",
+"start": 14.496,
+"end": 14.556
+},
+{
+"line": "a3",
+"text": "只是",
+"start": 15.096,
+"end": 15.246
+},
+{
+"line": "a3",
+"text": "通",
+"start": 15.246,
+"end": 15.496
+},
+{
+"line": "a3",
+"text": "知",
+"start": 15.496,
+"end": 15.736
+},
+{
+"line": "a3",
+"text": "订",
+"start": 15.996,
+"end": 16.116
+},
+{
+"line": "a3",
+"text": "阅",
+"start": 16.116,
+"end": 16.406
+},
+{
+"line": "a3",
+"text": "和",
+"start": 16.506,
+"end": 16.586
+},
+{
+"line": "a3",
+"text": "广",
+"start": 16.636,
+"end": 16.976
+},
+{
+"line": "a3",
+"text": "告。",
+"start": 16.976,
+"end": 17.206
+},
+{
+"line": "a4",
+"text": "真",
+"start": 17.991,
+"end": 18.021
+},
+{
+"line": "a4",
+"text": "正",
+"start": 18.021,
+"end": 18.271
+},
+{
+"line": "a4",
+"text": "需要",
+"start": 18.271,
+"end": 18.771
+},
+{
+"line": "a4",
+"text": "你",
+"start": 18.771,
+"end": 18.791
+},
+{
+"line": "a4",
+"text": "回",
+"start": 19.071,
+"end": 19.171
+},
+{
+"line": "a4",
+"text": "复",
+"start": 19.171,
+"end": 19.741
+},
+{
+"line": "a4",
+"text": "的",
+"start": 19.741,
+"end": 19.781
+},
+{
+"line": "a4",
+"text": "只有",
+"start": 20.131,
+"end": 20.441
+},
+{
+"line": "a4",
+"text": "两",
+"start": 20.441,
+"end": 20.621
+},
+{
+"line": "a4",
+"text": "成",
+"start": 20.661,
+"end": 20.901
+},
+{
+"line": "a4",
+"text": "左右",
+"start": 20.901,
+"end": 21.111
+}
+]
+}

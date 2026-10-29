@@ -1,0 +1,9 @@
+{
+  "title": "terminal-ledger demo (illustrative data)",
+  "duration": 24.233,
+  "shared": "../demo-shared",
+  "bedVolume": 0.5,
+  "avatar": [[0, 4.0]],
+  "hands": 4,
+  "poster": 15.5
+}

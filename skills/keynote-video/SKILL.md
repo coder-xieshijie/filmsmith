@@ -1,24 +1,51 @@
 ---
-name: filmsmith
-description: Short technical films made by any coding agent, drawn and scored entirely in code (HyperFrames) from a mode template. Sixteen modes — Thread, Ink, Plakat, Blueprint, Phosphor, Tally, Trace, Morph, Halftone, Pulse, Handset, Exhibit, Dossier, Strip, Split, Scroll — each with palette presets, a form variant, a scene registry and a renderable template; length follows the content, pace is brisk, every render is measured. Use when asked to make, remake or restyle a launch, promo, teaser, showreel, data story or explainer video for a technical product, or to choose a visual style for one.
+name: keynote-video
+description: Makes short music-driven films for a technical product — launch, teaser, showreel, data story, a mechanism explained — drawn and scored entirely in code (HyperFrames) from one of sixteen style templates, with English on-screen text, no voice-over and no people. Use when asked to make, remake or restyle such a film, or to choose a visual style for one.
 descriptions:
-  zh-Hans: 任何编码 Agent 都能用的技术短片制作：画面和配乐全部由代码生成（HyperFrames），从模式模板出发。十六种模式：Thread、Ink、Plakat、Blueprint、Phosphor、Tally、Trace、Morph、Halftone、Pulse、Handset、Exhibit、Dossier、Strip、Split、Scroll，各带配色预设、形态变体、登记场景库和可直接渲染的模板；片长由内容决定，节奏轻快，每次渲染都有测量。用于给技术产品制作、重做或换风格的发布片、宣传片、预告、showreel、数据片、讲解片，或为一支片选视觉风格。
+  zh-Hans: 为技术产品制作由音乐驱动的短片（发布片、预告、showreel、数据片、机制讲解），画面与配乐全部由代码生成（HyperFrames），从十六种风格模板出发；屏幕文字为英文，无旁白、无人物。用于制作、重做或换风格这类短片，或为它选视觉风格。
 displayNames:
-  zh-Hans: 片匠 Filmsmith
+  zh-Hans: 片匠 · 发布片
 ---
 
-# Filmsmith
+# keynote-video
 
-Sixteen ways to film your code. Makes a short technical film — a technology demo, a technical report or explainer, a technical product launch — from a brief, its length computed from the content, with no person on screen: pick a **mode**, copy its template, fill `content.js`, render. Every picture is drawn in code and every sound is synthesised in code (a generated music track can replace the bed), so a film needs only a coding agent that can run shell commands. The skill stands on a theory of taste ([foundations](references/foundations.md)), ten [core principles](references/principles.md) derived from it and from the owner's verdicts, one shared [system](references/system.md) of colours, type, space and motion, and sixteen modes that apply them to one visual language each.
+Makes a short technical film — a technology demo, a technical report or explainer, a technical product launch — from a brief, its length computed from the content: pick a **mode**, copy its template, fill `content.js`, render. Every picture is drawn in code and every sound is synthesised in code (a generated music track can replace the bed), so a film needs only a coding agent that can run shell commands. `SKILL_ROOT` below is the folder that holds this `SKILL.md`.
 
-The house style for every mode: **brisk, direct and clean** — something changes on about every beat, each change brings one new thing, and the viewer never waits for the film — and **clean is not plain**: few elements, each moving fluidly enough to hold the eye ([principles 4–6](references/principles.md)).
+The skill stands on a theory of taste ([foundations](references/foundations.md)), ten [core principles](references/principles.md) derived from it and from the owner's verdicts, one shared [system](references/system.md) of colours, type, space and motion, and sixteen modes that apply them to one visual language each.
+
+## Scope and fixed rules
+
+These hold for every film, in every step.
+
+- **Format.** Every film is 16:9, 1920×1080, for landscape full-screen playback. When asked for a vertical or square film, say the skill does not make one.
+- **Language.** On-screen text is English. When the user asks for Chinese or another script, say the templates do not set it yet.
+- **Colour.** Palette presets only, as listed on the mode card; no custom hex values. A brand colour the user asks for becomes a new preset first ([system](references/system.md#a-preset-from-a-brand-colour)).
+- **Facts.** Every fact on screen comes from the source the user named; every number is computed by code.
+- **Length.** Lengths come from `npm run fit`; never type `duration` or scene `bars` to hit a length.
+- **Plan first.** A film without a filled `PLAN.md` is not rendered ([principle 10](references/principles.md)).
+- **Pinned tools.** Keep the hyperframes version the templates pin; do not upgrade it inside a film.
+- **House style.** Brisk, direct and clean — something changes on about every beat, each change brings one new thing, and the viewer never waits for the film — and clean is not plain: few elements, each moving fluidly enough to hold the eye ([principles 4–6](references/principles.md)).
+
+## Core principles
+
+Full text, theory and evidence in [references/principles.md](references/principles.md). Gates first; a film that fails one is not shown. Where a verdict and the theory disagree, the theory wins ([who decides](references/foundations.md#who-decides)).
+
+1. **Readable before beautiful** — information text ≥ 25 px (main text ≥ 40 px), contrast ≥ 4.5:1, reading by tier (primary 0.3 s a word in order, glance ≥ 1 s, word-at-a-time), −14 LUFS with short-term loudness ≤ integrated + 5 LU and a restrained arrangement.
+2. **Precision is a gate** — aligned, consistent, computed; exact text, numbers and logos in code; quoted numbers keep their source's terms; no number animates through other digits.
+3. **One idea per beat, one protagonist per frame** — at most three type levels (within 15 % is one level, neighbours ≥ 1.25 apart); emphasis by scale and isolation.
+4. **Transform at the turns, grow every state out of the last** — related transformations are the default change, a cut where there is no relation; expressive devices (T2) about every 8–12 s, one device ≤ 3 times and never twice in a row unchanged; 2–3 marked peaks (T3); transitions stay clean. Prefer a hand-off from `runtime/handoffs/`, else a frame-level transition from `runtime/transitions/` ([transitions.md](references/transitions.md)); vary the axis of motion between chapters ([families](references/transitions.md#families)).
+5. **Motion is a function of time, locked to the beat, and brisk** — key events on the beat, other cuts on any beat; four tiers of change: a micro change (T0) at a median of ≤ 2 beats and never > 4 beats apart, compositions (T1) a median 2–3 s and ≤ 6 s, holds 0.2 s to 2 beats; reading stays 0.3 s a word with ≤ 5 primary words per state (a claim ≤ 8, in a pause); length follows content, phrase rounding spread over the scenes.
+6. **Texture decides how good a passing film is; clean is not simple** — fluid motion, motion blur, grain, light where things have volume; organic material flows; never at the cost of clarity; flat print may leave out blur if its card says why.
+7. **One system, one accent, one meaning** — accent, status, category and effect colours; the accent ≤ 10 % as a mark; one type scale per mode; a through-line or a frame of real information.
+8. **No people; the picture is technical** — graphic, typographic, diagrammatic or drawn.
+9. **The style points at the content** — choose the mode by what the content is; a mode chosen by form draws one scene from a real technical artefact.
+10. **Borrow grammar, not layout** — `PLAN.md` with the concept sentence and its rival test, a ban list from the Factory defaults and the AI tells, and the motif table before the picture.
 
 ## Requirements
 
-- Any coding agent that can run shell commands. `SKILL_ROOT` below is the folder that holds this `SKILL.md`.
+- Any coding agent that can run shell commands.
 - Node 22 or newer, `ffmpeg` and `ffprobe` on PATH. `new-film` checks them and stops with a message if one is missing.
-- Network while a film is set up and rendered: fonts from a pinned google/fonts commit and the pinned GSAP build from the npm registry (both stored in the film folder), the first run of `npx hyperframes@0.8.163` (which also fetches its headless Chrome), and at render time the HyperFrames compiler may fetch font faces from Google Fonts as well. Offline rendering is not verified. Keep the hyperframes version the templates pin; do not upgrade it inside a film.
-- On-screen text is English in this version; when the user asks for Chinese or another script, say the templates do not set it yet.
+- Network while a film is set up and rendered: fonts from a pinned google/fonts commit and the pinned GSAP build from the npm registry (both stored in the film folder), the first run of `npx hyperframes@0.8.163` (which also fetches its headless Chrome), and at render time the HyperFrames compiler may fetch font faces from Google Fonts as well. Offline rendering is not verified.
 
 ## Modes
 
@@ -41,7 +68,7 @@ The house style for every mode: **brisk, direct and clean** — something change
 | [split](references/modes/split.md) | One movable seam: what is written on one side, the real result it makes on the other; every change a move of the seam, the climax one changed line over two renders | `seam`: straight or stitched | Developer tools whose input maps line by line to an output: generators, configs, CLIs and their reports |
 | [scroll](references/modes/scroll.md) | One long vertical sheet of the product's own page, flicked up with momentum and locking section by section; its headings pin as chapters, an underline and a quote band read it, one row unfolds in place | `minimap`: on or off | Launches told by the product's own long page: a README, docs, a changelog |
 
-Every mode has colour presets (on its card) and one form variant, both set in `content.js`; the default renders as before. Every card lists its use cases with a worked example and marks the best fit. The names before 2026-10-19 (`thread-reel`, `ink-beat`, `swiss-poster`, `blueprint-drafting`, `terminal-launch`, `unit-data`, `diagram-explainer`) still work in `new-film`.
+Every mode has colour presets (on its card) and one form variant, both set in `content.js`; the variant's default is the template as shipped. Every card lists its use cases with a worked example and marks the best fit. `new-film` also accepts the aliases `thread-reel`, `ink-beat`, `swiss-poster`, `blueprint-drafting`, `terminal-launch`, `unit-data` and `diagram-explainer`.
 
 Choosing rules and the mode card format: [references/modes/README.md](references/modes/README.md). In standard mode a film uses one mode as it ships; in creative mode it recombines scene ideas and every transition inside one base mode's visual system ([creative.md](references/creative.md)). Themes (narrative skeletons and rules by kind of film): [tech-product-launch](references/themes/tech-product-launch/README.md) for thread, ink, plakat, blueprint, phosphor, morph, halftone, pulse, handset, exhibit, dossier, strip, split and scroll, [tech-explainer](references/themes/tech-explainer/README.md) for tally and trace.
 
@@ -54,14 +81,14 @@ First decide how the skill is used, and say which:
 - **Standard mode** (default): one existing mode as it ships, its template, presets, scenes and transitions. Choose it when the content matches a mode's "Pick it for" line.
 - **Creative mode**: when no mode fits, the user asks for something custom, or the subject's real assets call for their own grammar. Styles and transitions are separate layers: pick a base mode for the visual system, then compose scene ideas from any card and transitions from the whole catalogue, under the rules in [creative.md](references/creative.md) (one system, one accent, one through-line, a composition sheet in `PLAN.md`).
 
-Skip what the user already gave; ask the rest, the mode first. Ask in plain conversation, at most three questions at a time; when a gap does not block the start, assume and say so. Every film is 16:9, 1920×1080, for landscape full-screen playback; when asked for a vertical or square film, say the skill does not make one.
+Skip what the user already gave; ask the rest, the mode first. Ask in plain conversation, at most three questions at a time; when a gap does not block the start, assume and say so.
 
 | # | Question | Why |
 |---|---|---|
 | 1 | What is the content: a tool, a claim with steps, a system, a name, a reel, numbers, a mechanism? Are there real assets (screenshots, product UI, official charts, logos)? | Decides the mode ([selection table](references/modes/README.md#choosing-a-mode)) and standard or creative use; propose one and say why |
-| 2 | Where do the facts come from (repo, doc, dataset, algorithm)? | Every fact on screen comes from it; every number is computed |
+| 2 | Where do the facts come from (repo, doc, dataset, algorithm)? | Every fact on screen comes from it |
 | 3 | Platform, and a target length if any? | Length is computed from the content ([principle 5](references/principles.md)); a target moves the tempo inside the mode's range, then scenes are cut or added |
-| 4 | Which palette preset? | Presets only, listed on the mode card; no custom hex values. A brand colour the user asks for becomes a new preset first ([system](references/system.md#a-preset-from-a-brand-colour)) |
+| 4 | Which palette preset? | The presets are listed on the mode card |
 | 5 | Hard constraints (must show, must not show, URL, name)? | Avoid rework |
 | 6 | Music: can this agent call a music-generation API? | If yes, a generated bed at the film's tempo replaces the synthesised one ([system](references/system.md#sound-recipes)); if not, the synthesised bed is used and the hand-over says so |
 
@@ -77,18 +104,20 @@ This checks Node and FFmpeg, copies the template, adds the shared runtime as `li
 
 ### 3. Concept and beat plan
 
-`new-film` has written a `PLAN.md` skeleton into the film folder. Fill it before touching `content.js`; a film without a plan is not rendered ([principle 10](references/principles.md)):
+`new-film` has written a `PLAN.md` skeleton into the film folder. Fill it before touching `content.js`:
 
 1. **Concept sentence**, in the form "In this film, [something only this product has] becomes [the mode's signature device]", and the rival test: with the nearest competitor in the sentence it must no longer hold. Then the through-line (the object or frame that carries the eye from first to last frame).
 2. **Ban list**: start from the mode card's Factory defaults and [ai-tells.md](references/ai-tells.md); add anything too close to the nearest reference film.
 3. **Nearest reference and motif table**: name the closest reference film and list the motifs the film shares with it; in a mode with a known reference, more than half shared fails P1.
 4. **Beat plan**: one row per scene — scene type, on-screen copy and which of it is primary or glance text, the fact's source, what this scene *becomes* in the next one, and where the music breaks for reading or drops for the key moment. Lengths are not chosen: write the scenes into `content.js` and run `npm run fit`, which prints each scene's start, beats, reading need, the pad before a turn and its share of the phrase rounding, and the film's length, writes `renders/timing.json`, and copies the table into `PLAN.md` between its `fit` markers. `npm run fit` stops while `PLAN.md` is missing and warns while it still has unfilled `<!-- fill -->` parts.
 
-Before writing copy, read the Length table in the mode's `TEMPLATE.md`: it says which slots of each scene count as primary text and how they enter, so each state can be budgeted instead of discovered. Done when every scene type is in the registry, every string fits its character limit, every number names the code that computes it, and `npm run fit` reports no errors. Character limits are only a first filter: a slot's width can depend on its neighbours, so the pixel check is the red banner in step 4. On a template whose rules declare timing API 3, an error means the film breaks one of the four tiers of change ([principle 5](references/principles.md)): more than five words of primary text entering at once (eight for a claim, read in a marked pause), a hold after a landing over two beats, a composition over 6 s, a gap of more than four beats without a change, or the wrong number or placement of expressive transitions and peaks. Split long lines into phrases that enter one after another first, then make repeated labels glance text, then split the scene; never shrink the type or speed past the reading floor. Under the timing table `npm run fit` prints the tier measures; a template still on API 2 keeps its page limits (twelve primary words, a step's hold one bar and the last one and a half, a page four bars) and shows the tiers as an INFO note.
+Before writing copy, read the Length table in the mode's `TEMPLATE.md`: it says which slots of each scene count as primary text and how they enter, so each state can be budgeted instead of discovered. Done when every scene type is in the registry, every string fits its character limit, every number names the code that computes it, and `npm run fit` reports no errors. Character limits are only a first filter: a slot's width can depend on its neighbours, so the pixel check is the red banner in step 4.
+
+On a template whose rules declare timing API 3, a `fit` error means the film breaks one of the four tiers of change of [principle 5](references/principles.md) (primary words per state, hold length, composition length, gaps without a change, or the number and placement of expressive transitions and peaks). Split long lines into phrases that enter one after another first, then make repeated labels glance text, then split the scene; never shrink the type or speed past the reading floor. Under the timing table `npm run fit` prints the tier measures. A template on timing API 2 keeps its page limits (twelve primary words, a step's hold one bar and the last one and a half, a page four bars) and shows the tiers as an INFO note.
 
 ### 4. Fill and frame first
 
-Edit `content.js` (and `data/` or `run.js` where the mode uses them); never type `duration` or scene `bars` to hit a length. Then render stills of the key frames and look at them before animating (the script runs `fit` first, so the stills use the current length):
+Edit `content.js` (and `data/` or `run.js` where the mode uses them). Then render stills of the key frames and look at them before animating (the script runs `fit` first, so the stills use the current length):
 
 ```bash
 npm run snapshot -- --at <t1>,<t2>,<t3>
@@ -119,32 +148,13 @@ Then walk [references/checklist.md](references/checklist.md) and the mode card's
 
 Give the MP4 path, the contact sheet, and a README with the plan, the mode and preset, the music source (synthesised or generated), commands, the `check-film` report and known issues; say "not yet confirmed by ear" unless someone has listened. Ask for the user's verdict and quote it back verbatim with the date; when the user is not available, write "verdict pending" and stop.
 
-### Maintainers: from verdict to rule
-
-Only for whoever maintains this skill's source; a film's maker stops at step 7. A verdict does not edit a mode card or the [principles](references/principles.md) directly. First place it on a layer of the pyramid and check it against [foundations.md](references/foundations.md#who-decides): at layers 1–2 the standard decides, at 3–4 domain consensus unless a departure is written with its reason, at 5–6 the owner picks between candidates the theory judges equally good. A tendency becomes a rule after two consistent verdicts or one A/B comparison. Show the owner any conflict with the theory, then propose the edit citing the date, and apply it once agreed.
-
-## Core principles
-
-Full text, theory and evidence in [references/principles.md](references/principles.md). Premise: technical videos, no person on screen. Gates first; a film that fails one is not shown. Where a verdict and the theory disagree, the theory wins ([who decides](references/foundations.md#who-decides)).
-
-1. **Readable before beautiful** — information text ≥ 25 px (main text ≥ 40 px), contrast ≥ 4.5:1, reading by tier (primary 0.3 s a word in order, glance ≥ 1 s, word-at-a-time), −14 LUFS with short-term loudness ≤ integrated + 5 LU and a restrained arrangement.
-2. **Precision is a gate** — aligned, consistent, computed; exact text, numbers and logos in code; quoted numbers keep their source's terms; no number animates through other digits.
-3. **One idea per beat, one protagonist per frame** — at most three type levels (within 15 % is one level, neighbours ≥ 1.25 apart); emphasis by scale and isolation.
-4. **Transform at the turns, grow every state out of the last** — related transformations are the default change, a cut where there is no relation; expressive devices (T2) about every 8–12 s, one device ≤ 3 times and never twice in a row unchanged; 2–3 marked peaks (T3); transitions stay clean. Prefer a hand-off from `runtime/handoffs/`, else a frame-level transition from `runtime/transitions/` ([transitions.md](references/transitions.md)); vary the axis of motion between chapters ([families](references/transitions.md#families)).
-5. **Motion is a function of time, locked to the beat, and brisk** — key events on the beat, other cuts on any beat; four tiers of change: a micro change (T0) at a median of ≤ 2 beats and never > 4 beats apart, compositions (T1) a median 2–3 s and ≤ 6 s, holds 0.2 s to 2 beats; reading stays 0.3 s a word with ≤ 5 primary words per state (a claim ≤ 8, in a pause); length follows content, phrase rounding spread over the scenes.
-6. **Texture decides how good a passing film is; clean is not simple** — fluid motion, motion blur, grain, light where things have volume; organic material flows; never at the cost of clarity; flat print may leave out blur if its card says why.
-7. **One system, one accent, one meaning** — accent, status, category and effect colours; the accent ≤ 10 % as a mark; one type scale per mode; a through-line or a frame of real information.
-8. **No people; the picture is technical** — graphic, typographic, diagrammatic or drawn.
-9. **The style points at the content** — choose the mode by what the content is; a mode chosen by form draws one scene from a real technical artefact.
-10. **Borrow grammar, not layout** — `PLAN.md` with the concept sentence and its rival test, a ban list from the Factory defaults and the AI tells, and the motif table before the picture.
-
 ## Files
 
 ```
-filmsmith/
+keynote-video/
 ├── SKILL.md
 ├── references/
-│   ├── foundations.md      theory: style vs taste, three layers of taste, the six-layer pyramid, where values come from
+│   ├── foundations.md      theory: style vs taste, three layers of taste, the six-layer pyramid, who decides, where values come from
 │   ├── principles.md       the ten core principles with theory and verdict dates
 │   ├── system.md           the shared layer: neutrals, accents, named colours with provenance, type pairing and scales, space, corners and strokes, motion and sound recipes
 │   ├── checklist.md        P0/P1/P2 for every film
@@ -154,15 +164,15 @@ filmsmith/
 │   ├── modes/              mode index, selection table, one card per mode
 │   └── themes/             per-theme narrative skeletons and rules (tech-product-launch, tech-explainer)
 ├── assets/
-│   ├── runtime/            shared code copied into every film as lib/: timing (length from content, the four tiers of change), motion, rng, beat, canvas (with speed-gated motion blur), text, boot, audio kit, font and GSAP setup
-│   │   ├── handoffs/       object-level hand-offs: one object carried from scene to scene (a word, an asset, a page, a strip of film, a seam)
+│   ├── runtime/            shared code copied into every film as lib/: timing, motion, rng, beat, canvas, text, boot, audio kit, font and GSAP setup
+│   │   ├── handoffs/       object-level hand-offs: one object carried from scene to scene
 │   │   └── transitions/    frame-level transitions between two rendered frames
 │   └── templates/          one renderable template per mode; CONTRACT.md is the template contract
 └── scripts/
-    ├── new-film.mjs        scaffold a film from a mode: prerequisite check, template, lib/ with VERSION, PLAN.md skeleton, pinned fonts and GSAP
-    ├── check-film.mjs      measure a render against renders/timing.json: format, loudness and jumps, flashes, key events (beat, picture, sound), stills, pace, settling, hand-offs, rhythm, the four tiers of change; INFO estimates of text, accent, picture onsets and sound balance
-    ├── lib/                check-film's measurement modules (media, picture, motion, flash, audio, text, timing)
+    ├── new-film.mjs        scaffold a film from a mode (step 2)
+    ├── check-film.mjs      measure a render against renders/timing.json (step 6)
+    ├── lib/                check-film's measurement modules
     ├── contact-sheet.sh
     ├── loudness.sh         loudness summary with the −14 LUFS / −1.5 dBTP gate
-    └── selftest.mjs        self-test for contributors and users: prerequisites, then every mode scaffolded, fitted, checked and stilled (red banner, black frame); --variants, --render <mode>
+    └── selftest.mjs        prerequisites, then every mode scaffolded, fitted, checked and stilled; --modes, --variants, --render <mode>
 ```

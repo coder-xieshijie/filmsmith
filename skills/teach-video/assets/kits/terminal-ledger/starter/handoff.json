@@ -1,0 +1,55 @@
+{
+  "_note": "Segment and handoff contract (the director writes it; segments read it). segments in time order: start/end in seconds, lines = narration line ids, goal = what this segment must make clear, hands = hand marks it may use. first / last describe the first and last frame: state is one sentence for people; chapter and counter (null = not shown) are the chapter label and the top-right counter; items are objects that stay on screen and pass to the next segment, box = [left, top, width, height] in screen px (border included, shadow excluded). One segment's last.items must equal the next one's first.items. Segment files receive with ctx.take(id) (a stand-in from the description when the previous segment is not built) and hand over with ctx.give(id, obj). npm run check verifies every last frame against last. Optional seams: [{ from, to, at, objects }]; without it, seams follow from neighbouring segments.",
+  "segments": [
+    {
+      "id": "demo-a1", "start": 0, "end": 7.5, "lines": ["a1"], "hands": 0,
+      "goal": "一周来了 1,200 封邮件，全读完要近 3,000 分钟：量很大",
+      "first": { "state": "空纸，口播圆窗在右下", "chapter": null, "counter": null, "items": {} },
+      "last": {
+        "state": "收件箱终端停在中间，数字还在（demo-a2 开头自己收掉）",
+        "chapter": "一周的邮件", "counter": null,
+        "items": {
+          "term": { "kind": "term", "box": [360, 130, 1200, 590], "title": "收件箱 · 本周" }
+        }
+      }
+    },
+    {
+      "id": "demo-a2", "start": 7.5, "end": 24.233, "lines": ["a2", "a3", "a4"], "hands": 0,
+      "goal": "程序读完全部邮件挑出 600 封；一半只是通知、订阅和广告，真正要你回复的只有两成",
+      "first": {
+        "state": "收件箱终端停在中间，数字还在",
+        "chapter": "一周的邮件", "counter": null,
+        "items": {
+          "term": { "kind": "term", "box": [360, 130, 1200, 590], "title": "收件箱 · 本周" }
+        }
+      },
+      "last": {
+        "state": "整页账本，600 颗点分三堆：通知类 300（黄，左）、要你回复 120（红，中上）、其余 180（灰，右下）；数字和三张签在堆旁",
+        "chapter": "一周的邮件", "counter": { "value": "600", "unit": "封可能要处理" },
+        "items": {
+          "ledger": { "kind": "ledger", "box": [0, 0, 1920, 1080], "frame": false, "rules": true,
+            "piles": [
+              { "n": 300, "c": [372, 536], "seed": 23, "color": "cont", "k": "c" },
+              { "n": 120, "c": [936, 396], "seed": 41, "squash": [1.1, 0.92], "color": "judge", "k": "j" },
+              { "n": 180, "c": [1272, 664], "seed": 53, "squash": [1.12, 0.9], "color": "rest", "k": "r" }
+            ] },
+          "labelsA": { "kind": "labels",
+            "list": [
+              { "type": "lbl", "text": "50%", "x": 228, "y": 262, "size": 66, "color": "ink" },
+              { "type": "lbl", "text": "约 300 封", "x": 400, "y": 286, "size": 28, "color": "mute" },
+              { "type": "chip", "text": "通知", "x": 200, "y": 726, "rot": -2.5 },
+              { "type": "chip", "text": "订阅", "x": 300, "y": 726, "rot": 1.8 },
+              { "type": "chip", "text": "广告", "x": 400, "y": 726, "rot": -1.2 },
+              { "type": "lbl", "text": "约两成", "x": 862, "y": 220, "size": 46, "color": "judgeS" },
+              { "type": "lbl", "text": "约 120 封", "x": 1012, "y": 236, "size": 28, "color": "mute" }
+            ] },
+          "howA": { "kind": "labels", "layer": "scr",
+            "list": [
+              { "type": "how", "text": "分法：按要不要你动手" },
+              { "type": "tag", "text": "点的位置和个数都是示意", "x": 120, "y": 814 }
+            ] }
+        }
+      }
+    }
+  ]
+}

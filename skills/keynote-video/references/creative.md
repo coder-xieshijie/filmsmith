@@ -1,6 +1,6 @@
 # Creative mode: composing a film from styles and transitions
 
-Filmsmith can be used in two ways. Pick one in step 1 of the workflow and say which.
+This skill can be used in two ways. Pick one in step 1 of the workflow and say which.
 
 | | Standard mode | Creative mode |
 |---|---|---|

@@ -1,0 +1,12 @@
+# Generated: check reports, contact sheets, engine records, render intermediates, the assembled page and collected sound cues
+build/reports/
+build/shots/
+.geo-check.json
+.review-packet/
+.hyperframes/
+index.html
+sfx.json
+renders/
+# Downloaded or copied at build time: GSAP, fonts, audio (media and fonts never go into Git)
+vendor/
+assets/

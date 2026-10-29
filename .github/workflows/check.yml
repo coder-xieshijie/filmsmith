@@ -6,8 +6,37 @@ on:
   pull_request:
 
 jobs:
-  unit:
+  skills:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Every skill's frontmatter name matches its folder; no SKILL.md at the root
+        run: |
+          node -e '
+            const fs = require("fs");
+            const bad = [];
+            if (fs.existsSync("SKILL.md")) bad.push("SKILL.md at the repository root hides skills/ from the skills CLI");
+            for (const dir of fs.readdirSync("skills")) {
+              const file = `skills/${dir}/SKILL.md`;
+              if (!fs.existsSync(file)) { bad.push(`${file} is missing`); continue; }
+              const head = fs.readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---/);
+              const name = head && head[1].match(/^name:\s*(.+)$/m);
+              const desc = head && head[1].match(/^description:\s*\S/m);
+              if (!name || name[1].trim() !== dir) bad.push(`${file}: name must be ${dir}`);
+              if (!desc) bad.push(`${file}: description is missing`);
+            }
+            if (bad.length) { console.error(bad.join("\n")); process.exit(1); }
+            console.log("skills:", fs.readdirSync("skills").join(", "));
+          '
+
+  keynote-video:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/keynote-video
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,3 +47,22 @@ jobs:
           find scripts assets/runtime assets/templates -name '*.mjs' -o -name '*.js' | grep -v '/test/' | while read -r f; do node --check "$f" || exit 1; done
       - name: Timing runtime tests
         run: node --test assets/runtime/test/timing.test.mjs
+
+  teach-video:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/teach-video
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax of every script and kit module
+        run: |
+          find scripts assets -name '*.mjs' -o -name '*.cjs' -o -name '*.js' | grep -v '/vendor/' | while read -r f; do node --check "$f" || exit 1; done
+          python -m py_compile scripts/voice/voice.py
+          for f in $(find scripts assets -name '*.sh'); do bash -n "$f" || exit 1; done

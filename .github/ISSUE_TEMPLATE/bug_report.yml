@@ -1,14 +1,21 @@
 name: Bug report
-description: A film fails to scaffold, fit, render or pass check-film, or renders wrong.
+description: A film fails to scaffold, fit, render or pass its checks, or renders wrong.
 labels: [bug]
 body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options:
+        - keynote-video
+        - teach-video
+    validations:
+      required: true
   - type: input
     id: mode
     attributes:
-      label: Style (mode) and palette
+      label: Style and palette (keynote-video) or style kit (teach-video)
       placeholder: "ink, cobalt"
-    validations:
-      required: true
   - type: textarea
     id: what
     attributes:
@@ -20,13 +27,13 @@ body:
     id: output
     attributes:
       label: Output
-      description: The relevant part of `npm run fit`, `npm run film` or `check-film` output.
+      description: The relevant part of the command output (for keynote-video, `npm run fit`, `npm run film` or `check-film`).
       render: text
   - type: textarea
     id: env
     attributes:
       label: Environment
-      description: OS, Node version, FFmpeg version, and the output of `node scripts/selftest.mjs --modes <mode>`.
+      description: OS, Node version, FFmpeg version, and the skill's self-test output (for keynote-video, `node scripts/selftest.mjs --modes <mode>` in `skills/keynote-video`).
       render: text
     validations:
       required: true

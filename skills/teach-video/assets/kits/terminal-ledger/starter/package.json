@@ -1,0 +1,17 @@
+{
+  "name": "teach-video-terminal-ledger",
+  "private": true,
+  "scripts": {
+    "init": "node build/init.cjs",
+    "web-init": "sh build/web-init.sh",
+    "anchors": "node build/anchors.cjs",
+    "check": "node build/check.cjs",
+    "shots": "node build/shots.cjs",
+    "render": "sh build/render.sh",
+    "finish": "sh build/finish.sh",
+    "assemble": "node build/assemble.cjs",
+    "kit-sync": "node build/kit-sync.cjs",
+    "hf": "node build/hf.cjs",
+    "dev": "node build/assemble.cjs && node build/hf.cjs preview"
+  }
+}
