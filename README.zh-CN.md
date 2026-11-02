@@ -14,7 +14,7 @@ Filmsmith 是一组只用代码做视频的 Agent Skill：每一帧画面都用 
 | Skill | 做什么 |
 |---|---|
 | [keynote-video](#keynote-video) | 技术产品的音乐短片：发布片、预告、showreel、数据片；十六种风格，没有旁白 |
-| [teach-video](#teach-video) | 给零基础观众讲清一个技术概念的中文讲解片，带旁白 |
+| [teach-video](#teach-video) | 给有基础的开发者讲清一个技术概念的中文讲解片，带旁白 |
 
 ## 安装
 
@@ -135,7 +135,7 @@ node ../filmsmith/skills/keynote-video/scripts/check-film.mjs renders/film.mp4 -
 
 ## teach-video
 
-[`skills/teach-video`](skills/teach-video/SKILL.md) 做中文讲解片，给零基础的观众讲清一个技术概念。画面用代码（HyperFrames）从风格包画出来：一条命令把解说稿变成配音、时间轴和逐词时间戳；导演把一支片拆成 2–3 段，段与段之间有交接约定；几何门禁和约 20 张图的核查包代替肉眼盯片；最后由讲解人自己录旁白。
+[`skills/teach-video`](skills/teach-video/SKILL.md) 做中文讲解片，给有基础的开发者讲清一个技术概念。画面用代码（HyperFrames）从风格包画出来：一条命令把解说稿变成配音、时间轴和逐词时间戳；导演把一支片拆成 2–3 段，段与段之间有交接约定；几何门禁和约 20 张图的核查包代替肉眼盯片；最后由讲解人自己录旁白。
 
 ```bash
 npx skills add coder-xieshijie/filmsmith --skill teach-video

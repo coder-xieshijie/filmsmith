@@ -26,7 +26,7 @@ Before dispatching, the dispatcher has: the delivery form; the topic card and fa
 | 5 | **Checker** (a fresh agent, strongest model) | Gets only the review packet (≤ 20 images and its `index.md`), the fact sheet, the brief's "for the checker" items and [teaching.md](teaching.md) "Picture". Writes `check-report.md` in the project | issues, each "segment · time · element id or visible text · what is wrong · which requirement" |
 | 6 | **Rework** (each segment's original maker; seams to the director) | Changes only the reported items; their segment's check passes | as in step 2 |
 | 7 | Renderer → checker again | as 4 and 5 | at most two rounds, then open items go onto the review page |
-| 8 | Dispatcher | A review page: the film, its contact sheet, at most three decisions, known issues, "not yet watched by a beginner" | |
+| 8 | Dispatcher | A review page: the film, its contact sheet, at most three decisions, known issues, "not yet watched by the audience" | |
 
 Dispatch rework as soon as a check report arrives; do not wait for the user. A change to the brief settled during the run (in a note to a maker or a rework order) goes into `brief.md` before the check, so the checker judges against what was decided.
 
@@ -45,7 +45,7 @@ Dispatch rework as soon as a check report arrives; do not wait for the user. A c
 Scripts have already measured geometry (text on lines, overlaps, out of frame, caption zone), empty frames, hand-mark count and read holds; the checker does not count them again, and questions a script result only by naming the frame and element. The checker judges what scripts cannot:
 
 1. Facts and sources: every number and claim on screen against the fact sheet; illustrative things labelled 示意.
-2. Understood: each learning goal, in order — could a beginner explain it from these pictures?
+2. Understood: each learning goal, in order — could a viewer from the audience explain it from these pictures?
 3. Every state change the narration names is acted out before → during → after, in sync with the words.
 4. Each rule of teaching.md "Picture" and each taste requirement in the brief, one by one.
 

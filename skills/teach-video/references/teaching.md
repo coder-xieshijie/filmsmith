@@ -1,10 +1,10 @@
 # Teaching and picture rules
 
-What makes these films work: a beginner actually understands, then it looks good. Read this when writing the topic card, the script and the brief, and when checking a film. Rules carry the date they were set; the theory behind them is cited as author and year.
+What makes these films work: the viewer actually understands, then it looks good. Read this when writing the topic card, the script and the brief, and when checking a film. Rules carry the date they were set; the theory behind them is cited as author and year.
 
 ## Priorities
 
-1. **Understood.** A viewer with no background can explain the mechanism afterwards. Everything else serves this.
+1. **Understood.** A viewer from the audience can explain the mechanism afterwards. The audience is developers who know the basics but not this mechanism (2026-10-24, 2026-11-02), unless the style kit names another. Everything else serves this.
 2. **Good.** Design, taste, one consistent style — after it is understood.
 
 **Accurate** is a floor, not a priority: simplify and omit freely, never say something false. Every analogy and illustration says where it stops being true.
@@ -13,7 +13,7 @@ Form: when the subject is a change, a process or a cause, animate it and then ho
 
 ## What counts as understood
 
-Before any picture, write 1–3 learning goals as "after watching, the viewer can explain / predict / compare …" (for example "explain why a long conversation gets slower"), each with one new question the film does not answer. Understanding means transfer: the viewer answers a new question with the mechanism, not by repeating the film (Mayer 2002). Never measure it by how understood viewers feel: a fluent explanation raises confidence more than understanding (Rozenblit & Keil 2002). An agent answering the transfer questions from the rough cut is a diagnosis only; it does not replace a real beginner, and a delivery says "not yet watched by a beginner" until one has.
+Before any picture, write 1–3 learning goals as "after watching, the viewer can explain / predict / compare …" (for example "explain why a long conversation gets slower"), each with one new question the film does not answer. Understanding means transfer: the viewer answers a new question with the mechanism, not by repeating the film (Mayer 2002). Never measure it by how understood viewers feel: a fluent explanation raises confidence more than understanding (Rozenblit & Keil 2002). An agent answering the transfer questions from the rough cut is a diagnosis only; it does not replace a real viewer from the audience, and a delivery says "not yet watched by the audience" until one has.
 
 ## Telling
 
@@ -22,8 +22,9 @@ Before any picture, write 1–3 learning goals as "after watching, the viewer ca
 - **Show the operation, then give the name.** The viewer sees what it does and why it is needed; the term comes last (Mayer et al. 2002).
 - **Question before answer.** Every passage answers a question the viewer has right now; cut passages that answer none. Pause before an important animation so the viewer can guess (Loewenstein 1994).
 - **One new thing at a time.** Each step adds one element and leaves the old ones still; about four new elements on screen at most (Cowan 2001).
-- **Name the misconception.** State the beginner's most likely wrong idea, break it with a phenomenon, give the new explanation, then use it on one more phenomenon (Posner et al. 1982; Muller et al. 2008).
+- **Name the misconception.** State the viewer's most likely wrong idea, break it with a phenomenon, give the new explanation, then use it on one more phenomenon (Posner et al. 1982; Muller et al. 2008).
 - **Analogies map structure** — relations and causes, not looks — and say where they break (Gentner 1983).
+- **One structure worth considering for a system of parts** (2026-10-24): open on the whole as one overview, enlarge one part of it into the next passage, and return to the overview to sum up. Whether a film uses it is the maker's judgement, not a default (2026-11-02).
 - **An opening hook must land on the question** (2026-10-21): a striking claim, a show of difficulty, or a sourced authority may open the film if it serves the topic and, by its end, the viewer knows the one question the film answers.
 
 ## Picture

@@ -1,15 +1,15 @@
 ---
 name: teach-video
-description: Makes narrated explainer films that teach a technical mechanism to viewers with no background — Chinese voice-over and on-screen text, pictures drawn in code (HyperFrames) from a style kit, built by a director agent and 2–3 segment agents and checked by a fresh agent. Use when asked to explain how something technical works in a video, to make or rework such a film or a silent loop for an article, or to set up its narration, timeline and checks.
+description: Makes narrated explainer films that teach a technical mechanism to developers who know the basics — Chinese voice-over and on-screen text, pictures drawn in code (HyperFrames) from a style kit, built by a director agent and 2–3 segment agents and checked by a fresh agent. Use when asked to explain how something technical works in a video, to make or rework such a film or a silent loop for an article, or to set up its narration, timeline and checks.
 descriptions:
-  zh-Hans: 制作给零基础观众讲清一个技术机制的讲解片：中文旁白与画面字，画面由代码按风格包绘制（HyperFrames），由一个导演 agent 加 2–3 个分段 agent 制作、一个没参与制作的 agent 核查。用于把技术原理做成讲解视频、制作或返工这类片子或文章里的无声循环动图，或为它准备旁白、时间轴与检查。
+  zh-Hans: 制作给有基础的开发者讲清一个技术机制的讲解片：中文旁白与画面字，画面由代码按风格包绘制（HyperFrames），由一个导演 agent 加 2–3 个分段 agent 制作、一个没参与制作的 agent 核查。用于把技术原理做成讲解视频、制作或返工这类片子或文章里的无声循环动图，或为它准备旁白、时间轴与检查。
 displayNames:
   zh-Hans: 片匠 · 讲解片
 ---
 
 # teach-video
 
-Makes an explainer film that a viewer with no background understands: a narration in Chinese is voiced and timed first, then the picture is written in code against that timeline, segment by segment, from a style kit that already holds the look, the components and the checks. `SKILL_ROOT` below is the folder that holds this `SKILL.md`; every script finds the others from there, so the folder can live anywhere.
+Makes an explainer film that its audience understands (by default developers who know the basics but not this mechanism; a style kit may name another audience): a narration in Chinese is voiced and timed first, then the picture is written in code against that timeline, segment by segment, from a style kit that already holds the look, the components and the checks. `SKILL_ROOT` below is the folder that holds this `SKILL.md`; every script finds the others from there, so the folder can live anywhere.
 
 ## Fixed rules
 
@@ -59,7 +59,7 @@ Commands, for a film with the `terminal-ledger` kit:
 7. **Render.** `npm run render`, then `npm run finish` → `renders/film.mp4`, poster, contact sheet; every line must be PASS (spec, caption band, every sound cue mixed, −14 LUFS, true peak ≤ −1.5 dBTP, full decode).
 8. **Review packet and independent check.** `node SKILL_ROOT/scripts/review-packet.mjs <project>` → at most 20 images (with a before / during / after row for each state change marked `!`) and an `index.md`. A fresh agent that did not make the film checks facts, learning goals, acted-out state changes and the brief's taste requirements, and writes `check-report.md` ([roles.md](references/roles.md), "What the checker checks").
 9. **Rework** by each segment's original maker, then steps 7–8 again; at most two rounds, then open items go to the user as known issues.
-10. **Hand to the user** as one page: the film, its contact sheet, at most three decisions, known issues, and "not yet watched by a beginner" until a real beginner has.
+10. **Hand to the user** as one page: the film, its contact sheet, at most three decisions, known issues, and "not yet watched by the audience" until someone from it who does not yet know the mechanism has.
 
 Silent loops for an article: `uv run SKILL_ROOT/scripts/voice/voice.py fonts --dir <fonts>` (or reuse a film's shared assets), `new-film`, then `npm run web-init -- <unit id> <seconds> [hand marks] <fonts>` instead of `init`; the unit's rules are in CARD.md's last section, and `npm run check`, `render`, `finish` work as for a film.
 

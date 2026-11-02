@@ -14,7 +14,7 @@ Filmsmith is a collection of agent skills that make videos with nothing but code
 | Skill | Makes |
 |---|---|
 | [keynote-video](#keynote-video) | Short music-driven films for a technical product — launches, teasers, showreels, data stories — in sixteen styles, with no voice-over |
-| [teach-video](#teach-video) | Chinese explainer films that teach one technical idea to newcomers, with a narrated voice-over |
+| [teach-video](#teach-video) | Chinese explainer films that teach one technical idea to developers who know the basics, with a narrated voice-over |
 
 ## Install
 
@@ -135,7 +135,7 @@ theory of taste ──▶ ten principles ──▶ sixteen styles ──▶ temp
 
 ## teach-video
 
-[`skills/teach-video`](skills/teach-video/SKILL.md) makes Chinese explainer films that teach one technical idea to newcomers, drawn in code (HyperFrames) from a style kit: one command turns a narration script into voice, timeline and word timestamps; a director splits the film into 2–3 segments with hand-off contracts; geometry gates and a ~20-image review packet replace eyeballing; the presenter records the voice-over at the end.
+[`skills/teach-video`](skills/teach-video/SKILL.md) makes Chinese explainer films that teach one technical idea to developers who know the basics, drawn in code (HyperFrames) from a style kit: one command turns a narration script into voice, timeline and word timestamps; a director splits the film into 2–3 segments with hand-off contracts; geometry gates and a ~20-image review packet replace eyeballing; the presenter records the voice-over at the end.
 
 ```bash
 npx skills add coder-xieshijie/filmsmith --skill teach-video
