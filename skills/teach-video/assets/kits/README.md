@@ -6,6 +6,8 @@ A kit turns one approved look into components, a starter project and a one-page 
 |---|---|---|
 | [terminal-ledger](terminal-ledger/README.md) | light terminal windows on paper × a ruled ledger of hand-drawn dots | software and AI work: sessions, logs, counts of events, sorting, decisions |
 
+"Fits" names the topics a kit suits and, when it differs from the default (developers who know the basics), the audience.
+
 ## What every kit contains
 
 ```

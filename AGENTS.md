@@ -14,7 +14,7 @@ Public repository of **Filmsmith**, a collection of agent skills that make video
 ## Layout
 
 - `skills/keynote-video/`: short music-driven films for technical products in sixteen styles, English on-screen text, no voice-over. Its `SKILL.md` lists its files.
-- `skills/teach-video/`: Chinese explainer films that teach one technical idea to newcomers, with a narrated voice-over. Its `SKILL.md` lists its files.
+- `skills/teach-video/`: Chinese explainer films that teach one technical idea to developers who know the basics, with a narrated voice-over. Its `SKILL.md` lists its files.
 - `README.md`, `README.zh-CN.md`: the collection, install, and one section per skill (what it makes, gallery, quick start).
 - `docs/keynote-video/`: `previews/` holds six-second animated previews of each style's demo for the README (full films are linked on YouTube; the original ten MP4s are also in the v0.1.0 Release); `showcase.jpg` is the README's still of all sixteen styles, one still per mode from `skills/keynote-video/references/modes/stills/`.
 - `docs/social-preview.jpg`: the repository's social preview (1280×640 at 2×, sixteen named keynote-video stills beside the name), uploaded by hand in the GitHub settings.
