@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 // Skill self-test: one command, PASS/FAIL per case.
 //   node <skill>/scripts/selftest/run.mjs [--only <name regex>] [--keep] [--jobs 4]
-// Four parts:
+// Five parts:
 //   1. The geo-check cases in cases.mjs: each becomes a minimal HyperFrames project of a few seconds in a temp folder and makes one
 //      deliberate mistake; the set of issue kinds geo-check reports must equal `expect` exactly (more or fewer is a FAIL).
-//   2. The style kit's demo segments must report 0: a fresh project from scripts/new-film.mjs with the kit's demo shared assets
-//      (fonts via scripts/voice/voice.py fonts, cached after the first download), assembled, then geo-check.
-//   3. The page-check cases in cases.mjs (PAGE_CASES): copies of that project with one segment each, checked by the kit's
+//   2. Each style kit's demo segments (KIT_DEMOS in cases.mjs) must report 0: a fresh project from scripts/new-film.mjs --kit <kit> with
+//      the kit's demo shared assets (fonts via scripts/voice/voice.py fonts, cached after the first download), assembled, then geo-check.
+//   3. The page-check cases in cases.mjs (PAGE_CASES): copies of the terminal-ledger demo project with one segment each, checked by the kit's
 //      build/page-checks.cjs (handoffs covered by a later element, the presenter reserve, handoff.json "persist").
-//   4. voice-t2s: scripts/voice/voice.py words on a cached transcript written in traditional characters must write simplified ones.
+//   4. The zoom cases in cases.mjs (ZOOM_CASES) on copies of the blueprint-zoom demo project (F.bp.zoom near the presenter reserve,
+//      a second zoom after a built or stand-in segment), and kit-shared-identical: lib.js, main.js and build/ byte-identical across kits.
+//   5. voice-t2s: scripts/voice/voice.py words on a cached transcript written in traditional characters must write simplified ones.
 // geo-check does not check the presenter reserve itself (the kit's build/page-checks.cjs compares that block pixel by pixel); the avatar-zone
 // case tests how geo-check treats the reserve: anything entirely inside it is not counted as content.
 // Needs node, uv, network on first run (GSAP from the npm registry, fonts, the pinned HyperFrames engine and its Chrome).
@@ -18,7 +20,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { CASES, PAGE_CASES, PAGE_ITEMS } from './cases.mjs';
+import { createRequire } from 'node:module';
+import { CASES, PAGE_CASES, PAGE_ITEMS, KIT_DEMOS, ZOOM_CASES } from './cases.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const SKILL = path.resolve(here, '../..');
@@ -36,12 +39,12 @@ const KIT = path.join(SKILL, 'assets/kits/terminal-ledger');
 sh('node', [path.join(KIT, 'starter/build/vendor.cjs'), path.join(tmp, 'gsap')]);
 const gsap = fs.readFileSync(path.join(tmp, 'gsap/vendor/gsap.min.js'));
 
-// The kit demo: new project + its own copy of the demo shared assets (JSON committed in the skill; fonts downloaded or cached)
-function kitDemo() {
-  const proj = path.join(tmp, 'kit-demo'), shared = path.join(tmp, 'kit-demo-shared');
-  sh('node', [path.join(SKILL, 'scripts/new-film.mjs'), proj]);
+// A kit demo: new project + its own copy of the demo shared assets (JSON committed in the skill; fonts downloaded or cached)
+function kitDemo(kit) {
+  const proj = path.join(tmp, 'kit-demo-' + kit), shared = path.join(tmp, 'kit-demo-shared-' + kit);
+  sh('node', [path.join(SKILL, 'scripts/new-film.mjs'), proj, '--kit', kit]);
   fs.mkdirSync(shared);
-  for (const f of ['narration.json', 'shared.json', 'timeline.json', 'words.json', 'contract.json']) fs.copyFileSync(path.join(KIT, 'demo-shared', f), path.join(shared, f));
+  for (const f of ['narration.json', 'shared.json', 'timeline.json', 'words.json', 'contract.json']) fs.copyFileSync(path.join(SKILL, 'assets/kits', kit, 'demo-shared', f), path.join(shared, f));
   sh('uv', ['run', path.join(SKILL, 'scripts/voice/voice.py'), 'fonts', '--dir', shared]);
   const fp = path.join(proj, 'film.json'), film = JSON.parse(fs.readFileSync(fp, 'utf8'));
   film.shared = shared; fs.writeFileSync(fp, JSON.stringify(film, null, 2) + '\n');
@@ -79,6 +82,57 @@ function pageCase(c, demo) {
     p.stdout.on('data', (b) => (log += b)); p.stderr.on('data', (b) => (log += b));
     p.on('close', (code) => { let report = null; try { report = JSON.parse(fs.readFileSync(out, 'utf8')); } catch {} resolve({ code, log, report }); });
   });
+}
+
+// A blueprint-zoom project: a copy of its kit-demo project with the case's handoff.json and segments (silent audio, no presenter windows)
+function zoomProject(name, c, demo, segs) {
+  const d = path.join(tmp, name);
+  fs.cpSync(demo, d, { recursive: true });
+  for (const f of fs.readdirSync(path.join(d, 'segments'))) fs.unlinkSync(path.join(d, 'segments', f));
+  for (const [id, body] of Object.entries(segs)) fs.writeFileSync(path.join(d, `segments/${id}.js`), /^defineSegment/.test(body) ? body : `defineSegment('${id}', function build(ctx) { ${body} });\n`);
+  fs.writeFileSync(path.join(d, 'handoff.json'), JSON.stringify(c.handoff, null, 1));
+  const fp = path.join(d, 'film.json'), film = JSON.parse(fs.readFileSync(fp, 'utf8'));
+  film.avatar = []; film.duration = Math.max(...c.handoff.segments.map((x) => x.end)); fs.writeFileSync(fp, JSON.stringify(film, null, 2) + '\n');
+  fs.writeFileSync(path.join(d, 'cues.js'), 'window.CUES = { T: {} };\n');
+  fs.mkdirSync(path.join(d, 'assets/audio'), { recursive: true });
+  for (const f of ['vo', 'bed']) fs.writeFileSync(path.join(d, `assets/audio/${f}.wav`), silentWav());
+  sh('node', [path.join(d, 'build/assemble.cjs')]);
+  return d;
+}
+// The box of window.__probe at time t, read by seeking the directly opened page (the project's own build/common.cjs)
+async function probeBox(d, t) {
+  const { open } = createRequire(import.meta.url)(path.join(d, 'build/common.cjs'));
+  const { seek, page, close } = await open();
+  try { await seek(t); return await page.evaluate(() => { const r = window.__probe.getBoundingClientRect(); return [r.left, r.top, r.width, r.height].map((v) => Math.round(v)); }); } finally { await close(); }
+}
+async function zoomCase(c, demo) {
+  try {
+    if (!c.probe) {
+      const d = zoomProject(c.name, c, demo, c.segs), out = path.join(tmp, c.name + '.page.json');
+      const r = spawnSync(process.execPath, [path.join(d, 'build/page-checks.cjs'), '--out', out], { encoding: 'utf8' });
+      let report = null; try { report = JSON.parse(fs.readFileSync(out, 'utf8')); } catch {}
+      return { code: r.status, log: (r.stdout || '') + (r.stderr || ''), report };
+    }
+    const built = await probeBox(zoomProject(c.name, c, demo, c.segs), c.probe.at);
+    const shell = await probeBox(zoomProject(c.name + '-shell', c, demo, { ...c.segs, [c.probe.standIn]: `defineSegment('${c.probe.standIn}', (ctx) => F.shell(ctx));` }), c.probe.at);
+    const off = Math.max(...built.map((v, i) => Math.abs(v - shell[i])));
+    return { code: 0, log: '', report: { issues: off > 2 ? [{ kind: 'zoom_origin', text: `built ${built.join(',')}, after a stand-in ${shell.join(',')}` }] : [] } };
+  } catch (e) { return { code: 2, log: e.message, report: null }; }
+}
+
+// The parts every kit shares (lib.js, main.js, build/) must be byte-identical across kits
+function kitDrift() {
+  const kits = path.join(SKILL, 'assets/kits'), names = fs.readdirSync(kits).filter((k) => fs.existsSync(path.join(kits, k, 'starter/package.json')));
+  const files = (k) => { const b = path.join(kits, k, 'starter'); const walk = (r) => fs.readdirSync(path.join(b, r), { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (['reports', 'shots'].includes(e.name) ? [] : walk(path.join(r, e.name))) : [path.join(r, e.name)]); return ['lib.js', 'main.js', ...walk('build')].sort(); };
+  const ref = names[0], issues = [];
+  for (const k of names.slice(1)) {
+    const a = files(ref), b = files(k);
+    for (const f of new Set([...a, ...b])) {
+      const pa = path.join(kits, ref, 'starter', f), pb = path.join(kits, k, 'starter', f);
+      if (!fs.existsSync(pa) || !fs.existsSync(pb) || !fs.readFileSync(pa).equals(fs.readFileSync(pb))) issues.push({ kind: 'kit_drift', text: `${k}/starter/${f} differs from ${ref}'s` });
+    }
+  }
+  return { code: 0, log: '', report: { issues } };
 }
 
 // voice-t2s: a shared-assets folder whose cached transcript (vo/a1.words.json, keyed by the audio's hash, so nothing is transcribed) is in
@@ -153,14 +207,16 @@ const jobs = CASES.map((c) => {
   const proj = c.same || c.name, args = c.args ?? byName[proj].args ?? [];
   return { name: c.name, what: c.what, expect: c.expect, proj, run: () => geo(path.join(tmp, proj), args, path.join(tmp, c.name + '.geo.json')) };
 });
-// The kit-demo project is built once, before the jobs, when a job needs it
-let demo = null, demoErr = null;
-const needDemo = () => { if (!demo && !demoErr) { try { demo = kitDemo(); } catch (e) { demoErr = e; } } if (demoErr) throw demoErr; return demo; };
-jobs.push({ name: 'kit-demo', what: 'the terminal-ledger kit demo segments must report 0', expect: [], kit: true, run: async () => { try { return await geo(needDemo(), [], path.join(tmp, 'kit-demo.geo.json')); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
-for (const c of PAGE_CASES) jobs.push({ name: c.name, what: c.what, expect: c.expect, kit: true, run: async () => { try { return await pageCase(c, needDemo()); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
+// Each kit-demo project is built once, before the jobs, when a job needs it; the page cases use terminal-ledger's
+const demos = {}, demoErrs = {};
+const needDemo = (kit = 'terminal-ledger') => { if (!demos[kit] && !demoErrs[kit]) { try { demos[kit] = kitDemo(kit); } catch (e) { demoErrs[kit] = e; } } if (demoErrs[kit]) throw demoErrs[kit]; return demos[kit]; };
+for (const kit of KIT_DEMOS) jobs.push({ name: 'kit-demo-' + kit, what: `the ${kit} kit demo segments must report 0`, expect: [], kit, run: async () => { try { return await geo(needDemo(kit), [], path.join(tmp, `kit-demo-${kit}.geo.json`)); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
+for (const c of PAGE_CASES) jobs.push({ name: c.name, what: c.what, expect: c.expect, kit: 'terminal-ledger', run: async () => { try { return await pageCase(c, needDemo()); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
+for (const c of ZOOM_CASES) jobs.push({ name: c.name, what: c.what, expect: c.expect, kit: 'blueprint-zoom', run: async () => { try { return await zoomCase(c, needDemo('blueprint-zoom')); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
+jobs.push({ name: 'kit-shared-identical', what: 'lib.js, main.js and build/ are byte-identical in every kit', expect: [], run: async () => kitDrift() });
 jobs.push({ name: 'voice-t2s', what: 'voice.py words turns a cached transcript in traditional characters (這樣的話 說過) into simplified ones', expect: [], run: async () => voiceT2S() });
 const todo = jobs.filter((j) => !ONLY || ONLY.test(j.name));
-if (todo.some((j) => j.kit)) { try { needDemo(); } catch (_) { /* each kit job reports it */ } }
+for (const kit of new Set(todo.map((j) => j.kit).filter(Boolean))) { try { needDemo(kit); } catch (_) { /* each kit job reports it */ } }
 for (const p of new Set(todo.map((j) => j.proj).filter(Boolean))) writeProject(byName[p]);
 const t0 = Date.now();
 const results = new Array(todo.length);
@@ -180,7 +236,7 @@ let fail = 0;
 for (const x of results) {
   if (!x.ok) fail++;
   const got = x.got ? (x.got.length ? x.got.join(', ') : 'none') : 'no report';
-  console.log(`${x.ok ? 'PASS' : 'FAIL'}  ${x.name.padEnd(24)} want ${x.want.length ? x.want.join(', ') : 'none'}, got ${got} (${x.sec.toFixed(1)} s)  ${x.what}`);
+  console.log(`${x.ok ? 'PASS' : 'FAIL'}  ${x.name.padEnd(26)} want ${x.want.length ? x.want.join(', ') : 'none'}, got ${got} (${x.sec.toFixed(1)} s)  ${x.what}`);
   if (!x.ok) {
     for (const i of x.r.report?.issues || []) console.log(`        ${i.kind}  ${i.text || ''}${i.other ? ' × ' + i.other : ''}  ${i.who || ''}`);
     if (!x.r.report || x.r.code === 2) console.log(x.r.log.split('\n').map((l) => '        ' + l).join('\n'));

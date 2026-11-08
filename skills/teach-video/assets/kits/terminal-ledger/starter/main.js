@@ -12,6 +12,8 @@
 // handoff.json "persist": small objects no segment animates that stay on screen across segments (a 示意 note, a legend). main builds each
 // from F.standIn.<kind> on its own layer above every segment and shows it from `from` to `to` (seconds, an anchor name from cues.js, or
 // "end"); segments never take, give or retire them, and the segment-end leftover check does not see them.
+// Components main.js relies on: shell.js (F.shell, F.standIn) always. chapter.js (F.chapterNow), counter.js (F.cntNow, F.cntRender) and
+// avatar.js (F.avatars) are used when the kit has them; a kit without a chapter label, a counter or presenter windows may leave them out.
 // Web loop units (film.json "web": true): coordinates are the logical canvas TOKENS.zone.W × H (1200×675); no narration, reading ctx.T throws
 // (write seconds); silent, ctx.hit does nothing; no presenter window.
 (function () {
@@ -19,6 +21,7 @@
   const SEGS = (HO.segments || []).slice().sort((a, b) => a.start - b.start);
   FILM.timeline = SEGS.length ? SEGS.map((s) => ({ id: s.id, t0: s.start, t1: s.end, hands: s.hands })) : [{ id: 'main', t0: 0, t1: FILM.duration }];
   const { tl, $ } = F;
+  const opt = (name) => (typeof F[name] === 'function' ? F[name] : () => {});   // optional component functions (see the header)
   const WEB = TOKENS.zone.web;
   const noCues = new Proxy({}, { get(_, k) { if (typeof k === 'symbol' || k === 'toJSON' || k === 'then') return undefined; throw new Error(`web loop units have no narration anchors: replace ctx.T.${String(k)} with seconds`); } });
   const PEAK = { tick: 0.001, paper: 0.054, stamp: 0.008, scratch: 0.038, whoosh: 0.356 };
@@ -40,8 +43,8 @@
       const prev = prevOf(s.id), prevBuilt = prev && window.SEGMENTS[prev] && !window.__segErrors.some((e) => e.seg === prev);
       // Previous segment not built (or failed): put the chapter label and the counter in place from the contract
       if (!prevBuilt) {
-        if (bin.chapter) F.chapterNow(bin.chapter);
-        if (bin.counter) F.cntNow(bin.counter.value, 'ho-' + s.id, bin.counter.unit, s.t0, s.t1, bin.counter.approx);
+        if (bin.chapter) opt('chapterNow')(bin.chapter);
+        if (bin.counter) opt('cntNow')(bin.counter.value, 'ho-' + s.id, bin.counter.unit, s.t0, s.t1, bin.counter.approx);
       }
       const ctx = {
         id: s.id, t0: s.t0, t1: s.t1, layer: layers[s.id], scr: scrs[s.id], ov, imps, cam, T: WEB ? noCues : (window.CUES || {}).T || {}, film: FILM, seg: H, in: bin, out: bout,
@@ -74,12 +77,13 @@
         } catch (err) { console.error(`[handoff.json persist.${id}] ${err.message}`); }
       }
     }
-    F.avatars(WEB ? [] : FILM.avatar || []);
-    tl.eventCallback('onUpdate', F.cntRender);
-    window.addEventListener('hf-seek', F.cntRender);
+    opt('avatars')(WEB ? [] : FILM.avatar || []);
+    const cntRender = opt('cntRender');
+    tl.eventCallback('onUpdate', cntRender);
+    window.addEventListener('hf-seek', cntRender);
     tl.set({}, {}, FILM.duration);
     window.__timelines.main = tl;
-    tl.seek(0); F.cntRender();
+    tl.seek(0); cntRender();
     window.__built = built.map((s) => s.id);
   }
 

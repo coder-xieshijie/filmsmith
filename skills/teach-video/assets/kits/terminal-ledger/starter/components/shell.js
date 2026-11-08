@@ -33,9 +33,11 @@
       // Neither end has handoff objects (the skeleton right after npm run init): the placeholder belongs to this segment and goes 0.1 s before its end (the film's last segment keeps it)
       if (empty2 && t1 < ctx.film.duration - 1e-3) F.set(g, { opacity: 0 }, t1 - 0.1);
     }
+    // chapter.js and counter.js are optional in a kit: without them a contract's chapter / counter is not drawn (page checks then report it)
     const fc = ctx.in.chapter || null, lc = ctx.out.chapter || null;
-    if (fc !== lc) { if (lc) F.chapter(lc, tm); else F.chapterHide(tm); }
+    if (fc !== lc && F.chapter) { if (lc) F.chapter(lc, tm); else F.chapterHide(tm); }
     const a = ctx.in.counter || null, b = ctx.out.counter || null;
+    if (!F.cntSeg) return;
     if (same(a, b)) { if (a) F.cntSeg(t0, t1, () => a.value); return; }
     if (a) F.cntSeg(t0, tm, () => a.value);
     F.unitsOff(tm);

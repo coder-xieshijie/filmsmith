@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- teach-video: a second style kit, `blueprint-zoom` (`new-film.mjs --kit blueprint-zoom`), for a system made of parts: an overview of equal-width layers whose nodes are hand-drawn (Rough.js outlines and hachure) while frames, connectors and circles stay clean; one layer is enlarged into the detail view, messages walk along the connectors, and the film returns to the overview. Repeated rounds of the same path may run fast once the first has walked it slowly; the presenter reserve stays empty all film. Extracted from an approved sample film, with demo segments on illustrative content.
+- teach-video: kit plumbing shared by every kit. A project's `vendor.json` lists extra npm libraries (package, version, file, sha256, licence) that `build/vendor.cjs` fetches and checks and `assemble` loads after GSAP, and `kit-sync` copies; the page checks read the paper colour from `tokens.js` (`col.paper`) instead of a constant; `main.js` and the stand-in segment need only `shell.js`, and call the chapter label, counter and presenter windows only when the kit has those components.
+
 ## 0.5.0 — 2026-11-08
 
 - repo: Filmsmith becomes a collection of video skills. Each skill lives in its own folder under `skills/` and installs on its own (`npx skills add coder-xieshijie/filmsmith --skill <name>`, or a link to `skills/<name>`); the repository root holds no `SKILL.md`. Both READMEs introduce the collection with one section per skill, and `AGENTS.md`, `CONTRIBUTING.md`, `THIRD-PARTY.md` and the issue and pull-request templates name the skill they are about. CI checks that every skill's frontmatter `name` matches its folder, then runs keynote-video's checks inside its folder.

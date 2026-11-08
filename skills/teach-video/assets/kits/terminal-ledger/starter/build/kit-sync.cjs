@@ -3,7 +3,7 @@
 // leave the project's own files alone.
 //   in a project:              npm run kit-sync [-- --check]
 //   for another project:       node <skill>/assets/kits/<kit>/starter/build/kit-sync.cjs <project-dir> [--check]
-// Synced: build/ (except reports, shots), lib.js, main.js, components/, style.css, tokens.js, package.json, hyperframes.json;
+// Synced: build/ (except reports, shots), lib.js, main.js, components/, style.css, tokens.js, vendor.json, package.json, hyperframes.json;
 // .gitignore gets the kit's lines it lacks appended, and keeps the project's own lines.
 // Untouched: film.json, handoff.json, cues.js, anchors.txt, segments/, sfx.json, assets/, vendor/, renders/, READMEs and other project files;
 // index.html is rewritten by the next command that assembles.
@@ -25,7 +25,7 @@ const kit = path.join(skill, 'assets/kits', film.kit || 'terminal-ledger', 'star
 if (!fs.existsSync(path.join(kit, 'build/kit-sync.cjs'))) { console.error(`no kit at ${kit}`); process.exit(2); }
 if (path.resolve(kit) === proj) { console.error('this is the kit itself: run it in a project, or pass the project directory'); process.exit(2); }
 
-const FILES = ['lib.js', 'main.js', 'style.css', 'tokens.js', 'package.json', 'hyperframes.json', '.gitignore'];
+const FILES = ['lib.js', 'main.js', 'style.css', 'tokens.js', 'vendor.json', 'package.json', 'hyperframes.json', '.gitignore'];
 const DIRS = ['build', 'components'];
 const SKIP = new Set(['build/reports', 'build/shots']);
 const list = (root, d) => fs.existsSync(path.join(root, d)) ? fs.readdirSync(path.join(root, d), { withFileTypes: true }).flatMap((e) => {
