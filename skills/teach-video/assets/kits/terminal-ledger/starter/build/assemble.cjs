@@ -6,7 +6,8 @@
 //    the engine splits scenes at top-level timed elements, so `hyperframes snapshot --review` recognises segments and gives every
 //    segment boundary and every handoff.json seam its own seam strip (scripts/review-packet.mjs uses it).
 // 2. Media and fonts: copies sound and fonts from film.json's shared directory into assets/ (media and fonts stay out of Git), subsets
-//    LXGW WenKai to the characters the project uses (re-subsets when they change), and fetches GSAP into vendor/ when missing (build/vendor.cjs).
+//    LXGW WenKai to the characters the project uses (re-subsets when they change), and fetches GSAP and any library in vendor.json into
+//    vendor/ when one is missing or its sha256 does not match the pin (build/vendor.cjs).
 // Web loop units (film.json "web": true): fonts only; no presenter windows, narration, music or sound cues; window.STAGE tells tokens.js the logical canvas.
 'use strict';
 const fs = require('fs'), path = require('path'), cp = require('child_process');
@@ -18,7 +19,11 @@ const exists = (p) => fs.existsSync(rel(p));
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 // ---------- vendor, sound and fonts ----------
-if (!['gsap.min.js', 'MotionPathPlugin.min.js', 'DrawSVGPlugin.min.js'].every((f) => exists('vendor/' + f))) cp.execFileSync('node', [path.join(__dirname, 'vendor.cjs'), dir], { stdio: 'inherit' });
+// Every vendor file is hashed against its pin (GSAP's in vendor.cjs, a kit's extra libraries in vendor.json); a missing, damaged or re-pinned one is fetched again
+const vendor = require('./vendor.cjs');
+let EXTRA, stale;
+try { EXTRA = Object.keys(vendor.readExtra(dir)); stale = vendor.stale(dir); } catch (e) { console.error(`[assemble] ${e.message}`); process.exit(1); }
+if (stale.length && cp.spawnSync('node', [path.join(__dirname, 'vendor.cjs'), dir], { stdio: 'inherit' }).status !== 0) process.exit(1);
 const shared = sharedDir();
 fs.mkdirSync(rel('assets/audio'), { recursive: true }); fs.mkdirSync(rel('assets/fonts'), { recursive: true });
 // Fonts are required for every project (films and web units): stop with the command that fetches them
@@ -80,7 +85,7 @@ const html = `<!doctype html>
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/MotionPathPlugin.min.js"></script>
 <script src="vendor/DrawSVGPlugin.min.js"></script>
-<script>window.STAGE = ${JSON.stringify(S)};</script>
+${EXTRA.map((f) => `<script src="vendor/${esc(f)}"></script>\n`).join('')}<script>window.STAGE = ${JSON.stringify(S)};</script>
 <script src="tokens.js"></script>
 <script src="lib.js"></script>
 ${comps.map((c) => `<script src="components/${c}"></script>`).join('\n')}

@@ -1,0 +1,87 @@
+{
+ "fps": 30,
+ "total": 734,
+ "lines": [
+  {
+   "id": "a1",
+   "scene": "A",
+   "text": "一次网页请求，要穿过这四层。",
+   "off": 0.159,
+   "dur": 2.841,
+   "start": 0.8,
+   "from": 24,
+   "frames": 85
+  },
+  {
+   "id": "b1",
+   "scene": "B",
+   "text": "放大服务端：路由、事件循环、处理函数。",
+   "off": 0.164,
+   "dur": 4.269,
+   "start": 5.633,
+   "from": 169,
+   "frames": 128
+  },
+  {
+   "id": "b2",
+   "scene": "B",
+   "text": "请求进了事件循环，处理函数写出一条查询，发给数据库。",
+   "off": 0.152,
+   "dur": 4.677,
+   "start": 10.7,
+   "from": 321,
+   "frames": 140
+  },
+  {
+   "id": "b3",
+   "scene": "B",
+   "text": "查到三行订单，原路送回浏览器。",
+   "off": 0.18,
+   "dur": 2.802,
+   "start": 15.767,
+   "from": 473,
+   "frames": 84
+  },
+  {
+   "id": "c1",
+   "scene": "C",
+   "text": "回到总图，服务端这一层讲完了。",
+   "off": 0.171,
+   "dur": 2.692,
+   "start": 19.767,
+   "from": 593,
+   "frames": 81
+  }
+ ],
+ "scenes": [
+  {
+   "scene": "A",
+   "manim": false,
+   "lines": [
+    "a1"
+   ],
+   "in": 0,
+   "out": 133
+  },
+  {
+   "scene": "B",
+   "manim": false,
+   "lines": [
+    "b1",
+    "b2",
+    "b3"
+   ],
+   "in": 133,
+   "out": 557
+  },
+  {
+   "scene": "C",
+   "manim": false,
+   "lines": [
+    "c1"
+   ],
+   "in": 557,
+   "out": 734
+  }
+ ]
+}

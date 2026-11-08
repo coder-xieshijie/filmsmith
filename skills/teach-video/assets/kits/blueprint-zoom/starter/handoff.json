@@ -1,0 +1,262 @@
+{
+ "_note": "Segment and handoff contract (the director writes it; segments read it). segments in time order: start/end in seconds, lines = narration line ids, goal = what this segment must make clear, hands = hand marks it may use. first / last describe the first and last frame: state is one sentence for people; chapter and counter (null = not shown) are the chapter label and the top-right counter; items are objects that stay on screen and pass to the next segment, box = [left, top, width, height] in screen px (border included, shadow excluded). One segment's last.items must equal the next one's first.items. Segment files receive with ctx.take(id) (a stand-in from the description when the previous segment is not built) and hand over with ctx.give(id, obj). npm run check verifies every last frame against last. Optional seams: [{ from, to, at, objects }]; without it, seams follow from neighbouring segments.",
+ "segments": [
+  {
+   "id": "demo-a",
+   "start": 0,
+   "end": 4.433,
+   "lines": [
+    "a1"
+   ],
+   "hands": 0,
+   "goal": "一次网页请求要穿过四层：先出服务端，其余三层从下往上加载，数据库在右边",
+   "first": {
+    "state": "只有服务端一层画好，其余是空纸",
+    "chapter": null,
+    "counter": null,
+    "items": {}
+   },
+   "last": {
+    "state": "四层总图画完，数据库框在服务端右侧，连线两头带箭头",
+    "chapter": "一次网页请求",
+    "counter": null,
+    "items": {
+     "ov": {
+      "kind": "overview",
+      "box": [
+       0,
+       0,
+       1920,
+       1080
+      ],
+      "rows": [
+       {
+        "key": "web",
+        "c": "blue",
+        "name": "浏览器",
+        "sub": "用户这边",
+        "y": 100,
+        "h": 130,
+        "inset": 20,
+        "cells": [
+         "地址栏",
+         "页面渲染",
+         "缓存",
+         "Cookie"
+        ]
+       },
+       {
+        "key": "net",
+        "c": "violet",
+        "name": "网络",
+        "y": 244,
+        "h": 130,
+        "inset": 20,
+        "cells": [
+         "DNS",
+         "TLS",
+         "CDN",
+         "负载均衡"
+        ]
+       },
+       {
+        "key": "srv",
+        "c": "teal",
+        "name": "服务端",
+        "sub": "处理请求",
+        "y": 388,
+        "h": 230,
+        "inset": 24,
+        "gap": 25,
+        "nameY": 14,
+        "cells": [
+         {
+          "title": "路由",
+          "sub": "按路径分发",
+          "seed": 41
+         },
+         {
+          "title": "事件循环",
+          "sub": "一次只做一件事",
+          "seed": 47,
+          "loop": [
+           675,
+           385,
+           250,
+           250
+          ]
+         },
+         {
+          "title": "处理函数",
+          "sub": "读写订单",
+          "seed": 43
+         }
+        ]
+       },
+       {
+        "key": "sys",
+        "c": "stone",
+        "name": "系统",
+        "sub": "底座",
+        "y": 632,
+        "h": 130,
+        "inset": 20,
+        "cells": [
+         "进程",
+         "内存",
+         "磁盘",
+         "网卡",
+         "时钟"
+        ]
+       }
+      ],
+      "side": {
+       "row": "srv",
+       "c": "red",
+       "title": "数据库",
+       "sub": "订单表"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "demo-b",
+   "start": 4.433,
+   "end": 24.467,
+   "lines": [
+    "b1",
+    "b2",
+    "b3",
+    "c1"
+   ],
+   "hands": 0,
+   "goal": "放大服务端成详图，一个请求沿连线走到数据库再原路回到浏览器；回到总图，服务端打勾",
+   "first": {
+    "state": "四层总图画完，数据库框在服务端右侧，连线两头带箭头",
+    "chapter": "一次网页请求",
+    "counter": null,
+    "items": {
+     "ov": {
+      "kind": "overview",
+      "box": [
+       0,
+       0,
+       1920,
+       1080
+      ],
+      "rows": [
+       {
+        "key": "web",
+        "c": "blue",
+        "name": "浏览器",
+        "sub": "用户这边",
+        "y": 100,
+        "h": 130,
+        "inset": 20,
+        "cells": [
+         "地址栏",
+         "页面渲染",
+         "缓存",
+         "Cookie"
+        ]
+       },
+       {
+        "key": "net",
+        "c": "violet",
+        "name": "网络",
+        "y": 244,
+        "h": 130,
+        "inset": 20,
+        "cells": [
+         "DNS",
+         "TLS",
+         "CDN",
+         "负载均衡"
+        ]
+       },
+       {
+        "key": "srv",
+        "c": "teal",
+        "name": "服务端",
+        "sub": "处理请求",
+        "y": 388,
+        "h": 230,
+        "inset": 24,
+        "gap": 25,
+        "nameY": 14,
+        "cells": [
+         {
+          "title": "路由",
+          "sub": "按路径分发",
+          "seed": 41
+         },
+         {
+          "title": "事件循环",
+          "sub": "一次只做一件事",
+          "seed": 47,
+          "loop": [
+           675,
+           385,
+           250,
+           250
+          ]
+         },
+         {
+          "title": "处理函数",
+          "sub": "读写订单",
+          "seed": 43
+         }
+        ]
+       },
+       {
+        "key": "sys",
+        "c": "stone",
+        "name": "系统",
+        "sub": "底座",
+        "y": 632,
+        "h": 130,
+        "inset": 20,
+        "cells": [
+         "进程",
+         "内存",
+         "磁盘",
+         "网卡",
+         "时钟"
+        ]
+       }
+      ],
+      "side": {
+       "row": "srv",
+       "c": "red",
+       "title": "数据库",
+       "sub": "订单表"
+      }
+     }
+    }
+   },
+   "last": {
+    "state": "回到四层总图，服务端左栏有“✓ 讲过”",
+    "chapter": "一次网页请求",
+    "counter": null,
+    "items": {}
+   }
+  }
+ ],
+ "persist": {
+  "note": {
+   "kind": "labels",
+   "layer": "scr",
+   "list": [
+    {
+     "type": "tag",
+     "text": "分层与内容都是示意",
+     "x": 1622,
+     "y": 40
+    }
+   ],
+   "from": 0.6,
+   "to": "end"
+  }
+ }
+}

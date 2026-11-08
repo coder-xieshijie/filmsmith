@@ -45,16 +45,16 @@ Who does each step and how agents are dispatched: [roles.md](references/roles.md
 <film>/look-board.md only after a direction review (gate 1); otherwise the kit is the look
 ```
 
-Commands, for a film with the `terminal-ledger` kit:
+Commands (the kit is picked when the project is made; [assets/kits/README.md](assets/kits/README.md) lists which topics each kit fits):
 
 1. **Topic card and fact sheet** in `topic.md`, after deciding the delivery form (film, silent loops for an article, or both): what goes in it and the fact sheet's format are in [process.md](references/process.md) "Topic card and fact sheet".
 2. **Narration and shared assets.** Write `shared/narration.json` (one object per line: `id`, `scene`, `text`, optional `pause`; length per character count: [voice README](scripts/voice/README.md) "Input") and optionally `shared.json`, then
    `uv run SKILL_ROOT/scripts/voice/voice.py all --dir <film>/shared` → voice per line, `timeline.json`, `audio/vo.wav`, `words.json`, temporary music and sound cues, `contract.json`, fonts. The kit's `demo-shared/` is a complete example.
 3. **Brief.** Fill [brief-template.md](references/brief-template.md): the result wanted, segments and learning goals, files to read, per-segment requirements (the picture's action line by line), hard requirements with who measures each, the hand-back.
 4. **Director sets up the project.**
-   `node SKILL_ROOT/scripts/new-film.mjs <film>/<version>` copies the kit's starter (and fetches GSAP); inside it
+   `node SKILL_ROOT/scripts/new-film.mjs <film>/<version> [--kit terminal-ledger | blueprint-zoom]` copies the kit's starter (and fetches GSAP and the kit's other libraries); inside it
    `npm run init -- --shared ../shared --segments "<id>:<firstLine>-<lastLine>,…" --title "<film title>"` cuts 2–3 segments by line IDs and writes `film.json`, the `handoff.json` skeleton, stand-in segments and `anchors.txt`. The director fills `handoff.json` (each segment's goal, hand marks, first and last state and the objects handed over; small objects no segment animates go under `persist`), picks anchor words in `anchors.txt`, marking with `!` each state change the narration names, runs `npm run anchors`, and `npm run check -- --no-hf` must pass.
-5. **Segment makers** (2–3 in parallel), each writing only `segments/<id>.js` from the kit's [CARD.md](assets/kits/terminal-ledger/CARD.md) and [ref/look.jpg](assets/kits/terminal-ledger/ref/look.jpg). Done when `npm run check -- --seg <id>` ends in `pass` and `npm run shots -- --seg <id>` looks right.
+5. **Segment makers** (2–3 in parallel), each writing only `segments/<id>.js` from the kit's `CARD.md` and `ref/look.jpg` (`assets/kits/<kit>/`). Done when `npm run check -- --seg <id>` ends in `pass` and `npm run shots -- --seg <id>` looks right.
 6. **Assembly.** The director takes the makers' notes, fixes the seams, and runs the full `npm run check` (needed for the film-wide hand-mark count).
 7. **Render.** `npm run render`, then `npm run finish` → `renders/film.mp4`, poster, contact sheet; every line must be PASS (spec, caption band, every sound cue mixed, −14 LUFS, true peak ≤ −1.5 dBTP, full decode).
 8. **Review packet and independent check.** `node SKILL_ROOT/scripts/review-packet.mjs <project>` → at most 20 images (with a before / during / after row for each state change marked `!`) and an `index.md`. A fresh agent that did not make the film checks facts, learning goals, acted-out state changes and the brief's taste requirements, and writes `check-report.md` ([roles.md](references/roles.md), "What the checker checks").
@@ -72,9 +72,10 @@ Silent loops for an article: `uv run SKILL_ROOT/scripts/voice/voice.py fonts --d
 | Director / segment / renderer / checker split, concurrency, rework, what each hands back | [references/roles.md](references/roles.md) |
 | Writing the brief for the agents | [references/brief-template.md](references/brief-template.md) |
 | Narration input, shared assets, re-timing to a recording | [scripts/voice/README.md](scripts/voice/README.md) |
-| What a kit is, how to extract a new one from an approved film | [assets/kits/README.md](assets/kits/README.md) |
+| The kits and the topics each fits; what a kit is; how to extract a new one from an approved film | [assets/kits/README.md](assets/kits/README.md) |
 | terminal-ledger: project layout, every `npm run` command, handoff contract, engine version, measurements, limits | [assets/kits/terminal-ledger/README.md](assets/kits/terminal-ledger/README.md) |
-| Writing a segment (the one page segment makers read) | [assets/kits/terminal-ledger/CARD.md](assets/kits/terminal-ledger/CARD.md) |
+| blueprint-zoom: its look, components, Rough.js, measurements, limits | [assets/kits/blueprint-zoom/README.md](assets/kits/blueprint-zoom/README.md) |
+| Writing a segment (the one page segment makers read) | the kit's `CARD.md`: [terminal-ledger](assets/kits/terminal-ledger/CARD.md), [blueprint-zoom](assets/kits/blueprint-zoom/CARD.md) |
 | Check scripts: geometry and measurable brief rules; delivery spec; review packet | header comments of `scripts/geo-check.cjs`, `scripts/unit-check.sh`, `scripts/review-packet.mjs` (usage only, not the source) |
 | Proving the scripts still work | `node SKILL_ROOT/scripts/selftest/run.mjs` (every case PASS) |
 

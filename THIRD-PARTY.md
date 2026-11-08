@@ -49,12 +49,13 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 
 ## teach-video
 
-Paths are inside `skills/teach-video/`. `scripts/new-film.mjs` and `scripts/voice/voice.py fonts` download GSAP and the fonts into each film folder and check their sha256; `npx hyperframes` fetches HyperFrames, its headless Chrome and, for word timestamps, the Whisper model on first use. Nothing below is committed to this repository.
+Paths are inside `skills/teach-video/`. `scripts/new-film.mjs` and `scripts/voice/voice.py fonts` download GSAP, the libraries a kit lists in its `vendor.json` and the fonts into each film folder and check their sha256; `npx hyperframes` fetches HyperFrames, its headless Chrome and, for word timestamps, the Whisper model on first use. Nothing below is committed to this repository.
 
 | Component | Version and licence | Used for |
 |---|---|---|
 | [HyperFrames](https://github.com/heygen-com/hyperframes) | 0.8.214, Apache-2.0 | Rendering, checks, snapshots, transcription |
 | [GSAP](https://gsap.com) with MotionPathPlugin and DrawSVGPlugin | 3.15.0, GreenSock standard no-charge licence, from the npm registry | Animation timeline |
+| [Rough.js](https://github.com/rough-stuff/rough) | 4.6.6, MIT, from the npm registry (blueprint-zoom kit, `starter/vendor.json`) | Hand-drawn node outlines and hachure |
 | [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) Medium | v1.522, OFL-1.1 | On-screen Chinese text |
 | [IBM Plex Mono](https://github.com/google/fonts) Medium | google/fonts commit 47d54ca1, OFL-1.1 | Terminal text |
 | [edge-tts](https://github.com/rany2/edge-tts) | 7.3.1, LGPL-3.0, installed by `uv` when `voice.py` runs | Placeholder voice-over only; the presenter records the final voice |
@@ -62,4 +63,4 @@ Paths are inside `skills/teach-video/`. `scripts/new-film.mjs` and `scripts/voic
 | Whisper small | Downloaded by `hyperframes transcribe` | Word timestamps |
 | fonttools, FFmpeg | Called at run time, not distributed | Font subsetting, audio and video processing |
 
-The temporary music bed and the sound effects are synthesised in code by `voice.py` and released under CC0. The kit's demo segments use made-up data (a week of e-mail and similar), labelled as illustrative on screen.
+The temporary music bed and the sound effects are synthesised in code by `voice.py` and released under CC0. The kits' demo segments use made-up content (terminal-ledger: a week of e-mail and similar; blueprint-zoom: an illustrative system diagram), labelled as illustrative on screen.

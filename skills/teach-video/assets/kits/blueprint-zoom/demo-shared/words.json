@@ -1,0 +1,449 @@
+{
+"_note": "Word timestamps: each vo/<id> transcribed on its own, plus the line start (scripts/voice/voice.py words). Use the times only; the text of record is narration.json (the transcript mishears characters and spells numbers as read).",
+"words": [
+{
+"line": "a1",
+"text": "一次",
+"start": 0.841,
+"end": 0.931
+},
+{
+"line": "a1",
+"text": "网",
+"start": 1.041,
+"end": 1.441
+},
+{
+"line": "a1",
+"text": "页",
+"start": 1.441,
+"end": 1.921
+},
+{
+"line": "a1",
+"text": "请",
+"start": 1.921,
+"end": 2.041
+},
+{
+"line": "a1",
+"text": "求",
+"start": 2.041,
+"end": 2.216
+},
+{
+"line": "a1",
+"text": "要",
+"start": 2.216,
+"end": 2.391
+},
+{
+"line": "a1",
+"text": "穿",
+"start": 2.391,
+"end": 2.771
+},
+{
+"line": "a1",
+"text": "过",
+"start": 2.801,
+"end": 2.881
+},
+{
+"line": "a1",
+"text": "这",
+"start": 2.941,
+"end": 3.021
+},
+{
+"line": "a1",
+"text": "四",
+"start": 3.081,
+"end": 3.221
+},
+{
+"line": "a1",
+"text": "层。",
+"start": 3.221,
+"end": 3.721
+},
+{
+"line": "b1",
+"text": "放",
+"start": 5.633,
+"end": 5.669
+},
+{
+"line": "b1",
+"text": "大",
+"start": 5.669,
+"end": 5.739
+},
+{
+"line": "b1",
+"text": "服",
+"start": 5.739,
+"end": 5.859
+},
+{
+"line": "b1",
+"text": "务",
+"start": 5.859,
+"end": 6.249
+},
+{
+"line": "b1",
+"text": "端,",
+"start": 6.249,
+"end": 6.709
+},
+{
+"line": "b1",
+"text": "路",
+"start": 6.959,
+"end": 7.129
+},
+{
+"line": "b1",
+"text": "由,",
+"start": 7.129,
+"end": 7.819
+},
+{
+"line": "b1",
+"text": "事",
+"start": 7.819,
+"end": 7.939
+},
+{
+"line": "b1",
+"text": "件",
+"start": 7.939,
+"end": 7.999
+},
+{
+"line": "b1",
+"text": "循",
+"start": 8.049,
+"end": 8.429
+},
+{
+"line": "b1",
+"text": "环,",
+"start": 8.429,
+"end": 9.049
+},
+{
+"line": "b1",
+"text": "处",
+"start": 9.109,
+"end": 9.139
+},
+{
+"line": "b1",
+"text": "理",
+"start": 9.139,
+"end": 9.229
+},
+{
+"line": "b1",
+"text": "函",
+"start": 9.229,
+"end": 9.499
+},
+{
+"line": "b1",
+"text": "数。",
+"start": 9.499,
+"end": 9.769
+},
+{
+"line": "b2",
+"text": "请",
+"start": 10.7,
+"end": 10.768
+},
+{
+"line": "b2",
+"text": "求",
+"start": 10.768,
+"end": 10.848
+},
+{
+"line": "b2",
+"text": "进",
+"start": 10.848,
+"end": 10.928
+},
+{
+"line": "b2",
+"text": "了",
+"start": 10.998,
+"end": 11.098
+},
+{
+"line": "b2",
+"text": "事",
+"start": 11.178,
+"end": 11.298
+},
+{
+"line": "b2",
+"text": "件",
+"start": 11.298,
+"end": 11.448
+},
+{
+"line": "b2",
+"text": "循",
+"start": 11.448,
+"end": 11.898
+},
+{
+"line": "b2",
+"text": "环,",
+"start": 11.898,
+"end": 12.518
+},
+{
+"line": "b2",
+"text": "处",
+"start": 12.698,
+"end": 12.858
+},
+{
+"line": "b2",
+"text": "理",
+"start": 12.958,
+"end": 12.968
+},
+{
+"line": "b2",
+"text": "函",
+"start": 12.968,
+"end": 13.278
+},
+{
+"line": "b2",
+"text": "数",
+"start": 13.278,
+"end": 13.368
+},
+{
+"line": "b2",
+"text": "写",
+"start": 13.368,
+"end": 13.638
+},
+{
+"line": "b2",
+"text": "出",
+"start": 13.708,
+"end": 13.788
+},
+{
+"line": "b2",
+"text": "一",
+"start": 13.788,
+"end": 13.888
+},
+{
+"line": "b2",
+"text": "条",
+"start": 13.888,
+"end": 13.988
+},
+{
+"line": "b2",
+"text": "查",
+"start": 13.988,
+"end": 14.078
+},
+{
+"line": "b2",
+"text": "询,",
+"start": 14.088,
+"end": 14.648
+},
+{
+"line": "b2",
+"text": "发",
+"start": 14.648,
+"end": 14.708
+},
+{
+"line": "b2",
+"text": "给",
+"start": 14.748,
+"end": 14.848
+},
+{
+"line": "b2",
+"text": "数",
+"start": 14.848,
+"end": 14.948
+},
+{
+"line": "b2",
+"text": "据",
+"start": 14.948,
+"end": 15.248
+},
+{
+"line": "b2",
+"text": "库。",
+"start": 15.248,
+"end": 15.548
+},
+{
+"line": "b3",
+"text": "查",
+"start": 15.767,
+"end": 15.857
+},
+{
+"line": "b3",
+"text": "到",
+"start": 15.857,
+"end": 15.947
+},
+{
+"line": "b3",
+"text": "三",
+"start": 15.947,
+"end": 16.097
+},
+{
+"line": "b3",
+"text": "行",
+"start": 16.187,
+"end": 16.307
+},
+{
+"line": "b3",
+"text": "订",
+"start": 16.307,
+"end": 16.817
+},
+{
+"line": "b3",
+"text": "单,",
+"start": 17.027,
+"end": 17.087
+},
+{
+"line": "b3",
+"text": "原",
+"start": 17.087,
+"end": 17.217
+},
+{
+"line": "b3",
+"text": "路",
+"start": 17.327,
+"end": 17.347
+},
+{
+"line": "b3",
+"text": "送",
+"start": 17.347,
+"end": 17.477
+},
+{
+"line": "b3",
+"text": "回",
+"start": 17.477,
+"end": 17.607
+},
+{
+"line": "b3",
+"text": "浏",
+"start": 17.607,
+"end": 18.007
+},
+{
+"line": "b3",
+"text": "览",
+"start": 18.007,
+"end": 18.407
+},
+{
+"line": "b3",
+"text": "器。",
+"start": 18.407,
+"end": 18.627
+},
+{
+"line": "c1",
+"text": "回",
+"start": 19.796,
+"end": 19.836
+},
+{
+"line": "c1",
+"text": "到",
+"start": 19.836,
+"end": 19.996
+},
+{
+"line": "c1",
+"text": "总",
+"start": 19.996,
+"end": 20.156
+},
+{
+"line": "c1",
+"text": "图,",
+"start": 20.186,
+"end": 21.026
+},
+{
+"line": "c1",
+"text": "服",
+"start": 21.026,
+"end": 21.116
+},
+{
+"line": "c1",
+"text": "务",
+"start": 21.116,
+"end": 21.396
+},
+{
+"line": "c1",
+"text": "端",
+"start": 21.396,
+"end": 21.606
+},
+{
+"line": "c1",
+"text": "这",
+"start": 21.696,
+"end": 21.766
+},
+{
+"line": "c1",
+"text": "一",
+"start": 21.766,
+"end": 21.846
+},
+{
+"line": "c1",
+"text": "层",
+"start": 21.846,
+"end": 22.136
+},
+{
+"line": "c1",
+"text": "讲",
+"start": 22.136,
+"end": 22.226
+},
+{
+"line": "c1",
+"text": "完了。",
+"start": 22.226,
+"end": 22.596
+}
+]
+}

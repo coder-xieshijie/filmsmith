@@ -90,7 +90,10 @@ export const CASES = [
   },
 ];
 
-// Page-check cases for the kit's build/page-checks.cjs. Each copies the kit-demo project, replaces handoff.json with one segment "cov"
+// Style kits whose demo segments must report 0 in geo-check (one kit-demo-<kit> job each; a fresh project from scripts/new-film.mjs --kit <kit>).
+export const KIT_DEMOS = ['terminal-ledger', 'blueprint-zoom'];
+
+// Page-check cases for the kit's build/page-checks.cjs. Each copies the terminal-ledger kit-demo project, replaces handoff.json with one segment "cov"
 // (0–3 s, no presenter windows) whose last.items are a window and a strip of cells, writes segments/cov.js from `seg`, adds `persist`
 // (handoff.json "persist", built by main.js) and runs the page checks; the set of issue kinds must equal `expect`.
 const WIN = `const w = F.term(L, { title: '模型', x: 400, y: 200, w: 800, h: 400 });`;
@@ -114,5 +117,45 @@ export const PAGE_CASES = [
     name: 'page-reserve', what: 'no presenter windows; a persist label sits in the presenter reserve from 1 to 2 s',
     seg: WIN + STRIP + GIVE, persist: { inReserve: { kind: 'labels', list: [{ type: 'lbl', text: '占位', x: 1640, y: 680, size: 28 }], from: 1, to: 2 } },
     expect: ['avatar_zone'],
+  },
+];
+
+// Zoom cases for the blueprint-zoom kit (F.bp.zoom): copies of its kit-demo project with their own segments and handoff.json.
+//   zoom-reserve: the bottom layer starts above the presenter reserve and ends below it, so it sweeps through it on the push; the
+//                 page checks must find nothing (the layer has to fade fast).
+//   zoom-origin:  s1 zooms the server layer and returns, s2 zooms the network layer; the bottom band's box mid-push in s2 must be the
+//                 same whether s1 is built or is the F.shell stand-in (each zoom pushes about its own centre). `probe` names the element.
+const ZROWS = [
+  { key: 'a', c: 'blue', name: '上层', y: 120, h: 130, inset: 20, cells: ['甲', '乙'] },
+  { key: 'b', c: 'teal', name: '中层', y: 270, h: 260, inset: 24, cells: ['丙', '丁'] },
+  { key: 'c', c: 'stone', name: '底层', y: 650, h: 110, inset: 18, cells: ['戊', '己'] },
+];
+const OV4 = { kind: 'overview', box: [0, 0, 1920, 1080], rows: [
+  { key: 'web', c: 'blue', name: '浏览器', y: 100, h: 130, inset: 20, cells: ['地址栏', '缓存'] },
+  { key: 'net', c: 'violet', name: '网络', y: 244, h: 130, inset: 20, cells: ['DNS', 'CDN'] },
+  { key: 'srv', c: 'teal', name: '服务端', y: 388, h: 230, inset: 24, cells: ['路由', '处理函数'] },
+  { key: 'sys', c: 'stone', name: '系统', y: 632, h: 130, inset: 20, cells: ['进程', '磁盘'] }] };
+const EMPTY = { state: '', chapter: null, counter: null, items: {} };
+export const ZOOM_CASES = [
+  {
+    name: 'zoom-reserve', what: 'blueprint-zoom: a layer that sweeps through the presenter reserve on the push (ends below it) fades fast; page checks find nothing',
+    handoff: { segments: [{ id: 'zr', start: 0, end: 4, lines: [], hands: 0, goal: 'zoom-reserve', first: EMPTY, last: EMPTY }] },
+    segs: { zr: `const ov = F.bp.overview(ctx.layer, { rows: ${JSON.stringify(ZROWS)}, visible: true });
+      const z = F.bp.zoom(ov, 'a', { detail: [50, 120, 1500, 400] }); z.in(0.8); z.out(2.4);` },
+    expect: [],
+  },
+  {
+    name: 'zoom-origin', what: 'blueprint-zoom: a second zoom on another layer pushes about its own centre, built or after a stand-in (bottom band at 5.6 s)',
+    handoff: { segments: [
+      { id: 's1', start: 0, end: 4.5, lines: [], hands: 0, goal: 's1', first: EMPTY, last: { state: '', chapter: null, counter: null, items: { ov: OV4 } } },
+      { id: 's2', start: 4.5, end: 9, lines: [], hands: 0, goal: 's2', first: { state: '', chapter: null, counter: null, items: { ov: OV4 } }, last: EMPTY }] },
+    segs: {
+      s1: `const ov = F.bp.overview(ctx.layer, Object.assign({}, ctx.out.items.ov, { visible: true }));
+        const z = F.bp.zoom(ov, 'srv', { detail: [50, 240, 1500, 540] }); z.in(0.5); z.out(2.2); ctx.give('ov', ov);`,
+      s2: `const ov = ctx.take('ov'); window.__probe = ov.rows.sys.band.el;
+        const z = F.bp.zoom(ov, 'net', { detail: [50, 240, 1500, 540] }); z.in(5.0); z.out(7.0);`,
+    },
+    probe: { at: 5.6, standIn: 's1' },
+    expect: [],
   },
 ];

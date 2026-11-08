@@ -3,7 +3,8 @@
 // 0. Handoff contract is consistent: each segment's last.items equals the next segment's first.items.
 // 1. Presenter reserve: outside the presenter windows (film.json "avatar"), the reserve x 1580–1880, y 560–860 must be plain paper in
 //    every frame. Each sampled frame first lists the visible painted elements whose box (grown by 40 px for shadows, blur and stroke width)
-//    reaches into the reserve; only frames with such an element are screenshotted and compared pixel by pixel with the paper colour.
+//    reaches into the reserve; only frames with such an element are screenshotted and compared pixel by pixel with the paper colour
+//    (tokens.js col.paper, read from the page, so a kit with another paper needs no change here).
 //    Painted means own text, a background, a border, a shadow, an SVG shape or an image; a kit that paints with ::before / ::after
 //    must add that here.
 // 2. Handoffs: for each built segment, at its last frame (end − 1/30) every item of handoff.json last.items was given, is visible and
@@ -22,10 +23,12 @@ const [A, B] = range(o, FM);
 const STEP = Number(o['zone-step'] || 1 / 15), TOL = 6;
 const Z = [1580, 560, 1880, 860];
 const S = FM.stage;   // web loop units: no presenter reserve; handoff boxes compared in logical canvas units (screen px ÷ k)
-const PAPER = [246, 241, 231];
+let PAPER = [246, 241, 231];   // replaced by tokens.js col.paper once the page is open
 (async () => {
   const { page, seek, close, errors } = await open();
   const issues = [], notes = [];
+  const paperHex = await page.evaluate(() => (window.TOKENS && TOKENS.col && TOKENS.col.paper) || null);
+  if (/^#[0-9a-f]{6}$/i.test(paperHex || '')) PAPER = [1, 3, 5].map((i) => parseInt(paperHex.slice(i, i + 2), 16));
   const segErr = await page.evaluate(() => window.__segErrors);
   const built = await page.evaluate(() => window.__built);
   for (const e of segErr) { const s = FM.timeline.find((x) => x.id === e.seg); if (s && s.t1 > A && s.t0 < B) issues.push({ kind: 'segment_error', text: `segment ${e.seg} failed to build: ${e.msg.split('\n')[0]}` }); }

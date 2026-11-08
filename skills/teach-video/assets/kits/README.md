@@ -5,6 +5,7 @@ A kit turns one approved look into components, a starter project and a one-page 
 | Kit | Look | Fits |
 |---|---|---|
 | [terminal-ledger](terminal-ledger/README.md) | light terminal windows on paper × a ruled ledger of hand-drawn dots | software and AI work: sessions, logs, counts of events, sorting, decisions |
+| [blueprint-zoom](blueprint-zoom/README.md) | one overview of equal-width layers with hand-drawn nodes; one layer enlarged into its detail, messages travelling along clean connectors, then back | a system made of parts: what its layers are, how one part works inside, what passes between the parts |
 
 "Fits" names the topics a kit suits and, when it differs from the default (developers who know the basics), the audience.
 
@@ -24,6 +25,7 @@ A kit turns one approved look into components, a starter project and a one-page 
     segments/      one file per segment; one or two demo segments (demo-*, deleted by npm run init)
     handoff.json   the segment and handoff contract
     film.json      length, shared assets, presenter windows, poster
+    vendor.json    optional: npm libraries the look draws with besides GSAP, pinned by version and sha256 (build/vendor.cjs fetches them)
     anchors.txt    narration anchors → cues.js
     build/         init, anchors, check, shots, render, finish, kit-sync, vendor, browser; hf.cjs holds the engine version
     package.json   npm run init / anchors / check / shots / render / finish / kit-sync / hf
@@ -34,7 +36,7 @@ Interfaces other parts rely on (change them only together with the scripts and d
 ## Extracting a new kit from an approved film
 
 1. Start from a film the user approved and its look board (palette, sizes, components, transitions, each pointing at a frame). Move only what was approved; do not redesign on the way.
-2. Copy `terminal-ledger/starter/` as the skeleton: `lib.js`, `main.js` and `build/` carry no style and stay; replace `tokens.js`, `style.css` and `components/`.
+2. Copy `terminal-ledger/starter/` as the skeleton: `lib.js`, `main.js` and `build/` carry no style and stay byte-identical (a change there goes into every kit); replace `tokens.js`, `style.css` and `components/`, and list any extra library in `vendor.json`.
 3. Take the components from the film's code: one picture unit per file, positions and times as parameters, three to five lines of usage at the top; for every object that can cross a segment boundary write `F.standIn.<kind>`, so the next segment can start before the previous one exists.
 4. Write one or two demo segments that recreate the approved film's most typical 15–25 seconds with neutral, illustrative content, and make `npm run check` pass; compare fonts, colours and sizes with `npm run hf -- snapshot --against <approved mp4> --at <t>`.
 5. Make `ref/look.jpg` with `npm run shots -- --at …` (demo moments plus a frame for each component the demo does not show), write CARD.md and README.md (with measurements: minutes and rounds from copying the starter to a passing demo).
