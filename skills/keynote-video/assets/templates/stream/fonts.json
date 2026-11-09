@@ -1,0 +1,4 @@
+[
+  { "family": "DM Sans", "file": "DMSans-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmsans/DMSans%5Bopsz,wght%5D.ttf", "weight": "100 1000", "style": "normal", "license": "OFL-DMSans.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmsans/OFL.txt" },
+  { "family": "Noto Sans SC", "lang": "zh", "subset": true, "file": "NotoSansSC-VF.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf", "weight": "100 900", "style": "normal", "license": "OFL-NotoSansSC.txt", "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/OFL.txt" }
+]

@@ -62,6 +62,7 @@ The climax is the cost claim or the offer. Every score follows principle 2's ter
 | [strip](../../modes/strip.md) | One strip of film through a fixed gate: real frames stop registered, a contact sheet of the films' real lengths, one grease-pencil pick that runs | Accepted 2026-10-21 (sample film) |
 | [split](../../modes/split.md) | One movable seam between what is written and the real result it makes; one changed line over two renders at the climax | Accepted 2026-10-21 (sample film, its sound included) |
 | [scroll](../../modes/scroll.md) | One long vertical sheet of the product's own page: flicked and locked section by section, its headings pinned as chapters, one row unfolding in place | Accepted 2026-10-21 (sample film) |
+| [stream](../../modes/stream.md) | One thread of light through a night sky: it gathers a scattered desk, hangs small interface blocks on itself, sends tasks out as stars and gathers them back into one panel; English or Chinese | Accepted 2026-11-09 (style sample in English and Chinese, made from an accepted launch film) |
 
 ## Ruled out
 

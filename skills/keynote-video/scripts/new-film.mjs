@@ -141,8 +141,11 @@ Written by \`npm run fit\` (do not edit between the markers).
 <!-- fit:end -->
 `);
 
-for (const [script, what] of [['setup-fonts.mjs', 'font'], ['setup-vendor.mjs', 'GSAP']]) {
-  const r = spawnSync(process.execPath, [join(dest, 'lib', script), dest], { stdio: 'inherit' });
+// A template whose fonts depend on content.js (stream: the language) ships its own tools/fonts.mjs, run instead of
+// lib/setup-fonts.mjs; it reads the same fonts.json and pinned commit.
+const ownFonts = await access(join(dest, 'tools', 'fonts.mjs')).then(() => true, () => false);
+for (const [script, what] of [[ownFonts ? join(dest, 'tools', 'fonts.mjs') : join(dest, 'lib', 'setup-fonts.mjs'), 'font'], [join(dest, 'lib', 'setup-vendor.mjs'), 'GSAP']]) {
+  const r = spawnSync(process.execPath, [script, dest], { stdio: 'inherit' });
   if (r.status !== 0) {
     console.error(`\n${what} setup failed: ${dest} is set up but cannot render. Fix the network${what === 'font' ? ' or fonts.json' : ''}, then run \`npm run setup\` inside the folder.`);
     process.exit(1);

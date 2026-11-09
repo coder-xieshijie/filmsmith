@@ -64,7 +64,7 @@ A name is only used when its value can be traced; otherwise the preset gets a pl
 
 ### Families
 
-Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `setup-fonts.mjs`, its licence file copied next to it.
+Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `setup-fonts.mjs` (stream: its own `tools/fonts.mjs`, per language), its licence file copied next to it.
 
 | Family | Class | Role in the skill | Modes |
 |---|---|---|---|
@@ -80,6 +80,8 @@ Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `set
 | Hanken Grotesk | grotesque (variable, wght axis) | intertitles, labels and the name on a light box | strip |
 | Schibsted Grotesk | news grotesque (variable, wght axis) | quotes, the hook and the name over a long page | scroll |
 | DM Mono | monospace | measured values: lengths, the address | strip, scroll |
+| DM Sans | geometric grotesque (variable, opsz and wght axes) | every Latin line: captions, blocks, the name | stream |
+| Noto Sans SC | Chinese sans (variable, wght axis), cut to the film's characters at setup | Chinese text, after DM Sans in the stack | stream (`lang: 'zh'`) |
 
 ### Pairing rules
 
@@ -87,7 +89,7 @@ Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `set
 - Mono only for what is really code, a command, a hash or a data label; never for headings that merely want to look technical.
 - A serif appears only where the content is editorial or explanatory (a thesis, a quotation); a launch film stays sans.
 - Pair within one design system when possible (Plex Sans with Plex Mono); otherwise pair by x-height and stroke contrast, and settle a hesitation with five-second samples (tech-product-launch rule 6).
-- Chinese faces are not part of this version; on-screen text is English.
+- Chinese is set only in stream (`lang: 'zh'`): Noto Sans SC after DM Sans, +0.02 em tracking and 1.5 leading, a character at a time, 6 characters a second plus 0.5 s a state to read (owner, 2026-11-09). Every other mode is English.
 
 ### Scales
 
@@ -105,6 +107,7 @@ One series per mode; sizes within 15 % are one level, neighbouring levels ≥ 1.
 | strip | 4/3 from 25: 25 · 33 · 44 · 59 · 79 · 105 · 140; intertitle 79 / labels 59 / the sheet's names and lengths 33, the name 140 | derived |
 | split | 4/3 from 25: 25 · 33 · 44 · 59 · 79 · 105; claims 59 / request and command 44 / code 33 / labels 25, the name 105 | derived |
 | scroll | 25 × 1.4ⁿ: 25 · 35 · 49 · 69 · 96 · 134; hook 96 / quotes 69 / slot and claim 49 / label 25, the name 134 · address 35 | derived |
+| stream | named series 26 · 30 · 34 · 42 · 58 · 66 · 168 (about ×1.2–1.4, from the source film's 25.2 · 32 · 40 · 64 · 96); caption 58 / bubble 34 / row 26–30, cards 58 / 42 / 27, claim 66 / 54, lock-up 168 / 40; the same in Chinese | derived |
 
 A new mode picks a named series (ISO 3098 for drawings, a modular ratio ≥ 1.25 from the 25 px floor otherwise) before it sets any size.
 

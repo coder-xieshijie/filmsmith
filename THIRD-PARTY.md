@@ -25,6 +25,7 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 | Barlow Condensed | pulse |
 | Bricolage Grotesque | thread, halftone |
 | DM Mono | strip, scroll |
+| DM Sans | stream |
 | Hanken Grotesk | strip |
 | IBM Plex Mono | ink, plakat, tally, blueprint, morph, halftone, handset, exhibit, dossier |
 | IBM Plex Sans Condensed | blueprint |
@@ -33,6 +34,7 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 | Inter | phosphor |
 | Inter Tight | plakat, tally, trace, morph, handset, dossier |
 | JetBrains Mono | phosphor, thread, trace, pulse, split |
+| Noto Sans SC | stream, Chinese films only (`lang: 'zh'`): downloaded at setup by the template's `tools/fonts.mjs` (about 18 MB) and cut to the film's characters with [fontTools](https://github.com/fonttools/fonttools) (MIT, run through `uvx`); never committed |
 | Schibsted Grotesk | scroll |
 | Source Serif 4 | trace, dossier |
 
@@ -45,7 +47,7 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 - strip's example frames (`assets/templates/strip/assets/real/`) are frames of the skill's own ten demo films (the v0.1.0 release renders of this repository), taken 2026-10-21 with `tools/extract.mjs` (ffmpeg decode and lanczos scale only): one gate frame per film, a contact row per film sampled at the middle of every 4 s block, two seconds of the morph demo at 30 fps, and each film's sound around its gate frame as RMS values (`tracks.js`). `repo-readme.webp` is a capture of this repository's README as rendered on its public GitHub page (https://github.com/coder-xieshijie/filmsmith), made 2026-10-21 with `tools/capture.mjs`, clipped to the README column (no avatars, account rows or sidebar). All of it is this repository's own content, under its licence; the page's typography is the host's rendering of it.
 - split's example assets (`assets/templates/split/assets/real/`) are the skill's own outputs, made 2026-10-21 with `tools/capture.mjs`: ten frames of four demo films (ink, blueprint, phosphor, pulse; the v0.1.0 release renders of this repository), each decoded once at a named time (one cropped) and encoded as webp; two renders of the halftone template at one instant (`npm run snapshot -- --at 2.5`), as shipped and with line 18 set to `palette: 'reverse'`; and `readme-top.webp`, a capture of this repository's README as rendered on its public GitHub page (https://github.com/coder-xieshijie/filmsmith), clipped to the README article (no avatars, account rows or sidebar). The quoted lines are lines of this repository's files and the report lines are what `scripts/check-film.mjs` prints for the pulse demo's render. All of it is this repository's own content, under its licence; the page's typography is the host's rendering of it.
 - scroll's example assets (`assets/templates/scroll/assets/real/`) are seven strips of one capture of this repository's own page (https://github.com/coder-xieshijie/filmsmith: the repository header and the README as rendered), made 2026-10-21 (03:16 UTC) with `tools/capture.mjs` at device pixel ratio 2, cut at one x range and scaled (ffmpeg crop and scale ×0.8, cwebp), with the file list, the sidebar and the lines naming third-party products left out (no avatars or account rows); and 41 frames (`ink/`, 12 fps, 11.9–15.3 s) of the skill's own Ink demo film, taken with `tools/frames.mjs` (ffmpeg decode and scale only). All of it is this repository's own content, under its licence; the page's typography is the host's rendering of it.
-- Every other example product (`grainlock`, `seedfield`, `tablewarden`, `shoring`, `rushes`, `reseed`, `loudgate`, `gatewright`, `tidepool`, `vela-2`, `orrery-3`, `fernwave`, `quarrystore`) is made up, and its numbers are illustrative.
+- Every other example product (`grainlock`, `seedfield`, `tablewarden`, `shoring`, `rushes`, `reseed`, `loudgate`, `gatewright`, `tidepool`, `vela-2`, `orrery-3`, `fernwave`, `quarrystore`, stream's `Skein`) is made up, and its numbers are illustrative.
 
 ## teach-video
 

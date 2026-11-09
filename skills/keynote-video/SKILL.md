@@ -1,8 +1,8 @@
 ---
 name: keynote-video
-description: Makes short music-driven films for a technical product — launch, teaser, showreel, data story, a mechanism explained — drawn and scored entirely in code (HyperFrames) from one of sixteen style templates, with English on-screen text, no voice-over and no people. Use when asked to make, remake or restyle such a film, or to choose a visual style for one.
+description: Makes short music-driven films for a technical product — launch, teaser, showreel, data story, a mechanism explained — drawn and scored entirely in code (HyperFrames) from one of seventeen style templates, with English on-screen text, no voice-over and no people. Use when asked to make, remake or restyle such a film, or to choose a visual style for one.
 descriptions:
-  zh-Hans: 为技术产品制作由音乐驱动的短片（发布片、预告、showreel、数据片、机制讲解），画面与配乐全部由代码生成（HyperFrames），从十六种风格模板出发；屏幕文字为英文，无旁白、无人物。用于制作、重做或换风格这类短片，或为它选视觉风格。
+  zh-Hans: 为技术产品制作由音乐驱动的短片（发布片、预告、showreel、数据片、机制讲解），画面与配乐全部由代码生成（HyperFrames），从十七种风格模板出发；屏幕文字为英文，无旁白、无人物。用于制作、重做或换风格这类短片，或为它选视觉风格。
 displayNames:
   zh-Hans: 片匠 · 发布片
 ---
@@ -11,14 +11,14 @@ displayNames:
 
 Makes a short technical film — a technology demo, a technical report or explainer, a technical product launch — from a brief, its length computed from the content: pick a **mode**, copy its template, fill `content.js`, render. Every picture is drawn in code and every sound is synthesised in code (a generated music track can replace the bed), so a film needs only a coding agent that can run shell commands. `SKILL_ROOT` below is the folder that holds this `SKILL.md`.
 
-The skill stands on a theory of taste ([foundations](references/foundations.md)), ten [core principles](references/principles.md) derived from it and from the owner's verdicts, one shared [system](references/system.md) of colours, type, space and motion, and sixteen modes that apply them to one visual language each.
+The skill stands on a theory of taste ([foundations](references/foundations.md)), ten [core principles](references/principles.md) derived from it and from the owner's verdicts, one shared [system](references/system.md) of colours, type, space and motion, and seventeen modes that apply them to one visual language each.
 
 ## Scope and fixed rules
 
 These hold for every film, in every step.
 
 - **Format.** Every film is 16:9, 1920×1080, for landscape full-screen playback. When asked for a vertical or square film, say the skill does not make one.
-- **Language.** On-screen text is English. When the user asks for Chinese or another script, say the templates do not set it yet.
+- **Language.** On-screen text is English. The one exception is stream, which also sets Chinese (`lang: 'zh'`, its `TEMPLATE.md`): choose the language from the material, ask when it is mixed or unclear, English when there is nothing to go by. When the user asks for Chinese in another mode, or for another script, say those templates do not set it yet.
 - **Colour.** Palette presets only, as listed on the mode card; no custom hex values. A brand colour the user asks for becomes a new preset first ([system](references/system.md#a-preset-from-a-brand-colour)).
 - **Facts.** Every fact on screen comes from the source the user named; every number is computed by code.
 - **Length.** Lengths come from `npm run fit`; never type `duration` or scene `bars` to hit a length.
@@ -45,6 +45,7 @@ Full text, theory and evidence in [references/principles.md](references/principl
 
 - Any coding agent that can run shell commands.
 - Node 22 or newer, `ffmpeg` and `ffprobe` on PATH. `new-film` checks them and stops with a message if one is missing.
+- A Chinese stream film also needs `uvx` ([uv](https://docs.astral.sh/uv/)) on PATH: its setup cuts the Chinese face to the film's characters with fontTools.
 - Network while a film is set up and rendered: fonts from a pinned google/fonts commit and the pinned GSAP build from the npm registry (both stored in the film folder), the first run of `npx hyperframes@0.8.163` (which also fetches its headless Chrome), and at render time the HyperFrames compiler may fetch font faces from Google Fonts as well. Offline rendering is not verified.
 
 ## Modes
@@ -67,10 +68,11 @@ Full text, theory and evidence in [references/principles.md](references/principl
 | [strip](references/modes/strip.md) | One strip of film through a fixed gate on a light box: real frames of real films stop registered one a beat, a frame punches to a contact sheet whose rows are the films' lengths, a grease pencil picks one take | `perfs`: double or single perforation | Reels of a product's real outputs: rendered films, footage, frames to choose from |
 | [split](references/modes/split.md) | One movable seam: what is written on one side, the real result it makes on the other; every change a move of the seam, the climax one changed line over two renders | `seam`: straight or stitched | Developer tools whose input maps line by line to an output: generators, configs, CLIs and their reports |
 | [scroll](references/modes/scroll.md) | One long vertical sheet of the product's own page, flicked up with momentum and locking section by section; its headings pin as chapters, an underline and a quote band read it, one row unfolds in place | `minimap`: on or off | Launches told by the product's own long page: a README, docs, a changelog |
+| [stream](references/modes/stream.md) | One thread of light through a night sky: it gathers a scattered desk, hangs small interface blocks on itself, sends tasks out as stars and gathers them back into one panel; supports English and Chinese | `opening`: desk or night | Agent desks and task schedulers: work sent out, run in parallel, checked and brought back |
 
 Every mode has colour presets (on its card) and one form variant, both set in `content.js`; the variant's default is the template as shipped. Every card lists its use cases with a worked example and marks the best fit. `new-film` also accepts the aliases `thread-reel`, `ink-beat`, `swiss-poster`, `blueprint-drafting`, `terminal-launch`, `unit-data` and `diagram-explainer`.
 
-Choosing rules and the mode card format: [references/modes/README.md](references/modes/README.md). In standard mode a film uses one mode as it ships; in creative mode it recombines scene ideas and every transition inside one base mode's visual system ([creative.md](references/creative.md)). Themes (narrative skeletons and rules by kind of film): [tech-product-launch](references/themes/tech-product-launch/README.md) for thread, ink, plakat, blueprint, phosphor, morph, halftone, pulse, handset, exhibit, dossier, strip, split and scroll, [tech-explainer](references/themes/tech-explainer/README.md) for tally and trace.
+Choosing rules and the mode card format: [references/modes/README.md](references/modes/README.md). In standard mode a film uses one mode as it ships; in creative mode it recombines scene ideas and every transition inside one base mode's visual system ([creative.md](references/creative.md)). Themes (narrative skeletons and rules by kind of film): [tech-product-launch](references/themes/tech-product-launch/README.md) for thread, ink, plakat, blueprint, phosphor, morph, halftone, pulse, handset, exhibit, dossier, strip, split, scroll and stream, [tech-explainer](references/themes/tech-explainer/README.md) for tally and trace.
 
 ## Workflow
 
