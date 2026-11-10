@@ -48,6 +48,12 @@ const make = (content, opt) => {
   const TY = typeOf(lang);
   const { P, C } = palOf(opt.colors, opt.palette);
   const UI = content.ui;
+  // the filter row's words (`ui.filter`: a product names its filters apart from its rows' states, as "In progress" over
+  // "Running"); left out, the filters say what the rows say. Given, every filter carries its count, as a product's does.
+  const FL = { ...UI, ...(UI.filter || {}) }, COUNTED = !!UI.filter;
+  // how many tasks run at once (`ui.cap`): the evening's list holds at most this many running and queues the rest, rows
+  // and counts alike, so the counts never show how many the product can run. Left out, the last two of the burst queue.
+  const CAP = Number.isInteger(UI.cap) && UI.cap >= 1 ? UI.cap : null;
   const VARIANT = content.opening === 'night' ? 'night' : 'desk';
   const LOCK = content.lockup === 'mascot' ? 'mascot' : 'name';
   const SEED = content.seed ?? 1;
@@ -55,6 +61,9 @@ const make = (content, opt) => {
   // default 1.6 × sit); a film's own mascot passes its own (opt.mascotSize { sit, drop } in px)
   const MS = opt.mascotSize || {}, KB = MS.sit > 0 && MS.sit !== 60 ? MS.sit / 60 : 1, DROP = MS.drop > 0 ? MS.drop / (MS.sit > 0 ? MS.sit : 60) : 1.6;
   const problems = [];
+  // where the mascot on its perch hands over: to an interlude that leaves the frame to its composition (`perch: false`),
+  // else to the lock-up, else it stays to the end
+  const IL = sc.interlude, HAND = IL && IL.s.perch === false ? IL.start : sc.lockup ? sc.lockup.start : Infinity;
   const M = layer();   // measuring
   const deskL = layer(), midL = layer(), topL = layer();
   const mid = midL, top = topL;
@@ -263,7 +272,7 @@ const make = (content, opt) => {
       if (t >= land) { const b = seg(t, land, land + 0.22); sq = 0.18 * Math.sin(Math.PI * b) * (1 - b); }
       const mv = E.io3(seg(t, T(k.sink0), T(k.sink1)));
       x = lerp(x, L.MASCOT[0], mv); y = lerp(y, L.MASCOT[1], mv); s = lerp(s, 1, mv);
-      if (t < sc.lockup.start) mascot(top, C, x, y, KB === 1 ? s : s * KB, 1, sq, opt.mascot || null);
+      if (t < HAND) mascot(top, C, x, y, KB === 1 ? s : s * KB, 1, sq, opt.mascot || null);
     }
     // the thread: shoots from the mascot through every item, goes taut, reels them in
     const th0 = T(k.th0), th1 = T(k.th1), tugEnd = T(k.tugEnd);
@@ -286,7 +295,7 @@ const make = (content, opt) => {
       if (sp.ret > 0) { glow(mid, L.SPINE_X, sp.bot, 44, C.line, 0.6); glow(mid, L.SPINE_X, sp.bot, 12, C.core, 0.95); }
       else if (sp.bot > L.SPINE_BOT - 1) for (let j = 0; j < 3; j++) { const y = lerp(L.SPINE_TOP, L.SPINE_BOT, wrapv(t * 0.11 + j / 3, 1)); glow(mid, L.SPINE_X, y, 10, C.glow, 0.35); }
     }
-    const n0 = sc.intro.start + sc.intro.k.name, n1 = sc.lockup.start + 0.4 * B, bi = blurIn(t, n0 + 0.1, 0.3, n1, 0.3);
+    const n0 = sc.intro.start + sc.intro.k.name, n1 = HAND + 0.4 * B, bi = blurIn(t, n0 + 0.1, 0.3, n1, 0.3);
     q('texts', 0, (c) => xf(c, bi, () => textAt(c, TY, content.product.name, L.NAME[0], L.NAME[1], TY.mascotName, 600, P.text)));
     if (heroR || roleR) {
       const h0 = sc.intro.start + sc.intro.k.hero, h1 = sc.intro.end, top = 392;
@@ -416,7 +425,7 @@ const make = (content, opt) => {
   const renderEvening = (t) => {
     const e = sc.evening, g = listGeo(t);
     if (g.w < 1) return;
-    const n = listCount(t), nq = e.k.burst.filter((x, i) => i >= e.s.more - 2 && t >= e.start + x).length;
+    const n = listCount(t), nq = CAP != null ? Math.max(0, n - CAP) : e.k.burst.filter((x, i) => i >= e.s.more - 2 && t >= e.start + x).length;
     const times = [...e.s.asks.map((_, i) => e.start + e.k.asks[i] + 0.2 * B), ...e.k.burst.map((x) => e.start + x)];
     q('blocks', 2, (ctx) => {
       const X = L.LIST.x, Y = L.LIST.y;
@@ -424,10 +433,11 @@ const make = (content, opt) => {
       ctx.save(); ctx.beginPath(); ctx.roundRect(X, Y, g.w, L.LIST.h, Math.min(30, g.w / 2)); ctx.clip();
       const headH = Math.max(lineH(TY.row, 'normal', UI.tasks), pillH), hy = Y + 26;
       textAt(ctx, TY, UI.tasks, X + 34, hy + (headH - lineH(TY.row, 'normal', UI.tasks)) / 2, TY.row, 600, P.ink);
-      const runS = `${UI.running} ${n - nq}`, qS = `${UI.queued} ${nq}`, pw = (s) => textW(ctx, TY, s, TY.rowSub, 500) + 32;
+      const runS = `${FL.running} ${n - nq}`, qS = `${FL.queued} ${nq}`, pw = (s) => textW(ctx, TY, s, TY.rowSub, 500) + 32;
       if (ev.tabs) { // the filter tabs under the title: all, needs you, running, done, queued
         let tx = X + 34; const ty = hy + headH + 12;
-        [[UI.all, true], [`${UI.needsYou} 0`], [runS], [UI.done], [qS]].forEach(([s2, on]) => { tx += pill(ctx, TY, P, tx, ty, s2, on ? { bg: P.ink, color: P.paper } : {}) + 10; });
+        // done: the tasks finished before the evening (the ask's), counted where the filters carry counts
+        [[FL.all, true], [`${FL.needsYou} 0`], [runS], [COUNTED ? `${FL.done} ${STARS.filter((x) => x.launchAt < e.start).length}` : FL.done], [qS]].forEach(([s2, on]) => { tx += pill(ctx, TY, P, tx, ty, s2, on ? { bg: P.ink, color: P.paper } : {}) + 10; });
       } else {
         let px = X + 34 + (L.LIST.w - 68) - (nq ? pw(qS) + 12 : 0) - pw(runS);
         px += pill(ctx, TY, P, px, hy + (headH - pillH) / 2, runS) + 12;
@@ -442,17 +452,17 @@ const make = (content, opt) => {
       for (let i = 0; i < total; i++) {
         const k = E.outExpo(seg(t, times[i] - 0.05, times[i] + 0.3)); if (k <= 0.001) continue;
         const ry = by + i * EVP; if (ry > Y + L.LIST.h || ry + EVP - 8 < Y + EVH) continue;
-        const queued = i >= nAsk && i - nAsk >= e.s.more - 2, rc = EVP === 58 ? 25 : EVC;
+        const queued = CAP != null ? i >= CAP : i >= nAsk && i - nAsk >= e.s.more - 2, rc = EVP === 58 ? 25 : EVC;
         xf(ctx, { o: k, b: 5 * (1 - k), left: X + 34, top: ry, x: 30 * (1 - k) }, () => {
           ring(ctx, P, 15, rc, queued ? 0 : (((t * 360 + i * 40) % 360) * Math.PI) / 180, { dashed: queued });
           let x = 30 + 18;
           if (i < nAsk && EVP !== 58) { // two lines: the task, then "running · its progress"
-            const s = e.s.asks[i].task, pr = e.s.asks[i].progress, r = pr ? `${UI.running} · ${pr}` : UI.running;
+            const s = e.s.asks[i].task, pr = e.s.asks[i].progress, r = queued ? UI.queued : pr ? `${UI.running} · ${pr}` : UI.running;
             const th = lineH(TY.row, 'normal', s), top0 = rc - (th + lineH(TY.rowSub, 'normal', r)) / 2;
             textAt(ctx, TY, s, x, top0, TY.row, 500, P.ink); textAt(ctx, TY, r, x, top0 + th, TY.rowSub, 400, P.ink2);
           } else if (i < nAsk) {
             const s = e.s.asks[i].task; textAt(ctx, TY, s, x, 25 - lineH(TY.row, 'normal', s) / 2, TY.row, 500, P.ink); x += textW(ctx, TY, s, TY.row, 500) + 18;
-            const r = `· ${UI.running}`; textAt(ctx, TY, r, x, 25 - lineH(TY.rowSub, 'normal', r) / 2, TY.rowSub, 400, P.ink2);
+            const r = `· ${queued ? UI.queued : UI.running}`; textAt(ctx, TY, r, x, 25 - lineH(TY.rowSub, 'normal', r) / 2, TY.rowSub, 400, P.ink2);
           } else {
             const j = i - nAsk, bw = 200 + ((j * 97) % 220); box(ctx, x, rc - 8, bw, 16, 8, P.bubble); x += bw + 18;
             if (queued) { const r = `· ${UI.queued}`; textAt(ctx, TY, r, x, rc - lineH(TY.rowSub, 'normal', r) / 2, TY.rowSub, 400, P.ink2); }
@@ -531,7 +541,11 @@ const make = (content, opt) => {
     const curves = old.map((st, k) => { const y0 = 300 + ((k * 73) % 240); return { st, base: arcPts([X0, y0], [st.x, st.y], 0, 1, N - 1), f: [1 + rnd() * 1.4, 1.6 + rnd() * 1.6, 1 + rnd() * 1.3, 2 + rnd() * 1.5, 1 + rnd()], ph: Array.from({ length: 5 }, () => rnd() * 6.28), rx: 300 + rnd() * 100, ry: 210 + rnd() * 70, spin: 0.22 + 0.06 * k }; });
     return { curves, N, X0, CX: 1330, CY: 620, TE: [960, 610] };
   })() : null;
-  const strandY = (i) => L.CARD.ys[i] + geo.cards[i].h0 / 2;
+  // the cards' places: three at the template's tops, two between them; one card opens at once where a card is enlarged
+  // (L.ZOOM) and is read there, its strand straight into it
+  const NC = cd.cards.length, CYS = NC === 3 ? L.CARD.ys : NC === 2 ? [435, 645] : [L.CARD.ys[1]], CX0 = NC === 1 ? L.ZOOM.x : L.CARD.x;
+  const ONE = NC === 1 ? (() => { const s2 = L.ZOOM.s, h = geo.cards[0].h1; return { x: L.ZOOM.x, y: Math.max(260, 600 - (h * s2) / 2), s: s2, h, a: 1, z: 1 }; })() : null;
+  const strandY = (i) => (ONE ? ONE.y + (ONE.h * ONE.s) / 2 : CYS[i] + geo.cards[i].h0 / 2);
   const renderTangle = (t) => {
     if (!TG) return;
     const c = sc.cards, g = c.k.tg, T = (x) => c.start + x, { curves, N, X0, CX, CY, TE } = TG;
@@ -542,7 +556,7 @@ const make = (content, opt) => {
       const y = cv.ry * Math.cos(T2 * cv.f[2] * u + cv.ph[2]) + 80 * Math.sin(T2 * cv.f[3] * u + cv.ph[3]);
       const z = Math.sin(T2 * cv.f[4] * u + cv.ph[4]), th = lt * cv.spin;
       let p = [CX + x * Math.cos(th) + z * 220 * Math.sin(th), CY + y];
-      if (k < 3) { const h = E.io2(Math.min(1, u / 0.14)); p = [lerp(TE[0], p[0], h), lerp(TE[1], p[1], h)]; }
+      if (k < NC) { const h = E.io2(Math.min(1, u / 0.14)); p = [lerp(TE[0], p[0], h), lerp(TE[1], p[1], h)]; }
       return p;
     };
     const K = E.io2(seg(t, T(g.knot0), T(g.knot1))), Pk = seg(t, T(g.pull0), T(g.pull1));
@@ -551,11 +565,11 @@ const make = (content, opt) => {
       const pts = [];
       for (let j = 0; j < N; j++) {
         const u = j / (N - 1); let p = K <= 0 ? cv.base[j] : (() => { const q2 = tp(cv, i, u); return K >= 1 ? q2 : [lerp(cv.base[j][0], q2[0], K), lerp(cv.base[j][1], q2[1], K)]; })();
-        if (i < 3 && Pk > 0) { const m = E.io2(clamp(Pk * 1.5 - u * 0.5)); const tg = [lerp(X0, L.CARD.x, u), strandY(i)]; p = [lerp(p[0], tg[0], m), lerp(p[1], tg[1], m)]; }
+        if (i < NC && Pk > 0) { const m = E.io2(clamp(Pk * 1.5 - u * 0.5)); const tg = [lerp(X0, CX0, u), strandY(i)]; p = [lerp(p[0], tg[0], m), lerp(p[1], tg[1], m)]; }
         pts.push(p);
       }
       const grow = seg(t, T(g.relight) + i * 0.06, T(g.knot0) + i * 0.06);
-      const a = i < 3 ? lerp(0.55, 1, E.io2(seg(Pk, 0.2, 1))) : 0.5 * (1 - seg(Pk, 0.15, 0.75)), w = i < 3 ? lerp(0.5, 0.75, E.io2(seg(Pk, 0.2, 1))) : 0.45;
+      const a = i < NC ? lerp(0.55, 1, E.io2(seg(Pk, 0.2, 1))) : 0.5 * (1 - seg(Pk, 0.15, 0.75)), w = i < NC ? lerp(0.5, 0.75, E.io2(seg(Pk, 0.2, 1))) : 0.45;
       thread(mid, C, grow < 1 ? pts.slice(0, Math.max(2, Math.ceil(E.out3(grow) * N))) : pts, a, w);
       const el = E.out3(relight) * (1 - seg(t, T(g.knot0) + 0.5, T(g.knot1)));
       if (el > 0) { glow(top, cv.st.x, cv.st.y, 34, C.glow, 0.7 * el); glow(top, cv.st.x, cv.st.y, 8, C.core, el); }
@@ -563,7 +577,7 @@ const make = (content, opt) => {
     const hint = seg(t, T(g.knot1) - 0.4, T(g.reach)) * (1 - seg(t, T(g.pull1) - 0.3, T(g.pull1)));
     if (t >= T(g.reach) && t < T(g.pull1)) {
       const gk = E.out3(seg(t, T(g.reach), T(g.pull0)));
-      const end = Pk > 0 ? [lerp(TE[0], X0, E.io2(Pk)), lerp(TE[1], strandY(1), E.io2(Pk))] : [lerp(X0, TE[0], gk), TE[1]];
+      const end = Pk > 0 ? [lerp(TE[0], X0, E.io2(Pk)), lerp(TE[1], strandY(Math.min(1, NC - 1)), E.io2(Pk))] : [lerp(X0, TE[0], gk), TE[1]];
       thread(mid, C, [[X0, 610], end], 1, 0.9); glow(top, end[0], end[1], 34 + 10 * Math.sin(t * 9), C.glow, 0.85); glow(top, end[0], end[1], 9, C.core, 1);
     } else if (hint > 0) { glow(top, TE[0], TE[1], 40, C.glow, 0.7 * hint); glow(top, TE[0], TE[1], 9, C.core, hint); }
   };
@@ -690,7 +704,7 @@ const make = (content, opt) => {
         box(ctx, 0, 0, L.REGION.w, geo.wsHead.h, [27, 27, 18, 18], P.paper, { shadow: shadowOf(0.42) });
         spaceChip(ctx, 20, 18, cs.workspace);
         let x = 26; const y = 18 + geo.wsHead.chip + 14;
-        [[UI.all, true], [`${UI.needsYou} 0`], [`${UI.running} ${run}`], [`${UI.done} ${done}`], [`${UI.queued} ${queued}`]].forEach(([s2, on]) => { if (x + textW(ctx, TY, s2, TY.rowSub, 500) + 32 > L.REGION.w - 20) return; x += pill(ctx, TY, P, x, y, s2, on ? { bg: P.ink, color: P.paper } : {}) + 10; });
+        [[FL.all, true], [`${FL.needsYou} 0`], [`${FL.running} ${run}`], [`${FL.done} ${done}`], [`${FL.queued} ${queued}`]].forEach(([s2, on]) => { if (x + textW(ctx, TY, s2, TY.rowSub, 500) + 32 > L.REGION.w - 20) return; x += pill(ctx, TY, P, x, y, s2, on ? { bg: P.ink, color: P.paper } : {}) + 10; });
       }));
     } else q('blocks', 4, (ctx) => xf(ctx, { ...hb, left: L.REGION.x + 24, top: L.REGION.y + 22 }, () => {
       box(ctx, 0, 0, geo.regionHead.w, geo.regionHead.h, 20, P.panel, { shadow: shadowOf(0.45) });
@@ -764,7 +778,8 @@ const make = (content, opt) => {
 
   const cardGeo = (k, t) => {
     const c = sc.cards, kk = c.k, T = (x) => c.start + x;
-    const base = { x: L.CARD.x, y: L.CARD.ys[k], h: geo.cards[k].h0 };
+    if (ONE) return ONE;
+    const base = { x: L.CARD.x, y: CYS[k], h: geo.cards[k].h0 };
     let z = 0, dim = 0;
     kk.zoom.forEach((zz, j) => {
       const zEnd = j + 1 < kk.zoom.length ? T(kk.zoom[j + 1].z0) : T(kk.whole);
@@ -799,7 +814,7 @@ const make = (content, opt) => {
         box(ctx, 1, 1, L.CARD.w - 2, g.h - 2, 27, null, { stroke: [2, `rgba(${C.line},0.55)`] });
       }));
       const ex = g.x * (1 - fk) + L.SPINE_X * fk, ey = g.y + (g.h * g.s) / 2;
-      const sy = L.CARD.ys[i] + geo.cards[i].h0 / 2;
+      const sy = strandY(i);
       const draw = TG ? 1 : E.io2(seg(t, T(k.fork) + i * 0.5 * B, T(k.land[i])));
       const tipX = lerp(L.SPINE_X, ex, draw);
       const pts = []; for (let j = 0; j <= 30; j++) { const f = j / 30, x = lerp(L.SPINE_X, tipX, f); const yy = lerp(sy, ey, E.io2(clamp(((x - L.SPINE_X) / Math.max(1, ex - L.SPINE_X)) * 1.4 - 0.4))); pts.push([x, yy]); }
@@ -863,7 +878,8 @@ const make = (content, opt) => {
     return `#${c.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
   };
   const drawPanel = (ctx, nk, wk = 1, rq = 0) => {
-    const w = L.PANEL.w, nDone = STARS.length - 1;
+    // done: every star the film sent; a card's new task (its star) is the one row that needs you, so it is not done
+    const w = L.PANEL.w, nDone = STARS.filter((x) => x.task == null).length;
     box(ctx, 0, 0, w, geo.panelH, 30, P.paper, { shadow: shadowOf(0.42) });
     let y = 30;
     if (cl.panel.head) spaceChip(ctx, 20, y + (lineH(TY.row + 2, 'normal', cl.panel.title) - chipH) / 2, cl.panel.title); // the title as a space chip (`head`)
@@ -875,11 +891,11 @@ const make = (content, opt) => {
     }
     y += lineH(TY.row + 2, 'normal', cl.panel.title) + 18;
     let x = 34;
-    x += pill(ctx, TY, P, x, y, UI.all, { bg: P.ink, color: P.paper }) + 12;
-    x += pill(ctx, TY, P, x, y, `${UI.needsYou} 1`, { bg: tint(P.bubble, P.warn, wk), color: tint(P.ink2, P.paper, wk), w: 600, scale: 1 + 0.14 * nk, glow: nk, glowRgb: C.line }) + 12;
-    x += pill(ctx, TY, P, x, y, `${UI.running} 0`) + 12;
-    x += pill(ctx, TY, P, x, y, `${UI.done} ${nDone}`) + 12;
-    const qS = `${UI.queued} 0`; // with `head`, the queued filter too, where it fits
+    x += pill(ctx, TY, P, x, y, FL.all, { bg: P.ink, color: P.paper }) + 12;
+    x += pill(ctx, TY, P, x, y, `${FL.needsYou} 1`, { bg: tint(P.bubble, P.warn, wk), color: tint(P.ink2, P.paper, wk), w: 600, scale: 1 + 0.14 * nk, glow: nk, glowRgb: C.line }) + 12;
+    x += pill(ctx, TY, P, x, y, `${FL.running} 0`) + 12;
+    x += pill(ctx, TY, P, x, y, `${FL.done} ${nDone}`) + 12;
+    const qS = `${FL.queued} 0`; // with `head`, the queued filter too, where it fits
     if (cl.panel.head && x + textW(ctx, TY, qS, TY.rowSub, 500) + 32 <= w - 20) pill(ctx, TY, P, x, y, qS);
     y += pillH + 10;
     cl.panel.rows.forEach((r, ri) => {
@@ -903,8 +919,9 @@ const make = (content, opt) => {
   const renderCaptions = (t) => caps.forEach((c) => q('texts', 7, (ctx) => runAt(ctx, TY, c.R, L.CAP[0], L.CAP[1], P.text, t, c.t0, c.t1, lang)));
 
   const renderLock = (t) => {
-    const lk = sc.lockup, k = lk.k, T = (x) => lk.start + x;
-    if (t < lk.start) return;
+    const lk = sc.lockup;
+    if (!lk || t < lk.start) return;
+    const k = lk.k, T = (x) => lk.start + x;
     const g = geo.name, cx = W / 2, cy = 470;
     const open = E.io3(seg(t, T(k.open), T(k.open) + 0.6));
     const nameX = LOCK === 'mascot' ? cx - g.w / 2 - 50 : cx - g.w / 2;

@@ -60,11 +60,11 @@
     ],
     "pitfalls": {
       "en": [
-        "All nine slots are required in the template (no cut-down yet): the check and the evening are the ones meant to become optional.",
+        "The order is fixed and each scene comes once; the days, the interlude and the lock-up are optional (the template itself draws its nine scenes, with the lock-up). A film that drops the lock-up ends on its own composition over the interlude, which must land the name or the mascot.",
         "The two climaxes must be the constellation (about half-way) and the gather (about 83 %); swapping their order loses the build."
       ],
       "zh": [
-        "模板里九个槽全是必选（还没有删减版）：核对和一晚上那两场是准备改成可选的。",
+        "顺序固定，每场一次；多日、夜空插段和落版可选（模板本身画九场，含落版）。不要落版的片子在夜空插段上用自己的合成收尾，这个合成要落到名字或吉祥物上。",
         "两个高潮必须是星座（约一半处）和收束（约 83%）；对调顺序就失去了递进。"
       ]
     }

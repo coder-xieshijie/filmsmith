@@ -6,8 +6,10 @@ import { len, LIMITS } from './text.js';
 const langOf = (content) => (content?.lang === 'zh' ? 'zh' : 'en');
 
 const REASON = 'stream: one continuous composition on the thread; length = choreography + reading (sched.js)';
-const TYPES = ['open', 'intro', 'ask', 'evening', 'constellation', 'verify', 'cards', 'days', 'close', 'lockup'];
-const OPTIONAL = new Set(['days']); // a film may leave these scenes out
+const TYPES = ['open', 'intro', 'ask', 'evening', 'constellation', 'verify', 'cards', 'days', 'close', 'interlude', 'lockup'];
+// a film may leave these scenes out: the days, the interlude (a stretch of the night after the close for the film's own
+// composition) and the lock-up (a film that ends on the close or on its interlude)
+const OPTIONAL = new Set(['days', 'interlude', 'lockup']);
 
 // slot → limit key, per type; arrays are checked item by item
 const SLOTS = {
@@ -24,6 +26,7 @@ const SLOTS = {
   cards: (s) => [['caption', s.caption], ['caption', s.caption2], ...s.cards.flatMap((c) => [['cardTitle', c.title], ['cardSub', c.sub], ...c.rows.map((r) => ['cardRow', r]), ...(c.say ? [['caption', c.say]] : []), ...(c.flow ? [['cardRow', c.flow]] : []), ...(c.task ? [['row', c.task.title], ...(c.task.detail ? [['rowSub', c.task.detail]] : [])] : [])])],
   days: (s) => [['caption', s.caption], ...(s.sub ? [['sub', s.sub]] : []), ...s.days.flatMap((d) => [['day', d.day], ['bubble', d.user], ['bubble', d.bot]]), ['bubble', s.ask], ['bubble', s.answer], ...s.notes.map((x) => ['say', x]), ...(s.summary ? [['cardTitle', s.summary]] : []), ...(s.summaryRows || []).map((x) => ['cardRow', x])],
   close: (s) => [['caption', s.caption], ...(s.caption2 ? [['caption', s.caption2]] : []), ['row', s.panel.title], ...(s.panel.tabs || []).map((x) => ['tab', x]), ...s.panel.rows.flatMap((r) => [['row', r.title], ['rowSub', r.detail], ...(r.group ? [['rowSub', r.group]] : []), ...(r.time ? [['time', r.time]] : [])]), ['rowSub', s.nudge], ['claim', s.claim], ...s.words.map((w) => ['word', w])],
+  interlude: () => [],
   lockup: () => [],
 };
 const SHAPE = {
@@ -40,10 +43,12 @@ const SHAPE = {
     s.modal == null || (Array.isArray(s.modal.fields) && s.modal.fields.length >= 1 && s.modal.fields.length <= 3) || 'constellation.modal.fields: 1–3 { label, value, required }',
     s.head == null || typeof s.head === 'boolean' || 'constellation.head: true or false'],
   verify: (s) => [s.graph == null || (Array.isArray(s.graph.outs) && s.graph.outs.length >= 3 && s.graph.outs.length <= 6) || 'verify.graph.outs: 3–6'],
-  cards: (s) => [Array.isArray(s.cards) && s.cards.length === 3 || 'cards.cards: exactly 3', ...(s.cards || []).map((c, k) => (c.rows?.length >= 1 && c.rows.length + (c.flow ? 1 : 0) <= 5) || `cards.cards[${k}].rows: 1–5 (with the flow line)`)],
+  cards: (s) => [Array.isArray(s.cards) && s.cards.length >= 1 && s.cards.length <= 3 || 'cards.cards: 1–3', ...(s.cards || []).map((c, k) => (c.rows?.length >= 1 && c.rows.length + (c.flow ? 1 : 0) <= 5) || `cards.cards[${k}].rows: 1–5 (with the flow line)`),
+    s.cards?.length !== 1 || !s.cards[0].say || 'cards.cards[0].say: one card is read under the scene\'s caption; leave `say` out'],
   days: (s) => [Array.isArray(s.days) && s.days.length >= 2 && s.days.length <= 5 || 'days.days: 2–5 { day, user, bot }', Array.isArray(s.notes) && s.notes.length === 3 || 'days.notes: exactly 3 (one per card)',
     s.summaryRows == null || (!!s.summary && Array.isArray(s.summaryRows) && s.summaryRows.length >= 1 && s.summaryRows.length <= 3) || 'days.summaryRows: 1–3, with `summary`',
     s.bigNotes == null || typeof s.bigNotes === 'boolean' || 'days.bigNotes: true or false'],
+  interlude: (s) => [Number.isFinite(s.beats) && s.beats >= 1 && s.beats <= 64 || 'interlude.beats: 1–64', s.perch == null || typeof s.perch === 'boolean' || 'interlude.perch: true or false'],
   close: (s) => [Array.isArray(s.panel?.rows) && s.panel.rows.length >= 2 && s.panel.rows.length <= 4 || 'close.panel.rows: 2–4', s.panel?.rows?.filter((r) => r.status === 'needs').length === 1 || 'close.panel.rows: exactly one status "needs"', Array.isArray(s.words) && s.words.length === 3 || 'close.words: exactly 3',
     s.panel?.tabs == null || (Array.isArray(s.panel.tabs) && s.panel.tabs.length >= 2 && s.panel.tabs.length <= 3) || 'close.panel.tabs: 2–3',
     s.panel?.head == null || typeof s.panel.head === 'boolean' || 'close.panel.head: true or false',
@@ -66,7 +71,15 @@ export const validate = (content) => {
   if (!['name', 'mascot'].includes(content.lockup ?? 'name')) errs.push(`lockup "${content.lockup}": use 'name' or 'mascot'`);
   const order = content.scenes.map((s) => s.type).join(' ');
   const want = TYPES.filter((t) => !OPTIONAL.has(t) || content.scenes.some((s) => s.type === t)).join(' ');
-  if (order !== want) errs.push(`scenes: the stream skeleton is ${TYPES.map((t) => (OPTIONAL.has(t) ? `[${t}]` : t)).join(' → ')} in this order, [ ] optional (got ${order}) (no cut-down yet: TEMPLATE.md "Scenes")`);
+  if (order !== want) errs.push(`scenes: the stream skeleton is ${TYPES.map((t) => (OPTIONAL.has(t) ? `[${t}]` : t)).join(' → ')} in this order, each once, [ ] optional (got ${order})`);
+  // the days hang one line on each of the cards' three cards
+  const cardsN = content.scenes.find((s) => s.type === 'cards')?.cards?.length;
+  if (content.scenes.some((s) => s.type === 'days') && cardsN !== 3) errs.push(`scenes: days hangs its lines on three cards; the cards scene has ${cardsN}`);
+  // the task panel's words: ui.filter (the filter row's own words, as a product names them apart from its rows), ui.cap
+  // (how many tasks run at once; the rest are queued)
+  const ui = content.ui || {};
+  if (ui.filter != null && (typeof ui.filter !== 'object' || Array.isArray(ui.filter) || !Object.entries(ui.filter).every(([k, v]) => ['all', 'needsYou', 'running', 'done', 'queued'].includes(k) && typeof v === 'string' && v))) errs.push('ui.filter: { all, needsYou, running, done, queued } (strings, each optional)');
+  if (ui.cap != null && !(Number.isInteger(ui.cap) && ui.cap >= 1)) errs.push('ui.cap: a whole number ≥ 1 (tasks running at once)');
   const p = content.product || {};
   if (len(p.name) > L.name) errs.push(`product.name: ${len(p.name)} > ${L.name} characters`);
   if (len(p.tagline) > L.tagline) errs.push(`product.tagline: ${len(p.tagline)} > ${L.tagline} characters`);

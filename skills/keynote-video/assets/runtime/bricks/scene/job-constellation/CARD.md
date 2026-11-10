@@ -28,7 +28,7 @@ status: approved
   | `plan` | {label, waits} | glance | 1 | 18/22 chars | 9/11 chars | example copy |
   | `result` | text (claim) | primary | 1 | 86 chars | 40 chars | example copy |
   | `caption2` | text | glance (shares the screen with the result) | 1 | 34 chars | 14 chars | example copy |
-  | `head` | flag (optional) | – | 1 | – | – | false: the workspace's name as a small label |
+  | `head` | flag (optional) | – | 1 | – | – | false: the workspace's name as a small label; true: a header with the name as a space chip and the filter row with live counts (its names the film's `ui.filter`, else the rows') |
   | `modal` | {title, fields: [{label, value, required?}], note?} (optional) | glance | 1–3 fields | 40/30/30/40 chars | 20/15/15/20 chars | none: not drawn |
   | `holds` | {key: seconds, or an array per item} (optional) | – | 1 | 0–20 s | 0–20 s | none: primary texts hold their reading time, glances `glance`; keys `ask`, `offer`, `modal`, `result`, `caption2` |
   | `glance` | seconds (optional) | – | 1 | 0.3–3 | 0.3–3 | the film's `glance`, else 0.8 s: how long a glanced text holds |

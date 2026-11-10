@@ -3,28 +3,28 @@
   "category": "scene",
   "name": {
     "en": "Strand cards",
-    "zh": "细丝上的三张卡"
+    "zh": "细丝上的卡片"
   },
   "summary": {
-    "en": "Whole – part – whole: three strands fork from the spine and each ends in a glass card; each card is enlarged in turn in place on its strand, its rows arriving, the next growing as the previous shrinks; then the three again and a sub-line.",
-    "zh": "总–分–总：主干分出三根细丝，各挂一张玻璃卡；每张卡依次在细丝上原地放大、各行出现，下一张放大时上一张同时缩小；最后三张一起，再加一句副标题。"
+    "en": "Whole – part – whole: three strands (or two) fork from the spine and each ends in a glass card; each card is enlarged in turn in place on its strand, its rows arriving, the next growing as the previous shrinks; then all of them again and a sub-line. One card is a single pass: one strand straight into it, already large, its rows read.",
+    "zh": "总–分–总：主干分出三根（或两根）细丝，各挂一张玻璃卡；每张卡依次在细丝上原地放大、各行出现，下一张放大时上一张同时缩小；最后全部一起，再加一句副标题。只有一张卡时一遍过：一根细丝直连到已经放大的卡，读完各行。"
   },
-  "fits": "What the product keeps between tasks (memory, decisions, files), shown together and one by one.",
-  "notFor": "More than three things; things that are not lists.",
+  "fits": "What the product keeps between tasks (memory, decisions, files): up to three, shown together and one by one, or one shown on its own.",
+  "notFor": "More than three things; things that are not lists; one card that needs a sentence of its own while open (one card is read under the scene's caption).",
   "select": {
     "intent": {
-      "en": "Show the parts and keep the whole: three things the product keeps, each read in turn.",
-      "zh": "看部分、留住整体：产品保存的三样东西，一样样读。"
+      "en": "Show the parts and keep the whole: up to three things the product keeps, each read in turn.",
+      "zh": "看部分、留住整体：产品保存的东西（最多三样），一样样读。"
     },
     "content": {
-      "en": "Two captions, three cards each with a title, a sub-line and 1–3 rows (≤ 34 characters / 17 Chinese characters); optional: the tangle the three strands are pulled out of, a caption per open card, a line flowing into a card, a new task starting from a card; rows up to 5 with the flowed line.",
-      "zh": "两句字幕，三张卡各有标题、副标题和 1–3 行（≤ 34 字符 / 17 个汉字）；可选：开头线团拽成三股、每张卡放大时的章节句、一句话顺线流进卡、从卡开工的新任务行；连流进的那句最多 5 行。"
+      "en": "Two captions; one to three cards, each with a title, a sub-line and 1–3 rows (≤ 34 characters / 17 Chinese characters); optional: the tangle the strands are pulled out of, a caption per open card (two or three cards), a line flowing into a card, a new task starting from a card; rows up to 5 with the flowed line.",
+      "zh": "两句字幕；一到三张卡，各有标题、副标题和 1–3 行（≤ 34 字符 / 17 个汉字）；可选：开头线团拽成几股、每张卡放大时的章节句（两张或三张卡时）、一句话顺线流进卡、从卡开工的新任务行；连流进的那句最多 5 行。"
     },
     "fits": {
-      "zh": "产品在任务之间保存的东西（记忆、决定、文件），先一起再一样样。"
+      "zh": "产品在任务之间保存的东西（记忆、决定、文件）：最多三样时先一起再一样样，一样时单独展示。"
     },
     "notFor": {
-      "zh": "超过三样；不是列表的东西。"
+      "zh": "超过三样；不是列表的东西；只有一张卡却要在卡打开时另说一句（一张卡时读的是场景字幕）。"
     },
     "use": [
       "in-scene"
@@ -79,10 +79,12 @@
     "pitfalls": {
       "en": [
         "The rows are glances (0.8 s each): what a card says is its `say`, read while the card is open; a card without `say` holds for its rows' glances only.",
+        "One card is a single pass: it opens already large on one strand, with no whole before or after; its rows are read under the scene's caption, so a card's `say` is refused. Two cards hang at y 435 and 645 and hand over as three do; `day-after-day` needs three cards.",
         "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
       ],
       "zh": [
         "卡里的行是扫一眼的（每行 0.8 秒）：一张卡要说的话放在 `say`，卡打开时按读字计时；没给 `say` 的卡只停够各行的扫一眼。",
+        "一张卡时一遍过：卡在一根细丝上直接以放大状态出现，前后没有“全部一起”；各行在场景字幕下读，所以不能给卡 `say`。两张卡挂在 y 435 和 645，交接方式同三张；`day-after-day` 要求三张卡。",
         "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
       ]
     }
@@ -90,11 +92,11 @@
   "energy": "mid",
   "duration": {
     "beats": [
-      20,
+      10,
       56
     ],
     "sec120": [
-      10,
+      5,
       28
     ]
   },

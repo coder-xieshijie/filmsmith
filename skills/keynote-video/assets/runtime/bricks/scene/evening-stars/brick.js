@@ -1,6 +1,6 @@
 // evening-stars — one evening of asks: the chat block lowers and a task list grows out beside it; every ask the user sends
-// adds a running row and launches a star from that row's ring; then a burst of unnamed tasks (the last two queued, a
-// dashed ring and a half-bright star) and the list's counts. The "too many to read" is the point.
+// adds a running row and launches a star from that row's ring; then a burst of unnamed tasks (those past the film's
+// `ui.cap` queued, else the last two: a dashed ring that does not spin and a half-bright star) and the list's counts. The "too many to read" is the point.
 // From the stream template: film.js renderEvening, listScrollEased, the stars of renderBG; sched.js evening.
 import { filmScene, text } from '../../prop/glow-thread/kit.js';
 

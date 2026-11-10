@@ -6,8 +6,8 @@
     "zh": "一晚上的星"
   },
   "summary": {
-    "en": "One evening of asks: the chat block lowers and a task list grows out beside it; every ask adds a running row and launches a star from its ring; then a burst of unnamed tasks (the last two queued) and the list's counts. Too many to read is the point.",
-    "zh": "一晚上的请求：对话块下移，旁边长出任务列表；每个请求加一行进行中的任务，并从它的环里飞出一颗星；然后是一阵没名字的任务（最后两个在排队）和列表的计数。多到读不完正是要说的。"
+    "en": "One evening of asks: the chat block lowers and a task list grows out beside it; every ask adds a running row and launches a star from its ring; then a burst of unnamed tasks (those past the film's `ui.cap` queued; without it the last two) and the list's counts. Too many to read is the point.",
+    "zh": "一晚上的请求：对话块下移，旁边长出任务列表；每个请求加一行进行中的任务，并从它的环里飞出一颗星；然后是一阵没名字的任务（超过整片 `ui.cap` 的在排队；没设时最后两个）和列表的计数。多到读不完正是要说的。"
   },
   "fits": "Showing volume after the single loop: the product takes many things in one evening.",
   "notFor": "A scene where each task must be read; fewer than three asks.",
