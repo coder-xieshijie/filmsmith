@@ -22,16 +22,17 @@ A mode is one visual language made repeatable: a mode card (this folder) that st
 | [strip](strip.md) | One strip of film on a light box, the camera locked: real frames of real films move through a fixed gate a pull-down at a time and stop registered, intertitles ride the same strip with an optical track drawn from real sound; a frame punches to the full frame and shrinks into a contact sheet whose rows are as long as the films; a grease pencil rings one cell, which punches to full and runs; the strip runs out of the gate | Reels of a product's real outputs — rendered films, captured footage, animation or simulation frames — shown side by side with their real lengths and one chosen | 112–128 bpm (120) · 28 s · shortest cut titles → frames → lockup (`edges: 'cut'`), 12 s | real-asset sample film (2026-10-21) |
 | [split](split.md) | One movable seam divides the frame: the input on paper (a request, real lines of a real file, a command, a one-line diff) on one side, real frames, renders and reports on the other; it slides results out of itself, louvres, wipes, branches into three panes and slides across a before/after | Developer tools whose input maps line by line to an output: generators, template systems, configs, CLIs with a report | 112–128 bpm (120) · 32 s · shortest cut file → render → diff, 16 s | real-asset sample film (2026-10-21) |
 | [scroll](scroll.md) | One long vertical sheet joined from the product's real page (a repository page and its README, docs, a changelog) and code-set quote bands; flicked up with momentum, it brakes and locks on the next section, the page's own headings pin as chapters, an ochre underline marks the line a band repeats, one row unfolds in place on what it describes, and at the end the sheet flies back to its top and its paper roll winds it up under the name | Launches whose argument is already written, in order, on the product's own long page: open-source tools and skills, CLIs and libraries with a good README, a release told by its changelog | 112–128 bpm (120) · 33.75 s at 128 · shortest cut open → lockup, 12 s | real-asset sample film (2026-10-21) |
+| [stream](stream.md) | One thread of light through a night sky is the product's attention: it pierces a scattered desk and reels it in, becomes the spine small interface blocks hang on, sends each task out as a star, links a job's stars into a constellation, forks into three cards zoomed in turn, sweeps the sky to gather every star into one panel where one thing needs you, lies flat under the claim and winds back into the mascot; English or Chinese (`lang`) | Launches of agent desks, task schedulers and orchestration products: work sent out, run in parallel, checked and brought back | 120–132 bpm (128) · 91.9 s (en), 97.5 s (zh) · no cut-down yet | style sample (2026-11-09) |
 
 ## Choosing a mode
 
-The shortest cut is the smallest chain each template renders (2026-10-19), made for reels and stings; its first frame is already the mode's world and its last half second is settled, so it can be cut into a longer film. Lengths in the index are the shipped examples fitted at the default tempo under the four tiers of change of 2026-10-19 (timing API 3, all sixteen templates); every film's length follows its own content (principle 5).
+The shortest cut is the smallest chain each template renders (2026-10-19), made for reels and stings; its first frame is already the mode's world and its last half second is settled, so it can be cut into a longer film. Lengths in the index are the shipped examples fitted at the default tempo under the four tiers of change of 2026-10-19 (timing API 3, the sixteen templates of that day); every film's length follows its own content (principle 5).
 
 Ask what the content *is*, then pick (principle 9, the style points at the content):
 
 | The content is… | Mode |
 |---|---|
-| A reel showing what a video, motion or rendering toolchain itself makes | thread |
+| A reel showing what a video, motion or rendering toolchain itself makes: the line *becomes* each object of its pipeline | thread |
 | A name, a slogan, a teaser under 30 s | ink |
 | A claim plus a short list of steps or decisions, with a human in the loop | plakat |
 | A system: parts, flow between them, inputs and outputs | blueprint |
@@ -47,6 +48,7 @@ Ask what the content *is*, then pick (principle 9, the style points at the conte
 | A product's real outputs (rendered films, footage, frames) to show side by side with their real lengths and choose from | strip |
 | An input that maps line by line to a real output (a file, a config line, a command and the render or report it makes), with a one-line change that shows in a second render | split |
 | A product whose argument is already written, in order, on its own long page (a README, a docs page, a changelog), with headings for chapters and a row that can open on what it describes; the page itself is the story | scroll |
+| A product that sends work out and brings it back — an agent desk, a task scheduler, an orchestration or background-job product: dispatch, parallel work, checking, gathering; the line stays a line and *carries* the work (a tool whose output is film is thread) | stream |
 | The owner asks for "something with impact" for a developer product | ink or phosphor; show a 5 s sample of each |
 | None of the above fits | Use creative mode ([creative.md](../creative.md)): pick the nearest mode as the base system and compose; say so. Do not improvise a second visual system inside a film |
 

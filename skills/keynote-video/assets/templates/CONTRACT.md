@@ -181,6 +181,8 @@ Scene `type` values come only from the mode's registry in TEMPLATE.md. Each slot
 
 Templates load fonts only through `fonts.css`, never through `@font-face` rules of their own in `index.html`; whatever a template needs (a width axis, an italic) goes into `fonts.json`.
 
+A template whose fonts depend on its content ships `tools/fonts.mjs`, which `new-film.mjs` and its `npm run setup` run instead of `setup-fonts.mjs` (stream, 2026-11-09). It reads the same `fonts.json` with two more fields: `"lang": "zh"` (the entry is used only when `content.lang` is that language) and `"subset": true` (the file is cut to the characters of `content.js`); it fetches from the same pinned commit, writes `fonts.css` the same way, checks that every character of the copy is in the font stack, and stamps `<html lang>`. It moves into the runtime once a second template sets Chinese.
+
 ## Form variant
 
 Besides its palette presets, every template takes one form variant in `content.js` (2026-10-19): a field that changes the shape of the mode's marks, not its colours, timing or scene registry. The default value renders exactly as the template did before the field existed (stills compared pixel for pixel when it was added). Each card's `## Variants` lists the values, what changes, when to pick one and the source.
@@ -203,6 +205,7 @@ Besides its palette presets, every template takes one form variant in `content.j
 | strip | `perfs` | `'double'`, `'single'` |
 | split | `seam` | `'straight'`, `'stitched'` |
 | scroll | `minimap` | `'on'`, `'off'` |
+| stream | `opening` | `'desk'`, `'night'` |
 
 ## Cut-downs for a reel
 
@@ -226,6 +229,7 @@ A film that is cut into a longer one (a showcase, a launch film's sting, a demo 
 | strip | `edges: 'cut'` (the first frame is an intertitle registered in the gate); `titles` → `frames` → `lockup` | 12 s at 120 bpm |
 | split | `edges: 'cut'`: may open on a `file` (the first frame is already code over its result) and end on a `diff` (the claim's pause settles the last half second); `file` → `render` → `diff` | 16 s at 120 bpm, 15 s at 128 |
 | scroll | `open` → `lockup` (no fling: the sheet is already at its top and the name replaces the hook; the first frame is the paper roll on the ground, already unrolling the page; the roll-up lands on the last downbeat) | 12 s at 120 bpm |
+| stream | none yet: all nine scenes are required (mode card, Known issues) | the whole film, 91.9 s at 128 bpm |
 
 The switches differ because the templates do; a later version may unify them under `edges`.
 
