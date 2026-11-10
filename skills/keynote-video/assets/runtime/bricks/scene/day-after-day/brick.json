@@ -73,11 +73,11 @@
     "pitfalls": {
       "en": [
         "The days are glances: keep each ask and answer to a few words; the reading belongs to the caption.",
-        "Pass the film's whole content as `film` (with the cards scene): the strands and cards it uses are that film's."
+        "Pass the film's whole content as `film` (with the cards scene): the strands and cards it uses are that film's, and its cards scene must keep three cards (a film with fewer is refused)."
       ],
       "zh": [
         "前几天的对话是扫一眼的：每句几个字就够，要读的是字幕。",
-        "把整片的 content 作为 `film` 传进来（含三张卡那场）：它用的线和卡就是那部片的。"
+        "把整片的 content 作为 `film` 传进来（含三张卡那场）：它用的线和卡就是那部片的，那场必须是三张卡（少于三张的片子会被拒）。"
       ]
     }
   },

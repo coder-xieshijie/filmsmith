@@ -230,10 +230,12 @@ export const SCHED = {
     const tg = s.tangle ? { relight: 0.2 * B, knot0: 1.2 * B, knot1: 2.4 * B, reach: 2.4 * B, pull0: 3.0 * B, pull1: 5.6 * B } : null;
     const cap = 0, fork = (tg ? 6 * B : 0) + 0.4 * B;
     const land = s.cards.map((_, k) => fork + (1 + k * 0.5) * B);
+    // one card (`cards` of one) lands already open and is read in one pass, under the caption: no whole before or after
+    const one = s.cards.length === 1;
     // whole: the titles are glanced as the cards land; the caption is read
     const allRead = Math.max(land[land.length - 1] + 0.4 + glance('cards', s.cards.map((c) => c.title)), cap + read('caption', s.caption) + 0.3);
     const zoom = [];
-    let t = snap(allRead, B);
+    let t = one ? land[0] : snap(allRead, B);
     s.cards.forEach((c, k) => { // part: each card opens in turn, straight from the previous one
       const z0 = t, rows = c.rows.map((_, j) => z0 + 0.6 * B + j * 0.4 * B);
       let z1 = rows[rows.length - 1] + 0.3 + glance('rows', c.rows, k);
@@ -246,13 +248,13 @@ export const SCHED = {
       if (c.flow) { flow = { t0: after, t1: after + 0.9 }; z1 = Math.max(z1, flow.t1 + 0.3 + glance('flow', c.flow, k)); }
       if (c.task) { const r0 = (flow ? flow.t1 : after) + 0.1, done = r0 + 0.4 + glance('task', c.task.title, k) + 0.3; task = { row: r0, launch: done + 0.3 }; z1 = Math.max(z1, task.launch + 0.5); }
       zoom.push({ z0, rows, z1, flow, task });
-      t = snap(z1, B);
+      t = snap(one ? Math.max(z1, allRead) : z1, B);
     });
     const whole = t, cap2 = whole + 0.6 * B;
     const end = cap2 + read('caption2', s.caption2) + 0.6;
     return {
-      dur: snap(end, B), cap, fork, land, zoom, whole, cap2, tg,
-      cues: [...(tg ? [{ t: tg.relight, kind: 'sweep' }, { t: tg.pull0, kind: 'pull', dur: tg.pull1 - tg.pull0 }] : []), { t: fork, kind: 'sweep' }, ...land.map((x, i) => ({ t: x, kind: 'pluck', i })), ...zoom.flatMap((z, k) => [{ t: z.z0, kind: 'zoom', i: k }, ...z.rows.map((x, j) => ({ t: x, kind: 'tick', i: j })), { t: z.z1 + 0.2, kind: 'unzoom' }]), { t: whole, kind: 'chime' }],
+      dur: snap(end, B), cap, fork, land, zoom, whole, cap2, tg, one,
+      cues: [...(tg ? [{ t: tg.relight, kind: 'sweep' }, { t: tg.pull0, kind: 'pull', dur: tg.pull1 - tg.pull0 }] : []), { t: fork, kind: 'sweep' }, ...land.map((x, i) => ({ t: x, kind: 'pluck', i })), ...zoom.flatMap((z, k) => [...(one ? [] : [{ t: z.z0, kind: 'zoom', i: k }]), ...z.rows.map((x, j) => ({ t: x, kind: 'tick', i: j })), ...(one ? [] : [{ t: z.z1 + 0.2, kind: 'unzoom' }])]), { t: whole, kind: 'chime' }],
       music: [{ at: 0, kind: 'break', energy: 0.4, reading: true }, { at: whole, kind: 'build', energy: 0.5 }],
     };
   },
@@ -309,6 +311,14 @@ export const SCHED = {
       music: [{ at: 0, kind: 'build', energy: 0.65 }, { at: unfold, kind: 'drop', energy: 0.85 }, { at: recede, kind: 'build', energy: 0.55, reading: true }],
       peak: { t: unfold, kind: 'reveal', climax: true },
     };
+  },
+
+  // 7b · (optional) interlude: a stretch of the night after the close, `beats` long, for the film's own composition
+  // (drawn over it by the host); the sky goes on and the mascot stays on its perch at the top of the spine, or leaves the
+  // frame to the composition (`perch: false`). No text, no cues of its own: the composition brings its own.
+  interlude(s, B) {
+    const beats = Math.min(64, Math.max(1, Number(s.beats) || 8));
+    return { dur: beats * B, cues: [], music: [{ at: 0, kind: 'build', energy: 0.5 }] };
   },
 
   // 8 · lock-up: 'name' — the thread winds into a point at the centre and the name opens out of it;

@@ -1,9 +1,9 @@
 {
  "version": 1,
- "generated": "2026-11-10T03:44:54Z",
+ "generated": "2026-11-10T13:33:29Z",
  "counts": {
-  "motion": 166,
-  "scene": 180,
+  "motion": 167,
+  "scene": 181,
   "prop": 47,
   "look": 21,
   "sound": 18,
@@ -11374,6 +11374,161 @@
    "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
   },
   {
+   "id": "split-fuse",
+   "category": "motion",
+   "name": {
+    "en": "Split fuse",
+    "zh": "拆开再扣合"
+   },
+   "summary": {
+    "en": "A figure shown as its two parts, then fused: from the whole (split) or from two edges (converge) the parts hold apart, then slam together into the whole under a flash, a shock and a shake.",
+    "zh": "把一个形象拆成两半给人看，再合回去：从整体一闪拆开（split），或两半从画面两端进场（converge），停住让人认，然后扣合成整体，配闪白、冲击和震屏。"
+   },
+   "fits": "A product, mascot or mark that is made of two recognisable things (a brand and a character, a model and a tool): its debut or its closing reveal.",
+   "notFor": "Two sides of a comparison that collide (versus); one thing becoming many (clone-echo); shapes melting into one (sphere-merge); parts that are not recognisable alone; more than once or twice a film.",
+   "select": {
+    "intent": {
+     "en": "Show what the thing is made of, then make it one: each part is recognised on its own before the slam makes them the whole.",
+     "zh": "先让人看清它由什么组成，再合成一个：两半各自被认出来，扣合那一下让它们成为整体。"
+    },
+    "content": {
+     "en": "Three pictures: the whole figure and its two parts (cut-outs, transparent PNG), at most about 480 px high; no text (a film may set names as glance text over it). Without pictures, a drawn badge and its two halves.",
+     "zh": "三张图：完整形象和它的两半（透明底抠图），高约 480 px 以内；不带字（要名字时由片子另配扫一眼的字）。不给图时画一个示意徽章和它的两半。"
+    },
+    "fits": {
+     "zh": "由两个认得出的东西组成的产品、吉祥物或标志（品牌加角色、模型加工具）：它的登场，或片尾的揭晓。"
+    },
+    "notFor": {
+     "zh": "两方对比相撞（用 versus）；一个变很多（用 clone-echo）；形状融成一个（用 sphere-merge）；单看认不出的部件；一部片用超过一两次。"
+    },
+    "use": [
+     "in-scene"
+    ],
+    "roles": [
+     "hook",
+     "turn",
+     "climax",
+     "lockup"
+    ],
+    "subjects": [
+     "image",
+     "logo"
+    ],
+    "moods": [
+     "dramatic",
+     "energetic",
+     "cinematic"
+    ],
+    "keywords": {
+     "en": [
+      "fusion",
+      "merge",
+      "reveal",
+      "assemble",
+      "two halves",
+      "exploded view",
+      "slam",
+      "mascot debut"
+     ],
+     "zh": [
+      "合体",
+      "拆开再扣合",
+      "揭晓",
+      "组装",
+      "两半",
+      "爆炸视图",
+      "扣合",
+      "吉祥物登场"
+     ]
+    },
+    "pairs": [
+     {
+      "id": "night-interlude",
+      "note": "in stream, over the night after the close, as the film's own ending"
+     },
+     {
+      "id": "desk-threaded",
+      "note": "converge as the mascot's debut over the opening, its slam on the drop's landing"
+     }
+    ],
+    "pitfalls": {
+     "en": [
+      "Hold the parts apart long enough to be recognised (about two beats from apart to the wind back): rushed, the slam merges two unread blurs.",
+      "The slam is the hit: give it the film's heaviest sound and let the music drop on it; the flash hides the cut to the whole, so the parts need not fit pixel for pixel.",
+      "In stream the shock is the line shooting across (`line`); on another look keep `impact` and let the roles reskin it, or turn the shake off on calm films."
+     ],
+     "zh": [
+      "两半分开后要停够让人认出来（从分开到蓄力约两拍）：太快的话扣合的是两团没看清的影子。",
+      "扣合是重拍：给它全片最重的声音，配乐在这里落下；闪白藏住切到整体那一下，两半不必逐像素拼准。",
+      "stream 里冲击就是线横穿画面（`line`）；别的样式保留 `impact`，靠颜色角色换皮，安静的片子把震屏关掉。"
+     ]
+    }
+   },
+   "energy": "peak",
+   "duration": {
+    "beats": 10,
+    "range": [
+     6,
+     16
+    ]
+   },
+   "tier": "T3",
+   "family": "shape",
+   "surface": [
+    "canvas"
+   ],
+   "styles": {
+    "fits": [
+     "any"
+    ],
+    "avoid": [
+     "plakat",
+     "blueprint",
+     "dossier"
+    ]
+   },
+   "langs": {
+    "en": "full",
+    "zh": "full"
+   },
+   "source": {
+    "kind": "own",
+    "path": "the stream films of the source production: the opening fusion and the closing reveal"
+   },
+   "licence": "MIT",
+   "mergedFrom": [],
+   "overlaps": [
+    {
+     "id": "versus",
+     "note": "versus slams two sides of a comparison together and keeps them two (numbers, a stamp, a verdict); split-fuse shows one thing's parts and makes them one"
+    },
+    {
+     "id": "clone-echo",
+     "note": "clone-echo copies one element into many and draws them back into it (one is many); split-fuse takes one apart into two different parts and puts it back (what it is made of)"
+    },
+    {
+     "id": "sphere-merge",
+     "note": "sphere-merge melts like shapes into one through a viscous neck; split-fuse slams two different pictures together and cuts to the whole under a flash"
+    }
+   ],
+   "hosts": [
+    "keynote"
+   ],
+   "entry": "motion/split-fuse/brick.js",
+   "card": "motion/split-fuse/CARD.md",
+   "sample": {
+    "poster": "motion/split-fuse/poster.jpg"
+   },
+   "compare": {
+    "verdict": "waived",
+    "waive": {
+     "all": "an own brick from two stream films of the source production: no upstream shot; checked instead against both films at the same moments (card, Differs from upstream)"
+    }
+   },
+   "status": "approved",
+   "approvedBy": "taste/journal.md 2026-11-10 · 第 6 轮选 L，尾部换成 M 的合体揭晓（合体段不要标签）；补进 Skill"
+  },
+  {
    "id": "stagger-in",
    "category": "motion",
    "name": {
@@ -15687,7 +15842,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -17030,7 +17185,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -18932,11 +19087,11 @@
     "pitfalls": {
      "en": [
       "The days are glances: keep each ask and answer to a few words; the reading belongs to the caption.",
-      "Pass the film's whole content as `film` (with the cards scene): the strands and cards it uses are that film's."
+      "Pass the film's whole content as `film` (with the cards scene): the strands and cards it uses are that film's, and its cards scene must keep three cards (a film with fewer is refused)."
      ],
      "zh": [
       "前几天的对话是扫一眼的：每句几个字就够，要读的是字幕。",
-      "把整片的 content 作为 `film` 传进来（含三张卡那场）：它用的线和卡就是那部片的。"
+      "把整片的 content 作为 `film` 传进来（含三张卡那场）：它用的线和卡就是那部片的，那场必须是三张卡（少于三张的片子会被拒）。"
      ]
     }
    },
@@ -18978,7 +19133,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -19560,7 +19715,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -21073,8 +21228,8 @@
     "zh": "一晚上的星"
    },
    "summary": {
-    "en": "One evening of asks: the chat block lowers and a task list grows out beside it; every ask adds a running row and launches a star from its ring; then a burst of unnamed tasks (the last two queued) and the list's counts. Too many to read is the point.",
-    "zh": "一晚上的请求：对话块下移，旁边长出任务列表；每个请求加一行进行中的任务，并从它的环里飞出一颗星；然后是一阵没名字的任务（最后两个在排队）和列表的计数。多到读不完正是要说的。"
+    "en": "One evening of asks: the chat block lowers and a task list grows out beside it; every ask adds a running row and launches a star from its ring; then a burst of unnamed tasks (those past the film's `ui.cap` queued; without it the last two) and the list's counts. Too many to read is the point.",
+    "zh": "一晚上的请求：对话块下移，旁边长出任务列表；每个请求加一行进行中的任务，并从它的环里飞出一颗星；然后是一阵没名字的任务（超过整片 `ui.cap` 的在排队；没设时最后两个）和列表的计数。多到读不完正是要说的。"
    },
    "fits": "Showing volume after the single loop: the product takes many things in one evening.",
    "notFor": "A scene where each task must be read; fewer than three asks.",
@@ -21192,7 +21347,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -26156,7 +26311,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -28206,6 +28361,153 @@
    },
    "status": "approved",
    "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+  },
+  {
+   "id": "night-interlude",
+   "category": "scene",
+   "name": {
+    "en": "Night interlude",
+    "zh": "收束后的一段夜空"
+   },
+   "summary": {
+    "en": "A stretch of the stream night after the closing sweep for a film's own composition: the sky goes on with the film's motes and push, and the mascot stays on its perch or leaves the frame to the composition.",
+    "zh": "收束之后留一段 stream 的夜空给片子自己的合成：夜空照整片的微尘与推进继续，吉祥物留在线顶，或把画面让给合成。"
+   },
+   "fits": "A section the stream skeleton has no scene for (a draw, an offer, a reveal) after the close, or an ending of the film's own in place of the lock-up.",
+   "notFor": "Anything a stream scene already draws; a stretch with nothing over it (the night alone is a held frame); before the close (the stars are still in the sky there).",
+   "select": {
+    "intent": {
+     "en": "Keep the film one continuous night past the close, so the film's own section or ending sits in the same sky with no seam.",
+     "zh": "让收束之后仍是同一片夜空，片子自己的段落或结尾放在里面，看不出接缝。"
+    },
+    "content": {
+     "en": "Nothing to read: its length in beats (the composition's own) and whether the mascot stays on its perch; the composition over it is the film's.",
+     "zh": "没有字：长度（拍数，按合成自己的需要）和吉祥物留不留在线顶；上面的合成由片子自己画。"
+    },
+    "fits": {
+     "zh": "收束之后 stream 骨架里没有的段落（抽奖、福利、揭晓），或代替落版的片子自己的结尾。"
+    },
+    "notFor": {
+     "zh": "stream 场景已经能画的东西；上面什么都不放（只剩夜空就是一帧定格）；收束之前（那时星还在天上）。"
+    },
+    "use": [
+     "in-scene"
+    ],
+    "roles": [
+     "demo",
+     "proof",
+     "rest",
+     "lockup"
+    ],
+    "subjects": [
+     "abstract",
+     "space"
+    ],
+    "moods": [
+     "calm",
+     "cinematic"
+    ],
+    "keywords": {
+     "en": [
+      "interlude",
+      "night",
+      "insert",
+      "extra section",
+      "own ending",
+      "continuity",
+      "sky"
+     ],
+     "zh": [
+      "插段",
+      "夜空",
+      "插入段落",
+      "自定义结尾",
+      "接缝",
+      "延续"
+     ]
+    },
+    "pairs": [
+     {
+      "id": "split-fuse",
+      "note": "a reveal over it as the film's own ending"
+     },
+     {
+      "id": "sky-gather",
+      "note": "the close it follows"
+     },
+     {
+      "id": "point-lockup",
+      "note": "or the lock-up after it"
+     }
+    ],
+    "pitfalls": {
+     "en": [
+      "Give it the composition's length: the film's sky push and the lock-up after it are laid out with it, so a host that redraws the sky with another length shows a seam.",
+      "With `perch: false` the composition draws the mascot where it takes it from: the perch is at (230, 156), the size the film's `mascotSize.sit`.",
+      "As the film's last scene it takes the film's rounding to a whole bar: read its length from the plan, not from `beats`."
+     ],
+     "zh": [
+      "长度给合成自己的长度：整片夜空的推进和后面的落版都按它排，宿主用别的长度重画夜空就会露接缝。",
+      "`perch: false` 时吉祥物由合成从线顶接走：线顶在 (230, 156)，大小是整片的 `mascotSize.sit`。",
+      "它是整片最后一场时会吃掉整片取整到整小节的余量：长度以排出来的为准，不以 `beats` 为准。"
+     ]
+    }
+   },
+   "energy": "low",
+   "duration": {
+    "beats": [
+     1,
+     64
+    ],
+    "sec120": [
+     0.5,
+     32
+    ]
+   },
+   "surface": [
+    "canvas"
+   ],
+   "styles": {
+    "fits": [
+     "stream"
+    ],
+    "avoid": [
+     "plakat",
+     "blueprint",
+     "dossier"
+    ]
+   },
+   "langs": {
+    "en": "full",
+    "zh": "full"
+   },
+   "source": {
+    "kind": "own",
+    "path": "prop/glow-thread sched.js interlude (the engine's scene after the close)"
+   },
+   "licence": "MIT",
+   "mergedFrom": [],
+   "overlaps": [],
+   "needsFilm": {
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
+    "example": "prop/glow-thread/examples.js"
+   },
+   "hosts": [
+    "keynote"
+   ],
+   "entry": "scene/night-interlude/brick.js",
+   "card": "scene/night-interlude/CARD.md",
+   "sample": {
+    "poster": "scene/night-interlude/poster.jpg"
+   },
+   "compare": {
+    "verdict": "waived",
+    "waive": {
+     "all": "an own brick of the stream engine: no upstream shot; checked instead in a stream film whose own section and ending sat on a placeholder lock-up (card, Differs from upstream)"
+    }
+   },
+   "status": "approved",
+   "approvedBy": "taste/journal.md 2026-11-10 · 第 6 轮选 L，尾部换成 M 的合体揭晓（合体段不要标签）；补进 Skill"
   },
   {
    "id": "numeral-chapter",
@@ -30514,7 +30816,7 @@
     }
    ],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -35290,7 +35592,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -36070,7 +36372,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -36349,28 +36651,28 @@
    "category": "scene",
    "name": {
     "en": "Strand cards",
-    "zh": "细丝上的三张卡"
+    "zh": "细丝上的卡片"
    },
    "summary": {
-    "en": "Whole – part – whole: three strands fork from the spine and each ends in a glass card; each card is enlarged in turn in place on its strand, its rows arriving, the next growing as the previous shrinks; then the three again and a sub-line.",
-    "zh": "总–分–总：主干分出三根细丝，各挂一张玻璃卡；每张卡依次在细丝上原地放大、各行出现，下一张放大时上一张同时缩小；最后三张一起，再加一句副标题。"
+    "en": "Whole – part – whole: three strands (or two) fork from the spine and each ends in a glass card; each card is enlarged in turn in place on its strand, its rows arriving, the next growing as the previous shrinks; then all of them again and a sub-line. One card is a single pass: one strand straight into it, already large, its rows read.",
+    "zh": "总–分–总：主干分出三根（或两根）细丝，各挂一张玻璃卡；每张卡依次在细丝上原地放大、各行出现，下一张放大时上一张同时缩小；最后全部一起，再加一句副标题。只有一张卡时一遍过：一根细丝直连到已经放大的卡，读完各行。"
    },
-   "fits": "What the product keeps between tasks (memory, decisions, files), shown together and one by one.",
-   "notFor": "More than three things; things that are not lists.",
+   "fits": "What the product keeps between tasks (memory, decisions, files): up to three, shown together and one by one, or one shown on its own.",
+   "notFor": "More than three things; things that are not lists; one card that needs a sentence of its own while open (one card is read under the scene's caption).",
    "select": {
     "intent": {
-     "en": "Show the parts and keep the whole: three things the product keeps, each read in turn.",
-     "zh": "看部分、留住整体：产品保存的三样东西，一样样读。"
+     "en": "Show the parts and keep the whole: up to three things the product keeps, each read in turn.",
+     "zh": "看部分、留住整体：产品保存的东西（最多三样），一样样读。"
     },
     "content": {
-     "en": "Two captions, three cards each with a title, a sub-line and 1–3 rows (≤ 34 characters / 17 Chinese characters); optional: the tangle the three strands are pulled out of, a caption per open card, a line flowing into a card, a new task starting from a card; rows up to 5 with the flowed line.",
-     "zh": "两句字幕，三张卡各有标题、副标题和 1–3 行（≤ 34 字符 / 17 个汉字）；可选：开头线团拽成三股、每张卡放大时的章节句、一句话顺线流进卡、从卡开工的新任务行；连流进的那句最多 5 行。"
+     "en": "Two captions; one to three cards, each with a title, a sub-line and 1–3 rows (≤ 34 characters / 17 Chinese characters); optional: the tangle the strands are pulled out of, a caption per open card (two or three cards), a line flowing into a card, a new task starting from a card; rows up to 5 with the flowed line.",
+     "zh": "两句字幕；一到三张卡，各有标题、副标题和 1–3 行（≤ 34 字符 / 17 个汉字）；可选：开头线团拽成几股、每张卡放大时的章节句（两张或三张卡时）、一句话顺线流进卡、从卡开工的新任务行；连流进的那句最多 5 行。"
     },
     "fits": {
-     "zh": "产品在任务之间保存的东西（记忆、决定、文件），先一起再一样样。"
+     "zh": "产品在任务之间保存的东西（记忆、决定、文件）：最多三样时先一起再一样样，一样时单独展示。"
     },
     "notFor": {
-     "zh": "超过三样；不是列表的东西。"
+     "zh": "超过三样；不是列表的东西；只有一张卡却要在卡打开时另说一句（一张卡时读的是场景字幕）。"
     },
     "use": [
      "in-scene"
@@ -36425,10 +36727,12 @@
     "pitfalls": {
      "en": [
       "The rows are glances (0.8 s each): what a card says is its `say`, read while the card is open; a card without `say` holds for its rows' glances only.",
+      "One card is a single pass: it opens already large on one strand, with no whole before or after; its rows are read under the scene's caption, so a card's `say` is refused. Two cards hang at y 435 and 645 and hand over as three do; `day-after-day` needs three cards.",
       "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
      ],
      "zh": [
       "卡里的行是扫一眼的（每行 0.8 秒）：一张卡要说的话放在 `say`，卡打开时按读字计时；没给 `say` 的卡只停够各行的扫一眼。",
+      "一张卡时一遍过：卡在一根细丝上直接以放大状态出现，前后没有“全部一起”；各行在场景字幕下读，所以不能给卡 `say`。两张卡挂在 y 435 和 645，交接方式同三张；`day-after-day` 要求三张卡。",
       "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
      ]
     }
@@ -36436,11 +36740,11 @@
    "energy": "mid",
    "duration": {
     "beats": [
-     20,
+     10,
      56
     ],
     "sec120": [
-     10,
+     5,
      28
     ]
    },
@@ -36469,7 +36773,7 @@
    "mergedFrom": [],
    "overlaps": [],
    "needsFilm": {
-    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }",
+    "shape": "the stream template's content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton's scenes by type, in order] }",
     "example": "prop/glow-thread/examples.js"
    },
    "hosts": [
@@ -51923,11 +52227,11 @@
     ],
     "pitfalls": {
      "en": [
-      "All nine slots are required in the template (no cut-down yet): the check and the evening are the ones meant to become optional.",
+      "The order is fixed and each scene comes once; the days, the interlude and the lock-up are optional (the template itself draws its nine scenes, with the lock-up). A film that drops the lock-up ends on its own composition over the interlude, which must land the name or the mascot.",
       "The two climaxes must be the constellation (about half-way) and the gather (about 83 %); swapping their order loses the build."
      ],
      "zh": [
-      "模板里九个槽全是必选（还没有删减版）：核对和一晚上那两场是准备改成可选的。",
+      "顺序固定，每场一次；多日、夜空插段和落版可选（模板本身画九场，含落版）。不要落版的片子在夜空插段上用自己的合成收尾，这个合成要落到名字或吉祥物上。",
       "两个高潮必须是星座（约一半处）和收束（约 83%）；对调顺序就失去了递进。"
      ]
     }

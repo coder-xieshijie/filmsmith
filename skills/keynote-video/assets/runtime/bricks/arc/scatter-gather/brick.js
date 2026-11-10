@@ -3,9 +3,9 @@
 // top of the thread; one ask becomes one task and one star, then an evening of them; a job that keeps going becomes a
 // constellation (the second peak); its result passes a check; whole – part – whole cards show what stays; the thread
 // sweeps the sky and gathers every star into one panel with one "needs you" (the climax, about 83 %); the thread lies
-// flat under the claim and winds back into the name. Fixed order; the template's nine required (the mode card's known
-// issue: no cut-down yet; the check and the evening are the ones meant to become optional), plus one optional proof
-// between the cards and the sweep: the days going on in the same chat (day-after-day, from the original K).
+// flat under the claim and winds back into the name. Fixed order, each scene once; optional: the days going on in the
+// same chat between the cards and the sweep (day-after-day, from the original K), the night after the sweep for a
+// composition of the film's own (night-interlude), and the lock-up (a film may end on its own composition instead).
 // From the stream template (assets/templates/stream/content.js, sched.js, the mode card's Scenes). Ranges cover the
 // example under the library's reading rule (128 BPM, 80.6 s in English: open 14.5 s, intro 7.5 s, ask 6.1 s, evening
 // 7.5 s, constellation 10.3 s, verify 5.2 s, cards 10.8 s, close 10.8 s, lock-up 8.0 s) and a full real film (K's
@@ -23,11 +23,12 @@ export const ARC = {
     { role: 'demo', sec: [10, 20], scenes: { ids: ['strand-cards'], fits: 'demo' }, required: true },
     { role: 'proof', sec: [4, 11], scenes: { ids: ['day-after-day'], fits: 'proof' }, optional: true },
     { role: 'climax', sec: [9, 14], scenes: { ids: ['sky-gather'], fits: 'climax' }, peak: 'reveal', at: [0.78, 0.88], required: true },
-    { role: 'lockup', sec: [6, 9], scenes: { ids: ['point-lockup'], fits: 'lockup' }, peak: 'lockup', required: true },
+    { role: 'rest', sec: [1, 30], scenes: { ids: ['night-interlude'], fits: 'rest' }, optional: true },
+    { role: 'lockup', sec: [6, 9], scenes: { ids: ['point-lockup'], fits: 'lockup' }, peak: 'lockup', optional: true },
   ],
   length: { sec: [75, 120] },
   peaks: [3, 4],
-  bed: { hook: 'build', turn: 'intro', demo: 'build', proof: 'build', climax: 'drop', lockup: 'outro' },
+  bed: { hook: 'build', turn: 'intro', demo: 'build', proof: 'build', climax: 'drop', rest: 'build', lockup: 'outro' },
   bedPreset: 'terminal',
 };
 export default {

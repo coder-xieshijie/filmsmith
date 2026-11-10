@@ -149,7 +149,7 @@ What the template produces untouched; a film's PLAN.md ban list starts here: the
 ## Known issues
 
 - **Timing API 1.** Each scene is one continuous composition, so the rules mark every type `rest` and the api 3 tiers are INFO only (T1 median 9–10 s; no T2 devices from the libraries; the hand-offs here are the template's own). Declaring `shots` for each block change and naming the thread moves as template devices is the migration.
-- **No cut-downs.** All nine scenes are required; `evening` and `verify` should become optional, and `close` + `lockup` should stand alone as a sting.
+- **No cut-downs.** The template draws all nine scenes; the bricks make the lock-up optional and add the days and a night interlude for a film's own section or ending ([stream recipe](../recipes/stream.md#recommended-bricks)), but every scene before the close is still required: `evening` and `verify` should become optional, and `close` + `lockup` should stand alone as a sting.
 - **Chinese runs about 6 % longer** (97.5 s against 91.9 s for the same film) because of the reading rule (6 characters a second plus 0.5 s a state, owner, 2026-11-09); the example copy was already tightened for it.
 - **Language plumbing in the template.** `lang.js` (reading, limits, line breaking, typing, type per language) and `tools/fonts.mjs` (fonts per language, subset, coverage, `<html lang>`) belong in the shared runtime; the reading rule already matches `timing.js`.
 - **Small type.** Row details, star labels and statuses are 25–27 px, at the information floor and under the 28 px HyperFrames recommends, as in the source film.

@@ -2,7 +2,7 @@
 // A stream scene is one window of a continuous film whose picture reads the scenes before it (the stars every earlier
 // scene sent stay in the sky; the chat block carries the feed of every ask; the closing sweep catches every star), so a
 // scene brick takes its own copy as slots and the rest of the film as `film` (the template's content.js: product, ui,
-// opening, lockup, seed and the nine scenes; default the worked example in the brick's language), lays the whole film
+// opening, lockup, seed and the scenes of the skeleton; default the worked example in the brick's language), lays the whole film
 // out with the template's rules, and draws its own window: the frames from its start to its end, the neighbours'
 // lingering pieces included, exactly as the film draws them. A host that passes its film's content gets its film's
 // frames and lengths; left alone, a scene draws its window of the example film with its own copy in it.
@@ -13,7 +13,7 @@ import { ROLES } from './draw.js';
 
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const KEY = { hit: 'accent', impact: 'accent', alert: 'claim', stamp: 'stamp', land: 'land', thud: 'land', chime: 'end', fold: 'turn', sweep: 'turn', pull: 'turn', zoom: 'turn', unzoom: 'turn', settle: 'land', launch: 'accent', return: 'accent', done: 'accent', word: 'claim' };
-export const TYPES = ['open', 'intro', 'ask', 'evening', 'constellation', 'verify', 'cards', 'days', 'close', 'lockup']; // days optional
+export const TYPES = ['open', 'intro', 'ask', 'evening', 'constellation', 'verify', 'cards', 'days', 'close', 'interlude', 'lockup']; // days, interlude, lockup optional
 const exampleOf = (lang) => EX[lang === 'zh' ? 'zh' : 'en'];
 
 // the film this scene stands in: the host's film (or the example), its own slots over the scene of its type, the
@@ -55,7 +55,7 @@ export const filmScene = (spec) => {
     slots: spec.slots,
     roles: ROLES,
     // SPEC 3.2: the picture reads the whole film; without `film` the scene draws its window of the worked example
-    needsFilm: { shape: 'the stream template\'s content.js: { product, ui, opening, lockup, seed, scenes: [nine scenes by type] }', example: 'prop/glow-thread/examples.js' },
+    needsFilm: { shape: 'the stream template\'s content.js: { product, ui, opening, lockup, seed, scenes: [the skeleton\'s scenes by type, in order] }', example: 'prop/glow-thread/examples.js' },
     defaults: (ctx = {}) => ({ ...own(ctx.lang), ...(spec.defaults ? spec.defaults(ctx) : {}), palette: 'night', film: null }),
     plan(s, ctx) {
       const { sc, B, content } = windowOf(s, ctx);
@@ -73,7 +73,7 @@ export const filmScene = (spec) => {
     },
     validate(s, ctx) {
       const { content } = windowOf(s, ctx);
-      return RULES(content).validate(content).filter((e) => e.includes(`(${spec.type})`) || e.includes(`${spec.type}.`) || /^(lang|opening|lockup|product)/.test(e));
+      return RULES(content).validate(content).filter((e) => e.includes(`(${spec.type})`) || e.includes(`${spec.type}.`) || /^(lang|opening|lockup|product|ui\.|scenes:)/.test(e));
     },
     async prepare(s, c) {
       const { content, sc } = windowOf(s, c);
