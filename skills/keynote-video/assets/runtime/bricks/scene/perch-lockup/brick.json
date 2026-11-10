@@ -1,0 +1,123 @@
+{
+  "id": "perch-lockup",
+  "category": "scene",
+  "name": {
+    "en": "Perch lockup",
+    "zh": "吉祥物栖落落版"
+  },
+  "summary": {
+    "en": "The mascot drops in and lands with a squash, the name rises behind it, the mascot flies to perch at the end of the name, a suffix types itself on, a pill says where to find the product, and the lock-up holds.",
+    "zh": "吉祥物落下压扁回弹，名字在它身后升起，吉祥物缩小飞到名字末尾栖落，后缀逐字打出，一枚胶囊标签说明在哪里找到产品，整体停够读完。"
+  },
+  "fits": "The ending of a film whose product has a mascot or character and a short name, with one place to find it.",
+  "notFor": "Products without a mascot image (the placeholder is only a stand-in); names longer than ten characters.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      12,
+      16
+    ],
+    "sec120": [
+      6,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any light"
+    ],
+    "avoid": [
+      "dossier",
+      "exhibit"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "mark-lockup",
+      "note": "a mark beside the wordmark; perch-lockup has a character perch on the name"
+    },
+    {
+      "id": "name-stamp",
+      "note": "stamps a name; perch-lockup adds a mascot, a typed suffix and a where-to-find pill"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/perch-lockup/brick.js",
+  "card": "scene/perch-lockup/CARD.md",
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "The mascot settles on the name and says where to find the product: a friendly sign-off that leaves an address.",
+      "zh": "吉祥物落在名字上并指明产品在哪：友好的道别，顺手留下地址。"
+    },
+    "content": {
+      "en": "A name ≤ 10 chars, an optional suffix ≤ 12 chars, an optional where-to-find line ≤ 34 chars with a highlighted part, the mascot in a dropping and a crouched pose (images).",
+      "zh": "≤ 5 字的名字，可选 ≤ 5 字的后缀，可选 ≤ 16 字的“在哪找到”一句及其高亮部分，吉祥物下落与蹲坐两种姿态的图片。"
+    },
+    "fits": {
+      "zh": "产品有吉祥物或角色、名字短、只有一个入口的片子的结尾。"
+    },
+    "notFor": {
+      "zh": "没有吉祥物图片的产品（占位只是替身）；名字超过 10 个字符。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "playful",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "mascot",
+        "perch",
+        "character",
+        "where to find",
+        "typed suffix",
+        "pill"
+      ],
+      "zh": [
+        "吉祥物",
+        "栖落",
+        "角色",
+        "入口提示",
+        "后缀打字",
+        "胶囊标签",
+        "兔子落版"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Without the film's mascot images the placeholder box is visible; do not ship it with the placeholder."
+      ],
+      "zh": [
+        "没有片子自己的吉祥物图，占位框会露出来；不要带着占位上线。"
+      ]
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

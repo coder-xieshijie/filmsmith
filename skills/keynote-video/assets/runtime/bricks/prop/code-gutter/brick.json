@@ -1,0 +1,104 @@
+{
+  "id": "code-gutter",
+  "category": "prop",
+  "name": {
+    "en": "Code gutter",
+    "zh": "带行号的代码"
+  },
+  "summary": {
+    "en": "Real lines of a real file set as they are: one mono, one colour, real line numbers in a gutter, the path as the label; one accent underline under a token, or a diff’s muted minus line and accent-barred plus line.",
+    "zh": "照原样排出的真实文件行：一种等宽字体、一种颜色、行号放在侧栏、路径作标签；一道强调色下划线标出一个词，或一组 diff 的减行（灰）和带强调竖条的加行。"
+  },
+  "fits": "Quoting the input a result was made from.",
+  "notFor": "Code written for the film; syntax-highlighted code; more than six lines.",
+  "select": {
+    "intent": {
+      "en": "Quote the input exactly, with its line numbers, so it can be checked.",
+      "zh": "原样引用输入并带行号，让人能去核对。"
+    },
+    "content": {
+      "en": "2–6 lines (≤ 64 characters) with the first line’s number and the file’s path; a token to underline or a line before and after.",
+      "zh": "2–6 行（≤ 64 字符），带首行行号和文件路径；要下划线的词，或改前改后的一行。"
+    },
+    "fits": {
+      "zh": "引用产生某个结果的输入。"
+    },
+    "notFor": {
+      "zh": "为片子现写的代码；带语法高亮的代码；多于六行。"
+    },
+    "roles": [
+      "demo",
+      "proof",
+      "climax"
+    ],
+    "subjects": [
+      "code"
+    ],
+    "moods": [
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "quoted code",
+        "line numbers",
+        "token underline",
+        "one-line diff",
+        "gutter"
+      ],
+      "zh": [
+        "引用代码",
+        "行号",
+        "词下划线",
+        "一行 diff",
+        "侧栏"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "No syntax colours: the accent is the only colour."
+      ],
+      "zh": [
+        "不加语法颜色：强调色是唯一的颜色。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/film.js (inputOf.file, inputOf.diff)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/code-gutter/brick.js",
+  "card": "prop/code-gutter/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

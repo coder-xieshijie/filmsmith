@@ -4,6 +4,12 @@
 // present from frame one is a preview, not a surprise. references/transitions.md#counter-portal.
 // glyph.draw: 'counter' draws only the letter that carries the counter (at its place in glyph.text), so the template's
 // `from` painter can draw the other letters itself (in another face, colour or motion); default 'all' draws the text.
+// Variant `through: 'stroke'`: the letters themselves are the windows (knocked out of the cover, the next scene seen
+// through all of them) and the camera pushes into one stroke (glyph.counter: the letter, counterAt: a point in its ink)
+// until the stroke is the frame; any glyph works, Chinese included. Adapted from video-shotcraft
+// demos/transition/transition-travel/LetterformZoom.tsx, https://github.com/Vincentwei1021/video-shotcraft @ 1266a3e,
+// Apache-2.0: letters as windows and the push into a stroke; its parallax ×1.08, ghosts, glow and the page's afterlife
+// are not taken (the module's own exponential zoom and parallax drive it).
 
 import { seg, bez, measure, scratch, canvasOf, text, ground } from './util.js';
 
@@ -29,10 +35,13 @@ export default {
     from: null,                          // (ctx, P) => scene A's other marks (no ground), drawn in A's space
     to: (ctx, P) => { text(ctx, 'next', 102, 660, { ...P.font, size: 400, spacing: -14 }, { color: P.colors.ink }); },   // scene B (its ground is filled for it)
     colors: { ground: '#F2EFE8', ink: '#111111', portal: '#FF3B1F' },
+    through: 'counter',                  // 'stroke': the letters are the windows and the camera pushes into a stroke
   },
   prepare(P) {
     const g = scratch(), G = P.glyph, f = P.font, s = G.text;
     let ci = G.counter;
+    const stroke = P.through === 'stroke', inside = (v) => (stroke ? v >= 128 : v < 128);
+    if (ci == null && stroke) ci = Math.floor((s.length - 1) / 2);
     if (ci == null) for (let i = s.length - 1; i >= 0; i--) if (COUNTERS.includes(s[i])) { ci = i; break; }
     if (ci == null) throw new Error(`counter-portal: no letter with a counter in "${s}"; set glyph.counter`);
     const ch = s[ci];
@@ -56,9 +65,9 @@ export default {
     for (let i = 0; i < N; i++) {
       const th = (i / N) * Math.PI * 2, dx = Math.cos(th), dy = Math.sin(th);
       let r = 0;
-      while (r < cw && al(gx + dx * r, gy + dy * r) < 128) r += 1;
+      while (r < cw && inside(al(gx + dx * r, gy + dy * r))) r += 1;
       let lo = Math.max(0, r - 1), hi = r;
-      for (let k = 0; k < 10; k++) { const mid = (lo + hi) / 2; if (al(gx + dx * mid, gy + dy * mid) < 128) lo = mid; else hi = mid; }
+      for (let k = 0; k < 10; k++) { const mid = (lo + hi) / 2; if (inside(al(gx + dx * mid, gy + dy * mid))) lo = mid; else hi = mid; }
       rho.push(lo / Z);
     }
     const Cx = x0 + gx / Z, Cy = P.baseline + (gy - oy) / Z;
@@ -71,7 +80,7 @@ export default {
         S = Math.max(S, Math.hypot(dx, dy) / rAt(Math.atan2(dy, dx)));
       }
     }
-    return { Cx, Cy, rho, N, S: S * 1.03, ci, ch, x0 };
+    return { Cx, Cy, rho, N, S: S * 1.03, ci, ch, x0, buf: stroke ? canvasOf(1920, 1080) : null };
   },
   rest(side) { return { w: side === 'from' ? 0 : 1 }; },
   at(p) { const w = seg(p, 0, 0.94); return { w: w >= 1 ? 1 : ZEASE(w) }; },   // lands a frame or two early: still by p = 1
@@ -83,6 +92,18 @@ export default {
     const sB = Math.pow(s / D.S, P.parallax);
     const aT = () => ctx.setTransform(s, 0, 0, s, Fx - D.Cx * s, Fy - D.Cy * s);
     const bT = () => ctx.setTransform(sB, 0, 0, sB, Fx - 960 * sB, Fy - 540 * sB);
+    if (P.through === 'stroke') {
+      // the next scene behind; the cover in front with every letter knocked out of it, pushed about the stroke
+      fillAll(C.portal); bT(); P.to(ctx, P);
+      const b = D.buf.getContext('2d');
+      b.setTransform(1, 0, 0, 1, 0, 0); b.globalCompositeOperation = 'source-over'; b.clearRect(0, 0, 1920, 1080); b.fillStyle = C.ground; b.fillRect(0, 0, 1920, 1080);
+      b.setTransform(s, 0, 0, s, Fx - D.Cx * s, Fy - D.Cy * s);
+      b.globalCompositeOperation = 'destination-out'; text(b, P.glyph.text, P.x, P.baseline, P.font, { color: C.ink });
+      b.globalCompositeOperation = 'source-over'; if (P.from) P.from(b, P);
+      b.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(D.buf, 0, 0);
+      return;
+    }
     if (P.ground !== false) fillAll(C.ground);
     // the portal: the counter polygon, grown 2.5 screen px so the redrawn ink overlaps its edge
     aT();

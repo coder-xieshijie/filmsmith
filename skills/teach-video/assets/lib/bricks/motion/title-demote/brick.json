@@ -1,0 +1,153 @@
+{
+  "id": "title-demote",
+  "category": "motion",
+  "name": {
+    "en": "Title demote",
+    "zh": "标题降格标签"
+  },
+  "summary": {
+    "en": "A centred hero title shrinks in one move into the section label at the top left while the section's content grows in under it; optionally a text selection sweeps over it first.",
+    "zh": "居中的大标题一口气缩小、飞到左上角落成小节标签，下面的内容在它落地的同时长出来；可选先扫过一道文本选区。"
+  },
+  "fits": "Opening a chapter: the title is the subject for a beat, then becomes the signpost of the content that grows under it; with select, a menu item becoming the heading of what it opens.",
+  "notFor": "A title that should stay the figure; sections without content to grow (it then reads as a title shrinking for nothing); titles over about three words; styles that never rescale type.",
+  "select": {
+    "intent": {
+      "en": "The title steps down instead of leaving, so the viewer keeps a free spatial memory: the big word from a moment ago is the small label up there, and this section is about it.",
+      "zh": "标题降格而不退场，观众白得一份空间记忆：刚才的大字就是左上角那个小标签，这一节讲的就是它。"
+    },
+    "content": {
+      "en": "A section title of up to three words (≤ 20 chars), an optional number (\"01\") and eyebrow, and the section content to grow under it (blocks in reading order).",
+      "zh": "一个不超过三个词的小节标题（≤ 6 字），可选编号（“01”）和眉题，以及要在下面长出来的本节内容（按阅读顺序的块）。"
+    },
+    "fits": {
+      "zh": "章节开场：标题先当一拍主角，再变成下面长出的内容的门牌；select 式让菜单项变成它打开那一页的标题。"
+    },
+    "notFor": {
+      "zh": "应该一直当主角的标题；下面没有内容可长的小节（就成了标题无故缩小）；超过约三个词的标题；从不缩放文字的风格。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "title",
+      "ui"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "title demote",
+        "section label",
+        "chapter opener",
+        "signpost",
+        "heading to label",
+        "text selection"
+      ],
+      "zh": [
+        "标题降格标签",
+        "小节标签",
+        "章节开场",
+        "门牌",
+        "标题让位",
+        "文本选中",
+        "节交接"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "type-enter",
+        "note": "the title enters first, holds a beat, then steps down"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Nothing else may move on the title's path; a popup or pointer entering on the same frame steals the eye.",
+        "Used in several sections, the new label replaces the old one; stacked labels make the corner a graveyard.",
+        "The select highlight says \"this text can be selected\": use it only for editing or document products."
+      ],
+      "zh": [
+        "标题飞行路径上不许有别的东西动；同帧入场的弹窗或光标会抢走视线。",
+        "多节连用时新标签替换旧标签，叠放会让左上角变成标签坟场。",
+        "select 的选中高亮暗示“文字可被选中”，只给编辑器或文档类产品用。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "title-demote-to-label",
+        "name": "标题降格标签",
+        "card": "标题降格标签",
+        "summary": "大标题降格为节标签两式——A 大标题居中显影站稳一拍后连续缩小 0.3x 平移到左上角落成小节标签、内容区在其下生长；B 同套路但登场时带文本选中态高亮块扫入再撤掉",
+        "use": "章节开场（标题先当主角再让位给内容）；教程/功能演示片的小节交接；B 式给\"文字/编辑\"类产品加身份暗示",
+        "energy": "低中（版式变换型，氛围镜头）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/title-demote-to-label.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3.5,
+      6.5
+    ]
+  },
+  "tier": "T1",
+  "family": "zoom-depth",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "title-demote-to-label",
+        "path": "demos/typography/title-demote-to-label/TitleDemoteToLabel.tsx",
+        "card": "references/shots/typography/title-demote-to-label.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "card-portal",
+      "note": "card-portal opens a part into the whole; title-demote turns the whole title into the label of its part"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/title-demote/brick.js",
+  "card": "motion/title-demote/CARD.md",
+  "compare": {
+    "ssimMean": 0.8371,
+    "ssimMin": 0.7103,
+    "ssimDrop": 0.0557,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

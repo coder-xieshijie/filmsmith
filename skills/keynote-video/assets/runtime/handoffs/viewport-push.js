@@ -5,12 +5,34 @@
 // lands. Theory: a fixed frame keeps the viewer in the same place (common region, Palmer 1992) while the camera
 // moves; the push makes small source text reach the 25 px floor (principle 1). Sources: a fitness-app film (in-device
 // zoom, 16 frames), a paper-figure tool's film (in-window zoom, 15–17 frames ease in-out), a reading-app film.
+// Variant `punch` (a crash zoom, energy instead of reading): a 4 % pull back, then a 6-frame push strongly eased in
+// (log scale, the top speed on arrival), then either 'overshoot': one visible rebound past the landed zoom (about 6 %)
+// and back with an accent exposure flash, or 'impact': a dead stop with an accent flash outside the region and a shake
+// of 14 px · e^(−t / 1.8) that runs out in 6 frames, the first beat down. The overshoot passes the resolution cap by
+// that 6 % for a few frames. Adapted from video-shotcraft demos/camera/crash-zoom-punch/CrashZoomReal.tsx and
+// CrashImpactReal.tsx, https://github.com/Vincentwei1021/video-shotcraft @ 1266a3e, Apache-2.0: the pull back, the
+// eased-in push, the rebound and the shake; the tilted window, the corner marks, the readouts and the motion blur are
+// not taken.
 
-import { seg, cubicInOut } from './util.js';
+import { seg, cubicInOut, rgba } from './util.js';
+import { bez } from '../motion.js';
 import {
   NEUTRAL, MAX_SCALE, assetOf, placeholderPage, fitView, toScreen, windowOf, contentOf, windowBack, windowFront,
   clipWindow, drawAsset, zoomBetween, view, ring, corners,
 } from './asset.js';
+
+const SLAM = bez(0.7, 0, 0.84, 0);           // strong ease-in: the push is fastest on arrival
+const BACK = 0.25, HIT = 0.55;               // punch: pull back until BACK, push until HIT (20 frames: 5 + 6 + 9)
+const punchAt = (p, P, D) => {
+  const lr = Math.log(D.v1.a / D.v0.a), back = Math.log(0.96) / lr, ov = Math.log(1.06) / lr;
+  const t = seg(p, HIT, 1), f = t * 9;
+  let u, flash = 0, sx = 0, sy = 0;
+  if (p < BACK) u = back * cubicInOut(seg(p, 0, BACK));
+  else if (p < HIT) u = back + ((P.punch === 'overshoot' ? 1 + ov : 1) - back) * SLAM(seg(p, BACK, HIT));
+  else if (P.punch === 'overshoot') { u = 1 + ov * (1 - t) * (1 - t) * Math.cos(2.5 * Math.PI * t); flash = p < 1 ? 0.28 * Math.max(0, 1 - f / 8) : 0; }
+  else { u = 1; const a = p < 1 ? 14 * Math.exp(-f / 1.8) * (1 - t) : 0; sx = a * 0.35 * Math.sin(f * 3.1); sy = a * Math.cos(f * 2.6); flash = p < 1 ? Math.max(0, 1 - f / 3) : 0; }
+  return { u, ring: cubicInOut(seg(p, HIT, 0.9)), flash, sx, sy };
+};
 
 export default {
   name: 'viewport-push',
@@ -31,6 +53,7 @@ export default {
     mark: null,                               // image px box ringed on landing (null: the region)
     ring: true,
     readout: true,                            // the title bar's right side shows the live zoom and its cap
+    punch: null,                              // 'overshoot' | 'impact': a crash zoom (pull back, slam, rebound or stop)
     mono: { family: 'monospace', weight: 400 },
     colors: { ...NEUTRAL },
   },
@@ -53,18 +76,27 @@ export default {
     if (typeof console !== 'undefined') console.log(`viewport-push: fit ${v0.a.toFixed(4)} px/src px, cap ${cap.toFixed(2)}×, landed zoom ${zoom.toFixed(2)}× (${(1 / a).toFixed(2)} src px per output px)`);
     return { A, W, R, v0, v1, cap, zoom };
   },
-  rest(side) { return side === 'from' ? { u: 0, ring: 0 } : { u: 1, ring: 1 }; },
-  at(p) { return { u: cubicInOut(seg(p, 0, 0.8)), ring: cubicInOut(seg(p, 0.72, 1)) }; },
+  rest(side, P) { if (P && P.punch) return side === 'from' ? { u: 0, ring: 0, flash: 0, sx: 0, sy: 0 } : { u: 1, ring: 1, flash: 0, sx: 0, sy: 0 }; return side === 'from' ? { u: 0, ring: 0 } : { u: 1, ring: 1 }; },
+  at(p, P, D) { if (P && P.punch && p > 0 && p < 1) return punchAt(p, P, D); if (P && P.punch) return { u: p <= 0 ? 0 : 1, ring: p <= 0 ? 0 : 1, flash: 0, sx: 0, sy: 0 }; return { u: cubicInOut(seg(p, 0, 0.8)), ring: cubicInOut(seg(p, 0.72, 1)) }; },
   paint(ctx, S, P, D) {
     const C = P.colors;
     if (P.ground !== false) { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = C.ground; ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height); ctx.restore(); }
     const v = zoomBetween(D.v0, D.v1, S.u);
+    if (S.sx || S.sy) { ctx.save(); ctx.translate(S.sx, S.sy); }
     windowBack(ctx, D.W, P);
     ctx.save(); clipWindow(ctx, D.W); drawAsset(ctx, D.A, v, D.R);
     if (P.ring && S.ring > 0) { ctx.beginPath(); ctx.rect(D.R.x, D.R.y, D.R.w, D.R.h); ctx.clip(); ring(ctx, toScreen(v, P.mark || P.region), P, { pad: 10, radius: 12, width: 3, draw: S.ring }); }
     ctx.restore();
     const z = v.a / D.v0.a;
     windowFront(ctx, D.W, P, { title: P.title, right: P.readout ? `${z.toFixed(2)}×  cap ${D.cap.toFixed(2)}×` : '' });
+    if (S.sx || S.sy) ctx.restore();
+    if (S.flash > 0) {
+      // overshoot: an exposure lift over the content; impact: the frame outside the region flashes and goes dark
+      ctx.save(); ctx.beginPath(); ctx.rect(D.R.x, D.R.y, D.R.w, D.R.h); ctx.clip();
+      if (P.punch === 'impact') { const r = toScreen(v, P.region); ctx.beginPath(); ctx.rect(D.R.x, D.R.y, D.R.w, D.R.h); ctx.rect(r.x + r.w, r.y, -r.w, r.h); ctx.clip('evenodd'); ctx.fillStyle = rgba(C.accent, 0.85 * S.flash); }
+      else { ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = rgba(C.accent, S.flash); }
+      ctx.fillRect(D.R.x, D.R.y, D.R.w, D.R.h); ctx.restore();
+    }
   },
-  track: (S, P, D) => corners(toScreen(zoomBetween(D.v0, D.v1, S.u), P.region)),
+  track: (S, P, D) => (S.sx || S.sy ? corners(toScreen(zoomBetween(D.v0, D.v1, S.u), P.region)).map(([x, y]) => [x + S.sx, y + S.sy]) : corners(toScreen(zoomBetween(D.v0, D.v1, S.u), P.region))),
 };

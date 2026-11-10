@@ -1,0 +1,114 @@
+{
+  "id": "evidence-mat",
+  "category": "look",
+  "name": {
+    "en": "Evidence mat",
+    "zh": "证据垫板"
+  },
+  "summary": {
+    "en": "The dossier look: real published pages laid one at a time on a near-black mat, on paper mounts with hard stacked edges, the rest of each page veiled, a single highlighter colour for a published claim and its proof, serif claims and mono terms on the mat, a ruled worksheet that computes, a locked camera.",
+    "zh": "dossier 的样式：真实发布的页面一张张放在近黑的垫板上，贴在有硬边叠层的纸托上，页面其余部分压暗，只有一种荧光笔颜色标出已发布的断言和它的证据；垫板上是衬线断言和等宽条件，旁边一张会计算的格子演算纸，镜头锁定。"
+  },
+  "fits": "Claims that can be shown where they were published: benchmark tables, price lists, changelogs, charts, app screens; 20–45 s.",
+  "notFor": "Products without published evidence; mechanisms to explain; mood pieces.",
+  "select": {
+    "intent": {
+      "en": "Make the viewer trust a claim by showing it where it was printed, struck like evidence in a file.",
+      "zh": "让观众相信一条断言：把它在原出处展示出来，像卷宗里的证据一样划出。"
+    },
+    "content": {
+      "en": "2–5 real published pages (captured at 2×) with the line each claim is printed on; one figure to compute.",
+      "zh": "2–5 张真实发布的页面（2 倍截图）以及每条断言所在的那一行；一个要计算的数字。"
+    },
+    "fits": {
+      "zh": "能在原出处展示的断言：跑分表、价格表、更新日志、图表、应用截图；20–45 秒。"
+    },
+    "notFor": {
+      "zh": "没有公开证据的产品；需要讲解的机制；氛围片。"
+    },
+    "subjects": [
+      "image",
+      "chart",
+      "metric"
+    ],
+    "moods": [
+      "editorial",
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "evidence",
+        "highlighter",
+        "exhibit",
+        "published page",
+        "veil",
+        "worksheet",
+        "fact check"
+      ],
+      "zh": [
+        "证据",
+        "荧光笔",
+        "证物",
+        "发布页面",
+        "压暗",
+        "演算纸",
+        "事实核查"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "paper-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "mounted-sheet",
+        "note": "the exhibit on its mount"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The accent means only a published claim and its proof: the stroke, the leader's core, the stickers and tabs, the struck name and result.",
+        "Never recolour, retouch or rebuild a page: crop, scale (≤ 4/3) and the uniform veil only."
+      ],
+      "zh": [
+        "强调色只表示已发布的断言及其证据：划痕、引线芯、贴纸和标签、被划的名字和结果。",
+        "页面不许改色、修图或重排：只能裁切、缩放（≤ 4/3）和统一的压暗。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "dossier"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the dossier source film, layout.js, film.js type"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "look/evidence-mat/look.js",
+  "card": "look/evidence-mat/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

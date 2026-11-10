@@ -1,0 +1,117 @@
+{
+  "id": "mounted-sheet",
+  "category": "prop",
+  "name": {
+    "en": "Mounted sheet",
+    "zh": "托裱页面"
+  },
+  "summary": {
+    "en": "A real page on a paper mount with stacked edges, the rest of it veiled, its claim struck with the highlighter in multiply and tied to the sticker by a leader.",
+    "zh": "真实页面贴在有叠层硬边的纸托上，其余部分压暗，断言用荧光笔以正片叠底划出，引线连到贴纸。"
+  },
+  "fits": "Showing a published page as evidence.",
+  "notFor": "Screens shown as a product demo; pages that must be read whole.",
+  "select": {
+    "intent": {
+      "en": "Make a capture read as a document on file, with one line of it marked as the claim.",
+      "zh": "让截图读起来像归档的文件，并把其中一行标成断言。"
+    },
+    "content": {
+      "en": "A captured page, its crop and the box of its claim.",
+      "zh": "一张截图页面、裁切范围和断言的框。"
+    },
+    "fits": {
+      "zh": "把发布的页面当证据展示。"
+    },
+    "notFor": {
+      "zh": "当产品演示的界面；需要整页阅读的页面。"
+    },
+    "roles": [
+      "hook",
+      "problem",
+      "proof"
+    ],
+    "subjects": [
+      "image",
+      "chart",
+      "ui"
+    ],
+    "moods": [
+      "editorial",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "mount",
+        "veil",
+        "highlighter",
+        "multiply",
+        "leader",
+        "evidence"
+      ],
+      "zh": [
+        "托裱",
+        "压暗",
+        "荧光笔",
+        "正片叠底",
+        "引线",
+        "证据"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Never past 4/3 output px per source px; never recolour the page."
+      ],
+      "zh": [
+        "放大不超过每源像素 4/3 输出像素；不给页面改色。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "dossier"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the dossier source film paper, edges, paintSheet; layout.js sheetOf, bandOf, leaderOf"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "print-mount",
+      "note": "the exhibit style's print on a desk mount seen from above; here a flat file sheet on a mat with a veil and a struck band"
+    },
+    {
+      "id": "region-light",
+      "note": "a veil and ring round a region; here a veil and a multiply stroke"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/mounted-sheet/brick.js",
+  "card": "prop/mounted-sheet/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

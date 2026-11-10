@@ -1,0 +1,151 @@
+{
+  "id": "row-to-card",
+  "category": "motion",
+  "name": {
+    "en": "Row to card",
+    "zh": "行变卡上画布"
+  },
+  "summary": {
+    "en": "Picked rows leave a panel on an upward arc, staggered, change into cards on the way and land on the canvas; their slots stay as dashed outlines.",
+    "zh": "选中的行错峰沿上弧离开面板，途中变成卡片落到画布上，原位留下虚线空槽。"
+  },
+  "fits": "Items moving from a list into a workspace: picks placed on a board, results added to a canvas.",
+  "notFor": "Re-ordering in place (layout-morph); more than about six items; copies.",
+  "select": {
+    "intent": {
+      "en": "The same items change form on the way from a list to a canvas, so the viewer reads them as moved and materialised, not deleted and re-added.",
+      "zh": "同一批条目从列表飞到画布、途中变了形态，观众读到的是“它飞过去变的”，不是删掉一个再加一个。"
+    },
+    "content": {
+      "en": "A panel of rows and an open canvas; 2–6 items, each with a row form (≤ 30 chars) and a card form (title ≤ 20 chars, a line or two).",
+      "zh": "一个由行组成的面板和一块空画布；2–6 个条目，各有行形态（≤ 14 字）和卡形态（标题 ≤ 8 字，一两行正文）。"
+    },
+    "fits": {
+      "zh": "条目从列表进入工作区：选中的项放上看板、生成结果落到画布、一次选择变成实体。"
+    },
+    "notFor": {
+      "zh": "原地重排（用 layout-morph）；一次超过约六项；复制（虚线空槽说的是“移走了”）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "list",
+      "cards"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "panel to canvas",
+        "materialize",
+        "row to card",
+        "drag to board",
+        "canvas",
+        "import",
+        "generated results"
+      ],
+      "zh": [
+        "行倒卡上画布",
+        "画布物化动效",
+        "行变卡",
+        "一键上板",
+        "批量导入",
+        "生成结果落画布",
+        "形态迁移"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "cursor-glide",
+        "note": "the pointer ticks the rows and presses the button before they fly"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The slot a row leaves must stay as a dashed outline; if the panel looks untouched, the move reads as a copy.",
+        "Never show the row and the card content at once on the way: one fades out before the other fades in."
+      ],
+      "zh": [
+        "行飞走后原位必须留下虚线空槽；面板完好如初，“迁移”就成了“复制”。",
+        "途中行内容和卡内容不能同时出现：一个淡完另一个才亮。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "panel-to-canvas",
+        "name": "行倒卡上画布",
+        "card": "画布物化动效",
+        "summary": "复选框逐个自动打勾→按钮按下→三行沿上抛弧线错峰飞出，途中行形态与卡形态交叉淡化，落位带随机倾角；面板行槽塌陷成虚线留白",
+        "use": "AI/协作工具\"生成结果落到画布上\"的叙事段落；A 式讲\"已有内容换了个存在形态\"，B 式讲\"从一句话长出一棵结构\"",
+        "energy": "中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/panel-to-canvas.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3.5,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "panel-to-canvas",
+        "path": "demos/interaction/canvas-materialize-moves/PanelToCanvasMaterialize.tsx",
+        "card": "references/shots/interaction/canvas-materialize-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "layout-morph",
+      "note": "tiles re-laid out in one container; row-to-card moves objects between containers and changes their form"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/row-to-card/brick.js",
+  "card": "motion/row-to-card/CARD.md",
+  "compare": {
+    "ssimMean": 0.8608,
+    "ssimMin": 0.7842,
+    "ssimDrop": 0,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

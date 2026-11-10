@@ -1,0 +1,177 @@
+{
+  "id": "afterglow",
+  "category": "look",
+  "name": {
+    "en": "Afterglow",
+    "zh": "余晖"
+  },
+  "summary": {
+    "en": "A look whose texture is light: orbs drifting behind the content, an aurora rising from the foot of the frame, rings breathing round the subject; a night and a dawn preset.",
+    "zh": "以光为质感的样式：光斑在内容背后漂移、极光从画框底部升起、同心圆环绕主体呼吸；有夜、晨两套预设。"
+  },
+  "fits": "One quiet section of a film (or a whole calm film) whose ground should breathe: a product held still, a turn, a closing claim.",
+  "notFor": "Busy films (the light competes with the content); paper and print styles; more than one light texture at a time.",
+  "duration": null,
+  "styles": {
+    "fits": [
+      "any calm"
+    ],
+    "avoid": [
+      "ink",
+      "halftone",
+      "dossier",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "glow-orb-ambient",
+        "path": "demos/effects/glow-flyline-moves/GlowOrbAmbient.tsx",
+        "card": "references/shots/effects/glow-flyline-moves.md"
+      },
+      {
+        "key": "radial-ripple-phone-chips",
+        "path": "demos/effects/radial-ripple-phone-chips/RadialRipplePhoneChips.tsx",
+        "card": "references/shots/effects/radial-ripple-phone-chips.md"
+      },
+      {
+        "key": "aurora-bloom-bg-flip",
+        "path": "demos/effects/aurora-bloom-bg-flip/AuroraBloomBgFlip.tsx",
+        "card": "references/shots/effects/aurora-bloom-bg-flip.md"
+      },
+      {
+        "key": "orb-flyline-relay",
+        "path": "demos/effects/glow-flyline-moves/OrbFlylineRelay.tsx",
+        "card": "references/shots/effects/glow-flyline-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "look/afterglow/look.js",
+  "card": "look/afterglow/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": null,
+    "ssimMin": null,
+    "trackDevPx": null,
+    "verdict": "waived",
+    "waive": {
+      "all": "a look has no motion of its own to compare frame for frame; the bloom texture is compared through ground-flip (pass, track 11.5 px), the orbs and rings keep the upstream sizes, periods and phases (texture.js)"
+    }
+  },
+  "select": {
+    "intent": {
+      "en": "Let the ground breathe: the product reads as a source of light in a quiet dark section, without any hit or cut.",
+      "zh": "让底色呼吸：在一段安静的暗场里，产品读成一个光源，不靠任何打点或剪切。"
+    },
+    "content": {
+      "en": "Any calm section's content on top; one light per section (orbs, aurora bloom or breathing rings round one subject); a night or a dawn preset.",
+      "zh": "上面放任何安静段落的内容；每段只用一种光（光斑、极光或围着一个主体呼吸的圆环）；夜、晨两套预设。"
+    },
+    "fits": {
+      "zh": "一支片里一段安静的暗场（或整支安静的片）：产品静置、转折、收尾主张。"
+    },
+    "notFor": {
+      "zh": "热闹的片（光会抢内容）；纸面与印刷风格；一段里叠两种光。"
+    },
+    "subjects": [
+      "abstract",
+      "space"
+    ],
+    "moods": [
+      "calm",
+      "warm",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "afterglow",
+        "glow orbs",
+        "aurora",
+        "bloom",
+        "ripple rings",
+        "ambient light",
+        "night",
+        "dawn"
+      ],
+      "zh": [
+        "余晖",
+        "光斑",
+        "极光",
+        "泛光",
+        "呼吸光圈",
+        "环境光",
+        "夜色",
+        "晨光"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "ground-flip",
+        "note": "the bloom texture under the turn of the ground"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "One light per section, in the accent only: violet-to-cyan neon glows on black are a known AI tell.",
+        "A film dark all through drowns the light; keep it to the quiet section."
+      ],
+      "zh": [
+        "每段只用一种光，只用强调色：黑底上紫到青的霓虹渐变是公认的 AI 味。",
+        "整支片都暗时光就不再有意义；只放在安静的那一段。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "glow-orb-ambient",
+        "name": "暗场光斑呼吸",
+        "card": "光斑与飞线",
+        "summary": "三团 500-700px radial 光斑 + blur(100px)，双正弦漂移；卡缘辉光按光斑距离 [180,720]px→[1,0] 加权取 max 驱动",
+        "use": "全片唯一暗场段落的氛围与数据叙事：铺底噪用 A、讲数据流向用 B、要背景给前景搭腔用 C；Linear 官网味",
+        "energy": "A 低（底噪级）/ B 中 / C 中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/glow-orb-ambient.mp4"
+      },
+      {
+        "key": "radial-ripple-phone-chips",
+        "name": "同心波纹手机",
+        "card": "同心波纹手机",
+        "summary": "暖沙底四层同心圆错相呼吸如水波，中央手机 mockup 屏内 feed 自动缓滚，两侧白色 chip 先后 spring pop 入场并悬浮",
+        "use": "移动端产品的\"这就是它\"定格镜头；功能点分列两侧的介绍段；片头/片尾的产品全景",
+        "energy": "低（安静、有呼吸感，靠同心圆的持续起伏撑住不冷场）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/radial-ripple-phone-chips.mp4"
+      },
+      {
+        "key": "aurora-bloom-bg-flip",
+        "name": "极光升腾反黑",
+        "card": "极光升腾反黑",
+        "summary": "浅灰底从底部升起紫橙柔焦 blob，随后整个底色在约 0.36s 内压暗到近黑、blob 压成余晖；文案同步 blur-out 换句 blur-in，换句间留空档不 cross-fade",
+        "use": "叙事转折点（\"多年以来…→一切都变了\"）；品牌片从铺垫拉到重音的那一拍；深浅色系之间的段落切换",
+        "energy": "由低到高（前 2/3 是酝酿，压暗那一瞬是全片重音）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/aurora-bloom-bg-flip.mp4"
+      },
+      {
+        "key": "orb-flyline-relay",
+        "name": "光斑飞线接力",
+        "card": "光斑与飞线",
+        "summary": "A+B 焊接：光斑 surge 与卡脉冲共用落点帧，涨亮 1+1.6×surge、5f 起升 15f 消散",
+        "use": "全片唯一暗场段落的氛围与数据叙事：铺底噪用 A、讲数据流向用 B、要背景给前景搭腔用 C；Linear 官网味",
+        "energy": "A 低（底噪级）/ B 中 / C 中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/orb-flyline-relay.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

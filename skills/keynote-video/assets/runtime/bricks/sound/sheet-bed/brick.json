@@ -1,0 +1,107 @@
+{
+  "id": "sheet-bed",
+  "category": "sound",
+  "name": {
+    "en": "Sheet bed",
+    "zh": "长卷节拍床"
+  },
+  "summary": {
+    "en": "The scroll sound: lib/audio's thread bed (D major plucks, a pad, a soft four-on-the-floor), a click on every landing, a tick per detent, a pencil tick per underline, the drop under the unfold.",
+    "zh": "scroll 的声音：lib/audio 的 thread 床（D 大调拨弦、铺底、轻的四拍底鼓），每次停稳一声轻响，每格一声嗒，每次划线一声铅笔声，drop 落在展开上。"
+  },
+  "fits": "Films read off a page, 20–60 s.",
+  "notFor": "Hard-cut type films; dark dramatic teasers.",
+  "select": {
+    "intent": {
+      "en": "One long line that keeps moving, like the sheet, with a small sound for every move of it.",
+      "zh": "一条一直往前走的长线，像那张长卷，它每动一下都有一个小声音。"
+    },
+    "content": {
+      "en": "An arc with one unfold; the scroll bricks' events.",
+      "zh": "一条有一次展开的骨架；scroll 积木的画面事件。"
+    },
+    "fits": {
+      "zh": "从一张页面上读出来的片子，20–60 秒。"
+    },
+    "notFor": {
+      "zh": "硬切文字片；阴暗戏剧化的预告。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "D major",
+        "plucks",
+        "soft four on the floor",
+        "detent ticks",
+        "paper"
+      ],
+      "zh": [
+        "D 大调",
+        "拨弦",
+        "轻四拍",
+        "棘轮嗒声",
+        "纸声"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "reading-sheet",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The melody rests while a band is read."
+      ],
+      "zh": [
+        "读引语时旋律休止。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "bpm": [
+      112,
+      128
+    ]
+  },
+  "styles": {
+    "fits": [
+      "scroll"
+    ],
+    "avoid": [
+      "ink",
+      "pulse"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "film-v1/score.mjs; lib/audio beds.mjs thread"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "sound/sheet-bed/sound.js",
+  "card": "sound/sheet-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

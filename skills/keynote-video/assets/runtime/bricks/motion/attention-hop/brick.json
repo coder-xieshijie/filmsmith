@@ -1,0 +1,157 @@
+{
+  "id": "attention-hop",
+  "category": "motion",
+  "name": {
+    "en": "Attention hop",
+    "zh": "求关注弹跳"
+  },
+  "summary": {
+    "en": "One icon hops for attention, each jump higher, squashing on every landing, while the camera is drawn to it and the rest goes soft.",
+    "zh": "一个图标原地连跳讨关注，一次比一次高，每次落地压扁，镜头被它吸过去，其余画面虚掉。"
+  },
+  "fits": "Introducing one new feature or app as a performer at half-screen size, before it opens its panel.",
+  "notFor": "Small icons in a corner (no one sees the performance); text; more than once a film; serious or editorial films.",
+  "select": {
+    "intent": {
+      "en": "A new feature asks to be noticed, louder each time, so the viewer looks at it before it opens.",
+      "zh": "一个新功能一次比一次大声地讨关注，让观众在它打开之前先把目光投过去。"
+    },
+    "content": {
+      "en": "One icon or app tile in the scene (its rect), shown large (about half the screen); no text.",
+      "zh": "画面里的一个图标或应用方块（给出它的位置框），拍得够大（约半屏）；不需要文字。"
+    },
+    "fits": {
+      "zh": "把一个新功能或新应用当作表演者引出来：半屏大小的图标，在它弹开面板之前。"
+    },
+    "notFor": {
+      "zh": "角落里的小图标（没人看得见这场表演）；文字；一支片用两次以上；严肃、编辑感的片子。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "demo"
+    ],
+    "subjects": [
+      "logo",
+      "ui"
+    ],
+    "moods": [
+      "playful",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "attention bounce",
+        "dock bounce",
+        "icon hop",
+        "squash and stretch",
+        "new feature",
+        "notice me",
+        "icon performance"
+      ],
+      "zh": [
+        "注意力弹跳",
+        "求关注弹跳",
+        "图标表演动效",
+        "Dock 弹跳",
+        "图标连跳",
+        "新功能引出",
+        "压扁拉伸"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "card-portal",
+        "note": "after the last landing the icon can open into its panel"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Leave headroom: the last hop rises 1.2 times the icon height plus the push; measure the top margin or it leaves the frame.",
+        "A small icon gets lost: the hop only reads at about half-screen size.",
+        "Each landing wants a rising \"duk\"; silent hops lose half their weight."
+      ],
+      "zh": [
+        "先留够上方空间：末跳高 1.2 倍图标高再加推近，量好上留白，否则顶出画框。",
+        "图标小了就看不见：这套弹跳只在约半屏大时成立。",
+        "每次落地配一声音调递升的“咚”，无声的弹跳少一半分量。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "attention-bounce",
+        "name": "注意力弹跳",
+        "card": "图标表演动效",
+        "summary": "图标表演——attention-bounce 求关注弹跳（图标连跳递增+落地压扁+镜头被吸引）",
+        "use": "半屏级 icon 特写段落；新功能引出",
+        "energy": "蓄势引入",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/attention-bounce.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 8,
+    "range": [
+      6,
+      8
+    ]
+  },
+  "tier": "T2",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "attention-bounce",
+        "path": "demos/effects/icon-performance-moves/AttentionBounce.tsx",
+        "card": "references/shots/effects/icon-performance-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "slam-drop",
+      "note": "one heavy landing from above; attention-hop is a rising series in place"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/attention-hop/brick.js",
+  "card": "motion/attention-hop/CARD.md",
+  "compare": {
+    "ssimMean": 0.6815,
+    "ssimMin": 0.6246,
+    "ssimDrop": 0,
+    "trackDevPx": 0.1,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

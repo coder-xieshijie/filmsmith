@@ -1,0 +1,117 @@
+{
+  "id": "night-sky",
+  "category": "look",
+  "name": {
+    "en": "Night sky",
+    "zh": "夜空"
+  },
+  "summary": {
+    "en": "The stream look: a night sky (a radial field, drifting dust, soft bokeh, a slow push) where one accent colour is the product's attention (the glowing thread, the stars it sends, the one \"needs you\"), and warm off-white paper blocks hung on the thread carry the interface; DM Sans throughout, Noto Sans SC after it in Chinese.",
+    "zh": "stream 的样式：夜空（径向渐变的天、漂浮的尘、柔焦光斑、缓慢推近）里只有一种强调色，它是产品的注意力（发光的线、派出的星、唯一一处“需要你”）；挂在线上的暖白纸块承载界面；全片 DM Sans，中文接思源黑体。"
+  },
+  "fits": "Products that take work off people and bring it back: agents, assistants, automation, background jobs.",
+  "notFor": "Daytime, print or paper films; data stories with many series; a second accent colour.",
+  "select": {
+    "intent": {
+      "en": "Make the product's attention one visible thing: a light that runs through a night of loose work.",
+      "zh": "把产品的注意力变成一样看得见的东西：在一夜散乱的事里穿行的一道光。"
+    },
+    "content": {
+      "en": "A product that keeps track of many tasks for one person; its interface as small blocks (chat, task rows, a panel).",
+      "zh": "一个替一个人照看很多件事的产品；它的界面拆成小块（对话、任务行、面板）。"
+    },
+    "fits": {
+      "zh": "帮人接走事情再带回结果的产品：agent、助手、自动化、后台任务。"
+    },
+    "notFor": {
+      "zh": "白天、印刷、纸面风格的片；多序列的数据故事；需要第二种强调色。"
+    },
+    "subjects": [
+      "space",
+      "ui",
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "mysterious",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "night sky",
+        "glow",
+        "thread",
+        "stars",
+        "dark",
+        "bokeh",
+        "agent",
+        "paper blocks"
+      ],
+      "zh": [
+        "夜空",
+        "发光",
+        "线",
+        "星",
+        "暗色",
+        "光斑",
+        "智能体",
+        "纸块"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "glow-thread",
+        "note": "the thread drawn in the accent"
+      },
+      {
+        "id": "stream-bed",
+        "note": "its sound"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The accent is attention only: never use it for a decoration, a heading or a second state on paper (the paper's accent is accentInk, once).",
+        "`line` is derived for library bricks (dim 28 % over the ground); the stream bricks never draw a divider on the night."
+      ],
+      "zh": [
+        "强调色只代表注意力：不拿它做装饰、标题或纸上的第二种状态（纸上的强调色是 accentInk，只用一次）。",
+        "`line` 是为库里其他积木推出来的（dim 以 28% 叠在底色上）；stream 自己的积木在夜空上不画分隔线。"
+      ]
+    }
+  },
+  "duration": null,
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/palettes.js; lang.js (TYPE); film.js renderBG, css()"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "look/night-sky/look.js",
+  "card": "look/night-sky/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

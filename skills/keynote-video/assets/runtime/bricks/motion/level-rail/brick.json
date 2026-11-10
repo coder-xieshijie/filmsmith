@@ -1,0 +1,122 @@
+{
+  "id": "level-rail",
+  "category": "motion",
+  "name": {
+    "en": "Level rail",
+    "zh": "水平跟随"
+  },
+  "summary": {
+    "en": "The margin’s copy block slides on the hop’s ease to stay level with the region in play, the level tick with it.",
+    "zh": "页边文案块沿光带跳动的缓动滑到新高度，始终与当前区域齐平，刻度随之移动。"
+  },
+  "fits": "A light or a push that moves the region in play while its words stay beside it.",
+  "notFor": "Copy that does not belong to a region; a block that would leave the safe area.",
+  "select": {
+    "intent": {
+      "en": "Word and evidence are read across one horizontal, even when the evidence moves.",
+      "zh": "文字和证据始终在同一水平线上读，即使证据移动了。"
+    },
+    "content": {
+      "en": "A copy block (value, line, note) and the heights of two regions.",
+      "zh": "一组文案（数值、说明、注释）和两个区域的高度。"
+    },
+    "fits": {
+      "zh": "光带或推近移动了当前区域、而文字要留在它旁边时。"
+    },
+    "notFor": {
+      "zh": "不属于某个区域的文案；会移出安全区的文案块。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "text",
+      "list"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "level rail",
+        "follow the row",
+        "copy block",
+        "aligned caption",
+        "tick"
+      ],
+      "zh": [
+        "水平跟随",
+        "跟随行",
+        "文案块",
+        "对齐注释",
+        "刻度"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "row-band",
+        "note": "the band hops and the block rides with it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Clamp the block to the safe area; a region near the edge leaves the block at the clamp."
+      ],
+      "zh": [
+        "文案块要夹在安全区内；区域贴边时文案块停在边界。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 1,
+    "range": [
+      1,
+      1
+    ]
+  },
+  "tier": "T0",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/film.js (blockY), choreo.js (the level tick)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/level-rail/brick.js",
+  "card": "motion/level-rail/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

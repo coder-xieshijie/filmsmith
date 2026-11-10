@@ -1,5 +1,12 @@
 // ink.js — ink-wash (ink wicking through absorbent paper) and ink-drop (a drop blooming in water).
 // Theory and parameters: references/transitions.md#ink-wash, #ink-drop.
+// Variants: ink-wash `front: 'hair'` pulls the front out along the paper's fibres into hair-like feathers and lengthens
+// the pale halo ahead of it (from video-shotcraft demos/transition/print-texture-transitions/InkBleedReveal.tsx);
+// dot-iris `anchor: 'push'` makes the dot a circle already in the frame (origin = its centre, dot = its radius) and
+// the next frame's own circle shares that centre: the disc opens with no ink ring, so the new frame's circle is the
+// edge that grows, while the old frame is pushed away about the anchor (1 → 1.22, an ease-in) and dimmed to 45 %, the
+// new frame landing on top (from demos/transition/circle-match-iris/CircleMatchIris.tsx). https://github.com/Vincentwei1021/video-shotcraft @ 1266a3e,
+// Apache-2.0; no copy, photos or colours taken.
 
 // ---------------------------------------------------------------------------------------------------------------
 // ink-wash: brush touches set ink on absorbent paper; the ink wicks outward through the fibres. Each touch's front
@@ -10,6 +17,7 @@
 const WASH = `
 uniform vec4 uS0, uS1, uS2, uS3;   // touches: x, y (film px), start (0..1 of p), reach (fraction of uRmax)
 uniform float uRmax;               // reach of the first touch at p = 1: past every corner, so p = 1 is all new frame
+uniform float uHair;               // 1: the front feathers out along the fibres (hair-like edge)
 
 // paper fibres: sparse thin strands in random local directions (the hairs the ink runs along)
 float fibre(vec2 s) {
@@ -41,8 +49,9 @@ vec3 transition(vec2 s, float p) {
   f = smin(f, touch(uS3, w, p), 70.0);
   float wet = 1.0 - smoothstep(0.72, 0.97, p);
   float fb = fibre(s);
+  if (uHair > 0.5) f -= 55.0 * fb * wet;          // the front runs ahead along the fibres
   // the halo (墨晕): pale ink wicked ahead of the front, furthest along the fibres
-  float H = wet * (16.0 + 34.0 * (0.5 + 0.5 * fbm2(s / 120.0 + o + 6.0)));
+  float H = wet * (16.0 + 34.0 * (0.5 + 0.5 * fbm2(s / 120.0 + o + 6.0))) * (uHair > 0.5 ? 2.4 : 1.0);
   float halo = cover(H * (0.35 + 0.65 * fb) - f);
   float x = -f;                                   // depth behind the front, px
   // the wet body: dark, uneven (浓淡), a darker rim where pigment piles up at the edge, fine granulation
@@ -182,6 +191,7 @@ uniform float uClose;   // 0: open (dot to frame), 1: close (frame to dot)
 uniform float uGroundOnly;  // 1: the incoming side is its ground colour (uGround) only
 uniform float uExpo;    // 1: exponential growth instead of cubic in-out
 uniform float uRing;    // 1: the ink ring at the disc's edge, 0: none
+uniform float uPush;    // 1: the old frame is pushed away about the anchor and dimmed while the disc opens
 
 vec3 transition(vec2 s, float p) {
   float d = length(s - uOrigin);
@@ -196,6 +206,11 @@ vec3 transition(vec2 s, float p) {
   vec3 incoming = uGroundOnly > 0.5 ? uGround : B(s);
   vec3 inside = uClose > 0.5 ? A(s) : incoming;
   vec3 outside = uClose > 0.5 ? incoming : A(s);
+  if (uPush > 0.5 && uClose < 0.5) {
+    // the old frame recedes about the anchor (which stays put on screen) and darkens, both easing in
+    float q = p * p * p;
+    outside = A(uOrigin + (s - uOrigin) / (1.0 + 0.22 * q)) * mix(1.0, 0.45, q);
+  }
   vec3 col = mix(outside, uInk, cover(R - d));
   return mix(col, inside, cover(R - w - d));
 }`;
@@ -219,7 +234,7 @@ export default [
     summary: 'Ink wicks through absorbent paper from a few brush touches; dark rims, uneven wash, the new frame where it settles.',
     origin: [700, 470],
     frag: WASH,
-    uniforms: ({ seed, origin }) => {
+    uniforms: ({ seed, origin, front = 'round' }) => {
       const t = [origin];
       for (let i = 1; i < 4; i++) t.push([240 + rnd(seed, i * 3) * 1440, 160 + rnd(seed, i * 3 + 1) * 760]);
       return {
@@ -228,6 +243,7 @@ export default [
         uS2: [t[2][0], t[2][1], 0.18, 0.36],
         uS3: [t[3][0], t[3][1], 0.26, 0.3],
         uRmax: farthest(origin) + 270,   // warp ≤ 150 + 24 px per axis, so this passes every corner
+        uHair: front === 'hair' ? 1 : 0,
       };
     },
   },
@@ -258,9 +274,10 @@ export default [
     origin: [960, 540],
     frag: IRIS,
     // origin: the dot, or the previous shot's subject; contents 'ground-only' needs colors.ground (the next scene's ground)
-    uniforms: ({ origin, dot = 20, direction = 'open', contents = 'frame', growth = 'cubic', ring = true }) => ({
+    uniforms: ({ origin, dot = 20, direction = 'open', contents = 'frame', growth = 'cubic', ring = true, anchor = 'dot' }) => ({
       uDot: dot, uRmax: farthest(origin) + 20, uClose: direction === 'close' ? 1 : 0,
       uGroundOnly: contents === 'ground-only' ? 1 : 0, uExpo: growth === 'exp' ? 1 : 0, uRing: ring ? 1 : 0,
+      uPush: anchor === 'push' ? 1 : 0,
     }),
   },
 ];

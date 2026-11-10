@@ -1,0 +1,99 @@
+{
+  "id": "report-pane",
+  "category": "prop",
+  "name": {
+    "en": "Report pane",
+    "zh": "报告栏"
+  },
+  "summary": {
+    "en": "What a measuring tool printed, on the bench beside its output: the tool’s label, status · item · value lines, the result line in bold, room for a two-phrase claim.",
+    "zh": "测量工具打印出的内容，放在输出旁的台面上：工具标签、状态 · 项目 · 数值各一行、加粗的结论行，上方留出两段主张的位置。"
+  },
+  "fits": "A command’s report next to the output it describes.",
+  "notFor": "A report typed for the film; more than five lines.",
+  "select": {
+    "intent": {
+      "en": "The proof is the tool’s own output, read beside the thing it measured.",
+      "zh": "证据是工具自己的输出，挨着被测的东西读。"
+    },
+    "content": {
+      "en": "A label, 1–5 lines of [status, item, value] (≤ 30 characters), a result line; a claim of 1–2 phrases (≤ 2 words).",
+      "zh": "一个标签、1–5 行 [状态, 项目, 数值]（≤ 30 字符）、一行结论；1–2 段主张（每段 ≤ 7 字）。"
+    },
+    "fits": {
+      "zh": "命令的报告放在它描述的输出旁边。"
+    },
+    "notFor": {
+      "zh": "为片子编的报告；多于五行。"
+    },
+    "roles": [
+      "proof"
+    ],
+    "subjects": [
+      "terminal",
+      "metric"
+    ],
+    "moods": [
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "check report",
+        "PASS lines",
+        "tool output",
+        "measured",
+        "bench pane"
+      ],
+      "zh": [
+        "检查报告",
+        "PASS 行",
+        "工具输出",
+        "实测",
+        "台面栏"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/film.js (reportPane)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/report-pane/brick.js",
+  "card": "prop/report-pane/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

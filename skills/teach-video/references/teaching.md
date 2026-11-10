@@ -46,6 +46,21 @@ Before any picture, write 1–3 learning goals as "after watching, the viewer ca
 - On screen only keywords and labels next to their objects; full subtitles are closed captions, not burned in (Yue et al. 2013).
 - The band y ≥ 880 of the 1920×1080 frame stays empty for two lines of subtitles (2026-10-21), whether they end up burned in or not.
 
+## On-screen language
+
+The narration is Chinese: the voice, the transcription and the timeline are set for it, and an English voice-over is not part of this skill. On-screen text is Chinese or English, chosen from the material: Chinese material gives Chinese text, English material (an English codebase's names, an English paper) English text; when the material's language is unclear or mixed, ask; with no material to go by, Chinese, the narration's language. Code, commands, file names, numbers and captures stay as they are in either language. The rules (the same as keynote-video's; written here because each skill installs on its own):
+
+| Rule | English | Chinese |
+|---|---|---|
+| Reading a text that must be read | 0.3 s a word; a word is a space-separated token with a letter or digit in it | 6 characters a second; a Latin word inside Chinese 0.3 s; punctuation and symbols do not count; plus 0.5 s for each text, once |
+| Information text | ≥ 25 px | ≥ 28 px |
+| Main text | ≥ 40 px | ≥ 40 px |
+| Line breaking | at spaces | between characters, never inside a Latin word or a number with its unit; no `。，、；：？！）」』` at a line's start, no `（「『` at its end |
+| Setting | the kit's tracking and case | by word groups as written: no capitals, no negative tracking, no italic |
+| Faces | the recipe's English faces | the kit's Chinese face, cut to the characters the film uses at setup, never committed; a character outside the subset is an error |
+
+A film whose on-screen text is English keeps every other rule here; the recipes give each kit's English faces ([terminal-ledger](recipes/terminal-ledger.md#languages), [blueprint-zoom](recipes/blueprint-zoom.md#languages)).
+
 ## Presenter, characters, people
 
 - The narration speaks to the viewer ("你", "我们") like a person across the table.

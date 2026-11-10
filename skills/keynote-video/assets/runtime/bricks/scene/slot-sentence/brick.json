@@ -1,0 +1,214 @@
+{
+  "id": "slot-sentence",
+  "category": "scene",
+  "name": {
+    "en": "Slot sentence",
+    "zh": "句中词槽轮换"
+  },
+  "summary": {
+    "en": "A sentence with one slot: the stem holds still while the slot cycles through words (or pictures) on the beat, then the sentence lands; five ways to cycle.",
+    "zh": "一句话留一个词槽：句干不动，槽里的词（或图）按节拍轮换，最后落成完整的一句；五种换法。"
+  },
+  "fits": "A list of features, audiences, roles or steps said as one sentence (Built for ___, Every ___ checked, Your ___ agent).",
+  "notFor": "Items that need reading time each (over two words, four Chinese characters); lists without a common stem; more than six items.",
+  "select": {
+    "intent": {
+      "en": "A promise and its proofs in one line: the stem stays put and only the slot changes, so a list reads as one sentence and ends as a conclusion.",
+      "zh": "一句话里装下承诺和证据：句干不动、只换槽里的词，清单读成一句话，最后落成结论。"
+    },
+    "content": {
+      "en": "A stem (≤ 18 chars, Chinese ≤ 6 characters), 3–6 items of 1–2 words (≤ 14 chars, Chinese ≤ 4 characters, lengths within 2× of each other), an optional tail; `bracket`: a picture per item.",
+      "zh": "句干（≤ 18 字符、中文 ≤ 6 字），3–6 个 1–2 词的条目（≤ 14 字符、中文 ≤ 4 字，长短相差不超过一倍），句尾可选；`bracket` 版每项配一张图。"
+    },
+    "fits": {
+      "zh": "把一串功能、对象、角色或步骤说成一句话（为 ___ 而生、每一次 ___ 都检查过、你的 ___ 助手）。"
+    },
+    "notFor": {
+      "zh": "每项都要读一会儿（超过两个词或四个汉字）；没有共同句干的清单；多于六项。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "claim"
+    ],
+    "subjects": [
+      "text",
+      "list"
+    ],
+    "moods": [
+      "elegant",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "slot machine text",
+        "rotating word",
+        "word carousel",
+        "fill in the blank",
+        "Built for ___",
+        "pill cycle",
+        "word wheel"
+      ],
+      "zh": [
+        "词槽轮换",
+        "胶囊滚轮挤开",
+        "竖向词条滚轮",
+        "双词合拢",
+        "对焦框轮换",
+        "填空句",
+        "句中换词"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "The stem must not move a pixel; any wobble loses the list.",
+        "Keep items within 2× of each other's length, or the slot jumps and the sentence swings.",
+        "One slot style per film; the closing words take the stem's size and weight, or they read as a new title."
+      ],
+      "zh": [
+        "句干一像素都不能动；一晃列举感就散。",
+        "各项长短相差控制在一倍内，否则槽宽跳变、句子左右甩。",
+        "一支片只留一种词槽；收束的词与句干同字号同字重，否则读成新标题。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "pill-slot-cycle",
+        "name": "词槽轮换",
+        "card": "词槽轮换",
+        "summary": "句中词槽轮换——固定句干钉死不动，句尾 pill 徽章每 ~0.7s 老虎机滚一格（旧的上飞加速淡出、新的从下带模糊滑入），连换 N 个功能词后落成完整句子收束",
+        "use": "\"功能列举\"类文案的最优雅解法（比逐条列表快、比字符级滚动有语义）；一句话卖点 + 多个动词短语的段落",
+        "energy": "中（稳定节拍器，无峰值）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/pill-slot-cycle.mp4"
+      },
+      {
+        "key": "pill-chip-slot-cycle-handled",
+        "name": "胶囊滚轮挤开",
+        "card": "胶囊滚轮挤开",
+        "summary": "白底句式 \"Your `chip` Handled\" 里深色胶囊内词竖向滚轮轮换，胶囊宽度按预量文本宽插值平滑伸缩、两侧文字被自然挤开收拢，胶囊上下露出 13% 透明度的灰色幽灵项",
+        "use": "\"我们替你搞定 ___\" 这类句式卖点；SaaS 功能列举的一句话收口；浅底品牌片主视觉一拍",
+        "energy": "中（三拍稳定节拍，宽度伸缩是唯一的连续运动）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/pill-chip-slot-cycle-handled.mp4"
+      },
+      {
+        "key": "vertical-word-roll-blur-cycle",
+        "name": "竖向词条滚轮",
+        "card": "竖向词条滚轮",
+        "summary": "句尾词换成竖向滚轮，3 次换词各 0.55s（outQuint 七成 + outBack 三成，前快后极慢带微过冲），相邻行按距离上垂直 blur 与灰度，中心词落定瞬间从灰染成强调色",
+        "use": "\"Crafted for ___\" / \"Built for ___\" 这类句干 + 受众/对象列举的一句话卖点；浅底品牌片的干净一拍",
+        "energy": "中（稳定三拍，无峰值）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/vertical-word-roll-blur-cycle.mp4"
+      },
+      {
+        "key": "text-column-converge",
+        "name": "双词合拢",
+        "card": "双词合拢",
+        "summary": "双词对峙合拢——左\"NEW\"右特性词钉死在等屏边距两侧硬切轮换、全程零收缩，换到最后一词才唯一一次 ease-in-out 滑到居中咬合成短语，下方小字近乎硬切浮现；收尾揭晓型文字卡",
+        "use": "特性清单收束到产品名/口号的段落（\"NEW × 一串特性 → NEW <产品名>\"式）；发布会式 recap、版本号揭晓",
+        "energy": "中低（机器节奏、小字规格清单气质，不是砸字）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/text-column-converge.mp4"
+      },
+      {
+        "key": "avatar-bracket-carousel",
+        "name": "对焦框轮换",
+        "card": "对焦框轮换",
+        "summary": "\"Your ___ agent\" 填空排版，四角对焦框钉在句中不动，头像队列在框内垂直 spring 轮换三次，入框放大清晰、出框按距离缩小淡化模糊，角色标签同步更换，切换瞬间对焦框呼吸 7%",
+        "use": "\"一个位置，多种角色\"的能力枚举；团队/身份/预设/人格类产品的核心一句话镜头",
+        "energy": "中（三次等距切换构成稳定节拍器，对焦框脉冲是唯一装饰性动作）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/avatar-bracket-carousel.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      4,
+      14
+    ],
+    "sec120": [
+      2,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "pill-slot-cycle",
+        "path": "demos/typography/pill-slot-cycle/PillSlotCycle.tsx",
+        "card": "references/shots/typography/pill-slot-cycle.md"
+      },
+      {
+        "key": "pill-chip-slot-cycle-handled",
+        "path": "demos/typography/pill-chip-slot-cycle-handled/PillChipSlotCycleHandled.tsx",
+        "card": "references/shots/typography/pill-chip-slot-cycle-handled.md"
+      },
+      {
+        "key": "vertical-word-roll-blur-cycle",
+        "path": "demos/typography/vertical-word-roll-blur-cycle/VerticalWordRollBlurCycle.tsx",
+        "card": "references/shots/typography/vertical-word-roll-blur-cycle.md"
+      },
+      {
+        "key": "text-column-converge",
+        "path": "demos/typography/text-column-converge/TextColumnConverge.tsx",
+        "card": "references/shots/typography/text-column-converge.md"
+      },
+      {
+        "key": "avatar-bracket-carousel",
+        "path": "demos/ui-entrance/avatar-bracket-carousel/AvatarBracketCarousel.tsx",
+        "card": "references/shots/ui-entrance/avatar-bracket-carousel.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "pill-chip-slot-cycle-handled",
+    "vertical-word-roll-blur-cycle",
+    "text-column-converge"
+  ],
+  "overlaps": [
+    {
+      "id": "slot-rails",
+      "note": "slot-rails hands one word to the next through a railed slot between two rails; slot-sentence keeps a sentence round the slot and reflows it"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/slot-sentence/brick.js",
+  "card": "scene/slot-sentence/CARD.md",
+  "compare": {
+    "ssimMean": 0.9603,
+    "ssimMin": 0.9485,
+    "ssimDrop": 0.0174,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "fitsRoles": [
+    "demo",
+    "proof",
+    "claim"
+  ],
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

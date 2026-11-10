@@ -1,0 +1,167 @@
+{
+  "id": "icon-field",
+  "category": "scene",
+  "name": {
+    "en": "Icon field",
+    "zh": "图标点阵点亮"
+  },
+  "summary": {
+    "en": "A field of unlit keycaps rises from the centre out until it fills the frame; after a breath, bands of light sweep down it and light every key, then a title lands on a veil.",
+    "zh": "上百枚熄灯的图标键帽从中心向外错峰浮现铺满全屏，停一拍后几道光带极快向下扫过、逐行点亮，最后在暗幕上落下标题。"
+  },
+  "fits": "Showing scale before the name: a feature or integration universe laid out in grey, then lit at once by the product; an opening or a lockup.",
+  "notFor": "Fewer than about a hundred things (the field needs to read as \"many\"); icons that must be read one by one; light, flat styles.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      12
+    ],
+    "sec120": [
+      5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any dark",
+      "afterglow"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "plakat",
+      "swiss"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "icon-field-colorize",
+        "path": "demos/opening/icon-field-colorize/IconFieldColorize.tsx",
+        "card": "references/shots/opening/icon-field-colorize.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "stagger-in",
+      "note": "its radial order is the field's rise; icon-field adds the lighting waves and the titled veil"
+    },
+    {
+      "id": "bento-wall",
+      "note": "cells of a wall lit one by one; icon-field lights a field of a hundred and seventy keys in a few fast bands"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Lay out the whole universe of features in grey so the viewer registers 'this many', then light it all in one fast sweep, so the product reads as what brings it all to life.",
+      "zh": "先用灰阶把整个功能宇宙摆满，让观众意识到“有这么多”，再用几道快速光带一举点亮，产品就是让这一切亮起来的那一个。"
+    },
+    "content": {
+      "en": "6–16 simple solid icons (SVG paths on a 24 grid; hearts, stars, bolts, ticks: recognisable shapes, not abstract blocks), repeated over about 170 keys; an eyebrow (en ≤ 20 chars, zh ≤ 8) and a two-line title (en ≤ 16 / 24, zh ≤ 6 / 9).",
+      "zh": "6–16 个简笔实心图标（24 网格的 SVG 路径；心、星、闪电、对勾这类认得出的形，不要抽象色块），铺满约 170 个键位；一行眉标（英文 ≤ 20 字符，中文 ≤ 8 字）和两行标题（英文 ≤ 16 / 24，中文 ≤ 6 / 9）。"
+    },
+    "fits": {
+      "zh": "点名之前先交代规模：一片功能或集成的宇宙先以灰阶铺开，再被产品一下点亮；用于开场或落版。"
+    },
+    "notFor": {
+      "zh": "少于约一百样东西（这片阵列要读作“很多”）；要一个个读的图标；浅色平面风格。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "proof",
+      "lockup"
+    ],
+    "subjects": [
+      "abstract",
+      "logo"
+    ],
+    "moods": [
+      "ceremonial",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "icon grid",
+        "keycaps",
+        "colorize",
+        "feature universe",
+        "light sweep",
+        "ecosystem scale",
+        "integrations",
+        "power on"
+      ],
+      "zh": [
+        "图标点阵点亮",
+        "图标点阵翻色",
+        "功能宇宙",
+        "键帽",
+        "光带扫过",
+        "品牌色点亮",
+        "生态规模",
+        "logo 前垫场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "mark-lockup",
+        "note": "the lit field hands over to the brand lockup"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Never light the whole field on one frame; the light must sweep down in bands, or it reads as a different picture swapped in.",
+        "Wipe the light in with a clip, not a cross-fade; half-transparent warm colour over a dark ground passes through a muddy olive.",
+        "Use recognisable solid icons; abstract blocks do not read as a universe of features."
+      ],
+      "zh": [
+        "点亮不能同帧硬翻；要几道光带向下扫，否则读作换了一张图。",
+        "点亮用裁切擦入，不用透明度交叉淡入；暖色半透明叠在暗底上会过一段橄榄泥色。",
+        "图标要用认得出的实心简笔形；抽象色块读不出“功能宇宙”。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "icon-field-colorize",
+        "name": "图标点阵翻色",
+        "card": "图标点阵翻色",
+        "summary": "灰阶小图标点阵错峰浮现铺满全屏，停一拍后多道品牌色横带波纹极快向下扫翻全场——\"功能全景先摆满，品牌一瞬间点亮\"的开场/收束卡",
+        "use": "开场铺陈产品能力面（图标=功能宇宙）再一举打上品牌色；功能集合页、生态/集成规模展示、片头 logo 前垫场",
+        "energy": "中（浮现是铺垫，翻色瞬间是唯一爆点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/icon-field-colorize.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/icon-field/brick.js",
+  "card": "scene/icon-field/CARD.md",
+  "compare": {
+    "ssimMean": 0.7962,
+    "ssimMin": 0.6848,
+    "ssimDrop": 0.0018,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

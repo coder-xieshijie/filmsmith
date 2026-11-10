@@ -1,0 +1,167 @@
+{
+  "id": "segment-reveal",
+  "category": "motion",
+  "name": {
+    "en": "Segment reveal",
+    "zh": "断笔成字"
+  },
+  "summary": {
+    "en": "A word is cut into separate pieces that light up in a shuffled order; it reads only when the last key pieces land, and then the whole word surges to full light.",
+    "zh": "一个词被切成十几段互不相连的碎片，乱序逐段点亮；最后几段钥匙段落位才读得出来，随即整词通电满亮。"
+  },
+  "fits": "The hook of an opening: a product name, one word or a big number whose recognition is the moment; once a film.",
+  "notFor": "Text that must be read at once (a claim, a label); more than one word line; a light, busy ground where half-lit pieces do not glow.",
+  "energy": "mid",
+  "duration": {
+    "beats": 8.533333333333333,
+    "range": [
+      7,
+      10
+    ]
+  },
+  "tier": "T3",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any dark"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "plakat",
+      "halftone"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "stroke-segment-build",
+        "path": "demos/opening/stroke-segment-build/StrokeSegmentBuild.tsx",
+        "card": "references/shots/opening/stroke-segment-build.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "scramble-resolve",
+      "note": "glyphs cycle through other glyphs and resolve; segment-reveal keeps every glyph and withholds parts of it"
+    },
+    {
+      "id": "outline-write",
+      "note": "the word is written whole and continuously; segment-reveal withholds meaning, in discrete pieces"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Hold back recognition to make a hook: the viewer sees only mysterious pieces until the key ones land, and the moment the word is recognised is the payoff.",
+      "zh": "把“认出来”压到最后做成钩子：观众前大半时间只看到神秘的碎段，钥匙段落位的那一刻认出是什么字，这一下就是回报。"
+    },
+    "content": {
+      "en": "One short word the viewer already knows (a product name, SHIP, LIVE, a big number): en 4–6 letters best, zh 2–4 chars; no other text.",
+      "zh": "一个观众本来就认识的短词（产品名、SHIP、LIVE、大数字）：英文 4–6 个字母最好，中文 2–4 字；不带其他文字。"
+    },
+    "fits": {
+      "zh": "开场的钩子：认出这个词就是那一刻的产品名、单个词或大数字；一支片一次。"
+    },
+    "notFor": {
+      "zh": "必须立刻读懂的文字（主张、标签）；超过一行字；浅色或花的底，半亮的碎段不发光。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "climax"
+    ],
+    "subjects": [
+      "title",
+      "number",
+      "logo"
+    ],
+    "moods": [
+      "dramatic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "neon segments",
+        "stroke segments",
+        "delayed reveal",
+        "Alien title",
+        "recognition",
+        "fragments",
+        "tube flicker",
+        "suspense"
+      ],
+      "zh": [
+        "断笔成字",
+        "描边分段构建",
+        "异形片头",
+        "意义延迟揭晓",
+        "霓虹灯管",
+        "碎段点亮",
+        "认出瞬间",
+        "悬念"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "slam-drop",
+        "note": "a claim after the word is recognised"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The word must be one the viewer already knows; a made-up word has no moment of recognition.",
+        "Keep it short; long words make the unreadable stretch hard to control and the pieces explode in number.",
+        "For the reveal let the lettering's own glow surge; a separate radial glow makes a dirty spot in the middle of the word.",
+        "Once per film."
+      ],
+      "zh": [
+        "必须是观众认识的词；生造词没有“认出”可言。",
+        "词要短；长词的不可读期难控制，碎段数量爆炸。",
+        "揭晓时让字形自己的泛光涌起；另画一团径向光会在字中间留下脏亮点。",
+        "一支片只用一次。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "stroke-segment-build",
+        "name": "描边分段构建",
+        "card": "描边分段构建",
+        "summary": "断笔成字——标题拆成十几段互不相连的笔画乱序逐段点亮，前 70% 不可读，末段落位瞬间语义\"啪\"地成立",
+        "use": "开场吊悬念的产品名/大数字揭晓；一支片 ≤1 次；与 type-assembly/draw-svg-trace 分工：那些是\"看着字被组装/描画\"，本卡是\"意义延迟揭晓\"",
+        "energy": "低起中收（悬念型，落位帧是能量点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/stroke-segment-build.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/segment-reveal/brick.js",
+  "card": "motion/segment-reveal/CARD.md",
+  "compare": {
+    "ssimMean": 0.5687,
+    "ssimMin": 0.4698,
+    "ssimDrop": 0.0441,
+    "trackDevPx": 62.5,
+    "progressRmse": 0.027,
+    "eventFrames": 0,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

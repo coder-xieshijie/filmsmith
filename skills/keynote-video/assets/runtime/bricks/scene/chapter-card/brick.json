@@ -1,0 +1,128 @@
+{
+  "id": "chapter-card",
+  "category": "scene",
+  "name": {
+    "en": "Chapter card",
+    "zh": "章节卡"
+  },
+  "summary": {
+    "en": "A chapter turn: the number above, the title slams in decoded at 150 px, the card line types, then the title flies to the page header, motion-blurred, while the note slides in under it.",
+    "zh": "章节转场：上方是章节号，标题以 150 px 解码砸入，卡片行敲出，然后标题带着运动模糊飞到页眉，注释从下面滑入。"
+  },
+  "fits": "Each chapter of a phosphor film, before its page.",
+  "notFor": "Films with one chapter (use the page alone, header decoding in); more than four chapters.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Mark each chapter as a command the film is about to run: its name big, its tool in mono, then the name becomes the page's header.",
+      "zh": "把每一章标成片子将要运行的一条命令：章名大字，工具名用等宽字，然后章名变成页眉。"
+    },
+    "content": {
+      "en": "Number and total, a title in two halves (≤ 2 words each), a card line (the chapter's tool, ≤ 6 words), a note for the page.",
+      "zh": "序号和总数、两半的标题（各 ≤ 4 字）、卡片行（本章用到的工具，≤ 24 字）、页面注释。"
+    },
+    "fits": {
+      "zh": "phosphor 片子每一章正文之前。"
+    },
+    "notFor": {
+      "zh": "只有一章的片子（直接用正文页，页眉解码出现）；超过四章。"
+    },
+    "roles": [
+      "turn"
+    ],
+    "subjects": [
+      "title",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "chapter",
+        "title card",
+        "header",
+        "flight",
+        "motion blur",
+        "section"
+      ],
+      "zh": [
+        "章节",
+        "标题卡",
+        "页眉",
+        "飞行",
+        "运动模糊",
+        "小节"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "qa-pick",
+        "note": "its page, header in place"
+      },
+      {
+        "id": "hub-flow",
+        "note": "its page"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The page after it must draw the header in place (`headEnter: false`); the template starts the page 0.4 beat into the flight, the bricks after it."
+      ],
+      "zh": [
+        "之后的正文页要把页眉画在原位（headEnter: false）；模板在飞行进行到 0.4 拍时就开始正文，积木在飞行结束后才开始。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      6
+    ],
+    "sec120": [
+      1.5,
+      3
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js pageHeader; events.js card()"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/chapter-card/brick.js",
+  "card": "scene/chapter-card/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,114 @@
+{
+  "id": "sketch-node",
+  "category": "prop",
+  "name": {
+    "en": "Sketch node",
+    "zh": "手绘节点"
+  },
+  "summary": {
+    "en": "The one hand-drawn thing in a clean diagram: a part as a rough outline and hachure on a light backing with its title, or a smooth loop pill that becomes a circle; same seed, same strokes.",
+    "zh": "干净图里唯一手绘的东西：部件画成粗糙轮廓加排线、浅底、带标题；或光滑的循环药丸，放大成圆；同一种子同一笔画。"
+  },
+  "fits": "Parts of a system in an overview or a detail diagram; a loop.",
+  "notFor": "Frames, connectors or circles (keep those clean); decorative doodles.",
+  "select": {
+    "intent": {
+      "en": "Make each part feel like a thing drawn for the viewer, distinct from the clean structure around it.",
+      "zh": "让每个部件像为观众手画的东西，和周围干净的结构区分开。"
+    },
+    "content": {
+      "en": "A title (≤ 14 / 6), an optional secondary line (≤ 30 / 12), the layer, a seed, rect or loop.",
+      "zh": "标题（≤ 14 / 6）、可选副行（≤ 30 / 12）、所属层、种子、方形或循环。"
+    },
+    "fits": {
+      "zh": "总图或细节图里的系统部件；一个循环。"
+    },
+    "notFor": {
+      "zh": "框、连线、圆（这些保持干净）；装饰性涂鸦。"
+    },
+    "roles": [
+      "problem",
+      "demo"
+    ],
+    "subjects": [
+      "diagram"
+    ],
+    "moods": [
+      "warm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "rough node",
+        "hachure",
+        "hand-drawn box",
+        "loop",
+        "pill to circle",
+        "Rough.js"
+      ],
+      "zh": [
+        "手绘节点",
+        "排线",
+        "手绘方框",
+        "循环",
+        "药丸变圆",
+        "Rough.js"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "msg-chip",
+        "note": "the messages between parts"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Give every node its own fixed seed; two nodes with one seed look copied.",
+        "A loop is a smooth pill with clipped hachure, never a rough circle."
+      ],
+      "zh": [
+        "每个节点用自己固定的种子；同种子的两个节点像复制的。",
+        "循环是带裁剪排线的光滑药丸，不是粗糙圆。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint-zoom"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/teach-video/assets/kits/blueprint-zoom/starter/components/node.js, loop.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "token-chip",
+      "note": "a mono box whose outline wears a meaning (keynote); here a rough hand-drawn part with hachure"
+    }
+  ],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "prop/sketch-node/brick.js",
+  "card": "prop/sketch-node/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from teach-video's blueprint-zoom kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

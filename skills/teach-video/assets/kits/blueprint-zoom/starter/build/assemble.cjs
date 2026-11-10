@@ -69,6 +69,23 @@ const r3 = (x) => Math.round(x * 1000) / 1000;
 const cuts = [...new Set([...F.timeline.map((s) => s.t0), ...seams().map((x) => x.at)].filter((t) => t > 0 && t < D).map(r3))].sort((a, b) => a - b);
 const segOf = (t) => (F.timeline.find((s) => t >= s.t0 - 1e-6 && t < s.t1 - 1e-6) || F.timeline[F.timeline.length - 1]).id;
 const seen = {};
+// Bricks (film.json "bricks", copied into lib/bricks/ by scripts/add-bricks.mjs): a module script, run after the classic
+// scripts and before main.js builds, imports each brick and puts it on window.BRICKS[id] as { module, create(params, ctx) }
+// (create = lib/bricks/index.js createBrick); window.BRICKS_READY is the promise main.js waits for.
+const brickIds = (F.bricks || []).filter((id) => /^[a-z0-9-]+$/.test(id));
+const brickCats = exists('lib/bricks/teach.json') ? JSON.parse(fs.readFileSync(rel('lib/bricks/teach.json'), 'utf8')).bricks : {};
+const brickCat = (id) => ['motion', 'scene', 'prop', 'look', 'sound', 'arc'].find((c) => exists(`lib/bricks/${c}/${id}/brick.json`)) || brickCats[id];
+const missingBricks = brickIds.filter((id) => !brickCat(id));
+if (missingBricks.length) { console.error(`[assemble] film.json "bricks" lists ${missingBricks.join(', ')}, not in lib/bricks/: run node ${path.join(scripts(), 'add-bricks.mjs')} .`); process.exit(1); }
+const brickEntry = (id) => { const c = brickCat(id); return c === 'look' ? 'look.js' : c === 'sound' ? 'sound.js' : 'brick.js'; };
+const bricksLoader = brickIds.length ? `<script>window.BRICKS = {}; window.BRICKS_READY = new Promise((r) => (window.__bricksDone = r));</script>
+<script type="module">
+import { createBrick } from './lib/bricks/index.js';
+${brickIds.map((id, i) => `import B${i} from './lib/bricks/${brickCat(id)}/${id}/${brickEntry(id)}';`).join('\n')}
+${brickIds.map((id, i) => `window.BRICKS[${JSON.stringify(id)}] = { module: B${i}, create: (params, ctx) => createBrick(${JSON.stringify(id)}, params, { category: ${JSON.stringify(brickCat(id))}, ...ctx }) };`).join('\n')}
+window.__bricksDone();
+</script>
+` : '';
 const marks = [0, ...cuts].map((a, i, all) => {
   const b = i + 1 < all.length ? all[i + 1] : D, id = segOf(a);
   seen[id] = (seen[id] || 0) + 1;
@@ -111,7 +128,7 @@ ${S.web ? '' : `  <audio id="vo" src="assets/audio/vo.wav" data-start="0" data-d
   window.__hf.buildReady.main = new Promise((r) => (window.__hf.buildHold.main = r));
 </script>
 ${segs.map((s) => `<script src="segments/${s.id}.js"></script>`).join('\n')}
-<script src="main.js"></script>
+${bricksLoader}<script src="main.js"></script>
 </body>
 </html>
 `;

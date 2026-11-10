@@ -1,0 +1,131 @@
+{
+  "id": "cover-rise",
+  "category": "motion",
+  "name": {
+    "en": "Cover rise",
+    "zh": "盖屏上升"
+  },
+  "summary": {
+    "en": "A cover rises from the bottom edge and fills the frame: a gradient (the next scene's ground) or a picture, over the scene it covers, which is drawn by the brick or left to the real picture under the canvas (`from: 'none'`).",
+    "zh": "一块盖板从画面下沿升起盖满全屏：盖面是渐变（下一场的底色）或一张图；被盖住的那场由积木画，或留给画布下面的真实画面（`from: 'none'`）。"
+  },
+  "fits": "The seam into an ending whose ground is a gradient or a picture (a lock-up), where a hard cut would jump.",
+  "notFor": "A cut between two scenes on the same ground (nothing changes under the cover); more than once a film.",
+  "select": {
+    "intent": {
+      "en": "Hide the last cut inside a rise: the next ground comes up over the frame.",
+      "zh": "把最后一刀藏进一次上升：下一场的底色从下面升起盖满画面。"
+    },
+    "content": {
+      "en": "Nothing to read: the cover's gradient stops (or a picture) and the scenes either side (drawn, or the real ones under the canvas).",
+      "zh": "没有字：盖板的渐变色（或一张图），以及两边的场景（由积木画，或画布下面的真实画面）。"
+    },
+    "fits": {
+      "zh": "进入以渐变或图片为底的结尾（落版）的接缝，硬切会跳的地方。"
+    },
+    "notFor": {
+      "zh": "同一底色的两场之间（盖住前后没有变化）；一部片用不止一次。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "lockup",
+      "claim"
+    ],
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "cinematic",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "cover",
+        "wipe",
+        "rise",
+        "reveal",
+        "gradient",
+        "seam",
+        "lock-up",
+        "transition"
+      ],
+      "zh": [
+        "盖屏",
+        "擦除",
+        "上升",
+        "渐变",
+        "接缝",
+        "落版",
+        "转场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sky-gather",
+        "note": "the stream ending it covers"
+      },
+      {
+        "id": "point-lockup",
+        "note": "or the stream's own lock-up after it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Give the cover the next scene's own ground (its stops or picture): the next clip must open on exactly what the cover shows, or the cut comes back.",
+        "With `from: 'none'` the canvas is transparent until the edge passes: put it above the previous clip in the host, overlapping its last beat.",
+        "`beats` sets the rise's length (0.25–2, default 1); under about 0.85 beat the edge is still moving on its last frame, so let the next clip's first frame land on it."
+      ],
+      "zh": [
+        "盖面要用下一场自己的底（同样的渐变或图）：下一段开场必须正好是盖板的样子，否则硬切又回来了。",
+        "`from: 'none'` 时边沿经过之前画布是透明的：在宿主里放在上一段之上，压住它的最后一拍。",
+        "`beats` 设上升的长度（0.25–2，默认 1 拍）；短于约 0.85 拍时最后一帧边沿还在动，让下一段的第一帧接在它上面。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 1,
+    "range": [
+      0.25,
+      2
+    ]
+  },
+  "tier": "T1",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film (the sweep before the lock-up)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/cover-rise/brick.js",
+  "card": "motion/cover-rise/CARD.md",
+  "status": "approved",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick from the stream original K (the source film): no upstream shot; checked instead against K at the same moment (card, Differs from upstream)"
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

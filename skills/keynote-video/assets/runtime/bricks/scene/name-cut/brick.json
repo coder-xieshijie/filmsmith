@@ -1,0 +1,131 @@
+{
+  "id": "name-cut",
+  "category": "scene",
+  "name": {
+    "en": "Name cut from the line",
+    "zh": "线里切出名字"
+  },
+  "summary": {
+    "en": "The close: the ground opens out of the line, a blade cuts the line into the name in the line colour, the band contracts into the caret, which types the URL; the closing line enters; on the last downbeat the caret falls flat under the URL.",
+    "zh": "收尾：底色从线里打开，一把刀把线切成线色的产品名，剩下的线条收成光标、敲出网址；结束语进场；最后一个强拍上光标平躺成网址的下划线。"
+  },
+  "fits": "The lock-up of a thread film.",
+  "notFor": "Names over 16 characters; a film without a URL (the band then stays under the name).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "End where the film began: the line that typed the request is cut into the name and types the link.",
+      "zh": "回到开头：当初敲出需求的那条线，被切成产品名、再敲出链接。"
+    },
+    "content": {
+      "en": "The name (≤ 16), one closing line (≤ 52), the URL (≤ 52).",
+      "zh": "产品名（≤ 8 字）、一句结束语（≤ 20 字）、网址。"
+    },
+    "fits": {
+      "zh": "thread 片子的收尾。"
+    },
+    "notFor": {
+      "zh": "超过 16 个字符的名字；没有网址的片子（那时线条留在名字下面）。"
+    },
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title",
+      "cursor"
+    ],
+    "moods": [
+      "calm",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "lock-up",
+        "name",
+        "blade",
+        "cut",
+        "URL",
+        "underline"
+      ],
+      "zh": [
+        "收尾",
+        "产品名",
+        "刀",
+        "切开",
+        "网址",
+        "下划线"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sheet-flood",
+        "note": "its card squashes into the line"
+      },
+      {
+        "id": "caret-fall",
+        "note": "the band → caret → underline"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The closing URL needs 3 s after it is typed: the close takes the bar rounding to give it.",
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "网址敲完要停 3 秒：收尾环节吃掉小节取整来保证这一点。",
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      9,
+      14
+    ],
+    "sec120": [
+      4.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js close, urlGeo; shots.js CLOSE, closeSecondMove"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/name-cut/brick.js",
+  "card": "scene/name-cut/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

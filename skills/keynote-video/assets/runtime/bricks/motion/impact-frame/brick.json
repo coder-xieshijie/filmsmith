@@ -1,0 +1,163 @@
+{
+  "id": "impact-frame",
+  "category": "motion",
+  "name": {
+    "en": "Impact frame",
+    "zh": "打击帧"
+  },
+  "summary": {
+    "en": "The camera winds back and crashes into one card; three frames of negative with focus lines hit, then the clean close-up shakes still.",
+    "zh": "镜头先往后收、再急推撞进一张卡；撞停的三帧画面翻成负片、炸出集中线，随后干净的特写抖几下停稳。"
+  },
+  "fits": "The one hit of a film: a card, a number or a word that lands as the climax, on the drop.",
+  "notFor": "Anything but the single peak; paper and ink styles (use plate-slip); calm or serious products.",
+  "select": {
+    "intent": {
+      "en": "The film's one hit lands with force: three negative frames bite into time, so the viewer feels the blow rather than sees a picture.",
+      "zh": "全片唯一的一拳打实：三帧负片把时间咬住，观众感到的是冲击力，而不是看到一张图。"
+    },
+    "content": {
+      "en": "The scene and one target card in it (its rect): a card, a number or a word that is the climax; no extra text.",
+      "zh": "场景和其中一张目标卡（给出位置框）：作为高潮的卡片、数字或词；不需要额外文字。"
+    },
+    "fits": {
+      "zh": "全片唯一的那一击：作为高潮的卡片、数字或词，落在音乐的 drop 上。"
+    },
+    "notFor": {
+      "zh": "除那一个高潮以外的任何地方；纸墨风格（用 plate-slip）；调性安静或严肃的产品。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax"
+    ],
+    "subjects": [
+      "cards",
+      "number",
+      "title"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "impact frame",
+        "anime impact",
+        "crash zoom",
+        "negative flash",
+        "focus lines",
+        "screen shake",
+        "hit"
+      ],
+      "zh": [
+        "动漫打击帧",
+        "冲击反馈",
+        "负片",
+        "集中线",
+        "急推",
+        "震屏",
+        "命中一瞬"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Once a film, at the peak; a second one makes the punch a habit. Never with whiteout-slam or plate-slip in one film.",
+        "The negative frames must land with an impact sound on the same frame; silent, they read as a broken frame.",
+        "Do not stack it with another time remap (freeze, speed ramp) in the same shot."
+      ],
+      "zh": [
+        "一支片只用一次、用在高潮；第二次就成了习惯。不和 whiteout-slam、plate-slip 同片。",
+        "负片帧必须和撞击音效同帧落下，无声的负片读成坏帧。",
+        "同一镜头别再叠别的时间重映射（顿帧、变速）。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "anime-impact",
+        "name": "动漫打击帧",
+        "card": "冲击反馈",
+        "summary": "crash-zoom 撞停的 3f 整幅负片反色 + 放射集中线 + 红青色散，第 4f 全撤",
+        "use": "元素落位/撞击的\"命中一瞬\"——给砸入、撞停加游戏级手感；按强度阶梯选式",
+        "energy": "高（瞬时冲击）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/anime-impact.mp4"
+      }
+    ]
+  },
+  "energy": "peak",
+  "duration": {
+    "beats": 2.5,
+    "range": [
+      2,
+      3
+    ]
+  },
+  "tier": "T3",
+  "family": "zoom-depth",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse",
+      "phosphor"
+    ],
+    "avoid": [
+      "ink",
+      "halftone",
+      "dossier",
+      "blueprint",
+      "stream"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "anime-impact",
+        "path": "demos/effects/impact-feedback/AnimeImpact.tsx",
+        "card": "references/shots/effects/impact-feedback.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "viewport-push",
+      "note": "batch 1 adds punch: impact to it; impact-frame keeps its own crash so the hit has an approach, push: false hits in place"
+    },
+    {
+      "id": "whiteout-slam",
+      "note": "the film’s one peak by white exposure; never both in one film"
+    },
+    {
+      "id": "plate-slip",
+      "note": "the paper-and-ink hit; one of the two per film"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/impact-frame/brick.js",
+  "card": "motion/impact-frame/CARD.md",
+  "compare": {
+    "ssimMean": 0.6001,
+    "ssimMin": 0.2306,
+    "ssimDrop": 0.3561,
+    "trackDevPx": 4.2,
+    "progressRmse": 0.0056,
+    "eventFrames": 0,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

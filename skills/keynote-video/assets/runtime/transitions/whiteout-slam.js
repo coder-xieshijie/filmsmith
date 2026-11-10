@@ -2,6 +2,12 @@
 // while the camera leans into the locked answer (origin); two frames of white; then the incoming frame lands with blur,
 // scale and a small channel offset that all decay to zero, while its ground falls back from white. One per film, on
 // the sound's high point. Theory: references/transitions.md#whiteout-slam.
+// Variant `swap: 'inplace'`: the same thing in another version, in place: the outgoing frame is exposed to white without
+// the lean, the white frames hold, and the incoming frame comes back out of the white where the old one was, with no
+// blur, scale or colour offset (the whole frame falls back from white, expo out). For a rich mark that comes back flat,
+// a draft that comes back final. Adapted from video-shotcraft
+// demos/transition/white-flash-logo-simplify-cut/WhiteFlashLogoSimplifyCut.tsx, https://github.com/Vincentwei1021/
+// video-shotcraft @ 1266a3e, Apache-2.0: the flash over the swap in place; its liquid-metal mark is not taken.
 
 const SLAM = `
 uniform float uWhiteAt;   // p of the hit (end of the build)
@@ -9,12 +15,18 @@ uniform float uWhite;     // length of the white frames (fraction of p)
 uniform float uShock;     // length of the shock decay (fraction of p)
 uniform float uFade;      // length of the ground's fall from white (fraction of p)
 uniform float uBlurPx, uShift, uZoom;
+uniform float uInPlace;   // 1: swap in place (no lean, no shock; the whole frame falls back from white)
 
 // golden-angle disc taps (radius 1)
 vec2 tap(float k) { float r = sqrt((k + 0.5) / 16.0), a = k * 2.39996; return r * vec2(cos(a), sin(a)); }
 
 vec3 transition(vec2 s, float p) {
   vec2 C = vec2(960.0, 540.0);
+  if (uInPlace > 0.5) {
+    if (p < uWhiteAt) { float u = p / uWhiteAt; return mix(A(s), uPaper, pow(u, 2.2) * 0.94); }
+    float h = easeOutExpo(sat((p - uWhiteAt - uWhite) / (uFade + uShock * 0.5)));
+    return mix(uPaper, B(s), h);
+  }
   if (p < uWhiteAt) {
     float u = p / uWhiteAt;
     float push = 1.0 + 0.14 * u * u;
@@ -53,8 +65,8 @@ export default [
     origin: [960, 540],
     frag: SLAM,
     // origin: the locked answer (where the camera leans and the new answer scales from); dur: seconds the slam lasts
-    uniforms: ({ dur = 1, fps = 30, blur = 26, shift = 22, zoom = 0.16 }) => ({
-      uWhiteAt: 0.5, uWhite: 2 / fps / dur, uShock: 0.45 / dur, uFade: 0.28 / dur, uBlurPx: blur, uShift: shift, uZoom: zoom,
+    uniforms: ({ dur = 1, fps = 30, blur = 26, shift = 22, zoom = 0.16, swap = 'slam' }) => ({
+      uWhiteAt: 0.5, uWhite: 2 / fps / dur, uShock: 0.45 / dur, uFade: 0.28 / dur, uBlurPx: blur, uShift: shift, uZoom: zoom, uInPlace: swap === 'inplace' ? 1 : 0,
     }),
   },
 ];

@@ -1,0 +1,146 @@
+{
+  "id": "three-angles",
+  "category": "scene",
+  "name": {
+    "en": "Three angles",
+    "zh": "三格机位"
+  },
+  "summary": {
+    "en": "One subject cut into three comic panels on three beats, each stamped with a caption; the last panel eats the frame and holds the headline.",
+    "zh": "一个主体在三拍里切成三格漫画分镜，每格盖一个旁白框；最后一格吃满全屏，托住标题。"
+  },
+  "fits": "One screen worth seeing whole, closer and in one detail, then a claim on it (demo, climax, claim).",
+  "notFor": "Three different subjects (use quad-montage); subjects without a detail worth a close-up; quiet, editorial films (the stamps are loud).",
+  "select": {
+    "intent": {
+      "en": "One subject seen whole, closer and in detail, cut in like comic panels on the beat, and the detail grows into a poster that carries the claim.",
+      "zh": "同一主体看全貌、近景、细节，像漫画分格一样踩拍劈出，细节那格长成海报托住主张。"
+    },
+    "content": {
+      "en": "One subject (vector or high-resolution), three captions of kicker plus text (≤ 16 chars, Chinese ≤ 6 characters), a headline (≤ 24 chars, Chinese ≤ 10) and an optional subline.",
+      "zh": "一个主体（矢量或高清），三条旁白框（眉题加正文，≤ 16 字符、中文 ≤ 6 字），一个标题（≤ 24 字符、中文 ≤ 10 字），副行可选。"
+    },
+    "fits": {
+      "zh": "一个值得看全貌、近景和一个细节的画面，再在上面落一句主张（演示、高潮、主张）。"
+    },
+    "notFor": {
+      "zh": "三个不同主体（用 quad-montage）；没有值得特写的细节；安静的编辑风片子（盖章很响）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "climax",
+      "claim"
+    ],
+    "subjects": [
+      "image",
+      "ui",
+      "title"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "comic panels",
+        "three angles",
+        "manga split",
+        "caption boxes",
+        "poster ending",
+        "Scott Pilgrim"
+      ],
+      "zh": [
+        "漫画分镜切屏",
+        "三格机位",
+        "旁白框",
+        "漫画分格",
+        "海报收尾",
+        "同主体三机位"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "All three panels show the same subject; different contents read as a bento layout.",
+        "Cut on the beat with a click per panel; once per film."
+      ],
+      "zh": [
+        "三格必须是同一主体；放不同内容读成 bento 排版。",
+        "踩拍、每格一声咔；一支片一次。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "comic-panel-split",
+        "name": "漫画分镜切屏",
+        "card": "面板网格动效",
+        "summary": "分格节奏——comic-panel-split 漫画斜格劈出同一主体的三个机位，咔咔咔三格定格后末格斜边吃屏成海报",
+        "use": "把\"格子\"当节奏器：同主体多机位定格并列，逐格踩拍劈出；吃拍点",
+        "energy": "中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/comic-panel-split.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      9,
+      12
+    ],
+    "sec120": [
+      4.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "comic-panel-split",
+        "path": "demos/rhythm/panel-grid-moves/ComicPanelSplit.tsx",
+        "card": "references/shots/rhythm/panel-grid-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "panel-carve",
+      "note": "panel-carve is the carve and the eat; three-angles adds the stamped captions and the poster with the headline"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/three-angles/brick.js",
+  "card": "scene/three-angles/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.3951,
+    "ssimMin": 0.3091,
+    "ssimDrop": 0.04,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

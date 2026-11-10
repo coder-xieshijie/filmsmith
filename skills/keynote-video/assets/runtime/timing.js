@@ -9,8 +9,11 @@
 //
 // Rules, from references/principles.md:
 //   reading   three tiers (principle 1):
-//             primary  titles, claims, numbers, commands, questions: 0.3 s a word (CJK: 1/9 s a character),
-//                      read one after another; a scene's primary text adds up
+//             primary  titles, claims, numbers, commands, questions: 0.3 s a word (a run of letters or digits;
+//                      → · — / and punctuation are not read); in Chinese (content.lang 'zh') 6 Han characters a
+//                      second, 0.3 s a Latin word inside, punctuation not counted, plus 0.5 s for each state (the
+//                      primary items that become readable together; readCount, readTimeOf). Read one after
+//                      another; a scene's primary text adds up
 //             glance   labels, corner notes, stage names, title-block fields: ≤ 6 words, repeated elsewhere or
 //                      safe to delete; fully still ≥ 1 s, read in parallel, never added up. A glance item over
 //                      6 words is counted as primary and reported
@@ -55,7 +58,7 @@
 //   api: 3,                       // 3: the four tiers above, as errors; 2: the ceiling checks as errors; 1: warnings
 //   bpm: { default: 120, min: 112, max: 128 },
 //   beatsPerBar: 4, unit: 0.25, phrase: 2,
-//   // optional overrides of DEFAULTS: wordSec, cjkCharSec, glanceSec, glanceMaxWords, maxStillBars,
+//   // optional overrides of DEFAULTS: wordSec, hanPerSec, stateSec, glanceSec, glanceMaxWords, maxStillBars,
 //   // lastStillBars, pageMaxBars, pageWords, entryBeats, max, phraseShareBeats, fps, keyFrames
 //   types: {
 //     claim:   { in: 2, out: 1, turn: true, read: (s) => [s.title, { text: s.kicker, tier: 'glance' }] },
@@ -106,7 +109,8 @@ export const TIMING_API = 3;
 
 export const DEFAULTS = {
   wordSec: 0.3, // s per Latin word (principle 1, standard)
-  cjkCharSec: 1 / 9, // s per CJK character (≤ 9 characters a second; used from the Chinese batch on)
+  hanPerSec: 6, // Han characters read a second in Chinese (owner, 2026-11-09)
+  stateSec: 0.5, // s added to each Chinese primary state (owner, 2026-11-09)
   glanceSec: 1.0, // s a glance item stays fully still (subtitle minimum 5/6 s, rounded up)
   glanceMaxWords: 6, // a glance item longer than this is primary text
   maxStillBars: 1, // bars the picture may hold still after a step lands (brisk: something new every bar, 2026-10-18)
@@ -169,9 +173,35 @@ export const units = (text, lang = 'en') => { // eslint-disable-line no-unused-v
   return c.latin + c.cjk;
 };
 
+// What a reader reads, the one rule for every film and brick (bricks/lang.js re-exports it): a word is a run holding a
+// letter or a digit (v1.5, don't, 38%); symbols and punctuation (→ · — / ，。) are not read. English: the number of
+// words. Chinese: { han, words }, its Han characters (and kana) and the Latin words inside it, each read as a word, not
+// as letters. Markup is the caller's: readTime() strips the reader's [[style|text]] and {TOKEN} first.
+const SEG = typeof Intl !== 'undefined' && Intl.Segmenter ? new Intl.Segmenter('zh', { granularity: 'grapheme' }) : null;
+const graphemesOf = (s) => (SEG ? Array.from(SEG.segment(s), (x) => x.segment) : Array.from(s));
+const HAN = /[぀-ヿ㐀-䶿一-鿿豈-﫿]/;
+const WORD = /[\p{L}\p{N}]/u;
+export const readCount = (s, lang = 'en') => {
+  s = String(s ?? '');
+  if (lang !== 'zh') return s.split(/\s+/).filter((w) => WORD.test(w)).length;
+  let han = 0;
+  for (const g of graphemesOf(s)) if (HAN.test(g)) han++;
+  const words = s.replace(/[぀-ヿ㐀-䶿一-鿿豈-﫿]/g, ' ').split(/[\s　-〿＀-￯，。、；：？！（）「」『』《》〈〉【】“”‘’…—–·]+/).filter((w) => /[A-Za-z0-9]/.test(w)).length;
+  return { han, words };
+};
+// Seconds to read one string as one state: English 0.3 s a word; Chinese han / 6 + 0.3 s a Latin word + 0.5 s.
+// o: wordSec, hanPerSec, stateSec (DEFAULTS); stateSec 0 leaves the state's 0.5 s to the caller (reader() adds it once
+// for the items that become readable together).
+export const readTimeOf = (s, lang = 'en', o = {}) => {
+  const wordSec = o.wordSec ?? DEFAULTS.wordSec;
+  if (lang !== 'zh') return readCount(s, 'en') * wordSec;
+  const { han, words } = readCount(s, 'zh');
+  return han / (o.hanPerSec ?? DEFAULTS.hanPerSec) + words * wordSec + (o.stateSec ?? DEFAULTS.stateSec);
+};
+// readTime(text, o): the reader's markup stripped, then readTimeOf in o.lang (default 'en'; o may be the lang itself)
 export const readTime = (text, o = {}) => {
-  const c = count(text);
-  return c.latin * (o.wordSec ?? DEFAULTS.wordSec) + c.cjk * (o.cjkCharSec ?? DEFAULTS.cjkCharSec);
+  const opts = typeof o === 'string' ? { lang: o } : o;
+  return readTimeOf(clean(flatText(text)), opts.lang ?? 'en', opts);
 };
 
 // Before api 2. words() counts Latin words exactly as it always did; readSeconds() sums every string.
@@ -218,7 +248,7 @@ export const items = (list) => {
 export const reader = (list, opts = {}) => {
   const o = { ...DEFAULTS, ...opts };
   const out = [], demoted = [];
-  let done = 0, glanceDone = 0, primary = 0, hasGlance = false;
+  let done = 0, glanceDone = 0, primary = 0, hasGlance = false, lastState = null;
   for (const it of items(list)) {
     const n = units(it.text, o.lang);
     if (!n) continue;
@@ -230,7 +260,10 @@ export const reader = (list, opts = {}) => {
       out.push({ ...it, tier, units: n, from: it.at, to: it.at + o.glanceSec });
       continue;
     }
-    const sec = readTime(it.text, o);
+    // Chinese adds stateSec once for the primary items that become readable together (one state: one frame of `at`)
+    const state = Math.round(it.at * (o.fps ?? DEFAULTS.fps));
+    const sec = readTime(it.text, { ...o, stateSec: o.lang === 'zh' && state !== lastState ? o.stateSec : 0 });
+    lastState = state;
     const from = Math.max(done, it.at);
     done = from + sec;
     primary += sec;

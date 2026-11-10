@@ -1,0 +1,122 @@
+{
+  "id": "pick-run",
+  "category": "scene",
+  "name": {
+    "en": "Pick run",
+    "zh": "圈选放映"
+  },
+  "summary": {
+    "en": "The climax: the pencil loops one cell, the other rows step back, the cell punches to full and the picked film runs from that moment, then shrinks into the gate of the closing reel.",
+    "zh": "高潮：蜡笔圈住一格，其他行退后，这格冲到满屏，被选中的片从那一刻放起，再缩回收尾胶片的片门。"
+  },
+  "fits": "Picking one of many and showing it running.",
+  "notFor": "A still image (nothing to run); several picks.",
+  "select": {
+    "intent": {
+      "en": "One choice, made by hand, becomes the film itself running at full size.",
+      "zh": "亲手做出的一个选择，变成满屏放映的影片本身。"
+    },
+    "content": {
+      "en": "The sheet, the cell, the picked film’s frames from that moment (≥ 2 s at its fps); a caption (≤ 4 words / 10 字).",
+      "zh": "印样、被选的格、从那一刻起的画格（按帧率 ≥ 2 秒）；一句说明（≤ 4 词 / 10 字）。"
+    },
+    "fits": {
+      "zh": "从许多里挑一个并让它放起来。"
+    },
+    "notFor": {
+      "zh": "静态图片（没东西可放）；多次挑选。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax"
+    ],
+    "subjects": [
+      "image",
+      "cursor"
+    ],
+    "moods": [
+      "dramatic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "pick a style",
+        "sheet pick",
+        "grease pencil",
+        "film runs",
+        "climax"
+      ],
+      "zh": [
+        "挑一种风格",
+        "印样挑选",
+        "蜡笔",
+        "影片放映",
+        "高潮"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "reel-lockup",
+        "note": "into the closing reel"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Take the blue pencil when the picked cell is red, pink or magenta."
+      ],
+      "zh": [
+        "被圈的格是红、粉、洋红时换蓝色蜡笔。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      5,
+      16
+    ],
+    "sec120": [
+      2.5,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "strip",
+      "any film about films, frames or renders"
+    ],
+    "avoid": [
+      "exhibit",
+      "tally"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/strip/choreo.js (pick), film.js (sheetScene loop, pick, run, backIn)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/pick-run/brick.js",
+  "card": "scene/pick-run/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

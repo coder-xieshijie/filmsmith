@@ -1,0 +1,125 @@
+{
+  "id": "cursor-collapse",
+  "category": "motion",
+  "name": {
+    "en": "Cursor collapse",
+    "zh": "光标收缩"
+  },
+  "summary": {
+    "en": "Everything on screen is pulled into the block cursor, far pieces first so they arrive together, then the cursor shrinks to a glowing point at the frame's centre.",
+    "zh": "屏幕上的一切被吸进块状光标，远的先走、一起到达；然后光标缩成画面中心一个发光的点。"
+  },
+  "fits": "The end of a phosphor opening, into a burst or a cut to the claim.",
+  "notFor": "Mid-film transitions (it is a T2 device: one every 8–12 s); frames without a cursor.",
+  "select": {
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Return the screen to its source: everything goes back into the cursor, which becomes the point the next shot grows from.",
+      "zh": "让屏幕回到源头：一切回到光标里，光标变成下一个镜头长出来的点。"
+    },
+    "content": {
+      "en": "A line of type and a tag on screen with a cursor after the line.",
+      "zh": "屏幕上的一行字和一个标签，行尾有光标。"
+    },
+    "fits": {
+      "zh": "phosphor 开场的结尾，接爆发或切到主张。"
+    },
+    "notFor": {
+      "zh": "片中转场（它是 T2 手法：8–12 秒一个）；没有光标的画面。"
+    },
+    "roles": [
+      "hook",
+      "turn"
+    ],
+    "subjects": [
+      "cursor",
+      "title"
+    ],
+    "moods": [
+      "dramatic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "collapse",
+        "implode",
+        "cursor",
+        "point of light",
+        "power off",
+        "converge"
+      ],
+      "zh": [
+        "收缩",
+        "内爆",
+        "光标",
+        "光点",
+        "关机",
+        "汇聚"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "prompt-boot",
+        "note": "built into its end"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Pieces that arrive at different times read as a stutter: the delay must grow with the distance."
+      ],
+      "zh": [
+        "各块到达时间不一会显得卡顿：延迟要随距离增加。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      4,
+      4
+    ]
+  },
+  "tier": "T2",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.boot (collapse, point); events.js TIMING.boot"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/cursor-collapse/brick.js",
+  "card": "motion/cursor-collapse/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

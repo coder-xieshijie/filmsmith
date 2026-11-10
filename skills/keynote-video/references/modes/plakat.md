@@ -1,5 +1,7 @@
 # Plakat (`plakat`)
 
+**Recipe**: [plakat](../recipes/plakat.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 A series of International Typographic Style posters in motion: warm paper, ink, one signal accent, a visible 12-column grid, giant numerals beside 25 px mono labels, every cut on the beat. Aesthetic anchor: "like a Müller-Brockmann concert-poster series set as a product keynote".
 Theme: tech-product-launch · Template: `assets/templates/plakat/` · tempo 112–128 BPM, default 120 (length follows the copy; the placeholder example fits to 64 s, 32 bars at 120) · Source film accepted 2026-10-16 (dev-skills launch, Swiss version); template 2026-10-17; revised 2026-10-18 (accent narrowed, 25 px floor, timing api 2; batch 3: options settled, brisk pacing, exits straddle the cut, palette names); 2026-10-19 (form variant `diagonal`, `opening: 'set'`, the last scene holds, use cases; timing api 3 — the four tiers of change — with the batch 4 devices slot-rails, aperture-swap, counter-portal, step-wipe and plakat-columns' `angle` / `twoPhase`, and four new scene types `slot`, `bars`, `figure`, `words`; after the demo review, the mode's own `plakat-reblock` at verify → flow and install → tagline, and the `clay` preset)
 

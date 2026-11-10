@@ -14,6 +14,9 @@
 // "end"); segments never take, give or retire them, and the segment-end leftover check does not see them.
 // Components main.js relies on: shell.js (F.shell, F.standIn) always. chapter.js (F.chapterNow), counter.js (F.cntNow, F.cntRender) and
 // avatar.js (F.avatars) are used when the kit has them; a kit without a chapter label, a counter or presenter windows may leave them out.
+// Bricks: the ids in film.json "bricks" (copied into lib/bricks/ by scripts/add-bricks.mjs) are on window.BRICKS before any segment builds:
+// BRICKS[id].module is the brick's module, `await BRICKS[id].create(params, { lang })` a ready brick (draw(ctx, p, { dur }) on a canvas,
+// or mount(el) and pose(p) for a dom surface); see lib/bricks/index.js and each brick's CARD.md.
 // Web loop units (film.json "web": true): coordinates are the logical canvas TOKENS.zone.W × H (1200×675); no narration, reading ctx.T throws
 // (write seconds); silent, ctx.hit does nothing; no presenter window.
 (function () {
@@ -87,7 +90,8 @@
     window.__built = built.map((s) => s.id);
   }
 
-  Promise.all([document.fonts.load('40px WK', '我'), document.fonts.load('40px Mono', '0')]).then(() => document.fonts.ready).then(() => {
+  // window.BRICKS_READY: the bricks film.json lists, loaded as ES modules by the loader build/assemble.cjs writes before this file
+  Promise.all([document.fonts.load('40px WK', '我'), document.fonts.load('40px Mono', '0'), window.BRICKS_READY]).then(() => document.fonts.ready).then(() => {
     build();
     if (window.__hf && window.__hf.buildHold && window.__hf.buildHold.main) window.__hf.buildHold.main();
   });

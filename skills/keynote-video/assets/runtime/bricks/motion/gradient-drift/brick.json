@@ -1,0 +1,154 @@
+{
+  "id": "gradient-drift",
+  "category": "motion",
+  "name": {
+    "en": "Gradient drift",
+    "zh": "渐变参数变奏"
+  },
+  "summary": {
+    "en": "The ground drifts from a linear to a radial to a conic gradient, each kind moving its own parameters, with narrow cross-fades between kinds.",
+    "zh": "底色在线性、径向、锥形三种渐变间缓慢漂移，每种只动自己的参数（角度、圆心与半径、起始角），换种类时窄窗交叉淡化。"
+  },
+  "fits": "An ambient ground under a title sequence or a launch intro; three phases a three-line title can follow.",
+  "notFor": "Behind dense content (it competes); looks with a flat or paper ground; a cut on the beat (it is slow by design).",
+  "select": {
+    "intent": {
+      "en": "Keeps a still layout alive: a slow, ever-moving ground gives text-only passages a quiet pulse without pulling the eye.",
+      "zh": "让静止排版“活着”：缓慢变化的底色给纯文字段落一层安静的生气，又不抢视线。"
+    },
+    "content": {
+      "en": "No material: it is the ground under a scene (titles, a wordmark); 1–3 short foreground lines laid over it with `over`, one per gradient phase.",
+      "zh": "不吃物料：它是一场的底色（标题、字标在上面）；前景 1–3 行短句经 `over` 叠上，可每种渐变配一行。"
+    },
+    "fits": {
+      "zh": "片头或发布开场的氛围底；三段渐变正好托住三行标题。"
+    },
+    "notFor": {
+      "zh": "密集内容的背后（会抢）；平底或纸面风格；卡点硬切（它故意慢）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "rest",
+      "lockup"
+    ],
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "gradient background",
+        "animated gradient",
+        "conic gradient",
+        "radial glow",
+        "ambient ground",
+        "mesh gradient feel",
+        "backdrop"
+      ],
+      "zh": [
+        "渐变参数变奏",
+        "渐变背景",
+        "锥形渐变",
+        "径向光",
+        "氛围底",
+        "流动底色",
+        "背景层"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "type-enter",
+        "note": "a line of title per gradient phase"
+      },
+      {
+        "id": "lead-word",
+        "note": "one word held over the drifting ground"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Darken the text side (it does by default); the conic phase's bright tones otherwise eat the foreground's contrast.",
+        "Three tones from the look only; a rainbow ring reads as a show, not a brand."
+      ],
+      "zh": [
+        "文字一侧要压暗（默认已做）；否则锥形段的亮色会吃掉前景对比。",
+        "只用风格里的三个色调；七彩色环像演出，不像品牌。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "gradient-transition",
+        "name": "渐变参数变奏",
+        "card": "渐变参数变奏",
+        "summary": "背景在 linear、radial、conic 三类 CSS 渐变间平滑过渡——角度、色标、中心、半径逐参数插值，段间交叉淡化换类型",
+        "use": "氛围底/章节底色的连续变奏；给静态排版段落提供\"活着\"的背景层",
+        "energy": "低（纯背景运动，为前景内容让路）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/gradient-transition.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 12,
+    "range": [
+      8,
+      24
+    ]
+  },
+  "tier": "T0",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "paper",
+      "letterpress",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "gradient-transition",
+        "path": "demos/transition/gradient-transition/GradientTransition.tsx",
+        "card": "references/shots/transition/gradient-transition.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/gradient-drift/brick.js",
+  "card": "motion/gradient-drift/CARD.md",
+  "compare": {
+    "ssimMean": 0.7691,
+    "ssimMin": 0.6895,
+    "ssimDrop": 0.1121,
+    "trackDevPx": 0.1,
+    "progressRmse": 0,
+    "eventFrames": 1,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

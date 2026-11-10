@@ -1,0 +1,117 @@
+{
+  "id": "mark-pullback",
+  "category": "scene",
+  "name": {
+    "en": "Mark pull-back",
+    "zh": "标志拉远"
+  },
+  "summary": {
+    "en": "The camera pushes in on the anchor while the mark inks up out of it, then pulls back on a log scale into the whole mark; name and line rise beside it; the plate takes one dot-gain impression.",
+    "zh": "镜头推近锚点，标志的黑版从锚点向外上墨，随后按对数尺度拉远露出整个标志；名字和标语在旁边升起；黑版最后压一次网点扩大。"
+  },
+  "fits": "The lock-up of a film whose recurring anchor is a piece of the product mark.",
+  "notFor": "Marks without a separable piece; word-only marks.",
+  "select": {
+    "intent": {
+      "en": "The reveal that the anchor was part of the mark all along: the camera pulls back and the rings of the film were its arcs.",
+      "zh": "揭示锚点从头就是标志的一部分：镜头拉远，片里的圆环原来是它的弧线。"
+    },
+    "content": {
+      "en": "The product name (≤ 12 chars, Latin), a line (≤ 28 / 14 字), the mark as SVG paths with the anchor's box.",
+      "zh": "产品名（≤ 12 字符，拉丁字母），一行字（≤ 28 字符 / 14 字），以 SVG 路径给出的标志与锚点框。"
+    },
+    "fits": {
+      "zh": "贯穿锚点是产品标志一部分的片子的落版。"
+    },
+    "notFor": {
+      "zh": "拆不出一块的标志；纯文字标志。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo"
+    ],
+    "moods": [
+      "ceremonial",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "pull back",
+        "log zoom",
+        "logo reveal",
+        "lock-up",
+        "dot gain"
+      ],
+      "zh": [
+        "拉远",
+        "对数缩放",
+        "标志揭示",
+        "落版",
+        "网点扩大"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "burst-claim",
+        "note": "the climax before it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Leave 1–2 s without the bed for the push-in; the silence makes the pull-back land."
+      ],
+      "zh": [
+        "推近时留 1–2 秒没有音乐床；静默让拉远落得住。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      8,
+      12
+    ],
+    "sec120": [
+      4,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/film.js (pullState, paintPull, paintLockup)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/mark-pullback/brick.js",
+  "card": "scene/mark-pullback/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "mid",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

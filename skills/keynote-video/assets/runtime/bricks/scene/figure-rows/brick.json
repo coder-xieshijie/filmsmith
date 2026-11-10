@@ -1,0 +1,133 @@
+{
+  "id": "figure-rows",
+  "category": "scene",
+  "name": {
+    "en": "Figure rows",
+    "zh": "数字行"
+  },
+  "summary": {
+    "en": "One to three figures a beat apart, each resolving out of symbols (or counting) in its own digit slots, its label rising beside it.",
+    "zh": "一到三个数字隔一拍出现，每个在自己的数位里从乱码中定格（或滚动计数），标签随后在旁边升起。"
+  },
+  "fits": "The figures that explain an answer or a problem: one line edited, files rechecked, times faster.",
+  "notFor": "More than three numbers (a table or a chart); numbers without labels; decoration.",
+  "select": {
+    "intent": {
+      "en": "Each figure is a fact that arrives on the beat and stays still to be read; the scramble says it was measured, not typed.",
+      "zh": "每个数字是一条在拍子上到达、然后停住让人读的事实；乱码定格说明它是量出来的，不是写上去的。"
+    },
+    "content": {
+      "en": "1–3 items, each a value (≤ 9 chars) and a label (≤ 26 chars, ≤ 4 words); optional `count` per item; an optional query (≤ 48 chars).",
+      "zh": "1–3 项，每项一个值（≤ 6 字）和一个标签（≤ 10 字）；每项可选 `count`；可选查询行（≤ 48 个字符）。"
+    },
+    "fits": {
+      "zh": "解释答案或问题的那几个数：改了一行、重查了多少文件、快了几倍。"
+    },
+    "notFor": {
+      "zh": "三个以上的数字（用表格或图表）；没有标签的数字；装饰。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "demo",
+      "problem"
+    ],
+    "subjects": [
+      "number",
+      "metric"
+    ],
+    "moods": [
+      "energetic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "big figures",
+        "scramble resolve",
+        "count up",
+        "supporting numbers",
+        "stat rows"
+      ],
+      "zh": [
+        "大数字",
+        "乱码定格",
+        "计数滚动",
+        "佐证数字",
+        "数据行"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "answer-whiteout",
+        "note": "after the reveal, through its counter"
+      },
+      {
+        "id": "name-flip",
+        "note": "through the slice into the lock-up"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Every figure must come from the product or be computed from figures on screen (e.g. the ratio to a candidate)."
+      ],
+      "zh": [
+        "每个数字要么来自产品，要么由屏幕上的数字算出（比如相对某个候选的倍数）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      12
+    ],
+    "sec120": [
+      1.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/choreo.js dataPlan, film.js paintData"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "digit-roll",
+      "note": "an odometer roll; here symbols in fixed slots or a count, several figures in rows"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/figure-rows/brick.js",
+  "card": "scene/figure-rows/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

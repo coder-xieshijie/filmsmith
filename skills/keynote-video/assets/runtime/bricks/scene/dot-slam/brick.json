@@ -1,0 +1,124 @@
+{
+  "id": "dot-slam",
+  "category": "scene",
+  "name": {
+    "en": "Dot slam",
+    "zh": "砸字句号"
+  },
+  "summary": {
+    "en": "A short phrase slammed a word a beat on one or two lines, the dot landing as its full stop; or a stop per word that merges back into one.",
+    "zh": "短句一拍一个词砸在一两行上，墨点作为句号落下；或者每个词各有一个句号，最后并回一个。"
+  },
+  "fits": "The problem stated as a fact: a number and its noun, \"one of them\".",
+  "notFor": "more than six words; sentences that need punctuation inside.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "A statement lands like a stamp, and the full stop makes it final.",
+      "zh": "一句陈述像盖章一样落下，句号让它成为定论。"
+    },
+    "content": {
+      "en": "1–2 lines of 1–3 words (≤ 10 chars each), an optional label (≤ 24 chars).",
+      "zh": "1–2 行、每行 1–3 个词（每词 ≤ 4 字），可选标签（≤ 10 字）。"
+    },
+    "fits": {
+      "zh": "把问题当事实说出来：一个数和它的名词，“其中一个”。"
+    },
+    "notFor": {
+      "zh": "超过六个词；中间需要标点的句子。"
+    },
+    "roles": [
+      "hook",
+      "problem",
+      "claim"
+    ],
+    "subjects": [
+      "title",
+      "number"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "slam",
+        "full stop",
+        "kinetic statement",
+        "split stops",
+        "merge"
+      ],
+      "zh": [
+        "砸字",
+        "句号",
+        "动态陈述",
+        "分裂句号",
+        "合并"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "word-warp",
+        "note": "the next problem beat"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The words leave up through their mask 0.2 s before the end: do not cut the scene shorter than the last read."
+      ],
+      "zh": [
+        "词在场景结束前 0.2 秒从遮罩上方离开：场景不能短于最后一次阅读。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      2,
+      8
+    ],
+    "sec120": [
+      1,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js layoutScenes slam, drawSplit; plan.js slam"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/dot-slam/brick.js",
+  "card": "scene/dot-slam/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

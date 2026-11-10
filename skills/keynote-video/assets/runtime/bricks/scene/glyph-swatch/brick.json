@@ -1,0 +1,128 @@
+{
+  "id": "glyph-swatch",
+  "category": "scene",
+  "name": {
+    "en": "Glyphs into swatches",
+    "zh": "字形变色板"
+  },
+  "summary": {
+    "en": "The palette link: the word's first four glyphs morph into four swatches (text, ground, field, line) that hop on 1/16 notes, the hex labels type under them, a type specimen rises; the stage name in the centre.",
+    "zh": "配色环节：大字的前四个字形变成四块色板（字色、底色、场色、线色），按十六分音符依次一跳，色值在下面敲出，字体样张升起；中央是阶段名。"
+  },
+  "fits": "A reel's colour step: the real hex values of the preset.",
+  "notFor": "Palettes of more than four roles; a film without the word before it.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show that every colour of the film comes from one preset, by turning the word into it.",
+      "zh": "把大字直接变成色板，说明整片每个颜色都出自同一个预设。"
+    },
+    "content": {
+      "en": "No copy of its own: the palette's hex values, the specimen, the stage name and note.",
+      "zh": "本身没有文案：色值、字体样张、阶段名和注释。"
+    },
+    "fits": {
+      "zh": "作品集里的配色一步：预设的真实色值。"
+    },
+    "notFor": {
+      "zh": "超过四种角色的色板；前面没有大字的片子。"
+    },
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "abstract",
+      "text"
+    ],
+    "moods": [
+      "playful",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "palette",
+        "swatches",
+        "hex",
+        "type specimen",
+        "morph",
+        "colour"
+      ],
+      "zh": [
+        "配色",
+        "色板",
+        "色值",
+        "字体样张",
+        "变形",
+        "颜色"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "weight-word",
+        "note": "before it"
+      },
+      {
+        "id": "panel-board",
+        "note": "the swatches grow into panels"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      2,
+      8
+    ],
+    "sec120": [
+      1,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js palette, SW_ROLES; fx.js SPECIMEN"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/glyph-swatch/brick.js",
+  "card": "scene/glyph-swatch/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

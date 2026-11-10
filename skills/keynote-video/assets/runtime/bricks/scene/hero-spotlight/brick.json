@@ -1,0 +1,173 @@
+{
+  "id": "hero-spotlight",
+  "category": "scene",
+  "name": {
+    "en": "Hero spotlight",
+    "zh": "聚光主角卡"
+  },
+  "summary": {
+    "en": "The lights are down on a product page; a lamp searches it and locks on one card, the camera pushes in low from the side, the card lifts, a light runs twice round it, a note floats beside it, and both settle back.",
+    "zh": "关灯的页面上，一束聚光游走后锁定一张卡；镜头推进到斜侧特写，卡片弹起悬浮，一道光沿轮廓跑两圈，旁边浮起两行注记，最后卡和注记一起贴回页面。"
+  },
+  "fits": "The first shot of a \"one hero\" product opening: one core object (a card, an item, a module) made the protagonist of the film, in its page.",
+  "notFor": "Pages without a grid of comparable items (the lamp needs something to choose from); more than one hero; fast cutting (it is the slowest, most textured shot, 5.75 s); dark pages (the pool reads by showing a light page in a dark room).",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      11.5,
+      11.5
+    ],
+    "sec120": [
+      5.75,
+      5.75
+    ]
+  },
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any light",
+      "porcelain",
+      "exhibit",
+      "swiss"
+    ],
+    "avoid": [
+      "plakat",
+      "ink"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "spotlight-hero-card",
+        "path": "demos/opening/spotlight-hero-card/SpotlightHeroCard.tsx",
+        "card": "references/shots/opening/spotlight-hero-card.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "lamp-reveal",
+      "note": "a lamp that reveals a dark frame; hero-spotlight searches, locks on one card, pushes in and lifts it"
+    },
+    {
+      "id": "outline-trace",
+      "note": "a light running round an outline; here it is two laps round the lifted card, part of the scene"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Make one object the protagonist of the film: of everything on the page, this card; the lamp chooses it, the lift gives it weight, the running light inspects it, and the reseat says it belongs to the page.",
+      "zh": "把一个对象立成全片主角：页面上那么多，偏偏是这一张；聚光替观众选中它，弹起给它分量，轮廓光检视它，贴回原位说明它属于这个页面。"
+    },
+    "content": {
+      "en": "A light page with a grid of comparable cards (tile-card faces or the film's page image) and one hero card (or image); an optional two-line note (each en ≤ 16 chars, zh ≤ 7).",
+      "zh": "一张有一格格可比较卡片的浅色页面（卡面或影片自己的页面图）和一张主角卡（或图）；可选两行注记（每行英文 ≤ 16 字符，中文 ≤ 7 字）。"
+    },
+    "fits": {
+      "zh": "“单一主角”式产品开场的第一镜：把一个核心对象（一张卡、一个条目、一个模块）在它的页面里立成全片主角。"
+    },
+    "notFor": {
+      "zh": "没有一格格可比较条目的页面（聚光需要有得挑）；不止一个主角；快切（这是最慢、质感最重的一镜，约 5.75 秒）；暗色页面（光池靠暗室里一张亮页面读出来）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "demo"
+    ],
+    "subjects": [
+      "cards",
+      "ui"
+    ],
+    "moods": [
+      "cinematic",
+      "dramatic",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "spotlight",
+        "hero card",
+        "one hero",
+        "lamp search",
+        "lift and inspect",
+        "volumetric light",
+        "protagonist",
+        "product opening"
+      ],
+      "zh": [
+        "聚光主角卡",
+        "聚光灯",
+        "单一主角",
+        "关灯剧场",
+        "弹起悬浮",
+        "轮廓光",
+        "主角卡",
+        "产品开场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "card-pile",
+        "note": "when the hero is drawn from a set first"
+      },
+      {
+        "id": "field-fill",
+        "note": "after the hero, walk through what it carries"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Open on one hero with the whole arc; a group of cards dancing does not carry a first impression.",
+        "Light effects go to the hero only; a glint on every card was rejected twice.",
+        "Text on the card blurs in the push-in unless the face is rasterised at high resolution.",
+        "End the note's dark backing short of the card's left edge, or it presses a dark wedge onto the card."
+      ],
+      "zh": [
+        "开场直接上单主角加完整动作弧；多卡群舞撑不起第一印象。",
+        "光效只给主角；每张卡都闪一下被否过两次。",
+        "推进特写时卡上文字会糊，卡面要高分辨率栅格化。",
+        "注记的暗色衬底右缘要停在卡左缘之前，否则在卡面左侧压出一道暗楔。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "spotlight-hero-card",
+        "name": "聚光主角卡",
+        "card": "聚光主角卡",
+        "summary": "关灯的剧场里一束钨丝聚光（带体积光柱）扫过页面锁定一张卡，斜侧推进后卡片弹起悬浮、香槟色光束沿轮廓两圈、连同 3D 注记一起贴回原位",
+        "use": "\"单一主角\"式产品开场；把一个核心对象（卡片/条目/模块）立成全片主角",
+        "energy": "中（质感最高的一镜，节奏慢而稳）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/spotlight-hero-card.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/hero-spotlight/brick.js",
+  "card": "scene/hero-spotlight/CARD.md",
+  "compare": {
+    "ssimMean": 0.7138,
+    "ssimMin": 0.6074,
+    "ssimDrop": 0.181,
+    "trackDevPx": 28.2,
+    "progressRmse": 0.0026,
+    "eventFrames": 0,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

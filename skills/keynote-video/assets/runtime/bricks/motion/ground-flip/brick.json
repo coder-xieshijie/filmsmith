@@ -1,0 +1,164 @@
+{
+  "id": "ground-flip",
+  "category": "motion",
+  "name": {
+    "en": "Ground flip",
+    "zh": "底色反转"
+  },
+  "summary": {
+    "en": "An aurora rises slowly from the foot of a light frame, then the ground drops to near black in a third of a second and the aurora becomes an afterglow; the next line blurs in after a gap.",
+    "zh": "浅底上极光从画框底部慢慢升起，随后整片底色在约 0.36 秒内压到近黑、极光压成余晖；旧句先虚化消失，空一拍后新句虚化入场。"
+  },
+  "fits": "The turn of a story told by the ground itself: before / after, “for years …” → “now …”, the one accent of a calm film.",
+  "notFor": "A film already dark, or with more than one change of ground; a turn that is not the story’s main one; fast films (the build is two thirds of it).",
+  "select": {
+    "intent": {
+      "en": "The whole ground drops from light to dark after a long build, so the viewer feels the story turn before reading the next line.",
+      "zh": "长长的铺垫之后整片底色由亮压暗，让观众在读到下一句之前先感到故事转了。"
+    },
+    "content": {
+      "en": "Two lines: the before line on the light ground and the after line on the dark (≤ 30 chars each), usually a \"for years …\" / \"now …\" pair.",
+      "zh": "两句话：亮底上的“之前”句和暗底上的“之后”句（每句 ≤ 14 字），通常是“多年以来……/现在……”一对。"
+    },
+    "fits": {
+      "zh": "由底色本身讲的故事转折：之前与之后，“多年以来……”到“现在……”，安静片子里唯一的重音。"
+    },
+    "notFor": {
+      "zh": "已经是深色的片子，或底色换不止一次；不是故事主转折的转折；快节奏的片子（三分之二时长在铺垫）。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "turn",
+      "climax"
+    ],
+    "subjects": [
+      "title",
+      "abstract"
+    ],
+    "moods": [
+      "dramatic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "aurora",
+        "background flip",
+        "light to dark",
+        "before and after",
+        "everything changed",
+        "blackout",
+        "turning point"
+      ],
+      "zh": [
+        "极光升腾反黑",
+        "底色反转",
+        "由亮转暗",
+        "转折点",
+        "一切都变了",
+        "压暗",
+        "重音"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "type-enter",
+        "note": "the after line can enter with blur in the empty beat"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Leave the gap: the new line comes after the flip with an empty beat, never cross-faded with the old one.",
+        "Once a film, as the main turn; never in the same film as whiteout-slam.",
+        "Recolour the aurora as a whole with the line colours; changing only the text colour detaches it from the ground."
+      ],
+      "zh": [
+        "留出空档：新句在反转之后、空一拍再入，不和旧句交叉淡化。",
+        "一支片只用一次，用在主转折；不和 whiteout-slam 同片。",
+        "要换极光颜色就连同文字色整组换，只换文字色会和底色脱节。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "aurora-bloom-bg-flip",
+        "name": "极光升腾反黑",
+        "card": "极光升腾反黑",
+        "summary": "浅灰底从底部升起紫橙柔焦 blob，随后整个底色在约 0.36s 内压暗到近黑、blob 压成余晖；文案同步 blur-out 换句 blur-in，换句间留空档不 cross-fade",
+        "use": "叙事转折点（\"多年以来…→一切都变了\"）；品牌片从铺垫拉到重音的那一拍；深浅色系之间的段落切换",
+        "energy": "由低到高（前 2/3 是酝酿，压暗那一瞬是全片重音）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/aurora-bloom-bg-flip.mp4"
+      }
+    ]
+  },
+  "energy": "peak",
+  "duration": {
+    "beats": 10.4,
+    "range": [
+      8,
+      11
+    ]
+  },
+  "tier": "T3",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any with a light and a dark preset",
+      "afterglow"
+    ],
+    "avoid": [
+      "ink",
+      "halftone",
+      "dossier",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "aurora-bloom-bg-flip",
+        "path": "demos/effects/aurora-bloom-bg-flip/AuroraBloomBgFlip.tsx",
+        "card": "references/shots/effects/aurora-bloom-bg-flip.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "whiteout-slam",
+      "note": "a peak by exposing to white; ground-flip is a peak by dropping to dark; never both"
+    },
+    {
+      "id": "gradient-drift",
+      "note": "batch 1: a slow drift between grounds (T0), no accent"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/ground-flip/brick.js",
+  "card": "motion/ground-flip/CARD.md",
+  "compare": {
+    "ssimMean": 0.8614,
+    "ssimMin": 0.8137,
+    "ssimDrop": 0.0069,
+    "trackDevPx": 11.5,
+    "progressRmse": 0.0027,
+    "eventFrames": 1,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

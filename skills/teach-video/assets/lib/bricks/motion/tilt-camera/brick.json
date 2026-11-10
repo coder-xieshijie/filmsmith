@@ -1,0 +1,189 @@
+{
+  "id": "tilt-camera",
+  "category": "motion",
+  "name": {
+    "en": "Tilt camera",
+    "zh": "俯仰运镜"
+  },
+  "summary": {
+    "en": "The camera looks down on pages lying flat and lifts or dives until one stands upright in front of it.",
+    "zh": "相机俯看平躺的页面，抬头或俯冲，直到其中一页正立在镜头前。"
+  },
+  "fits": "A reveal of one page after a held-back opening (rise); a choice among a few pages (drop); landing on one part of an overview (dive).",
+  "notFor": "Every scene change of a film (it is a T2 move, a few a film); styles whose camera is locked.",
+  "select": {
+    "intent": {
+      "en": "The camera's pitch tells the story: a page lifted from the table into view, a pick from a desk of pages, or a dive from above onto the hero, each landing on one upright page.",
+      "zh": "用俯仰角讲故事：像掀开桌上的图纸把一页抬到眼前，或在一桌页面里巡一圈挑中一张，或从高空俯冲落到主角上，最后都落在一张正立的页面。"
+    },
+    "content": {
+      "en": "Wraps one page (`rise`), three pages and the target (`drop`), or an overview page and the region to land on (`dive`); high-resolution, since the end is a close-up.",
+      "zh": "包住一张页面（`rise`）、三张页面加选中哪张（`drop`），或一张总览页加落点区域（`dive`）；终点是特写，素材要高清。"
+    },
+    "fits": {
+      "zh": "压住开场后揭示一页（rise）；在几页里选中一页（drop）；从总览落到其中一处（dive）。"
+    },
+    "notFor": {
+      "zh": "每次换场都用（T2 大动作，一支片几次）；镜头锁死的风格（strip、split、scroll、dossier）。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "turn",
+      "climax"
+    ],
+    "subjects": [
+      "ui",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "tilt reveal",
+        "overhead",
+        "tabletop",
+        "drone dive",
+        "crane",
+        "bird's-eye",
+        "rotateX"
+      ],
+      "zh": [
+        "俯仰揭示",
+        "俯视桌面扎落",
+        "无人机俯冲落点",
+        "俯视运镜",
+        "抬头回正",
+        "上帝视角",
+        "掀开图纸"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "`rise` is an opening reveal: not with another reveal opener (crane-reveal) in the same film.",
+        "`drop`: keep the pan at a fixed angle and only then dive; mixing them leaves the camera's intent unclear.",
+        "One camera holder per section: not with other big camera moves; `dive` counts towards at most two 3D showpieces a film."
+      ],
+      "zh": [
+        "`rise` 是开场揭示：同一支片别再用另一个揭示开场（crane-reveal）。",
+        "`drop`：巡视时角度锁死，之后再扎入；混着动观众不知道相机想干嘛。",
+        "一段只有一个持镜人：别和别的大运镜同段；`dive` 计入一支片最多两次的 3D 炫技。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "tilt-reveal",
+        "name": "俯仰揭示",
+        "card": "俯视运镜",
+        "summary": "perspective 容器内整页 rotateX -80° 平躺，~43f 抬正，rotateX/scale/translateY 共用 out-cubic，末端轻过冲",
+        "use": "用\"俯仰角\"讲故事的开场/转场：单页 establishing 用 A，多页巡视择一扎入用 B",
+        "energy": "A 中 / B 中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/tilt-reveal.mp4"
+      },
+      {
+        "key": "overhead-tabletop-drop",
+        "name": "俯视桌面扎落",
+        "card": "俯视运镜",
+        "summary": "卡阵平躺 rotateX 62°，pan 段只动 translateX 横滑掠过，drop 段角度/缩放/位移三通道同跑扎入落版",
+        "use": "用\"俯仰角\"讲故事的开场/转场：单页 establishing 用 A，多页巡视择一扎入用 B",
+        "energy": "A 中 / B 中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/overhead-tabletop-drop.mp4"
+      },
+      {
+        "key": "drone-dive-landing",
+        "name": "无人机俯冲落点",
+        "card": "空间运镜",
+        "summary": "近垂直俯角悬停 → 猛扎俯冲 → 气垫减速停在 hero 卡特写",
+        "use": "把平面页面当 3D 实体拍的高光段落；两式都是\"大动作\"，一支片合计 ≤2 次",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/drone-dive-landing.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4.5,
+    "range": [
+      3,
+      8
+    ]
+  },
+  "tier": "T2",
+  "family": "zoom-depth",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split",
+      "scroll",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "tilt-reveal",
+        "path": "demos/camera/overhead-camera-moves/TiltReveal.tsx",
+        "card": "references/shots/camera/overhead-camera-moves.md"
+      },
+      {
+        "key": "overhead-tabletop-drop",
+        "path": "demos/camera/overhead-camera-moves/OverheadTabletopDrop.tsx",
+        "card": "references/shots/camera/overhead-camera-moves.md"
+      },
+      {
+        "key": "drone-dive-landing",
+        "path": "demos/camera/space-camera-moves/DroneDiveLanding.tsx",
+        "card": "references/shots/camera/space-camera-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "overhead-tabletop-drop",
+    "drone-dive-landing"
+  ],
+  "overlaps": [
+    {
+      "id": "grid-hop",
+      "note": "pulls back over a flat grid and dives into one tile, in the plane (no tilt)"
+    },
+    {
+      "id": "camera-truck",
+      "note": "travels along a row in the plane"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/tilt-camera/brick.js",
+  "card": "motion/tilt-camera/CARD.md",
+  "compare": {
+    "ssimMean": 0.6459,
+    "ssimMin": 0.5787,
+    "ssimDrop": 0.0878,
+    "trackDevPx": 8.5,
+    "progressRmse": 0.0134,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

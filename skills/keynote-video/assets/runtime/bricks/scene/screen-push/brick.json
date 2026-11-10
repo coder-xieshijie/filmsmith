@@ -1,0 +1,133 @@
+{
+  "id": "screen-push",
+  "category": "scene",
+  "name": {
+    "en": "Screen push",
+    "zh": "屏幕推近"
+  },
+  "summary": {
+    "en": "The screen pushes to the region in play under the zoom cap while the device holds still; the light, the value, the line and the ring land in order; or a registered cut on the beat; or the claim landing on the bar line in a pause.",
+    "zh": "设备不动，屏幕在缩放上限内推近当前区域；光、数值、说明、圆环依次落定；或在拍点上对位硬切；或主张在小节线上落定并停顿。"
+  },
+  "fits": "One region of a real capture that carries the point: a picker, a number, a row, a price.",
+  "notFor": "Text too small to read even at the cap (set it in the margin instead); two regions at once.",
+  "select": {
+    "intent": {
+      "en": "The viewer is taken to the exact part of the real screen that proves the line beside it.",
+      "zh": "把观众带到真实屏幕上证明旁边那句话的那一小块。"
+    },
+    "content": {
+      "en": "A capture with a named region (box, optional band); a value (≤ 10 chars / 5 字), a line (≤ 18 / 14 字), a note (≤ 40 / 22 字); for the claim a lead line.",
+      "zh": "一张带命名区域（方框，可选整行）的截图；数值（≤ 10 字符 / 5 字）、说明（≤ 18 / 14 字）、注释（≤ 40 / 22 字）；主张另加一行引子。"
+    },
+    "fits": {
+      "zh": "真实截图上承载要点的那一块：选择器、数字、一行、价格。"
+    },
+    "notFor": {
+      "zh": "推到上限仍看不清的字（改写进页边）；同时两个区域。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "climax"
+    ],
+    "subjects": [
+      "ui",
+      "number",
+      "device"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "viewport push",
+        "zoom to region",
+        "in-frame cut",
+        "registered cut",
+        "claim push",
+        "focus ring"
+      ],
+      "zh": [
+        "屏幕推近",
+        "推到区域",
+        "画内硬切",
+        "对位切",
+        "主张落定",
+        "焦点环"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "row-band",
+        "note": "light the rows of the same capture next"
+      },
+      {
+        "id": "screen-change",
+        "note": "change surface after the push"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Never push past 1.333 output px per source px; a soft capture reads as fake.",
+        "A cut needs two captures of the same screen; never draw the missing state."
+      ],
+      "zh": [
+        "推近不超过每源像素 1.333 输出像素；发虚的截图像假的。",
+        "硬切需要同一屏幕的两张截图；缺的状态不要画。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      14
+    ],
+    "sec120": [
+      1.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/choreo.js (TYPES.push, cut, claim), film.js (camera, light), moves.js (viewport-push)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/screen-push/brick.js",
+  "card": "scene/screen-push/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

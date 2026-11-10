@@ -1,0 +1,164 @@
+{
+  "id": "chapter-push",
+  "category": "motion",
+  "name": {
+    "en": "Chapter push",
+    "zh": "底推换章"
+  },
+  "summary": {
+    "en": "The next scene, ground and all, pushes the current one off the frame from one edge in one heavy ease-out.",
+    "zh": "下一场连着底色从一条边整屏推进来，把当前这场顶出画面，快进慢停。"
+  },
+  "fits": "Chapter breaks: the next section of the same document, a numbered step, a new topic with its own ground colour; used at every chapter from the same edge, it becomes the film's page-turn beat.",
+  "notFor": "Entering a part of the current scene (use card-portal or viewport-push); fast cuts on every beat (the long stop takes most of the push).",
+  "select": {
+    "intent": {
+      "en": "The new chapter shoves the old one out as one solid slab, so the viewer reads \"a new world\" with a physical clunk; repeated, the pushes become the film's chapter rhythm.",
+      "zh": "新章像一整块板把旧章顶出画外，观众读到“换了一个世界”，还带一记落位的“哐”；连用时换章本身成了全片的节拍。"
+    },
+    "content": {
+      "en": "Wraps two full scenes, each on its own saturated ground colour; no text of its own (the chapter's title belongs to the incoming scene).",
+      "zh": "包住两整场，各自铺一块饱和底色；自身不带文字（章节标题属于推进来的那一场）。"
+    },
+    "fits": {
+      "zh": "换章：同一份东西的下一节、编号的下一步、换底色的新话题；全片每章都从同一条边推，就成了翻页的节拍骨架。"
+    },
+    "notFor": {
+      "zh": "进入当前画面的某一部分（用 card-portal 或 viewport-push）；每拍都切的快剪（长长的落停占掉大半时间）。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "abstract",
+      "cards"
+    ],
+    "moods": [
+      "energetic",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "bottom push",
+        "push wipe",
+        "stack wipe",
+        "chapter break",
+        "next section",
+        "slab push",
+        "page turn"
+      ],
+      "zh": [
+        "底推换章",
+        "整屏推入",
+        "顶出画外",
+        "换章",
+        "下一章",
+        "压栈",
+        "翻页节奏"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "ground-flip",
+        "note": "the incoming ground colour can carry the chapter tone"
+      },
+      {
+        "id": "lead-word",
+        "note": "a chapter title once the push has landed"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep one direction for the whole film; switching edges mid-film breaks the chapter rhythm.",
+        "Start the chapter's own animation only after the push has landed (≥ 95 %); two moving screens leave the eye no anchor.",
+        "Use saturated grounds; with pale grounds it reads as cards changing backgrounds, not chapters."
+      ],
+      "zh": [
+        "全片保持一个推入方向；中途换边，换章的节拍就散了。",
+        "章内动画等推入落定（≥ 95%）再开始；两屏同时在动，视线没有落点。",
+        "底色要饱和；底色太淡读成“卡片各自换背景”，不像换章。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "bottom-push-stack-wipe",
+        "name": "底推换章",
+        "card": "底推换章",
+        "summary": "底边上推换章——新场景连底色整屏从底边向上推入，把旧场景物理顶出画外，连推数章各配一种饱和底色，内容钉死在各自色底坐标系里随底色走",
+        "use": "多章节产品片的换章骨架（每章一个卖点一种底色）；需要\"翻页节奏感\"贯穿全片的段落切换",
+        "energy": "中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/bottom-push-stack-wipe.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 1.75,
+    "range": [
+      1.5,
+      3
+    ]
+  },
+  "tier": "T1",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "thread",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "bottom-push-stack-wipe",
+        "path": "demos/transition/bottom-push-stack-wipe/BottomPushStackWipe.tsx",
+        "card": "references/shots/transition/bottom-push-stack-wipe.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "feed-stack",
+      "note": "the next card stacks on top; here the current scene is pushed away"
+    },
+    {
+      "id": "whip-push",
+      "note": "a fast push with drag smear; this one is heavy and sharp-edged"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/chapter-push/brick.js",
+  "card": "motion/chapter-push/CARD.md",
+  "compare": {
+    "ssimMean": 0.5421,
+    "ssimMin": 0.4774,
+    "ssimDrop": 0.0502,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

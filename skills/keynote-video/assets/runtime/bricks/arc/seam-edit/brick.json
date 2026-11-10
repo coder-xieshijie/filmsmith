@@ -1,0 +1,95 @@
+{
+  "id": "seam-edit",
+  "category": "arc",
+  "name": {
+    "en": "Seam edit",
+    "zh": "接缝剪辑"
+  },
+  "summary": {
+    "en": "The caret becomes a seam; the input on one side, its result on the other; pick, pair, run and measure; one changed line takes the frame over; the seam closes.",
+    "zh": "光标变成接缝；一边是输入，另一边是结果；挑选、配对、运行并测量；改一行占满画面；接缝合上。"
+  },
+  "fits": "Launches of a product whose input maps line by line to its output: a generator, a compiler, a config-driven renderer, a CLI with a report. 16–36 s.",
+  "notFor": "Products without a visible output; model launches argued from tables.",
+  "select": {
+    "intent": {
+      "en": "Tell the launch as edits: every change is a move of one seam between what is written and what it makes.",
+      "zh": "把发布讲成一次次编辑：每个变化都是同一道接缝在“写下的”和“做出的”之间移动。"
+    },
+    "content": {
+      "en": "A request, a list with 2–4 results, 2–6 file lines with their frames, a command with its frames and report, one changed line with two renders, an install line and a page.",
+      "zh": "一行请求、带 2–4 个结果的列表、2–6 行文件代码及其画格、一条命令及其画格和报告、一行改动及两张渲染、一行安装命令和一个页面。"
+    },
+    "fits": {
+      "zh": "输入与输出逐行对应的产品的发布：生成器、编译器、由配置驱动的渲染器、带报告的命令行。16–36 秒。"
+    },
+    "notFor": {
+      "zh": "没有可见输出的产品；用表格论证的模型发布。"
+    },
+    "subjects": [
+      "code",
+      "image"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "seam arc",
+        "input result",
+        "one-line diff climax",
+        "developer tool",
+        "split"
+      ],
+      "zh": [
+        "接缝骨架",
+        "输入结果",
+        "一行 diff 高潮",
+        "开发者工具",
+        "分屏"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": {
+    "sec": [
+      16,
+      36
+    ]
+  },
+  "styles": {
+    "fits": [
+      "split"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/content.js (scene order), timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "arc/seam-edit/brick.js",
+  "card": "arc/seam-edit/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

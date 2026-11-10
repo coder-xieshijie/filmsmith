@@ -1,0 +1,112 @@
+{
+  "id": "claim-steps",
+  "category": "arc",
+  "name": {
+    "en": "Claim and steps",
+    "zh": "主张与步骤"
+  },
+  "summary": {
+    "en": "The plakat arc: the problem as a table of facts, the claim as input → output, numbered chapters of steps with real material, a rest on how to start, the promise at full size, the closing page.",
+    "zh": "plakat 的骨架：问题列成事实表，主张画成“输入 → 输出”，带编号的章节里是有真实物料的步骤，在“怎么开始”上歇一下，再把承诺放到最大，最后落版。"
+  },
+  "fits": "Developer tools and workflows whose pitch is a claim plus an ordered process with a person deciding at the key points.",
+  "notFor": "Mood or brand films without steps; a single feature (too long); stories told by data volume.",
+  "select": {
+    "intent": {
+      "en": "Argue like a poster series: state the problem, make the claim, prove it one page at a time, and end on the promise and the URL.",
+      "zh": "像一套海报那样论证：摆出问题、提出主张、一页一页证明，最后落在承诺和网址上。"
+    },
+    "content": {
+      "en": "A problem with 1–4 facts, an input → output claim, 2–4 chapters of pages, install commands, a tagline, name and URL.",
+      "zh": "一个带 1–4 条事实的问题、一句“输入 → 输出”的主张、2–4 章页面、安装命令、标语、产品名与网址。"
+    },
+    "fits": {
+      "zh": "卖点是“主张 + 有序流程，且关键处由人决定”的开发者工具与工作流。"
+    },
+    "notFor": {
+      "zh": "没有步骤的情绪片或品牌片；单个功能（太长）；靠数据规模讲故事的题材。"
+    },
+    "subjects": [
+      "title",
+      "list",
+      "diagram"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "claim and steps",
+        "poster series",
+        "chapters",
+        "process",
+        "launch structure"
+      ],
+      "zh": [
+        "主张与步骤",
+        "海报系列",
+        "章节",
+        "流程",
+        "发布结构"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "poster-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "poster-grid",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Chinese pages read longer (6 characters a second plus 0.5 s): a 45 s English cut runs about 55 s in Chinese with the same pages."
+      ],
+      "zh": [
+        "中文页读得更久（每秒 6 字加 0.5 秒）：同样的页面，英文 45 秒在中文约 55 秒。"
+      ]
+    }
+  },
+  "duration": {
+    "sec": [
+      35,
+      60
+    ]
+  },
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/content.js, TEMPLATE.md"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "arc/claim-steps/brick.js",
+  "card": "arc/claim-steps/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead against the original template's scene order and lengths (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

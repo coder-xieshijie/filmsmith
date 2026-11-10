@@ -11,8 +11,8 @@ import { writeWav, readAudio } from './wav.mjs';
 // vary(): which option carries each voice's brightness (and its default), and which voices rotate `seed`.
 // synth and bass are left out of the rotation: their seed only moves the oscillator's start phase, which is
 // inaudible but changes how low-frequency peaks line up with the kick (measured: +1.5 dB of limiting at −14).
-const TIMBRE = { pluck: ['bright', 0.5], marimba: ['hardness', 0.5], keys: ['hardness', 0.35], synth: ['cutoff', 900], bass: ['cutoff', 380], kick: ['click', 0.3], hat: ['tone', 9000], clap: ['tone', 1300] };
-const SEEDED = new Set(['kick', 'snare', 'clap', 'hat', 'rim', 'tom', 'pluck', 'marimba', 'keys', 'tick', 'thud', 'typeKey']);
+const TIMBRE = { pluck: ['bright', 0.5], marimba: ['hardness', 0.5], keys: ['hardness', 0.35], synth: ['cutoff', 900], bass: ['cutoff', 380], kick: ['click', 0.3], hat: ['tone', 9000], clap: ['tone', 1300], paper: ['tone', 1400], scratch: ['tone', 3200] };
+const SEEDED = new Set(['kick', 'snare', 'clap', 'hat', 'rim', 'tom', 'pluck', 'marimba', 'keys', 'tick', 'thud', 'typeKey', 'paper', 'scratch']);
 const round = (x) => (Math.abs(x) >= 100 ? Math.round(x / 10) * 10 : Math.round(x * 1000) / 1000);
 // 'music' addresses every bus except 'fx'; any other name addresses that bus only.
 const hits = (target, name) => (target === 'music' ? name !== 'fx' : target === name);

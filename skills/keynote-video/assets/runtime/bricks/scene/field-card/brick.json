@@ -1,0 +1,125 @@
+{
+  "id": "field-card",
+  "category": "scene",
+  "name": {
+    "en": "Field card",
+    "zh": "场卡"
+  },
+  "summary": {
+    "en": "A big word and one line at the left; at the right a procedural field round the anchor acts the feature out and steps one state a beat; on paper or reversed out of ink.",
+    "zh": "左边一个大词加一行字；右边围着锚点的程序场把功能演出来，每拍走一步；纸底或墨底反白。"
+  },
+  "fits": "One feature per card in a launch: interference, separation, a log, a waveform, a grid filling in.",
+  "notFor": "Features that need a screenshot; more than one line of copy.",
+  "select": {
+    "intent": {
+      "en": "Each feature is acted out by the picture: the field round the anchor changes its function to show what the word means.",
+      "zh": "每个功能由画面演出来：锚点周围的场改变自己的函数，表现这个词的意思。"
+    },
+    "content": {
+      "en": "A word (≤ 11 chars / 6 字), a line (≤ 32 / 16 字), an optional label (≤ 30 / 16 字), a field kind, paper or ink; `print: 'blocks'` after a dot-quantize seam.",
+      "zh": "一个词（≤ 11 字符 / 6 字），一行字（≤ 32 / 16 字），可选标签（≤ 30 / 16 字），场的种类，纸底或墨底；接在 dot-quantize 之后用 `print: 'blocks'`。"
+    },
+    "fits": {
+      "zh": "发布片里一卡一个功能：干涉、分离、日志、波形、网格填满。"
+    },
+    "notFor": {
+      "zh": "需要截图的功能；超过一行文案。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "problem",
+      "proof",
+      "turn"
+    ],
+    "subjects": [
+      "title",
+      "abstract"
+    ],
+    "moods": [
+      "editorial",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "feature card",
+        "procedural field",
+        "interference",
+        "waveform",
+        "big word"
+      ],
+      "zh": [
+        "功能卡",
+        "程序场",
+        "干涉",
+        "波形",
+        "大字"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "dot-quantize",
+        "note": "between two cards"
+      },
+      {
+        "id": "cell-count",
+        "note": "the proof after the features"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Cards with the same `pattern` draw the same field: reuse it only when the film means 'the same one again'."
+      ],
+      "zh": [
+        "`pattern` 相同的卡画同一个场：只在片子要说“又是同一个”时复用。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      3,
+      8
+    ],
+    "sec120": [
+      1.5,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/film.js (ready card, toneAt), fields.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/field-card/brick.js",
+  "card": "scene/field-card/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "mid",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

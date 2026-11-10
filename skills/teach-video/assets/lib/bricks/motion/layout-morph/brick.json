@@ -1,0 +1,145 @@
+{
+  "id": "layout-morph",
+  "category": "motion",
+  "name": {
+    "en": "Layout morph",
+    "zh": "瓦片重排"
+  },
+  "summary": {
+    "en": "A set of tiles moves from one layout to another, tile after tile: each one lifts off the page, travels to its new place, takes its new size and settles into its turn.",
+    "zh": "一组瓦片从一种排版逐片换到另一种：每片先抬起、走到新位置，再长成新尺寸、落定到新角度。"
+  },
+  "fits": "Re-sorting a gallery, a storyboard or a set of screenshots; showing one set of items in a second arrangement (archive, feature, fan).",
+  "notFor": "Content that changes while it moves (use a scene); one or two tiles (use card-portal or a push); text-heavy tiles (the lift and the turn blur small text).",
+  "select": {
+    "intent": {
+      "en": "The layout itself is thinking: the same set of items re-sorts into a new arrangement while the eye follows each one, so the viewer sees one collection read another way.",
+      "zh": "让观众看见“布局在思考”：同一批内容换一种排法，每一片都能被眼睛跟到新位置，读到“同样的东西，另一种看法”。"
+    },
+    "content": {
+      "en": "8–12 tiles of pictures or screenshots (little or no text) and two layouts among grid, mosaic and cascade; pictures with their subject near the centre (cascade crops to portrait).",
+      "zh": "8–12 张图片或截图瓦片（少字或无字），在 grid、mosaic、cascade 中选两种排法；主体放在画面中部（cascade 会裁成竖幅）。"
+    },
+    "fits": {
+      "zh": "重排图库、分镜板或一组截图；把同一批内容换一种排法给观众看（档案 → 精选 → 摊开）。"
+    },
+    "notFor": {
+      "zh": "移动时内容也在变（用场景）；只有一两片（用 card-portal 或推）；满是小字的瓦片（抬起和旋转会糊）。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "image",
+      "cards"
+    ],
+    "moods": [
+      "elegant",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "layout morph",
+        "reflow",
+        "mosaic",
+        "grid to masonry",
+        "rearrange tiles",
+        "gallery layout",
+        "FLIP animation"
+      ],
+      "zh": [
+        "三段布局重排",
+        "瓦片重排",
+        "网格变拼贴",
+        "照片摊开",
+        "排版切换",
+        "图库布局",
+        "重新排列"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "gallery-reframe",
+        "note": "the full screen around it: switch, caption and headline"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Put the subject of each picture near its centre; portrait prints crop landscape pictures to a strip."
+      ],
+      "zh": [
+        "每张图的主体放在中部；竖幅相纸会把横图裁成中间一条。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "mosaic-reframe",
+        "name": "三段布局重排",
+        "card": "三段布局重排",
+        "summary": "12 张瓦片在规则网格、feature mosaic、对角瀑布串三种排版间连续变形，位置宽高各自插值、逐片微错峰，段间留 hold",
+        "use": "\"同一批内容多种看法\"的陈列转场：作品集/模板库/相册产品的布局能力展示",
+        "energy": "中（连续流动的重排，无爆点，气质从容）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/mosaic-reframe.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 2.75,
+    "range": [
+      2,
+      5
+    ]
+  },
+  "tier": "T1",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "mosaic-reframe",
+        "path": "demos/transition/mosaic-reframe/MosaicReframe.tsx",
+        "card": "references/shots/transition/mosaic-reframe.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/layout-morph/brick.js",
+  "card": "motion/layout-morph/CARD.md",
+  "compare": {
+    "ssimMean": 0.645,
+    "ssimMin": 0.6062,
+    "ssimDrop": 0.0308,
+    "trackDevPx": 0,
+    "progressRmse": 0.0001,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

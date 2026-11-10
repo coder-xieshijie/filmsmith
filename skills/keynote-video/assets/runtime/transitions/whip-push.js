@@ -2,12 +2,21 @@
 // frame. While the strip is fast, each pixel averages the strip over the shutter (the offsets of the last uBlur of p),
 // so the blur is the real motion streak and vanishes as the strip lands (p = 1 is B pixel for pixel).
 // Theory: references/transitions.md#whip-push.
+// Variant `curve: 'brake'`: a whip that brakes hard: the strip accelerates (cubic in) to half way, the swap passing in
+// the streak, then stops with a long tail (quartic out), the speeds matched where they meet (at 3/7 of p). Give it a
+// longer length (beats ≈ 1.5, dur 0.75) so the tail shows. Adapted from video-shotcraft
+// demos/transition/shot-transitions/WhipBrakeReal.tsx, https://github.com/Vincentwei1021/video-shotcraft @ 1266a3e,
+// Apache-2.0: the whip with the hard brake and long tail; its camera pan over a page is the strip here.
 
 const WHIP = `
 uniform float uBlur;      // shutter as a fraction of p (shutter / fps / duration)
 uniform float uDir;       // 0 the old card leaves left, 1 right, 2 up, 3 down
+uniform float uCurve;     // 0 quint in-out; 1 brake (cubic in to half way, quartic out with a long tail)
 
-float offAt(float p) { return easeInOutQuint(p); }   // most of the travel in the middle two frames
+float offAt(float p) {
+  if (uCurve > 0.5) { float a = 3.0 / 7.0; return p < a ? 0.5 * pow(p / a, 3.0) : 1.0 - 0.5 * pow(1.0 - (p - a) / (1.0 - a), 4.0); }
+  return easeInOutQuint(p);   // most of the travel in the middle two frames
+}
 vec3 strip(vec2 s, float o) {
   if (uDir < 0.5) { float u = s.x + o * 1920.0; return u < 1920.0 ? A(vec2(u, s.y)) : B(vec2(u - 1920.0, s.y)); }
   if (uDir < 1.5) { float u = s.x - o * 1920.0; return u >= 0.0 ? A(vec2(u, s.y)) : B(vec2(u + 1920.0, s.y)); }
@@ -37,6 +46,6 @@ export default [
     summary: 'The new card pushes the old one off with a strong motion streak along the push that is gone on landing.',
     frag: WHIP,
     // blur: the shutter in units of p (0.75 frame at 30 fps over 0.15 s); pass dur (s) and fps instead to derive it
-    uniforms: ({ blur, dur = 0.15, fps = 30, direction = 'left' }) => ({ uBlur: blur ?? 0.75 / fps / dur, uDir: DIRS[direction] ?? 0 }),
+    uniforms: ({ blur, dur = 0.15, fps = 30, direction = 'left', curve = 'quint' }) => ({ uBlur: blur ?? 0.75 / fps / dur, uDir: DIRS[direction] ?? 0, uCurve: curve === 'brake' ? 1 : 0 }),
   },
 ];

@@ -1,0 +1,134 @@
+{
+  "id": "unit-count",
+  "category": "scene",
+  "name": {
+    "en": "Unit count",
+    "zh": "方块计数"
+  },
+  "summary": {
+    "en": "One big number counts up to the size of a set while one square per item appears in a wave beside it; the squares stay for every later chapter.",
+    "zh": "一个大数字数到集合的总数，旁边一格一件事按数据顺序波浪式出现；这些方块留给后面每一章。"
+  },
+  "fits": "The opening of a story told by counting: how many there are, before saying which kinds.",
+  "notFor": "A single headline number with nothing to sort afterwards (use a number scene of a launch style); more than about 2,000 items.",
+  "select": {
+    "intent": {
+      "en": "The viewer feels the size of the set before any category: a number counts while one square per item fills the frame.",
+      "zh": "观众先感到集合有多大，再谈分类：数字往上数，同时一件一格铺满画面。"
+    },
+    "content": {
+      "en": "The set as groups (1–9, name ≤ 14 chars / 6 字, count); a caption (≤ 34 chars / 14 字) and a note on what one square is (≤ 40 / 16 字).",
+      "zh": "按组给出集合（1–9 组，名称 ≤ 14 字符 / 6 字，带数量）；一行说明（≤ 34 字符 / 14 字）和一行注明一格是什么（≤ 40 / 16 字）。"
+    },
+    "fits": {
+      "zh": "用计数讲的故事的开场：先讲有多少，再讲哪几类。"
+    },
+    "notFor": {
+      "zh": "只有一个大数字、之后没有可分类的东西（用发布片风格的数字场景）；超过约 2000 件。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "problem"
+    ],
+    "subjects": [
+      "number",
+      "chart"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "counter",
+        "wave of squares",
+        "how many",
+        "dataset size",
+        "opening count"
+      ],
+      "zh": [
+        "计数开场",
+        "方块波",
+        "有多少",
+        "数据集规模",
+        "数字滚动"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "unit-bands",
+        "note": "the first re-sort of the same squares"
+      },
+      {
+        "id": "unit-flight",
+        "note": "carries the grid into the next chapter"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Set `title: ''` unless the count needs a claim; the caption is the main read.",
+        "The squares must stay on screen into the next chapter; cutting them away loses the through-line."
+      ],
+      "zh": [
+        "除非计数本身就是主张，否则 `title` 留空；主读是说明。",
+        "方块要留到下一章；切掉就丢了贯穿线索。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      4,
+      10
+    ],
+    "sec120": [
+      2,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "tally",
+      "any data"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/layouts.js (count), squares.js (wave)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "unit-regroup",
+      "note": "its crowd is a scatter of dots each standing for several units; here one square is one item, in data order"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/unit-count/brick.js",
+  "card": "scene/unit-count/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

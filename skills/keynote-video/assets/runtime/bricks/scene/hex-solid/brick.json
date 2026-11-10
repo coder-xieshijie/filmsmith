@@ -1,0 +1,124 @@
+{
+  "id": "hex-solid",
+  "category": "scene",
+  "name": {
+    "en": "Hexagon to cube",
+    "zh": "六边形成立方体"
+  },
+  "summary": {
+    "en": "The card outline morphs into a hexagon, three accent lines re-read it as a cube, the faces take three tones; a caption rises and three counted face labels hang off the cube.",
+    "zh": "卡片轮廓变成六边形，三条强调色线把它重读成立方体，三个面上三种墨色；左侧说明升起，三个带计数的面标签挂在立方体上。"
+  },
+  "fits": "The turn of a promotion: one flat thing revealed as a solid source (a spec, a schema, a model).",
+  "notFor": "Films without a flat object before it; more than three counts.",
+  "select": {
+    "intent": {
+      "en": "A flat thing is revealed as a solid source, so the viewer understands that everything else is generated from it.",
+      "zh": "平面的东西被揭示为一个立体的源头，观众明白其余一切都是从它生成的。"
+    },
+    "content": {
+      "en": "A caption (≤ 15 chars / 7 字) and up to three counted face labels (≤ 15 / 8 字, may use {endpoints} {schemas} {sdks}).",
+      "zh": "一行说明（≤ 15 字符 / 7 字）和最多三个带计数的面标签（≤ 15 / 8 字，可用 {endpoints} {schemas} {sdks}）。"
+    },
+    "fits": {
+      "zh": "升级片的转折：一个平面的东西揭示为立体的源头（规格、模式、模型）。"
+    },
+    "notFor": {
+      "zh": "之前没有平面对象的片；超过三个计数。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "turn",
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "abstract",
+      "diagram"
+    ],
+    "moods": [
+      "elegant",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "hexagon",
+        "cube",
+        "isometric",
+        "spec",
+        "solid",
+        "stroke reinterpret"
+      ],
+      "zh": [
+        "六边形",
+        "立方体",
+        "等轴测",
+        "规格",
+        "立体",
+        "三线成体"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "cube-page",
+        "note": "unfolds the cube"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The caption is 86 px bold: Chinese holds seven characters at most."
+      ],
+      "zh": [
+        "说明是 86 px 粗体：中文最多七个字。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      6,
+      10
+    ],
+    "sec120": [
+      3,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "morph",
+      "blueprint"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/morph/film.js (drawSolid, solidState, faceLabels, cube)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/hex-solid/brick.js",
+  "card": "scene/hex-solid/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "high",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

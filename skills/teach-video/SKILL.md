@@ -1,8 +1,8 @@
 ---
 name: teach-video
-description: Makes narrated explainer films that teach a technical mechanism to developers who know the basics — Chinese voice-over and on-screen text, pictures drawn in code (HyperFrames) from a style kit, built by a director agent and 2–3 segment agents and checked by a fresh agent. Use when asked to explain how something technical works in a video, to make or rework such a film or a silent loop for an article, or to set up its narration, timeline and checks.
+description: Makes narrated explainer films that teach a technical mechanism to developers who know the basics — Chinese voice-over, on-screen text in Chinese or English chosen from the material, pictures drawn in code (HyperFrames) from a style kit, built by a director agent and 2–3 segment agents and checked by a fresh agent. Use when asked to explain how something technical works in a video, to make or rework such a film or a silent loop for an article, or to set up its narration, timeline and checks.
 descriptions:
-  zh-Hans: 制作给有基础的开发者讲清一个技术机制的讲解片：中文旁白与画面字，画面由代码按风格包绘制（HyperFrames），由一个导演 agent 加 2–3 个分段 agent 制作、一个没参与制作的 agent 核查。用于把技术原理做成讲解视频、制作或返工这类片子或文章里的无声循环动图，或为它准备旁白、时间轴与检查。
+  zh-Hans: 制作给有基础的开发者讲清一个技术机制的讲解片：中文旁白，画面字中英都行、按物料定，画面由代码按风格包绘制（HyperFrames），由一个导演 agent 加 2–3 个分段 agent 制作、一个没参与制作的 agent 核查。用于把技术原理做成讲解视频、制作或返工这类片子或文章里的无声循环动图，或为它准备旁白、时间轴与检查。
 displayNames:
   zh-Hans: 片匠 · 讲解片
 ---
@@ -20,11 +20,15 @@ These hold for every film, version and stage, including direction samples.
 - **Frame.** 1920×1080, 30 fps. The band y ≥ 880 stays empty for subtitles, by layout. The presenter reserve (x 1580–1880, y 560–860) is empty outside the presenter windows in `film.json`.
 - **People.** No real people on screen except the presenter window and sourced footage that supports a claim.
 - **Hand marks.** At most four hand-drawn marks (circles, underlines, braces, handwriting) per three-minute film; all other emphasis by greying, fading or scaling.
-- **Language.** Narration and on-screen text are Chinese (the voice, the transcription and the kit's fonts are set for it). The film's working documents (topic card, brief, notes, check report) follow the language of the user's project; code and comments are English.
+- **Language.** Narration is Chinese; an English voice-over is not part of this skill. On-screen text is Chinese or English, chosen from the material; ask when it is unclear or mixed; with no material to go by, Chinese. Reading rate, sizes, setting and fonts per language: [teaching.md](references/teaching.md#on-screen-language). The film's working documents (topic card, brief, notes, check report) follow the language of the user's project; code and comments are English.
 - **Time comes from the narration.** The picture is timed by line IDs and anchor words, never by typed seconds, so a re-recorded narration moves the picture with it. Never speed up the voice or shorten holds to hit a length.
 - **Deterministic.** A frame depends only on time: `F.rng` / `F.hash`, never `Math.random` or `Date`; one command re-renders.
 - **Pinned engine.** HyperFrames is pinned in the kit's `starter/build/hf.cjs` (0.8.214) and reached only through `npm run hf -- …`; never write `npx hyperframes@…` yourself, never upgrade inside a film (the upgrade procedure is in the kit README).
 - **No media in version control.** Audio, video and fonts are regenerated or downloaded, never committed.
+
+## Bricks and recipes
+
+Each kit is also a recipe ([references/recipes/](references/recipes/)): its look, the bricks it recommends for each part of the explanation, its ban list, and which brick each of its components became. A brick is a reusable part drawn in code (a motion, a scene, a prop, a look, a sound, an arc), with a `CARD.md` that says what it does, what material it takes and which languages it supports. The bricks are keynote-video's, under the same ids: its catalogue (`references/bricks.md` in keynote-video) lists them all. This skill carries a subset — the bricks whose index entry names `teach` among its hosts, with the runtime files they import — in `assets/lib/bricks/<kind>/<id>/`, copied byte for byte from keynote-video's `assets/runtime/bricks/` and kept identical by the collection's sync; `assets/lib/bricks/index.json` lists what is here. A brick a recipe names that is not in the subset needs keynote-video installed beside this skill. Each brick's card says how to drive it (its parameters, and its `host.html`, which mounts it as a HyperFrames sub-composition); a brick in a segment is checked like any other part of it.
 
 ## Requirements
 
@@ -67,12 +71,13 @@ Silent loops for an article: `uv run SKILL_ROOT/scripts/voice/voice.py fonts --d
 
 | Need | Read |
 |---|---|
-| Content and picture rules, what counts as understood, captions, presenter, tools | [references/teaching.md](references/teaching.md) |
+| Content and picture rules, what counts as understood, captions, on-screen language, presenter, tools | [references/teaching.md](references/teaching.md) |
 | The route from topic to final, the three user reviews, the topic card and fact sheet format, rule conflicts, recording the narration | [references/process.md](references/process.md) |
 | Director / segment / renderer / checker split, concurrency, rework, what each hands back | [references/roles.md](references/roles.md) |
 | Writing the brief for the agents | [references/brief-template.md](references/brief-template.md) |
 | Narration input, shared assets, re-timing to a recording | [scripts/voice/README.md](scripts/voice/README.md) |
 | The kits and the topics each fits; what a kit is; how to extract a new one from an approved film | [assets/kits/README.md](assets/kits/README.md) |
+| A kit as a recipe: its look, recommended bricks, ban list, kit → bricks, its English and Chinese type | [references/recipes/terminal-ledger.md](references/recipes/terminal-ledger.md), [references/recipes/blueprint-zoom.md](references/recipes/blueprint-zoom.md) |
 | terminal-ledger: project layout, every `npm run` command, handoff contract, engine version, measurements, limits | [assets/kits/terminal-ledger/README.md](assets/kits/terminal-ledger/README.md) |
 | blueprint-zoom: its look, components, Rough.js, measurements, limits | [assets/kits/blueprint-zoom/README.md](assets/kits/blueprint-zoom/README.md) |
 | Writing a segment (the one page segment makers read) | the kit's `CARD.md`: [terminal-ledger](assets/kits/terminal-ledger/CARD.md), [blueprint-zoom](assets/kits/blueprint-zoom/CARD.md) |

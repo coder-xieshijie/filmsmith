@@ -1,0 +1,156 @@
+{
+  "id": "glitch-tear",
+  "category": "motion",
+  "name": {
+    "en": "Glitch tear",
+    "zh": "故障条带错位"
+  },
+  "summary": {
+    "en": "The frame tears into 16 uneven bands that jitter sideways; the hard cut to the next scene hides in the strongest jitter, then the bands settle.",
+    "zh": "整屏切成 16 条不等高横条左右错位抖动，抖得最猛时硬切到下一场，再抖几下归位。"
+  },
+  "fits": "A state jump of the same screen: deploying → live, before → after, off → on; two scenes on one grid.",
+  "notFor": "Calm or warm films; two unrelated scenes (it then reads as a broken page); more than once a minute.",
+  "select": {
+    "intent": {
+      "en": "The system switches state in one jolt: the page tears into bands but stays whole, so the viewer reads a digital jump, not a broken screen.",
+      "zh": "系统一下子跳到新状态：页面撕成横条但每条完整，观众读到的是数字式跳变，而不是页面坏了。"
+    },
+    "content": {
+      "en": "Wraps two scenes of the same screen on one grid (before and after a state change); no text of its own; the scenes need an opaque ground.",
+      "zh": "包住同一界面的两个状态（同一网格的前后两场）；自身不带文字；两场都要有不透明的底。"
+    },
+    "fits": {
+      "zh": "同一界面的状态跳变：部署中 → 已上线、前 → 后、关 → 开；同一网格上的两场。"
+    },
+    "notFor": {
+      "zh": "安静或温暖的片子；两场毫不相关（读成页面坏了）；一分钟内用两次以上。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "turn",
+      "climax"
+    ],
+    "subjects": [
+      "ui",
+      "abstract"
+    ],
+    "moods": [
+      "energetic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "glitch",
+        "RGB split",
+        "band tear",
+        "signal jump",
+        "datamosh",
+        "state switch",
+        "go live"
+      ],
+      "zh": [
+        "故障条带错位",
+        "撕裂转场",
+        "故障风",
+        "信号跳变",
+        "横条抖动",
+        "状态切换",
+        "上线瞬间"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "slam-drop",
+        "note": "a status word landing right after the jump"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Bands only, never blocks: once the page breaks into tiles it reads as destroyed.",
+        "The cut must hide in the strongest jitter; a cut on a still frame loses the cover.",
+        "High-energy seam: keep it away from other loud transitions (whip, crash) or they cancel out."
+      ],
+      "zh": [
+        "只做横条，不碎成方块；一碎块就读成页面被破坏。",
+        "硬切必须藏在抖得最猛的那几帧；切在静止帧上就失去掩护。",
+        "高能转场：别和甩镜、撞击等其他响的转场挤在一起，互相抵消。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "glitch-displace",
+        "name": "故障条带错位",
+        "card": "撕裂拖影转场",
+        "summary": "撕裂转场——glitch-displace 噪声撕裂（16 横条错位抖动中硬切），数字故障语义的条带级撕裂",
+        "use": "高能换页：数字故障/断裂语义；页面完整性不破、能量拉满的条带级撕裂",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/glitch-displace.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 2.125,
+    "range": [
+      2,
+      3
+    ]
+  },
+  "tier": "T1",
+  "family": "edit-cut",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "paper",
+      "letterpress"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "glitch-displace",
+        "path": "demos/transition/tear-streak-transitions/GlitchDisplace.tsx",
+        "card": "references/shots/transition/tear-streak-transitions.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "slice-smear",
+      "note": "frame-level slices that smear the scenes into each other; this one keeps each band whole and cuts"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/glitch-tear/brick.js",
+  "card": "motion/glitch-tear/CARD.md",
+  "compare": {
+    "ssimMean": 0.422,
+    "ssimMin": 0.3735,
+    "ssimDrop": 0.0578,
+    "trackDevPx": 8.4,
+    "progressRmse": 0.0105,
+    "eventFrames": 1,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

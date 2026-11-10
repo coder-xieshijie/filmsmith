@@ -1,0 +1,126 @@
+{
+  "id": "row-unfold",
+  "category": "scene",
+  "name": {
+    "en": "Row unfold",
+    "zh": "行内展开"
+  },
+  "summary": {
+    "en": "The sheet moves to a row and the row opens in place: the page below slides down, a dark panel revealed from the fold plays what the row describes, and the claim rises into its caption.",
+    "zh": "长卷移到一行，这一行原地展开：下面的页面滑下去，从折线里露出暗色面板，播放这一行描述的东西，主张升进标题栏。"
+  },
+  "fits": "The climax: a row of the page that carries a demo, an output or a screen.",
+  "notFor": "rows with nothing real to open; two unfolds in a row.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Proof inside the page: the row opens on the very thing it describes.",
+      "zh": "证据就在页面里：这一行打开，正是它说的那个东西。"
+    },
+    "content": {
+      "en": "A row of the page, the frames it opens on (a film's own frames, 1:1), a claim (≤ 32 chars) and a source label.",
+      "zh": "页面上的一行，它展开后播放的画面（原片帧，1:1），一句主张（≤ 12 字）和来源标签。"
+    },
+    "fits": {
+      "zh": "高潮：页面上一行带演示、输出或界面的内容。"
+    },
+    "notFor": {
+      "zh": "打开后没有真东西的行；连续两次展开。"
+    },
+    "roles": [
+      "climax",
+      "demo"
+    ],
+    "subjects": [
+      "image",
+      "ui",
+      "text"
+    ],
+    "moods": [
+      "editorial",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "unfold",
+        "inline demo",
+        "expand row",
+        "reveal",
+        "climax"
+      ],
+      "zh": [
+        "展开",
+        "行内演示",
+        "展开行",
+        "揭示",
+        "高潮"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "row-ratchet",
+        "note": "the list it comes from"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "One unfold per film by default, two at most, never two in a row.",
+        "Frames play 1:1; when they run out the last stays."
+      ],
+      "zh": [
+        "一部片默认展开一次，最多两次，不能连着展开。",
+        "画面按 1:1 播放；放完停在最后一帧。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      6,
+      12
+    ],
+    "sec120": [
+      3,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "scroll"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "film-v1/plan.js reelUp, unMark, unfold, play, caption; film.js panel"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/row-unfold/brick.js",
+  "card": "scene/row-unfold/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

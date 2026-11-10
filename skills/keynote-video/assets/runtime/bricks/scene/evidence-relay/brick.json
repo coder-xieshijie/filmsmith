@@ -1,0 +1,156 @@
+{
+  "id": "evidence-relay",
+  "category": "scene",
+  "name": {
+    "en": "Evidence relay",
+    "zh": "证据胶片接力"
+  },
+  "summary": {
+    "en": "A column of page cards steps one card at a time only when the word changes, while a noun holds and the verb beside it is relayed in place.",
+    "zh": "左列页面卡只在换词时步进一格，右边名词不动、动词原位接力，词块中心对准焦点卡。"
+  },
+  "fits": "One subject, several capabilities, each with a page that proves it (plans, renders, ships); a tour of a portfolio or of product scenes.",
+  "notFor": "Capabilities with no page to show; more than four verbs; light grounds (the alternating cards want a dark ground).",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      9,
+      18
+    ],
+    "sec120": [
+      4.5,
+      9
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "word-relay-filmstrip",
+        "path": "demos/typography/word-relay-filmstrip/WordRelayFilmstrip.tsx",
+        "card": "references/shots/typography/word-relay-filmstrip.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "select": {
+    "intent": {
+      "en": "Pair each claim with its proof: the verb on the right is the argument, the page card on the left is the evidence, and the column steps only when the word changes, so text and picture footnote each other.",
+      "zh": "让每个说法都配上证据：右边的动词是论点，左边的页面卡是证据，只在换词时步进一格，文字和画面互为注脚。"
+    },
+    "content": {
+      "en": "One noun (en ≤ 10 chars, zh ≤ 4), 2–4 one-word verbs (en ≤ 9, zh ≤ 3) with optional notes (en ≤ 44, zh ≤ 20), and 4–8 page cards (real screenshots, the verbs plus at least two; card k + 1 proves verb k).",
+      "zh": "一个名词（英文 ≤ 10 字符，中文 ≤ 4 字），2–4 个一词动词（英文 ≤ 9，中文 ≤ 3），可选每词一行说明（英文 ≤ 44，中文 ≤ 20），加 4–8 张页面卡（真实截图，比动词多至少两张；第 k+1 张证明第 k 个动词）。"
+    },
+    "fits": {
+      "zh": "一个主体、几种能力，每种都有一页能证明它（规划、渲染、发布）；作品集或产品多场景的巡礼。"
+    },
+    "notFor": {
+      "zh": "没有页面可展示的能力；超过四个动词；浅色底（黑白相间的卡要暗底）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "title",
+      "image",
+      "ui"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "filmstrip",
+        "word relay",
+        "verb relay",
+        "noun and verbs",
+        "evidence column",
+        "capabilities list",
+        "portfolio tour",
+        "step scroll"
+      ],
+      "zh": [
+        "证据胶片接力",
+        "胶片词接力",
+        "动词接力",
+        "一个主体多种能力",
+        "能力枚举",
+        "证据流",
+        "作品集巡礼",
+        "步进滚动"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "doc-findings",
+        "note": "one source page dealt into findings when the proof is a single document"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The column must stand still between words and step only on the change; a constant scroll turns the evidence into wallpaper.",
+        "Align the word block's centre exactly with the focused card's middle; a few pixels off and the editorial rigour collapses.",
+        "Use real screenshots and grade their brightness by hand so the alternating cards stay readable."
+      ],
+      "zh": [
+        "左列在两次换词之间必须完全静止，只在换词时步进；持续滚动会让证据沦为背景装饰。",
+        "词块垂直中心要和焦点卡中点精确对齐；差几个像素，编辑部式的严谨感就塌了。",
+        "页面卡用真实截图，并人工分档亮度，保证相间的卡都读得清。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "word-relay-filmstrip",
+        "name": "胶片词接力",
+        "card": "胶片词接力",
+        "summary": "左列黑白相间等高页面卡步进滚动（焦点卡全亮、邻卡离焦压暗）、右侧衬线大词原位接力（名词恒定+动词轮换）——切词瞬间才滚动一格，词块垂直中心与当前页面卡中点精确对齐",
+        "use": "\"一个主体 × 多种能力\"的枚举段（Shotcraft frames/builds/ships…）；作品集/案例流展示；产品多场景巡礼",
+        "energy": "中低（编辑部气质，节奏靠切词的\"咔哒\"感）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/word-relay-filmstrip.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/evidence-relay/brick.js",
+  "card": "scene/evidence-relay/CARD.md",
+  "compare": {
+    "ssimMean": 0.6813,
+    "ssimMin": 0.6285,
+    "ssimDrop": 0.0797,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "fitsRoles": [
+    "demo",
+    "proof"
+  ],
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

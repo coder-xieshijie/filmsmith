@@ -1,0 +1,126 @@
+{
+  "id": "problem-table",
+  "category": "scene",
+  "name": {
+    "en": "Problem table",
+    "zh": "问题表"
+  },
+  "summary": {
+    "en": "A one- or two-line headline at 164 px shrinks into the heading of a table of what is broken; rows rise, ink flags wipe over their values one by one, an ink frame steps over the rows, and a full-screen accent wipe closes it.",
+    "zh": "一两行 164 px 的大标题读完后缩成一张“哪里坏了”表格的表头；行逐一升起，墨色标签逐个盖住数值，墨框在行间走动，最后一记满屏强调色擦除收尾。"
+  },
+  "fits": "The hook of a claim-plus-steps film: the problem stated, then itemised as facts.",
+  "notFor": "Problems without countable facts; more than four rows; a film with no person to hand the accent to (the wipe means what the person brings).",
+  "select": {
+    "intent": {
+      "en": "The problem is stated large, then shown to be concrete: each broken fact gets its own row and an ink flag, so the claim that follows answers something real.",
+      "zh": "先把问题说大，再证明它是具体的：每个坏掉的事实占一行、盖一枚墨标，后面的主张就是在回答真问题。"
+    },
+    "content": {
+      "en": "1–2 headline lines (≤ 18 chars each), 1–4 rows of a label (≤ 12 chars) and a value (≤ 12 chars).",
+      "zh": "1–2 行大标题（每行 ≤ 8 字），1–4 行“标签 + 数值”（标签 ≤ 5 字，数值 ≤ 6 字）。"
+    },
+    "fits": {
+      "zh": "“主张 + 步骤”型片子的开场：先说问题，再把它列成事实。"
+    },
+    "notFor": {
+      "zh": "没有可列举事实的问题；超过四行；片中没有人可以接住强调色（擦除代表人带来的东西）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "problem"
+    ],
+    "subjects": [
+      "title",
+      "list"
+    ],
+    "moods": [
+      "editorial",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "problem table",
+        "headline shrink",
+        "ink flag",
+        "Swiss poster",
+        "accent wipe",
+        "what is broken"
+      ],
+      "zh": [
+        "问题表",
+        "标题缩成表头",
+        "墨标",
+        "瑞士海报",
+        "强调色擦除",
+        "哪里坏了"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "input-output",
+        "note": "the accent wipe grows into its input half"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The wipe is the film's only full-frame accent outside the claim; without a claim after it, turn it off (`wipe: false`).",
+        "Values longer than 12 characters step down to 34 px and stop reading as flags."
+      ],
+      "zh": [
+        "擦除是主张之外唯一的满屏强调色；后面不接主张时关掉（wipe: false）。",
+        "数值超过 12 个字符会降到 34 px，不再像标签。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      24
+    ],
+    "sec120": [
+      4,
+      12
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (problem)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/problem-table/brick.js",
+  "card": "scene/problem-table/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

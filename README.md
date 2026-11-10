@@ -13,8 +13,8 @@ Filmsmith is a collection of agent skills that make videos with nothing but code
 
 | Skill | Makes |
 |---|---|
-| [keynote-video](#keynote-video) | Short music-driven films for a technical product — launches, teasers, showreels, data stories — in seventeen styles, with no voice-over |
-| [teach-video](#teach-video) | Chinese explainer films that teach one technical idea to developers who know the basics, with a narrated voice-over |
+| [keynote-video](#keynote-video) | Short music-driven films for a technical product — launches, teasers, showreels, data stories — composed from bricks with seventeen styles as recipes, on-screen text in English or Chinese, no voice-over |
+| [teach-video](#teach-video) | Explainer films that teach one technical idea to developers who know the basics, with a Chinese voice-over and Chinese or English on-screen text |
 
 ## Install
 
@@ -37,13 +37,13 @@ ln -s "$PWD/filmsmith/skills/teach-video" <your agent's skills folder>/teach-vid
 
 ## keynote-video
 
-**Seventeen ways to film your code.** [`skills/keynote-video`](skills/keynote-video/SKILL.md) makes short technical films — launches, teasers, showreels, data stories, explainers — with every frame drawn in code and every sound synthesised in code. Pick a style, fill one file, render.
+**Film your code, brick by brick.** [`skills/keynote-video`](skills/keynote-video/SKILL.md) makes short technical films — launches, teasers, showreels, data stories, explainers — with every frame drawn in code and every sound synthesised in code. A film is composed from bricks (motions, scenes, props, looks, sounds and story arcs) with two or three styles as references and one look of its own; when one style fits exactly, its template runs as it ships. On-screen text is English or Chinese, chosen from your material.
 
 ![Sixteen of the styles](docs/keynote-video/showcase.jpg)
 
 ### Seventeen styles
 
-Each style is one visual language with palette presets, one form variant, a scene registry and a template that renders a complete film. Every preview below is six seconds of an existing demo made with the skill itself (28–46 s; Stream's is 92 s). The first ten full films are on [YouTube](https://www.youtube.com/@world_0618), with MP4 downloads in the [v0.1.0 release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0); uploads for the six real-asset demos and Stream are pending.
+Each style is a recipe — one look, the bricks it recommends for each part of the story, what a film in it must not do — and a template that renders its example film, with palette presets and one form variant. Every preview below is six seconds of an existing demo made with the skill itself (28–46 s; Stream's is 92 s). The first ten full films are on [YouTube](https://www.youtube.com/@world_0618), with MP4 downloads in the [v0.1.0 release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0); uploads for the six real-asset demos and Stream are pending.
 
 The first ten demos use fictional products except Tally, which counts the real Python PEP index. Handset, Exhibit and Dossier demonstrate real launch pages, charts and product UI captured on October 20, 2026; Strip, Split and Scroll use Filmsmith's own films, code and repository captures from October 21. Stream's demo is a made-up agent desk, Skein, in an English and a Chinese version. Figures, offers and the ten-style README visible in these films belong to those source snapshots. The overview images show the first sixteen styles (Stream is not in them yet); the preserved demos may use earlier palette presets.
 
@@ -66,7 +66,7 @@ The first ten demos use fictional products except Tally, which counts the real P
 | <img src="docs/keynote-video/previews/filmsmith-strip-preview.webp" width="320" alt="Strip six-second demo preview"> | **[Strip](skills/keynote-video/references/modes/strip.md)** | One strip of film through a fixed gate on a light box: real frames of real films stop registered one a beat, a frame punches to a contact sheet whose rows are exactly as long as the films, and a grease pencil rings the take that runs | Reels of a product's real outputs: rendered films, footage, frames to choose from |
 | <img src="docs/keynote-video/previews/filmsmith-split-preview.webp" width="320" alt="Split six-second demo preview"> | **[Split](skills/keynote-video/references/modes/split.md)** | One movable seam divides the frame: what is written on paper on one side, the real frames, renders and reports it makes on the other; every change is a move of the seam, and the climax is one changed line over two renders of the same instant | Developer tools whose input maps line by line to an output: generators, configs, CLIs and their reports |
 | <img src="docs/keynote-video/previews/filmsmith-scroll-preview.webp" width="320" alt="Scroll six-second demo preview"> | **[Scroll](skills/keynote-video/references/modes/scroll.md)** | The product's own long page as one paper scroll: flicked up with momentum, it brakes and locks section by section while its headings pin as chapters; an underline marks the line being read and a band repeats it in large type; one row unfolds in place on the demo it describes | Launches told by the product's own README, docs or changelog |
-| <img src="docs/keynote-video/previews/filmsmith-stream-preview.webp" width="320" alt="Stream six-second demo preview"> | **[Stream](skills/keynote-video/references/modes/stream.md)** | One thread of light through a night sky: it pierces a scattered desk and reels it in, small interface blocks hang on it, each task leaves as a star, a job's stars link into a constellation, and one sweep gathers every star into the one panel where one thing needs you; on-screen text in English or Chinese | Agent desks and task schedulers: work sent out, run in parallel, checked and brought back |
+| <img src="docs/keynote-video/previews/filmsmith-stream-preview.webp" width="320" alt="Stream six-second demo preview"> | **[Stream](skills/keynote-video/references/modes/stream.md)** | One thread of light through a night sky: it pierces a scattered desk and reels it in, small interface blocks hang on it, each task leaves as a star, a job's stars link into a constellation, and one sweep gathers every star into the one panel where one thing needs you | Agent desks and task schedulers: work sent out, run in parallel, checked and brought back |
 
 Every style comes in variants: colour presets (Phosphor in ice, green, amber, cyan, violet or coral, for example) and one form axis — Thread's line even or swelled, Ink's type compressed or extended, Plakat square or diagonal, Blueprint in ink or pencil, Phosphor on a CRT raster or a flat panel, Tally in squares, dots or Isotype glyphs, Trace drawn as vectors or sketched, Morph with round or cut corners, Halftone in round, square or line screens, Pulse with cut or round apertures, Handset on a laptop or a phone, Exhibit on a plain desk or a cutting mat, Dossier's highlighter over the claim or under the line, Strip on double- or single-perforation film, Split's seam straight or stitched, Scroll with or without a minimap of the whole page, Stream opening on a desktop or in the night sky. Each style card lists its use cases with a worked example.
 
@@ -76,7 +76,7 @@ keynote-video asks very little of the agent that runs it, so it is not tied to o
 
 - **A shell, Node.js and FFmpeg.** No agent-specific tools, plugins or APIs: the skill is plain Markdown and JavaScript, so any agent that can read files and run commands can follow it.
 - **No generation model.** Pictures are drawn in code and sound is synthesised in code. Nothing calls an image, video or music model, so a film needs no API key and costs nothing per render; a generated music bed is optional.
-- **The template does the heavy lifting.** Every style starts as a working film. The agent writes one `content.js`; the scripts fit the timing to the beat, mix the sound and measure the render. A fast model can carry a film from brief to measured MP4, not only a large one.
+- **Bricks and templates do the heavy lifting.** Every brick and every style's template already works. The agent picks bricks and writes the film's content; the scripts fit the timing to the beat, mix the sound and measure the render. A fast model can carry a film from brief to measured MP4, not only a large one.
 
 ### Quick start
 
@@ -105,7 +105,7 @@ Explain how our rate limiter works, step by step, as a 45-second film; the code 
 Restyle last week's launch film as a blueprint and compare the two.
 ```
 
-The agent proposes a style and a palette, writes a plan, renders key frames for you to check, renders the film and measures it. Under the hood, from the folder that holds the clone:
+The agent picks two or three reference styles, one look and a brick for each part of the story, writes a plan, renders key frames for you to check, renders the film and measures it. Under the hood, from the folder that holds the clone:
 
 ```bash
 node filmsmith/skills/keynote-video/scripts/new-film.mjs ink my-film --palette cobalt   # scaffold a film from a style
@@ -118,12 +118,12 @@ Requirements: Node.js 22+, FFmpeg, and network access while a film is set up (fo
 ### How a film is made
 
 ```
-theory of taste ──▶ ten principles ──▶ seventeen styles ──▶ template + content.js ──▶ npm run film ──▶ measured MP4
-(foundations.md)    (principles.md)    (modes/)              (assets/templates/)        (HyperFrames)    (check-film)
+theory of taste ──▶ ten principles ──▶ styles + bricks ──▶ PLAN.md + content.js ──▶ npm run film ──▶ measured MP4
+(foundations.md)    (principles.md)    (recipes/, bricks.md)  (composition table)       (HyperFrames)    (check-film)
 ```
 
 - **Theory first.** A six-layer pyramid of good design (legible → clear → flowing → unified → fitting → fresh) gives ten core principles; every style rule and checklist item traces back to them, and where the author's taste and the theory disagree, the theory wins.
-- **Styles, not blank pages.** A new film starts from a working film: pick a style, replace the copy, keep the choreography.
+- **Bricks, not blank pages.** A film is composed from working bricks along a story arc, slot by slot, in one look: one palette, one type system, one line that carries the eye. When one style fits exactly, its template runs as it ships.
 - **All code.** Pictures are drawn with HTML, canvas, WebGL and GSAP on HyperFrames; sound is synthesised on the same beat grid, and a generated music bed can replace it.
 - **Brisk and clean.** Length follows the content, and the picture keeps changing: a small change about every beat, a new composition every 2–3 s, an expressive transition every 8–12 s, two or three peaks; at most five words enter at once, so the reading floor holds; every key moment lands on the beat.
 - **Transitions as a library.** Fifty object-level hand-offs (one object carried from scene to scene: a word, a ringed number, a long page, a strip of film, a seam) and seventeen frame-level transitions, each with the theory it rests on, grouped by the axis they move on.
@@ -132,11 +132,11 @@ theory of taste ──▶ ten principles ──▶ seventeen styles ──▶ te
 ### Limits
 
 - Landscape 16:9 at 1920×1080 only.
-- On-screen text is English; only Stream also sets Chinese.
+- On-screen text in English or Chinese, chosen from the material; no other script.
 
 ## teach-video
 
-[`skills/teach-video`](skills/teach-video/SKILL.md) makes Chinese explainer films that teach one technical idea to developers who know the basics, drawn in code (HyperFrames) from a style kit: one command turns a narration script into voice, timeline and word timestamps; a director splits the film into 2–3 segments with hand-off contracts; geometry gates and a ~20-image review packet replace eyeballing; the presenter records the voice-over at the end.
+[`skills/teach-video`](skills/teach-video/SKILL.md) makes explainer films with a Chinese voice-over and Chinese or English on-screen text that teach one technical idea to developers who know the basics, drawn in code (HyperFrames) from a style kit: one command turns a narration script into voice, timeline and word timestamps; a director splits the film into 2–3 segments with hand-off contracts; geometry gates and a ~20-image review packet replace eyeballing; the presenter records the voice-over at the end.
 
 ```bash
 npx skills add coder-xieshijie/filmsmith --skill teach-video
@@ -146,11 +146,11 @@ npx skills add coder-xieshijie/filmsmith --skill teach-video
 
 | | |
 |---|---|
-| [`skills/keynote-video/`](skills/keynote-video/SKILL.md) | The keynote-video skill: workflow, theory, principles, the seventeen styles and their templates, the transition library, the runtime and the measuring scripts |
+| [`skills/keynote-video/`](skills/keynote-video/SKILL.md) | The keynote-video skill: workflow, theory, principles, the brick library, the seventeen styles (recipes and templates), the transition library, the runtime and the measuring scripts |
 | [`skills/teach-video/`](skills/teach-video/SKILL.md) | The teach-video skill |
 | [`docs/`](docs/) | Images for this README and the repository's social preview |
 | [CHANGELOG.md](CHANGELOG.md) | Changes to every skill |
 
 ## License
 
-Code, skills and prompts are under the [MIT License](LICENSE). Fonts, GSAP and HyperFrames are downloaded at setup under their own licences: see [THIRD-PARTY.md](THIRD-PARTY.md). Contributions: [CONTRIBUTING.md](CONTRIBUTING.md).
+Code, skills and prompts are under the [MIT License](LICENSE); bricks adapted from the video-shotcraft library stay under Apache-2.0, as each one's card says. Fonts, GSAP and HyperFrames are downloaded at setup under their own licences: see [THIRD-PARTY.md](THIRD-PARTY.md). Contributions: [CONTRIBUTING.md](CONTRIBUTING.md).

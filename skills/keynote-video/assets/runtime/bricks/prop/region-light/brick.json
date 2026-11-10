@@ -1,0 +1,111 @@
+{
+  "id": "region-light",
+  "category": "prop",
+  "name": {
+    "en": "Region light",
+    "zh": "区域聚光"
+  },
+  "summary": {
+    "en": "The spotlight on a real asset: a uniform veil of the ground with a hole for the region in play (a box or a full-width band), a ring drawn on round it and a level tick at its height.",
+    "zh": "真实素材上的聚光：除当前区域外整体蒙一层底色（方框或整行的洞），绕区域画一圈环，旁边一个水平刻度。"
+  },
+  "fits": "Pointing at one region of a capture, a page or a chart without touching its pixels.",
+  "notFor": "Recolouring or blurring an asset; several regions lit at once.",
+  "select": {
+    "intent": {
+      "en": "The viewer looks where the film points, and the asset stays exactly as captured.",
+      "zh": "观众看向片子指的地方，而素材保持截下来的原样。"
+    },
+    "content": {
+      "en": "An asset and one region on it (a box, or a band for a row of a table or list).",
+      "zh": "一张素材和其上的一个区域（方框，或表格、列表的一整行）。"
+    },
+    "fits": {
+      "zh": "不碰像素地指向截图、页面或图表上的一个区域。"
+    },
+    "notFor": {
+      "zh": "给素材重新上色或模糊；同时点亮几个区域。"
+    },
+    "roles": [
+      "demo",
+      "proof",
+      "climax"
+    ],
+    "subjects": [
+      "image",
+      "ui",
+      "chart"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "spotlight",
+        "veil",
+        "focus ring",
+        "level tick",
+        "highlight row",
+        "band"
+      ],
+      "zh": [
+        "聚光",
+        "蒙层",
+        "焦点环",
+        "水平刻度",
+        "高亮整行",
+        "光带"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Size the box or band round whole words: the light’s edge must not cut a word.",
+        "Ring one region at a time."
+      ],
+      "zh": [
+        "方框或光带要包住整词：光的边缘不能切字。",
+        "一次只圈一个区域。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "exhibit",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/film.js (paintScreen light, the level tick)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/region-light/brick.js",
+  "card": "prop/region-light/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

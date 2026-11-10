@@ -1,0 +1,123 @@
+{
+  "id": "inspection-record",
+  "category": "scene",
+  "name": {
+    "en": "Inspection record",
+    "zh": "检验记录"
+  },
+  "summary": {
+    "en": "Verification as an inspection record: a table of 3–8 checks, a computed count k / n at 280 px, a note and a footer; each row's result is drafted as the probe run passes it, and a line-colour stamp lands beside the count on beat 5.",
+    "zh": "把验证画成检验记录：3–8 项检查的表格、280 px 的计算计数 k / n、一行注和页脚；探测光扫过哪一行，那一行的结果就被画上；第 5 拍线条色印章落在计数旁。"
+  },
+  "fits": "A sheet of machine checks with a count that can be computed: tests, probes, restores, canaries.",
+  "notFor": "Checks a person performs; more than eight rows; failures shown as drama (an X row is drafted as plainly as a tick).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Prove the claim by machine: the count is computed from the rows, so it can never disagree with the table, and a machine's stamp certifies it.",
+      "zh": "用机器证明主张：计数由表格各行算出，永远不会和表格对不上，再由机器的印章证明。"
+    },
+    "content": {
+      "en": "Label, title, sub, two column heads, 3–8 check ids (code ≤ 8) with pass/fail, a count label, note, footer, a stamp word.",
+      "zh": "标签、标题、副标题、两列表头、3–8 个检查编号（代码 ≤ 8）及是否通过、计数标签、注、页脚、印章词。"
+    },
+    "fits": {
+      "zh": "一张能算出计数的机器检查：测试、探针、恢复、金丝雀。"
+    },
+    "notFor": {
+      "zh": "人执行的检查；超过八行；把失败当戏剧（打叉的行和打勾一样平实）。"
+    },
+    "roles": [
+      "proof"
+    ],
+    "subjects": [
+      "list",
+      "metric"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "checklist",
+        "inspection record",
+        "probe run",
+        "k of n",
+        "verified",
+        "canary"
+      ],
+      "zh": [
+        "检查表",
+        "检验记录",
+        "探测扫描",
+        "k / n",
+        "已验证",
+        "金丝雀"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sheet-overview",
+        "note": "the whole drawing after the last check"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The lamp is the host's blueprint-expose (develop: false); with `lamp: 'line'` the brick draws only a stand-in feed line, so pass `lamp: 'host'` in a film."
+      ],
+      "zh": [
+        "扫描光是宿主的 blueprint-expose（develop: false）；lamp: 'line' 时积木只画一条替身扫描线，成片里请传 lamp: 'host'。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      18
+    ],
+    "sec120": [
+      5,
+      9
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/checklist.js; choreography.js CUES.checklist, CHECK_TABLE, scanRowBeats"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/inspection-record/brick.js",
+  "card": "scene/inspection-record/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

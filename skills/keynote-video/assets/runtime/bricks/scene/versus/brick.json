@@ -1,0 +1,147 @@
+{
+  "id": "versus",
+  "category": "scene",
+  "name": {
+    "en": "Versus",
+    "zh": "正反对撞"
+  },
+  "summary": {
+    "en": "Two sides of a comparison slam together over a question: an ink half against an accent half, each with its number, a flash, a shake and a stamp between them.",
+    "zh": "一个问题之下，比较的两边对撞合拢：墨色半边对强调色半边，各带一个数字，闪白、震动，中间盖一枚章。"
+  },
+  "fits": "The before and after, or us against the old way, told as two numbers (problem, turn, proof).",
+  "notFor": "Comparisons of more than two sides; sides without a number; a gentle contrast (the slam reads as a fight).",
+  "select": {
+    "intent": {
+      "en": "A comparison settled in one hit: the old way and the new slam together, each a number, so the gap is felt as a clash rather than read in a table.",
+      "zh": "一击定胜负的对比：老办法和新办法对撞合拢，各带一个数字，差距是“撞”出来的，而不是从表格里读出来的。"
+    },
+    "content": {
+      "en": "A question (≤ 24 chars, Chinese ≤ 9 characters), two sides each with a name, a number and unit (≤ 3 digits), a caption (≤ 46 chars, Chinese ≤ 13) and 0–4 items; a 1–3 character mark and an optional verdict.",
+      "zh": "一个问题（≤ 24 字符、中文 ≤ 9 字），两边各一个名称、一个数字加单位（≤ 3 位）、一行说明（≤ 46 字符、中文 ≤ 13 字）和 0–4 个条目；1–3 字符的标记和可选结论。"
+    },
+    "fits": {
+      "zh": "之前和之后、我们和老办法，讲成两个数字（问题、转折、证据）。"
+    },
+    "notFor": {
+      "zh": "多于两方的比较；没有数字的两边；温和的对照（对撞读作打架）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "problem",
+      "turn",
+      "proof"
+    ],
+    "subjects": [
+      "number",
+      "text"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "versus",
+        "VS",
+        "before and after",
+        "head to head",
+        "comparison",
+        "old way vs new",
+        "slam"
+      ],
+      "zh": [
+        "对撞开屏",
+        "正反对撞",
+        "对比",
+        "对阵",
+        "老办法对新办法",
+        "之前之后",
+        "VS 盖章"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Only for a real two-sided contrast; without one, the slam is just a slanted wipe.",
+        "Counts as the film's loud hit: keep it away from other flash or impact transitions."
+      ],
+      "zh": [
+        "只用于真有两方对峙的内容；没有对峙，对撞只是一次斜缝擦除。",
+        "它是全片响的一击：别和别的闪白或撞击转场挤在一起。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "versus-slam",
+        "name": "对撞开屏",
+        "card": "隐藏切点转场",
+        "summary": "左右两半屏带斜切边从画外加速对冲撞合，撞击帧白闪+震屏+VS 盖章，切点就是撞击本身",
+        "use": "两镜衔接处需要\"无痕换景\"或\"仪式感开屏\"时（技法卡，与 shot-transitions 三式同层选型）",
+        "energy": "n/a（技法卡，不占能量位）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/versus-slam.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      6,
+      10
+    ],
+    "sec120": [
+      3,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "versus-slam",
+        "path": "demos/transition/transition-hidden-cut/VersusSlam.tsx",
+        "card": "references/shots/transition/transition-hidden-cut.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "split-open",
+      "note": "split-open is the move (the seam, the slam, the flash, the shake, here its close variant); versus is the screen: the question, the two numbered sides, the stamp and the verdict"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/versus/brick.js",
+  "card": "scene/versus/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.7504,
+    "ssimMin": 0.6729,
+    "ssimDrop": 0.2299,
+    "trackDevPx": 280,
+    "progressRmse": 0.0061,
+    "eventFrames": 1,
+    "verdict": "waived"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

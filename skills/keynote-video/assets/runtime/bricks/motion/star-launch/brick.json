@@ -1,0 +1,129 @@
+{
+  "id": "star-launch",
+  "category": "motion",
+  "name": {
+    "en": "Star launch",
+    "zh": "派出成星"
+  },
+  "summary": {
+    "en": "A finished task becomes a star: the task row shrinks into its status ring (its beam retracting), and from there a star leaves with a short comet tail, arcing up into the sky where it stays, twinkling.",
+    "zh": "完成的任务变成一颗星：任务行缩进它的状态环（光束随之收回），从那里飞出一颗带短彗尾的星，划弧升上夜空停在那里，一闪一闪。"
+  },
+  "fits": "Each task the product takes; a count that should be felt as a sky filling up.",
+  "notFor": "Tasks that must stay readable after they finish; a single big reveal.",
+  "select": {
+    "intent": {
+      "en": "Every task handed off is not lost: it becomes a star the product keeps watching.",
+      "zh": "交出去的每件事都没丢：它变成一颗产品一直看着的星。"
+    },
+    "content": {
+      "en": "Nothing to read: the row (a placeholder) and where its star settles.",
+      "zh": "没有字：任务行（占位）和星最后停的位置。"
+    },
+    "fits": {
+      "zh": "产品接下的每件事；想让人感到“天空在被填满”的计数。"
+    },
+    "notFor": {
+      "zh": "完成后还要能读的任务；一次性的大揭示。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "abstract",
+      "ui"
+    ],
+    "moods": [
+      "playful",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "star",
+        "launch",
+        "comet",
+        "dispatch",
+        "send off",
+        "sky"
+      ],
+      "zh": [
+        "星",
+        "飞出",
+        "彗尾",
+        "派出",
+        "发出去",
+        "夜空"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "star-sweep",
+        "note": "later: one thread gathers every star"
+      },
+      {
+        "id": "hung-block",
+        "note": "the row it starts from"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The star stays: it must be in every later frame of the film (the closing sweep catches it).",
+        "Leave from the ring, not from the row's centre, or the row reads as exploding."
+      ],
+      "zh": [
+        "星要留下：它在之后每一帧都在（收尾的扫掠会接住它）。",
+        "从环里飞出，不要从行的中心飞出，否则看起来像整行炸开。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 3,
+    "range": [
+      2,
+      4
+    ]
+  },
+  "tier": "T1",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderAsk (the row's exit, in3 over 0.35 s) and renderBG stars (quadratic arc via a vertex 120 px above, io2 over 0.8 s, 8-step tail); plan.js the ask's star"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/star-launch/brick.js",
+  "card": "motion/star-launch/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

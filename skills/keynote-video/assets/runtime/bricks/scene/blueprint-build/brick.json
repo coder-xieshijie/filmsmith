@@ -1,0 +1,179 @@
+{
+  "id": "blueprint-build",
+  "category": "scene",
+  "name": {
+    "en": "Blueprint build",
+    "zh": "蓝图扫描装配"
+  },
+  "summary": {
+    "en": "A page builds itself on a blueprint board: a line crosses it and each block flies in and snaps into its slot as the line passes; variant type docks bare shells first, then every character tumbles in through depth.",
+    "zh": "页面在蓝图画板上自己长出来：扫描线掠过，扫到哪个槽位，那块就从画外飞入过冲贴合并被角标咬住；变体 type 先让无字骨架落位，再让每个字从纵深翻滚落定。"
+  },
+  "fits": "A product that generates or builds a page (sites, apps, documents): the result assembling itself in seconds.",
+  "notFor": "Products whose output is not a page; layouts the film must show in its real proportions (the board is fixed to seven blocks).",
+  "energy": "high",
+  "duration": {
+    "beats": [
+      11,
+      13
+    ],
+    "sec120": [
+      5.5,
+      6.5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any dark"
+    ],
+    "avoid": [
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "scanline-assemble-flyin",
+        "path": "demos/effects/scanline-assemble-flyin/ScanlineAssembleFlyin.tsx",
+        "card": "references/shots/effects/scanline-assemble-flyin.md"
+      },
+      {
+        "key": "assemble-then-type-flyin",
+        "path": "demos/effects/assemble-then-type-flyin/AssembleThenTypeFlyin.tsx",
+        "card": "references/shots/effects/assemble-then-type-flyin.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "assemble-then-type-flyin"
+  ],
+  "overlaps": [
+    {
+      "id": "scan-read",
+      "note": "the same line reading a page that exists; blueprint-build builds the page as the line passes"
+    },
+    {
+      "id": "bento-wall",
+      "note": "cells landing into a grid; blueprint-build lands a page's blocks into a blueprint"
+    },
+    {
+      "id": "type-enter",
+      "note": "titles entering unit by unit; the type variant tumbles every character through depth (proposed as type-enter tumble)"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/blueprint-build/brick.js",
+  "card": "scene/blueprint-build/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.6585,
+    "ssimMin": 0.6076,
+    "ssimDrop": 0.0699,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "select": {
+    "intent": {
+      "en": "The page builds itself in seconds, so the viewer feels the product generate the result, not draw it by hand.",
+      "zh": "页面几秒内自己长出来，让观众感到结果是产品生成的，不是手画的。"
+    },
+    "content": {
+      "en": "A landing-page set: headline ≤ 24 chars, body ≤ 70 chars, badge, three nav items, two buttons, three stats (value + label), an optional picture; seven slot tags and three status words.",
+      "zh": "一套落地页内容：标题 ≤ 10 字、正文 ≤ 26 字、徽章、三个导航项、两个按钮、三项数据（数值加标签）、可选配图；七个槽位标签和三个状态词。"
+    },
+    "fits": {
+      "zh": "生成或搭建页面的产品（网站、应用、文档）：结果几秒内自己装配起来。"
+    },
+    "notFor": {
+      "zh": "产出不是页面的产品；必须按真实比例展示的版式（画板固定七块）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "hook",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "diagram"
+    ],
+    "moods": [
+      "technical",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "blueprint",
+        "scanline assemble",
+        "fly-in",
+        "page generation",
+        "skeleton then type",
+        "3D type",
+        "landing page"
+      ],
+      "zh": [
+        "蓝图",
+        "扫描装配",
+        "组件飞入",
+        "页面生成",
+        "骨架装配落字",
+        "逐字翻滚",
+        "落地页"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "scan-read",
+        "note": "build the page, then read it back"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Seven blocks on a fixed board: a page with another structure needs its own scene, not squeezed copy.",
+        "The type variant's characters are unreadable while they tumble; the page reads only after frame 128."
+      ],
+      "zh": [
+        "画板固定七块：结构不同的页面要另做场景，不要硬塞文字。",
+        "type 变体翻滚中的字读不了；第 128 帧以后页面才可读。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "scanline-assemble-flyin",
+        "name": "扫描装配飞入",
+        "card": "扫描装配飞入",
+        "summary": "页面开场是一张只有网格与虚线槽位的蓝图画板，一条亮扫描线自上而下掠过；扫到每个槽位，该处组件就从画外飞入过冲贴合，带方向性残影模糊与落位咬合角标——扫完整页恰好装配完成",
+        "use": "\"页面自己生成\"的开场；AI 建站/自动排版类产品的核心演示；从空白到成品的能力叙事",
+        "energy": "中高（扫描线是稳的，但每次组件飞入都是一个爆点，密度递进）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/scanline-assemble-flyin.mp4"
+      },
+      {
+        "key": "assemble-then-type-flyin",
+        "name": "骨架装配落字",
+        "card": "骨架装配落字",
+        "summary": "空的暗底网格上，无文字的组件骨架先从四面八方飞入贴合；随后各处文字逐字从 3D 空间旋转着飞来落位，先大标题后小标注，全部落位后页面成形",
+        "use": "页面/海报\"自己长出来\"的开场；排版类产品的能力展示；从骨架到成稿的两段式叙事",
+        "energy": "中高（骨架段稀疏、文字段密集，能量单调上升到收尾）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/assemble-then-type-flyin.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

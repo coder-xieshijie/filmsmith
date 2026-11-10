@@ -1,0 +1,171 @@
+{
+  "id": "deck-deal",
+  "category": "scene",
+  "name": {
+    "en": "Deck deal",
+    "zh": "发牌入网格"
+  },
+  "summary": {
+    "en": "A pile of cards on a dark table is dealt into a page board with hard-accelerating cues while the camera chases the deal into a runway view of the full board.",
+    "zh": "暗色桌面上的一摞实体卡，像发牌一样硬加速甩进页面网格；相机追着发牌升起后仰，落在整块满板的跑道式俯瞰上定格。"
+  },
+  "fits": "The first impression of volume: a list page or card wall that fills up fast, \"it keeps pouring in\", in the climbing part of a film.",
+  "notFor": "The opening shot of a film (it needs a lead-in); fewer than ten distinct cards; reading any one card; calm passages.",
+  "energy": "high",
+  "duration": {
+    "beats": [
+      9,
+      11
+    ],
+    "sec120": [
+      4.5,
+      5.5
+    ]
+  },
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "deck-deal-flyin",
+        "path": "demos/ui-entrance/deck-deal-flyin/DeckDealFlyin.tsx",
+        "card": "references/shots/ui-entrance/deck-deal-flyin.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "card-pile",
+      "note": "cards land on a pile or stream past; deck-deal deals a pile out into a grid"
+    },
+    {
+      "id": "bento-wall",
+      "note": "a wall switching on in place; deck-deal is a wall that flies in"
+    },
+    {
+      "id": "scroll-wall",
+      "note": "a standing wall in flow; deck-deal fills the wall once and holds"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Build the first impression of volume with suspense: a pile raises 'what is it?', then dozens of items fly into place faster and faster, so the viewer feels content pouring in.",
+      "zh": "带着悬念建立“量很大”的第一印象：先是一摞牌（这是什么？），再是几十项越甩越快地飞进页面各就各位，观众感到东西源源不断涌进来。"
+    },
+    "content": {
+      "en": "10 distinct card crops from the film (real page or item slices; 16 more are dealt from the same ten), a two-line title (en ≤ 26 chars, zh ≤ 10), a count label (en ≤ 22, zh ≤ 9) and the board's page title (en ≤ 14, zh ≤ 6).",
+      "zh": "10 张影片自己的卡面切图（真实页面或条目切片；另 16 张由这十张复用），两行标题（英文 ≤ 26 字符，中文 ≤ 10 字）、计数说明（英文 ≤ 22，中文 ≤ 9）、页面板标题（英文 ≤ 14，中文 ≤ 6）。"
+    },
+    "fits": {
+      "zh": "“量很大”的第一印象：一个很快被填满的列表页或卡片墙，“源源不断涌进来”，放在片子节奏爬升的段落。"
+    },
+    "notFor": {
+      "zh": "全片第一镜（需要前面有铺垫）；少于十张不同的卡；要读某一张卡；安静的段落。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "climax"
+    ],
+    "subjects": [
+      "cards",
+      "ui"
+    ],
+    "moods": [
+      "energetic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "deal",
+        "deck deal",
+        "fly-in",
+        "card wall",
+        "pouring in",
+        "volume",
+        "dealt cards",
+        "runway view"
+      ],
+      "zh": [
+        "发牌入网格",
+        "发牌飞入",
+        "卡片涌入",
+        "源源不断",
+        "信息密度",
+        "卡片墙",
+        "甩牌",
+        "跑道式俯瞰"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "scroll-wall",
+        "note": "after the board fills, a standing wall in flow carries the volume on"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Use real page or item slices for the cards; hand-made fake cards read as fake at once.",
+        "Keep the accelerating stagger; all cards flying at once reads as an explosion.",
+        "Compute the anticipation in pixels, not as a share of the move; at the far camera a textbook ratio is too small to see.",
+        "Do not open the film with it; it needs a lead-in to tell where the pile comes from."
+      ],
+      "zh": [
+        "卡面要用真实页面或条目切片；手搓的假卡一眼假。",
+        "保留错峰递加速；所有卡同时飞读作爆炸。",
+        "预备动作先按像素算再算比例；拉远机位下教科书比例的位移小到看不见。",
+        "别当全片第一镜；要有前戏交代牌堆从哪来。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "deck-deal-flyin",
+        "name": "发牌飞入",
+        "card": "发牌飞入",
+        "summary": "暗色石墨桌面上的实体牌堆特写环绕开局，灯从牌堆亮到旁边的页面板，一摞卡像发牌一样硬加速甩进网格，相机追着发牌升起后仰、落在整块满板的跑道式俯瞰上定格",
+        "use": "展示\"内容量大/源源不断汇入\"的列表页与卡片墙；建立信息密度的第一印象",
+        "energy": "高（节奏爬升段主力，不放开场第一镜）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/deck-deal-flyin.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/deck-deal/brick.js",
+  "card": "scene/deck-deal/CARD.md",
+  "compare": {
+    "ssimMean": 0.8237,
+    "ssimMin": 0.7251,
+    "ssimDrop": 0.076,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,5 +1,7 @@
 # Ink (`ink`)
 
+**Recipe**: [ink](../recipes/ink.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 Heavy extra-condensed type slammed onto warm paper on every beat; an ink dot hops between the words as their full stop, then transforms — it opens each next ground under a word, splits into stops, swallows a word and bursts into the next, sinks and blooms into an accent field, holds still while the world is scanned in round it, stretches into a wipe, punches an iris — and ends as the cursor of the closing URL or command. The claim lands on the film's one whiteout, and the camera leaves through a counter of its type. Aesthetic anchor: "like a letterpress teaser where the full stop is the protagonist".
 Theme: tech-product-launch · Template: `assets/templates/ink/` · length fitted from content at 124 bpm (range 120–136); timing API 3 (the four tiers of change, 2026-10-19); the shipped example fits 18 bars = 34.8 s (api 2: 16 bars = 31.0 s) · Accepted 2026-10-17 (genre demo 02: "the first half an anchor (ink dot) hops between words; then the anchor's motion turns into a blue colour field. Good — explore more of these effects for transitions between scenes")
 

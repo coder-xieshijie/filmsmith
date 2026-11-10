@@ -1,0 +1,152 @@
+{
+  "id": "panel-carve",
+  "category": "motion",
+  "name": {
+    "en": "Panel carve",
+    "zh": "斜格劈屏"
+  },
+  "summary": {
+    "en": "Slanted comic seams carve the frame into three panels on three beats, each popping in with its own framing of one subject; after a hold the last panel's slanted edge sweeps across and eats the frame.",
+    "zh": "漫画斜缝踩着三拍把画面劈成三格，每格硬切弹入，是同一主体的不同取景；定格片刻后，末格的斜边扫过全屏把画面吃掉。"
+  },
+  "fits": "Showing one subject from three angles (whole, part, detail); a beat-driven reveal of a product, a chart or a page; a poster ending.",
+  "notFor": "Three different subjects that need their own captions to make sense (use a split or a grid scene); calm or minimal films (the cuts are hard and loud).",
+  "select": {
+    "intent": {
+      "en": "One subject seen from three angles at once, cut in on the beat like comic panels; the layout itself becomes the drum, then resolves into one poster.",
+      "zh": "像漫画分格一样踩拍劈出同一主体的三个机位，格子本身成了鼓点，最后合成一张海报。"
+    },
+    "content": {
+      "en": "Wraps one subject (vector or high-resolution, it is enlarged up to about 2.5×) and three framings of it: whole, closer, one detail; no text of its own (captions are three-angles).",
+      "zh": "包住一个主体（矢量或高清素材，最多放大约 2.5 倍），给出三个取景：全貌、近一点、一个细节；自身不带文字（旁白框归 three-angles）。"
+    },
+    "fits": {
+      "zh": "同一主体的三个角度（全貌、局部、细节）；踩拍揭示一个产品、一张图表或一页界面；引向海报收尾。"
+    },
+    "notFor": {
+      "zh": "三个不同主体、靠说明才看得懂（用网格或分屏场景）；安静或极简的片子（硬切很响）。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "climax",
+      "demo"
+    ],
+    "subjects": [
+      "image",
+      "ui"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "comic panels",
+        "split screen",
+        "Scott Pilgrim",
+        "three angles",
+        "panel cut",
+        "slanted split",
+        "manga"
+      ],
+      "zh": [
+        "漫画分镜切屏",
+        "斜格劈屏",
+        "三机位",
+        "分格",
+        "面板网格",
+        "漫画分屏",
+        "咔咔咔三格"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "three-angles",
+        "note": "adds the captions and the headline poster"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "All three panels must show the same subject; three different contents read as a bento layout.",
+        "On the beat, with a click per panel; off the beat it is just a layout animation.",
+        "Once per film: the panel language is too recognisable to repeat."
+      ],
+      "zh": [
+        "三格必须是同一主体的不同机位；放三种内容读成 bento 排版。",
+        "要踩拍，每格一声咔；不踩拍只是布局动画。",
+        "一支片一段：分格语言辨识度太高，两段就撞。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "comic-panel-split",
+        "name": "漫画分镜切屏",
+        "card": "面板网格动效",
+        "summary": "分格节奏——comic-panel-split 漫画斜格劈出同一主体的三个机位，咔咔咔三格定格后末格斜边吃屏成海报",
+        "use": "把\"格子\"当节奏器：同主体多机位定格并列，逐格踩拍劈出；吃拍点",
+        "energy": "中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/comic-panel-split.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      5
+    ]
+  },
+  "tier": "T2",
+  "family": "split-wipe",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "calm",
+      "minimal"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "comic-panel-split",
+        "path": "demos/rhythm/panel-grid-moves/ComicPanelSplit.tsx",
+        "card": "references/shots/rhythm/panel-grid-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/panel-carve/brick.js",
+  "card": "motion/panel-carve/CARD.md",
+  "compare": {
+    "ssimMean": 0.4202,
+    "ssimMin": 0.3092,
+    "ssimDrop": 0.0356,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

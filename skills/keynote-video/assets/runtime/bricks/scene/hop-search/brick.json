@@ -1,0 +1,144 @@
+{
+  "id": "hop-search",
+  "category": "scene",
+  "name": {
+    "en": "Hop search",
+    "zh": "跳格检索"
+  },
+  "summary": {
+    "en": "The real candidates in cells; a highlight hops over them, each value rises under it, the answer scrambles and locks in amber, or the verdict says none passes.",
+    "zh": "真实候选项排成格子；高亮逐格跳过，每个值在它下面升起，答案的数字乱码后锁定成琥珀色，或者结论说一个都没过。"
+  },
+  "fits": "Running the question over real options with measured values: builds, configurations, parsers, policies.",
+  "notFor": "Made-up candidates or values; more than five options; a choice without a measured limit.",
+  "select": {
+    "intent": {
+      "en": "The viewer watches the answer being found: anticipation builds hop by hop and resolves on the lock, or the failure is stated plainly.",
+      "zh": "观众看着答案被找出来：一格一格跳，期待越来越强，锁定时落地；或者干脆说明一个都没过。"
+    },
+    "content": {
+      "en": "A restated question (≤ 34 chars), 2–5 candidates each with a label (≤ 5 chars) and a measured value (≤ 8 chars), a numeric limit, an optional query (≤ 48 chars).",
+      "zh": "一句复述的问题（≤ 14 字）、2–5 个候选项（标签 ≤ 3 字、测得的值 ≤ 5 字）、一个数值上限、可选的查询行（≤ 48 个字符）。"
+    },
+    "fits": {
+      "zh": "把问题放到带实测值的真实选项上跑一遍：构建版本、配置、解析器、策略。"
+    },
+    "notFor": {
+      "zh": "编造的候选或数值；超过五个选项；没有测量上限的选择。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "turn"
+    ],
+    "subjects": [
+      "list",
+      "metric",
+      "number"
+    ],
+    "moods": [
+      "energetic",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "roulette",
+        "highlight hop",
+        "lock",
+        "scramble",
+        "verdict",
+        "n of N pass",
+        "benchmark"
+      ],
+      "zh": [
+        "轮盘",
+        "高亮跳格",
+        "锁定",
+        "数字乱码",
+        "结论",
+        "几个通过",
+        "跑分对比"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "answer-whiteout",
+        "note": "into the reveal: `into: 'reveal'`, the last beat is the exposure build"
+      },
+      {
+        "id": "figure-rows",
+        "note": "after a failed search, through the whip, into its evidence"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The verdict and the answer are computed from the candidates and `limit`; never type them.",
+        "Candidates already shown in an earlier search go in `known` so they hop on eighths."
+      ],
+      "zh": [
+        "结论和答案都由候选和 `limit` 算出，不许手写。",
+        "前一次检索出现过的候选写进 `known`，按八分音符跳。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      4,
+      12
+    ],
+    "sec120": [
+      2,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/choreo.js searchPlan, film.js paintSearchRow, paintVerdict"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "roulette-lock",
+      "note": "runtime hand-off: frames labels on a track and locks one; here each cell reveals a measured value, the failures dim, an empty slot can take the last hop"
+    },
+    {
+      "id": "picker-snap",
+      "note": "a vertical list through a still focus; here cells in a row and a moving highlight"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/hop-search/brick.js",
+  "card": "scene/hop-search/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

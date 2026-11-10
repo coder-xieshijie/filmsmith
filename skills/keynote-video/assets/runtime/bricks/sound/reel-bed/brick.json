@@ -1,0 +1,89 @@
+{
+  "id": "reel-bed",
+  "category": "sound",
+  "name": {
+    "en": "Reel bed",
+    "zh": "胶片音乐床"
+  },
+  "summary": {
+    "en": "The strip sound: the thread bed (plucks over a soft four-on-the-floor) by scene, a dry claw click on every pull-down, a swell as the track lights, an impact on the punch and the pick.",
+    "zh": "strip 的声音：thread 音乐床（拨弦加柔和四拍底鼓）按场景分段，每次拉片一声干脆的抓片咔哒，声轨点亮时一声渐强，冲出和挑选时一声重击。"
+  },
+  "fits": "Films about films; showreels with a mechanical rhythm.",
+  "notFor": "Voice-over films (duck it); ambient pieces.",
+  "select": {
+    "intent": {
+      "en": "A projector’s mechanism under a light reel bed: each pull-down is heard.",
+      "zh": "轻快的胶片音乐床下是放映机的机械声：每次拉片都听得见。"
+    },
+    "content": {
+      "en": "A film on the gate-reel arc; event kinds from the scenes’ plans.",
+      "zh": "按 gate-reel 骨架编排的片子；事件种类来自各场景的 plan。"
+    },
+    "fits": {
+      "zh": "关于影片的片子；有机械节奏的作品串。"
+    },
+    "notFor": {
+      "zh": "有旁白的片（改为压低）；氛围片。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "mechanical",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "thread bed",
+        "claw click",
+        "projector",
+        "track swell",
+        "pluck"
+      ],
+      "zh": [
+        "thread 音乐床",
+        "抓片咔哒",
+        "放映机",
+        "声轨渐强",
+        "拨弦"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": null,
+  "styles": {
+    "fits": [
+      "strip"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/strip/score.mjs"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "sound/reel-bed/sound.js",
+  "card": "sound/reel-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

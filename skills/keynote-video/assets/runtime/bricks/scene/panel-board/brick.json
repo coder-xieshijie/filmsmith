@@ -1,0 +1,124 @@
+{
+  "id": "panel-board",
+  "category": "scene",
+  "name": {
+    "en": "Storyboard panels",
+    "zh": "分镜格"
+  },
+  "summary": {
+    "en": "The storyboard link: swatches, glyphs or the line itself grow into six 16:9 panels, sketches draw in them, panel 3 (the merge's first frame) is outlined in the line colour; the stage name. Opening the film, the line is cut into four segments that open into panels.",
+    "zh": "分镜环节：色板、字形或那条线本身长成六格 16:9 分镜，格里画出草图，第三格（合并镜头的第一帧）用线色描边选中；中央是阶段名。作为片子第一环时，那条线切成四段打开成分镜。"
+  },
+  "fits": "A reel's planning step; the first link of the short chain.",
+  "notFor": "More than six panels; boards whose panels show nothing the film does.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show the film planned before anything moves, and choose the shot the camera will go into.",
+      "zh": "在一切动起来之前先展示规划好的片子，并选出镜头要推进去的那一格。"
+    },
+    "content": {
+      "en": "No copy of its own: the stage name and note.",
+      "zh": "本身没有文案：阶段名和注释。"
+    },
+    "fits": {
+      "zh": "作品集里的规划一步；短链的第一环。"
+    },
+    "notFor": {
+      "zh": "超过六格；格里画的不是片子真做的事。"
+    },
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "cards",
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "storyboard",
+        "panels",
+        "sketch",
+        "grid",
+        "choose",
+        "line to panels"
+      ],
+      "zh": [
+        "分镜",
+        "格子",
+        "草图",
+        "网格",
+        "选中",
+        "线变格"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sphere-merge",
+        "note": "the camera pushes through panel 3"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      8
+    ],
+    "sec120": [
+      1.5,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js drawBoard, sketch, segEnvelope, panel"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/panel-board/brick.js",
+  "card": "scene/panel-board/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

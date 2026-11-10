@@ -1,0 +1,184 @@
+{
+  "id": "time-freeze",
+  "category": "motion",
+  "name": {
+    "en": "Time freeze",
+    "zh": "冻结环绕"
+  },
+  "summary": {
+    "en": "Time stops inside the picture while the camera keeps moving: the content brakes into a freeze, the camera orbits the frozen moment (or it is marked up, or each hit holds two frames), then time comes back and the content finishes.",
+    "zh": "画面里的时间停住、镜头还在动：内容急刹进冻结，相机绕着冻住的瞬间转一圈（或在定格上圈注点题，或每次命中顿两帧），再恢复时间让内容长完。"
+  },
+  "fits": "The one moment of a process worth looking at from the side (a spike, a peak); review and explain films that point at one thing (annotate); the weight of each landing in a combo (hit-stop).",
+  "notFor": "Content with no motion of its own (nothing to freeze); films without a 3D camera (use mode annotate).",
+  "select": {
+    "intent": {
+      "en": "\"This moment is worth stopping time for\": the content freezes while we look at it from the side or mark it up, so one instant of a process lands with weight.",
+      "zh": "“这一刻值得停下时间看”：内容冻住，镜头绕到侧面看或在上面圈注，过程中的一瞬被郑重点出来。"
+    },
+    "content": {
+      "en": "Wraps one time-driven painter (a chart growing, a list moving) and the moment to freeze; `annotate`: the focus point and a note ≤ 24 chars (Chinese ≤ 10 characters); `hit-stop`: the hit frames.",
+      "zh": "包住一块随时间变化的内容（生长的图表、移动的列表）并给出冻结时刻；`annotate` 版：焦点位置和一句 ≤ 24 字符（中文 ≤ 10 字）的批注；`hit-stop` 版：各次命中帧。"
+    },
+    "fits": {
+      "zh": "过程中值得从侧面看一眼的那一刻（尖峰、峰值）；指着一件事讲的评审与讲解片（annotate）；连招里每次落地的分量（hit-stop）。"
+    },
+    "notFor": {
+      "zh": "本身不动的内容（没东西可冻）；strip、split 风格（orbit 要动镜头，改用 annotate）。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "climax",
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "chart",
+      "metric",
+      "ui"
+    ],
+    "moods": [
+      "dramatic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "bullet time",
+        "freeze frame",
+        "orbit",
+        "freeze annotate",
+        "hit-stop",
+        "pause and point",
+        "time remap"
+      ],
+      "zh": [
+        "冻结环绕",
+        "定格圈注",
+        "子弹时间",
+        "顿帧",
+        "停下来看",
+        "时间冻结",
+        "变速与定格"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "combo-hits",
+        "note": "calls hitStop for each landing"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "One time-manipulator per shot: not with on-threes or another speed ramp; two remaps fight and read as a fault.",
+        "`hit-stop` must freeze the whole picture, background included; otherwise only that card seems to drop frames.",
+        "Pick by meaning: orbit is \"stop to look\", annotate is \"stop to explain\"."
+      ],
+      "zh": [
+        "一个镜头只能有一个时间操纵者：别和 on-threes 或其他变速叠用，两套重映射打架读作故障。",
+        "`hit-stop` 要整个画面连背景一起停；否则只像那张卡掉帧。",
+        "按语义选：orbit 是“停下来看”，annotate 是“停下来讲”。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "bullet-time-freeze-orbit",
+        "name": "冻结环绕",
+        "card": "张力运镜",
+        "summary": "图表生长到一半全冻住，相机绕悬停的 UI 平面 rotateY 扫 55° 再回，时间恢复接着长完",
+        "use": "情绪节点（震撼/收束）的运镜语言；与 space-camera-moves 的\"炫技大动作\"互补——这两式动作小、情绪重",
+        "energy": "A 高 / B 低收",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/bullet-time-freeze-orbit.mp4"
+      },
+      {
+        "key": "hit-counter",
+        "name": "连招计数",
+        "card": "冲击反馈",
+        "summary": "三卡接连砸入，每命中 = 顿帧 2f + 伤害数字上浮 + ×N 计数跳字逐次加码",
+        "use": "元素落位/撞击的\"命中一瞬\"——给砸入、撞停加游戏级手感；按强度阶梯选式",
+        "energy": "高（瞬时冲击）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/hit-counter.mp4"
+      },
+      {
+        "key": "freeze-annotate",
+        "name": "定格圈注",
+        "card": "变速与定格",
+        "summary": "帧号非线性 remap 的节奏手法——定格标注（流动→定格圈注→解冻）",
+        "use": "卡片流/长横移中把一个重点\"停下给人看\"；教学解说、评审语境",
+        "energy": "中高（速度反差本身即energy beat）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/freeze-annotate.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 9.5,
+    "range": [
+      8,
+      12
+    ]
+  },
+  "tier": "T2",
+  "family": "zoom-depth",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "bullet-time-freeze-orbit",
+        "path": "demos/camera/tension-camera-moves/BulletTimeFreezeOrbit.tsx",
+        "card": "references/shots/camera/tension-camera-moves.md"
+      },
+      {
+        "key": "hit-counter",
+        "path": "demos/effects/impact-feedback/HitCounter.tsx",
+        "card": "references/shots/effects/impact-feedback.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "freeze-annotate"
+  ],
+  "overlaps": [
+    {
+      "id": "tether-link",
+      "note": "its ring marks a thing without stopping time"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/time-freeze/brick.js",
+  "card": "motion/time-freeze/CARD.md",
+  "compare": {
+    "ssimMean": 0.7247,
+    "ssimMin": 0.6904,
+    "ssimDrop": 0.0666,
+    "trackDevPx": 1.8,
+    "progressRmse": 0.0002,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

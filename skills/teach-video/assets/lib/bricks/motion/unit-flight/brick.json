@@ -1,0 +1,136 @@
+{
+  "id": "unit-flight",
+  "category": "motion",
+  "name": {
+    "en": "Unit flight",
+    "zh": "方块迁移"
+  },
+  "summary": {
+    "en": "The same squares move from one chart into the next: they change colour in place, then fly group by group on arcs and land with one pulse.",
+    "zh": "同一批方块从一张图走进下一张：先原地变色，再按组沿弧线飞过去，落地轻轻一胀。"
+  },
+  "fits": "Any change of chart over the same counted items: grid to bands, bands to a sorted grid, bands to period columns, to an axis, to a closing rule.",
+  "notFor": "Charts of different items, or of measures that are not counts (a square must stay one item).",
+  "select": {
+    "intent": {
+      "en": "The same items move from one chart into the next, so the viewer trusts that every chapter counts the same things.",
+      "zh": "同一批方块从一张图飞进下一张图，观众因此相信每一章数的都是同一批东西。"
+    },
+    "content": {
+      "en": "A counted set as groups (2–9, name ≤ 14 chars / 6 字, count) and the two layouts it flies between (grid, sorted, bands, share, periods, axis, rule).",
+      "zh": "一个分组的计数集合（2–9 组，名称 ≤ 14 字符 / 6 字，带数量），以及它在两种布局之间飞（网格、排序、分带、占比、时期、轴、尺）。"
+    },
+    "fits": {
+      "zh": "同一批被计数的东西换一张图：网格到分带、分带到排序网格、分带到时期柱、到轴、到收尾尺。"
+    },
+    "notFor": {
+      "zh": "不同东西的图，或不是计数的量（一个方块必须始终是一件东西）。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "turn"
+    ],
+    "subjects": [
+      "chart"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "unit flight",
+        "regroup",
+        "mark then fly",
+        "chart to chart",
+        "same items",
+        "arc flight"
+      ],
+      "zh": [
+        "方块飞行",
+        "先变色再飞",
+        "换图不换数据",
+        "同一批方块",
+        "弧线飞行",
+        "分组重排"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "unit-bands",
+        "note": "the layout it most often flies into"
+      },
+      {
+        "id": "rank-sweep",
+        "note": "the closing light once the squares have landed"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Never add or drop a square between layouts.",
+        "Over about 2,000 squares the flight turns to noise; count a larger unit."
+      ],
+      "zh": [
+        "换布局时一个方块都不能增减。",
+        "超过约 2000 个方块，飞行就成了噪点；改数更大的单位。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 5,
+    "range": [
+      3,
+      7
+    ]
+  },
+  "tier": "T1",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "tally",
+      "any data"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/squares.js, timeline.js (FLIGHT, MARK)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "unit-regroup",
+      "note": "unit-regroup migrates dots on springs through clusters, columns and the digits of the total; unit-flight marks rounded squares in place, then flies them group by group on arcs between the tally layouts (bands, periods, axis, rule)"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/unit-flight/brick.js",
+  "card": "motion/unit-flight/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

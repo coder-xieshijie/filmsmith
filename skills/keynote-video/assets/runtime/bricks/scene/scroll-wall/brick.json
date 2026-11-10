@@ -1,0 +1,172 @@
+{
+  "id": "scroll-wall",
+  "category": "scene",
+  "name": {
+    "en": "Scroll wall",
+    "zh": "页面瀑布墙"
+  },
+  "summary": {
+    "en": "A wall of page cards tilted back in depth: three columns scroll at different speeds, the middle one reversed, while the camera creeps in; then they brake.",
+    "zh": "后仰在纵深里的一面页面卡墙：三列差速滚动、中列反向，镜头缓推；结尾各列刹停。"
+  },
+  "fits": "The breadth of a product (many pages, features or templates) in a few seconds, read as volume: a montage middle or the beat after an intro.",
+  "notFor": "Reading any one page (hand over to a single-card scene); fewer than nine distinct cards; a second time in the same film.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      12
+    ],
+    "sec120": [
+      4,
+      6
+    ]
+  },
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "page-waterfall-wall",
+        "path": "demos/ui-entrance/page-waterfall-wall/PageWaterfallWall.tsx",
+        "card": "references/shots/ui-entrance/page-waterfall-wall.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "card-pile",
+      "note": "stream mode: cards arrive one by one on a pile; scroll-wall is a standing wall that flows"
+    },
+    {
+      "id": "bento-wall",
+      "note": "a wall switching on in place; scroll-wall is a wall in continuous flow"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Say 'there is far more than we can show you' in a few seconds: a standing wall of pages keeps flowing past, read as volume, never as detail.",
+      "zh": "几秒钟里说清“多到给你看不完”：一面页面墙持续流过，读到的是体量，不是细节。"
+    },
+    "content": {
+      "en": "9–15 distinct card-level crops of the film's pages (not whole pages), none repeated across columns; no text slots, the crops only need to look like real pages.",
+      "zh": "9–15 张互不重复的页面切图（卡片级，不是整页），各列之间不复用同一张；没有文字槽，切图只需看得出是真页面。"
+    },
+    "fits": {
+      "zh": "几秒内交代产品的广度（很多页面、功能或模板），读作体量：蒙太奇中段，或片头之后那一拍。"
+    },
+    "notFor": {
+      "zh": "要读某一页（交给单卡场景）；少于九张不同的卡；同一支片第二次出现。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "rest",
+      "proof"
+    ],
+    "subjects": [
+      "image",
+      "ui",
+      "cards"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "waterfall wall",
+        "page wall",
+        "infinite scroll",
+        "parallax columns",
+        "ticker",
+        "breadth",
+        "montage",
+        "3D tilted wall"
+      ],
+      "zh": [
+        "页面瀑布墙",
+        "瀑布流",
+        "差速滚动",
+        "页面墙",
+        "产品广度",
+        "体量感",
+        "流不完",
+        "后仰墙面"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "deck-deal",
+        "note": "deal the wall in first, then hand over to the flow"
+      },
+      {
+        "id": "hero-spotlight",
+        "note": "hand over when one page must be read"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Each column's crops must be taller than the visible wall, or the same crop shows twice on screen.",
+        "Do not reuse a crop across columns; the same image in two columns reads as thin material.",
+        "It is an atmosphere shot: text on the crops only needs to look real; to have one page read, hand over to a single-card scene.",
+        "Once per film; a second waterfall reads as padding."
+      ],
+      "zh": [
+        "每列切图总高要超过可见墙高，否则同屏看到同一张两次。",
+        "列与列之间不复用同一张图；同图出现在两列读作素材穷。",
+        "这是氛围铺陈镜头：切图上的字只求看得出是真页面；要观众读某一页，交给单卡场景。",
+        "一支片只用一次；第二次读作凑时长。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "page-waterfall-wall",
+        "name": "页面瀑布墙",
+        "card": "页面瀑布墙",
+        "summary": "页面瀑布墙——真实页面截图切成 3–4 列在 3D 后仰墙面上差速反向无限滚动，视差 + 镜头缓推做\"内容多到流不完\"的一览",
+        "use": "\"多页面/多功能/多模板\"体量感段落；montage 中段铺陈或 intro 后的产品广度镜头",
+        "energy": "中（流动陈列型）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/page-waterfall-wall.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/scroll-wall/brick.js",
+  "card": "scene/scroll-wall/CARD.md",
+  "compare": {
+    "ssimMean": 0.3839,
+    "ssimMin": 0.332,
+    "ssimDrop": 0.0162,
+    "trackDevPx": 550.6,
+    "progressRmse": 0.0233,
+    "eventFrames": null,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "point-line",
+  "category": "scene",
+  "name": {
+    "en": "Point to line",
+    "zh": "点到线"
+  },
+  "summary": {
+    "en": "The accent point lands on beat 1, shoots into a line that hands its colour to the ink, and the endpoint rises out of it as its baseline; one token swaps in on an accent chip.",
+    "zh": "强调色的点在第 1 拍落下，射成一条线并把颜色交给墨色，接口路径从线上升起、以线为基线；其中一个记号换成强调色小片上的值。"
+  },
+  "fits": "The hook of a film that promotes one shape; any opening on one line of code, a path or a command.",
+  "notFor": "Prose openings; more than one line.",
+  "select": {
+    "intent": {
+      "en": "A film opens on the smallest thing, a point, and promotes it into the first fact, so the viewer is inside the product's logic from frame one.",
+      "zh": "片子从最小的东西——一个点——开场，把它升级成第一条事实，观众从第一帧起就在产品的逻辑里。"
+    },
+    "content": {
+      "en": "One line of code or a path (≤ 30 chars), an optional token swap [from, to], an optional note (≤ 36 / 14 字).",
+      "zh": "一行代码或路径（≤ 30 字符），可选的记号替换 [原, 新]，可选注释（≤ 36 字符 / 14 字）。"
+    },
+    "fits": {
+      "zh": "把一个形状逐级升级的片子的钩子；任何以一行代码、路径或命令开场的片子。"
+    },
+    "notFor": {
+      "zh": "以散文开场；超过一行。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "demo"
+    ],
+    "subjects": [
+      "code",
+      "abstract"
+    ],
+    "moods": [
+      "elegant",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "point",
+        "line",
+        "baseline",
+        "endpoint",
+        "token swap",
+        "opening"
+      ],
+      "zh": [
+        "点",
+        "线",
+        "基线",
+        "接口路径",
+        "记号替换",
+        "开场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "pill-card",
+        "note": "thickens its line into a pill"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the line under 30 characters; at 69 px a longer line leaves the safe area."
+      ],
+      "zh": [
+        "这一行不超过 30 字符；69 px 字号下再长就出安全区。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      5,
+      9
+    ],
+    "sec120": [
+      2.5,
+      4.5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "morph"
+    ],
+    "avoid": [
+      "tally",
+      "halftone"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/morph/film.js (drawPoint, lineState, drawLineText)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/point-line/brick.js",
+  "card": "scene/point-line/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "mid",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

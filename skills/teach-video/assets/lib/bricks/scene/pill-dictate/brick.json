@@ -1,0 +1,163 @@
+{
+  "id": "pill-dictate",
+  "category": "scene",
+  "name": {
+    "en": "Pill dictate",
+    "zh": "胶囊听写"
+  },
+  "summary": {
+    "en": "A fixed-width pill lands slightly large and out of focus with a light inside it; a sentence types in at an even pace and the light recedes as it does.",
+    "zh": "定宽胶囊输入条略大、略虚地落位，里面亮着光；一句话匀速打出，光随之退去。"
+  },
+  "fits": "The quiet moment a request is given, before the product answers.",
+  "notFor": "Text longer than a line; busy or fast passages; showing the reply.",
+  "energy": "low",
+  "duration": {
+    "beats": [
+      5,
+      9
+    ],
+    "sec120": [
+      2.5,
+      4.5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "glass-pill-dictation-typing",
+        "path": "demos/interaction/glass-pill-dictation-typing/GlassPillDictationTyping.tsx",
+        "card": "references/shots/interaction/glass-pill-dictation-typing.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "type-retype",
+      "note": "a typed line with a hesitation and a correction; pill-dictate is an even dictation into a field with light"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "A rest between louder beats: the input glows while it waits for you, and gives its light to the words as they arrive, so the request feels calm and personal.",
+      "zh": "高能段之间的一个休止：输入条等你开口时亮着光，字一出来就把光让给文字，请求显得安静而亲近。"
+    },
+    "content": {
+      "en": "One request sentence (en ≤ 34 chars, zh ≤ 16, one line) and an optional caption under the pill (en ≤ 24, zh ≤ 10).",
+      "zh": "一句请求（英文 ≤ 34 字符，中文 ≤ 16 字，一行内）和胶囊下方一行可选说明（英文 ≤ 24，中文 ≤ 10）。"
+    },
+    "fits": {
+      "zh": "请求被说出、产品还没回答前的那个安静时刻。"
+    },
+    "notFor": {
+      "zh": "超过一行的文字；忙碌或快节奏的段落；展示回答（交给下一场）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "hook",
+      "rest"
+    ],
+    "subjects": [
+      "voice",
+      "ui",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "warm",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "dictation",
+        "voice input",
+        "prompt pill",
+        "glass pill",
+        "ask AI",
+        "typing",
+        "light recedes",
+        "quiet beat"
+      ],
+      "zh": [
+        "胶囊听写",
+        "玻璃胶囊听写",
+        "语音输入",
+        "AI 输入框",
+        "跟它说话",
+        "光退",
+        "安静一拍",
+        "提示词"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "input-field",
+        "note": "the prop it draws"
+      },
+      {
+        "id": "type-filter",
+        "note": "the product answering the request"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Do only three things: land, type, let the light recede; any extra bounce, colour change or icon motion stops it being a rest.",
+        "On a light stage the glow must be strong and the ambient light must recede with it, or the receding light is not seen.",
+        "Re-fit the pill width (about 1.8–2× the sentence) and the typing window when the sentence changes."
+      ],
+      "zh": [
+        "只做三件事：落位、打字、光退；任何额外的弹跳、变色、图标动画都会让这一拍不再是休止。",
+        "亮场里内嵌光要给足饱和度，背后环境光要一起退，否则看不出“光退”。",
+        "句子变了，胶囊定宽（约句宽 1.8–2 倍）和打字窗口一起改。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "glass-pill-dictation-typing",
+        "name": "玻璃胶囊听写",
+        "card": "玻璃胶囊听写",
+        "summary": "一条定宽玻璃胶囊以约 1.25 倍略大弹出后缓落到位，内里自左淡到右浓铺一层强调色暖光；光标先行、随后匀速打出听写句，光（连同胶囊背后的环境光）随打字进度渐渐退去，收尾成一条中性的磨砂玻璃条",
+        "use": "语音/AI 输入框的登场；\"跟它说话\"的交互提示镜头；高能段之间的一个安静过渡拍",
+        "energy": "低（全片最安静的一拍，只有光在退）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/glass-pill-dictation-typing.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/pill-dictate/brick.js",
+  "card": "scene/pill-dictate/CARD.md",
+  "compare": {
+    "ssimMean": 0.9521,
+    "ssimMin": 0.9435,
+    "ssimDrop": 0.035,
+    "trackDevPx": 31.4,
+    "progressRmse": 0.004,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,123 @@
+{
+  "id": "unit-close",
+  "category": "scene",
+  "name": {
+    "en": "Unit close",
+    "zh": "方块收尾"
+  },
+  "summary": {
+    "en": "Up to three numbers land a beat apart over a rule made of the same squares; the protagonist number is larger in the accent and its own squares wait under it as beads that light up one by one on the last downbeat.",
+    "zh": "最多三个数字隔一拍落定，下面是同一批方块排成的一条线；主角数字更大、用强调色，它自己的方块在下面排成珠子，最后一个强拍上逐颗亮起。"
+  },
+  "fits": "The lock-up of a counted film: the whole, one notable count, the protagonist.",
+  "notFor": "More than three numbers; three equal numbers (one must be the protagonist).",
+  "select": {
+    "intent": {
+      "en": "The film ends on the few numbers that matter, standing on a rule made of the same squares, the protagonist last and largest.",
+      "zh": "全片收在几个要紧的数字上，它们站在同一批方块排成的尺上，主角最后出现、最大。"
+    },
+    "content": {
+      "en": "Up to three numbers (value, label ≤ 24 / 10 字), the protagonist index; optional source line.",
+      "zh": "最多三个数字（数值，标签 ≤ 24 字符 / 10 字），主角序号；可选来源一行。"
+    },
+    "fits": {
+      "zh": "计数片的落版：整体、一个值得注意的计数、主角。"
+    },
+    "notFor": {
+      "zh": "超过三个数字；三个一样分量的数字（必须有一个是主角）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup",
+      "claim"
+    ],
+    "subjects": [
+      "number",
+      "chart"
+    ],
+    "moods": [
+      "ceremonial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "closing numbers",
+        "rule",
+        "beads",
+        "lock-up",
+        "three numbers"
+      ],
+      "zh": [
+        "收尾数字",
+        "方块尺",
+        "珠串",
+        "落版",
+        "三个数"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "rank-sweep",
+        "note": "its second move on the last downbeat"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Let the protagonist number be the only accent on screen."
+      ],
+      "zh": [
+        "主角数字是屏上唯一的强调色。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      14
+    ],
+    "sec120": [
+      3,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "tally",
+      "any data"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/layouts.js (close), timeline.js (closing light)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/unit-close/brick.js",
+  "card": "scene/unit-close/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

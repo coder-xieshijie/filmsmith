@@ -11,6 +11,8 @@
 //   4. The zoom cases in cases.mjs (ZOOM_CASES) on copies of the blueprint-zoom demo project (F.bp.zoom near the presenter reserve,
 //      a second zoom after a built or stand-in segment), and kit-shared-identical: lib.js, main.js and build/ byte-identical across kits.
 //   5. voice-t2s: scripts/voice/voice.py words on a cached transcript written in traditional characters must write simplified ones.
+//   6. bricks-synced: assets/lib/ (the bricks synced from keynote-video) matches assets/lib/SYNC.json byte for byte, and keynote-video's
+//      files when that skill is next to this one; bricks-loader: a kit demo with film.json "bricks" puts them on window.BRICKS.
 // geo-check does not check the presenter reserve itself (the kit's build/page-checks.cjs compares that block pixel by pixel); the avatar-zone
 // case tests how geo-check treats the reserve: anything entirely inside it is not counted as content.
 // Needs node, uv, network on first run (GSAP from the npm registry, fonts, the pinned HyperFrames engine and its Chrome).
@@ -21,6 +23,7 @@ import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
 import { CASES, PAGE_CASES, PAGE_ITEMS, KIT_DEMOS, ZOOM_CASES } from './cases.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -135,6 +138,71 @@ function kitDrift() {
   return { code: 0, log: '', report: { issues } };
 }
 
+// bricks-synced: assets/lib/ (keynote-video's bricks whose hosts include teach, with what they import) is the synced copy, byte for
+// byte: every file matches the sha256 in assets/lib/SYNC.json and no file is extra or missing. When keynote-video sits next to this
+// skill (the source repository), each file must also equal its keynote-video original. Drift means the copy was edited here or the
+// source changed without a sync: edit bricks in keynote-video and run the publish package's sync-bricks.mjs.
+function bricksSynced() {
+  const lib = path.join(SKILL, 'assets/lib'), issues = [];
+  const man = JSON.parse(fs.readFileSync(path.join(lib, 'SYNC.json'), 'utf8')).files;
+  const have = [];
+  const walk = (r) => { for (const e of fs.readdirSync(path.join(lib, r), { withFileTypes: true })) { const f = r ? `${r}/${e.name}` : e.name; if (e.isDirectory()) walk(f); else have.push(f); } };
+  walk('');
+  const sha = (f) => createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+  for (const f of have) if (f !== 'SYNC.json' && !(f in man)) issues.push({ kind: 'bricks_drift', text: `extra assets/lib/${f}` });
+  for (const [f, h] of Object.entries(man)) {
+    const p = path.join(lib, f);
+    if (!fs.existsSync(p)) issues.push({ kind: 'bricks_drift', text: `missing assets/lib/${f}` });
+    else if (sha(p) !== h) issues.push({ kind: 'bricks_drift', text: `assets/lib/${f} differs from SYNC.json` });
+  }
+  const src = path.join(SKILL, '../keynote-video/assets/runtime');
+  if (fs.existsSync(src)) for (const f of Object.keys(man)) {
+    if (f === 'bricks/teach.json') continue;
+    const o = path.join(src, f);
+    if (!fs.existsSync(o)) issues.push({ kind: 'bricks_drift', text: `assets/lib/${f}: no longer in keynote-video` });
+    else if (sha(o) !== man[f]) issues.push({ kind: 'bricks_drift', text: `assets/lib/${f} differs from keynote-video's` });
+  }
+  return { code: 0, log: '', report: { issues } };
+}
+
+// bricks-loader: a copy of the terminal-ledger demo project lists two bricks in film.json, scripts/add-bricks.mjs copies them into lib/,
+// assemble writes the module loader, and the page must put both on window.BRICKS with a working create() (a brick drawn at p 0.5 on a
+// canvas paints something) and still build every segment.
+async function bricksLoader(demo) {
+  const d = path.join(tmp, 'bricks-loader'), ids = ['card-portal', 'digit-roll'], issues = [];
+  fs.cpSync(demo, d, { recursive: true });
+  sh('node', [path.join(SKILL, 'scripts/add-bricks.mjs'), d, '--ids', ids.join(',')]);
+  sh('node', [path.join(d, 'build/assemble.cjs')]);
+  const { launch } = createRequire(import.meta.url)(path.join(d, 'build/browser.cjs'));
+  const http = await import('node:http');
+  const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.wav': 'audio/wav', '.ttf': 'font/ttf', '.woff2': 'font/woff2' };
+  const srv = http.createServer((q, res) => { const f = path.join(d, decodeURIComponent(q.url.split('?')[0])); if (!f.startsWith(d) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); } res.writeHead(200, { 'content-type': types[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res); });
+  await new Promise((ok) => srv.listen(0, '127.0.0.1', ok));
+  const browser = await launch();
+  try {
+    const page = await browser.newPage();
+    const errs = []; page.on('pageerror', (e) => errs.push(e.message));
+    await page.goto(`http://127.0.0.1:${srv.address().port}/index.html`, { waitUntil: 'load' });
+    await page.waitForFunction('window.__built', { timeout: 60000 });
+    const r = await page.evaluate(async (ids) => {
+      const out = {};
+      for (const id of ids) {
+        const B = window.BRICKS && window.BRICKS[id];
+        if (!B) { out[id] = 'missing'; continue; }
+        const b = await B.create({}, { lang: 'zh' }), c = document.createElement('canvas'); c.width = 1920; c.height = 1080;
+        const g = c.getContext('2d', { willReadFrequently: true }); b.draw(g, 0.5, { dur: 1 });
+        const px = g.getImageData(0, 0, 1920, 1080).data; let n = 0; for (let i = 3; i < px.length; i += 4 * 97) if (px[i]) n++;
+        out[id] = n ? 'ok' : 'blank';
+      }
+      return { out, built: window.__built.length, errs: window.__segErrors.length };
+    }, ids);
+    for (const id of ids) if (r.out[id] !== 'ok') issues.push({ kind: 'bricks_loader', text: `${id}: ${r.out[id]}` });
+    if (!r.built || r.errs) issues.push({ kind: 'bricks_loader', text: `segments built ${r.built}, errors ${r.errs}` });
+    for (const e of errs) issues.push({ kind: 'bricks_loader', text: `page error: ${e}` });
+  } finally { await browser.close(); srv.close(); }
+  return { code: 0, log: '', report: { issues } };
+}
+
 // voice-t2s: a shared-assets folder whose cached transcript (vo/a1.words.json, keyed by the audio's hash, so nothing is transcribed) is in
 // traditional characters; voice.py words must write words.json in simplified ones
 function voiceT2S() {
@@ -214,6 +282,8 @@ for (const kit of KIT_DEMOS) jobs.push({ name: 'kit-demo-' + kit, what: `the ${k
 for (const c of PAGE_CASES) jobs.push({ name: c.name, what: c.what, expect: c.expect, kit: 'terminal-ledger', run: async () => { try { return await pageCase(c, needDemo()); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
 for (const c of ZOOM_CASES) jobs.push({ name: c.name, what: c.what, expect: c.expect, kit: 'blueprint-zoom', run: async () => { try { return await zoomCase(c, needDemo('blueprint-zoom')); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
 jobs.push({ name: 'kit-shared-identical', what: 'lib.js, main.js and build/ are byte-identical in every kit', expect: [], run: async () => kitDrift() });
+jobs.push({ name: 'bricks-synced', what: 'assets/lib/ is the synced brick subset: SYNC.json hashes, and keynote-video\'s files when it is next to this skill', expect: [], run: async () => bricksSynced() });
+jobs.push({ name: 'bricks-loader', what: 'film.json "bricks" are copied by add-bricks.mjs, loaded before main.js and work on window.BRICKS', expect: [], kit: 'terminal-ledger', run: async () => { try { return await bricksLoader(needDemo()); } catch (e) { return { code: 2, log: e.message, report: null }; } } });
 jobs.push({ name: 'voice-t2s', what: 'voice.py words turns a cached transcript in traditional characters (這樣的話 說過) into simplified ones', expect: [], run: async () => voiceT2S() });
 const todo = jobs.filter((j) => !ONLY || ONLY.test(j.name));
 for (const kit of new Set(todo.map((j) => j.kit).filter(Boolean))) { try { needDemo(kit); } catch (_) { /* each kit job reports it */ } }

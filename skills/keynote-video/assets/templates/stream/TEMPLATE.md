@@ -36,7 +36,7 @@ Choose the language from the material: Chinese material makes a Chinese film, En
 
 Chinese needs `uvx` ([uv](https://docs.astral.sh/uv/)) on PATH: `npm run setup` downloads Noto Sans SC (about 18 MB, from the pinned google/fonts commit), cuts it to the film's characters with fontTools (about 170 KB for the example) and stops when a character of `content.js` is missing from the font, so a film never falls back to a system face. Change the Chinese copy, run `npm run setup` again. English needs only DM Sans; without `uvx` its coverage check is skipped with a warning.
 
-The Chinese reading rule (6 characters a second plus 0.5 s a state, owner, 2026-11-09) lives in `lang.js`; the runtime's `cjkCharSec` (9 characters a second) is not used by this template.
+The Chinese reading rule (6 characters a second plus 0.5 s a state, owner, 2026-11-09) is written in this template's `lang.js` and is the same as the runtime's `timing.js` `readTime`.
 
 ## Variants
 

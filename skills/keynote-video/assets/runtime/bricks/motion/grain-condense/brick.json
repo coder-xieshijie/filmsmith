@@ -1,0 +1,163 @@
+{
+  "id": "grain-condense",
+  "category": "motion",
+  "name": {
+    "en": "Grain condense",
+    "zh": "文字砂化凝聚"
+  },
+  "summary": {
+    "en": "A line of text boils into grain under a selection box and the cloud condenses into a larger mark that sets sharp and glowing.",
+    "zh": "一行字在选区框里沸腾成颗粒，颗粒云急速凝聚成更大的短字标，位移归零后清晰发光定格。"
+  },
+  "fits": "A long line that boils down to one word: a launch line into the product name, a sentence into its keyword, at the end of a film.",
+  "notFor": "Text the viewer still has to read when it starts moving (the line is legible only in the first 0.26 s); two texts that do not name the same thing.",
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      5
+    ]
+  },
+  "tier": "T2",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "dossier",
+      "exhibit"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "grain-dissolve",
+        "path": "demos/outro/grain-dissolve/GrainDissolve.tsx",
+        "card": "references/shots/outro/grain-dissolve.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "scramble-resolve",
+      "note": "characters cycle in place to the next text; grain-condense dissolves the whole line into a cloud and condenses a different, larger word"
+    },
+    {
+      "id": "unit-regroup",
+      "note": "dots that spell a number from the font; grain-condense is a displacement of the type itself, no particles to count"
+    },
+    {
+      "id": "shard-gather",
+      "note": "tiles of a poster gather and fly apart in 3D; grain-condense is fine grain in place"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/grain-condense/brick.js",
+  "card": "motion/grain-condense/CARD.md",
+  "compare": {
+    "ssimMean": 0.8185,
+    "ssimMin": 0.7917,
+    "ssimDrop": 0.0171,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "A long line boils down to the one word that matters, so the viewer feels the message distilled into the name.",
+      "zh": "一长句沸腾凝缩成最要紧的那个词，让观众感到信息被提纯成了名字。"
+    },
+    "content": {
+      "en": "Two texts that name the same thing: a line (≤ 40 chars) and a shorter mark (≤ 16 chars, usually the product name).",
+      "zh": "指同一件事的两段字：一句（≤ 18 字）和一个更短的字标（≤ 6 字，通常是产品名）。"
+    },
+    "fits": {
+      "zh": "片尾把一句宣言收成产品名，或把一句话收成关键词。"
+    },
+    "notFor": {
+      "zh": "起动时还得读的字（句子只有前 0.26 秒能读）；指的不是同一件事的两段字。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "lockup",
+      "claim"
+    ],
+    "subjects": [
+      "title",
+      "logo"
+    ],
+    "moods": [
+      "dramatic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "grain dissolve",
+        "sand",
+        "boil",
+        "condense",
+        "displacement",
+        "noise",
+        "selection box"
+      ],
+      "zh": [
+        "颗粒消融",
+        "砂化",
+        "沸腾",
+        "凝聚",
+        "噪声置换",
+        "选区框",
+        "收成字标"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "mark-lockup",
+        "note": "the condensed name can hand over to the full lock-up with its mark"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Both texts must say the same thing; a swap between unrelated words reads as a glitch.",
+        "The line is unreadable once the boil starts: show it on screen before this move."
+      ],
+      "zh": [
+        "两段字必须是同一件事，不相干的字互换像故障。",
+        "一沸腾句子就读不了：让它在这一动之前先在画面上停够。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "grain-dissolve",
+        "name": "文字砂化凝聚",
+        "card": "文字砂化凝聚",
+        "summary": "整行字爆裂成沸腾颗粒噪点并浮现斜纹选区框，噪点云急速凝聚成更大号发光短字标，位移衰减归零定格",
+        "use": "收尾\"XX. Now Live\"式上线宣告；长句信息压缩成品牌短标的能量聚合拍",
+        "energy": "中高（短促、一次性的能量脉冲，天然的 outro 卡点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/grain-dissolve.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

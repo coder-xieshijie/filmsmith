@@ -368,6 +368,44 @@ export const glitch = ({ sr = SR, seed = 0, dur = 0.25, rate = 24 } = {}) => {
   return done(b, sr, 0.2);
 };
 
+// paper({ dur, tone, grain, attack }) — paper friction: a label, a chip or a card rubbed onto the page, a sheet dragged.
+// Brown noise high-passed at `tone` Hz (higher is thinner and crisper), roughened by a seeded stick-slip grain, a short
+// rise and an exponential fall over the last three quarters.
+export const paper = ({ sr = SR, seed = 0, dur = 0.32, tone = 1400, grain = 0.3, attack = 0.04 } = {}) => {
+  const n = len(dur, sr), rnd = rngFor('paper', seed), b = new Float32Array(n);
+  let y = 0;
+  for (let i = 0; i < n; i++) { y = (y + 0.02 * (rnd() * 2 - 1)) / 1.02; b[i] = y; }
+  biquad(biquad(b, 'hp', tone, 0.707, 0, sr), 'hp', tone, 0.707, 0, sr);
+  const step = Math.max(1, Math.round(sr / 90)), an = Math.max(1, Math.round(attack * sr)), hn = Math.max(an, Math.round(0.25 * n));
+  let a = 1 - grain * rnd(), z = 1 - grain * rnd();
+  for (let i = 0; i < n; i++) {
+    if (i % step === 0) { a = z; z = 1 - grain * rnd(); }
+    const gr = a + (z - a) * ((i % step) / step);
+    const u = i < hn ? 0 : (i - hn) / Math.max(1, n - hn);
+    const e = i < an ? 0.5 - 0.5 * Math.cos((Math.PI * i) / an) : Math.exp(-5 * u) * (1 - u);
+    b[i] *= gr * e;
+  }
+  return done(b, sr, 1, 10);
+};
+
+// scratch({ dur, tone, width, rate, depth }) — a pen or pencil stroke: white noise band-passed around `tone` Hz
+// (`width` octaves), its level shaken by the nib's grain at `rate` Hz (`depth` 0..1, the rate drifting a little with the
+// seed), a 30 ms rise and a fall over the last 40 %. A soft felt tip: lower `depth` and `width`.
+export const scratch = ({ sr = SR, seed = 0, dur = 0.34, tone = 3200, width = 1.2, rate = 28, depth = 0.7 } = {}) => {
+  const n = len(dur, sr), rnd = rngFor('scratch', seed), w = 2 ** width;
+  const b = biquad(white(n, rnd), 'bp', tone, Math.sqrt(w) / (w - 1), 0, sr);
+  const an = Math.max(1, Math.round(0.03 * sr)), rn = Math.max(1, Math.round(0.4 * n));
+  const drift = rnd() * TAU, wob = 0.08 + 0.08 * rnd();
+  let ph = rnd() * TAU;
+  for (let i = 0; i < n; i++) {
+    ph += (TAU * rate * (1 + wob * Math.sin(drift + (TAU * 3 * i) / sr))) / sr;
+    const tr = 1 - depth * (0.5 - 0.5 * Math.sin(ph));
+    const e = i < an ? 0.5 - 0.5 * Math.cos((Math.PI * i) / an) : i > n - rn ? (n - i) / rn : 1;
+    b[i] *= tr * e * e;
+  }
+  return done(b, sr, 0.5, 8);
+};
+
 // swell({ freqs, dur, cutoff }) — reversed-feeling crescendo of a soft chord that stops on its end time.
 export const swell = ({ sr = SR, seed = 0, freqs = ['A3', 'D4', 'E4'], dur = 1.5, cutoff = 2400 } = {}) => {
   const b = pad({ sr, seed, freqs, dur, attack: dur * 0.95, release: 0.02, cutoff, motion: 0.05, air: 0.6 });
@@ -378,5 +416,5 @@ export const swell = ({ sr = SR, seed = 0, freqs = ['A3', 'D4', 'E4'], dur = 1.5
 
 export const VOICES = {
   kick, snare, clap, hat, rim, tom, synth, bass, sub, pluck, pad, keys, marimba, bell, arp,
-  tick, thud, chime, pop, whoosh, riser, impact, stamp, typeKey, glitch, swell,
+  tick, thud, chime, pop, whoosh, riser, impact, stamp, typeKey, glitch, swell, paper, scratch,
 };

@@ -3,7 +3,7 @@
 //
 //   node score.mjs        → assets/audio/mix-raw.wav, assets/audio/mix.wav (−14 LUFS, ≤ −1.5 dBTP), measure.json
 //
-// The bed is written here from lib/audio voices (no preset in lib/audio/beds.mjs fits morph yet): E major, one chord
+// The bed is written here from lib/audio voices (the same bed is the glass preset in lib/audio/beds.mjs, which bricks use): E major, one chord
 // a bar (Emaj9 C#m9 Amaj7#11 B7sus4), a soft pad, a plucked eighth-note arpeggio of the chord ("glass"), a muted kick
 // and offbeat hats that thicken scene by scene, a pad-only breath under the focus card's code, a riser into the flood,
 // the drop (four on the floor, claps, sixteenth hats, bass on every beat) from the flood's bar line to its retract, and

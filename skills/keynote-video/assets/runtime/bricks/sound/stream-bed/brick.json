@@ -1,0 +1,129 @@
+{
+  "id": "stream-bed",
+  "category": "sound",
+  "name": {
+    "en": "Stream bed",
+    "zh": "意识流音乐床"
+  },
+  "summary": {
+    "en": "The stream sound: the terminal bed (a filtered synth pulse in A minor, 120–132 BPM) building while things pile up, breaking on the freeze, dropping on each of the three peaks; one sound per picture event (ticks as the thread pierces, a pluck per star, a chime per result, a stamp at the gate) and the film's only alert on the one \"needs you\".",
+    "zh": "stream 的声音：terminal 音乐床（A 小调的滤波合成脉冲，120–132 BPM），堆积时铺垫、定格时断开、三个高峰各落一次拍；每个画面事件一个声音（线穿过时的滴答、每颗星一声拨弦、每个结果一声铃、关卡一记盖章），全片唯一的提示音给唯一的“需要你”。"
+  },
+  "fits": "Films of agents and background work; films with many small events and three peaks.",
+  "notFor": "Films with voice-over; loud or aggressive subjects.",
+  "select": {
+    "intent": {
+      "en": "Sound like quiet work at night with a pulse under it: small exact sounds, one alert.",
+      "zh": "听起来像夜里安静的工作，底下有脉搏：小而准的声音，只有一次提示。"
+    },
+    "content": {
+      "en": "The arc roles and their scenes; cues from the scenes' plans.",
+      "zh": "骨架角色与各场景；场景 plan 给出的提示点。"
+    },
+    "fits": {
+      "zh": "agent 与后台工作的片；小事件很多、有三个高峰的片。"
+    },
+    "notFor": {
+      "zh": "有旁白的片；吵闹或强攻击性的题材。"
+    },
+    "subjects": [
+      "abstract",
+      "terminal"
+    ],
+    "moods": [
+      "calm",
+      "technical",
+      "mysterious"
+    ],
+    "keywords": {
+      "en": [
+        "synth",
+        "pulse",
+        "terminal",
+        "pluck",
+        "chime",
+        "alert",
+        "night"
+      ],
+      "zh": [
+        "合成器",
+        "脉冲",
+        "终端",
+        "拨弦",
+        "铃声",
+        "提示音",
+        "夜"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "scatter-gather",
+        "note": "its arc"
+      },
+      {
+        "id": "night-sky",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The three-note alert is used once, on the one row that needs the user: a second alert spends it.",
+        "Pluck pitches climb a pentatonic per star; past eight stars they wrap, so keep launched stars under about eight before the sweep."
+      ],
+      "zh": [
+        "三音提示只用一次，给唯一一行需要用户的：用第二次就不值钱了。",
+        "每颗星的拨弦沿五声音阶往上；超过八颗会绕回，所以扫掠前派出的星最好不超过八颗左右。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "bpm": [
+      120,
+      132
+    ]
+  },
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/score.mjs; sched.js (music, cues); timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "phosphor-bed",
+      "note": "the same terminal preset; phosphor-bed types keys and builds by chapter"
+    },
+    {
+      "id": "shell-bed",
+      "note": "the same terminal preset; shell-bed clicks keys and ticks louvre slats"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "sound/stream-bed/sound.js",
+  "card": "sound/stream-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

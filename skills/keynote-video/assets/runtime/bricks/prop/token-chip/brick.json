@@ -1,0 +1,105 @@
+{
+  "id": "token-chip",
+  "category": "prop",
+  "name": {
+    "en": "Token chip",
+    "zh": "词元块"
+  },
+  "summary": {
+    "en": "One unit of a run as an object: a rounded box with a mono label whose outline wears one of four meanings: untouched, acted on now, learned, unseen.",
+    "zh": "运行里的一个单元：带等宽标签的圆角块，描边只有四种含义：未动、正在处理、学到的、没见过。"
+  },
+  "fits": "Any diagram whose units are counted, merged or tested.",
+  "notFor": "Free-form labels (it is a unit of data, not a tag); more than four meanings.",
+  "select": {
+    "intent": {
+      "en": "A unit of data looks like a thing that can be merged, counted or tested, and its outline says what is happening to it.",
+      "zh": "一个数据单元看起来是能被合并、计数、测试的东西，轮廓颜色说明它正在经历什么。"
+    },
+    "content": {
+      "en": "A label in code (≤ 8 chars).",
+      "zh": "一个代码标签（≤ 8 字符）。"
+    },
+    "fits": {
+      "zh": "单元被计数、合并或测试的任何图解。"
+    },
+    "notFor": {
+      "zh": "随意的标签（它是数据单元不是标签）；超过四种含义。"
+    },
+    "roles": [
+      "demo",
+      "hook"
+    ],
+    "subjects": [
+      "code",
+      "diagram"
+    ],
+    "moods": [
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "token",
+        "chip",
+        "unit",
+        "label box"
+      ],
+      "zh": [
+        "词元",
+        "芯片",
+        "单元",
+        "标签框"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "pair-fuse",
+        "note": "fuses two of them"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Four meanings at most; a fifth colour has no place in the legend."
+      ],
+      "zh": [
+        "最多四种含义；第五种颜色在图例里没位置。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "trace",
+      "any diagram"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/trace/pieces.js (drawChip)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "prop/token-chip/brick.js",
+  "card": "prop/token-chip/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

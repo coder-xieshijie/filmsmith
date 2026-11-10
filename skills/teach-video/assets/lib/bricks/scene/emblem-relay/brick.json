@@ -1,0 +1,158 @@
+{
+  "id": "emblem-relay",
+  "category": "scene",
+  "name": {
+    "en": "Emblem relay",
+    "zh": "几何徽记接力"
+  },
+  "summary": {
+    "en": "Two to four benefit words relayed in the centre, each with its own geometry behind it: rings that spin, rings that lock, a metal sheen for the last.",
+    "zh": "两到四个利益词在画面中央接力，每个词背后一套专属几何：转动的环、咬合的环，最后一个词扫过金属光泽。"
+  },
+  "fits": "A three-point benefit statement (quick, locked, polished) or a set of values said one word at a time, in the middle of a film.",
+  "notFor": "Words longer than one word (three Chinese characters); calm films (nothing on screen ever stops); light grounds.",
+  "energy": "high",
+  "duration": {
+    "beats": [
+      8,
+      16
+    ],
+    "sec120": [
+      4,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "dossier",
+      "ink"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "word-relay-geometry",
+        "path": "demos/typography/word-relay-geometry/WordRelayGeometry.tsx",
+        "card": "references/shots/typography/word-relay-geometry.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "select": {
+    "intent": {
+      "en": "Let each benefit word be argued by its own geometry, spinning rings for quick, locking rings for tight, a metal sheen for the final word, so three words become one continuous claim rather than three title cards.",
+      "zh": "让每个利益词由专属几何替它论证：转动的环是“快”、咬合的环是“紧”、金属光泽给最后那个结论词，三个词连成一句连贯的主张，而不是三张字卡。"
+    },
+    "content": {
+      "en": "2–4 single benefit words of the same grammatical kind (en ≤ 9 chars each, zh ≤ 3), optional one-line subs (en ≤ 40, zh ≤ 16), and which geometry backs each word.",
+      "zh": "2–4 个同一词性的利益词（每个英文 ≤ 9 字符，中文 ≤ 3 字），可选每词一行说明（英文 ≤ 40，中文 ≤ 16），并指定每个词配哪套几何。"
+    },
+    "fits": {
+      "zh": "片子中段的三点式利益陈述（快、稳、精致），或一词一词说出的一组价值观。"
+    },
+    "notFor": {
+      "zh": "超过一个词的说法（中文超过三个字）；安静的片子（画面上始终没有静止）；浅色底。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "claim",
+      "proof"
+    ],
+    "subjects": [
+      "title",
+      "abstract"
+    ],
+    "moods": [
+      "energetic",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "benefit words",
+        "word relay",
+        "three-point claim",
+        "value words",
+        "geometry emblem",
+        "chrome sheen",
+        "one word one world",
+        "faster better stronger"
+      ],
+      "zh": [
+        "几何徽记接力",
+        "利益词接力",
+        "三点式利益陈述",
+        "价值观",
+        "一词一世界",
+        "金属扫光",
+        "更快更好更强",
+        "几何论证"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "mark-lockup",
+        "note": "the polished last word hands over to the lockup"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The words must be the same kind (three adjectives or three comparatives) and of similar length; a long word pushes out of its ring.",
+        "Give the sheen to the last word only; sheen on every word removes the sense of a conclusion.",
+        "Keep the dust, shared stage light and progress bar; without them the relay falls back into three separate cards."
+      ],
+      "zh": [
+        "几个词要同一词性、长度相近；长词会顶出圆环。",
+        "金属扫光只给最后一个词；每个词都扫就没有结论感。",
+        "保留背景微尘、共用舞台光和进度条；没有它们接力会退回三张分开的字卡。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "word-relay-geometry",
+        "name": "利益词接力",
+        "card": "利益词接力",
+        "summary": "三个利益词各带一套专属几何接力——虚线大圆减速自转 + 彗星弧飞跑 → 三实线圆 trim 依次生长后收拢咬紧 → 镀铬金属 sheen 扫过后一拍收成纯白；旧词缩到 0.86 淡出，新词描边→填充揭示",
+        "use": "三点式利益陈述（更快/更好/更强）；品牌价值观段落；需要\"一词一世界\"的中段推进",
+        "energy": "中高（三拍推进 + 全程几何运动 + 背景粒子，无静止帧）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/word-relay-geometry.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/emblem-relay/brick.js",
+  "card": "scene/emblem-relay/CARD.md",
+  "compare": {
+    "ssimMean": 0.8089,
+    "ssimMin": 0.7876,
+    "ssimDrop": 0.0256,
+    "trackDevPx": 0,
+    "progressRmse": 0.0001,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "fitsRoles": [
+    "claim",
+    "proof"
+  ],
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

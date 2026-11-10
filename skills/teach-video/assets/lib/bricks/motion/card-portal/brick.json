@@ -1,0 +1,169 @@
+{
+  "id": "card-portal",
+  "category": "motion",
+  "name": {
+    "en": "Card portal",
+    "zh": "穿窗"
+  },
+  "summary": {
+    "en": "A card lifts, then grows into a full-frame window; the next scene grows from inside it.",
+    "zh": "画面里的一张卡先抬起，再放大成全屏窗口，下一场从窗里长出来接管。"
+  },
+  "fits": "Overview → the detail of one item (open this card, enter its world).",
+  "notFor": "Two scenes with no part-whole relation; it then reads as a decorative wipe.",
+  "select": {
+    "intent": {
+      "en": "Clicking into one item of an overview: the viewer feels they have entered that card's own world, not watched a wipe.",
+      "zh": "像点开总览里的一张卡走进它的世界：观众感到是“进入这一项”，而不是看了一次擦除。"
+    },
+    "content": {
+      "en": "Wraps two scenes: an overview with at least one card (its rect on screen) and the next scene, which should be that card's detail; no text of its own.",
+      "zh": "包住两场：一场带卡片的总览（给出那张卡在画面里的位置），下一场最好就是这张卡的详情；自身不带文字。"
+    },
+    "fits": {
+      "zh": "总览 → 其中一项的详情（点开这张卡，进入它的世界）。"
+    },
+    "notFor": {
+      "zh": "两场没有整体与局部关系（读成花哨擦除）；镜头锁死的风格（strip、split、scroll）。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "demo",
+      "turn"
+    ],
+    "subjects": [
+      "cards",
+      "ui"
+    ],
+    "moods": [
+      "cinematic",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "portal wipe",
+        "mask wipe",
+        "open the card",
+        "drill-down",
+        "zoom into card",
+        "part to whole",
+        "window grow"
+      ],
+      "zh": [
+        "穿窗转场",
+        "镜头交棒",
+        "点开卡片",
+        "进入详情",
+        "卡片放大成窗",
+        "纵深转场",
+        "总览到详情"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "bento-wall",
+        "note": "an overview of cards to open one from"
+      },
+      {
+        "id": "tile-card",
+        "note": "the card that grows into the window"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The world inside the window must be the opened card's detail; an unrelated scene turns it into a decorative wipe.",
+        "One transition per seam: no white flash or blur stacked on the growth.",
+        "Let the next scene really stop (hold ≥ 1 s) after the window fills; drifting parallax steals the read."
+      ],
+      "zh": [
+        "窗里长出的必须是被点开那张卡的详情；塞无关场景就成了花哨擦除。",
+        "一个接缝只用一式：放大途中别再叠白闪或模糊。",
+        "窗铺满后让下一场真停住（≥ 1 秒）再读；视差一直飘会抢走阅读。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "mask-wipe",
+        "name": "穿窗转场",
+        "card": "镜头交棒转场",
+        "summary": "页面内真实元素（卡片）放大成全屏窗口，新场景从窗内长出接管",
+        "use": "任何两镜衔接处（技法卡，分镜阶段排完镜头后逐个接缝选一式）",
+        "energy": "n/a（技法卡，不占能量位）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/mask-wipe.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "zoom-depth",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "mask-wipe",
+        "path": "demos/transition/shot-transitions/PortalWipeV2.tsx",
+        "card": "references/shots/transition/shot-transitions.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "gate-punch",
+      "note": "same function bound to the strip film material"
+    },
+    {
+      "id": "sheet-pick",
+      "note": "a ringed cell to the full frame, film material"
+    },
+    {
+      "id": "viewport-push",
+      "note": "pushes inside a still window instead of growing the window"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/card-portal/brick.js",
+  "card": "motion/card-portal/CARD.md",
+  "compare": {
+    "ssimMean": 0.6974,
+    "ssimMin": 0.669,
+    "ssimDrop": 0.0076,
+    "trackDevPx": 0.1,
+    "progressRmse": 0.0001,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

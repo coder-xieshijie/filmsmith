@@ -1,6 +1,6 @@
 # System: the values every mode shares
 
-The composition layer under the modes: neutrals, accents and named colours with their provenance, type families and how they pair, type scales, spacing and safe areas, corners and strokes, motion and sound recipes. A mode card takes its values from here, or states the departure and its reason ([foundations](foundations.md#who-decides)). A new mode starts here before it invents anything.
+The composition layer under the styles: neutrals, accents and named colours with their provenance, type families and how they pair, type scales, language, spacing and safe areas, corners and strokes, motion and sound recipes. A look brick and a mode card take their values from here, or state the departure and its reason ([foundations](foundations.md#who-decides)). A new style starts here before it invents anything.
 
 Tags as in [foundations](foundations.md#where-values-come-from): `standard`, `borrowed`, `derived`, `owner`, `draft`. Colour figures are CIELAB (D65) and WCAG 2.2 contrast; the study behind them is the workshop's colour audit of 2026-10-17.
 
@@ -64,7 +64,7 @@ A name is only used when its value can be traced; otherwise the preset gets a pl
 
 ### Families
 
-Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `setup-fonts.mjs` (stream: its own `tools/fonts.mjs`, per language), its licence file copied next to it.
+Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `setup-fonts.mjs` (stream: its own `tools/fonts.mjs`, per language), its licence file copied next to it. Fonts are downloaded when a film is set up and never committed to the skill.
 
 | Family | Class | Role in the skill | Modes |
 |---|---|---|---|
@@ -81,7 +81,8 @@ Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `set
 | Schibsted Grotesk | news grotesque (variable, wght axis) | quotes, the hook and the name over a long page | scroll |
 | DM Mono | monospace | measured values: lengths, the address | strip, scroll |
 | DM Sans | geometric grotesque (variable, opsz and wght axes) | every Latin line: captions, blocks, the name | stream |
-| Noto Sans SC | Chinese sans (variable, wght axis), cut to the film's characters at setup | Chinese text, after DM Sans in the stack | stream (`lang: 'zh'`) |
+| Noto Sans SC | Chinese sans (variable, wght axis), cut to the film's characters at setup | every Chinese sans line, after the style's Latin family in the stack | every style in Chinese |
+| Noto Serif SC | Chinese serif (variable, wght axis), cut to the film's characters at setup | Chinese where the style sets a serif (thread's notes, trace's thesis, dossier's claims), upright | every style with a serif, in Chinese |
 
 ### Pairing rules
 
@@ -89,7 +90,7 @@ Every family is SIL OFL 1.1, fetched from one pinned google/fonts commit by `set
 - Mono only for what is really code, a command, a hash or a data label; never for headings that merely want to look technical.
 - A serif appears only where the content is editorial or explanatory (a thesis, a quotation); a launch film stays sans.
 - Pair within one design system when possible (Plex Sans with Plex Mono); otherwise pair by x-height and stroke contrast, and settle a hesitation with five-second samples (tech-product-launch rule 6).
-- Chinese is set only in stream (`lang: 'zh'`): Noto Sans SC after DM Sans, +0.02 em tracking and 1.5 leading, a character at a time, 6 characters a second plus 0.5 s a state to read (owner, 2026-11-09). Every other mode is English.
+- A Chinese face follows the style's Latin family in each stack (Noto Sans SC after a sans, Noto Serif SC after a serif, Noto Sans SC after a mono for Chinese labels), so Latin words and digits inside Chinese keep the style's Latin face ([Language](#language)).
 
 ### Scales
 
@@ -110,6 +111,27 @@ One series per mode; sizes within 15 % are one level, neighbouring levels ≥ 1.
 | stream | named series 26 · 30 · 34 · 42 · 58 · 66 · 168 (about ×1.2–1.4, from the source film's 25.2 · 32 · 40 · 64 · 96); caption 58 / bubble 34 / row 26–30, cards 58 / 42 / 27, claim 66 / 54, lock-up 168 / 40; the same in Chinese | derived |
 
 A new mode picks a named series (ISO 3098 for drawings, a modular ratio ≥ 1.25 from the 25 px floor otherwise) before it sets any size.
+
+## Language
+
+A film's on-screen language is `content.lang`, `'en'` (the default) or `'zh'`, chosen from the material ([SKILL.md](../SKILL.md#scope-and-fixed-rules)); the page's `<html lang>` follows it (`zh-CN` selects simplified glyph forms). Every brick and every runtime text function takes the language; a brick's card says per language whether it is `full` (the same effect), `adapted` (another effect, described on the card) or `none` (left out of a film in that language). The rules below are the only place the Chinese values are written; recipes say how each style applies them.
+
+| Rule | English | Chinese | Tag |
+|---|---|---|---|
+| Reading, primary text | 0.3 s a word; a word is a space-separated token with a letter or digit in it (`→`, `·`, `—`, `/` on their own do not count) | 6 characters a second; a Latin word inside Chinese (a run of letters and digits: `Filmsmith`, `v1.5`) 0.3 s; punctuation and symbols do not count; plus 0.5 s for each primary text, once | owner, 2026-11-09 |
+| Example | `Ship it → faster · today`: 4 words, 1.2 s | `用 Filmsmith 做一支片，3 分钟。`: 6 characters and 2 Latin words, 2.27 s | derived |
+| Information text | ≥ 25 px | ≥ 28 px | owner, 2026-11-10 |
+| Main text | ≥ 40 px | ≥ 40 px | derived |
+| Line breaking | at spaces | between characters, never inside a Latin word or a number with its unit; no `。，、；：？！）」』` at a line's start, no `（「『` at its end; break after `，、：；。！？` first, and balance the lines so the last holds more than one character | standard (simplified kinsoku) |
+| Setting | the style's tracking and case | set by word groups as written: no capitals, no negative tracking (at most the style's small positive tracking), no italic (a serif voice is set upright) | standard |
+| Entrances | a word at a time | a character at a time (0.04 s apart where English runs 0.07 s), or a word of the word segmenter (`Intl.Segmenter('zh', { granularity: 'word' })`) where the style enters by words, punctuation joined to the word before | derived |
+| Faces | the style's families | Noto Sans SC / Noto Serif SC after them (Families above), cut at setup to the characters the film uses; a character that falls to a system font is an error and draws the red banner | derived |
+| What stays Latin | – | code, commands, URLs, hashes, numbers, product names written in Latin, and captures (evidence stays in its own language) | derived |
+
+- **Write the copy in the film's language**, not word for word from the other. Chinese slot limits are about half the English character limits (stream: a caption 14 characters), and each scene's card gives both.
+- **A Chinese film runs to its own length.** Chinese reads longer than English at these rates (a scene up to about 50 % longer, most in the text-heavy ones); keep 6 characters a second and let the scenes grow, never cut the reading to match an English cut (owner, 2026-11-10).
+- **Effects that depend on Latin letterforms** (a width axis, capitals, a counter to fly through, extra-condensed black) take another effect in Chinese; the recipes describe each (ink and pulse set Chinese display words as 长体, condensed by horizontal scaling; ink flies through the Han character with the largest closed counter).
+- **Another script** is not set by any style.
 
 ## Space
 

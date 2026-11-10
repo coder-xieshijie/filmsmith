@@ -1,0 +1,130 @@
+{
+  "id": "hook-unfold",
+  "category": "motion",
+  "name": {
+    "en": "Hook unfold",
+    "zh": "挂钩展开"
+  },
+  "summary": {
+    "en": "A block is hung on the thread: a point lights on the spine, a short light reaches right along the hook, and the block opens from its left edge along it (width 0 → full, content clipped as it widens). Played backwards, it folds back into the thread.",
+    "zh": "一个块挂上线：主干上亮一个点，一道短光向右伸出成挂钩，块从左边沿挂钩展开（宽度从 0 到满，内容随宽度裁切）。倒放就是折回线里。"
+  },
+  "fits": "Bringing an interface block in from the thread, or folding it back.",
+  "notFor": "A block that should fly in from off-screen; a full-screen panel.",
+  "select": {
+    "intent": {
+      "en": "Every piece of interface comes out of the thread and goes back into it.",
+      "zh": "每块界面都从线里出来、又回到线里。"
+    },
+    "content": {
+      "en": "Nothing to read in the move: the block's rectangle (its content is the block's).",
+      "zh": "动作本身没有字：块的位置（内容属于块）。"
+    },
+    "fits": {
+      "zh": "把界面块从线上带出来，或折回去。"
+    },
+    "notFor": {
+      "zh": "要从画外飞进来的块；整屏面板。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "cards"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "unfold",
+        "hook",
+        "expand",
+        "panel open",
+        "fold",
+        "reveal"
+      ],
+      "zh": [
+        "展开",
+        "挂钩",
+        "伸开",
+        "打开面板",
+        "折回",
+        "出现"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hung-block",
+        "note": "the block it opens"
+      },
+      {
+        "id": "card-squash",
+        "note": "the other way out: squashed into the line"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Open from the hook's side only; a centred scale-up loses the sense of hanging.",
+        "Clip the content with the width: content that fades in after the box looks like a second step."
+      ],
+      "zh": [
+        "只从挂钩那一侧展开；居中放大就没了“挂着”的感觉。",
+        "内容随宽度裁切：盒子开完再淡入内容，看起来像多了一步。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 1,
+    "range": [
+      1,
+      2
+    ]
+  },
+  "tier": "T0",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderChat (the hook: a point 64 px below the block's top, the reach); plan.js cardAt (0.45 s, ease-in-out cubic)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/hook-unfold/brick.js",
+  "card": "motion/hook-unfold/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

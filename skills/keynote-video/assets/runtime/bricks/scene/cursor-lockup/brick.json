@@ -1,0 +1,125 @@
+{
+  "id": "cursor-lockup",
+  "category": "scene",
+  "name": {
+    "en": "Cursor lock-up",
+    "zh": "光标收尾"
+  },
+  "summary": {
+    "en": "The lock-up out of a cursor: the horizon line shrinks into a block cursor, the name types out of it leftwards and the chips rightwards, the cursor drops a line and types the URL, a sub lands, and the chips light on the last downbeat.",
+    "zh": "从光标里出来的收尾：地平线缩成一个块状光标，名字向左、标签向右从光标里敲出来，光标换行敲出网址，一行副标落下，最后一个强拍上标签依次点亮。"
+  },
+  "fits": "The end card of a phosphor film, after slit-tagline (or alone, from the frame's centre).",
+  "notFor": "Films that end on a person or a product shot; names longer than 12 characters.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "End where the film started, at the prompt: everything the tool is comes out of one cursor, and the URL is typed for you.",
+      "zh": "在片子开始的地方结束——提示符：工具的一切都从一个光标里出来，网址替你敲好。"
+    },
+    "content": {
+      "en": "The name (≤ 12), 0–4 chips (one word each), the URL, an icon (github | link | none), an optional sub (≤ 8 words).",
+      "zh": "产品名（≤ 6 字）、0–4 个标签（各一个词）、网址、图标（github | link | none）、可选一行副标（≤ 20 字）。"
+    },
+    "fits": {
+      "zh": "phosphor 片子的结尾画面，接在 slit-tagline 之后（也可单独从画面中心开始）。"
+    },
+    "notFor": {
+      "zh": "以人物或产品镜头结尾的片子；超过 12 个字符的名字。"
+    },
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "cursor",
+      "title"
+    ],
+    "moods": [
+      "technical",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "lock-up",
+        "end card",
+        "cursor",
+        "URL",
+        "chips",
+        "outro"
+      ],
+      "zh": [
+        "收尾",
+        "结尾卡",
+        "光标",
+        "网址",
+        "标签",
+        "片尾"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "slit-tagline",
+        "note": "the line it takes over (`fromLine`, `horizonY`)"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "After slit-tagline pass `horizonY` 521.25 (its pushed-in horizon) or the cursor jumps 19 px."
+      ],
+      "zh": [
+        "接在 slit-tagline 后要传 horizonY 521.25（推近后的地平线），否则光标会跳 19 px。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      8,
+      20
+    ],
+    "sec120": [
+      4,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.end, endCursor, lightChips; fx.js horizon; events.js TIMING.end"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/cursor-lockup/brick.js",
+  "card": "scene/cursor-lockup/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

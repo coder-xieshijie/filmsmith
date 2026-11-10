@@ -8,6 +8,8 @@
 //   break  pad only, for reading
 //   rest   silence from the bed (tails ring out)
 //   outro  the groove leaves, a resolving chord rings to the end
+//   hold   one steady level for the whole section (e.g. under narration): the preset's break layers at the section's
+//          starting energy, with no swell, riser or glissando out of it and no closing chord after it
 // Bars may be fractional (e.g. to: 7.5). Bars not covered take the kind of the section before them.
 // Omit sections for the preset's default arrangement over the whole duration.
 //   energy   0..1 for this section (overrides opts.energy)
@@ -22,10 +24,10 @@
 // is cut off by the next drop or outro, its last bar plays the progression's last chord (the turnaround), so the
 // cadence into the home chord is complete. Every layer (pad, melody, bass) reads the same A.chord().
 
-import { voicing, bassNote, keyShift, mtof } from './notes.mjs';
+import { voicing, bassNote, keyShift, mtof, chord, note } from './notes.mjs';
 import { seedOf, mulberry32, clamp } from './dsp.mjs';
 
-export const KINDS = ['intro', 'build', 'drop', 'break', 'rest', 'outro'];
+export const KINDS = ['intro', 'build', 'drop', 'break', 'rest', 'outro', 'hold'];
 
 // Arrangement ------------------------------------------------------------------------------------
 
@@ -64,6 +66,10 @@ const ACCENT = [0, -0.2, -0.4, -0.7, -1];
 // Energy → bed level: (e − 0.6) × 2.5 dB, so energy 1 sits 1 dB over the reference and 0.2 sits 1 dB under.
 const LIFT = 2.5;
 
+// def: { key, shape, bright, lift = LIFT (dB per unit of energy), ramp (s, the level ramp), ownMix (the preset
+// applies mix 'v2' itself: no reverb filters or shelf from here) }.
+// A hold section becomes a break with hold: true, so every preset plays its break layers there; its energy is
+// fixed at the section's start.
 const arrange = (s, opts, def) => {
   const g = s.grid, bpb = g.beatsPerBar, nb = Math.max(1, Math.ceil((s.duration - g.t0) / g.bar - 1e-6));
   const curve = typeof opts.energy === 'function' ? opts.energy : null;
@@ -73,7 +79,7 @@ const arrange = (s, opts, def) => {
   for (const x of raw) if (!KINDS.includes(x.kind)) throw new Error(`bed: unknown section kind "${x.kind}" (use ${KINDS.join(', ')})`);
   const secs = [];
   let cur = 0;
-  const keep = (x) => ({ kind: x.kind, energy: x.energy, reading: x.reading, restart: x.restart });
+  const keep = (x) => ({ kind: x.kind === 'hold' ? 'break' : x.kind, energy: x.energy, reading: x.reading, restart: x.restart, ...(x.kind === 'hold' ? { hold: true } : {}) });
   raw.forEach((x) => {
     if (x.from > cur) { if (secs.length) secs[secs.length - 1].to = x.from; else secs.push({ from: 0, to: x.from, ...keep(x) }); }
     secs.push({ from: Math.max(x.from, cur), to: Math.min(x.to, nb), ...keep(x) });
@@ -81,7 +87,7 @@ const arrange = (s, opts, def) => {
   });
   if (!secs.length) secs.push({ from: 0, to: nb, kind: 'drop' });
   secs[secs.length - 1].to = nb;
-  const energyAt = (x, bar) => clamp(x.energy ?? (curve ? curve(bar) : baseE), 0, 1);
+  const energyAt = (x, bar) => (x.hold && x.e != null ? x.e : clamp(x.energy ?? (curve ? curve(bar) : baseE), 0, 1));
   secs.forEach((x, i) => {
     x.index = i;
     x.e = energyAt(x, x.from);
@@ -205,16 +211,16 @@ const arrange = (s, opts, def) => {
   for (const x of secs) for (let b = Math.floor(x.from); b < Math.ceil(x.to - EPS); b++) {
     const start = Math.max(b, x.from), end = Math.min(b + 1, x.to);
     if (end - start <= 1e-6 || x.kind === 'rest') continue;
-    const gain = Math.round(((A.eg(energyAt(x, start)) - 0.6) * LIFT + (x.reading === 'duck' ? -3 : 0)) * 100) / 100;
+    const gain = Math.round(((A.eg(energyAt(x, start)) - 0.6) * (def.lift ?? LIFT) + (x.reading === 'duck' ? -3 : 0)) * 100) / 100;
     const last = segs[segs.length - 1];
     if (last && last.gain === gain && Math.abs(last.to - start) < 1e-6) last.to = end;
     else segs.push({ from: start, to: end, gain });
   }
-  for (const x of segs) s.level(A.t(x.from), A.t(x.to), { gain: x.gain, bus: 'music', ramp: Math.min(0.06, g.beat / 4) });
+  for (const x of segs) s.level(A.t(x.from), A.t(x.to), { gain: x.gain, bus: 'music', ramp: def.ramp ?? Math.min(0.06, g.beat / 4) });
 
   // mix: 'v2' — the spectral-balance trial (D3), off by default: reverb lowcut 400 Hz / highcut 12 kHz and a
   // 7 kHz +3 dB shelf on the music buses (presets that are already bright skip the shelf).
-  if (A.v2) {
+  if (A.v2 && !def.ownMix) {
     s.reverbOpts = { lowcut: 400, highcut: 12000, ...s.reverbOpts };
     if (!def.bright) s.eq('music', [{ type: 'highshelf', freq: 7000, q: 0.7, gain: 3 }]);
   }
@@ -256,7 +262,7 @@ const padLayer = (s, A, { prog, center = 57, table, attack = 0.35, release = 1.2
 const intoDrops = (s, A, { swell = -19, riser = null, bars = 1, center = 64, prog, gap = 0 }) => {
   for (const x of A.secs) {
     const p = A.prev(x);
-    if (x.kind !== 'drop' || !p || p.kind === 'drop' || p.kind === 'rest') continue;
+    if (x.kind !== 'drop' || !p || p.kind === 'drop' || p.kind === 'rest' || p.hold) continue;
     const end = x.from - gap, start = Math.max(p.from, end - bars), dur = (end - start) * A.g.bar;
     if (dur < 0.2) continue;
     if (swell != null) {
@@ -278,7 +284,7 @@ const lastSec = (A) => A.secs[A.secs.length - 1];
 // Final chord: rings from the start of the outro (or the last bar) to the end.
 const ending = (s, A, { sym, center = 60, voice = 'keys', gain = -14, bell = null, bellOct = 2 }) => {
   const x = lastSec(A);
-  if (x.kind === 'rest') return;
+  if (x.kind === 'rest' || x.hold) return;
   const start = x.kind === 'outro' ? x.from : Math.max(x.from, A.nb - 1);
   const dur = Math.max(0.5, s.duration - A.t(start));
   const notes = voicing(sym, { center, transpose: A.tr });
@@ -408,7 +414,7 @@ export const swiss = (s, opts = {}) => {
   // Glissando into each drop.
   for (const x of A.secs) {
     const p = A.prev(x);
-    if (x.kind !== 'drop' || !p || p.kind === 'drop' || p.kind === 'rest') continue;
+    if (x.kind !== 'drop' || !p || p.kind === 'drop' || p.kind === 'rest' || p.hold) continue;
     const tones = voicing('Cmaj7', { center: 76, transpose: A.tr });
     const run = [...tones.map((m) => m - 12), ...tones, ...tones.map((m) => m + 12)];
     run.forEach((m, k) => s.add(s.voice('marimba', { freq: mtof(m), dur: 0.8, hardness: 0.5 }), A.t(x.from) - (run.length - k) * A.g.beat / 8, { gain: -19 + A.gain + k * 0.3, pan: -0.5 + k / run.length, send: 0.25, bus: 'music' }));
@@ -516,7 +522,7 @@ export const inkbeat = (s, opts = {}) => {
     if (x.kind !== 'drop' || !p || p.kind === 'drop') continue;
     const gap = p.kind === 'build' ? gapBars : 0;
     const dur = Math.min(2, x.from - gap - p.from) * A.g.bar;
-    if (dur > 0.3 && p.kind !== 'rest') s.add(s.voice('riser', { dur, seed: A.seed }), A.t(x.from - gap) - dur, { gain: -18 + A.gain, send: 0.35, bus: 'music' });
+    if (dur > 0.3 && p.kind !== 'rest' && !p.hold) s.add(s.voice('riser', { dur, seed: A.seed }), A.t(x.from - gap) - dur, { gain: -18 + A.gain, send: 0.35, bus: 'music' });
     s.add(s.voice('impact', { freq: 44, decay: 0.8 }), A.t(x.from), { gain: -15 + A.gain, send: 0.2, bus: 'music' });
   }
   ending(s, A, { sym: 'Fm9', center: 60, voice: 'keys', gain: -16, bell: null });
@@ -682,4 +688,212 @@ export const diagram = (s, opts = {}) => {
   return A;
 };
 
-export const beds = { terminal, swiss, blueprint, inkbeat, thread, data, diagram };
+// Template beds -----------------------------------------------------------------------------------
+// query, glass and press are the beds of the pulse, morph and halftone templates, ported from their score.mjs: called
+// with sections that follow the template's scenes they lay the template's bed sample for sample. They read the
+// arrangement (kinds, energy, reading, key, gain, vary) but keep the template's own harmony — one chord a bar counted
+// from the film's start, not A.chord() — and patterns; they have no layer rotation and no fills, and `seed` only
+// moves press's pad samples. A break (and a hold) is the pad alone, press keeps its ostinato and a kick on 1 there.
+
+// The section at time t (seconds), with the templates' 1 µs tolerance.
+const secAtT = (A, t) => A.at((t - A.g.t0 + 1e-6) / A.g.bar);
+const varied = (s, A) => (name, o, vel = 0.5) => (A.vary ? s.vary(name, o, { vel }) : s.voice(name, o));
+
+// query — the pulse template's bed, 120 BPM (112–120), D minor. A muted kick on every beat (not in an intro), offbeat
+// hats from bar 2, a rim on 2 and 4 from bar 3, a sub each bar and a sixteenth-note "query" synth whose filter opens
+// from the film's start to the first drop; the beat before a drop is silent; the drop has the full kick pumping the
+// pads, claps, open hats, offbeat bass and a brighter synth, and the progression lifts to its relative major from the
+// first drop's bar (Dm9 Bbmaj7 Gm9 A7sus4, then Dm9 Bbmaj9 Fmaj9 C6). A drop section that follows another drop eases
+// the kick, claps and bass by 2.5 dB (the release after the reveal). The outro keeps a muted kick on every beat (hats
+// for its first bar) under a long pad. Reading drops the synth.
+export const query = (s, opts = {}) => {
+  const A = arrange(s, opts, { key: 'D', ownMix: true, shape: [['build', 0.5], ['drop', '*'], ['outro', 2]] });
+  const { g, bpb } = A, B = g.beat, bar = g.bar, v2 = A.v2, v = varied(s, A), G = A.gain;
+  const BUILD = ['Dm9', 'Bbmaj7', 'Gm9', 'A7sus4'];
+  const DROP = ['Dm9', 'Bbmaj9', 'Fmaj9', 'C6'];
+  const first = A.secs.find((x) => x.kind === 'drop');
+  const dropT = first ? A.t(first.from) - g.t0 : null;
+  const dropBar = dropT != null ? Math.round(dropT / bar) : Infinity;
+  const chordAt = (barN) => (barN < dropBar ? BUILD[barN % 4] : DROP[(barN - dropBar) % 4]);
+  // the beat before every drop entered from another kind (not from a rest) is near silence
+  const gaps = A.secs.filter((x) => x.kind === 'drop' && A.prev(x) && A.prev(x).kind !== 'drop' && A.prev(x).kind !== 'rest').map((x) => A.t(x.from));
+  const blockStart = (x) => A.t(A.blocks[x.block].from);
+  const total = Math.round((s.duration - g.t0) / B);
+  for (let n = 0; n < total; n++) {
+    const t = g.t0 + n * B, barN = Math.floor(n / bpb), pos = n % bpb;
+    const sym = chordAt(barN), x = secAtT(A, t), kind = x.kind;
+    const inGap = gaps.some((d) => t >= d - B - 1e-6 && t < d - 1e-6);
+    const phase = inGap ? 'gap' : kind === 'intro' ? 'build' : kind;
+    const p = dropT ? Math.min(1, (t - g.t0) / dropT) : 0.5; // build progress: the filter opens, the pulse rises
+    const root = bassNote(sym, { center: 38, transpose: A.tr });
+    if (pos === 0 && phase !== 'gap' && phase !== 'rest') {
+      const bright = phase === 'build' ? 900 + 700 * p : phase === 'drop' ? 1900 : 1300;
+      s.play('pad', t, { freqs: chord(sym, { octave: 3, transpose: A.tr }), dur: bar * (phase === 'outro' ? 3 : 1), attack: 0.2, release: phase === 'outro' ? 2.4 : 0.8, cutoff: bright, detune: 10, voices: 3, air: 0.12, hp: v2 ? 150 : 0, dip: v2 ? [300, -3] : null },
+        { gain: (phase === 'drop' ? -19 : -21) + G, bus: 'pump', send: 0.35 });
+    }
+    if (phase === 'build') {
+      if (kind !== 'intro') s.add(v('kick', { muted: true, f0: 120, f1: 48, decay: 0.2 }, pos === 0 ? 0.7 : 0.4), t, { gain: -16 + 3 * p + G, bus: 'music' });
+      if (barN >= 1) s.add(v('hat', { decay: 0.03, seed: n }, 0.4), t + B / 2, { gain: -28 + 2 * p + G, pan: 0.25, bus: 'music' });
+      if (barN >= 2 && (pos === 1 || pos === 3)) s.add(v('rim', { freq: 1350 }), t, { gain: -25 + G, pan: -0.3, send: 0.15, bus: 'music' });
+      if (pos === 0) s.play('sub', t, { freq: mtof(root - 12), dur: bar * 0.8, attack: 0.02, release: 0.3 }, { gain: -22 + G, bus: 'pump' });
+      if (x.reading !== 'thin') {
+        const tones = chord(sym, { octave: 4, transpose: A.tr });
+        for (let k = 0; k < 4; k++) {
+          const f = tones[(n * 4 + k) % tones.length];
+          s.add(v('synth', { freq: f, dur: B / 4 * 0.6, wave: 'saw', cutoff: Math.round((500 + 2600 * p * p) / 50) * 50, env: 900, decay: 0.05, res: 0.9 }, k === 0 ? 0.7 : 0.4), t + (k * B) / 4,
+            { gain: -26 + 4 * p + (k ? -3 : 0) + G, pan: k % 2 ? 0.2 : -0.2, send: 0.12, bus: 'pump' });
+        }
+      }
+    }
+    if (phase === 'drop') {
+      const prev = A.prev(x), rel = prev && prev.kind === 'drop' ? -2.5 : 0;
+      s.add(v('kick', { f0: 155, f1: 50, decay: 0.26, click: 0.35, drive: 1.8 }, pos === 0 ? 0.8 : 0.5), t, { gain: -10 + rel + G, bus: 'music' });
+      s.duck(t, { bus: 'pump', depth: -6, attack: 0.004, hold: 0.02, release: 0.17 });
+      if (pos === 1 || pos === 3) s.add(v('clap', {}), t, { gain: -19 + rel + G, send: 0.2, bus: 'music' });
+      s.add(v('hat', { open: true, decay: 0.15, seed: 2 }), t + B / 2, { gain: -25 + G, pan: 0.2, send: 0.1, bus: 'music' });
+      for (let k = 1; k < 4; k += 2) s.add(v('hat', { decay: 0.02, seed: n * 4 + k }, 0.3), t + (k * B) / 4, { gain: -31 + G, pan: 0.35, bus: 'music' });
+      s.add(v('bass', { freq: mtof(root), dur: B * 0.42, cutoff: 420, env: 700, decay: 0.07 }), t + B / 2, { gain: -14 + rel + G, bus: 'pump' });
+      if (x.reading !== 'thin') {
+        const tones = chord(sym, { octave: 4, transpose: A.tr });
+        for (let k = 0; k < 4; k++) s.add(v('synth', { freq: tones[(n * 4 + k) % tones.length], dur: B / 4 * 0.6, wave: 'saw', cutoff: 2400, env: 1100, decay: 0.05, res: 0.8 }, 0.5), t + (k * B) / 4, { gain: -27 + (k ? -3 : 0) + G, pan: k % 2 ? 0.25 : -0.25, send: 0.15, bus: 'pump' });
+      }
+    }
+    if (phase === 'outro') {
+      const outroT = blockStart(x);
+      s.add(v('kick', { muted: true, f0: 130, f1: 48, decay: 0.24 }, pos === 0 ? 0.7 : 0.4), t, { gain: (t < outroT + 1e-6 ? -12 : -17) + G, bus: 'music' });
+      if (t < outroT + bar - 1e-6) s.add(v('hat', { decay: 0.03, seed: n }, 0.4), t + B / 2, { gain: -29 + G, pan: 0.25, bus: 'music' });
+    }
+  }
+  s.fade({ out: 0.5 });
+  return A;
+};
+
+// glass — the morph template's bed, 120 BPM (112–128), E major, Emaj9 C#m9 Amaj7#11 B7sus4 one a bar. A soft pad every
+// bar, a plucked eighth-note arpeggio an octave up ("glass"; one a beat in the intro), a muted kick and offbeat hats
+// that grow with the energy; the film's first section is pad and glass alone, a later intro adds a soft pulse. A build
+// with reading: true is the template's breath (the groove stays, the glass and the sub rest); a build that hands
+// straight into a drop is its lift (no sub). The drop: four on the floor, claps on 2 and 4, sixteenth hats, bass on
+// every beat. A closing outro is felt keys and a pad on the home chord ringing to the end. Energy shapes the layers
+// themselves (pad, glass, kick, hats; the sub enters a build at 0.5), so it adds no bed level; reading: 'duck' still
+// dips 3 dB. Everything is on the 'music' bus; no vary.
+export const glass = (s, opts = {}) => {
+  const A = arrange(s, opts, { key: 'E', ownMix: true, lift: 0, shape: [['intro', 2], ['build', 0.4], ['drop', '*'], ['outro', 2]] });
+  const { g, bpb } = A, B = g.beat, BAR = g.bar, DUR = s.duration, G = A.gain;
+  const PROG = ['Emaj9', 'C#m9', 'Amaj7#11', 'B7sus4'];
+  const chordAt = (bar) => PROG[((bar % PROG.length) + PROG.length) % PROG.length];
+  const last = lastSec(A);
+  const outroFrom = last.kind === 'outro' ? A.t(A.blocks[last.block].from) : null;
+  const kindOf = (x) => {
+    if (x.kind !== 'build') return x.kind;
+    if (x.reading === 'thin') return 'breath';
+    const nx = A.next(x);
+    return nx && nx.kind === 'drop' ? 'lift' : 'build';
+  };
+  const music = (name, t, vo, mo = {}) => s.play(name, t, vo, { bus: 'music', send: 0.25, ...mo, gain: (mo.gain ?? 0) + G });
+  const total = Math.round((DUR - g.t0) / B);
+  let lastPadBar = -1;
+  for (let n = 0; n < total; n++) {
+    const t = g.t0 + n * B, bar = Math.floor(n / bpb), beat = n % bpb, x = secAtT(A, t), kind = kindOf(x);
+    const e = A.energyAt((t - g.t0 + 1e-6) / BAR), thin = x.reading === 'thin';
+    const sym = chordAt(bar);
+    const tones = voicing(sym, { center: 64, transpose: A.tr });
+    if ((beat === 0 || bar !== lastPadBar) && kind !== 'outro' && kind !== 'rest') {
+      const left = (bpb - beat) * B;
+      music('pad', t, { freqs: tones.map(mtof), dur: left, attack: beat === 0 ? 0.25 : 0.08, release: 0.6, cutoff: 1300 + 900 * e, detune: 7, voices: 3, hp: 150 }, { gain: kind === 'drop' ? -24 : -21 + 2 * e, send: 0.35 });
+      lastPadBar = bar;
+    }
+    if (!thin && (kind === 'build' || kind === 'drop' || kind === 'lift' || kind === 'intro')) {
+      const up = tones.map((m) => m + 12);
+      for (let h = 0; h < 2; h++) {
+        if (kind === 'intro' && h === 1) continue;
+        const m = up[(n * 2 + h) % up.length];
+        music('pluck', t + h * B / 2, { freq: mtof(m), dur: 0.5, bright: 0.55 + 0.2 * e }, { gain: (kind === 'drop' ? -24 : -27 + 3 * e) - (h ? 1.5 : 0), pan: h ? 0.25 : -0.25 });
+      }
+    }
+    if (kind === 'intro' && x.index > 0) {
+      if (beat === 0) music('kick', t, { muted: true, decay: 0.2 }, { gain: -23, send: 0 });
+      music('hat', t + B / 2, { decay: 0.025 }, { gain: -35, pan: 0.2, send: 0.05 });
+    }
+    if (kind === 'build' || kind === 'breath' || kind === 'lift') {
+      if (beat === 0 || beat === 2) music('kick', t, { muted: true, decay: 0.22 }, { gain: -21 + 5 * e, send: 0 });
+      music('hat', t + B / 2, { decay: 0.03 }, { gain: -31 + 3 * e, pan: 0.2, send: 0.05 });
+    }
+    if (kind === 'drop') {
+      music('kick', t, { decay: 0.26 }, { gain: -13, send: 0 });
+      if (beat % 2 === 1) music('clap', t, {}, { gain: -21, send: 0.2 });
+      for (let q = 0; q < 4; q++) music('hat', t + q * B / 4, { decay: q === 2 ? 0.05 : 0.025, tone: 7000 }, { gain: q === 2 ? -30 : -35, pan: 0.15, send: 0.05 });
+      music('bass', t, { freq: mtof(bassNote(sym, { center: 40, transpose: A.tr })), dur: B * 0.8 }, { gain: -15, send: 0 });
+    }
+    if (kind === 'build' && beat === 0 && e >= 0.5) music('sub', t, { freq: mtof(bassNote(sym, { center: 34, transpose: A.tr })), dur: BAR * 0.95 }, { gain: -22 + 2 * e, send: 0 });
+  }
+  if (outroFrom != null) {
+    const home = voicing('Emaj9', { center: 60, transpose: A.tr });
+    music('keys', outroFrom, { freqs: home.map(mtof), dur: Math.max(2, DUR - outroFrom - 0.5), hardness: 0.3 }, { gain: -18, send: 0.4 });
+    music('pad', outroFrom, { freqs: voicing('Emaj9', { center: 64, transpose: A.tr }).map(mtof), dur: DUR - outroFrom, attack: 0.6, release: 1.2, cutoff: 1500, hp: 150 }, { gain: -25, send: 0.4 });
+  }
+  s.fade({ in: 0.02, out: 1.2 });
+  return A;
+};
+
+// press — the halftone template's bed, 120 BPM (112–128), D minor, Dm9 Bbmaj7 Gm9 A7sus4 one a bar: a sheet-fed press
+// in 3-3-2 (rim and tick, one sheet a bar) under every kind but rest. The intro is pad and press with a muted kick and
+// the bass on the downbeat; the build adds a half-time kick, offbeat hats and bass on 1 and 3; the drop is four on the
+// floor, light sixteenth hats, offbeat bass and a plucked arpeggio on the chord; a break keeps pad, press and a muted
+// kick on 1. A pad that runs into a rest stops where the rest begins (or is left out when the rest is under 0.5 s
+// away); the outro is D6add9, each bar's pad ringing to the end, with one bar of press. Reading drops the arpeggio;
+// energy moves the bed's level with a 30 ms ramp; mix 'v2' adds the pad's highpass and a 2 dB shelf at 7 kHz.
+export const press = (s, opts = {}) => {
+  const A = arrange(s, opts, { key: 'D', ownMix: true, ramp: 0.03, shape: [['intro', 2], ['build', 0.2], ['drop', '*'], ['break', 2], ['rest', 1], ['outro', 2]] });
+  const { g, bpb } = A, B = g.beat, BAR = g.bar, D = s.duration, v2 = A.v2, G = A.gain, tr = A.tr;
+  const v = (name, o, vel) => (A.vary ? s.vary(name, o, { vel }) : s.voice(name, o));
+  const PROG = ['Dm9', 'Bbmaj7', 'Gm9', 'A7sus4'];
+  const chordAt = (bar) => PROG[((bar % 4) + 4) % 4];
+  const kindAt = (t) => A.at((t - g.t0) / BAR).kind;
+  const restAfter = (t) => { const x = A.secs.find((y) => y.kind === 'rest' && A.t(y.to) > t + 1e-9); return x ? A.t(x.from) : Infinity; };
+  const outroStart = (t) => A.t(A.blocks[A.at((t - g.t0) / BAR).block].from);
+  const PRESS = [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0];
+  const bars = Math.ceil((D - g.t0) / BAR), steps = bpb * 4;
+  for (let bar = 0; bar < bars; bar++) {
+    const t0 = g.t0 + bar * BAR;
+    const kind = kindAt(t0 + 1e-3), restAt = restAfter(t0);
+    const sym = kind === 'outro' ? 'D6add9' : chordAt(bar);
+    const restBar = kind === 'rest' || (kindAt(t0 + BAR - 1e-3) === 'rest' && kind !== 'outro');
+    if (!restBar || t0 < restAt - 0.5) {
+      const dur = kind === 'outro' ? D - t0 : Math.min(BAR, restAt - t0 > 0 && restAt < t0 + BAR ? restAt - t0 : BAR);
+      if (dur > 0.2) s.add(s.voice('pad', { freqs: chord(sym, { octave: 3, transpose: tr }), dur, attack: kind === 'outro' ? 0.02 : 0.25, release: kind === 'outro' ? 1.2 : 0.35, cutoff: kind === 'drop' ? 1700 : 1300, air: 0.08, hp: v2 ? 150 : 0, seed: bar % 4 + A.seed }), t0, { gain: (kind === 'outro' ? -14 : -17) + G, send: 0.35, bus: 'pump' });
+    }
+    for (let k = 0; k < steps; k++) {
+      const t = t0 + (k * B) / 4;
+      const kk = kindAt(t);
+      if (t >= D - 0.05 || kk === 'rest') continue;
+      if (kk === 'outro' && t > outroStart(t) + BAR) continue;
+      const x = A.at((t - g.t0) / BAR);
+      if (PRESS[k % 16]) s.add(v('rim', { freq: k % 8 === 0 ? 1350 : 1550 }, k === 0 ? 0.8 : 0.4), t, { gain: -23 + G, pan: k % 2 ? 0.25 : -0.25, send: 0.12, bus: 'music' });
+      if (k % 2 === 1) s.add(v('tick', { freq: 5200 }, 0.3), t, { gain: -31 + G, pan: 0.35, bus: 'music' });
+      const beat = k % 4 === 0, q = k / 4;
+      if (kk === 'build' || kk === 'drop') {
+        if (beat && (kk === 'drop' || q % 2 === 0)) s.add(v('kick', { f0: 140, f1: 48, decay: 0.24, muted: kk === 'build' }, q === 0 ? 0.8 : 0.5), t, { gain: (kk === 'drop' ? -11 : -15) + G, bus: 'music' });
+        if (k % 4 === 2) s.add(v('hat', { decay: 0.04 }, 0.5), t, { gain: -22 + G, pan: -0.2, bus: 'music' });
+        if (kk === 'drop' && k % 2 === 1) s.add(v('hat', { decay: 0.02 }, 0.2), t, { gain: -30 + G, pan: 0.3, bus: 'music' });
+        // the template's bass pitch, kept so the preset matches it: note() reads a Hz value under 128 as a MIDI number,
+        // so this bass sounds around 570–6800 Hz instead of the chord's root at 73–117 Hz
+        const root = note(chord(chordAt(bar), { octave: 2, transpose: tr })[0]);
+        if ((kk === 'build' && (k === 0 || k === 8)) || (kk === 'drop' && k % 4 === 2)) s.add(s.voice('bass', { freq: root, dur: kk === 'drop' ? B / 2 : B, cutoff: 420 }), t, { gain: -15 + G, bus: 'pump' });
+        if (kk === 'drop' && k % 2 === 0 && x.reading !== 'thin') {
+          const tones = chord(chordAt(bar), { octave: 4, transpose: tr });
+          s.add(v('pluck', { freq: tones[(k / 2) % tones.length], dur: 0.5, bright: 0.45 }, k % 8 === 0 ? 0.7 : 0.4), t, { gain: -24 + G, pan: (k / 8) - 0.5, send: 0.25, bus: 'music' });
+        }
+      }
+      if (kk === 'intro' && beat && q === 0) {
+        s.add(v('kick', { f0: 120, f1: 46, decay: 0.3, muted: true }, 0.4), t, { gain: -17 + G, bus: 'music' });
+        s.add(s.voice('bass', { freq: note(chord(chordAt(bar), { octave: 2, transpose: tr })[0]), dur: 2 * B, cutoff: 360 }), t, { gain: -19 + G, bus: 'pump' });
+      }
+      if (kk === 'break' && beat && q === 0) s.add(v('kick', { f0: 120, f1: 46, decay: 0.3, muted: true }, 0.4), t, { gain: -17 + G, bus: 'music' });
+    }
+  }
+  s.eq('music', [{ type: 'highshelf', freq: 7000, gain: v2 ? 2 : 0 }]);
+  s.fade({ out: 1.2 });
+  return A;
+};
+
+export const beds = { terminal, swiss, blueprint, inkbeat, thread, data, diagram, query, glass, press };

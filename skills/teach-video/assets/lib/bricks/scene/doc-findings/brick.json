@@ -1,0 +1,164 @@
+{
+  "id": "doc-findings",
+  "category": "scene",
+  "name": {
+    "en": "Doc findings",
+    "zh": "文档驻留发牌"
+  },
+  "summary": {
+    "en": "The source document parks at the left, still being read, while findings are dealt one by one on the right, each tied to its evidence line.",
+    "zh": "来源文档退到左边只露一截、还在慢慢往下读，右边一条条发出结论药丸，每条都连回文档里划出的依据句。"
+  },
+  "fits": "A narrated passage that gives conclusions one at a time and must keep their source in view: analysis results, review findings, reasons for a recommendation.",
+  "notFor": "More than three findings (a caption needs about 1.2 s to be read); conclusions without a source line; a loud beat (the scene has no peak, its life is the slow scroll).",
+  "energy": "low",
+  "duration": {
+    "beats": [
+      10,
+      14
+    ],
+    "sec120": [
+      5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "doc-park-left-pill-deal",
+        "path": "demos/ui-entrance/doc-park-left-pill-deal/DocParkLeftPillDeal.tsx",
+        "card": "references/shots/ui-entrance/doc-park-left-pill-deal.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "evidence-relay",
+      "note": "page cards step on the word and a noun holds; doc-findings keeps one source page and deals findings tied to its lines"
+    },
+    {
+      "id": "stagger-in",
+      "note": "a list rises in place; doc-findings deals one item per narrated sentence"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Give conclusions one at a time without losing their source: the document stays on screen and is still being read, and every finding is visibly pulled out of one of its lines.",
+      "zh": "一条条给出结论又不丢出处：文档留在画面里、还在被读，每条结论都看得出是从它的某一行里长出来的。"
+    },
+    "content": {
+      "en": "A source document (10–40 lines; 1–3 real evidence lines, en ≤ 64 chars, zh ≤ 28) and 2–3 findings, each a name (en ≤ 18, zh ≤ 7), an optional value and a caption (en ≤ 40, zh ≤ 16), paced to one narrated sentence each.",
+      "zh": "一份来源文档（10–40 行，其中 1–3 行是真实证据句，英文 ≤ 64 字符，中文 ≤ 28 字）和 2–3 条结论，每条一个名称（英文 ≤ 18，中文 ≤ 7）、可选数值和一句说明（英文 ≤ 40，中文 ≤ 16），每条配一句旁白的时间。"
+    },
+    "fits": {
+      "zh": "旁白一条条给出结论、又必须让出处一直在画面里的段落：分析结果、审阅意见、推荐理由。"
+    },
+    "notFor": {
+      "zh": "超过三条结论（每句说明要约 1.2 秒才读得完）；没有出处行的结论；响亮的一拍（这一屏没有峰值，靠缓慢滚动维持生气）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "turn"
+    ],
+    "subjects": [
+      "text",
+      "list"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "document",
+        "findings",
+        "pills",
+        "source on screen",
+        "evidence",
+        "analysis results",
+        "narration-driven",
+        "review notes"
+      ],
+      "zh": [
+        "文档驻留发牌",
+        "结论逐条给出",
+        "来源文档",
+        "依据句",
+        "分析结论",
+        "审阅意见",
+        "推荐理由",
+        "药丸"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "evidence-relay",
+        "note": "a faster cut through several pages when the findings come from many sources"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Three findings at most; a fourth leaves no time for its caption to be read.",
+        "The document must be longer than the whole scroll, or the page scrolls into blank space.",
+        "Re-time the deal to the real captions; caption length sets how fast the word-by-word darkening reads."
+      ],
+      "zh": [
+        "最多三条；第四条没时间读完说明。",
+        "文档要比整段滚动行程长，否则末段滚出空白。",
+        "换真实文案后按句长重排发牌时间；说明的长短决定逐词加深读起来的快慢。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "doc-park-left-pill-deal",
+        "name": "文档驻留发牌",
+        "card": "文档驻留发牌",
+        "summary": "文档不淡出而是向左滑出只露约 35% 宽并微缩到 0.92，右侧按旁白节奏慢速发牌三张白底描边药丸（outBack 弹入），每张落定后其下方字幕逐词加深、下一张到来前整句淡出，左侧文档全程极缓慢自动滚动保持\"正在被读\"",
+        "use": "旁白驱动的\"分析结论逐条给出\"段落；文档理解、推荐理由、审阅意见类产品的核心说明镜头",
+        "energy": "低（慢发牌节奏，全片无峰值；靠自动滚动维持活性）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/doc-park-left-pill-deal.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/doc-findings/brick.js",
+  "card": "scene/doc-findings/CARD.md",
+  "compare": {
+    "ssimMean": 0.8552,
+    "ssimMin": 0.8072,
+    "ssimDrop": 0.0204,
+    "trackDevPx": 0.1,
+    "progressRmse": 0.0001,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -164,6 +164,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Length and easing**: 3 beats; front ∝ t^0.62, halo and wet band dry over 72–97 % of p.
 - **Sound**: a soft `whoosh` (lo 200, hi 2400, 0.8 × length) under the spread, no hit; or a brush noise swelling with the stain.
 - **C1–C8**: one operation (the stain spreads); every pixel is the old frame, an ink tone over it, or the new frame (C5: no blend of the two frames); settles clean before p = 0.97 (C6); measured flashes ≤ 1 / s (C8).
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`hair`** `{ front: 'hair' }`: the wet front runs ahead along the paper's fibres in fine hairs and the pale halo ahead of it reaches about twice as far, so the edge reads fibrous instead of a smooth blot; the frame still dries clean. For ink and paper styles where the wash should feel absorbed rather than poured. From `ink-bleed-reveal` (video-shotcraft `demos/transition/print-texture-transitions/InkBleedReveal.tsx`).
+  - *Licence*: the transitions are Filmsmith's own; the options are ideas from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### ink-drop
 
@@ -187,6 +190,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Length and easing**: 1 beat (0.5–1 beat); cubic in-out.
 - **Sound**: one accent (`impact` or `kick`) where the disc lands: at p = 1 for close, at p = 0 for open.
 - **C1–C8**: one disc; hard edge, no blend; the ring is the dot's own colour; no flash (ring area small).
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`anchor`** `{ anchor: 'push', ring: false, dot: <the circle's radius>, origin: [<its centre>] }`: the disc opens from a circle already in the frame and the next frame's own circle shares that centre, so with no ink ring the growing edge reads as that circle opening; meanwhile the old frame recedes about the anchor (scale 1 → 1.22, ease-in) and darkens to 45 %, the new frame landing on top. Opening only (`direction: 'open'`). For a match cut from an avatar, icon or round button to a ring chart or dial. From `circle-match-iris` (video-shotcraft `demos/transition/circle-match-iris/CircleMatchIris.tsx`).
+  - *Licence*: the transitions are Filmsmith's own; the options are ideas from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### thread-split
 
@@ -308,6 +314,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Modes**: halftone, pulse, phosphor.
 - **Length and easing**: 0.3 beat (0.15 s), quint in-out, starting 0.15 s before the beat and landing on it.
 - **Sound**: a short `whoosh` (up) landing with a `tick` on the beat.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`brake`** `{ curve: 'brake', beats: 1.5, dur: 0.75 }`: the strip accelerates (cubic in) to half way, the swap passing inside the motion streak, then brakes with a long tail (quartic out); the two pieces meet at 3/7 of the length with the same speed, so there is no kink. The shutter streak follows the speed, so it is long in the middle and gone well before the stop. It wants a longer length than the default whip (1.5 beats) for the tail to show. From `whip-pan` (video-shotcraft `demos/transition/shot-transitions/WhipBrakeReal.tsx`).
+  - *Licence*: the transition is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### slice-smear
 
@@ -330,6 +339,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Modes**: pulse, ink, halftone.
 - **Length and easing**: 2 beats; build: exposure u^2.2 to 94 % white, lean 1 + 0.14 u²; 2 white frames; shock (1 − q)^2.2 over 0.45 s; ground expo out over 0.28 s; still from p = 0.95 at 1 s.
 - **Sound**: a swell or riser over the build, the hit (`impact` plus the drop) on the white frame, then nothing new for a beat.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`inplace`** `{ swap: 'inplace' }`: the same flash without the camera: the outgoing frame is exposed towards white (u^2.2 to 94 %) without the lean, two white frames hold, and the incoming frame comes back out of the white exactly where the old one was (the whole frame falls back from white, expo out), with no blur, scale or colour offset. For a rich mark that comes back flat, a draft that comes back final, a before that comes back as the after. From `white-flash-logo-simplify-cut` (video-shotcraft `demos/transition/white-flash-logo-simplify-cut/WhiteFlashLogoSimplifyCut.tsx`); its liquid-metal mark is left to a later batch.
+  - *Licence*: the transition is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### occluder-pass
 
@@ -341,6 +353,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Modes**: blueprint, morph.
 - **Length and easing**: 1 beat; 80 % linear + 20 % smootherstep, off frame to off frame by p = 0.94.
 - **Sound**: a low, close `whoosh` matching the pass.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`card`** `{ shape: 'card', tilt: 0, width: 1500, defocus: 22 }`: the occluder is an oversized interface card close to the lens, well out of focus: a panel face a step off the ground, a darker header band, soft rows and a lit leading edge, taller than the frame, swept upright at the module's near-constant speed. The cut happens under its centre line as before, so the two frames are never seen over each other. For films about software, where a passing card belongs to the world. From `invisible-cut` (video-shotcraft `demos/transition/transition-hidden-cut/InvisibleCut.tsx`).
+  - *Licence*: the transition is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ## Catalogue: hand-offs
 
@@ -497,6 +512,10 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Modes**: trace, phosphor, tally.
 - **Length and easing**: 2 beats; pos = N (1 − e^(−k u)) / (1 − e^(−k)) over 80 %, the band locks cubic out over the rest.
 - **Sound**: a falling `whoosh` or a decelerating `tick` roll, a `stamp` on the stop.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`rows`** `{ layout: 'rows' }`: the stream is card rows of 72, 94 and 116 px in a fixed pattern, 20 px apart, each with its line, instead of bare lines; it runs on the curve (0.45, 0, 0.06, 1) and stops with the key row's middle at the frame's middle. The lock lifts the key row (1.03, a deeper shadow, an accent outline) while every other row dims to 0.38, in place of the reading band. From `changelog-scroll-brake` (video-shotcraft `demos/data/scroll-brake-moves/ChangelogScrollBrake.tsx`).
+  - **`overshoot`** `{ brake: 'overshoot' }`: instead of the exponential brake, the stream sprints (sine in) to 430 px short of the stop in 38 frames, runs 30 px past it in 9 (cubic out) and comes back in 4 (quad out), then the band locks; 66 frames (4.5 beats, from `beatsFor`). Works with either layout. The stop is frame 51 of 66, where `reticle-lock`'s corners variant can land. From `brake-reticle-lock` (`BrakeReticleLock.tsx`).
+  - *Licence*: the module is Filmsmith's own; the options are ideas from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### scramble-resolve
 
@@ -508,6 +527,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Modes**: phosphor, trace.
 - **Length and easing**: linear in time by construction; 3 beats with the default text.
 - **Sound**: a quiet `glitch` (rate 24) under it, a `tick` when the last cell locks.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`cycle`** `{ phrases: [...] }`: several short phrases pass through one slot of monospace cells, as many as the longest phrase, each centred in it, so the line never reflows. Each phrase holds 38 frames under a noise level g on the keyframes [1, 0, 0, 0.1, 0, 0, 1]: a cell shows a scrambled glyph with chance g (re-rolled every 2 frames, in the accent or a dimmed ink), the line jitters sideways ±g · 36 px and splits into an accent and a light copy ±g · 10 px. The last phrase's noise ends at 0, so it lands clean, with one soft bloom. Chinese phrases scramble only among the phrases' own Chinese characters, never into Latin glyphs. Length: 38 frames a phrase (from `beatsFor`). From `glitch-cycle` (video-shotcraft `demos/typography/glitch-cycle/GlitchCycle.tsx`), as filed by batch 2.
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### squash-to-path
 
@@ -541,6 +563,9 @@ A mechanism that is public grammar may be borrowed: one used by several makers, 
 - **Modes**: plakat, ink, pulse.
 - **Length and easing**: 1.5 beats; cubic-bezier (0.7, 0, 0.3, 1) on a log scale of zoom, landed at p = 0.94.
 - **Sound**: a rising `whoosh` landing on the beat with the new headline.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`stroke`** `{ through: 'stroke', font, glyph, x }`: the letters themselves are cut out of the cover, so from the first frame every stroke is a window onto the next scene, and the camera pushes into the stem of one letter until that stroke is the frame. Chinese is `adapted`: a heavy character with a broad vertical stroke (default 工) in Noto Sans SC. For a title that opens onto what it names. From `letterform-zoom` (video-shotcraft `demos/transition/transition-travel/LetterformZoom.tsx`).
+  - *Licence*: the hand-off is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### step-wipe
 
@@ -600,6 +625,10 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Modes**: handset (every push, pull and pan inside the screen), every mode with real assets.
 - **Length and easing**: 4/3 beats (20 frames); push 0–80 % cubic in-out (16 frames); ring 72–100 %.
 - **Sound**: none, or a soft `tick` on the ring.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`overshoot`** `{ punch: 'overshoot' }`: the push passes the landed zoom by about 6 % and comes back in one visible rebound with a slight undershoot, under an accent exposure flash that dies in 8 frames. For "look at this". The rebound passes the resolution cap by those 6 % for a few frames. From `crash-zoom-punch` (video-shotcraft `demos/camera/crash-zoom-punch/CrashZoomReal.tsx`).
+  - **`impact`** `{ punch: 'impact' }`: a dead stop: the content outside the region flashes in the accent and goes back within 3 frames, and the window shakes 14 px · e^(−t / 1.8), the first beat down, still after 6 frames. For "this is it". From the same card's `CrashImpactReal.tsx`.
+  - *Licence*: the module is Filmsmith's own; the options are ideas from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### spotlight-band
 
@@ -633,6 +662,9 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Modes**: exhibit (a travel without parallax), blueprint (the drawing table), plakat, thread.
 - **Length and easing**: 1 beat (15 frames) cubic in-out; a truck longer than about one screen needs more beats to keep the last frame's movement ≤ 2 px.
 - **Sound**: a short `whoosh`.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`travel`** `{ travel: true, from: 0, to: 3 }`: a travel of several screens instead of one: the camera passes the knots [0, .15, .88, 1] → [0, .055, .9, 1] of the distance, each piece eased in and out (quadratic: a slow start, a sprint across the middle, a brake in the last 12 %), over the first 35 of 45 frames, then pushes in 1.28× (cubic out) on the landing (3 beats, from `beatsFor`). From `timeline-travel` (video-shotcraft `demos/data/timeline-travel/TimelineTravel.tsx`), as filed by batch 7; the timeline, its ticks and milestones are the scene `milestone-run`.
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### device-flip
 
@@ -644,6 +676,10 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Modes**: handset (a change of surface, at most once a film, usually into the lock-up), phosphor, tally; not morph, exhibit, dossier, strip or scroll.
 - **Length and easing**: 2 beats; turn out 0–43 % cubic in (13 frames), turn back 43–100 % cubic out (17 frames).
 - **Sound**: a `whoosh` landing on the beat as it faces the camera.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`over`** `{ turn: 'over' }`: one continuous turn over instead of edge-on and back: the window leans back to −10° (4 of 30 frames), turns over accelerating past its back to 194° (16 frames, cubic-bezier 0.55, 0, 0.3, 1) and settles onto 180° (10 frames), the next content on its back. It lifts 6 % while it turns, its face darkens with the turn and a narrow light runs across it from left to right while it is near edge-on (60°–120°). From `card-flip-reveal` (video-shotcraft `demos/transition/card-flip-reveal/CardFlipReveal.tsx`); its row of staggered cards, mirrored floor and numbers settling on the backs are the scene `flip-row`, and the settle is an ease-out here instead of a spring.
+  - *Not for*: a page change that should feel like the same object showing its other side quietly (use the default edge turn).
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### tether-link
 
@@ -655,6 +691,9 @@ Nine hand-offs for real assets (rules under [Real assets](#real-assets)). Each t
 - **Modes**: dossier (a straight leader from the band to the exhibit sticker), every mode with real assets; trace, thread.
 - **Length and easing**: 1 beat; line 0–62 % by arc length, cubic in-out; ring 55–92 %.
 - **Sound**: a soft `tick` when the ring closes.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`flyline`** `{ style: 'flyline' }`: the link is shot across instead of drawn: the line grows out-cubic (fast off the claim, soft into the target) under a soft accent glow; the core is drawn in pieces that fade with their distance from the head, so the bright head leads a dark tail; the head carries a halo. As the head arrives the target's outline pulses once in the paper colour (outward, fading) while the ring closes. Best on a dark palette. From `flyline-arc` (video-shotcraft `demos/effects/glow-flyline-moves/FlylineArc.tsx`), filed by batch 3; chained flylines (`orb-flyline-relay`) are several uses one after another, each starting where the last pulsed, and the orbs that surge on the landing frame are the look `afterglow`.
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### mark-to-chrome
 
@@ -780,6 +819,11 @@ Twenty-one hand-offs on other axes of motion than the lifts, flips and pushes ab
 - **Modes**: split (the opening: the caret becomes the seam), dossier (the spread: the worksheet slides out of a seam), exhibit, plakat.
 - **Length and easing**: 1.5 beats (1.75 as split's opening); seam 0–26 %, doors or drawer 26–100 % cubic in-out.
 - **Sound**: a blade-like tick as the seam is cut, a slide as it opens.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`barn`** `{ rise: 1.08 }`: as the halves part, the next content comes up from 1.08 to 1 about the window's centre (snappy, cubic-bezier 0.16, 1, 0.3, 1), so the reveal reads as arriving, not as having lain there. From `barn-door-split` (video-shotcraft `demos/transition/page-turn-transitions/BarnDoorSplit.tsx`: the new page 1.08 → 1 behind doors that part); its light leak through the seam, the warm door faces and the motion blur are not taken.
+  - **`slam`** `{ close: true, impact: true, hit: 0.62 }`: the doors run the other way: after the seam is drawn on, the next content's two halves slide in from the frame's sides, accelerating (ease-in cubic), and meet at the seam at `hit`; with `impact`, a 0.85 flash in the `key` colour dies within three frames and the frame shakes 16 px · e^(−t / 1.7), running out by the end. From `versus-slam` (`demos/transition/transition-hidden-cut/VersusSlam.tsx`); its slanted 78° edge, the VS stamp, the shock ring and the speed lines are the scene `versus`.
+  - *Not for*: `close` in a pane (window only); `rise` with `reveal: 'drawer'` (it scales the content behind the doors).
+  - *Licence*: the module is Filmsmith's own; the two options are ideas from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### louvre
 
@@ -791,6 +835,10 @@ Twenty-one hand-offs on other axes of motion than the lifts, flips and pushes ab
 - **Modes**: split (a change of result beside the seam), dossier (slats cut along the rows the page struck), tally (rows of a table), plakat.
 - **Length and easing**: 2 beats; each slat cubic in-out over 40 % of p, the last landing at 95 % (or `stagger` 0.07 with nine slats).
 - **Sound**: a quick ripple of ticks, one per slat.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`flip`** `{ turn: 'flip', slide: 0.32 }`: each slat turns over about its own horizontal axis like a blind's vane, the current slice on its face and the next on its back. The vane darkens as it goes edge-on and the dark slot behind it shows, so a dark band travels down the content; each vane passes 180° by about 5° and settles (cubic-bezier 0.34, 1.32, 0.64, 1). The starts follow t^0.78 of the stagger, so the wave turns faster as it goes. Works in a window and in a pane. From `blinds-slice` (video-shotcraft `demos/transition/wipe-transitions/BlindsSlice.tsx`, 12 vertical strips turned in true 3D with a spring); here the slats are the louvre's rows and the vane is drawn flat (scaled by cos θ, no perspective), the grazing highlight is not taken.
+  - *Not for*: a content whose rows must stay readable through the change (use the push).
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### wipe-line
 
@@ -824,6 +872,9 @@ Twenty-one hand-offs on other axes of motion than the lifts, flips and pushes ab
 - **Modes**: split (the before / after), dossier; any mode with two renders of one frame.
 - **Length and easing**: 2 beats; cubic in-out.
 - **Sound**: a slide.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`scrub`** `{ scrub: true, tags: ['Before', 'After'] }`: the seam is handled like a hand on a slider instead of one eased travel: it rests at 8 % of the pane, winds back to 6.5 % (4 frames), flings to 76 % (12 frames, ease out), settles back to 70 % (12, ease in-out), holds (18) and scrubs back to 40 % (48), 94 frames (6.25 beats, from `beatsFor`). A round grip with two chevrons rides the seam and widens with its speed (up to 1.18× at the fling), round at rest; the tags sit in their own halves as dark pills and are cut by the seam. From `before-after-slider-scrub` (video-shotcraft `demos/data/before-after-slider-scrub/BeforeAfterSliderScrub.tsx`), timing as filed by batch 7.
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### type-window
 
@@ -879,6 +930,9 @@ Twenty-one hand-offs on other axes of motion than the lifts, flips and pushes ab
 - **Modes**: exhibit (the default travel: numerals, prints and chips at three depths), blueprint, thread, plakat.
 - **Length and easing**: 1.5 beats; cubic in-out.
 - **Sound**: a soft whoosh.
+- **Variants** (options of this module; with them unset it draws as before, pixel for pixel):
+  - **`multiplane`** `{ cues: true, depth: { back: 0.5, mid: 1, front: 2 } }`: the multiplane camera's depth cues on top of the three rates: the far numerals are out of focus (5 px), the front chips go soft with the camera's speed (up to 6 px at the middle of the slide, sharp at both rests, so they can be read where they land), and the window that lands lifts 3.5 % with a deeper shadow over the last fifth. The rates 0.5 / 1 / 2 are the upstream's 0.35 / 0.7 / 1.4 with the window at 1. From `multiplane` (video-shotcraft `demos/camera/depth-layer-moves/MultiplaneReal.tsx`); its warm haze over the far layer, the title fixed to the frame (a 0× layer) and the In focus tag are not taken, and the front softness is a blur rather than a smear along the motion.
+  - *Licence*: the module is Filmsmith's own; the option is an idea from video-shotcraft (Apache-2.0, see the file header and NOTICE).
 
 ### sheet-shuffle
 

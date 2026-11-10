@@ -1,0 +1,143 @@
+{
+  "id": "picker-snap",
+  "category": "motion",
+  "name": {
+    "en": "Picker snap",
+    "zh": "滚轮吸附"
+  },
+  "summary": {
+    "en": "A vertical picker: the focus pill stays still, the list snaps through it one item a step and holds still each time.",
+    "zh": "竖向滚轮：焦点药丸不动，列表一格一格吸附穿过，每格都真停住。"
+  },
+  "fits": "Cycling through features, modes or options one at a time, each held long enough to read.",
+  "notFor": "More than about seven items; showing everything at once; a free scroll.",
+  "select": {
+    "intent": {
+      "en": "Choosing is made physical: the content is caught by a fixed focus and truly stops, so each stop reads as \"this one is picked\".",
+      "zh": "把“选择”做出物理感：内容被固定的焦点框吸住并真正停下，每一停都读作“选中了这一项”。"
+    },
+    "content": {
+      "en": "3–7 short items (≤ 24 chars each, one line), optionally with an icon each; the number of steps to show.",
+      "zh": "3–7 个短条目（每条 ≤ 10 字，单行），可各带图标；以及要走几步。"
+    },
+    "fits": {
+      "zh": "一项一项轮过功能、模式或选项，每项都停够读完。"
+    },
+    "notFor": {
+      "zh": "超过约七项；要一次全部展示（用网格或列表）；自由滚动。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "problem"
+    ],
+    "subjects": [
+      "list",
+      "ui"
+    ],
+    "moods": [
+      "calm",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "picker",
+        "drum picker",
+        "carousel",
+        "snap",
+        "feature cycle",
+        "slot machine",
+        "wheel"
+      ],
+      "zh": [
+        "药丸吸附轮播",
+        "滚轮选择器",
+        "吸附",
+        "功能轮播",
+        "逐个念出",
+        "选一个",
+        "老虎机"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Every step must come to a true still for a few frames; continuous scrolling reads as a loading animation.",
+        "The focus pill must never move (its breath scales in place), or \"content passing through the focus\" is lost.",
+        "Keep each item on one line (under about 300 px at design size); shrink the type rather than wrap."
+      ],
+      "zh": [
+        "每一步都要真正静止几帧，连续滚动读作加载动画。",
+        "焦点药丸位置绝不能动（呼吸只原地缩放），否则“内容穿过焦点”的意思就没了。",
+        "每条保持单行（设计尺寸下约 300 px 以内），宁可缩字号也不换行。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "picker-carousel-feature-cycle",
+        "name": "药丸吸附轮播",
+        "card": "药丸吸附轮播",
+        "summary": "移动端风竖向选择器——焦点药丸不动、内容穿过它，每项带明显 outQuint 减速吸附后完全静止，按到中心距离分层控制透明度/字号/灰度，落定时药丸做 scaleY 极轻呼吸",
+        "use": "逐个念出功能名/场景名的列表镜头；\"选一个\"的交互演示；移动端产品的 picker 类控件展示",
+        "energy": "中（每一次吸附都是一个节拍点，5 拍匀速推进）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/picker-carousel-feature-cycle.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 6.42,
+    "range": [
+      1.28,
+      9
+    ]
+  },
+  "tier": "T0",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "picker-carousel-feature-cycle",
+        "path": "demos/interaction/picker-carousel-feature-cycle/PickerCarouselFeatureCycle.tsx",
+        "card": "references/shots/interaction/picker-carousel-feature-cycle.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/picker-snap/brick.js",
+  "card": "motion/picker-snap/CARD.md",
+  "compare": {
+    "ssimMean": 0.9464,
+    "ssimMin": 0.9405,
+    "ssimDrop": 0.0086,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

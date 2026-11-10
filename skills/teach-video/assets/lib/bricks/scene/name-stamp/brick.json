@@ -1,0 +1,157 @@
+{
+  "id": "name-stamp",
+  "category": "scene",
+  "name": {
+    "en": "Name stamp",
+    "zh": "名号压印"
+  },
+  "summary": {
+    "en": "The name is stated first: a crosshair draws itself, the name presses in letter by letter with a glint under each, a kicker types itself, and the lockup holds a full second before lifting away.",
+    "zh": "先立名号：准星描画，名字逐字压印、字底闪过强调色短划，副标打字机打出，整组静止满一秒后上浮消散。"
+  },
+  "fits": "The first beat of an opening that names the product before any of it is shown; a quiet lockup.",
+  "notFor": "High-energy openings (it starts low on purpose); names longer than two words; repeated mid-film titles.",
+  "energy": "low",
+  "duration": {
+    "beats": [
+      5,
+      9
+    ],
+    "sec120": [
+      2.5,
+      4.5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "pulse"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "brand-ink-open",
+        "path": "demos/typography/brand-ink-open/BrandInkOpen.tsx",
+        "card": "references/shots/opening/brand-ink-open.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "type-enter",
+      "note": "a title entering unit by unit with six ways to travel; name-stamp is the whole first-beat lockup (crosshair, press, kicker, hold, exit)"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Give the viewer the name to remember before anything of the product is shown: quiet, pressed like ink, with one complete still moment.",
+      "zh": "在任何产品画面出现之前先让观众看清并记住名字：安静、像墨一样压印，有一个完整的静止时刻。"
+    },
+    "content": {
+      "en": "The product name (up to 2 words; en ≤ 16 chars, zh ≤ 7) and an optional kicker line (en ≤ 32, zh ≤ 12).",
+      "zh": "产品名（最多两个词；英文 ≤ 16 字符，中文 ≤ 7 字）和一行可选副标（英文 ≤ 32，中文 ≤ 12）。"
+    },
+    "fits": {
+      "zh": "开场第一拍，在展示产品之前先立名号；安静的落版。"
+    },
+    "notFor": {
+      "zh": "高能量开场（它故意低起步）；超过两个词的名字；片中反复出现的标题。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "lockup"
+    ],
+    "subjects": [
+      "title",
+      "logo"
+    ],
+    "moods": [
+      "calm",
+      "editorial",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "brand open",
+        "wordmark",
+        "letterpress",
+        "ink stamp",
+        "crosshair",
+        "name first",
+        "kicker typewriter",
+        "quiet opening"
+      ],
+      "zh": [
+        "名号压印",
+        "品牌墨印开场",
+        "先立名号",
+        "逐字压印",
+        "十字准星",
+        "纸墨",
+        "打字机副标",
+        "安静开场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "word-window",
+        "note": "a louder second beat that takes the name into the product"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The full-second hold belongs to the name's lockup; do not copy it onto ordinary title or content cards.",
+        "Keep the opening low; a showy first beat leaves the film no room to climb."
+      ],
+      "zh": [
+        "满一秒的静止是给名号落定的；别照搬到普通字卡或内容卡上。",
+        "开场能量要低；第一拍就炫技，后面没有爬升空间。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "brand-ink-open",
+        "name": "品牌墨印开场",
+        "card": "品牌墨印开场",
+        "summary": "墨线十字准星描画→字标逐字压印→打字机副标→满一秒静止再上浮消散",
+        "use": "品牌开场；任何\"先立名号再进产品\"的片头",
+        "energy": "低（起步位，为后续镜头留爬升空间）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/brand-ink-open.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/name-stamp/brick.js",
+  "card": "scene/name-stamp/CARD.md",
+  "compare": {
+    "ssimMean": 0.9416,
+    "ssimMin": 0.9139,
+    "ssimDrop": 0.0828,
+    "trackDevPx": 26.9,
+    "progressRmse": 0.1181,
+    "eventFrames": 3,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

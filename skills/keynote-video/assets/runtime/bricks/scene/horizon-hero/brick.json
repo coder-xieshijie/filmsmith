@@ -1,0 +1,125 @@
+{
+  "id": "horizon-hero",
+  "category": "scene",
+  "name": {
+    "en": "Horizon hero",
+    "zh": "地平线主张"
+  },
+  "summary": {
+    "en": "The claim under the horizon: a hot line draws out from the centre, a scanline sphere rises out of it as the camera pushes in, the claim decodes under it in two lines, a sub and one to three facts land.",
+    "zh": "地平线下的主张：一条炽亮的线从中心向两边拉开，扫描线球体从线里升起、镜头推近，主张分两行在线下解码出现，随后一句副标和一到三条事实。"
+  },
+  "fits": "The claim right after the opening's flash.",
+  "notFor": "A claim of more than eight words; films that do not open with prompt-boot (the sphere is born at its point).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Make the claim the horizon of the film: one line of light, the product rising from it, the promise written under it.",
+      "zh": "把主张做成整部片子的地平线：一条光线，产品从中升起，承诺写在线下。"
+    },
+    "content": {
+      "en": "Two claim lines (≤ 4 words each), a sub (≤ 5 words, [marked] words in ink), 0–3 facts (a key and a value).",
+      "zh": "两行主张（每行 ≤ 9 字）、一句副标（≤ 16 字，[方括号] 内为墨色）、0–3 条事实（键和值）。"
+    },
+    "fits": {
+      "zh": "紧接开场闪白之后的主张。"
+    },
+    "notFor": {
+      "zh": "超过八个词的主张；不是以 prompt-boot 开场的片子（球体从它的光点诞生）。"
+    },
+    "roles": [
+      "claim"
+    ],
+    "subjects": [
+      "title",
+      "space",
+      "abstract"
+    ],
+    "moods": [
+      "cinematic",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "hero",
+        "claim",
+        "horizon",
+        "sphere",
+        "decode",
+        "push-in"
+      ],
+      "zh": [
+        "主张",
+        "主视觉",
+        "地平线",
+        "球体",
+        "解码",
+        "推近"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "prompt-boot",
+        "note": "the point it grows from"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The sphere is a light layer: on a light ground it disappears; keep the dark presets."
+      ],
+      "zh": [
+        "球体是光层：在浅色底上会消失；只用暗色预设。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      5,
+      14
+    ],
+    "sec120": [
+      2.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.hero; fx.js sphere; events.js TIMING.hero"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/horizon-hero/brick.js",
+  "card": "scene/horizon-hero/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

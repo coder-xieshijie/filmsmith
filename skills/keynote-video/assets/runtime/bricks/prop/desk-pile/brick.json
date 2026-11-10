@@ -1,0 +1,123 @@
+{
+  "id": "desk-pile",
+  "category": "prop",
+  "name": {
+    "en": "Desk pile",
+    "zh": "桌面乱堆"
+  },
+  "summary": {
+    "en": "The pile a stream film opens on: three session windows, four alerts, a sticky note with two questions and fourteen dialog copies cascading, on a daytime desktop or as dark cards over the night; states empty, piled and pierced (every item lit where the thread passes).",
+    "zh": "stream 片开场的那堆东西：三个会话窗口、四个弹窗、一张写着两个问题的便签、十四个层叠的对话框副本，铺在白天的桌面上或作为暗色卡片散在夜空里；状态有空、堆满、被线穿过（每件被穿过处亮起）。"
+  },
+  "fits": "The problem of a product that takes work off people: too many windows, approvals and questions at once.",
+  "notFor": "A pile that must be read item by item; a calm opening; a product that is not about handing work off.",
+  "select": {
+    "intent": {
+      "en": "Show \"too much at once\" as texture before the product takes it all.",
+      "zh": "在产品接手之前，先把“同时太多”做成一片质感给人看。"
+    },
+    "content": {
+      "en": "Three sessions (title, ask, status), four alerts (title, yes, no), a two-line note; the copies repeat the sessions; optional: 1–6 alerts and 4–30 dialog copies.",
+      "zh": "三个会话（标题、请求、状态）、四个弹窗（标题、是、否）、两行便签；副本重复这些会话；可选：1–6 条通知、4–30 个弹窗副本。"
+    },
+    "fits": {
+      "zh": "帮人接活的产品要讲的问题：同时太多窗口、审批和问题。"
+    },
+    "notFor": {
+      "zh": "要一条条读的堆；安静的开场；和“把事交出去”无关的产品。"
+    },
+    "roles": [
+      "hook",
+      "problem"
+    ],
+    "subjects": [
+      "ui",
+      "cards",
+      "cursor"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "desktop",
+        "windows",
+        "alerts",
+        "pile",
+        "chaos",
+        "popups",
+        "overload",
+        "copies"
+      ],
+      "zh": [
+        "桌面",
+        "窗口",
+        "弹窗",
+        "堆积",
+        "混乱",
+        "提醒",
+        "过载",
+        "副本数"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "thread-pierce",
+        "note": "the thread runs through every item"
+      },
+      {
+        "id": "reel-in",
+        "note": "and swallows the pile"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Only the note and the freeze line are read; the windows and alerts are texture, so their copy may be short and generic.",
+        "The 14 copies cascade from the approval window: keep that window's ask short or the cascade covers the note."
+      ],
+      "zh": [
+        "只有便签和定格那句要读；窗口和弹窗是质感，文案可以短而泛。",
+        "14 个副本从那个待审批窗口层叠出来：它的请求要短，否则层叠会盖住便签。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/plan.js openItems; film.js css(), buildDOM() (the opening), renderOpen"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/desk-pile/brick.js",
+  "card": "prop/desk-pile/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

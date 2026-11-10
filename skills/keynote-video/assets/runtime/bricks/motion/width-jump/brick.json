@@ -1,0 +1,123 @@
+{
+  "id": "width-jump",
+  "category": "motion",
+  "name": {
+    "en": "Width jump",
+    "zh": "宽度跳变"
+  },
+  "summary": {
+    "en": "A name snaps through the face's widths once a beat, condensed to normal, with a small punch-in on each step: the type breathes with the bar.",
+    "zh": "名字每拍在字体的宽度之间跳一次，从窄到正常，每次轻推一下镜头：字跟着小节呼吸。"
+  },
+  "fits": "A name or one word held over a bar on a drop.",
+  "notFor": "Body text; words read while they change; faces without a width axis in English.",
+  "select": {
+    "intent": {
+      "en": "The name moves with the music without moving at all: same place, same letters, a new width on every beat.",
+      "zh": "名字跟着音乐动却没挪位置：同一位置、同样的字，每拍换一个宽度。"
+    },
+    "content": {
+      "en": "One word (≤ 10 chars) set in a variable face with a width axis.",
+      "zh": "一个词（≤ 4 字）。"
+    },
+    "fits": {
+      "zh": "在 drop 上停留一个小节的名字或单词。"
+    },
+    "notFor": {
+      "zh": "正文；变化中要读的词。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "variable font",
+        "wdth axis",
+        "width jump",
+        "breathing type",
+        "beat sync"
+      ],
+      "zh": [
+        "可变字体",
+        "宽度轴",
+        "宽度跳变",
+        "呼吸的字",
+        "对拍"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "width-name",
+        "note": "the scene it runs in"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Fit the word at its widest step so no jump leaves the margins.",
+        "Steps, not tweens: a slide between widths reads as a rubber effect."
+      ],
+      "zh": [
+        "按最宽一步定字号，跳宽时不出边距。",
+        "是跳，不是渐变：宽度之间滑过去会像橡皮效果。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 5,
+    "range": [
+      3,
+      6
+    ]
+  },
+  "tier": "T0",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink",
+      "any kinetic type"
+    ],
+    "avoid": [
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js TYPE_WIDTHS.jumps, stretchAt"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/width-jump/brick.js",
+  "card": "motion/width-jump/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}
