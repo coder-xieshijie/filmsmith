@@ -1,0 +1,127 @@
+{
+  "id": "unit-split",
+  "category": "scene",
+  "name": {
+    "en": "Unit split",
+    "zh": "方块分拣"
+  },
+  "summary": {
+    "en": "The same grid re-sorted: the matches light up in place, then fly back first in the accent while one big number counts them; the share enters once the count has landed.",
+    "zh": "同一张方格重新排序：符合条件的先原地亮起，再带着强调色飞回最前面，一个大数字数出它们；占比等数字落定后才出现。"
+  },
+  "fits": "Which subset: one flag or one category over the whole set, told as a count.",
+  "notFor": "Two subsets at once; a subset too small to see (under about 1 % of the set).",
+  "select": {
+    "intent": {
+      "en": "A subset is counted where it lives: the matches light up inside the whole, fly out first, and one number counts them.",
+      "zh": "子集在原处被数出来：符合的方块在整体里亮起、先飞出来，一个数字数它们。"
+    },
+    "content": {
+      "en": "Groups (2–9) and which of them match; a title (≤ 44 / 16 字), a count label and a share line (≤ 30 / 12 字).",
+      "zh": "分组（2–9）与其中哪些符合；标题（≤ 44 / 16 字）、计数标签和占比一行（≤ 30 / 12 字）。"
+    },
+    "fits": {
+      "zh": "哪个子集：整体上的一个标记或类别，用计数讲。"
+    },
+    "notFor": {
+      "zh": "同时两个子集；小到看不见的子集（不到约 1 %）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "chart",
+      "number"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "subset",
+        "filter",
+        "matches light up",
+        "split count",
+        "share of the whole"
+      ],
+      "zh": [
+        "子集",
+        "筛选",
+        "符合项亮起",
+        "拆分计数",
+        "占整体多少"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "unit-bands",
+        "note": "the chapter before it"
+      },
+      {
+        "id": "unit-axis",
+        "note": "when the subsets overlap"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Show the share only after the count lands; two numbers at once split the reading."
+      ],
+      "zh": [
+        "占比要在计数落定后再出；两个数字同时出会分散阅读。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      12
+    ],
+    "sec120": [
+      3,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "tally",
+      "any data"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/layouts.js (split)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/unit-split/brick.js",
+  "card": "scene/unit-split/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

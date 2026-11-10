@@ -1,0 +1,134 @@
+{
+  "id": "terminal-window",
+  "category": "prop",
+  "name": {
+    "en": "Terminal window",
+    "zh": "终端窗"
+  },
+  "summary": {
+    "en": "A terminal as an object: a title bar, a command typed behind a block caret, output lines printed one by one whose spinners settle into ticks, and a last line in the accent.",
+    "zh": "当成实物的终端窗：标题栏、块状光标后敲进的命令、逐行打出的输出（转圈落成对勾），以及一行强调色的结尾。"
+  },
+  "fits": "Scenes that show a command-line tool working: a command, its output, what it made.",
+  "notFor": "Long logs or code to be read; graphical apps; more than four output lines.",
+  "select": {
+    "intent": {
+      "en": "A command-line tool shown working as a real object: a command typed, output that settles line by line, and a last line that says it is done.",
+      "zh": "把命令行工具当实物来展示它在干活：敲进一条命令，输出一行行落定，最后一行告诉你完成了。"
+    },
+    "content": {
+      "en": "A window name and path, one command (≤ 22 chars), 2–4 output lines (key, value, note; value ≤ 9 Chinese characters), an optional progress count and a ready line.",
+      "zh": "窗口名和路径，一条命令（≤ 22 字符），2–4 行输出（键、值、备注；值中文 ≤ 9 字），可选进度计数和一行完成标记。"
+    },
+    "fits": {
+      "zh": "展示命令行工具工作的场景：一条命令、它的输出、它产出了什么。"
+    },
+    "notFor": {
+      "zh": "要读的长日志或代码；图形界面应用；多于四行输出。"
+    },
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "terminal",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "terminal",
+        "CLI",
+        "shell window",
+        "command prompt",
+        "typed command",
+        "console"
+      ],
+      "zh": [
+        "终端窗",
+        "终端空间飞行",
+        "命令行",
+        "终端",
+        "敲命令",
+        "控制台"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "terminal-stations",
+        "note": "three windows as stations in space"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the command short and the output to 2–4 lines; more becomes unreadable texture.",
+        "The caret sits right after the last typed character; it blinks only while idle."
+      ],
+      "zh": [
+        "命令要短、输出 2–4 行；再多成了看不清的质感。",
+        "光标紧贴已打出的最后一个字；只在待机时闪。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "terminal-3d",
+        "name": "终端空间飞行",
+        "card": "终端空间飞行",
+        "summary": "三个终端窗散布 3D 空间，相机窗间飞行、途中正弦拉远，每到一窗打字机敲命令、结果逐行滑出——命令执行的空间叙事流",
+        "use": "开发者产品的 CLI/工作流演示：把\"三步命令\"拍成三站空间旅程",
+        "energy": "中（飞行给动感、打字给节奏，整体是沉稳的技术叙事；收在 ● READY 一记亮点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/terminal-3d.mp4"
+      }
+    ]
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "terminal-3d",
+        "path": "demos/camera/terminal-3d/Terminal3D.tsx",
+        "card": "references/shots/camera/terminal-3d.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "input-field",
+      "note": "input-field is one field typed into; terminal-window is a whole window with a prompt, output lines and a last line"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "prop/terminal-window/brick.js",
+  "card": "prop/terminal-window/CARD.md",
+  "status": "approved",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "a prop has no upstream shot of its own: its typing, printing and last line are measured inside terminal-stations, whose compare against terminal-3d passes (deviation 0 px, events ±0)"
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

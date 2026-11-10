@@ -1,0 +1,103 @@
+{
+  "id": "api-page",
+  "category": "prop",
+  "name": {
+    "en": "API docs page",
+    "zh": "接口文档页"
+  },
+  "summary": {
+    "en": "The generated docs page as one object: six panels on paper (title bar, endpoint list, reference, code sample, response, SDK chips), the list highlight on the followed endpoint.",
+    "zh": "把生成的文档页当成一件道具：纸色上的六块面板（标题栏、接口列表、说明、代码示例、响应、SDK 标签），列表高亮停在跟踪的接口上。"
+  },
+  "fits": "Any film about APIs, SDKs or generated documentation.",
+  "notFor": "Real product screenshots (use a device frame).",
+  "select": {
+    "intent": {
+      "en": "Generated docs look complete at a glance: list, reference, code, response and SDKs in one page.",
+      "zh": "生成的文档一眼看上去就是完整的：列表、说明、代码、响应、SDK 都在一页里。"
+    },
+    "content": {
+      "en": "The product facts (title, version, file, 2–6 endpoints, body, call, SDKs), a reference title (≤ 24 / 12 字), a code sample.",
+      "zh": "产品事实（标题、版本、文件、2–6 个接口、响应体、调用、SDK），说明页标题（≤ 24 字符 / 12 字），代码示例。"
+    },
+    "fits": {
+      "zh": "任何讲 API、SDK 或生成文档的片。"
+    },
+    "notFor": {
+      "zh": "真实产品截图（用设备框）。"
+    },
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "docs page",
+        "API reference",
+        "endpoint list",
+        "SDK chips"
+      ],
+      "zh": [
+        "文档页",
+        "API 参考",
+        "接口列表",
+        "SDK 标签"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "cube-page",
+        "note": "unfolds into it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "It is a schematic page; do not put a real product's screenshot style on it."
+      ],
+      "zh": [
+        "这是示意页；不要套真实产品的截图样式。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "morph"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/morph/film.js (PANELS, panelContent)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/api-page/brick.js",
+  "card": "prop/api-page/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

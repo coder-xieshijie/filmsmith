@@ -38,6 +38,12 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 | Schibsted Grotesk | scroll |
 | Source Serif 4 | trace, dossier |
 
+### Bricks adapted from video-shotcraft
+
+Many bricks in `assets/runtime/bricks/` are adapted from [video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft) by Vincent Wei, at commit `1266a3ec4831289c4d893d42dd5102723658039a`, under the Apache License 2.0; the licence text is in `assets/runtime/bricks/LICENSE-video-shotcraft`. Each one has `licence: Apache-2.0` and `source` (the upstream demo and shot card) in its `brick.json`, and every adapted file starts with the upstream path and what was changed: rewritten as a HyperFrames brick in plain JavaScript (no React or Remotion), colours by role, brand, demo copy and screenshots removed, timing in beats, English and Chinese text through the shared language functions. A few options of the runtime's own hand-offs and transitions (`louvre`, `split-open`, `ink-wash` and others) take an idea from an upstream shot and say so in their file header. `assets/runtime/bricks/NOTICE.md` lists every adapted file with its upstream source; upstream has no NOTICE file of its own. The upstream text quoted in each brick's `select.upstream` (shot names, summaries, use) is carried as written, with one Chinese word for "inside" swapped for its synonym 内里. Everything else in `assets/runtime/bricks/` is Filmsmith's own (MIT).
+
+The bricks' looks name two fonts besides the ones above; a film downloads them only when its look uses one, and they are never committed: Noto Serif SC (google/fonts, OFL-1.1, Chinese films in a serif look) and [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) (OFL-1.1, the two teach-video looks).
+
 ### Data in examples
 
 - tally's 10-second demo counts the [PEP index](https://peps.python.org/api/peps.json) (Python Software Foundation, public domain / CC0-1.0 for PEP content), fetched 2026-10-19.
@@ -64,5 +70,7 @@ Paths are inside `skills/teach-video/`. `scripts/new-film.mjs` and `scripts/voic
 | [OpenCC (Python reimplementation)](https://github.com/yichen0831/opencc-python) | opencc-python-reimplemented 0.1.7, Apache-2.0, installed by `uv` when `voice.py` runs | Converts transcripts to simplified characters before alignment |
 | Whisper small | Downloaded by `hyperframes transcribe` | Word timestamps |
 | fonttools, FFmpeg | Called at run time, not distributed | Font subsetting, audio and video processing |
+
+`assets/lib/` is a byte-for-byte copy of the keynote-video bricks this skill can use (those whose `hosts` include `teach`) and the runtime files they import, synced from keynote-video; the bricks adapted from video-shotcraft (Apache-2.0, commit `1266a3e`) are listed in `assets/lib/bricks/NOTICE.md`, with the licence text in `assets/lib/bricks/LICENSE-video-shotcraft`, as described under keynote-video above.
 
 The temporary music bed and the sound effects are synthesised in code by `voice.py` and released under CC0. The kits' demo segments use made-up content (terminal-ledger: a week of e-mail and similar; blueprint-zoom: an illustrative system diagram), labelled as illustrative on screen.

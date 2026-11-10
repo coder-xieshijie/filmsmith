@@ -13,8 +13,8 @@ Public repository of **Filmsmith**, a collection of agent skills that make video
 
 ## Layout
 
-- `skills/keynote-video/`: short music-driven films for technical products in seventeen styles, English on-screen text (stream also Chinese), no voice-over. Its `SKILL.md` lists its files.
-- `skills/teach-video/`: Chinese explainer films that teach one technical idea to developers who know the basics, with a narrated voice-over. Its `SKILL.md` lists its files.
+- `skills/keynote-video/`: short music-driven films for technical products, composed from bricks with seventeen styles as recipes, English or Chinese on-screen text, no voice-over. Its `SKILL.md` lists its files.
+- `skills/teach-video/`: explainer films that teach one technical idea to developers who know the basics, with a Chinese voice-over and Chinese or English on-screen text. Its `SKILL.md` lists its files.
 - `README.md`, `README.zh-CN.md`: the collection, install, and one section per skill (what it makes, gallery, quick start).
 - `docs/keynote-video/`: `previews/` holds six-second animated previews of each style's demo for the README (full films are linked on YouTube; the original ten MP4s are also in the v0.1.0 Release); `showcase.jpg` is the README's still of the first sixteen styles (stream not yet added), one still per mode from `skills/keynote-video/references/modes/stills/`.
 - `docs/social-preview.jpg`: the repository's social preview (1280×640 at 2×, sixteen named keynote-video stills beside the name), uploaded by hand in the GitHub settings.
@@ -24,5 +24,5 @@ Public repository of **Filmsmith**, a collection of agent skills that make video
 ## keynote-video
 
 - Check a change with `node skills/keynote-video/scripts/selftest.mjs` (all seventeen templates; `--modes <mode>` for the ones touched).
-- Taste lives in `references/`: `foundations.md` (theory), `principles.md` (core principles), `transitions.md` (the transition library), `modes/` (one card per visual language, each with a template under `assets/templates/`) and `themes/` (narrative skeletons and rules). The author's verdicts are kept verbatim in a private workshop, not here; principles, modes and rules cite them by date.
-- A verdict does not edit a mode card or the principles directly: place it on a layer of the pyramid and apply [who decides](skills/keynote-video/references/foundations.md#who-decides); show the owner any conflict with the theory, propose the edit citing the verdict's date, and apply it once agreed.
+- Taste lives in `references/`: `foundations.md` (theory), `principles.md` (core principles), `system.md` (shared values and the language rules), `creative.md` (composing a film), `bricks.md` (the brick catalogue; each brick's card sits beside its code in `assets/runtime/bricks/`), `transitions.md` (the transition library), `recipes/` (one recipe per style), `modes/` (one card per style's template under `assets/templates/`) and `themes/` (narrative skeletons and rules). The author's verdicts are kept verbatim in a private workshop, not here; principles, modes and rules cite them by date.
+- A verdict does not edit a recipe, a mode card or the principles directly: place it on a layer of the pyramid and apply [who decides](skills/keynote-video/references/foundations.md#who-decides); show the owner any conflict with the theory, propose the edit citing the verdict's date, and apply it once agreed.

@@ -1,0 +1,158 @@
+{
+  "id": "tape-run",
+  "category": "motion",
+  "name": {
+    "en": "Tape run",
+    "zh": "滚带定针"
+  },
+  "summary": {
+    "en": "The world moves, the pointer does not: a scale tape crawls up to the old cap, the cap breaks, the tape sprints and brakes on a spring onto the new value under a fixed reading window.",
+    "zh": "世界动、针不动：刻度带顶着旧上限慢爬，上限线断开，刻度带冲刺、弹簧刹车过冲回摆，停在新数值上，读数窗钉在画面中线不动。"
+  },
+  "fits": "One metric that jumps (a limit raised, throughput multiplied): the size of the jump becomes distance and speed.",
+  "notFor": "Small changes (the sprint has nothing to cover); several metrics at once (use needle-sweep).",
+  "select": {
+    "intent": {
+      "en": "The size of the jump becomes distance and speed: the viewer feels how far the value went before reading the new number.",
+      "zh": "跳变的大小变成路程和速度：观众先感到数值跑了多远，再读新数字。"
+    },
+    "content": {
+      "en": "One metric with its start, old cap and new value (the new several times the cap), a unit, a title (≤ 30 chars) and two cap labels (≤ 16 chars each); the claim is computed.",
+      "zh": "一个指标的起始值、旧上限和新值（新值是旧上限的几倍），单位、标题（≤ 14 字）和两个上限标签（每个 ≤ 7 字）；倍数自动算出。"
+    },
+    "fits": {
+      "zh": "一个跳变的指标（上限提高、吞吐翻倍）：跳变大小变成路程和速度。"
+    },
+    "notFor": {
+      "zh": "小幅变化（冲刺没有路可跑）；同时讲几个指标（用 needle-sweep）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "climax"
+    ],
+    "subjects": [
+      "metric",
+      "number"
+    ],
+    "moods": [
+      "mechanical",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "tape",
+        "fixed pointer",
+        "airspeed tape",
+        "limit raised",
+        "throughput",
+        "scale",
+        "speed tape"
+      ],
+      "zh": [
+        "滚带定针",
+        "仪表读数动效",
+        "刻度带",
+        "固定指针",
+        "上限提高",
+        "单指标大跳变",
+        "空速带"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "needle-sweep",
+        "note": "the several readings first, then the one that jumped"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Only for a jump of several times; a small change has nothing for the sprint to cover.",
+        "Hold the tape dead still after the spring settles; any drift reads as a bug."
+      ],
+      "zh": [
+        "只配翻几倍的跳变，小变化让冲刺无路可跑。",
+        "弹簧停稳后刻度带锁死不动，尾漂像 bug。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "tape-scroll-fixed-pointer",
+        "name": "滚带定针",
+        "card": "仪表读数动效",
+        "summary": "长刻度带 translate：慢爬段→45px/f 冲刺 ~25f→spring 刹车过冲回摆停位；窗内读数同步刷新",
+        "use": "dashboard 开场仪式/性能指标揭晓；A 多表盘开机感，B 单指标大跳变",
+        "energy": "中高（机械仪式型）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/tape-scroll-fixed-pointer.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 7,
+    "range": [
+      6,
+      8
+    ]
+  },
+  "tier": "T2",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "halftone"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "tape-scroll-fixed-pointer",
+        "path": "demos/data/gauge-readout-moves/TapeScrollFixedPointer.tsx",
+        "card": "references/shots/data/gauge-readout-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "scroll-reel",
+      "note": "a long page flicked through a window to a section; tape-run moves a measured scale and the reading is the position"
+    },
+    {
+      "id": "stream-brake",
+      "note": "a stream of lines braking on one item; tape-run brakes on a value"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/tape-run/brick.js",
+  "card": "motion/tape-run/CARD.md",
+  "compare": {
+    "ssimMean": 0.9218,
+    "ssimMin": 0.8904,
+    "ssimDrop": 0.0045,
+    "trackDevPx": 6.6,
+    "progressRmse": 0.0051,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

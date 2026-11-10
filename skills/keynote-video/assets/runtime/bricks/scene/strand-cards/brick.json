@@ -1,0 +1,138 @@
+{
+  "id": "strand-cards",
+  "category": "scene",
+  "name": {
+    "en": "Strand cards",
+    "zh": "细丝上的三张卡"
+  },
+  "summary": {
+    "en": "Whole – part – whole: three strands fork from the spine and each ends in a glass card; each card is enlarged in turn in place on its strand, its rows arriving, the next growing as the previous shrinks; then the three again and a sub-line.",
+    "zh": "总–分–总：主干分出三根细丝，各挂一张玻璃卡；每张卡依次在细丝上原地放大、各行出现，下一张放大时上一张同时缩小；最后三张一起，再加一句副标题。"
+  },
+  "fits": "What the product keeps between tasks (memory, decisions, files), shown together and one by one.",
+  "notFor": "More than three things; things that are not lists.",
+  "select": {
+    "intent": {
+      "en": "Show the parts and keep the whole: three things the product keeps, each read in turn.",
+      "zh": "看部分、留住整体：产品保存的三样东西，一样样读。"
+    },
+    "content": {
+      "en": "Two captions, three cards each with a title, a sub-line and 1–3 rows (≤ 34 characters / 17 Chinese characters); optional: the tangle the three strands are pulled out of, a caption per open card, a line flowing into a card, a new task starting from a card; rows up to 5 with the flowed line.",
+      "zh": "两句字幕，三张卡各有标题、副标题和 1–3 行（≤ 34 字符 / 17 个汉字）；可选：开头线团拽成三股、每张卡放大时的章节句、一句话顺线流进卡、从卡开工的新任务行；连流进的那句最多 5 行。"
+    },
+    "fits": {
+      "zh": "产品在任务之间保存的东西（记忆、决定、文件），先一起再一样样。"
+    },
+    "notFor": {
+      "zh": "超过三样；不是列表的东西。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "cards",
+      "ui",
+      "list"
+    ],
+    "moods": [
+      "calm",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "cards",
+        "whole part whole",
+        "memory",
+        "zoom",
+        "strands",
+        "summary",
+        "tangle",
+        "chapter line",
+        "new task"
+      ],
+      "zh": [
+        "卡片",
+        "总分总",
+        "记忆",
+        "放大",
+        "细丝",
+        "摘要",
+        "线团",
+        "章节句",
+        "新任务"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "strand-zoom",
+        "note": "the zoom between cards"
+      },
+      {
+        "id": "sky-gather",
+        "note": "next: the climax"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The rows are glances (0.8 s each): what a card says is its `say`, read while the card is open; a card without `say` holds for its rows' glances only.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "卡里的行是扫一眼的（每行 0.8 秒）：一张卡要说的话放在 `say`，卡打开时按读字计时；没给 `say` 的卡只停够各行的扫一眼。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      20,
+      56
+    ],
+    "sec120": [
+      10,
+      28
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderCards, cardGeo; sched.js cards"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/strand-cards/brick.js",
+  "card": "scene/strand-cards/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

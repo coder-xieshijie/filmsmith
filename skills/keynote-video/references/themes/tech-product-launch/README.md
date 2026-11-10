@@ -5,7 +5,7 @@ Launch and promo films for technical products: open-source repositories, develop
 ## Format so far
 
 - Length from the content (principle 5); no typical range. 16:9 only, 1920×1080, 30 fps, sized for landscape full-screen playback (2026-10-18); vertical films are not made.
-- On-screen text in English by default; Chinese when the user asks for it, once the templates support it (not yet). No narration.
+- On-screen text in English or Chinese, chosen from the material ([system](../../system.md#language)). No narration.
 - Ends on one clear action: the repository URL, held readable for at least 3 seconds.
 
 ## Narrative skeleton
@@ -62,7 +62,7 @@ The climax is the cost claim or the offer. Every score follows principle 2's ter
 | [strip](../../modes/strip.md) | One strip of film through a fixed gate: real frames stop registered, a contact sheet of the films' real lengths, one grease-pencil pick that runs | Accepted 2026-10-21 (sample film) |
 | [split](../../modes/split.md) | One movable seam between what is written and the real result it makes; one changed line over two renders at the climax | Accepted 2026-10-21 (sample film, its sound included) |
 | [scroll](../../modes/scroll.md) | One long vertical sheet of the product's own page: flicked and locked section by section, its headings pinned as chapters, one row unfolding in place | Accepted 2026-10-21 (sample film) |
-| [stream](../../modes/stream.md) | One thread of light through a night sky: it gathers a scattered desk, hangs small interface blocks on itself, sends tasks out as stars and gathers them back into one panel; English or Chinese | Accepted 2026-11-09 (style sample in English and Chinese, made from an accepted launch film) |
+| [stream](../../modes/stream.md) | One thread of light through a night sky: it gathers a scattered desk, hangs small interface blocks on itself, sends tasks out as stars and gathers them back into one panel | Accepted 2026-11-09 (style sample in English and Chinese, made from an accepted launch film) |
 
 ## Ruled out
 

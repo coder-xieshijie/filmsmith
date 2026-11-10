@@ -13,13 +13,20 @@
 // from the right in a window, from the seam at the left in a pane) or −1, `edge` 'seam' | 'none', timing by `slide`
 // and `end` (each slat takes `slide` of p, the last lands at `end`) or by `stagger` (p between slat starts; each
 // takes the rest).
+// Variant `turn: 'flip'`: instead of pushing, each slat turns over about its own horizontal axis like a blind's
+// vane, the current slice on its face and the next on its back; it lands with a small overshoot (about 5°), its face
+// darkening as it goes edge-on and the dark slot behind showing. Drawn flat (the vane scales by cos θ, no perspective).
+// Adapted from video-shotcraft demos/transition/wipe-transitions/BlindsSlice.tsx, https://github.com/Vincentwei1021/
+// video-shotcraft @ 1266a3e, Apache-2.0: the flip with a ~5° overshoot, the darkening with the turn, the slot behind and
+// the wave speeding up (starts at t^0.78 of the stagger); slats are the louvre's rows, not 12 vertical strips.
 // Theory: the venetian-blind and slide wipes of film grammar (Bordwell & Thompson, Film Art); slats that follow the
 // content's rows keep its form while it changes (as slice-smear keeps a terminal's lines); one rule applied to every
 // slat reads as one operation, alternating directions group in pairs by common fate, the top-to-bottom order is the
 // reading order (Wertheimer 1923); in a pane the content comes out of the seam, where the cause is. Sources: the louvre
 // and comb wipes of broadcast switchers, slatted title sequences (named, not copied).
 
-import { seg, cubicInOut, rrect } from './util.js';
+import { seg, cubicInOut, rrect, mix, rgba } from './util.js';
+import { bez } from '../motion.js';
 import { NEUTRAL, assetOf, placeholderPage, windowOf, contentOf, windowBack, windowFront, clipWindow, ptScreen } from './asset.js';
 import { coverView, paintView } from './stage.js';
 import { clipRect, SEAM_W, seamV } from './seam.js';
@@ -43,6 +50,23 @@ const progress = (p, n, P) => {
   return Array.from({ length: n }, (_, i) => cubicInOut(seg(p, st * i, st * i + P.slide)));
 };
 const alt = (P) => P.alternate ?? !P.pane;
+const FLIP = bez(0.34, 1.32, 0.64, 1);          // turns past 180° by about 5° and settles
+// flip: the starts speed up (t^0.78 of the stagger: the wave turns faster as it goes); each vane takes `slide` of p
+const flipProgress = (p, n, P) => Array.from({ length: n }, (_, i) => { const a = n > 1 ? Math.pow(i / (n - 1), 0.78) * (P.end - P.slide) : 0; return seg(p, a, a + P.slide); });
+const vane = (u) => Math.PI * (u <= 0 ? 0 : u >= 1 ? 1 : FLIP(u));
+// draw one vane of a slat [y, h]: the face (cos θ > 0: the current slice, else the next) squashed by |cos θ| about the
+// slat's middle over the dark slot, darkening as it goes edge-on
+const drawVane = (ctx, x, w, y, h, th, C, paintFrom, paintTo) => {
+  const c = Math.cos(th), k = Math.abs(c), cy = y + h / 2;
+  if (th > 0 && th < Math.PI * 1.06) { ctx.fillStyle = mix(C.ground, '#000000', 0.55); ctx.fillRect(x, y, w, h); }
+  if (k < 0.002) return;
+  ctx.save();
+  ctx.beginPath(); ctx.rect(x, cy - (h / 2) * k, w, h * k); ctx.clip();
+  ctx.translate(0, cy); ctx.scale(1, k); ctx.translate(0, -cy);
+  if (c > 0) paintFrom(); else paintTo();
+  ctx.restore();
+  if (th > 0 && k < 0.999) { ctx.fillStyle = rgba('#000000', 0.5 * (1 - k)); ctx.fillRect(x, cy - (h / 2) * k, w, h * k); }
+};
 const edgeOn = (P) => (P.edge ?? (P.pane ? 'seam' : 'none')) === 'seam';
 
 export default {
@@ -67,6 +91,7 @@ export default {
     end: 0.95,                                 // the last slat lands here (the rest of p holds still)
     stagger: null,                             // instead: p between slat starts, each slat taking the rest
     alternate: null, direction: 1, edge: null,
+    turn: 'push',                              // 'flip': each slat turns over like a blind's vane instead of pushing
     mono: { family: 'monospace', weight: 400 },
     colors: { ...NEUTRAL, key: '#F3F2EE' },
   },
@@ -83,13 +108,14 @@ export default {
     return { W, R, A, B, vA, vB, slats };
   },
   rest(side, P, D) { return { u: (P.pane ? paneSlats(P) : D.slats).map(() => (side === 'from' ? 0 : 1)) }; },
-  at(p, P, D) { return { u: progress(p, (P.pane ? paneSlats(P) : D.slats).length, P) }; },
+  at(p, P, D) { const n = (P.pane ? paneSlats(P) : D.slats).length; return { u: P.turn === 'flip' ? flipProgress(p, n, P) : progress(p, n, P) }; },
   paint(ctx, S, P, D) {
     const C = P.colors;
     if (P.pane) {
       // in each slat the next content slides out of the seam, pushing the current one out of the far edge, its
       // slat's copy of the seam riding the boundary
       const R = P.pane;
+      if (P.turn === 'flip') { paneSlats(P).forEach(({ y, h }, i) => drawVane(ctx, R.x, R.w, y, h, vane(S.u[i]), C, () => P.from.paint(ctx, 0, 0), () => P.to.paint(ctx, 0, 0))); return; }
       paneSlats(P).forEach(({ y, h }, i) => {
         const u = S.u[i], dir = (alt(P) && i % 2 ? -1 : 1) * P.direction;
         const edge = dir > 0 ? R.x + u * R.w : R.x + R.w - u * R.w;
@@ -116,7 +142,8 @@ export default {
       windowFront(ctx, W, P, { title });
     };
     ctx.save(); clipWindow(ctx, W);
-    D.slats.forEach((s, i) => {
+    if (P.turn === 'flip') D.slats.forEach((s, i) => drawVane(ctx, W.x, W.w, s.y, s.h, vane(S.u[i]), C, () => face(D.vA, D.A, P.from.title), () => face(D.vB, D.B, P.to.title)));
+    else D.slats.forEach((s, i) => {
       const u = S.u[i], dir = (alt(P) && i % 2 ? -1 : 1) * P.direction, dx = dir * W.w;
       ctx.save();
       ctx.beginPath(); ctx.rect(W.x, s.y, W.w, s.h); ctx.clip();
@@ -135,6 +162,7 @@ export default {
     ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.stroke();
   },
   track: (S, P, D) => {
+    if (P.turn === 'flip') return (P.pane ? paneSlats(P) : D.slats).map((s, i) => [(P.pane || D.W).x + (P.pane || D.W).w / 2, s.y + (s.h / 2) * (1 - Math.cos(vane(S.u[i])))]);
     if (P.pane) return S.u.map((u, i) => [P.pane.x + u * P.pane.w, P.pane.y + (i + 0.5) * P.pane.h / S.u.length]);
     return D.slats.map((s, i) => [D.W.x + (alt(P) && i % 2 ? -1 : 1) * P.direction * D.W.w * (1 - S.u[i]), s.y]);
   },

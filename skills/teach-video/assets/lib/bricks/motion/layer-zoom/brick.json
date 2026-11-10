@@ -1,0 +1,126 @@
+{
+  "id": "layer-zoom",
+  "category": "motion",
+  "name": {
+    "en": "Layer zoom",
+    "zh": "分层放大"
+  },
+  "summary": {
+    "en": "Into one layer of an overview: the other layers are pushed away and fade while the focus layer grows into its detail layout, a loop pill becoming a circle.",
+    "zh": "放大总图的某一层：其他层被推开淡出，焦点层长成细节布局，循环药丸变成圆。"
+  },
+  "fits": "Going from a system map into one part, and back.",
+  "notFor": "Camera moves through a scene; zooming into a picture or a screenshot.",
+  "select": {
+    "intent": {
+      "en": "Keep the viewer sure which overview cell became which detail part.",
+      "zh": "让观众确定总图里的哪一格变成了细节里的哪个部件。"
+    },
+    "content": {
+      "en": "An overview with a focus layer, and the detail layout of its parts.",
+      "zh": "带焦点层的总图，以及它的部件在细节里的布局。"
+    },
+    "fits": {
+      "zh": "从系统总图进入某一部分，再回来。"
+    },
+    "notFor": {
+      "zh": "镜头在场景里移动；放大图片或截图。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "diagram"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "zoom into a layer",
+        "push away",
+        "detail view",
+        "overview",
+        "semantic zoom",
+        "pill to circle"
+      ],
+      "zh": [
+        "放大一层",
+        "推开",
+        "细节图",
+        "总图",
+        "语义缩放",
+        "药丸变圆"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "layer-overview",
+        "note": "before"
+      },
+      {
+        "id": "detail-walk",
+        "note": "after (it runs the same move)"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the overview's left-to-right order in the detail so no part crosses another.",
+        "The layers below the focus fade at once (0.3 s), or they cross the presenter reserve as they grow."
+      ],
+      "zh": [
+        "细节里保持总图的左右顺序，部件不交叉。",
+        "焦点下面的层要马上淡出（0.3 秒），否则放大时会压到主讲人预留区。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 2.6,
+    "range": [
+      2,
+      3.2
+    ]
+  },
+  "tier": "T2",
+  "family": "zoom-depth",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint-zoom"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/teach-video/assets/kits/blueprint-zoom/starter/components/zoom.js; the source film 12.65 s, 38.04 s"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "motion/layer-zoom/brick.js",
+  "card": "motion/layer-zoom/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from teach-video's blueprint-zoom kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

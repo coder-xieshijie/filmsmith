@@ -1,0 +1,157 @@
+{
+  "id": "group-photo",
+  "category": "scene",
+  "name": {
+    "en": "Group photo",
+    "zh": "发布会合影收场"
+  },
+  "summary": {
+    "en": "One piece from each part of the film flies in from its side and lands around the centre for a group photo; the camera cranes down, the mark and wordmark press in letter by letter while the cast steps back, a rule and the tagline follow, and the frame fades.",
+    "zh": "全片每段各出一块素材从各自方向飞入、在中心周围落位合影；镜头吊降，标志和字标逐字压入、配角退后，横线和标语跟上，最后淡出。"
+  },
+  "fits": "The ending of a film that showed several screens: a curtain call of the screens it showed, then the lock-up.",
+  "notFor": "Films with fewer than five distinct screens to bring back; endings that should be quiet (it is a launch).",
+  "energy": "high",
+  "duration": {
+    "beats": [
+      10,
+      14
+    ],
+    "sec120": [
+      5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "outro-group-photo-launch",
+        "path": "demos/outro/outro-group-photo-launch/OutroGroupPhotoLaunch.tsx",
+        "card": "references/shots/outro/outro-group-photo-launch.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "flock-finale",
+      "note": "many marks flocking into a formation; group-photo brings back the film's own screens around the wordmark"
+    },
+    {
+      "id": "mark-lockup",
+      "note": "the plain lock-up; group-photo frames it with the cast of the film"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/group-photo/brick.js",
+  "card": "scene/group-photo/CARD.md",
+  "compare": {
+    "ssimMean": 0.8047,
+    "ssimMin": 0.7678,
+    "ssimDrop": 0.052,
+    "trackDevPx": 13.9,
+    "progressRmse": 0.0006,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "A curtain call: everything the film showed comes back together around the name, so the ending feels like a launch.",
+      "zh": "谢幕合影：片子里出现过的画面一起回到名字周围，让收尾像一场发布。"
+    },
+    "content": {
+      "en": "5–9 screenshots from the film (cropped to cover; placeholders by shape without them), optional page behind, a mark, a wordmark ≤ 16 chars, an optional tagline ≤ 34 chars.",
+      "zh": "5–9 张片中截图（裁切铺满；没有就按形状画占位），可选背景页，一个标志，≤ 6 字的字标，可选 ≤ 12 字的标语。"
+    },
+    "fits": {
+      "zh": "展示过多个画面的片子的结尾：先请出场过的画面谢幕，再落版。"
+    },
+    "notFor": {
+      "zh": "可请回的不同画面少于五个的片子；应该安静收尾的片子（它是发布感）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup",
+      "climax"
+    ],
+    "subjects": [
+      "image",
+      "logo",
+      "cards"
+    ],
+    "moods": [
+      "ceremonial",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "group photo",
+        "curtain call",
+        "launch outro",
+        "crane down",
+        "letterpress",
+        "cast"
+      ],
+      "zh": [
+        "合影",
+        "谢幕",
+        "发布收尾",
+        "吊臂下降",
+        "逐字压入",
+        "群像"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "bento-wall",
+        "note": "a wall of the same screens earlier makes the curtain call a callback"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Bring back screens the viewer saw; new screenshots here are noise.",
+        "The pieces stay on screen around the name: busy screenshots compete with the wordmark, keep them calm or let them recede."
+      ],
+      "zh": [
+        "请回观众看过的画面；这里放新截图只是噪声。",
+        "素材一直围着名字：太花的截图会和字标抢，挑素净的或让它们退后。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "outro-group-photo-launch",
+        "name": "发布会合影收场",
+        "card": "发布会合影收场",
+        "summary": "全片元素从四面八方飞来围住字标合影，crane 落机位+舞台光+金尘做成发布会收场",
+        "use": "outro/品牌收尾；多功能产品的\"全家福\"式终镜",
+        "energy": "峰值（全片最高点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/outro-group-photo-launch.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

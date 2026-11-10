@@ -1,0 +1,164 @@
+{
+  "id": "outline-write",
+  "category": "motion",
+  "name": {
+    "en": "Outline write",
+    "zh": "字距结晶"
+  },
+  "summary": {
+    "en": "A widely spaced wordmark writes itself: every letter's outline starts on the same frame, grows as one continuous line and closes on the same frame, with a brief glow.",
+    "zh": "大字距字标自己写出来：每个字的轮廓同一帧起笔、连续生长、同一帧收笔，收笔时轻轻一亮。"
+  },
+  "fits": "A quiet wordmark or chapter title at the start or the end of a film: a name that should feel composed, not announced.",
+  "notFor": "Body text or anything read for content; a busy ground behind the line; energetic openings (it is one slow breath).",
+  "energy": "low",
+  "duration": {
+    "beats": 4.4,
+    "range": [
+      3,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "plakat",
+      "pulse"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "letterspace-materialize",
+        "path": "demos/opening/letterspace-materialize/LetterspaceMaterialize.tsx",
+        "card": "references/shots/opening/letterspace-materialize.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "segment-reveal",
+      "note": "withholds meaning in discrete pieces; outline-write writes the whole word continuously"
+    },
+    {
+      "id": "path-type",
+      "note": "type laid along a path; outline-write draws the glyphs themselves"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Let a name feel composed rather than announced: one invisible hand writes every letter at once, so the word arrives as one calm act.",
+      "zh": "让一个名字像被从容写成，而不是被喊出来：一只看不见的手同时写所有字，整个词作为一次安静的动作出现。"
+    },
+    "content": {
+      "en": "One wordmark or chapter title, a short word or name (en about 4–12 letters, zh 2–6 chars) set with wide tracking; optional solid fill at the close.",
+      "zh": "一个字标或章节标题，一个短词或名字（英文约 4–12 个字母，中文 2–6 字），大字距排；收笔时可选填实。"
+    },
+    "fits": {
+      "zh": "片头或片尾安静的字标或章节标题：要显得从容写成、而不是被宣布出来的名字。"
+    },
+    "notFor": {
+      "zh": "正文或任何要读内容的文字；线后面背景很花；有冲劲的开场（它是一次缓慢的呼吸）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup",
+      "hook",
+      "rest"
+    ],
+    "subjects": [
+      "title",
+      "logo"
+    ],
+    "moods": [
+      "calm",
+      "elegant",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "wordmark",
+        "handwriting",
+        "write-on",
+        "letterspace",
+        "crystallise",
+        "stroke draw",
+        "chapter title",
+        "signature"
+      ],
+      "zh": [
+        "字距结晶",
+        "字距结晶字标",
+        "字标显影",
+        "同步描画",
+        "手写",
+        "笔画生长",
+        "章节题字",
+        "片尾字标"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "mark-lockup",
+        "note": "the written name settles into the brand lockup"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Every letter must start and finish on the same frame; staggering them turns the ceremony into a typewriter.",
+        "The line must grow continuously; a mask uncovering it in pieces is seen through.",
+        "Keep the ground behind the line quiet; a 3 px line is lost over a busy picture."
+      ],
+      "zh": [
+        "所有字必须同帧起笔、同帧收笔；逐字错开就成了打字机。",
+        "笔画必须连续生长；用遮罩分段揭开会被看穿。",
+        "线背后的底要安静；3 px 的线在花的画面上会丢。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "letterspace-materialize",
+        "name": "字距结晶字标",
+        "card": "字距结晶字标",
+        "summary": "大字距字标全字符并行连续描画结晶——所有字母同帧起笔、笔画像手写一样连续生长、同帧齐收成词；氛围底景上的品牌字标显影",
+        "use": "片尾/片头品牌字标登场（大字距细骨架字标；demo 为 video-shotcraft 全小写）；章节题字；needs 静谧/高级感的收束帧",
+        "energy": "低（静谧仪式感，一次呼吸完成）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/letterspace-materialize.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/outline-write/brick.js",
+  "card": "motion/outline-write/CARD.md",
+  "compare": {
+    "ssimMean": 0.8236,
+    "ssimMin": 0.8136,
+    "ssimDrop": 0.0199,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

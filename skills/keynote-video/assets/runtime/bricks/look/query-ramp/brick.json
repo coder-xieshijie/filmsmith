@@ -1,0 +1,109 @@
+{
+  "id": "query-ramp",
+  "category": "look",
+  "name": {
+    "en": "Query ramp",
+    "zh": "查询色阶"
+  },
+  "summary": {
+    "en": "The pulse look: grounds that walk one hue's lightness ramp and a tinted white, white type on the dark steps, amber only for the answer, huge condensed black words at one anchor, a mono query line.",
+    "zh": "pulse 的样式：底色沿一个色相的明度阶梯走（四级加一档带色的白），深底白字，琥珀色只标答案，极窄黑体大字落在同一锚点，下方一行等宽查询行。"
+  },
+  "fits": "A question with a measured answer: version releases, benchmarks with one winner, a configuration that passes a limit; teasers of 12–40 s.",
+  "notFor": "Stories without a measurable question; many numbers; anything that needs more than five words at once or a second accent.",
+  "select": {
+    "intent": {
+      "en": "The beat becomes visible: every word lands on a new ground of the same hue, so the film feels like a query run live, and amber can only mean the answer.",
+      "zh": "把节拍变成看得见的东西：每个词落在同一色相的新底色上，像一次现场跑的查询；琥珀色只可能是答案。"
+    },
+    "content": {
+      "en": "One question (≤ 5 words a state), its real candidates with measured values, the answer, two or three supporting figures.",
+      "zh": "一个问题（每个状态 ≤ 5 个词），真实候选项和测得的值，答案，两三个佐证数字。"
+    },
+    "fits": {
+      "zh": "有测量答案的问题：版本发布、只有一个赢家的跑分、过了某个上限的配置；12–40 秒的预告。"
+    },
+    "notFor": {
+      "zh": "没有可测问题的故事；数字很多；一次要读五个词以上或要第二个强调色的片子。"
+    },
+    "subjects": [
+      "title",
+      "number",
+      "metric"
+    ],
+    "moods": [
+      "energetic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "benchmark",
+        "query",
+        "colour ramp",
+        "condensed black",
+        "one word per beat",
+        "amber answer",
+        "Barlow Condensed"
+      ],
+      "zh": [
+        "跑分",
+        "查询",
+        "色阶",
+        "极窄黑体",
+        "一拍一词",
+        "琥珀答案",
+        "长体"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "query-bed",
+        "note": "its sound: a muted kick on every beat, the drop on the whiteout"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Never colour anything but the answer amber.",
+        "Coral puts the accent on ramp[0] and ramp[1] only (`accentOn`)."
+      ],
+      "zh": [
+        "除了答案，任何东西都不许用琥珀色。",
+        "珊瑚红预设只在 ramp[0]、ramp[1] 上用强调色（`accentOn`）。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/palettes.js, film.js (grid and type)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "look/query-ramp/look.js",
+  "card": "look/query-ramp/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

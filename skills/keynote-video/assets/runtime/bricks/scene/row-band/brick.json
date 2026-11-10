@@ -1,0 +1,126 @@
+{
+  "id": "row-band",
+  "category": "scene",
+  "name": {
+    "en": "Row band",
+    "zh": "逐行光带"
+  },
+  "summary": {
+    "en": "A full-width band of light hops row to row on a still capture; each row brings its own value, line and note into the margin, level with it, and is ringed.",
+    "zh": "一条整行的光带在静止截图上逐行跳动；每一行带来自己的数值、说明和注释，与它齐平地写在页边，并被圈出。"
+  },
+  "fits": "A table, a list or a paragraph whose rows each carry a point (benchmark rows, plan tiers, guide steps).",
+  "notFor": "More than four rows (cut to the ones that matter); rows too close to tell apart at rest.",
+  "select": {
+    "intent": {
+      "en": "The viewer reads a real table one row at a time, each row paired with the sentence it proves.",
+      "zh": "观众一行一行地读真实表格，每行都配着它所证明的那句话。"
+    },
+    "content": {
+      "en": "A capture with 2–4 row regions (band and box each); per row a value (≤ 10 chars / 5 字), a line (≤ 18 / 14 字), a note (≤ 40 / 22 字).",
+      "zh": "一张带 2–4 个行区域（各有整行和方框）的截图；每行一个数值（≤ 10 字符 / 5 字）、一行说明（≤ 18 / 14 字）、一条注释（≤ 40 / 22 字）。"
+    },
+    "fits": {
+      "zh": "每行都有一个要点的表格、列表或段落（基准测试行、价格档、操作步骤）。"
+    },
+    "notFor": {
+      "zh": "超过四行（只留重要的）；静止时分不清的紧挨着的行。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "list",
+      "chart",
+      "ui"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "spotlight band",
+        "row by row",
+        "table rows",
+        "benchmark table",
+        "highlight hop",
+        "level rail"
+      ],
+      "zh": [
+        "光带",
+        "逐行",
+        "表格行",
+        "基准表",
+        "高亮跳动",
+        "水平跟随"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "screen-push",
+        "note": "push onto the last row as the claim"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Each row’s copy leaves as the next hop starts; do not keep two rows’ words on screen."
+      ],
+      "zh": [
+        "下一次跳动开始时上一行的文案退场；不要同时留两行的字。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      4,
+      20
+    ],
+    "sec120": [
+      2,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/choreo.js (TYPES.band), film.js (light, blockY), moves.js (spotlight-band)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/row-band/brick.js",
+  "card": "scene/row-band/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

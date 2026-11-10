@@ -1,0 +1,159 @@
+{
+  "id": "type-retype",
+  "category": "motion",
+  "name": {
+    "en": "Type and retype",
+    "zh": "误删重打"
+  },
+  "summary": {
+    "en": "A line is typed, the typist hesitates and deletes the tail, then types the real words faster; a highlighter bar settles under them.",
+    "zh": "先打出一句平庸的话，犹豫、退格删掉后半句，再更快地打出真正的说法，底下铺一道荧光笔。"
+  },
+  "fits": "A claim made by correcting a plainer one (\"not a draft, the cut you meant\"); a search or command being refined; copy built on a negation.",
+  "notFor": "Plain titles with nothing to correct (use type-enter); lines over about 30 characters (16 in Chinese); more than once a film (a second correction reads as a stammer).",
+  "select": {
+    "intent": {
+      "en": "A small drama of hesitate, reject, declare: the viewer sees the plain word thrown out and the real claim typed faster, so the claim reads as a decision.",
+      "zh": "一出“犹豫、否定、宣言”的小戏：观众看着平庸的说法被删掉、真正的卖点被更快地打出来，主张读成一个决定。"
+    },
+    "content": {
+      "en": "Three slots on one line: the start that stays, the wrong ending (typed then deleted) and the right ending; ≤ 30 chars in all.",
+      "zh": "同一行的三个槽：保留的开头、打出又删掉的错误结尾、正确结尾；合计 ≤ 16 字。"
+    },
+    "fits": {
+      "zh": "用改掉一个平庸说法来亮出主张（“不是草稿，是你想要的那一版”）；一条搜索或命令被改准；否定式文案。"
+    },
+    "notFor": {
+      "zh": "没什么可改的普通标题（用 type-enter）；超过约 30 个字符（中文 16 字）的句子；一支片两次以上（改两次口是口吃）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "claim",
+      "turn",
+      "hook"
+    ],
+    "subjects": [
+      "text",
+      "title",
+      "terminal"
+    ],
+    "moods": [
+      "playful",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "typewriter",
+        "retype",
+        "backspace",
+        "correction",
+        "not this but that",
+        "slogan",
+        "typing"
+      ],
+      "zh": [
+        "误删重打",
+        "打字机动效",
+        "退格",
+        "改口",
+        "不是而是",
+        "卖点字卡",
+        "打字"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "marker-stroke",
+        "note": "already ends with a highlighter bar; do not add another mark"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "It depends on sound: key clicks on every character and a lower backspace; silent, it is just a subtitle machine.",
+        "Once a film.",
+        "Keep the monospace face (or one cell per character), or the line reflows as it types."
+      ],
+      "zh": [
+        "强依赖声音：键击声逐字对齐、退格音更低；无声就只剩字幕机。",
+        "一支片只用一次。",
+        "保持等宽字体（或每字一个格），否则边打边重排、像抽搐。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "error-retype",
+        "name": "误删重打",
+        "card": "打字机动效",
+        "summary": "打字机 error-retype——误删重打的\"改口\"三幕剧：打出平庸词 → 犹豫 → 退格删掉 → 更快打出卖点词",
+        "use": "slogan/卖点字卡、否定式文案；文字自带时间性的入场",
+        "energy": "中低",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/error-retype.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      7
+    ]
+  },
+  "tier": "T1",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "error-retype",
+        "path": "demos/typography/typewriter-moves/TypewriterErrorRetype.tsx",
+        "card": "references/shots/typography/typewriter-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "scramble-resolve",
+      "note": "also reveals a line character by character, through scrambled glyphs and without a correction"
+    },
+    {
+      "id": "type-enter",
+      "note": "a plain title entrance; use it unless the correction is the point"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/type-retype/brick.js",
+  "card": "motion/type-retype/CARD.md",
+  "compare": {
+    "ssimMean": 0.9521,
+    "ssimMin": 0.9351,
+    "ssimDrop": 0.0267,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

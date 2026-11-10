@@ -1,0 +1,123 @@
+{
+  "id": "layer-overview",
+  "category": "scene",
+  "name": {
+    "en": "Layer overview",
+    "zh": "分层总图"
+  },
+  "summary": {
+    "en": "A whole system as one diagram of layer bands, built from the inside out: the focus layer around the side part, then the others from the bottom up.",
+    "zh": "把整个系统画成一张分层总图，从里往外搭：先在侧边部件旁画出焦点层，再从下往上画其他层。"
+  },
+  "fits": "The map of a system before one part is explained; the return to it after.",
+  "notFor": "Flows over time; more than six layers.",
+  "select": {
+    "intent": {
+      "en": "Give the viewer the whole map first, so every detail later has a place on it.",
+      "zh": "先给观众整张地图，之后每个细节都在上面有位置。"
+    },
+    "content": {
+      "en": "3–6 layers (name ≤ 14 / 8, optional note ≤ 40 / 12, 1–6 parts ≤ 14 / 6 each), which layer is the focus, an optional side part, a note on whose layering it is.",
+      "zh": "3–6 层（层名 ≤ 14 / 8、可选说明 ≤ 40 / 12、每层 1–6 个部件 ≤ 14 / 6）、哪一层是焦点、可选侧边部件、一条“谁的分层”注。"
+    },
+    "fits": {
+      "zh": "讲某一部分之前的系统总图；讲完回到总图。"
+    },
+    "notFor": {
+      "zh": "随时间的流程；超过六层。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "problem",
+      "claim"
+    ],
+    "subjects": [
+      "diagram"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "architecture map",
+        "layers",
+        "overview",
+        "system diagram",
+        "bottom up",
+        "harness"
+      ],
+      "zh": [
+        "架构总图",
+        "分层",
+        "总览",
+        "系统图",
+        "从下往上",
+        "harness"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "detail-walk",
+        "note": "next: zoom into the focus layer"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The layering is a judgement: say whose with the dashed note.",
+        "Build the focus layer first; the viewer's eye stays where the film will zoom."
+      ],
+      "zh": [
+        "分层是一种判断：用虚线注写明是谁的。",
+        "先搭焦点层；观众的视线停在之后要放大的地方。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      8,
+      32
+    ],
+    "sec120": [
+      4,
+      16
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint-zoom"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film 4.84–11.97 s; skills/teach-video/assets/kits/blueprint-zoom/starter/components/overview.js, band.js, node.js, loop.js, line.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "scene/layer-overview/brick.js",
+  "card": "scene/layer-overview/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from teach-video's blueprint-zoom kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

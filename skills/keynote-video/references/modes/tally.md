@@ -1,5 +1,7 @@
 # Tally (`tally`)
 
+**Recipe**: [tally](../recipes/tally.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 One square per item; the same squares regroup from a grid into category bands, a sorted grid, the axis of a bar chart and a rule under the closing numbers, chapter by chapter. Aesthetic anchor: "like a data-journalism unit chart that keeps its marbles between charts".
 Theme: tech-explainer · Template: `assets/templates/tally/` · Length follows content: 104–120 bpm (default 112), whole beats per scene, 1-bar phrase, timing API 3 (≤ 5 primary words a state, holds ≤ 2 beats, compositions ≤ 6 s, an entry every 8–12 s); the example fits to 15 bars, 32.1 s (30.0 s under API 2) · Accepted 2026-10-17 (genre demo 08: "I really like the squares-to-bar-chart effect"); pacing tiers and transitions owner-approved 2026-10-19 (batch 4)
 

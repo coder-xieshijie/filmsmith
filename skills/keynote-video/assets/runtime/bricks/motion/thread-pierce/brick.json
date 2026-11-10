@@ -1,0 +1,130 @@
+{
+  "id": "thread-pierce",
+  "category": "motion",
+  "name": {
+    "en": "Thread pierce",
+    "zh": "线穿乱堆"
+  },
+  "summary": {
+    "en": "One thread gathers a scattered pile: from the mascot its white-hot head runs one smooth path through the centre of every item (each lights with a ring as it is pierced), then the whole thread goes taut once and relaxes.",
+    "zh": "一根线收拢散乱的一堆：线头从吉祥物出发，沿一条平滑路径穿过每件东西的中心（被穿过的亮一圈），然后整根线绷紧一次再放松。"
+  },
+  "fits": "Turning a pile of loose things into one connected thing; the hook's peak.",
+  "notFor": "Items that must be read while it runs; fewer than four items.",
+  "select": {
+    "intent": {
+      "en": "Show one attention taking every loose thing at once.",
+      "zh": "让人看到一个注意力一次接住了所有散乱的东西。"
+    },
+    "content": {
+      "en": "Nothing to read: the items' rectangles and the thread's start.",
+      "zh": "没有字：各件东西的位置和线的起点。"
+    },
+    "fits": {
+      "zh": "把一堆散乱的东西变成连着的一串；开场的高峰。"
+    },
+    "notFor": {
+      "zh": "穿的时候要读的东西；少于四件。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "problem"
+    ],
+    "subjects": [
+      "abstract",
+      "ui"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "thread",
+        "pierce",
+        "string together",
+        "connect",
+        "path",
+        "taut"
+      ],
+      "zh": [
+        "穿线",
+        "串联",
+        "连起来",
+        "路径",
+        "绷紧",
+        "线头"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "reel-in",
+        "note": "next: the pile is swallowed"
+      },
+      {
+        "id": "desk-pile",
+        "note": "the pile it pierces"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Order the items by angle round the start, not by layer: a path by layer zig-zags and reads as random.",
+        "The taut swell is the beat's hit: land it on a downbeat."
+      ],
+      "zh": [
+        "按绕起点的角度排序，不按层级：按层级走的路径来回折，看起来像乱的。",
+        "绷紧那一下是节拍重音：落在强拍上。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 5,
+    "range": [
+      4,
+      6
+    ]
+  },
+  "tier": "T2",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/plan.js (the opening's path: Catmull-Rom by angle, io2 over 3.5 beats, pierce times); film.js renderOpen"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/thread-pierce/brick.js",
+  "card": "motion/thread-pierce/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

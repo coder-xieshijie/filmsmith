@@ -1,0 +1,131 @@
+{
+  "id": "prompt-boot",
+  "category": "scene",
+  "name": {
+    "en": "Prompt boot",
+    "zh": "提示符开机"
+  },
+  "summary": {
+    "en": "The opening: a prompt types alone at the centre and rises as the hook types under it at 150 px, the key word grows on a beat, problem tags pop, then everything collapses into the cursor, a point of light, the fibre burst and a flash.",
+    "zh": "开场：提示符在中央单独敲出，随后上移，钩子句在下方以 150 px 敲出，关键词在拍点放大，问题标签弹出；然后一切被吸进光标，变成一个光点，光纤爆发，一道闪白。"
+  },
+  "fits": "The hook of a CLI film: the command and what went wrong, then the energy of the burst into the claim.",
+  "notFor": "Films without a command line; a hook longer than five words; quiet openings.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Open in the terminal with the failure itself, then turn the whole screen into the point the film grows from.",
+      "zh": "在终端里直接以失败开场，再把整个屏幕收成一个光点，片子从这里长出来。"
+    },
+    "content": {
+      "en": "A prompt (the command), a hook of ≤ 5 words with its key word marked (`*3*`), 0–4 problem tags (a word and a note).",
+      "zh": "一条提示符命令、一句 ≤ 10 字的钩子（用 `*…*` 标出关键词）、0–4 个问题标签（一个词加一句注）。"
+    },
+    "fits": {
+      "zh": "命令行片子的钩子：敲下的命令和出了什么错，再借爆发冲进主张。"
+    },
+    "notFor": {
+      "zh": "没有命令行的片子；超过五个词的钩子；安静的开场。"
+    },
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "terminal",
+      "code",
+      "title"
+    ],
+    "moods": [
+      "dramatic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "boot",
+        "prompt",
+        "hook",
+        "cursor",
+        "fibre burst",
+        "collapse"
+      ],
+      "zh": [
+        "开机",
+        "提示符",
+        "钩子",
+        "光标",
+        "光纤爆发",
+        "收缩"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "horizon-hero",
+        "note": "the claim grows out of its point"
+      },
+      {
+        "id": "cursor-collapse",
+        "note": "its collapse, as a motion"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Mark the key word in the copy (`*3*`); a bare word match fails on Chinese and on punctuation.",
+        "The burst is the loudest shot of the opening: do not put another T2 device within 8 s of it."
+      ],
+      "zh": [
+        "在文案里标出关键词（`*3*`）；按裸词匹配在中文和标点上都会失败。",
+        "爆发是开场最响的镜头：8 秒内不要再放第二个 T2 手法。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      10,
+      20
+    ],
+    "sec120": [
+      5,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.boot; fx.js burst; events.js TIMING.boot"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/prompt-boot/brick.js",
+  "card": "scene/prompt-boot/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

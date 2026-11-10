@@ -13,8 +13,8 @@ Filmsmith 是一组只用代码做视频的 Agent Skill：每一帧画面都用 
 
 | Skill | 做什么 |
 |---|---|
-| [keynote-video](#keynote-video) | 技术产品的音乐短片：发布片、预告、showreel、数据片；十七种风格，没有旁白 |
-| [teach-video](#teach-video) | 给有基础的开发者讲清一个技术概念的中文讲解片，带旁白 |
+| [keynote-video](#keynote-video) | 技术产品的音乐短片：发布片、预告、showreel、数据片；由积木组合，十七种风格作配方，画面文字中英都行，没有旁白 |
+| [teach-video](#teach-video) | 给有基础的开发者讲清一个技术概念的讲解片，中文旁白，画面文字中英都行 |
 
 ## 安装
 
@@ -37,13 +37,13 @@ ln -s "$PWD/filmsmith/skills/teach-video" <你的 Agent 的 skills 目录>/teach
 
 ## keynote-video
 
-**十七种拍代码的方法。** [`skills/keynote-video`](skills/keynote-video/SKILL.md) 用来做技术短片：发布片、预告、showreel、数据片、讲解片。每一帧画面都由代码绘制，每一个声音都由代码合成。选一种风格，填一个文件，渲染即可。
+**用积木拍你的代码。** [`skills/keynote-video`](skills/keynote-video/SKILL.md) 用来做技术短片：发布片、预告、showreel、数据片、讲解片。每一帧画面都由代码绘制，每一个声音都由代码合成。一支片由积木（动作、场景、道具、样式、声音、叙事骨架）组合而成，挑两三种风格作参考，全片只用一套样式；某一种风格正好合适时，也可以直接用它的模板。画面文字是英文还是中文，按你给的物料定。
 
 ![其中十六种风格](docs/keynote-video/showcase.jpg)
 
 ### 十七种风格
 
-每种风格是一套视觉语言：配色预设、一个形态变体、登记好的场景库，以及一个能直接渲出完整成片的模板。下面每张动图取自现成的 demo（28–46 秒，Stream 的是 92 秒），时长均为 6 秒。前十支完整成片已在 [YouTube](https://www.youtube.com/@world_0618) 公开，MP4 下载在 [v0.1.0 Release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0)；六支真实素材 demo 和 Stream 正待上传。
+每种风格是一份配方：一套样式、故事每个位置推荐用的积木、这种风格不能做的事，再加一个渲出示例片的模板，带配色预设和一个形态变体。下面每张动图取自现成的 demo（28–46 秒，Stream 的是 92 秒），时长均为 6 秒。前十支完整成片已在 [YouTube](https://www.youtube.com/@world_0618) 公开，MP4 下载在 [v0.1.0 Release](https://github.com/coder-xieshijie/filmsmith/releases/tag/v0.1.0)；六支真实素材 demo 和 Stream 正待上传。
 
 前十支的产品都是虚构的，只有 Tally 用的是真实的 Python PEP 索引。Handset、Exhibit、Dossier 演示 2026-10-20 留存的真实发布页、图表和产品界面；Strip、Split、Scroll 使用 2026-10-21 留存的 Filmsmith 成片、代码与仓库页面。Stream 的 demo 是虚构的 agent 工作台 Skein，有英文和中文两版。片中的数字、活动与十种风格 README 属于当时的来源快照。总览图展示前十六种风格（还没有 Stream），保留的 demo 可能使用较早的配色预设。
 
@@ -66,7 +66,7 @@ ln -s "$PWD/filmsmith/skills/teach-video" <你的 Agent 的 skills 目录>/teach
 | <img src="docs/keynote-video/previews/filmsmith-strip-preview.webp" width="320" alt="Strip six-second demo preview"> | **[Strip](skills/keynote-video/references/modes/strip.md)** | 灯箱上的一条胶片穿过固定的片门：真实影片的真实画格一拍一格地拉进片门、停稳对齐，一格冲到全屏后缩进印样，印样每一行和影片一样长，剪辑师的油性笔圈出选中的那一格，让它跑起来 | 产品真实产出的合集：渲染出的影片、实拍素材、可供挑选的画面 |
 | <img src="docs/keynote-video/previews/filmsmith-split-preview.webp" width="320" alt="Split six-second demo preview"> | **[Split](skills/keynote-video/references/modes/split.md)** | 一条可移动的分割线把画面分成两边：一边是写在纸面上的输入（请求、真实文件里的几行、命令、一行 diff），另一边是它产出的真实画面、渲染和报告；每次变化都是分割线在动，高潮是改一行代码，同一时刻的两帧渲染分在线的两侧 | 输入能逐行对应到产出的开发者工具：生成器、配置、命令行工具和它们的报告 |
 | <img src="docs/keynote-video/previews/filmsmith-scroll-preview.webp" width="320" alt="Scroll six-second demo preview"> | **[Scroll](skills/keynote-video/references/modes/scroll.md)** | 把产品自己的长页面当成一张纸卷轴：向上一甩带着惯性滑动，一节一节刹住、锁定，页面自己的标题钉在顶部当章节；一条下划线标出正在读的那一行，旁边的引文条用大字重复它；表格里的一行在原地展开，播放它所描述的那支演示片 | 用产品自己的 README、文档或更新日志讲的发布 |
-| <img src="docs/keynote-video/previews/filmsmith-stream-preview.webp" width="320" alt="Stream six-second demo preview"> | **[Stream](skills/keynote-video/references/modes/stream.md)** | 夜空里一根贯穿全片的光线：它穿过散乱的桌面把一切收回来，小块界面挂在线上，每个任务派出去成一颗星，一项工作的几颗星连成星座，最后一次扫线把满天星收进一个面板，只有一件事需要你；屏幕文字可以是英文或中文 | agent 工作台和任务调度类产品：任务派出、并行、核对、收回 |
+| <img src="docs/keynote-video/previews/filmsmith-stream-preview.webp" width="320" alt="Stream six-second demo preview"> | **[Stream](skills/keynote-video/references/modes/stream.md)** | 夜空里一根贯穿全片的光线：它穿过散乱的桌面把一切收回来，小块界面挂在线上，每个任务派出去成一颗星，一项工作的几颗星连成星座，最后一次扫线把满天星收进一个面板，只有一件事需要你 | agent 工作台和任务调度类产品：任务派出、并行、核对、收回 |
 
 每种风格都有变体。一是配色预设，例如 Phosphor 有冰白、绿、琥珀、青、紫、珊瑚红六套；二是一条形态轴：Thread 的线可以等宽或膨线，Ink 的字可以压缩或扩展，Plakat 可以方正或斜向，Blueprint 可以是针管笔或铅笔，Phosphor 可以是 CRT 扫描线或平板，Tally 可以用方块、圆点或 Isotype 图形符号，Trace 可以是矢量或手绘，Morph 可以是圆角或切角，Halftone 可以是圆点、方点或线网，Pulse 的光圈可以是切角或圆形，Handset 的设备可以是笔记本或手机，Exhibit 的桌面可以是素面或切割垫，Dossier 的荧光笔可以盖在主张上或划在行下，Strip 的胶片可以是双排齿孔或单排齿孔，Split 的分割线可以是实线或虚线（裁切线），Scroll 可以带或不带整页的缩略导航条，Stream 可以从白天的桌面或夜空开场。每张风格卡都列出适用场景，并附具体例子。
 
@@ -76,7 +76,7 @@ keynote-video 对运行它的 Agent 要求很少，所以不绑定某一个 Agen
 
 - **一个 shell，加上 Node.js 和 FFmpeg。** 不依赖任何 Agent 专属的工具、插件或 API：Skill 本身就是 Markdown 和 JavaScript，能读文件、能跑命令的 Agent 都能照着做。
 - **不调用生成模型。** 画面由代码绘制，声音由代码合成，不调用任何图像、视频或音乐模型，所以不需要 API key，每次渲染也没有费用；生成的音乐床只是可选项。
-- **重活由模板承担。** 每种风格一开始就是一支能跑的成片。Agent 只写一个 `content.js`，脚本负责把时间对齐到节拍、混音和测量成片。不只大模型，快模型也能把一支片从需求做到测量过的 MP4。
+- **重活由积木和模板承担。** 每块积木、每种风格的模板都已经能跑。Agent 挑积木、写这支片的内容，脚本负责把时间对齐到节拍、混音和测量成片。不只大模型，快模型也能把一支片从需求做到测量过的 MP4。
 
 ### 快速开始
 
@@ -105,7 +105,7 @@ keynote-video 对运行它的 Agent 要求很少，所以不绑定某一个 Agen
 把上周那支发布片换成 Blueprint 风格重做一版，两版对比给我看。
 ```
 
-Agent 会推荐风格和配色、写好计划、先出关键帧给你看，再渲染成片并测量。背后是这几条命令（在放 clone 的目录里执行）：
+Agent 会挑两三种参考风格、定一套样式、给故事的每一段选积木，写好计划，先出关键帧给你看，再渲染成片并测量。背后是这几条命令（在放 clone 的目录里执行）：
 
 ```bash
 node filmsmith/skills/keynote-video/scripts/new-film.mjs ink my-film --palette cobalt   # 从一种风格建工程
@@ -118,12 +118,12 @@ node ../filmsmith/skills/keynote-video/scripts/check-film.mjs renders/film.mp4 -
 ### 一支片怎么做出来
 
 ```
-品味理论 ──▶ 十条原则 ──▶ 十七种风格 ──▶ 模板 + content.js ──▶ npm run film ──▶ 测量过的 MP4
-(foundations.md) (principles.md) (modes/)  (assets/templates/)     (HyperFrames)    (check-film)
+品味理论 ──▶ 十条原则 ──▶ 风格 + 积木 ──▶ PLAN.md + content.js ──▶ npm run film ──▶ 测量过的 MP4
+(foundations.md) (principles.md) (recipes/、bricks.md) (组合表)   (HyperFrames)    (check-film)
 ```
 
 - **理论先行。** 好设计的六层金字塔（看得清 → 看得懂 → 看得顺 → 成一体 → 合身 → 新鲜）推出十条核心原则，每条风格规则和检查项都能追溯到它们；作者的品味和理论冲突时，以理论为准。
-- **从风格出发，不从白纸出发。** 新片从一支能跑的片子开始：选风格、换文案，编舞保留。
+- **从积木出发，不从白纸出发。** 一支片按叙事骨架一格一格放进能跑的积木，全片一套样式：一套配色、一套字体、一根贯穿的线索。某种风格正好合适时，直接用它的模板。
 - **全部是代码。** 画面用 HTML、canvas、WebGL 和 GSAP 在 HyperFrames 上绘制；声音在同一套节拍网格上合成，也可以换成生成的配乐。
 - **轻快、干净。** 片长由内容决定，画面一直在变：约每拍一个小变化，每 2–3 秒换一次构图，每 8–12 秒一次表现型转场，全片两三个高峰；一次最多进场五个词，读字时间不打折；关键时刻都落在拍上。
 - **转场成库。** 五十个对象级交接件（同一个东西从上一场带到下一场：一个词、一个圈出的数字、一张长页、一条胶片、一条分屏线）和十七个帧级转场，每个都写明依据的理论，并按运动方向分好家族。
@@ -132,11 +132,11 @@ node ../filmsmith/skills/keynote-video/scripts/check-film.mjs renders/film.mp4 -
 ### 限制
 
 - 只做横屏 16:9、1920×1080。
-- 画面文字只有英文；只有 Stream 也能做中文。
+- 画面文字是英文或中文，按物料定；不做其他文字。
 
 ## teach-video
 
-[`skills/teach-video`](skills/teach-video/SKILL.md) 做中文讲解片，给有基础的开发者讲清一个技术概念。画面用代码（HyperFrames）从风格包画出来：一条命令把解说稿变成配音、时间轴和逐词时间戳；导演把一支片拆成 2–3 段，段与段之间有交接约定；几何门禁和约 20 张图的核查包代替肉眼盯片；最后由讲解人自己录旁白。
+[`skills/teach-video`](skills/teach-video/SKILL.md) 做讲解片，给有基础的开发者讲清一个技术概念：中文旁白，画面文字中英都行。画面用代码（HyperFrames）从风格包画出来：一条命令把解说稿变成配音、时间轴和逐词时间戳；导演把一支片拆成 2–3 段，段与段之间有交接约定；几何门禁和约 20 张图的核查包代替肉眼盯片；最后由讲解人自己录旁白。
 
 ```bash
 npx skills add coder-xieshijie/filmsmith --skill teach-video
@@ -146,11 +146,11 @@ npx skills add coder-xieshijie/filmsmith --skill teach-video
 
 | | |
 |---|---|
-| [`skills/keynote-video/`](skills/keynote-video/SKILL.md) | keynote-video：流程、理论、原则、十七种风格及其模板、转场库、运行库和测量脚本 |
+| [`skills/keynote-video/`](skills/keynote-video/SKILL.md) | keynote-video：流程、理论、原则、积木库、十七种风格（配方与模板）、转场库、运行库和测量脚本 |
 | [`skills/teach-video/`](skills/teach-video/SKILL.md) | teach-video |
 | [`docs/`](docs/) | 本 README 用的图片和仓库的社交预览图 |
 | [CHANGELOG.md](CHANGELOG.md) | 所有 Skill 的变更 |
 
 ## 许可
 
-代码、Skill 和提示词采用 [MIT License](LICENSE)。字体、GSAP 和 HyperFrames 在建工程时下载，各自遵循自己的许可，见 [THIRD-PARTY.md](THIRD-PARTY.md)。参与贡献见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+代码、Skill 和提示词采用 [MIT License](LICENSE)；改自 video-shotcraft 库的积木仍遵循 Apache-2.0，每块的卡片上写明。字体、GSAP 和 HyperFrames 在建工程时下载，各自遵循自己的许可，见 [THIRD-PARTY.md](THIRD-PARTY.md)。参与贡献见 [CONTRIBUTING.md](CONTRIBUTING.md)。

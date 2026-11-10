@@ -1,0 +1,123 @@
+{
+  "id": "seam-lockup",
+  "category": "scene",
+  "name": {
+    "en": "Seam lock-up",
+    "zh": "接缝落版"
+  },
+  "summary": {
+    "en": "A wipe line brings the name, the install line typing, the address and the published page beside the seam; on the last bar the seam closes and the caret waits.",
+    "zh": "一道擦除线带来名字、逐字打出的安装命令、网址和接缝旁已发布的页面；最后一小节接缝合上，光标停着等。"
+  },
+  "fits": "The close of a split film.",
+  "notFor": "A logo card; a QR end card.",
+  "select": {
+    "intent": {
+      "en": "What to type to get it, beside where it is published; then the seam leaves.",
+      "zh": "告诉人怎么装、去哪里看；然后接缝离开。"
+    },
+    "content": {
+      "en": "The name (≤ 16 characters), the install command (≤ 44), the address (≤ 44), a glance line (≤ 6 words), the published page.",
+      "zh": "名字（≤ 8 字）、安装命令（≤ 44 字符）、网址（≤ 44 字符）、一行扫读（≤ 14 字）、已发布的页面。"
+    },
+    "fits": {
+      "zh": "split 片的收尾。"
+    },
+    "notFor": {
+      "zh": "标志卡；二维码尾卡。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "title",
+      "code",
+      "image"
+    ],
+    "moods": [
+      "calm",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "install line",
+        "name and address",
+        "seam close",
+        "caret blink",
+        "published page"
+      ],
+      "zh": [
+        "安装命令",
+        "名字和网址",
+        "接缝合上",
+        "光标闪烁",
+        "已发布页面"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "diff-climax",
+        "note": "after the climax"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Hold the address at least 3 s."
+      ],
+      "zh": [
+        "网址至少停 3 秒。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      10,
+      24
+    ],
+    "sec120": [
+      5,
+      12
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/choreo.js (lockup), film.js (stateOf lockup, wipe-line)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/seam-lockup/brick.js",
+  "card": "scene/seam-lockup/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

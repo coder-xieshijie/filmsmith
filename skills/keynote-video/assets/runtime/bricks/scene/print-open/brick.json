@@ -1,0 +1,123 @@
+{
+  "id": "print-open",
+  "category": "scene",
+  "name": {
+    "en": "Print open",
+    "zh": "截图开场"
+  },
+  "summary": {
+    "en": "The film opens on a real print at full frame; the camera rises and its mount grows round it until it lies on the desk; its chip, then a caption word by word.",
+    "zh": "片子从一张满屏的真实截图开场；镜头升起，卡框在它四周长出，直到它躺在桌上；先读它的标签，再逐词落下说明。"
+  },
+  "fits": "The first scene of an exhibit film: the strongest single piece of evidence.",
+  "notFor": "A logo or title card; an asset that does not survive full frame (below 1920 × 1080 source px).",
+  "select": {
+    "intent": {
+      "en": "Start inside the evidence, then step back to show it is a print on a desk with a source.",
+      "zh": "从证据内里开场，再退后，让人看到它是桌上一张有出处的截图。"
+    },
+    "content": {
+      "en": "The desk’s prints; this print’s caption (≤ 6 words / 16 字).",
+      "zh": "桌上的截图；这张的说明（≤ 6 词 / 16 字）。"
+    },
+    "fits": {
+      "zh": "exhibit 片的第一场：最有力的那一件证据。"
+    },
+    "notFor": {
+      "zh": "标志或标题卡；放到满屏会糊的素材（源像素小于 1920 × 1080）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "image",
+      "chart",
+      "ui"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "bezel pullback",
+        "full frame to mount",
+        "opening print",
+        "rise off the page",
+        "cold open"
+      ],
+      "zh": [
+        "边框拉远",
+        "满屏到卡框",
+        "开场截图",
+        "从页面升起",
+        "冷开场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "print-read",
+        "note": "read its claim next"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The opening frame is at the zoom cap: crop so it holds at 1.333."
+      ],
+      "zh": [
+        "开场画面在放大上限：裁切要保证 1.333 下仍清楚。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      5,
+      12
+    ],
+    "sec120": [
+      2.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "exhibit",
+      "any launch argued from published evidence"
+    ],
+    "avoid": [
+      "tally",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/exhibit/choreo.js (open), moves.js (bezel-pullback)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/print-open/brick.js",
+  "card": "scene/print-open/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

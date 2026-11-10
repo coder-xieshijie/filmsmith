@@ -1,0 +1,89 @@
+{
+  "id": "shell-bed",
+  "category": "sound",
+  "name": {
+    "en": "Shell bed",
+    "zh": "终端音乐床"
+  },
+  "summary": {
+    "en": "The split sound: the terminal bed (a pulsing saw figure in A minor) by scene; a key click per typed character, a rim per pick, a tick per louvre slat, air under each seam move, an impact and a chime on the climax.",
+    "zh": "split 的声音：terminal 音乐床（A 小调的锯齿波律动）按场景分段；每打一个字一声按键，每次挑选一声边击，百叶每片一声轻响，接缝每次移动带一阵风声，高潮一声重击加钟声。"
+  },
+  "fits": "Developer-tool films whose input side is a shell or an editor.",
+  "notFor": "Voice-over films (duck it); ambient pieces.",
+  "select": {
+    "intent": {
+      "en": "The keyboard and the seam are heard: typing, ticks, air as the seam moves.",
+      "zh": "听得见键盘和接缝：打字、轻响、接缝移动时的风声。"
+    },
+    "content": {
+      "en": "A film on the seam-edit arc; event kinds from the scenes’ plans.",
+      "zh": "按 seam-edit 骨架编排的片子；事件种类来自各场景的 plan。"
+    },
+    "fits": {
+      "zh": "输入侧是终端或编辑器的开发者工具片。"
+    },
+    "notFor": {
+      "zh": "有旁白的片（改为压低）；氛围片。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "terminal bed",
+        "key clicks",
+        "seam whoosh",
+        "louvre ticks",
+        "A minor"
+      ],
+      "zh": [
+        "terminal 音乐床",
+        "按键声",
+        "接缝风声",
+        "百叶轻响",
+        "A 小调"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": null,
+  "styles": {
+    "fits": [
+      "split"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/score.mjs"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "sound/shell-bed/sound.js",
+  "card": "sound/shell-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

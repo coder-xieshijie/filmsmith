@@ -1,0 +1,101 @@
+{
+  "id": "quote-band",
+  "category": "prop",
+  "name": {
+    "en": "Quote band",
+    "zh": "引语条"
+  },
+  "summary": {
+    "en": "A pull quote pasted across the sheet: a band of warm paper, the page's words in large grotesk, each phrase rising into its line box.",
+    "zh": "横贴在长卷上的引语：一条暖白纸，页面原话用大号无衬线字，每个短语升进自己的行框。"
+  },
+  "fits": "Quoting a line of a captured page in readable type.",
+  "notFor": "Words the page does not say; more than two lines.",
+  "select": {
+    "intent": {
+      "en": "Make a line of the page readable without retyping the page: paste the words over it.",
+      "zh": "不重排页面也能让一句话读得清：把这句话贴在上面。"
+    },
+    "content": {
+      "en": "1–2 lines of phrases (≤ 20 chars each), the page's own words.",
+      "zh": "1–2 行短语（每段 ≤ 6 字），页面原话。"
+    },
+    "fits": {
+      "zh": "把截图页面上的一句话用可读的字号引出来。"
+    },
+    "notFor": {
+      "zh": "页面没说的话；超过两行。"
+    },
+    "roles": [
+      "hook",
+      "problem",
+      "proof"
+    ],
+    "subjects": [
+      "text"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "pull quote",
+        "band",
+        "paper stock",
+        "phrase by phrase"
+      ],
+      "zh": [
+        "引语",
+        "条带",
+        "纸张",
+        "逐个短语"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Never add a claim: cut words only."
+      ],
+      "zh": [
+        "只删不加：不许添新主张。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "scroll",
+      "any capture film"
+    ],
+    "avoid": [
+      "ink"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "film-v1/film.js band, slotLine, phraseLine"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/quote-band/brick.js",
+  "card": "prop/quote-band/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

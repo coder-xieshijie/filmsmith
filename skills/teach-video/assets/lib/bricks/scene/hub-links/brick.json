@@ -1,0 +1,178 @@
+{
+  "id": "hub-links",
+  "category": "scene",
+  "name": {
+    "en": "Hub links",
+    "zh": "汇流中枢"
+  },
+  "summary": {
+    "en": "Several sources joined to one hub by paths with light running along them: they keep feeding it (connect) or slide in and are swallowed (merge).",
+    "zh": "几个来源由带光点的路径连到同一个中枢：要么持续输送（接入），要么顺着路径滑进去被吞并（汇流）。"
+  },
+  "fits": "Integrations, one entry for many inputs, consolidation of tools: merge when the sources disappear into the product, connect when they stay and feed it.",
+  "notFor": "A pipeline with order (use a row of steps); more than six sources (the layout and the paths crowd); the product page as the subject (it is a picture in the hub here).",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      12
+    ],
+    "sec120": [
+      3,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "bezier-source-converge-merge",
+        "path": "demos/ui-entrance/bezier-source-converge-merge/BezierSourceConvergeMerge.tsx",
+        "card": "references/shots/ui-entrance/bezier-source-converge-merge.md"
+      },
+      {
+        "key": "integration-hub-map",
+        "path": "demos/ui-entrance/integration-hub-map/IntegrationHubMap.tsx",
+        "card": "references/shots/ui-entrance/integration-hub-map.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "integration-hub-map"
+  ],
+  "overlaps": [
+    {
+      "id": "converge-mark",
+      "note": "the film's pieces fly on arcs into the cells of the mark (a lockup); hub-links keeps the paths and their flow"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Turn 'many sources, one place' into a physical process: paths connect, and the sources are either swallowed so only the product remains (merge) or stay and keep feeding it (connect).",
+      "zh": "把“多个来源、一个去处”变成看得见的物理过程：通路接上，来源要么被吸进去、最后只剩产品（汇流），要么留在原处持续输送（接入）。"
+    },
+    "content": {
+      "en": "4–5 sources as logos, images or neutral glyphs; one mark for the hub (on an opaque disc); in connect a page painter as the hub; in merge one caption (en ≤ 28 chars, zh ≤ 12).",
+      "zh": "4–5 个来源（标志、图片或中性图标）；中枢一个标志（托在不透明圆片上）；接入式中枢是一页画面；汇流式一句说明（英文 ≤ 28 字符，中文 ≤ 12 字）。"
+    },
+    "fits": {
+      "zh": "集成、多个输入一个入口、工具合并：来源消失进产品里用汇流，来源留着并持续输送用接入。"
+    },
+    "notFor": {
+      "zh": "有先后顺序的流水线（用一排步骤）；超过六个来源（布局和路径会挤）；以产品页本身为主体（这里它只是中枢里的一张图）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "turn",
+      "proof"
+    ],
+    "subjects": [
+      "diagram",
+      "logo"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "integration hub",
+        "converge and merge",
+        "ecosystem",
+        "sources to hub",
+        "consolidation",
+        "single entry",
+        "neon tubes",
+        "swallowed"
+      ],
+      "zh": [
+        "汇流中枢",
+        "曲线汇流吞并",
+        "集成星图",
+        "生态接入",
+        "统一接入",
+        "多源整合",
+        "一个入口",
+        "吞并"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "device-flip",
+        "note": "the turn-over flip that opens connect: an old page becomes the hub"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "In connect, pop all sources on one frame, then draw all tubes on the next beat; connecting one by one reads as separate negotiations.",
+        "Keep the accent for the packets and ripples; colouring the sources takes the subject away from the hub.",
+        "Put an open-shaped hub mark on an opaque disc, or the line ends show through its gap.",
+        "If a caption follows narration, time it to the spoken word, not to the end of the merge."
+      ],
+      "zh": [
+        "接入式要所有来源同帧弹现、下一拍所有光管同帧齐连；逐个连读作一个个谈判。",
+        "强调色只给光点和涟漪；给来源上色会把主体从中枢抢走。",
+        "开口形的中枢标志要托在不透明圆片上，否则线头从缺口露出来。",
+        "配旁白时，说明出现的时刻对齐旁白落词，而不是吞并结束。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "bezier-source-converge-merge",
+        "name": "曲线汇流吞并",
+        "card": "曲线汇流吞并",
+        "summary": "左侧四个来源节点各有一条细贝塞尔曲线连向右侧同一汇聚点，曲线先错峰由左向右 draw-on，节点沿自己的曲线滑向汇聚点并三段式加速缩小到消失，强调色数据包全程沿路径滑行，吞并完成后曲线从左端反向擦除只留品牌标志（demo：白瓷圆片托 video-shotcraft 镜刻标志）",
+        "use": "\"多源整合/统一接入/数据汇聚\"的核心机制镜头；集成、聚合、单一入口类产品的说明段落",
+        "energy": "中（长镜慢速推进，靠数据包滑行维持活性；吞并瞬间是唯一小高点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/bezier-source-converge-merge.mp4"
+      },
+      {
+        "key": "integration-hub-map",
+        "name": "集成星图",
+        "card": "集成星图",
+        "summary": "旧页面一次性快翻 180°（侧棱瞬间亮闪）落成新中枢页，五个集成 app 图标同帧弹现、随即五条彩虹光管同帧齐连，光管内输送脉冲持续流动——\"翻开新一页，生态一齐接入\"",
+        "use": "集成/生态能力段（一个产品连一切）；版本翻新叙事（旧页翻成新页）；暗场霓虹调性的功能高潮",
+        "energy": "中高（翻面是爆点，输送段是余韵）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/integration-hub-map.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/hub-links/brick.js",
+  "card": "scene/hub-links/CARD.md",
+  "compare": {
+    "ssimMean": 0.982,
+    "ssimMin": 0.9711,
+    "ssimDrop": 0.0072,
+    "trackDevPx": 5.7,
+    "progressRmse": 0.0006,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

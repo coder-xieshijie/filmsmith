@@ -1,0 +1,87 @@
+{
+  "id": "neutral",
+  "category": "look",
+  "name": {
+    "en": "Neutral",
+    "zh": "中性"
+  },
+  "summary": {
+    "en": "The plain look every brick sample and motion comparison is drawn in: two grey grounds, one blue accent, and a grey-only probe.",
+    "zh": "所有积木小样和动作对照用的素样式：浅、深两套灰底加一个蓝色强调色，另有只含灰阶的对照预设。"
+  },
+  "fits": "Samples, comparisons and animatics, where the brick must be judged apart from any style.",
+  "notFor": "A film: it carries no point of view.",
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the brick spec"
+  },
+  "licence": "MIT",
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "look/neutral/look.js",
+  "card": "look/neutral/CARD.md",
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "Judge a brick by its motion alone: a plain workbench with no point of view, so nothing but the movement is read.",
+      "zh": "只凭动作判断一块积木：一张没有立场的素工作台，画面里除了动作没有别的可读。"
+    },
+    "content": {
+      "en": "Nothing of its own: the brick being sampled or compared, in two grey grounds and one blue accent (or the grey-only probe).",
+      "zh": "自身不带内容：被出小样或对照的那块积木，放在浅、深两套灰底加一个蓝色强调色上（或只含灰阶的对照预设）。"
+    },
+    "fits": {
+      "zh": "小样、动作对照、骨架示意片，需要撇开任何风格看积木本身的时候。"
+    },
+    "notFor": {
+      "zh": "成片：它没有立场；一支片要用某个风格的样式。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "neutral",
+        "grey",
+        "workbench",
+        "probe",
+        "sample look",
+        "default palette"
+      ],
+      "zh": [
+        "中性",
+        "灰底",
+        "素样式",
+        "对照预设",
+        "小样配色",
+        "默认配色"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Not a film's look: a film drawn in it reads as an unfinished sample."
+      ],
+      "zh": [
+        "不是成片的样式：用它做的片读起来像没做完的小样。"
+      ]
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

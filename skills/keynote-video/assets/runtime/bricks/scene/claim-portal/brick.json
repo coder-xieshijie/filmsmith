@@ -1,0 +1,130 @@
+{
+  "id": "claim-portal",
+  "category": "scene",
+  "name": {
+    "en": "Claim portal",
+    "zh": "断言穿孔"
+  },
+  "summary": {
+    "en": "The film's one claim lands whole on the second drop; the next scene already waits inside a counter of one glyph; the other glyphs rise out and the camera pushes through the counter.",
+    "zh": "全片唯一的断言在第二次 drop 上整句落下；下一场已经在其中一个字的字腔里等着；其余字向上退出，镜头穿过字腔。"
+  },
+  "fits": "The claim of a launch film, once, followed by the closing card.",
+  "notFor": "a second claim; a claim with no glyph that has a counter (Chinese falls back to the 。 ring).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "The claim is the door to the end: the viewer reads it, then goes through it.",
+      "zh": "断言是通往结尾的门：观众读完它，然后穿过它。"
+    },
+    "content": {
+      "en": "1–2 lines (≤ 12 chars, ≤ 8 words in all), a far side (the closing wordmark or a painter).",
+      "zh": "1–2 行（每行 ≤ 7 字），一个门后画面（结尾字标或一个绘制函数）。"
+    },
+    "fits": {
+      "zh": "发布片的断言，只用一次，后面接结尾卡。"
+    },
+    "notFor": {
+      "zh": "第二个断言；没有带字腔的字（中文退到句号“。”的圆圈）。"
+    },
+    "roles": [
+      "claim",
+      "climax"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "dramatic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "claim",
+        "counter portal",
+        "zoom through",
+        "letter counter",
+        "climax"
+      ],
+      "zh": [
+        "断言",
+        "字腔穿越",
+        "穿字推镜",
+        "字腔",
+        "高潮"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "cursor-close",
+        "note": "the far side of the counter"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The landing shock is the transition into this scene (runtime whiteout-slam); cut into it hard, never crossfade.",
+        "English needs a 0, O, Q or D in the claim."
+      ],
+      "zh": [
+        "落下时的冲击属于进入本场的转场（运行时 whiteout-slam）；硬切进来，不要淡入。",
+        "英文断言里要有 0、O、Q 或 D。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      5,
+      10
+    ],
+    "sec120": [
+      2.5,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js layoutScenes claim, paintClaim, drawClaim; counter-portal hand-off"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "counter-portal",
+      "note": "runtime hand-off used unchanged; this scene sets the claim and picks the glyph"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/claim-portal/brick.js",
+  "card": "scene/claim-portal/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

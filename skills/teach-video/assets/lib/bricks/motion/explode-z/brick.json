@@ -1,0 +1,146 @@
+{
+  "id": "explode-z",
+  "category": "motion",
+  "name": {
+    "en": "Explode z",
+    "zh": "爆炸分层视图"
+  },
+  "summary": {
+    "en": "A page lying at a three-quarter angle comes apart: its parts rise along the page's normal one after another, hang while the camera turns a little, then drop back in reverse and land with one thud.",
+    "zh": "页面 3/4 斜躺，构件沿法线错峰升起、悬停一拍让镜头小绕、再逆序砸回，一次阻尼落锤收口。"
+  },
+  "fits": "How a product is built (layers, modules, the stack); an architecture told as one object.",
+  "notFor": "Pages whose parts overlap or have no clear blocks; text that must be read while it hangs (it is at an angle).",
+  "select": {
+    "intent": {
+      "en": "\"See what it is made of\": the viewer sees a product's layers lift apart and click back, the Apple-style exploded view of its build.",
+      "zh": "“看看它由什么组成”：观众看到产品的各层升起分开再合回，苹果发布会式的爆炸图讲清构成。"
+    },
+    "content": {
+      "en": "Wraps one page with 3–6 clearly separate blocks (their rects, non-overlapping), ideally cut from real screenshots part by part; optional callouts are the scene's.",
+      "zh": "包住一张页面，带 3–6 个互不重叠的独立构件（给出各自位置），最好按构件分别截图；标注说明归场景。"
+    },
+    "fits": {
+      "zh": "讲产品怎么搭起来的（分层、模块、技术栈）；把架构当一个实体来讲。"
+    },
+    "notFor": {
+      "zh": "构件互相重叠或分不出块的页面；悬停时要读的文字（是斜着的）。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "demo",
+      "climax"
+    ],
+    "subjects": [
+      "ui",
+      "diagram",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "exploded view",
+        "layer explode",
+        "z-axis stack",
+        "teardown",
+        "architecture layers",
+        "Apple style",
+        "3D layers"
+      ],
+      "zh": [
+        "爆炸分层视图",
+        "分层炸开",
+        "构件升起",
+        "拆解展示",
+        "苹果式",
+        "架构分层",
+        "空间运镜"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Needs the page as separate parts; one flat screenshot cannot come apart.",
+        "A big camera move: with dives and other 3D showpieces, at most two per film."
+      ],
+      "zh": [
+        "页面要按构件拆开给；一整张截图炸不开。",
+        "大动作：和俯冲等 3D 炫技合计一支片最多两次。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "exploded-view",
+        "name": "爆炸分层视图",
+        "card": "空间运镜",
+        "summary": "整页 3D 倾斜后构件沿 Z 轴错峰炸开悬停，一拍后逆序合体震屏收口",
+        "use": "把平面页面当 3D 实体拍的高光段落；两式都是\"大动作\"，一支片合计 ≤2 次",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/exploded-view.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 9.5,
+    "range": [
+      8,
+      12
+    ]
+  },
+  "tier": "T2",
+  "family": "lift-flip",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "exploded-view",
+        "path": "demos/camera/space-camera-moves/ExplodedView.tsx",
+        "card": "references/shots/camera/space-camera-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/explode-z/brick.js",
+  "card": "motion/explode-z/CARD.md",
+  "compare": {
+    "ssimMean": 0.8515,
+    "ssimMin": 0.783,
+    "ssimDrop": 0.0931,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

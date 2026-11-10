@@ -1,0 +1,131 @@
+{
+  "id": "reel-in",
+  "category": "motion",
+  "name": {
+    "en": "Reel in",
+    "zh": "一口吞"
+  },
+  "summary": {
+    "en": "The threaded pile is swallowed in one pull: every item slides back along the thread into the mascot, the nearest first, shrinking to a speck, while the thread reels in behind the farthest; all arrive together.",
+    "zh": "串好的一堆被一口拉走：每件沿线滑回吉祥物，近的先走，缩成一点，线跟在最远那件后面收回；全部同时到达。"
+  },
+  "fits": "Ending a pile: the product takes everything in one move.",
+  "notFor": "Items that must stay readable; a merge into a hub with several sources (hub-links).",
+  "select": {
+    "intent": {
+      "en": "Make taking everything over feel like one effortless pull.",
+      "zh": "让“全部接手”像轻松的一拉。"
+    },
+    "content": {
+      "en": "Nothing to read: the threaded items and the point they go into.",
+      "zh": "没有字：串着的东西和它们被收进去的那个点。"
+    },
+    "fits": {
+      "zh": "收掉一堆东西：产品一下子全拿走。"
+    },
+    "notFor": {
+      "zh": "要保持可读的东西；多个来源汇进一个中心（用 hub-links）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "climax"
+    ],
+    "subjects": [
+      "abstract",
+      "ui"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "swallow",
+        "reel in",
+        "pull",
+        "gather",
+        "absorb",
+        "collapse"
+      ],
+      "zh": [
+        "一口吞",
+        "收线",
+        "拉回",
+        "收拢",
+        "吸入",
+        "坍缩"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "thread-pierce",
+        "note": "before: the thread runs through the pile"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "All items must arrive on the same frame: the lateness is a share of the distance, not a fixed stagger.",
+        "Fade only the last quarter; earlier fading makes it read as disappearing, not as being taken."
+      ],
+      "zh": [
+        "所有东西要在同一帧到达：延迟按距离占比算，不是固定错开。",
+        "只在最后四分之一淡出；淡得早就像消失，而不是被拿走。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 3,
+    "range": [
+      2,
+      4
+    ]
+  },
+  "tier": "T1",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderOpen (the tug: 0.6 beat × distance share late, io2 over 2.5 beats, scale 1 → 0.08)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "hub-links",
+      "note": "its merge mode slides several sources into one hub; reel-in pulls a whole pile along one thread into a point"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/reel-in/brick.js",
+  "card": "motion/reel-in/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

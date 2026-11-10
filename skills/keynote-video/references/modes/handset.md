@@ -1,5 +1,7 @@
 # Handset (`handset`)
 
+**Recipe**: [handset](../recipes/handset.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 One code-drawn device — a laptop for a desktop or web product, a phone for a mobile one — sits head-on and locked off on the left of the frame from the first frame to the last; everything that changes, changes on its screen, and the screen shows only real captures: the product's own pages and UI states, its docs, its official charts. The words live in a margin to the right, riding level with the part of the screen in play; the device's chin names where the screen's state comes from. Aesthetic anchor: "like a product demo shot on one locked-off camera, with the presenter's notes pinned in the margin — except every pixel on the screen was captured, none drawn".
 Theme: tech-product-launch (a release that can be seen on the product's own surface) · Template: `assets/templates/handset/` · tempo 112–128 BPM, default 120 (length follows the copy; the shipped example fits 14 bars = 28.0 s) · timing API 3 · Status: owner-accepted 2026-10-21 (sample film, its sound included); template 2026-10-21; its own axis of motion 2026-10-21 (the device stays, the screen's content moves vertically: `scroll-reel`, `feed-stack`; one flip at most). Values are tagged `standard` / `borrowed` / `derived` / `owner` / `draft` as in [foundations](../foundations.md#where-values-come-from).
 
@@ -41,7 +43,7 @@ Does not fit:
 | Not changed | the file is the capture (sha256 in the manifest); the film only shows it through views (crop and scale) and veils it; never recoloured, retouched, re-laid out or regenerated; a rebuilt UI never stands in for a capture | `standard` (principle 2) |
 | Public region | the manifest names the only part of each capture the film may draw (`public`) and the parts it must never show (`private`, e.g. a sidebar with account names); `npm run assets` checks every view stays inside | `owner` (2026-10-20) |
 | Supplied screenshots | an app screenshot supplied by its maker is used as supplied (hash), never re-encoded; its public region is set before the first scene is written | `owner` (2026-10-20) |
-| UI in another language | its text is evidence only (a push may show it); every margin line is English and code-drawn | `owner` (2026-10-20) |
+| UI in another language | its text is evidence only (a push may show it); every margin line is in the film's language and code-drawn | `owner` (2026-10-20; the film's language 2026-11-09) |
 | A live readout | a number the app shows while working is one moment, not a benchmark: the margin says whose number it is and when, and the vendor's figure sits next to it as the vendor's | `derived` (principle 2) |
 | Zoom cap | output px / source px ≤ 1 / 0.75 = 1.333 | `standard` (principle 2) / `derived` |
 | Numbers | every digit in a scene's copy appears in the `reads` of the region that scene lights; macOS Vision reads `reads` back inside the region's box (WARN where OCR is unavailable) | `derived` |

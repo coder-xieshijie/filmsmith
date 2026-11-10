@@ -1,0 +1,109 @@
+{
+  "id": "paper-frame",
+  "category": "prop",
+  "name": {
+    "en": "Paper frame",
+    "zh": "纸面框架"
+  },
+  "summary": {
+    "en": "The persistent frame of a narrated explainer: a chapter label with a yellow rule top left, one counter top right with its units, a \"sorted by\" label and a dashed illustrative note.",
+    "zh": "解说片的常驻框架：左上带黄线的章节标签，右上一个带单位的计数器，“分法”标签和虚线示意注。"
+  },
+  "fits": "Every scene of a film in the paper-ledger or sketch-paper look.",
+  "notFor": "Films without chapters or a running count.",
+  "select": {
+    "intent": {
+      "en": "Keep the viewer oriented: which chapter, how many so far, how the items were sorted, and that the data is illustrative.",
+      "zh": "让观众不迷路：第几章、目前数到多少、按什么分的、数据是示意。"
+    },
+    "content": {
+      "en": "A chapter title (≤ 28 / 12), a counter value with a unit line (≤ 30 / 12), an optional \"sorted by\" line and a note.",
+      "zh": "章节名（≤ 28 / 12）、计数值与单位（≤ 30 / 12）、可选“分法”一行和注。"
+    },
+    "fits": {
+      "zh": "paper-ledger 或 sketch-paper 样式里的每个场景。"
+    },
+    "notFor": {
+      "zh": "没有章节或连续计数的片子。"
+    },
+    "roles": [
+      "problem",
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "number",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "chapter label",
+        "counter",
+        "running total",
+        "illustrative note",
+        "frame"
+      ],
+      "zh": [
+        "章节标签",
+        "计数器",
+        "累计",
+        "示意注",
+        "常驻框架"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "One counter a frame; when its meaning changes, blur it out and in with the new unit.",
+        "Every illustrative number gets the dashed note."
+      ],
+      "zh": [
+        "一帧只一个计数器；含义变了就模糊切换并换单位。",
+        "示意数字都要配虚线注。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/teach-video/assets/kits/terminal-ledger/starter/components/chapter.js, counter.js, labels.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "chart-frame",
+      "note": "the keynote data frame with a progress rule and accent key; here the paper frame with one counter, units and the dashed note"
+    }
+  ],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "prop/paper-frame/brick.js",
+  "card": "prop/paper-frame/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from teach-video's terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

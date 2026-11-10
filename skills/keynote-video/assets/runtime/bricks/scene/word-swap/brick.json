@@ -1,0 +1,129 @@
+{
+  "id": "word-swap",
+  "category": "scene",
+  "name": {
+    "en": "Word swap",
+    "zh": "换底换词"
+  },
+  "summary": {
+    "en": "One word a beat on one anchor, each on its own ground opened from the previous word's dot; the answer stands on the accent field.",
+    "zh": "同一锚点一拍一个词，每个词有自己的底色，从上一个词的墨点打开；答案站在强调色满底上。"
+  },
+  "fits": "A hook of three words; a list of verdicts with the answer last.",
+  "notFor": "words that need reading together; more than six words; phrases.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Each word is a new page: the ground changes with the word, opened by the dot, so three words read as three hits.",
+      "zh": "每个词都是新的一页：底色随词换，由墨点打开，三个词读起来像三下重击。"
+    },
+    "content": {
+      "en": "2–6 single words (≤ 10 chars), optional grounds per word, an optional answer index.",
+      "zh": "2–6 个单词（每个 ≤ 4 字），可选每词底色，可选答案序号。"
+    },
+    "fits": {
+      "zh": "三个词的开场钩子；最后一个是答案的一串结论。"
+    },
+    "notFor": {
+      "zh": "要连起来读的词；超过六个词；短语。"
+    },
+    "roles": [
+      "hook",
+      "turn",
+      "proof"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "one word per beat",
+        "ground swap",
+        "aperture",
+        "full stop",
+        "verdicts"
+      ],
+      "zh": [
+        "一拍一词",
+        "换底",
+        "开口转场",
+        "句号墨点",
+        "结论"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "dot-slam",
+        "note": "the problem after the hook"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "All words share one size so the anchor never moves: a long word shrinks the others."
+      ],
+      "zh": [
+        "所有词共用一个字号，锚点不动：一个长词会让其他词一起变小。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      3,
+      12
+    ],
+    "sec120": [
+      1.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js drawSwap, swapState; plan.js swap"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "anchor-ask",
+      "note": "pulse: a question on a ramp with a query line; here paper/night grounds and the dot opens each"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/word-swap/brick.js",
+  "card": "scene/word-swap/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

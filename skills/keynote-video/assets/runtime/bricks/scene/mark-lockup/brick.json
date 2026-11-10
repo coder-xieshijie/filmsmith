@@ -1,0 +1,220 @@
+{
+  "id": "mark-lockup",
+  "category": "scene",
+  "name": {
+    "en": "Mark lockup",
+    "zh": "图标收束落位"
+  },
+  "summary": {
+    "en": "The closing lock-up: something on screen becomes the mark (a ring collapses onto it, an app icon flips into it, or an input field and three pieces assemble it), the mark steps aside, the wordmark lands beside it, a tagline follows and it holds to be read.",
+    "zh": "收尾标志落版：画面里的东西变成标志（光环收缩落定、应用图标翻转绽开、或输入框和三块部件拼装成标），标志让位，字标落在旁边，标语跟上，停够读完。"
+  },
+  "fits": "The last screen of a film when the product has a mark: the mark, the name and one line, with the way in chosen by what came before (a busy film: ring; a product with an app icon: flip; a prompt or chat product: assemble).",
+  "notFor": "Films without a mark and a name to show (use name-stamp); ends that must keep the product UI on screen (strip-away); more than one tagline.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      14
+    ],
+    "sec120": [
+      4,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "logo-shrink-wordmark-lockup",
+        "path": "demos/outro/logo-shrink-wordmark-lockup/LogoShrinkWordmarkLockup.tsx",
+        "card": "references/shots/outro/logo-shrink-wordmark-lockup.md"
+      },
+      {
+        "key": "icon-flip-bloom",
+        "path": "demos/outro/ui-to-brand-morph/IconFlipBloomLogo.tsx",
+        "card": "references/shots/outro/ui-to-brand-morph.md"
+      },
+      {
+        "key": "input-morph-assemble",
+        "path": "demos/outro/ui-to-brand-morph/InputMorphsIntoLogo.tsx",
+        "card": "references/shots/outro/ui-to-brand-morph.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "icon-flip-bloom",
+    "input-morph-assemble"
+  ],
+  "overlaps": [
+    {
+      "id": "name-stamp",
+      "note": "stamps a name without a mark; mark-lockup builds the mark first, then sets the wordmark beside it"
+    },
+    {
+      "id": "mark-command",
+      "note": "a card splits into the mark's parts that fly in on arcs, with a closing command typing on; mark-lockup brings the mark out of something already on screen (a ring, an icon, an input field) and holds a wordmark and tagline"
+    },
+    {
+      "id": "device-flip",
+      "note": "flips a device or card to its back; mark-lockup flip flips an app icon edge-on and opens the mark from the sliver"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/mark-lockup/brick.js",
+  "card": "scene/mark-lockup/CARD.md",
+  "compare": {
+    "ssimMean": 0.6077,
+    "ssimMin": 0.5825,
+    "ssimDrop": 0.0286,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass",
+    "variants": {
+      "flip": {
+        "upstream": "icon-flip-bloom",
+        "ssimMean": 0.947,
+        "ssimMin": 0.9195,
+        "ssimDrop": 0.0693,
+        "trackDevPx": 0,
+        "progressRmse": 0,
+        "eventFrames": 0,
+        "verdict": "pass"
+      },
+      "assemble": {
+        "upstream": "input-morph-assemble",
+        "ssimMean": 0.9542,
+        "ssimMin": 0.917,
+        "ssimDrop": 0.003,
+        "trackDevPx": 0,
+        "progressRmse": 0.0002,
+        "eventFrames": 0,
+        "verdict": "pass"
+      }
+    }
+  },
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "The film resolves into the product's signature: something the viewer has just seen becomes the mark, and the name is left to remember.",
+      "zh": "全片收束成产品签名：刚看到的东西变成标志，留下要记住的名字。"
+    },
+    "content": {
+      "en": "A mark (image or vector; a placeholder without one), a wordmark ≤ 16 chars, an optional tagline ≤ 34 chars; for flip an app icon, for assemble a prompt ≤ 36 chars and the mark's pieces.",
+      "zh": "标志（图片或矢量，没有就用占位）、≤ 6 字的字标、可选标语 ≤ 12 字；flip 要应用图标，assemble 要 ≤ 15 字的输入句和标志的部件。"
+    },
+    "fits": {
+      "zh": "有标志的产品片尾：标志、名字和一句话；入场按前文选（热闹的片子用 ring，有应用图标用 flip，对话或输入类产品用 assemble）。"
+    },
+    "notFor": {
+      "zh": "没有标志的片子（用 name-stamp）；片尾要留住产品界面的（用 strip-away）；不止一句标语。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "ceremonial",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "logo lockup",
+        "end card",
+        "wordmark",
+        "logo sting",
+        "icon flip",
+        "app icon",
+        "prompt to logo",
+        "outro"
+      ],
+      "zh": [
+        "标志落版",
+        "片尾落版",
+        "字标",
+        "图标翻转",
+        "应用图标",
+        "输入框变标志",
+        "光环收缩",
+        "收尾"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "grain-condense",
+        "note": "a line condensed into the name just before the lock-up"
+      },
+      {
+        "id": "strip-away",
+        "note": "shares drawMark, so a film can end its demo with strip-away and its other cut with mark-lockup"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Hold the finished lock-up at least one second past its reading time; a cut on the last letter loses the name.",
+        "flip swaps on the thinnest frame: an icon that does not resemble the mark makes the swap read as a cut.",
+        "assemble needs the mark as separable pieces; a single-shape logo only floods the field."
+      ],
+      "zh": [
+        "落版成形后读完再多停至少 1 秒，最后一个字母刚落就切会丢名字。",
+        "flip 在最薄那帧换图：图标和标志不像，换图就像硬切。",
+        "assemble 要标志能拆成部件；整块的标志只能做到输入框灌满。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "logo-shrink-wordmark-lockup",
+        "name": "图标收束落位",
+        "card": "图标收束落位",
+        "summary": "霓虹切口大环快速收束成中央实心小白 O、过冲刹车时换成 video-shotcraft 标志，图标左移让位，字标字母逐个滑入完成 lockup，强调色标语收尾",
+        "use": "片尾品牌定妆：从满屏图形能量收束到\"图标+字标+标语\"的标准 lockup",
+        "energy": "中（收束段有冲击力，整体是沉稳的落定节奏）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/logo-shrink-wordmark-lockup.mp4"
+      },
+      {
+        "key": "icon-flip-bloom",
+        "name": "图标翻扁绽放",
+        "card": "UI 变品牌",
+        "summary": "图标 anticipation 晃两下→Y 轴 scaleX 压扁成竖线（双层拖影+blur）→最薄处实体交换、spring 展开成 video-shotcraft「镜刻」标志、琥珀斜切第二拍划入→标志左移让位、字标逐字落定",
+        "use": "品牌收尾/outro 前最后一拍；\"你每天用的那个 UI 就是这个品牌\"的视觉论证",
+        "energy": "中高（收尾点睛，一次完整变形讲完）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/icon-flip-bloom.mp4"
+      },
+      {
+        "key": "input-morph-assemble",
+        "name": "输入框集结成标",
+        "card": "UI 变品牌",
+        "summary": "光标点发送→文字飞走→输入框 x/y/w/h/r 五量 spring 插值成标志的竖框→上下横条与琥珀斜切从虚线构造框里依次落位拼成「镜刻」标志→左移让位、字标逐字落定",
+        "use": "品牌收尾/outro 前最后一拍；\"你每天用的那个 UI 就是这个品牌\"的视觉论证",
+        "energy": "中高（收尾点睛，一次完整变形讲完）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/input-morph-assemble.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

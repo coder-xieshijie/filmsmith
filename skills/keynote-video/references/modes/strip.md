@@ -1,5 +1,7 @@
 # Strip (`strip`)
 
+**Recipe**: [strip](../recipes/strip.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 Real frames of real films, carried by one strip of film on a light box: the strip moves horizontally through a fixed gate and stops with a frame registered in it, intertitles ride the same strip, a frame punches to the full frame, the films lie side by side as a contact sheet whose rows are exactly as long as the films, and the editor's grease pencil rings the pick, which punches to full size and runs. At the end the strip runs out of the gate and leaves the name. The camera never moves; the material does. Aesthetic anchor: "like an editor's light box and flatbed viewer: a print reel advanced frame by frame through the gate, the contact sheet beside it, one china-marker loop on the take".
 Theme: tech-product-launch (products whose evidence is footage: renderers, video and motion tools, engines, the skill itself), reels · Template: `assets/templates/strip/` · tempo 112–128 BPM, default 120 (length follows the content; the shipped example fits 14 bars = 28.0 s) · timing API 3 · Status: owner-accepted 2026-10-21 (sample film); template 2026-10-21. Values are tagged `standard` / `borrowed` / `derived` / `owner` / `draft` as in [foundations](../foundations.md#where-values-come-from).
 

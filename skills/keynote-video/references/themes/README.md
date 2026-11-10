@@ -1,6 +1,6 @@
 # Themes
 
-A theme is a kind of film with its own audience, narrative skeleton and rules: a technical product launch wants different things from a personal essay or a story. Visual languages are [modes](../modes/README.md); a theme lists which modes suit it. A theme's rules apply only inside it; when several themes share a rule, it moves up to [principles.md](../principles.md).
+A theme is a kind of film with its own audience, narrative skeleton and rules: a technical product launch wants different things from a personal essay or a story. Visual languages are [styles](../modes/README.md); a theme lists which styles suit it. A theme's rules apply only inside it; when several themes share a rule, it moves up to [principles.md](../principles.md).
 
 ## Index
 
@@ -26,4 +26,4 @@ Every theme shares the skill's format: 16:9 only, 1920×1080, for landscape full
 
 When a mode card and a theme rule disagree, the mode card wins only where it states the departure and its reason; for example, a mode may carry the viewer with a through-line object instead of the persistent frame of tech-product-launch rule 3.
 
-A new visual language becomes a mode, not a theme file: write a mode card from the template in [modes/README.md](../modes/README.md) and a template under `assets/templates/` following its CONTRACT.md, once the owner has accepted a film in it.
+A new visual language becomes a style, not a theme file: a recipe in `../recipes/` and the bricks it adds, plus a mode card from the template in [modes/README.md](../modes/README.md) and a template under `assets/templates/` following its CONTRACT.md as its example film, once the owner has accepted a film in it.

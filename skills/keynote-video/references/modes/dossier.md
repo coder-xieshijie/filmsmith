@@ -1,5 +1,7 @@
 # Dossier (`dossier`)
 
+**Recipe**: [dossier](../recipes/dossier.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 An editorial evidence file on a locked document camera: real published pages (tables, charts, pricing, changelogs, product screens) are mounted on paper and dealt one at a time onto a dark mat; the rest of the page is veiled, a highlighter strikes the exact words or number a claim rests on, a leader ties the stroke to an exhibit sticker that names the source and its capture date, and the claim is restated in type on the mat. A figure the viewer must read is lifted off its page as a paper slip and carried onto a ruled worksheet that does the arithmetic and strikes the result; an index of exhibits closes the file; the name is struck on the mat. Aesthetic anchor: "like a newsroom's annotated source document — yellow note rectangles on a trial exhibit with its sticker — filmed on a document camera".
 Theme: tech-product-launch (benchmark-heavy launches), technical reports, changelogs · Template: `assets/templates/dossier/` · tempo 112–124 BPM, default 120 (length follows the copy; the shipped example fits 16 bars = 32.0 s) · timing API 3 · Status: owner-accepted 2026-10-21 (sample film, its sound included); template 2026-10-21. Values are tagged `standard` / `borrowed` / `derived` / `owner` / `draft` as in [foundations](../foundations.md#where-values-come-from).
 

@@ -1,0 +1,124 @@
+{
+  "id": "install-block",
+  "category": "scene",
+  "name": {
+    "en": "Install block",
+    "zh": "安装命令"
+  },
+  "summary": {
+    "en": "How to start: an ink block where one or two commands type out after a prompt with a block cursor, an optional note, then numbered steps under 4 px rules; the cursor blinks on every beat while the page holds and the music rests.",
+    "zh": "怎么开始：一块墨色区里，一两条命令跟在提示符后打出来，带块状光标；可选一行注释，然后是 4 px 细线下的编号步骤；停留时光标每拍闪一下，音乐在这里休息。"
+  },
+  "fits": "The rest before the closing claim: install command and first steps of a developer tool.",
+  "notFor": "Products without a command line; more than two commands; commands longer than 36 characters.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "A pause that is also a call to act: real commands typing out in a quiet bar tell a developer exactly how to begin.",
+      "zh": "一段既是停顿也是行动召唤的休息：安静的小节里真实命令逐字打出，告诉开发者从哪开始。"
+    },
+    "content": {
+      "en": "Title, panel label, 1–2 commands (code, ≤ 36 chars), an optional note, 2–4 steps of a command (≤ 16) and a note (≤ 24).",
+      "zh": "标题、面板标签、1–2 条命令（代码，≤ 36 字符）、可选注释、2–4 步“命令（≤ 16 字符）+ 说明（≤ 9 字）”。"
+    },
+    "fits": {
+      "zh": "结尾主张之前的休息：开发者工具的安装命令和头几步。"
+    },
+    "notFor": {
+      "zh": "没有命令行的产品；超过两条命令；超过 36 字符的命令。"
+    },
+    "roles": [
+      "rest",
+      "demo"
+    ],
+    "subjects": [
+      "terminal",
+      "code"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "install",
+        "command line",
+        "typing",
+        "cursor blink",
+        "getting started",
+        "terminal block"
+      ],
+      "zh": [
+        "安装",
+        "命令行",
+        "打字",
+        "光标闪烁",
+        "快速开始",
+        "终端块"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "poster-tagline",
+        "note": "its command block carries into the tagline's bar (block-carry)"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Commands are code and stay Latin in Chinese films; translate only the notes."
+      ],
+      "zh": [
+        "命令是代码，中文片里也保持拉丁字符；只翻译说明。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      6,
+      22
+    ],
+    "sec120": [
+      3,
+      11
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (install)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/install-block/brick.js",
+  "card": "scene/install-block/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

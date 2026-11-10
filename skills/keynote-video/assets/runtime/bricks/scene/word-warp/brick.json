@@ -1,0 +1,123 @@
+{
+  "id": "word-warp",
+  "category": "scene",
+  "name": {
+    "en": "Word warp",
+    "zh": "扭字"
+  },
+  "summary": {
+    "en": "An accent word rises and warps beat by beat, ghosts smearing off it, while an ink word slams under it with its full stop.",
+    "zh": "一个强调色的词升起并一拍拍扭曲，带着拖影；下面一个黑字砸下，带着句号。"
+  },
+  "fits": "A problem that is unstable or blamed: \"blame everyone\", \"flaky tests\".",
+  "notFor": "a calm statement; a word that must be read exactly (the warp blurs it).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Instability made visible: the problem word cannot hold its shape while the plain word under it lands hard.",
+      "zh": "让不稳定看得见：问题词保持不住形状，下面那个平实的词却重重落下。"
+    },
+    "content": {
+      "en": "Two single words (≤ 10 chars), an optional label.",
+      "zh": "两个单词（每个 ≤ 4 字），可选标签。"
+    },
+    "fits": {
+      "zh": "不稳定或互相甩锅的问题：“甩锅给所有人”“测试时好时坏”。"
+    },
+    "notFor": {
+      "zh": "平静的陈述；必须精确读到的词（扭曲会让它模糊）。"
+    },
+    "roles": [
+      "problem",
+      "turn"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "warp",
+        "wobble",
+        "ghost smear",
+        "unstable type",
+        "blame"
+      ],
+      "zh": [
+        "扭曲",
+        "晃动",
+        "拖影",
+        "不稳定的字",
+        "甩锅"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "dot-burst",
+        "note": "the turn after it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The warped word is the one place the accent colours a word: use it once in a film."
+      ],
+      "zh": [
+        "扭曲的词是强调色唯一能给字上色的地方：一部片只用一次。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      4,
+      8
+    ],
+    "sec120": [
+      2,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js layoutScenes warp; plan.js warp"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/word-warp/brick.js",
+  "card": "scene/word-warp/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,125 @@
+{
+  "id": "name-flip",
+  "category": "scene",
+  "name": {
+    "en": "Name flip",
+    "zh": "换底落版"
+  },
+  "summary": {
+    "en": "The lock-up: name and version (amber when it is the answer), the tagline, the install command typing; the ground flips once more on the last downbeat.",
+    "zh": "落版：名字和版本号（版本是答案时为琥珀色）、标语、安装命令打出来；最后一个强拍上底色再翻一次。"
+  },
+  "fits": "The closing of a query film: the product that answered, and how to get it.",
+  "notFor": "A film that ends on a claim or a reveal (use answer-whiteout as the close); a name without a command.",
+  "select": {
+    "intent": {
+      "en": "The answer gets a name and a way in: the name stands still, the command types out and holds long enough to copy, the last flip closes the rhythm.",
+      "zh": "答案有了名字和入口：名字不动，命令打出来并停留到够人抄下，最后一次翻底收住节奏。"
+    },
+    "content": {
+      "en": "A name (≤ 12 chars), an optional version (≤ 6), a tagline (≤ 34 chars), an install command (≤ 34 chars of code).",
+      "zh": "名字（≤ 6 字）、可选版本号、一句标语（≤ 14 字）、安装命令（≤ 34 个字符的代码）。"
+    },
+    "fits": {
+      "zh": "提问式片子的收尾：给出答案的产品，以及怎么用上它。"
+    },
+    "notFor": {
+      "zh": "以主张或揭晓收尾的片子；没有命令的名字。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "code",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "lock-up",
+        "install command",
+        "name and version",
+        "closing flip",
+        "end card"
+      ],
+      "zh": [
+        "落版",
+        "安装命令",
+        "名字与版本",
+        "收尾翻底",
+        "片尾卡"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "figure-rows",
+        "note": "the figures before it, through runtime slice-smear"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The version is amber only when it is the search's answer (`answer: true`).",
+        "Hold the typed command at least 3 s."
+      ],
+      "zh": [
+        "只有版本号就是检索答案时才用琥珀色（`answer: true`）。",
+        "命令打完至少停 3 秒。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      16
+    ],
+    "sec120": [
+      4,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/film.js paintName, choreo.js namePlan"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/name-flip/brick.js",
+  "card": "scene/name-flip/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,14 +1,16 @@
 #!/usr/bin/env node
-// new-film.mjs <mode> <film-dir> [--palette <id>]
+// new-film.mjs <mode> <film-dir> [--palette <id>] [--bricks a,b,…]
 // Copies a mode template into a new film folder, adds the shared runtime as lib/ (stamped with
-// lib/VERSION), writes the PLAN.md skeleton, downloads the fonts and the pinned GSAP build. Exits non-zero
+// lib/VERSION; without the brick library, assets/runtime/bricks/: a composed film copies the bricks it uses with
+// add-bricks.mjs once PLAN.md's composition table is filled, or here with --bricks), writes the PLAN.md skeleton,
+// downloads the fonts and the pinned GSAP build. Exits non-zero
 // when a prerequisite is missing or a font or GSAP cannot be downloaded: a film is never set up to render
 // in a fallback font or to depend on a CDN. The network is needed here and on the first `npx hyperframes`
 // run, not afterwards.
 // Then: fill PLAN.md, edit content.js (see TEMPLATE.md), npm run film.
 import { cp, readdir, readFile, writeFile, access } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { join, resolve, dirname, relative } from 'node:path';
+import { join, resolve, dirname, relative, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
@@ -18,11 +20,13 @@ const runtime = join(root, 'assets', 'runtime');
 // Names before 2026-10-19 still work.
 const ALIASES = { 'thread-reel': 'thread', 'ink-beat': 'ink', 'swiss-poster': 'plakat', 'blueprint-drafting': 'blueprint', 'terminal-launch': 'phosphor', 'unit-data': 'tally', 'diagram-explainer': 'trace' };
 const [modeArg, target, ...rest] = process.argv.slice(2);
+const bi = rest.indexOf('--bricks');
+const brickIds = bi >= 0 ? (rest[bi + 1] ?? '').split(',').map((x) => x.trim()).filter(Boolean) : [];
 const mode = ALIASES[modeArg] ?? modeArg;
 const modes = (await readdir(templates, { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name);
 
 if (!mode || !target || !modes.includes(mode)) {
-  console.error(`usage: new-film.mjs <mode> <film-dir> [--palette <id>]\nmodes: ${modes.join(', ')}`);
+  console.error(`usage: new-film.mjs <mode> <film-dir> [--palette <id>] [--bricks a,b,…]\nmodes: ${modes.join(', ')}`);
   process.exit(2);
 }
 // Prerequisites (doctor): Node 22+, ffmpeg and ffprobe on PATH. Chrome is downloaded by hyperframes on its
@@ -45,21 +49,31 @@ if (await access(dest).then(() => true, () => false)) {
 }
 
 await cp(join(templates, mode), dest, { recursive: true });
-await cp(runtime, join(dest, 'lib'), { recursive: true });
+// the runtime without the brick library (bricks are copied by id: add-bricks.mjs)
+const BRICKS = join(runtime, 'bricks');
+const outsideBricks = (p) => p !== BRICKS && !p.startsWith(BRICKS + sep);
+await cp(runtime, join(dest, 'lib'), { recursive: true, filter: outsideBricks });
 
 // lib/VERSION: which runtime this film was made with, so a film's lib/ that drifts from the Skill's
-// runtime can be spotted (compare the hash with a fresh new-film).
-const files = async (d) => (await readdir(d, { withFileTypes: true, recursive: true })).filter((e) => e.isFile()).map((e) => join(e.parentPath ?? e.path, e.name)).sort();
+// runtime can be spotted (compare the hash with a fresh new-film). The hash covers the runtime outside bricks/; the
+// copied bricks get their own line with a hash each (add-bricks.mjs).
+const files = async (d) => (await readdir(d, { withFileTypes: true, recursive: true })).filter((e) => e.isFile()).map((e) => join(e.parentPath ?? e.path, e.name)).filter(outsideBricks).sort();
 const hash = createHash('sha256');
 for (const f of await files(runtime)) hash.update(relative(runtime, f) + '\0').update(await readFile(f));
 const { TIMING_API } = await import(pathToFileURL(join(runtime, 'timing.js')).href);
 const today = new Date().toISOString().slice(0, 10);
 await writeFile(join(dest, 'lib', 'VERSION'), [
   `runtime timing-api ${TIMING_API}`,
-  `hash sha256:${hash.digest('hex').slice(0, 16)} (assets/runtime at copy time)`,
+  `hash sha256:${hash.digest('hex').slice(0, 16)} (assets/runtime outside bricks/ at copy time)`,
   `created ${today} by scripts/new-film.mjs ${mode}`,
   '',
 ].join('\n'));
+
+if (brickIds.length) {
+  const { addBricks } = await import(pathToFileURL(join(root, 'scripts', 'add-bricks.mjs')).href);
+  const r = addBricks(dest, brickIds);
+  console.log(`lib/bricks/: ${r.bricks.map((b) => b.id).join(', ')}`);
+}
 
 const pi = rest.indexOf('--palette');
 if (pi >= 0 && rest[pi + 1]) {
@@ -96,6 +110,14 @@ Rival tested: <!-- fill: competitor, and why the sentence no longer holds for it
 The one object or gesture that carries the film from the first scene to the last, and how it changes at each turn.
 
 <!-- fill: through-line -->
+
+## Composition table
+
+Composed films only (references/creative.md, "The composition table"); a standard-mode film deletes this section. One row per brick; the Brick column's first \`code\` span is the id that \`node <skill>/scripts/add-bricks.mjs <film>\` copies into lib/bricks/ (run it after filling the table and whenever it changes).
+
+| Slot | Brick | From | Reskin | Material |
+|---|---|---|---|---|
+| <!-- fill --> | | | | |
 
 ## Banned defaults
 

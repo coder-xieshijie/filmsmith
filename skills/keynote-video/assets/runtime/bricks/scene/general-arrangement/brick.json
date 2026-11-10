@@ -1,0 +1,126 @@
+{
+  "id": "general-arrangement",
+  "category": "scene",
+  "name": {
+    "en": "General arrangement",
+    "zh": "总体布置"
+  },
+  "summary": {
+    "en": "The claim as a general arrangement: a two-line headline, then input → system → output as three boxes on one axis with arrows, the system name large in the middle, an overall dimension under them.",
+    "zh": "把主张画成总体布置图：两行标题，然后是同一轴线上的“输入 → 系统 → 输出”三个方框和箭头，系统名在中间放大，下方一条总尺寸线。"
+  },
+  "fits": "The claim of a system film: what goes in, what the product is, what comes out.",
+  "notFor": "Claims with branches or more than one product; names longer than 14 characters.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show the product as one designed part between an input and an output, dimensioned like a real assembly.",
+      "zh": "把产品画成输入与输出之间的一个被设计的部件，像真正的装配图一样标尺寸。"
+    },
+    "content": {
+      "en": "Label, two lines (≤ 18 chars), a sub (≤ 6 words), input, system and output each a tag and a name.",
+      "zh": "标签、两行（每行 ≤ 8 字）、一句副标题、输入/系统/输出各一个标签和名称。"
+    },
+    "fits": {
+      "zh": "系统类片子的主张：进去什么、产品是什么、出来什么。"
+    },
+    "notFor": {
+      "zh": "有分支或多个产品的主张；超过 6 字的名称。"
+    },
+    "roles": [
+      "claim",
+      "turn"
+    ],
+    "subjects": [
+      "diagram",
+      "title"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "general arrangement",
+        "input output",
+        "system diagram",
+        "dimension line",
+        "block diagram"
+      ],
+      "zh": [
+        "总体布置",
+        "输入输出",
+        "系统图",
+        "尺寸线",
+        "框图"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "review-callouts",
+        "note": "the problem before it"
+      },
+      {
+        "id": "detail-confirm",
+        "note": "the first detail"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Three names must leave 110 px between boxes; long names fail before they shrink."
+      ],
+      "zh": [
+        "三个名称之间要留出 110 px；名称太长会直接放不下。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      7,
+      14
+    ],
+    "sec120": [
+      3.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/arrangement.js; choreography.js CUES.arrangement"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/general-arrangement/brick.js",
+  "card": "scene/general-arrangement/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

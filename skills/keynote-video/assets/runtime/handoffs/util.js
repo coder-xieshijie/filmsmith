@@ -106,8 +106,9 @@ export const scratch = () => {
   return SCRATCH;
 };
 
-// A fresh canvas (glyph sampling in prepare()).
+// A fresh canvas (glyph sampling in prepare()), CPU-rastered (willReadFrequently): a GPU canvas read back into another
+// can switch raster path between passes and change its anti-aliasing.
 export const canvasOf = (w, h) => {
-  if (typeof document !== 'undefined') { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
-  return new OffscreenCanvas(w, h);
+  if (typeof document !== 'undefined') { const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d', { willReadFrequently: true }); return c; }
+  { const c = new OffscreenCanvas(w, h); c.getContext('2d', { willReadFrequently: true }); return c; }
 };

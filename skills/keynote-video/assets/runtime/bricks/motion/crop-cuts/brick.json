@@ -1,0 +1,181 @@
+{
+  "id": "crop-cuts",
+  "category": "motion",
+  "name": {
+    "en": "Crop cuts",
+    "zh": "裁切跳切"
+  },
+  "summary": {
+    "en": "The same picture jumps to tighter crops of itself on the beat, hard cuts with no tween, and holds on the subject.",
+    "zh": "同一画面逐拍硬切到更紧的裁切，没有补间，最后停在主体上。"
+  },
+  "fits": "Pointing at one thing inside a busy screen, on the beat; a highlight moment (flash).",
+  "notFor": "Two different pictures (that is a cut, not a crop); slow, quiet passages.",
+  "select": {
+    "intent": {
+      "en": "\"Look here, closer, this one\": hard cuts to ever tighter crops force the eye onto one thing; with flashes it becomes the film's loudest drumbeat.",
+      "zh": "“看这里、再近点、就是它”：一刀比一刀紧的硬切逼着观众盯住一个东西；加白闪时就是全片最响的一记鼓点。"
+    },
+    "content": {
+      "en": "Wraps one still picture (a screenshot or a scene) and the subject's rect inside it; 2–3 crops; the picture must stay sharp at about 2.6×.",
+      "zh": "包住一张静止画面（截图或一场），给出主体在画里的位置；2–3 级裁切；素材放大约 2.6 倍仍要清楚。"
+    },
+    "fits": {
+      "zh": "在繁杂的画面里踩拍点名一个东西；高光时刻（flash 连闪定格）。"
+    },
+    "notFor": {
+      "zh": "两张不同的画面（那是切，不是裁）；慢、安静的段落；从不硬切的 morph、thread 类风格。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "climax",
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "image",
+      "metric"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "jump cut",
+        "punch-in",
+        "crop zoom",
+        "paparazzi flash",
+        "camera flash",
+        "snap zoom",
+        "beat cut"
+      ],
+      "zh": [
+        "跳切递进推近",
+        "连闪定格",
+        "节拍硬切",
+        "裁切推近",
+        "快门连拍",
+        "逼近主体",
+        "顿挫推近"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "reticle-lock",
+        "note": "marks the subject once the last crop holds"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "All crops share the subject's centre; reframing each step makes three shots, not a jump cut.",
+        "Put every cut on a beat with a click or shutter sound; silent, it reads as the picture glitching.",
+        "Once per film with flash, and hold long after the last cut; a cross-fade of even 2 frames kills the hard cut."
+      ],
+      "zh": [
+        "各级裁切钉同一个主体中心；每级重新构图就成了三个镜头，不是跳切。",
+        "每刀落在拍点上并配一声咔嚓或快门；无声时像画面乱跳。",
+        "flash 版一支片最多一次，切完要留足停顿；哪怕加 2 帧交叉淡化，硬切感就没了。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "jump-cut-punch-in",
+        "name": "跳切递进推近",
+        "card": "节奏中断动效",
+        "summary": "打断节奏——jump-cut-punch-in 三级跳切推近：同构图三次无补间硬跳放大，逐级逼近目标",
+        "use": "用\"打断连续性\"本身当节奏器：顿挫推近（A）；与 beat-cut-moves（切点排布）互补",
+        "energy": "A 中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/jump-cut-punch-in.mp4"
+      },
+      {
+        "key": "paparazzi-flash",
+        "name": "连闪定格",
+        "card": "节拍硬切",
+        "summary": "硬切当节拍乐器——连闪定格：三次白闪各硬切同一画面的一个裁切（全景→卡片→特写），快门余韵沉降后停在特写收束",
+        "use": "高光段落把\"切\"本身打成鼓点；颁奖连拍式的仪式感、关键信息的加冕",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/paparazzi-flash.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 5,
+    "range": [
+      3,
+      8
+    ]
+  },
+  "tier": "T1",
+  "family": "edit-cut",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "thread",
+      "morph",
+      "strip",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "jump-cut-punch-in",
+        "path": "demos/rhythm/rhythm-interrupt-moves/JumpCutPunchIn.tsx",
+        "card": "references/shots/rhythm/rhythm-interrupt-moves.md"
+      },
+      {
+        "key": "paparazzi-flash",
+        "path": "demos/rhythm/beat-cut-moves/PaparazziFlash.tsx",
+        "card": "references/shots/rhythm/beat-cut-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "paparazzi-flash"
+  ],
+  "overlaps": [
+    {
+      "id": "viewport-push",
+      "note": "one tweened push inside a window; this one cuts"
+    },
+    {
+      "id": "match-cut",
+      "note": "cuts between two pictures on a shared value"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/crop-cuts/brick.js",
+  "card": "motion/crop-cuts/CARD.md",
+  "compare": {
+    "ssimMean": 0.5912,
+    "ssimMin": 0.5619,
+    "ssimDrop": 0.0136,
+    "trackDevPx": 13.7,
+    "progressRmse": 0.0012,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

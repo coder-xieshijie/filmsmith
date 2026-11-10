@@ -1,5 +1,7 @@
 # Split (`split`)
 
+**Recipe**: [split](../recipes/split.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 One movable seam carries the whole film: on one side of it what someone writes (a request, a list, real lines of a real file, a command, a one-line diff, the install line), on the other what that makes (real frames of the rendered output, a real report, a real page). The seam is born from the caret of the first typed line, and every change in the film is a move of the seam — it slides a result out like a drawer, louvres the result into slats, wipes across the frame, branches into three panes, slides across a before/after — until it closes and leaves the caret waiting. Aesthetic anchor: "like a code review where the diff is on the left and the running result on the right, and the reviewer drags the divider — except the divider is the film's only actor".
 Theme: tech-product-launch (developer tools whose input maps line by line to an output) · Template: `assets/templates/split/` · tempo 112–128 BPM, default 120 (length follows the copy; the shipped example fits 16 bars = 32.0 s) · timing API 3 · Status: owner-accepted 2026-10-21 (sample film; the mode and its five transitions go into the skill); template 2026-10-21. Values are tagged `standard` / `borrowed` / `derived` / `owner` / `draft` as in [foundations](../foundations.md#where-values-come-from).
 

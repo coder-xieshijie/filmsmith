@@ -1,0 +1,121 @@
+{
+  "id": "glow-thread",
+  "category": "prop",
+  "name": {
+    "en": "Glow thread",
+    "zh": "发光的线"
+  },
+  "summary": {
+    "en": "The one object of a stream film: the thread of light that is the product's attention, drawn in three additive passes with a white-hot head while it travels; it branches (hooks, beams, strands) but never breaks. Also the engine every stream scene draws with (the template's film on one canvas).",
+    "zh": "stream 片里唯一的物体：代表产品注意力的那根光线，三层叠加发光，走动时有白热的线头；可以分叉（挂钩、光束、细丝）但从不断开。也是每个 stream 场景用来画的引擎（模板整片搬到一张画布上）。"
+  },
+  "fits": "Every scene of a stream film; a line of light that ties loose things together.",
+  "notFor": "A line that carries text; a line in a second colour; a light ground.",
+  "select": {
+    "intent": {
+      "en": "Keep one thread on screen through the whole film: whatever arrives, the thread takes it, sends it or brings it back.",
+      "zh": "让一根线贯穿整部片：不管来了什么，都是这根线接住、派出或带回。"
+    },
+    "content": {
+      "en": "Nothing to read: the thread's form (running, spine, hooked, taut).",
+      "zh": "没有字：只有线的形态（走动、主干、挂钩、绷紧）。"
+    },
+    "fits": {
+      "zh": "stream 片的每个场景；把散乱东西串起来的一道光。"
+    },
+    "notFor": {
+      "zh": "要承载文字的线；第二种颜色的线；浅色底。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "climax"
+    ],
+    "subjects": [
+      "abstract",
+      "space"
+    ],
+    "moods": [
+      "calm",
+      "mysterious"
+    ],
+    "keywords": {
+      "en": [
+        "thread",
+        "glow",
+        "light line",
+        "spine",
+        "beam",
+        "neon",
+        "attention"
+      ],
+      "zh": [
+        "线",
+        "发光",
+        "光线",
+        "主干",
+        "光束",
+        "霓虹",
+        "注意力"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "yarn-mascot",
+        "note": "the thread's root"
+      },
+      {
+        "id": "hung-block",
+        "note": "blocks hang off it by hooks"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Draw it additively (lighter) over the night only: on a light ground the three passes turn into a grey smear.",
+        "It never breaks: a block leaves by folding back into it, a star by a beam that stays."
+      ],
+      "zh": [
+        "只在夜空上以叠加方式画：浅色底上三层发光会变成一道灰糊。",
+        "线从不断开：块是折回线里离开的，星是沿一条留下的光束离开的。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js (thread, glow, star, renderSpine, render*); plan.js; sched.js; timing.rules.js; lang.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "prop/glow-thread/brick.js",
+  "card": "prop/glow-thread/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

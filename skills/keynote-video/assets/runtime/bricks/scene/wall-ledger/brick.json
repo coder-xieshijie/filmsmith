@@ -1,0 +1,128 @@
+{
+  "id": "wall-ledger",
+  "category": "scene",
+  "name": {
+    "en": "Wall to ledger",
+    "zh": "窗口墙记账"
+  },
+  "summary": {
+    "en": "The work is read and counted: the terminal becomes a wall of small windows, a teal reader ticks each, marks run along a rail into a ledger card and pour their dots onto its heap while the counter counts.",
+    "zh": "把工作读一遍、记下来：终端变成一面小窗墙，青色读取框逐个打勾，记号沿轨道跑进账本卡片，倒出圆点，计数器跟着数。"
+  },
+  "fits": "Turning a pile of work into a count the film can sort later.",
+  "notFor": "Small counts (under about 50); exact data the viewer must check.",
+  "select": {
+    "intent": {
+      "en": "Show where the number comes from: a machine read every item and each one became a dot on the page.",
+      "zh": "交代数字从哪来：机器读了每一件，每件都成了纸上一颗点。"
+    },
+    "content": {
+      "en": "The terminal from the scene before, a wall caption (≤ 50 / 22), a reader label (≤ 20 / 6), a ledger title, a unit for the counter, a legend of two lines, a number of dots.",
+      "zh": "上一场的终端、墙的说明（≤ 50 / 22）、读取者标签（≤ 20 / 6）、账本标题、计数单位、两行图例、点数。"
+    },
+    "fits": {
+      "zh": "把一堆工作变成之后可以分的计数。"
+    },
+    "notFor": {
+      "zh": "小数量（约 50 以下）；观众要核对的精确数据。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "problem",
+      "demo"
+    ],
+    "subjects": [
+      "terminal",
+      "number",
+      "list"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "read every item",
+        "wall of windows",
+        "tally",
+        "ledger",
+        "marks",
+        "counter"
+      ],
+      "zh": [
+        "逐个读取",
+        "窗口墙",
+        "记账",
+        "账本",
+        "记号",
+        "计数器"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "term-count",
+        "note": "before"
+      },
+      {
+        "id": "pile-split",
+        "note": "next: the card pushes in and the heap is sorted"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The counter counts the dots that have landed, not a separate number.",
+        "Say what a mark and a dot stand for (the legend) before the heap is sorted."
+      ],
+      "zh": [
+        "计数器数的是已落下的点，不是另一个数字。",
+        "分堆之前先用图例说清一颗记号、一颗点各代表什么。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      24
+    ],
+    "sec120": [
+      4,
+      12
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film 9.7–15.8 s; skills/teach-video/assets/kits/terminal-ledger/starter/components/wall.js, ledger.js, counter.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "scene/wall-ledger/brick.js",
+  "card": "scene/wall-ledger/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from teach-video's terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

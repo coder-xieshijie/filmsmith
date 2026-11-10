@@ -1,0 +1,118 @@
+{
+  "id": "dot-quantize",
+  "category": "motion",
+  "name": {
+    "en": "Dot quantize",
+    "zh": "网点量化"
+  },
+  "summary": {
+    "en": "A front from the anchor turns halftone dots into square blocks, which re-sort inside out into the next field.",
+    "zh": "从锚点跑出的波前把网点变成方块，方块再由内向外重排成下一个场。"
+  },
+  "fits": "A picture becoming data: audio to text, a signal to a log, an image to tokens.",
+  "notFor": "Films without a halftone field; any cut that should feel soft.",
+  "select": {
+    "intent": {
+      "en": "A signal becomes data before the viewer's eyes: the same picture is reprinted as blocks and re-sorted into the next one.",
+      "zh": "信号在观众眼前变成数据：同一张画面被重印成方块，再重排成下一张。"
+    },
+    "content": {
+      "en": "Two field kinds round the anchor (from, to) on paper or ink.",
+      "zh": "锚点周围的两种场（起、止），纸底或墨底。"
+    },
+    "fits": {
+      "zh": "画面变成数据：声音到文字、信号到日志、图像到词元。"
+    },
+    "notFor": {
+      "zh": "没有网点场的片；该柔和的切换。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "quantize",
+        "pixelate",
+        "dither",
+        "blocks",
+        "signal to data"
+      ],
+      "zh": [
+        "量化",
+        "像素化",
+        "抖动",
+        "方块",
+        "信号变数据"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "field-card",
+        "note": "the cards it joins"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Blocks that agree must not move; animating every block turns the re-sort into noise."
+      ],
+      "zh": [
+        "前后一致的方块不能动；每块都动，重排就成了噪点。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 2
+  },
+  "tier": "T1",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/film.js (paintBoundary quantize, drawBlocks, binOf)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "field-morph",
+      "note": "field-morph changes a field’s parameters behind a front with the dots kept; dot-quantize reprints the field as binary blocks and re-sorts them"
+    }
+  ],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "motion/dot-quantize/brick.js",
+  "card": "motion/dot-quantize/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

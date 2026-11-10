@@ -1,0 +1,123 @@
+{
+  "id": "release-block",
+  "category": "scene",
+  "name": {
+    "en": "Release title block",
+    "zh": "发布标题栏"
+  },
+  "summary": {
+    "en": "The end card as a title block: a kicker, the product name dimensioned at 200 px, tags as framed chips, the URL in a framed field held at least 3 s, a key plan of the sheets, a foot line; RELEASED lettered in a framed field on the last downbeat.",
+    "zh": "把落版画成标题栏：一行引语、200 px 并标注尺寸的产品名、带框的标签芯片、带框的网址（至少停 3 秒）、全部图纸的索引图、页脚；最后一个强拍在框里写上“已发布”。"
+  },
+  "fits": "The last sheet of a blueprint film.",
+  "notFor": "Logos that must be artwork; more than five tags; a film that ends unreleased (change the status word).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "End on the issued drawing: the name, what it does in four words, where to get it, and the status stamped as released.",
+      "zh": "以发出的图纸收尾：名称、四个词说明它做什么、去哪获取，以及“已发布”的状态。"
+    },
+    "content": {
+      "en": "Label, kicker (≤ 40), name (≤ 14), 2–5 tags (≤ 14), URL (≤ 44), a foot line, the status word.",
+      "zh": "标签、引语（≤ 16 字）、名称（≤ 7 字）、2–5 个标签（≤ 5 字）、网址（≤ 44 字符）、页脚、状态词。"
+    },
+    "fits": {
+      "zh": "blueprint 片子的最后一张图。"
+    },
+    "notFor": {
+      "zh": "必须画成图形的标志；超过五个标签；以“未发布”结束的片子（改状态词）。"
+    },
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "release",
+        "end card",
+        "title block",
+        "URL field",
+        "key plan",
+        "RELEASED"
+      ],
+      "zh": [
+        "发布",
+        "落版",
+        "标题栏",
+        "网址框",
+        "索引图",
+        "已发布"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sheet-overview",
+        "note": "entered from it under the parallel rule (occluder-pass)"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "RELEASED lands on the last downbeat (4 beats before the end): a host that cuts the scene short loses the closing move."
+      ],
+      "zh": [
+        "“已发布”落在最后一个强拍（结束前 4 拍）；宿主截短这一场，收尾动作就没了。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      7,
+      16
+    ],
+    "sec120": [
+      3.5,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/release.js; choreography.js CUES.release; timeline.js status cue"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/release-block/brick.js",
+  "card": "scene/release-block/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

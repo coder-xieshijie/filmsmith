@@ -1,0 +1,114 @@
+{
+  "id": "reading-sheet",
+  "category": "look",
+  "name": {
+    "en": "Reading sheet",
+    "zh": "长卷阅读"
+  },
+  "summary": {
+    "en": "The scroll look: one long sheet of the product's own page hanging in a fixed viewport on near-black, quote bands on warm paper stock pasted in, a dark unfold panel, a pencil-ochre accent that is only a stroke, a lit paper roll at both ends.",
+    "zh": "scroll 的样式：产品自己的长页面作为一整张长卷挂在固定视窗里，底是近黑；暖白纸的引语条贴在中间，暗色展开面板，赭石色强调只做笔画，两端是一根有光影的纸卷。"
+  },
+  "fits": "Products whose own long page carries the story: a README, docs, a changelog; 20–60 s.",
+  "notFor": "Evidence spread over many artefacts; apps told by their screens; pages that are mostly images or show people.",
+  "select": {
+    "intent": {
+      "en": "The product's own page is the film: read top to bottom like a long-form story, so every claim is the page's own words.",
+      "zh": "产品自己的页面就是影片：像读长文一样从上往下读，每句话都是页面原话。"
+    },
+    "content": {
+      "en": "One real long page (captured at 2×), 3–6 lines to underline, its headings as chapters, one row that carries a demo.",
+      "zh": "一张真实的长页面（2 倍截图），3–6 句可划线的话，标题当章节，一行带演示的内容。"
+    },
+    "fits": {
+      "zh": "靠自己的长页面讲故事的产品：README、文档、更新日志；20–60 秒。"
+    },
+    "notFor": {
+      "zh": "证据分散在多个材料里；靠界面讲的应用；以图片为主或有人物的页面。"
+    },
+    "subjects": [
+      "text",
+      "image",
+      "ui"
+    ],
+    "moods": [
+      "editorial",
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "long page",
+        "README",
+        "scroll",
+        "sticky headers",
+        "pull quote",
+        "paper roll",
+        "minimap"
+      ],
+      "zh": [
+        "长页面",
+        "README",
+        "滚动",
+        "吸顶标题",
+        "引语条",
+        "纸卷",
+        "小地图"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sheet-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "quote-band",
+        "note": "the pull quotes"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The accent is a stroke only (4 px underline, 6 px margin mark, 3 px bracket), never a fill or text.",
+        "Never recolour, retouch or rebuild the capture: crop, scale and a uniform ground veil only."
+      ],
+      "zh": [
+        "强调色只做笔画（4 px 下划线、6 px 边注、3 px 括框），不做填充、不做文字。",
+        "截图不许改色、修图或重排：只裁切、缩放和统一的底色遮罩。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "scroll"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "film-v1/film.js PAL, type and grid; references/modes/scroll.md palettes"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "look/reading-sheet/look.js",
+  "card": "look/reading-sheet/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,161 @@
+{
+  "id": "write-on",
+  "category": "motion",
+  "name": {
+    "en": "Write on",
+    "zh": "文档自己写出来"
+  },
+  "summary": {
+    "en": "A page writes itself: its blocks are uncovered left to right two at a time, an accent nib riding the front of the newest one.",
+    "zh": "一页文档自己“写”出来：内容块两个一组按节拍从左到右揭开，强调色笔尖骑在最新一块的揭示前沿上。"
+  },
+  "fits": "The first appearance of a document, report or dashboard page, the densest page of a film, uncovered in reading order at the pace it can be read.",
+  "notFor": "A page already seen; pages with little text (it reads as a slow wipe) or blocks not in reading order; real screenshots shown as evidence (uncover them whole).",
+  "select": {
+    "intent": {
+      "en": "A static page becomes a document being written, so the viewer reads along at the pace it appears and believes the document is real.",
+      "zh": "静态页面变成“正在被写出来的文档”，观众跟着出现的速度读下去，并相信这份文档是真的。"
+    },
+    "content": {
+      "en": "One full page (a document, report or dashboard) with 4–20 blocks in reading order; real, publication-grade copy.",
+      "zh": "一整页（文档、报告或仪表盘），4–20 个按阅读顺序排列的内容块；文字要真实、达到发布水准。"
+    },
+    "fits": {
+      "zh": "文档、报告或仪表盘页面第一次出现，是片中信息最密的一页，按阅读顺序、以读得过来的速度揭开。"
+    },
+    "notFor": {
+      "zh": "已经看过的页面；字很少的页面（读成慢速擦除）或块不按阅读顺序的页面；作为证据的真截图（整张亮出）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "document",
+        "typewriter reveal",
+        "write on",
+        "report",
+        "notes app",
+        "nib",
+        "page reveal"
+      ],
+      "zh": [
+        "文档打字揭示",
+        "文档自己写出来",
+        "报告",
+        "笔记",
+        "逐块揭开",
+        "笔尖",
+        "信息密度最高"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "tilt-camera",
+        "note": "the camera pulls back from a tilted close-up while the page writes"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The page must look published: native layout, filled with text; a token page with a slogan sinks the shot.",
+        "No real customer or member names in the mock content.",
+        "One nib at a time; two writing fronts split the eye."
+      ],
+      "zh": [
+        "页面要像发布过的：产品原生排版、文字铺满；敷衍的“贴图加标语”页会让整镜重做。",
+        "示意内容里绝不出现客户或成员的真名。",
+        "同一时间只有一个笔尖，两处同时写会分散视线。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "document-typewriter-reveal",
+        "name": "文档打字揭示",
+        "card": "文档打字揭示",
+        "summary": "悬浮在暗场里的整页真排版文档窗口在光标后自己\"写\"出来、侧栏跟进、历史条目逐个落入轨道，相机从斜侧标题特写一路后撤到全窗",
+        "use": "文档/报告/笔记类功能镜头；信息密度最高的一拍",
+        "energy": "低中（信息密度最高，节奏放稳让观众读字）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/document-typewriter-reveal.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 3,
+    "range": [
+      2,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "document-typewriter-reveal",
+        "path": "demos/ui-entrance/document-typewriter-reveal/DocumentTypewriterReveal.tsx",
+        "card": "references/shots/typography/document-typewriter-reveal.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "type-retype",
+      "note": "type-retype types one line character by character; write-on uncovers a whole page block by block"
+    },
+    {
+      "id": "tilt-camera",
+      "note": "the upstream camera pull-back from a tilted close-up is tilt-camera or viewport-push run over this brick"
+    },
+    {
+      "id": "type-enter",
+      "note": "a title entering; write-on is for a whole page of blocks"
+    }
+  ],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "motion/write-on/brick.js",
+  "card": "motion/write-on/CARD.md",
+  "compare": {
+    "ssimMean": 0.5703,
+    "ssimMin": 0.4478,
+    "ssimDrop": 0,
+    "trackDevPx": 5.5,
+    "progressRmse": 0.0031,
+    "eventFrames": 4,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

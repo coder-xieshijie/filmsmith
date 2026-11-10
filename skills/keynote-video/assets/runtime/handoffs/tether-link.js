@@ -4,8 +4,14 @@
 // than proximity (Palmer & Rock 1994): a line makes "this number comes from there" visible; the dot gives the line a
 // direction (claim → source). Sources: an editor's launch film (a line from each typed source line to its
 // rendered line, per beat), a catalogue "tracing beam" component, ring annotations (a ring is the link's end).
+// Variant `style: 'flyline'`: a glowing line shot across instead of drawn: it grows out-cubic, a bright head leads it
+// with a glow, the line behind fades with its distance from the head, and on arrival the target's outline pulses once
+// in the paper colour as the ring closes. Adapted from video-shotcraft demos/effects/glow-flyline-moves/FlylineArc.tsx,
+// https://github.com/Vincentwei1021/video-shotcraft @ 1266a3e, Apache-2.0: the out-cubic growth, the bright head and
+// dark tail, the glow under the core and the arrival pulse; the indigo literals are the accent, the dashboard is the
+// module's asset.
 
-import { seg, cubicInOut, text, measure, scratch } from './util.js';
+import { seg, cubicInOut, cubicOut, text, measure, scratch, mix, rgba } from './util.js';
 import {
   NEUTRAL, assetOf, placeholderPage, fitView, toScreen, windowOf, contentOf, windowBack, windowFront, clipWindow,
   drawAsset, ring,
@@ -35,6 +41,7 @@ export default {
     bend: 0.18,                                // arc height as a fraction of the line's length (negative: below)
     gapStart: 28, ringPad: 8,
     dot: 8, width: 3,
+    style: 'line',                             // 'flyline': a glowing line shot across, head first, the target pulsing
     font: { family: 'sans-serif', weight: 700 },
     mono: { family: 'monospace', weight: 400 },
     colors: { ...NEUTRAL },
@@ -61,7 +68,10 @@ export default {
     return { A, W, v, box, pts, acc, total: acc[N] };
   },
   rest(side) { return side === 'from' ? { l: 0, ring: 0 } : { l: 1, ring: 1 }; },
-  at(p) { return { l: cubicInOut(seg(p, 0, 0.62)), ring: cubicInOut(seg(p, 0.55, 0.92)) }; },
+  at(p, P) {
+    if (P && P.style === 'flyline') { const u = seg(p, 0.62, 0.92); return { l: cubicOut(seg(p, 0, 0.62)), ring: cubicInOut(seg(p, 0.55, 0.92)), pulse: u > 0 && u < 1 ? u : 0 }; }
+    return { l: cubicInOut(seg(p, 0, 0.62)), ring: cubicInOut(seg(p, 0.55, 0.92)) };
+  },
   paint(ctx, S, P, D) {
     const C = P.colors;
     if (P.ground !== false) { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = C.ground; ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height); ctx.restore(); }
@@ -70,6 +80,7 @@ export default {
     ctx.save(); clipWindow(ctx, D.W); drawAsset(ctx, D.A, D.v, contentOf(D.W)); ctx.restore();
     windowFront(ctx, D.W, P, { title: P.target.title });
     if (S.ring > 0) ring(ctx, D.box, P, { pad: P.ringPad, radius: 10, width: P.width, draw: S.ring });
+    if (P.style === 'flyline') { this.flyline(ctx, S, P, D); return; }
     if (S.l <= 0) return;
     const head = this.headAt(S.l, D);
     ctx.save();
@@ -80,6 +91,34 @@ export default {
     ctx.strokeStyle = C.accent; ctx.lineWidth = P.width; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     ctx.stroke();
     ctx.beginPath(); ctx.arc(head[0], head[1], P.dot, 0, Math.PI * 2); ctx.fillStyle = C.accent; ctx.fill();
+    ctx.restore();
+  },
+  // flyline: a glow under the whole drawn line, then the core in pieces fading with distance from the head, the head
+  // with its halo, and the target's outline pulsing once on arrival
+  flyline(ctx, S, P, D) {
+    const C = P.colors;
+    if (S.pulse > 0) {
+      const b = D.box, g = 4 + 22 * S.pulse;
+      ctx.save(); ctx.strokeStyle = rgba(C.paper || C.panel, 0.9 * (1 - S.pulse)); ctx.lineWidth = 3; ctx.shadowColor = rgba(C.accent, 0.6 * (1 - S.pulse)); ctx.shadowBlur = 18;
+      ctx.strokeRect(b.x - P.ringPad - g, b.y - P.ringPad - g, b.w + 2 * (P.ringPad + g), b.h + 2 * (P.ringPad + g)); ctx.restore();
+    }
+    if (S.l <= 0) return;
+    const head = this.headAt(S.l, D), end = S.l * D.total, pts = [D.pts[0]];
+    for (let i = 1; i < D.pts.length && D.acc[i] < end; i++) pts.push(D.pts[i]);
+    pts.push(head);
+    ctx.save(); ctx.lineCap = 'butt'; ctx.lineJoin = 'round';
+    ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
+    ctx.strokeStyle = rgba(C.accent, 0.22); ctx.lineWidth = P.width * 4; ctx.shadowColor = rgba(C.accent, 0.5); ctx.shadowBlur = 16; ctx.stroke();
+    ctx.shadowBlur = 0;
+    for (let i = 1, a = 0; i < pts.length; i++) {
+      a += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+      const k = end > 0 ? a / end : 1;
+      ctx.beginPath(); ctx.moveTo(pts[i - 1][0], pts[i - 1][1]); ctx.lineTo(pts[i][0], pts[i][1]);
+      ctx.strokeStyle = rgba(mix(C.accent, '#FFFFFF', 0.35 * k), 0.15 + 0.85 * k * k); ctx.lineWidth = P.width; ctx.stroke();
+    }
+    const hot = mix(C.accent, '#FFFFFF', 0.7);
+    ctx.shadowColor = rgba(C.accent, 0.9); ctx.shadowBlur = 22;
+    ctx.beginPath(); ctx.arc(head[0], head[1], P.dot, 0, Math.PI * 2); ctx.fillStyle = hot; ctx.fill();
     ctx.restore();
   },
   // the point at fraction l of the arc's length

@@ -1,0 +1,120 @@
+{
+  "id": "paper-term",
+  "category": "prop",
+  "name": {
+    "en": "Paper terminal",
+    "zh": "纸面终端"
+  },
+  "summary": {
+    "en": "The light terminal of a narrated explainer: a white window in a hard ink frame, a line typed after the prompt sign, a log coloured by who wrote each line.",
+    "zh": "解说片里的浅色终端：硬墨框白窗，提示符后打一行字，日志按谁写的上色。"
+  },
+  "fits": "A question asked of a machine; a log of what an agent did; a person typing a reply.",
+  "notFor": "Code walkthroughs with many lines; dark terminals (use terminal-window).",
+  "select": {
+    "intent": {
+      "en": "Show that a machine was asked and answered, in a window light enough to sit on the paper with the rest of the story.",
+      "zh": "交代机器被问到、给了回答，窗口够浅，和其余故事一起放在纸面上。"
+    },
+    "content": {
+      "en": "A title (≤ 28 chars / 14), one typed line (≤ 40 / 18), up to six log lines (≤ 40 / 18) each marked plain, ok, me or stop.",
+      "zh": "标题（≤ 28 字符 / 14 字）、一行输入（≤ 40 / 18）、至多 6 行日志（≤ 40 / 18），各标 plain、ok、me 或 stop。"
+    },
+    "fits": {
+      "zh": "向机器提的问题；agent 做过什么的日志；人打字回复。"
+    },
+    "notFor": {
+      "zh": "多行代码讲解；暗色终端（用 terminal-window）。"
+    },
+    "roles": [
+      "hook",
+      "problem",
+      "demo"
+    ],
+    "subjects": [
+      "terminal",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "light terminal",
+        "prompt",
+        "typed question",
+        "log",
+        "agent output",
+        "caret"
+      ],
+      "zh": [
+        "浅色终端",
+        "提示符",
+        "打字提问",
+        "日志",
+        "agent 输出",
+        "光标"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "term-count",
+        "note": "the window the counts grow in"
+      },
+      {
+        "id": "term-wall",
+        "note": "shrinks it into a wall of windows"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Grey is the machine, green a pass, vermilion only what a person types.",
+        "Keep the window inside x 360–1560 so the reserve stays empty."
+      ],
+      "zh": [
+        "灰色是机器，绿色是通过，朱红只给人打的字。",
+        "窗口保持在 x 360–1560 内，让出预留区。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/teach-video/assets/kits/terminal-ledger/starter/components/term.js, style.css (.term, .q, .ln, .caret)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "terminal-window",
+      "note": "a dark keynote terminal with a block caret and a command; here a light window on paper with a coloured log and a hard shadow"
+    }
+  ],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "prop/paper-term/brick.js",
+  "card": "prop/paper-term/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from teach-video's terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

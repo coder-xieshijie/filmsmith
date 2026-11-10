@@ -1,0 +1,162 @@
+{
+  "id": "flow-landscape",
+  "category": "scene",
+  "name": {
+    "en": "Flow landscape",
+    "zh": "数据景观开场"
+  },
+  "summary": {
+    "en": "A low camera flies over a data landscape: a bright trunk line winds to a vanishing point, tributaries sweep in and merge, pins rise on them, pulses flow, the vanishing point lights and a two-line title lands in the sky.",
+    "zh": "低空镜头在一片数据地景上前飞：一条亮主干蜿蜒奔向消失点，两侧支流切向汇入，支流上立起标签，脉冲流向汇点，汇点亮起，天空落下两行标题。"
+  },
+  "fits": "The first shot of an opening about many things becoming one: many inputs into one output, many contributors into one release, many sources into one pipeline; a mood-setting world before the product is named.",
+  "notFor": "Light, flat or paper styles (it needs a dark ground for the light to read); content that must be read in detail (the pins are glances); slots under 6 seconds.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      12,
+      14
+    ],
+    "sec120": [
+      6,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any dark",
+      "afterglow",
+      "terminal"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "plakat",
+      "swiss"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "dataviz-landscape-open",
+        "path": "demos/opening/dataviz-landscape-open/DatavizLandscapeOpen.tsx",
+        "card": "references/shots/opening/dataviz-landscape-open.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "select": {
+    "intent": {
+      "en": "Set a world before naming anything: countless streams of work flowing into one trunk, seen from a low camera gliding over them, so the product is felt as what all that work becomes.",
+      "zh": "在说出任何名字之前先立一个世界：无数工作流汇进一条主干，从低空缓缓飞越，观众先感到“这么多东西汇成了一个产品”。"
+    },
+    "content": {
+      "en": "3–6 pins naming the streams (en ≤ 16 chars, zh ≤ 6, numbered), an optional eyebrow (en ≤ 28, zh ≤ 10) and a two-line title (line 1 en ≤ 16 / zh ≤ 7, line 2 en ≤ 24 / zh ≤ 9).",
+      "zh": "3–6 个标签，给各条支流命名（英文 ≤ 16 字符，中文 ≤ 6 字，自动编号），可选眉标（英文 ≤ 28，中文 ≤ 10），两行标题（第一行英文 ≤ 16 / 中文 ≤ 7，第二行英文 ≤ 24 / 中文 ≤ 9）。"
+    },
+    "fits": {
+      "zh": "讲“很多东西汇成一个”的开场第一镜：很多输入汇成一个输出、很多贡献者汇成一次发布、很多来源汇成一条流水线；产品被点名之前先立氛围的世界。"
+    },
+    "notFor": {
+      "zh": "浅色、平面或纸感风格（光要暗底才读得出）；要细读的内容（标签只是一瞥）；短于 6 秒的槽位。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "claim",
+      "lockup"
+    ],
+    "subjects": [
+      "space",
+      "abstract",
+      "diagram"
+    ],
+    "moods": [
+      "cinematic",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "data landscape",
+        "flyover",
+        "tributaries",
+        "trunk line",
+        "abstract opening",
+        "data universe",
+        "vanishing point",
+        "release film opening"
+      ],
+      "zh": [
+        "数据景观开场",
+        "数据地景",
+        "支流汇入主干",
+        "低空飞越",
+        "数据宇宙",
+        "抽象开场",
+        "品牌级开场",
+        "发光线"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "mark-lockup",
+        "note": "the lit vanishing point hands over to the brand lockup"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Do not put it next to another dark glowing-line passage; back to back they read as the film's only trick, so keep two light shots between them.",
+        "Grade the line brightness by depth; all lines at full white mat into a cobweb, and no glow at all reads as a wireframe.",
+        "Cutting from it into a light product passage needs a hidden-cut transition, not a straight cut from dark to light.",
+        "Keep the pin labels at least 18 px equivalent, or they become decorative noise."
+      ],
+      "zh": [
+        "别和别的暗场发光线段落相邻；背靠背读作全片只会一招，中间至少隔两个亮场镜头。",
+        "线条亮度按纵深分层；全部纯白会糊成蛛网，完全没辉光又读作线框图。",
+        "接亮场产品段要用藏切类转场垫，别从暗到亮生切。",
+        "标签字号等效不小于 18 px，否则沦为装饰噪点。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "dataviz-landscape-open",
+        "name": "数据景观开场",
+        "card": "数据景观开场",
+        "summary": "暗场支流线束地景开场——多条流线汇入主干、虚构 ID 标签浮在线上、相机重景深低速飞越",
+        "use": "品牌级抽象开场（\"数据宇宙\"隐喻），接亮场产品段或字标；与 glow-flyline-moves 分工：那卡是段落内卡片之间的连线叙事，本卡是开场专用的全画幅地景",
+        "energy": "低开缓升（起步位，为后续爬升留空间）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/dataviz-landscape-open.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "scene/flow-landscape/brick.js",
+  "card": "scene/flow-landscape/CARD.md",
+  "compare": {
+    "ssimMean": 0.8443,
+    "ssimMin": 0.7902,
+    "ssimDrop": 0.0081,
+    "trackDevPx": 0,
+    "progressRmse": 0.0002,
+    "eventFrames": null,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

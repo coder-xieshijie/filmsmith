@@ -1,0 +1,138 @@
+{
+  "id": "check-gate",
+  "category": "scene",
+  "name": {
+    "en": "Check gate",
+    "zh": "核对关卡"
+  },
+  "summary": {
+    "en": "Done means checked: a gate (a vertical stroke of the thread) rises from its middle; the item, hung on a beam, slides up to it, is stopped with a white flash and sent back (\"not passed\" in grey), is reworked, slides through and is ringed in the accent (\"checked\"); then the chat block folds back into the spine.",
+    "zh": "完成是核对过的完成：一道关卡（线的一段竖笔）从中间升起；挂在光束上的那件东西滑到关卡前，白光一闪被拦下、退回（灰色的“没通过”），返工后滑过关卡、被强调色圈住（“核对通过”）；然后对话块折回主干。"
+  },
+  "fits": "The proof of an agent's result: it was checked before it came back.",
+  "notFor": "A product without a check step; several items at once.",
+  "select": {
+    "intent": {
+      "en": "Show that a result is not \"done\" until it has passed a check, failing once first.",
+      "zh": "让人看到结果在通过核对之前不算“完成”，而且先失败一次。"
+    },
+    "content": {
+      "en": "A caption, a gate word (≤ 10 characters / 4 Chinese characters), an item label, a fail line and a pass line; optional: the product's explanation in the chat after the stop, and a relation graph (3–6 named arcs to one node, one thick arc back, two captions).",
+      "zh": "一句字幕、关卡上的词（≤ 10 字符 / 4 个汉字）、一件东西的名字、没通过一行和通过一行；可选：挡回后产品在对话里的解释，和关系图（3–6 道带名字的弧射向一个节点、一道粗弧回传、两句字幕）。"
+    },
+    "fits": {
+      "zh": "agent 结果的证明：它是核对过才回来的。"
+    },
+    "notFor": {
+      "zh": "没有核对步骤的产品；同时多件东西。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "diagram"
+    ],
+    "moods": [
+      "technical",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "check",
+        "gate",
+        "verify",
+        "reject",
+        "rework",
+        "pass",
+        "quality",
+        "relation graph",
+        "explain",
+        "arcs"
+      ],
+      "zh": [
+        "核对",
+        "关卡",
+        "验证",
+        "拦下",
+        "返工",
+        "通过",
+        "质量",
+        "关系图",
+        "解释",
+        "弧"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "card-squash",
+        "note": "the chat block's fold back into the line"
+      },
+      {
+        "id": "strand-cards",
+        "note": "next"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The fail is grey and the pass is the accent: a red fail adds a second accent the style does not have.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "没通过用灰色，通过用强调色：红色的失败会加出这个风格没有的第二种强调色。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      34
+    ],
+    "sec120": [
+      5,
+      17
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderVerify; sched.js verify"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/check-gate/brick.js",
+  "card": "scene/check-gate/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

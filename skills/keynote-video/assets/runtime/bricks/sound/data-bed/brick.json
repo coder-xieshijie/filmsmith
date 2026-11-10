@@ -1,0 +1,86 @@
+{
+  "id": "data-bed",
+  "category": "sound",
+  "name": {
+    "en": "Data bed",
+    "zh": "数据音乐床"
+  },
+  "summary": {
+    "en": "The tally sound: the data bed (F lydian, 104–120 BPM), landings that walk up the scale, roulette ticks and a stamp, a chime on the accent.",
+    "zh": "tally 的声音：data 音乐床（F 利底亚，104–120 BPM），落点音高沿音阶上行，轮盘嘀嗒加盖章，强调色配一声钟。"
+  },
+  "fits": "Counting and data stories; any film made of many small landings.",
+  "notFor": "Launch films that need a drop; voice-over films (duck it instead).",
+  "select": {
+    "intent": {
+      "en": "Many small landings become a phrase: pitches walk up the scale, so counting sounds like progress.",
+      "zh": "许多小落点连成一句：音高沿音阶上行，计数听起来像前进。"
+    },
+    "content": {
+      "en": "A film on the arc of its style; event kinds from the scenes' plans.",
+      "zh": "按其风格骨架编排的片子；事件种类来自各场景的 plan。"
+    },
+    "fits": {
+      "zh": "计数与数据故事；由许多小落点组成的片子。"
+    },
+    "notFor": {
+      "zh": "需要高潮段的发布片；有旁白的片（改为压低）。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "data bed",
+        "lydian",
+        "counting sounds",
+        "roulette tick"
+      ],
+      "zh": [
+        "数据音乐床",
+        "利底亚",
+        "计数音效",
+        "轮盘嘀嗒"
+      ]
+    },
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": null,
+  "styles": {
+    "fits": [
+      "tally"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/score.mjs"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "sound/data-bed/sound.js",
+  "card": "sound/data-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

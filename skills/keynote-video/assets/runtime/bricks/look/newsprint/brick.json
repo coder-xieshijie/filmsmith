@@ -1,0 +1,112 @@
+{
+  "id": "newsprint",
+  "category": "look",
+  "name": {
+    "en": "Newsprint",
+    "zh": "新闻纸"
+  },
+  "summary": {
+    "en": "The halftone look: warm newsprint, one black plate and one process ink that prints only the anchor; every picture a procedural field printed as an AM screen; Bricolage Grotesque and IBM Plex Mono.",
+    "zh": "halftone 的样式：暖色新闻纸，一块黑版加一种只印锚点的印刷色；所有画面都是程序生成的场，用调幅网点印出；字体 Bricolage Grotesque 与 IBM Plex Mono。"
+  },
+  "fits": "Launches of models and tools that want a printed, editorial feel with one recurring brand piece.",
+  "notFor": "Screenshots and UI demos; films with several brand colours; photographic material.",
+  "select": {
+    "intent": {
+      "en": "The film reads as printed: one black plate, one process ink kept for the brand piece, and every picture a field of dots that change size, never grey.",
+      "zh": "整支片像印出来的：一块黑版，一种只留给品牌件的印刷色，所有画面都是只变大小、不变灰度的网点场。"
+    },
+    "content": {
+      "en": "A product mark with one separable piece (the anchor), four to six features each with a word.",
+      "zh": "一个能拆出一块（锚点）的产品标志，四到六个各配一个词的功能。"
+    },
+    "fits": {
+      "zh": "想要印刷感、编辑感的模型和工具发布片，有一个反复出现的品牌件。"
+    },
+    "notFor": {
+      "zh": "截图和界面演示；多种品牌色；照片素材。"
+    },
+    "subjects": [
+      "abstract",
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "editorial",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "halftone",
+        "newsprint",
+        "print",
+        "screen dots",
+        "process cyan",
+        "risograph"
+      ],
+      "zh": [
+        "网点",
+        "新闻纸",
+        "印刷感",
+        "加网",
+        "印刷青",
+        "孔版"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "press-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "anchor-launch",
+        "note": "its arc"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The accent prints the anchor only: never type, a field or emphasis.",
+        "Bricolage Grotesque and IBM Plex Mono are not in tools/fonts.json: samples fall back to Inter Tight and JetBrains Mono."
+      ],
+      "zh": [
+        "强调色只印锚点：不印字、不印场、不做强调。",
+        "Bricolage Grotesque 与 IBM Plex Mono 不在 tools/fonts.json，小样回退到 Inter Tight 与 JetBrains Mono。"
+      ]
+    }
+  },
+  "duration": null,
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": [
+      "morph",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/palettes.js, film.js (type, frame), screen.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote",
+    "teach"
+  ],
+  "entry": "look/newsprint/look.js",
+  "card": "look/newsprint/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

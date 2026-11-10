@@ -1,0 +1,120 @@
+{
+  "id": "mark-command",
+  "category": "scene",
+  "name": {
+    "en": "Mark and command",
+    "zh": "标志与命令"
+  },
+  "summary": {
+    "en": "The card splits into the parts of the product mark, which fly in on arcs; the point lands as the mark dot, the name wipes out, the tagline rises and the closing command types on.",
+    "zh": "卡片裂成产品标志的几块，沿弧线飞进去；那个点落成标志上的圆点，名字擦出，标语升起，结尾的命令逐字打出。"
+  },
+  "fits": "The close of a film whose product has a geometric mark and a command to run.",
+  "notFor": "Marks that are pictures or words only; closings without a command (use a plain lock-up).",
+  "select": {
+    "intent": {
+      "en": "The object the viewer followed all film becomes the product's mark, and the command to get it is typed, so they leave with a name and an action.",
+      "zh": "观众跟了一整片的对象变成产品标志，取用它的命令被打出来，观众带走一个名字和一个动作。"
+    },
+    "content": {
+      "en": "The product's name (≤ 12 chars), the mark as parts in grid units plus a dot, a tagline (≤ 26 chars / 12 字), a command (≤ 36 chars).",
+      "zh": "产品名（≤ 12 字符），以网格单位描述的标志块与圆点，一句标语（≤ 26 字符 / 12 字），一条命令（≤ 36 字符）。"
+    },
+    "fits": {
+      "zh": "产品有几何标志和可运行命令的片子的收尾。"
+    },
+    "notFor": {
+      "zh": "图形或纯文字标志；没有命令的收尾（用普通落版）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "terminal"
+    ],
+    "moods": [
+      "ceremonial",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "lock-up",
+        "logo assemble",
+        "mark",
+        "command",
+        "npx",
+        "dot lands"
+      ],
+      "zh": [
+        "落版",
+        "标志拼合",
+        "标志",
+        "命令",
+        "npx",
+        "圆点落下"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "run-flood",
+        "note": "hands it the Run button as the baton"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Hold the typed command ≥ 3 s; a closing command that vanishes cannot be copied."
+      ],
+      "zh": [
+        "打完的命令至少停 3 秒；一闪而过的结尾命令没法抄。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      8,
+      14
+    ],
+    "sec120": [
+      4,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "morph"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/morph/film.js (drawMark, markLayout, piecesOf, batonOf)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/mark-command/brick.js",
+  "card": "scene/mark-command/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "mid",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

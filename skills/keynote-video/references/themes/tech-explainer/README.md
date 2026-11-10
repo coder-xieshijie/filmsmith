@@ -5,7 +5,7 @@ Films that explain a technical thing rather than sell it: how an algorithm or me
 ## Format so far
 
 - Length from the content (principle 5); the shipped examples run 34–45 s. 16:9 only, 1920×1080, 30 fps, for landscape full-screen playback.
-- On-screen text in English; Chinese is planned for a later version of the skill. No narration.
+- On-screen text in English or Chinese, chosen from the material ([system](../../system.md#language)). No narration.
 - Ends on the one sentence the viewer should keep (the thesis, or the headline number), then the source.
 
 ## Narrative skeleton

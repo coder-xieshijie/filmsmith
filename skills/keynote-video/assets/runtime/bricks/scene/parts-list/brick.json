@@ -1,0 +1,124 @@
+{
+  "id": "parts-list",
+  "category": "scene",
+  "name": {
+    "en": "Parts list",
+    "zh": "零件表"
+  },
+  "summary": {
+    "en": "Getting started as a parts list: a bill-of-materials table of 1–3 rows with BOM balloons, then a chain of 2–5 chips (the first steps) under a THEN label, and a note.",
+    "zh": "把“如何开始”画成零件表：1–3 行的物料清单，带零件编号气泡；下面一个“然后”标签引出 2–5 个步骤芯片连成的链，再加一行注。"
+  },
+  "fits": "The install / getting-started sheet near the end of a blueprint film.",
+  "notFor": "More than three commands; commands longer than 60 characters; products without a command line.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Tell a developer exactly what to fetch and do first, in the drawing office's own form: a parts list.",
+      "zh": "用制图室自己的形式告诉开发者先拿什么、做什么：一张零件表。"
+    },
+    "content": {
+      "en": "Title, two heads, 1–3 rows (code ≤ 60), a then label, 2–5 chips (≤ 16), a note.",
+      "zh": "标题、两个表头、1–3 行（代码 ≤ 60）、“然后”标签、2–5 个芯片（≤ 6 字）、一行注。"
+    },
+    "fits": {
+      "zh": "blueprint 片子临近结尾的安装 / 快速开始图。"
+    },
+    "notFor": {
+      "zh": "超过三条命令；超过 60 字符的命令；没有命令行的产品。"
+    },
+    "roles": [
+      "demo",
+      "rest"
+    ],
+    "subjects": [
+      "code",
+      "list"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "parts list",
+        "bill of materials",
+        "BOM balloon",
+        "install",
+        "getting started",
+        "chips"
+      ],
+      "zh": [
+        "零件表",
+        "物料清单",
+        "零件气泡",
+        "安装",
+        "快速开始",
+        "步骤芯片"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "release-block",
+        "note": "the end card"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Rows are code: keep them Latin; only the heads, chips and note translate."
+      ],
+      "zh": [
+        "行是代码，保持拉丁字符；只翻译表头、芯片和注。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      7,
+      14
+    ],
+    "sec120": [
+      3.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/parts.js; choreography.js CUES.parts"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/parts-list/brick.js",
+  "card": "scene/parts-list/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,5 +1,7 @@
 # Pulse (`pulse`)
 
+**Recipe**: [pulse](../recipes/pulse.md), the style as a reference for a composed film (its look, recommended bricks by slot, ban list, Chinese). This card describes the template and its example film.
+
 A question acted out as a query: huge condensed type asks it one word per beat at a fixed anchor while the ground flips along one hue's lightness ramp, a highlight hops over the real candidates, the answer locks, and the film's one whiteout slams it in amber on the music's drop; the camera then pushes through the answer's own 0 into the figures that explain it, and the name lands again. Aesthetic anchor: "like a benchmark query run live, cut to a beat".
 Theme: tech-product-launch · Template: `assets/templates/pulse/` · tempo 112–120 BPM, default 120 (length follows the copy; the shipped example fits 16 bars = 32.0 s, the shortest cut 6 bars = 12 s) · timing API 3 · Status: owner-accepted 2026-10-19 (batch 4 style sample); template 2026-10-19
 

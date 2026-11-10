@@ -1,0 +1,138 @@
+{
+  "id": "job-constellation",
+  "category": "scene",
+  "name": {
+    "en": "Job constellation",
+    "zh": "一件活连成星座"
+  },
+  "summary": {
+    "en": "A job that keeps going: an ask and an offer in the chat, a dashed workspace region with its name, three jobs and a plan launched from the thread as stars along beams, each with its status; results flow back as beads of light and the jobs turn done; on the drop the plan joins the three into a constellation; one answer comes back into the chat.",
+    "zh": "一件持续进行的活：对话里一个请求和一个提议，一块虚线框出的工作区和它的名字，三件活和一个计划沿光束从线上派出成星，各带状态；结果化作光点沿光束回来、活变成完成；落拍时计划把三颗星连成星座；一个答复回到对话里。"
+  },
+  "fits": "The middle peak of a stream film: a bigger job split into parts that run in the background and come back as one answer.",
+  "notFor": "A job without parts; a product that does not run things in the background.",
+  "select": {
+    "intent": {
+      "en": "Show that a bigger job is split, run and brought back as one answer, without the user watching each part.",
+      "zh": "让人看到一件大活被拆开、跑完、再作为一个答复带回，用户不用盯着每一部分。"
+    },
+    "content": {
+      "en": "A caption, an ask, an offer, a yes, a workspace name, three job labels, a plan label and its waiting line, a result, a second caption; optional: the new-workspace dialog that folds into the workspace's name, and the workspace's header (a space chip and a filter row).",
+      "zh": "一句字幕、一个请求、一个提议、一个“好”、工作区名、三件活的名字、计划名和它的等待行、一个结果、第二句字幕；可选：收成空间名的新建任务空间弹窗，以及工作区头部（空间名小卡和筛选行）。"
+    },
+    "fits": {
+      "zh": "stream 片中段的高峰：一件大活拆成几部分在后台跑，最后作为一个答复回来。"
+    },
+    "notFor": {
+      "zh": "不分部分的活；不在后台跑东西的产品。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "demo"
+    ],
+    "subjects": [
+      "diagram",
+      "ui",
+      "abstract"
+    ],
+    "moods": [
+      "cinematic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "constellation",
+        "jobs",
+        "workspace",
+        "plan",
+        "background",
+        "results",
+        "beams",
+        "modal",
+        "dialog"
+      ],
+      "zh": [
+        "星座",
+        "后台任务",
+        "工作区",
+        "计划",
+        "后台",
+        "结果",
+        "光束",
+        "弹窗",
+        "任务空间"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "beam-return",
+        "note": "each job's beam"
+      },
+      {
+        "id": "check-gate",
+        "note": "next: the result is checked"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The link into a constellation lands on the drop; the labels must already be settled by then.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "连成星座要落在落拍上；那之前标签必须已经停稳。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      20,
+      44
+    ],
+    "sec120": [
+      10,
+      22
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderConst; sched.js constellation; plan.js CONST"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "keynote"
+  ],
+  "entry": "scene/job-constellation/brick.js",
+  "card": "scene/job-constellation/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}
