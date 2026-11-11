@@ -1,0 +1,144 @@
+{
+  "id": "sky-gather",
+  "category": "scene",
+  "name": {
+    "en": "Sky gather",
+    "zh": "扫星收束"
+  },
+  "summary": {
+    "en": "One thread gathers everything (the climax): the spine retracts into the mascot, the thread sweeps the sky catching every star, straightens, the caught stars ride it into its end, and that point opens into the task panel (one row \"needs you\" in the accent's ink); a nudge hangs on the tether; then the thread lies flat as the baseline of the claim and its three words, and winds back into the mascot.",
+    "zh": "一根线收回一切（高潮）：主干缩回吉祥物，线在夜空扫过、接住每一颗星，拉直，接住的星顺着线流进末端，那个点展开成任务面板（只有一行“需要你”用强调色的墨色）；系绳上挂一句提醒；然后线平躺成主张的基线，三个词依次落下，线再缠回吉祥物。"
+  },
+  "fits": "The climax and claim of a stream film: everything sent out comes back to one panel with one thing for the user.",
+  "notFor": "A film that has not sent stars out; a claim longer than one line.",
+  "select": {
+    "intent": {
+      "en": "Everything comes back to one place, and only one thing in it needs the user.",
+      "zh": "一切回到一处，其中只有一件需要用户。"
+    },
+    "content": {
+      "en": "A caption, a panel (title and 2–4 rows, one marked needs), a nudge, a claim (one line) and three words; optional: the panel's tabs, group headers and row times and its title as a space chip (ui-kit), the \"needs you\" grey until the alert, and a second chapter line after the alert; \"needs you\" in the look's warn role.",
+      "zh": "一句字幕、一个面板（标题和 2–4 行，其中一行标“需要”）、一句提醒、一句主张（一行）和三个词；可选：面板的页签、分组标题、行尾时间和空间头部（ui-kit），“需要你处理”在提示前保持灰色，以及提醒之后的第二句章节句；“需要你处理”用样式的 warn 角色。"
+    },
+    "fits": {
+      "zh": "stream 片的高潮和主张：派出去的一切回到一个面板，里面只有一件要用户处理。"
+    },
+    "notFor": {
+      "zh": "之前没派出星的片子；超过一行的主张。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "claim"
+    ],
+    "subjects": [
+      "abstract",
+      "ui",
+      "title"
+    ],
+    "moods": [
+      "cinematic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "climax",
+        "gather",
+        "panel",
+        "needs you",
+        "claim",
+        "sweep",
+        "stars",
+        "tabs",
+        "groups",
+        "warn"
+      ],
+      "zh": [
+        "高潮",
+        "收拢",
+        "面板",
+        "需要你",
+        "主张",
+        "扫掠",
+        "星",
+        "页签",
+        "分组",
+        "警示色"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "star-sweep",
+        "note": "its sweep"
+      },
+      {
+        "id": "caret-fall",
+        "note": "the same idea as the thread lying flat under the claim"
+      },
+      {
+        "id": "point-lockup",
+        "note": "next"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Exactly one row needs the user: the accent's ink appears once in the film, here.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "只有一行需要用户：强调色的墨色全片只出现这一次，就在这里。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "peak",
+  "duration": {
+    "beats": [
+      20,
+      36
+    ],
+    "sec120": [
+      10,
+      18
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderClose; sched.js close; plan.js GATHER"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/sky-gather/brick.js",
+  "card": "scene/sky-gather/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

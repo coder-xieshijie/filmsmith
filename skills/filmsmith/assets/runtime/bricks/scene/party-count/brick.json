@@ -1,0 +1,126 @@
+{
+  "id": "party-count",
+  "category": "scene",
+  "name": {
+    "en": "Parties and count",
+    "zh": "双方与计数"
+  },
+  "summary": {
+    "en": "Two parties in cards and the shared ruler between them, then a big counter steps to N, the camera pushing in on the count, a meta column, and a ticker of the counted items with their verdict.",
+    "zh": "两张卡片上的双方和它们之间共用的尺子，然后大计数器一步步走到 N，镜头推近计数，旁边一列补充信息，底部滚动条重复被数的条目和结论。"
+  },
+  "fits": "A comparison that ends in a number: two machines, two teams, before and after, all checked against one thing.",
+  "notFor": "More than 16 counted items; a comparison without a shared ruler; numbers that are not counts.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Prove agreement by counting: both sides checked against the same thing, one at a time, until the number lands.",
+      "zh": "用计数证明一致：双方对着同一个标准逐项核对，直到数字落定。"
+    },
+    "content": {
+      "en": "The header, left and right parties (label, name, desc, ≤ 3 items), the shared middle (label, name, desc), the counted items (≤ 16) with a label and verdict, ≤ 3 meta lines.",
+      "zh": "页眉、左右双方（标签、名称、说明、≤ 3 条）、中间共用项（标签、名称、说明）、被数的条目（≤ 16）及标签和结论、≤ 3 行补充。"
+    },
+    "fits": {
+      "zh": "以一个数字结尾的对比：两台机器、两个团队、改前改后，都对照同一个标准。"
+    },
+    "notFor": {
+      "zh": "超过 16 个计数条目；没有共同标准的对比；不是计数的数字。"
+    },
+    "roles": [
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "number",
+      "cards",
+      "metric"
+    ],
+    "moods": [
+      "technical",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "compare",
+        "counter",
+        "parties",
+        "verdict",
+        "ticker",
+        "push-in"
+      ],
+      "zh": [
+        "对比",
+        "计数器",
+        "双方",
+        "结论",
+        "滚动条",
+        "推近"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hub-flow",
+        "note": "the flow it checks"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The counter steps through whole numbers only; digits never flicker through other digits."
+      ],
+      "zh": [
+        "计数器只走整数；数字不会闪过别的数字。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      20
+    ],
+    "sec120": [
+      3,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.compare; events.js TIMING.compare"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/party-count/brick.js",
+  "card": "scene/party-count/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

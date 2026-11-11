@@ -1,0 +1,124 @@
+{
+  "id": "section-cut",
+  "category": "scene",
+  "name": {
+    "en": "Section cut",
+    "zh": "剖面"
+  },
+  "summary": {
+    "en": "An artefact and the check on it: two oblique boxes cut by a section line, notes off the cut, a dimension repeating the check, the output box, and an inspection stamp in the line colour.",
+    "zh": "一个产物和对它的检查：两个斜投影方框被剖切线切开，剖面旁引出注释，尺寸线上重复检查结果，输出方框，再加一枚线条色的检验章。"
+  },
+  "fits": "A sheet about what the product produces and how a machine verifies it: an archive, a build, a package.",
+  "notFor": "Processes (use lap-loop); more than two parts; checks a person makes (use detail-confirm).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Open the artefact like a section drawing so its insides are evidence, and certify it in the machine's colour.",
+      "zh": "像剖面图那样切开产物，让内里成为证据，再用机器的颜色加以证明。"
+    },
+    "content": {
+      "en": "Label, title, sub, two parts (name, description, up to two lines), the cut label, 1–2 notes, a dimension (code), the output, a stamp.",
+      "zh": "标签、标题、副标题、两个部件（名称、说明、最多两行）、剖切标签、1–2 条注释、尺寸（代码）、输出、印章。"
+    },
+    "fits": {
+      "zh": "讲产品产出什么、机器怎么验证的一张图：归档、构建、软件包。"
+    },
+    "notFor": {
+      "zh": "流程（用 lap-loop）；超过两个部件；人做的检查（用 detail-confirm）。"
+    },
+    "roles": [
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "diagram",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "section A-A",
+        "cutaway",
+        "oblique",
+        "inspection stamp",
+        "checksum",
+        "artefact"
+      ],
+      "zh": [
+        "剖面 A-A",
+        "剖视",
+        "斜投影",
+        "检验章",
+        "校验和",
+        "产物"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "detail-confirm",
+        "note": "the person's decision before it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The dimension is code (a hash): keep it Latin and ≤ 28 characters or it collides with the output box."
+      ],
+      "zh": [
+        "尺寸是代码（哈希），保持拉丁字符且 ≤ 28 个，否则会撞到输出方框。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      18
+    ],
+    "sec120": [
+      5,
+      9
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/section.js; choreography.js CUES.section"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/section-cut/brick.js",
+  "card": "scene/section-cut/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

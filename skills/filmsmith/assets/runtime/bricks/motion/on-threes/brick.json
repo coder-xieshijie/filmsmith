@@ -1,0 +1,143 @@
+{
+  "id": "on-threes",
+  "category": "motion",
+  "name": {
+    "en": "On threes",
+    "zh": "作画式节奏变拍"
+  },
+  "summary": {
+    "en": "Runs any motion brick on threes (each pose held three frames) until a switch, marks the switch with two inverted impact frames, then lets the rest run smooth on ones.",
+    "zh": "套在任一部件外：开头一拍三（每个姿势停三帧，像手绘作画），到切换点闪两帧反相冲击帧，之后一拍一逐帧丝滑。"
+  },
+  "fits": "A climax that should feel faster than what came before; hand-drawn, anime or zine styles; one moment per film.",
+  "notFor": "Calm, continuous films (the steps read as dropped frames); dom bricks (canvas only for now).",
+  "select": {
+    "intent": {
+      "en": "The climax feels faster than anything before it: a hand-drawn, stepping move suddenly runs smooth, and the switch itself is the high point.",
+      "zh": "高潮显得比之前任何时候都快：先是手绘式一顿一顿，突然变成逐帧丝滑，换拍这一下本身就是看点。"
+    },
+    "content": {
+      "en": "Wraps one canvas motion brick with a large move (each 3-frame step ≥ 30 px) and the moment to switch; no text of its own.",
+      "zh": "套在一块位移够大的 canvas 部件外（每 3 帧一步至少 30 px），给出切换时刻；自身不带文字。"
+    },
+    "fits": {
+      "zh": "要比前面更快的高潮；手绘、动画、zine 风格；一支片一次。"
+    },
+    "notFor": {
+      "zh": "安静连续的片子（顿挫读成掉帧）；dom 部件（目前只支持 canvas）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax"
+    ],
+    "subjects": [
+      "abstract",
+      "cards"
+    ],
+    "moods": [
+      "playful",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "on threes",
+        "on ones",
+        "sakuga",
+        "limited animation",
+        "impact frames",
+        "frame rate shift",
+        "anime timing"
+      ],
+      "zh": [
+        "作画式节奏变拍",
+        "一拍三",
+        "一拍一",
+        "作画",
+        "冲击帧",
+        "手翻书",
+        "日式动画"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Each step on threes must move ≥ 30 px; small steps read as dropped frames.",
+        "Mark the switch (a hit sound or a label); otherwise viewers only feel \"it got faster\".",
+        "One time-manipulator per shot: not with time-freeze or hit-stop."
+      ],
+      "zh": [
+        "一拍三时每步位移要 ≥ 30 px；小步读成渲染掉帧。",
+        "切换点要有标记（一声打点或角标）；否则观众只觉得“变快了”。",
+        "一个镜头只能有一个时间操纵者：别和 time-freeze、顿帧叠用。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "sakuga-timing-shift",
+        "name": "作画式节奏变拍",
+        "card": "作画式节奏变拍",
+        "summary": "一拍三转一拍一——元素先以每 3 帧一步的手翻书顿挫移动，高潮瞬间切成逐帧丝滑冲刺，帧率量化的突变本身就是看点",
+        "use": "单元素的强调性位移（卡片入场、指标冲线）；需要\"手工感→高潮爆发\"反差的段落",
+        "energy": "中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/sakuga-timing-shift.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      2,
+      8
+    ]
+  },
+  "tier": "T1",
+  "family": "edit-cut",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "sakuga-timing-shift",
+        "path": "demos/rhythm/sakuga-timing-shift/SakugaTimingShift.tsx",
+        "card": "references/shots/rhythm/sakuga-timing-shift.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/on-threes/brick.js",
+  "card": "motion/on-threes/CARD.md",
+  "compare": {
+    "ssimMean": 0.6855,
+    "ssimMin": 0.1189,
+    "ssimDrop": 0.6041,
+    "trackDevPx": 613.9,
+    "progressRmse": 0.2414,
+    "eventFrames": 1,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

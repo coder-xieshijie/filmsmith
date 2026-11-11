@@ -1,0 +1,138 @@
+{
+  "id": "anchor-ask",
+  "category": "scene",
+  "name": {
+    "en": "Anchor ask",
+    "zh": "锚点提问"
+  },
+  "summary": {
+    "en": "A question asked one word per beat at one fixed anchor; each word opens on the next ground of a lightness ramp through an aperture while its machine form types into the query line.",
+    "zh": "问题一拍一个词落在同一个锚点上；每个词通过一个几何开口换到明度阶梯的下一级底色，同时它的机器写法打进下方查询行。"
+  },
+  "fits": "The question of a film that answers it: the hook (the first word slams on beat 1) or the turn after an invert.",
+  "notFor": "Copy over five words a state; statements that are not a question or a query; long words that would need to move the anchor.",
+  "select": {
+    "intent": {
+      "en": "The eye never moves: one word per beat on the same spot, the ground flipping under it, so the question lands as rhythm and the query under it says it is real.",
+      "zh": "视线不用移动：同一位置一拍一个词，底色在下面翻，问题变成节奏；下方的查询行说明它是真的。"
+    },
+    "content": {
+      "en": "2–6 words or short phrases (≤ 14 chars, ≤ 5 words a state), each with an optional machine form (≤ 34 chars of code).",
+      "zh": "2–6 个词或短语（每个 ≤ 5 字，一个状态 ≤ 5 个词），每个可带一段机器写法（≤ 34 个字符的代码）。"
+    },
+    "fits": {
+      "zh": "要回答一个问题的片子里的提问：钩子（第一个词在第 1 拍砸下）或反转后的提问。"
+    },
+    "notFor": {
+      "zh": "一个状态超过五个词；不是问题或查询的陈述；长到要挪动锚点的词。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "problem",
+      "turn"
+    ],
+    "subjects": [
+      "title",
+      "text",
+      "code"
+    ],
+    "moods": [
+      "energetic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "one word per beat",
+        "fixed anchor",
+        "aperture",
+        "colour ramp",
+        "query line",
+        "kinetic question"
+      ],
+      "zh": [
+        "一拍一词",
+        "固定锚点",
+        "几何开口",
+        "色阶翻底",
+        "查询行",
+        "动态提问"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hop-search",
+        "note": "the question run over the candidates"
+      },
+      {
+        "id": "query-line",
+        "note": "the line under the words"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Never move the anchor for a long word: split the question into two asks.",
+        "Do not crossfade grounds: every change is an aperture or an invert."
+      ],
+      "zh": [
+        "不要为长词挪锚点：把问题拆成两段提问。",
+        "底色不许淡入淡出：每次换底都是开口或反白。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      2,
+      12
+    ],
+    "sec120": [
+      1,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/choreo.js askPlan, film.js paintAsk"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "slot-sentence",
+      "note": "there a stem holds and one slot cycles; here every word replaces the last at one anchor and the ground flips"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/anchor-ask/brick.js",
+  "card": "scene/anchor-ask/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

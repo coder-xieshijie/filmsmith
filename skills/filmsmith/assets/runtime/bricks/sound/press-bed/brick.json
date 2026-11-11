@@ -1,0 +1,92 @@
+{
+  "id": "press-bed",
+  "category": "sound",
+  "name": {
+    "en": "Press bed",
+    "zh": "印刷机音乐床"
+  },
+  "summary": {
+    "en": "The halftone sound: a D minor print-shop bed over a 3-3-2 press ostinato, a stamp per word, a thud as the anchor lands and strikes, silence before the pull-back.",
+    "zh": "halftone 的声音：D 小调印刷车间音乐床，底下是 3-3-2 节奏的印刷机，每个词一声盖章，锚点落定与击出各一声闷响，拉远前静默。"
+  },
+  "fits": "Print-styled launches; anything with one recurring brand piece.",
+  "notFor": "Screen-based demos; soft films.",
+  "select": {
+    "intent": {
+      "en": "The rhythm of a printing press sets the film in a print shop, and its silence makes the pull-back land.",
+      "zh": "印刷机的节奏把片子放进印刷车间，它的静默让拉远落得住。"
+    },
+    "content": {
+      "en": "A film on the arc of its style; event kinds from the scenes' plans.",
+      "zh": "按其风格骨架编排的片子；事件种类来自各场景的 plan。"
+    },
+    "fits": {
+      "zh": "印刷风格的发布片；有一个反复出现的品牌件的片子。"
+    },
+    "notFor": {
+      "zh": "屏幕演示；柔和的片。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "mechanical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "press",
+        "print shop",
+        "3-3-2",
+        "D minor",
+        "stamp"
+      ],
+      "zh": [
+        "印刷机",
+        "印刷车间",
+        "3-3-2 节奏",
+        "D 小调",
+        "盖章"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Give the push-in before the lock-up a rest section: without that silence the pull-back does not land."
+      ],
+      "zh": [
+        "落版前的推近要给一段 rest：没有这段静默，拉远落不住。"
+      ]
+    }
+  },
+  "duration": null,
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/score.mjs"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "sound/press-bed/sound.js",
+  "card": "sound/press-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

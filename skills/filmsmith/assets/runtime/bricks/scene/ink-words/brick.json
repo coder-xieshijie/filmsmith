@@ -1,0 +1,131 @@
+{
+  "id": "ink-words",
+  "category": "scene",
+  "name": {
+    "en": "Ink and words",
+    "zh": "水墨与字"
+  },
+  "summary": {
+    "en": "The ink link: the full-height line dissolves into two marbled dyes curling outward, the centre kept darker, and up to three serif words rise over it.",
+    "zh": "水墨环节：满屏高的那条线化开成两股向外卷的大理石纹染料，中心保持较暗，最多三个衬线词依次升起。"
+  },
+  "fits": "A reel's output or render step said in two or three words.",
+  "notFor": "Films without a WebGL host; more than three words.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Say what the output is in a few words over something only code could draw.",
+      "zh": "在只有代码画得出的东西上，用几个词说出产出是什么。"
+    },
+    "content": {
+      "en": "One to three words (≤ 14 characters).",
+      "zh": "一到三个词（≤ 6 字）。"
+    },
+    "fits": {
+      "zh": "作品集里的输出或渲染一步，用两三个词说出来。"
+    },
+    "notFor": {
+      "zh": "没有 WebGL 的宿主；超过三个词。"
+    },
+    "roles": [
+      "claim",
+      "rest"
+    ],
+    "subjects": [
+      "abstract",
+      "text"
+    ],
+    "moods": [
+      "cinematic",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "ink",
+        "marble",
+        "fluid",
+        "serif",
+        "words",
+        "WebGL"
+      ],
+      "zh": [
+        "水墨",
+        "大理石纹",
+        "流体",
+        "衬线",
+        "词",
+        "WebGL"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "edit-tracks",
+        "note": "its playhead"
+      },
+      {
+        "id": "sheet-flood",
+        "note": "the flood follows"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "A Chinese phrase with no word break rises as one: the segmenter splits 纯代码 into 纯 / 代码.",
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "没有分词的中文会整句一起升起：分词器把“纯代码”分成“纯 / 代码”。",
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      4,
+      8
+    ],
+    "sec120": [
+      2,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js ink; shots.js inkState; gl.js ink"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/ink-words/brick.js",
+  "card": "scene/ink-words/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

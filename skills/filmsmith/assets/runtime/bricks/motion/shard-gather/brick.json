@@ -1,0 +1,169 @@
+{
+  "id": "shard-gather",
+  "category": "motion",
+  "name": {
+    "en": "Shard gather",
+    "zh": "碎片聚合"
+  },
+  "summary": {
+    "en": "A picture assembles from shards that fly in from scattered 3D poses and click into place from the centre out; or it shatters and flies off the frame.",
+    "zh": "一张画面切成 5×5 碎片，从三维散乱姿态按中心向外的波纹逐圈飞回原位、咔哒入槽；或整面碎开飞出画面。"
+  },
+  "fits": "Chaos to form: the first shot of an opening revealing a poster or product picture; reversed (out), a hard exit from a held picture.",
+  "notFor": "Pictures whose detail must be read while moving; light, flat styles with no depth; more than once a film.",
+  "energy": "high",
+  "duration": {
+    "beats": 6.303333333333333,
+    "range": [
+      4,
+      11
+    ]
+  },
+  "tier": "T2",
+  "family": "shape",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any dark",
+      "exhibit"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "plakat",
+      "halftone",
+      "swiss"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "fracture",
+        "path": "demos/opening/fracture/Fracture.tsx",
+        "card": "references/shots/opening/fracture.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "mosaic-assemble",
+      "note": "tiles grow in place from points (2D); shard-gather flies 3D shards in from scattered poses"
+    },
+    {
+      "id": "explode-z",
+      "note": "a page's parts rise along its normal and return; shard-gather scatters a picture's grid of tiles in every axis"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Film 'the product takes shape' as a physical event: a whole picture grows out of disorder before the viewer's eyes; reversed, it clears the screen by flying apart, not fading.",
+      "zh": "把“产品成形”拍成一件物理事件：观众看着一整面画面从无序中长出来；反着用时，画面是被炸飞出画，而不是淡掉。"
+    },
+    "content": {
+      "en": "One picture (a poster, a product picture or a title card) painted into a rect, split into 5 × 5 tiles; keep any logo inside one tile.",
+      "zh": "一张画面（海报、产品图或标题卡），画进一个矩形、切成 5 × 5 块；标志要整个落在一块里。"
+    },
+    "fits": {
+      "zh": "从混沌到成形：开场第一镜揭示一张海报或产品图；反向（out）作为一张定格画面的硬退场。"
+    },
+    "notFor": {
+      "zh": "运动中就要读清细节的画面；没有纵深的浅色平面风格；一支片用两次以上。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "hook",
+      "climax",
+      "lockup"
+    ],
+    "subjects": [
+      "image",
+      "title"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "fracture",
+        "shatter",
+        "shards",
+        "assemble",
+        "chaos to order",
+        "tiles fly in",
+        "poster reveal",
+        "explode out"
+      ],
+      "zh": [
+        "碎片聚合",
+        "碎片聚合飞散",
+        "碎片飞散",
+        "从混沌到成形",
+        "瓦片聚合",
+        "海报揭示",
+        "炸开",
+        "硬转场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "slam-drop",
+        "note": "a claim landing on the assembled poster"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Exit by flying out, not by fading; a fade reads as vanishing and the physics is lost.",
+        "Do not let a logo or key word straddle a tile seam; the seam cuts a hairline through it and reads as a broken picture.",
+        "In through, the hold is the only reading window; longer copy needs a longer hold before the shards leave."
+      ],
+      "zh": [
+        "退场靠位移飞出，不要淡出；淡出读作“消失”而非“飞走”，物理感尽失。",
+        "标志或关键字别跨拼缝；拼缝会切出一条细缝，读作坏图。",
+        "through 式里停顿段是唯一的读字窗口；文案更长要先拉长停顿再让碎片起飞。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "fracture",
+        "name": "碎片聚合飞散",
+        "card": "碎片聚合飞散",
+        "summary": "5×5 瓦片从 3D 碎片态按中心波纹逐圈聚合成整面海报，停一拍亮字，随后全部碎片背离中心加速旋转飞出画面",
+        "use": "开场第一镜\"从混沌到成形\"的品牌/海报揭示；倒放或只取后半可作硬转场",
+        "energy": "高（两头高能、中段静止，适合压 BGM 重音起收）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/fracture.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/shard-gather/brick.js",
+  "card": "motion/shard-gather/CARD.md",
+  "compare": {
+    "ssimMean": 0.6955,
+    "ssimMin": 0.5682,
+    "ssimDrop": 0.222,
+    "trackDevPx": 2727.9,
+    "progressRmse": 0.0604,
+    "eventFrames": 11,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

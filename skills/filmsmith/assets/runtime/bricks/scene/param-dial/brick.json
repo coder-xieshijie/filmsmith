@@ -1,0 +1,156 @@
+{
+  "id": "param-dial",
+  "category": "scene",
+  "name": {
+    "en": "Param dial",
+    "zh": "参数拨盘"
+  },
+  "summary": {
+    "en": "One parameter drives a layout: a big readout over a dial ruler, a row of blocks under a selection frame with measured gaps; the value draws back, swings out, holds and springs home, and everything follows in the same frame.",
+    "zh": "一个参数带动整块布局：大读数和刻度拨盘，下面一排带选框和间距标注的块；数值先后撤、再甩出、停一拍、弹回，所有依赖它的东西同帧跟着动。"
+  },
+  "fits": "Showing that one setting controls many things at once, in a design, low-code or configuration demo: change one number and the layout follows in the same frame.",
+  "notFor": "Several parameters; values the viewer cannot see in the layout; light, decorative passages; audiences who do not know design-tool selection frames.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      10
+    ],
+    "sec120": [
+      5,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "autolayout-gap-dial",
+        "path": "demos/interaction/autolayout-gap-dial/AutolayoutGapDial.tsx",
+        "card": "references/shots/interaction/autolayout-gap-dial.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "digit-roll",
+      "note": "a number changing as an odometer; param-dial is a live value driving a layout"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Film the cause, not just the before and after: one number moves and everything that depends on it moves in the same frame, so the viewer believes the parameter really drives the layout.",
+      "zh": "拍出因果，而不只是前后对比：一个数字在动，所有依赖它的东西同帧跟着动，观众才相信真是这个参数在驱动布局。"
+    },
+    "content": {
+      "en": "One parameter with its unit and values (rest, peak), a label (en ≤ 18 chars, zh ≤ 8), a layer name (en ≤ 14, zh ≤ 6) and 3–6 block labels (en ≤ 12, zh ≤ 4), the first active.",
+      "zh": "一个参数及其单位和取值（常值、峰值），一个标签（英文 ≤ 18 字符，中文 ≤ 8 字），一个图层名（英文 ≤ 14，中文 ≤ 6），3–6 个块标签（英文 ≤ 12，中文 ≤ 4），第一个为当前项。"
+    },
+    "fits": {
+      "zh": "设计、低代码或配置类演示里，表现一个设置同时控制很多东西：改一个数，布局同帧跟着变。"
+    },
+    "notFor": {
+      "zh": "多个参数；在布局里看不出来的数值；轻松装饰性的段落；不认识设计工具框选的受众。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "number"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "auto layout",
+        "gap dial",
+        "parameter driven",
+        "design tool",
+        "spacing",
+        "live value",
+        "selection handles",
+        "low-code"
+      ],
+      "zh": [
+        "参数拨盘",
+        "间距拨盘布局",
+        "参数驱动布局",
+        "设计工具",
+        "改一个数界面跟着动",
+        "框选手柄",
+        "间距标注",
+        "低代码"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "chip-select",
+        "note": "a choice whose result is a number, after the dial"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The readout and the layout must come from the same value on the same frame; one frame apart breaks the trust.",
+        "Turn one parameter per shot; two or more read as random tweaking.",
+        "If the picture already shows a real inspector field, drop the big readout so the value is not reported twice."
+      ],
+      "zh": [
+        "读数和布局必须来自同一个值、同一帧；差一帧，“参数驱动”的信任就碎了。",
+        "一镜只拨一个参数；两个以上读作乱调。",
+        "画面里已有真实的检查器数值框时，去掉大读数，别重复报数。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "autolayout-gap-dial",
+        "name": "间距拨盘布局",
+        "card": "间距拨盘布局",
+        "summary": "间距拨盘驱动布局——一排链接块带框选描边+缝隙间距标注，徽章数字逐格跳动、块被参数实时推开再弹簧回弹归位；\"参数驱动布局\"的可视化",
+        "use": "设计工具/低代码产品的\"改一个数、界面跟着动\"卖点镜头；\"用设计工具语义做包装\"的品类语言",
+        "energy": "中（工具理性型，爽点在数字与位移的锁定同步）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/autolayout-gap-dial.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/param-dial/brick.js",
+  "card": "scene/param-dial/CARD.md",
+  "compare": {
+    "ssimMean": 0.795,
+    "ssimMin": 0.7872,
+    "ssimDrop": 0.014,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

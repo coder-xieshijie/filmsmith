@@ -1,0 +1,153 @@
+{
+  "id": "sheen-sweep",
+  "category": "motion",
+  "name": {
+    "en": "Sheen sweep",
+    "zh": "单点扫光"
+  },
+  "summary": {
+    "en": "One diagonal highlight crosses a dark card once, clipped to its corners, and its top edge catches the light.",
+    "zh": "一道斜向高光带在深色主角卡上缓缓扫过一次，被圆角裁住，卡的上沿跟着亮一下。"
+  },
+  "fits": "Crowning the one hero card while it holds still: the plan, the product card, the result.",
+  "notFor": "Light grounds or light cards (screened light is invisible there); more than one card; more than twice a film counting all light effects.",
+  "select": {
+    "intent": {
+      "en": "A silent crowning: one pass of light over the hero card says \"this is the one\" without decorating anything else.",
+      "zh": "一次无声的加冕：一道光扫过主角卡一次，说“就是它”，别的都不装饰。"
+    },
+    "content": {
+      "en": "One dark hero card in the scene (its rect), holding still; no text.",
+      "zh": "场景里一张静止的深色主角卡（给出位置框）；不需要文字。"
+    },
+    "fits": {
+      "zh": "主角卡静止时给它加冕：方案卡、产品卡、结果卡。"
+    },
+    "notFor": {
+      "zh": "浅色底或浅色卡（叠加的光在上面看不见）；不止一张卡；连同其他光效全片超过两次。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "lockup",
+      "claim"
+    ],
+    "subjects": [
+      "cards"
+    ],
+    "moods": [
+      "elegant",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "sheen",
+        "gloss",
+        "light sweep",
+        "specular",
+        "shine",
+        "hero card",
+        "crown"
+      ],
+      "zh": [
+        "单点扫光",
+        "光影动效",
+        "扫光",
+        "高光带",
+        "金属光泽",
+        "主角卡加冕",
+        "流光"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Four rules or it looks cheap: one sweep, one hero card, clipped to its corners, once only.",
+        "Dark card or dark ground only; on light it is invisible.",
+        "All light effects together at most twice a film."
+      ],
+      "zh": [
+        "四条约束缺一就廉价：单点、主角卡、圆角裁剪、只扫一次。",
+        "只用于深色卡或深底，浅色上看不见。",
+        "全片光效合计最多两次。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "sheen-sweep",
+        "name": "单点扫光",
+        "card": "光影动效",
+        "summary": "深墨卡上 45° 高光带 translateX 扫一次，overflow hidden 圆角裁剪",
+        "use": "把光当另一种笔触（扫/擦）：暗场标题揭示（A）、主角卡加冕（B）",
+        "energy": "A 中 / B 低",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/sheen-sweep.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 2,
+    "range": [
+      2,
+      3
+    ]
+  },
+  "tier": "T0",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any dark"
+    ],
+    "avoid": [
+      "ink",
+      "halftone",
+      "dossier",
+      "plakat"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "sheen-sweep",
+        "path": "demos/effects/light-play-moves/SheenSweepRetry.tsx",
+        "card": "references/shots/effects/light-play-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "lamp-reveal",
+      "note": "the light as camera and edit (reveals and hides a scene); sheen-sweep is a gloss on one object"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/sheen-sweep/brick.js",
+  "card": "motion/sheen-sweep/CARD.md",
+  "compare": {
+    "ssimMean": 0.2784,
+    "ssimMin": 0.2666,
+    "ssimDrop": 0.0026,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

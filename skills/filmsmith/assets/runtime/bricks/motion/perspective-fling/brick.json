@@ -1,0 +1,158 @@
+{
+  "id": "perspective-fling",
+  "category": "motion",
+  "name": {
+    "en": "Perspective fling",
+    "zh": "透视甩入"
+  },
+  "summary": {
+    "en": "A card is flung in from the side in a fish-eye perspective that flattens as it brakes, then snaps flat with an overshoot and focus lines.",
+    "zh": "卡片带着鱼眼般的夸张透视从侧面甩进来，减速时透视收平，落定时过冲一下“啪”地拍平，周围炸一圈集中线。"
+  },
+  "fits": "One hero card arriving with flair: the launch card, the release, the feature everyone came for.",
+  "notFor": "Serious or editorial films; more than one per film; cards that must be read while they fly (the text lands with the card).",
+  "select": {
+    "intent": {
+      "en": "The hero card arrives with flair: the bent lens says speed and nearness, and the snap flat says \"it's here\".",
+      "zh": "主角卡潇洒登场：夸张透视说的是快和近，“啪”地拍平说的是“它来了”。"
+    },
+    "content": {
+      "en": "One card in the scene (its rect), e.g. a launch or KPI card; its text is read only after it lands.",
+      "zh": "场景里的一张卡（给出位置框），如发布卡、KPI 卡；卡上的字落定后才读。"
+    },
+    "fits": {
+      "zh": "一张主角卡潇洒登场：发布卡、新版本、大家等着看的那个功能。"
+    },
+    "notFor": {
+      "zh": "严肃或编辑感的片子；一支片用两次以上；飞行途中就要读字的卡（字随卡一起落定）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "hook"
+    ],
+    "subjects": [
+      "cards"
+    ],
+    "moods": [
+      "energetic",
+      "playful",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "Kanada perspective",
+        "fling",
+        "fish-eye",
+        "snap flat",
+        "anime",
+        "hero card",
+        "slam entrance"
+      ],
+      "zh": [
+        "金田式透视甩正",
+        "砸入式登场",
+        "透视甩入",
+        "鱼眼透视",
+        "动漫金田流",
+        "主角卡登场",
+        "拍平"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Its shake counts as the shot's one source of shake: no other slam or impact in the same shot.",
+        "At most two slams a film counting slam-drop; more and none of them hit.",
+        "The snap wants a \"pak\" on the same frame; silent, it loses its accent."
+      ],
+      "zh": [
+        "它的震屏算这一镜唯一的震源：同镜头不再叠别的砸入或冲击。",
+        "连同 slam-drop 全片砸入最多两次，多了每次都不响。",
+        "拍平那一帧要同帧配一声“啪”，无声就丢了重音。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "kanada-perspective-snap",
+        "name": "金田式透视甩正",
+        "card": "砸入式登场",
+        "summary": "perspective 300→1500px + rotate3d 58°→0 + scale 1.7→1 甩入 18f，末 4f 过冲 +5° 弹平，长斜影收正",
+        "use": "主角卡/KPI 卡的重拳入场；impact-feedback 管落位后的反馈，本卡管入场本身就是冲击",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/kanada-perspective-snap.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 2.4,
+    "range": [
+      2,
+      3
+    ]
+  },
+  "tier": "T2",
+  "family": "horizontal",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "pulse",
+      "plakat"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "blueprint",
+      "stream",
+      "split"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "kanada-perspective-snap",
+        "path": "demos/effects/slam-entrance-moves/KanadaPerspectiveSnap.tsx",
+        "card": "references/shots/effects/slam-entrance-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "slam-drop",
+      "note": "the same weight class on the depth axis: dropped from the camera"
+    },
+    {
+      "id": "parallax-slide",
+      "note": "a calm slide in; no lens, no snap"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/perspective-fling/brick.js",
+  "card": "motion/perspective-fling/CARD.md",
+  "compare": {
+    "ssimMean": 0.4615,
+    "ssimMin": 0.4033,
+    "ssimDrop": 0.079,
+    "trackDevPx": 5,
+    "progressRmse": 0.0097,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

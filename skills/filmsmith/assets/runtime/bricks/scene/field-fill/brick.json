@@ -1,0 +1,164 @@
+{
+  "id": "field-fill",
+  "category": "scene",
+  "name": {
+    "en": "Field fill",
+    "zh": "逐字段自建"
+  },
+  "summary": {
+    "en": "A detail card builds itself field by field as a fill cursor jumps ahead from slot to slot; one value is struck and replaced on the way.",
+    "zh": "一张详情卡像被逐字段自动填好：填充光标领先一格跳到下一个槽位，骨架让位给内容；途中一个数值被划掉、换成新值。"
+  },
+  "fits": "Showing structured extraction or autofill, or walking the viewer through what one item carries (picture, name, tags, a changed value, key lines, variants, an action).",
+  "notFor": "A list of many items (one card only); a real product page shown as a screenshot; a cut that must land on one big moment (the card is a run of small events).",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      13
+    ],
+    "sec120": [
+      5,
+      6.5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "product-card-progressive-assemble",
+        "path": "demos/ui-entrance/product-card-progressive-assemble/ProductCardProgressiveAssemble.tsx",
+        "card": "references/shots/ui-entrance/product-card-progressive-assemble.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "reticle-lock",
+      "note": "corners bite onto one target; field-fill cursor hops through every slot of a card and morphs between them"
+    },
+    {
+      "id": "list-fill",
+      "note": "rows of a list arrive into a page; field-fill fills the fields of one card"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Turn 'a card appears' into 'a form is being filled': the eye is led through what one item carries in order, and the one value struck and replaced is the scene's single change of meaning.",
+      "zh": "把“出现一张卡”变成“一张表正在被填写”：视线被领着按顺序走一遍一个条目的信息结构，途中被划掉换新的那个数值，是整屏唯一的语义变化。"
+    },
+    "content": {
+      "en": "One item: an optional picture, an eyebrow (en ≤ 28 chars, zh ≤ 12), a one-word name (en ≤ 10, zh ≤ 5), 2–3 tags, an old and a new value (≤ 6 chars) with a chip, 2–3 key lines (en ≤ 38, zh ≤ 18), a swatch label and a call to action.",
+      "zh": "一个条目：可选一张图、一行眉标（英文 ≤ 28 字符，中文 ≤ 12 字）、一个词的名称（英文 ≤ 10，中文 ≤ 5）、2–3 个标签、一旧一新两个数值（≤ 6 字符）加一枚小标、2–3 行要点（英文 ≤ 38，中文 ≤ 18）、色卡说明和一个按钮文字。"
+    },
+    "fits": {
+      "zh": "表现结构化抽取或自动填写，或带观众过一遍一个条目带着哪些信息（图、名称、标签、一个改变的数值、要点、变体、操作）。"
+    },
+    "notFor": {
+      "zh": "很多项的列表（只放一张卡）；当作截图展示的真实产品页；需要落在一个大时刻上的镜头（这张卡是一串小事件）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "cards",
+      "cursor"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "autofill",
+        "structured extraction",
+        "progressive assemble",
+        "detail card",
+        "form filling",
+        "price strike",
+        "field by field",
+        "product card"
+      ],
+      "zh": [
+        "逐字段自建",
+        "字段逐个落位",
+        "自动填写",
+        "结构化抽取",
+        "详情卡",
+        "划价换新",
+        "填表",
+        "数据自己长出来"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hero-spotlight",
+        "note": "show the finished item as the one in focus"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the ~1.3 s slow push after the last field; it is the time to read the whole card, not dead air.",
+        "Key lines do not wrap; longer copy or Chinese must be refitted to size and line length or it overflows the card.",
+        "When the real item has more or fewer fields, re-space the timetable by field group; keep the struck value in the middle."
+      ],
+      "zh": [
+        "最后一个字段落定后约 1.3 秒的缓推是给观众通读整卡的，别当空白砍掉。",
+        "要点行不换行；更长的文案或中文要重配字号与行长，否则溢出卡边。",
+        "真实条目字段数变了，要按字段分组重排时间表；划价换新那一下留在中段。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "product-card-progressive-assemble",
+        "name": "字段逐个落位",
+        "card": "字段逐个落位",
+        "summary": "详情卡像被逐字段抓取般自建——一枚\"填充光标\"领先跳格，图→标题→分类 pill 依次 pop→原价出现后被划线降级、强调色新价 spring 跳出→正文逐行揭示且高亮块由左向右刷过→色卡点亮→按钮填满，整卡全程极慢 scale 前推",
+        "use": "商品/条目详情页的能力展示；\"结构化抽取\"\"自动填充\"\"数据自己长出来\"类叙事的主镜头",
+        "energy": "中（连续小事件密集排布，无单点爆发；靠前推保持推进感）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/product-card-progressive-assemble.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/field-fill/brick.js",
+  "card": "scene/field-fill/CARD.md",
+  "compare": {
+    "ssimMean": 0.8669,
+    "ssimMin": 0.8394,
+    "ssimDrop": 0.0852,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,103 @@
+{
+  "id": "anchor-mark",
+  "category": "prop",
+  "name": {
+    "en": "Anchor and mark",
+    "zh": "锚点与标志"
+  },
+  "summary": {
+    "en": "The product mark as a print object: the anchor in process-ink dots, the black plate in 45° dots, the field rings round it in mark space.",
+    "zh": "把产品标志当成印刷物：锚点是印刷色网点，黑版是 45° 网点，外圈是标志空间里的场圆环。"
+  },
+  "fits": "Any print-styled film with a mark that has one separable piece.",
+  "notFor": "Photographic logos; marks with gradients.",
+  "select": {
+    "intent": {
+      "en": "The brand piece is a printed object: process-ink dots on paper, the black plate round it.",
+      "zh": "品牌件是一件印刷物：纸上的印刷色网点，四周是黑版。"
+    },
+    "content": {
+      "en": "The mark as SVG paths in mark units (accent piece, ink plate, box, anchor box).",
+      "zh": "以标志单位给出的 SVG 路径（强调件、墨版、外框、锚点框）。"
+    },
+    "fits": {
+      "zh": "有一块可拆标志件的印刷风格片。"
+    },
+    "notFor": {
+      "zh": "照片式标志；带渐变的标志。"
+    },
+    "roles": [
+      "hook",
+      "lockup"
+    ],
+    "subjects": [
+      "logo"
+    ],
+    "moods": [
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "logo",
+        "mark",
+        "anchor",
+        "process ink",
+        "halftone logo"
+      ],
+      "zh": [
+        "标志",
+        "锚点",
+        "印刷色",
+        "网点标志"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "mark-pullback",
+        "note": "the scene that reveals it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The anchor always knocks out to paper, also on an ink ground."
+      ],
+      "zh": [
+        "锚点挖白总是挖到纸色，墨底上也一样。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/film.js (drawAnchor, drawMark, drawMarkRings), content.js mark"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/anchor-mark/brick.js",
+  "card": "prop/anchor-mark/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

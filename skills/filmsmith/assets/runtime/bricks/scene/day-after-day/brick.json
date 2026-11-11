@@ -1,0 +1,134 @@
+{
+  "id": "day-after-day",
+  "category": "scene",
+  "name": {
+    "en": "Day after day",
+    "zh": "一直用下去"
+  },
+  "summary": {
+    "en": "The days go on in one chat: a chat block unfolds from the spine and days scroll past in it, today's question gets an answer written from what was kept, the progress runs back along the three strands to the mascot, and a short line hangs on each card. Optional, between strand-cards and sky-gather; reads the same `film`.",
+    "zh": "日子在同一个对话里继续：对话块从竖线上展开，几天的对话从里面滚过，今天一问，回答来自记下的东西；进展沿三股线流回吉祥物，每张卡上挂一句。可选，接在 strand-cards 与 sky-gather 之间，读同一个 `film`。"
+  },
+  "fits": "After the cards: show that the product is used every day and keeps what matters (the chat does not break, nothing is forgotten, details come back).",
+  "notFor": "A film without the three cards before it; showing one day only (that is ask-to-star).",
+  "select": {
+    "intent": {
+      "en": "Show the product keeps going: days pass in one chat and it still knows where things stand.",
+      "zh": "证明产品一直用得下去：日子在同一个对话里过去，它仍然知道事情到哪了。"
+    },
+    "content": {
+      "en": "A caption and an optional sub-line, 2–5 days (a divider, an ask and an answer each, read at a glance), today's ask and answer, three short lines for the cards (≤ 34 characters / 14 Chinese characters); optional: one summary card's title, in place of the three cards, with rows of its own and the lines large.",
+      "zh": "一句字幕和可选的副句，2–5 天（每天一个分隔、一问一答，扫一眼）、今天的一问一答、三张卡各一句（≤ 34 字符 / 14 个汉字）；可选：一张汇总卡的标题，代替三张卡，卡里可带自己的行，三句可用大字。"
+    },
+    "fits": {
+      "zh": "三张卡之后：产品天天在用，要紧的事记得住（对话不断、不忘事、细节找得回）。"
+    },
+    "notFor": {
+      "zh": "前面没有三张卡的片子；只演一天（那是 ask-to-star）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "rest"
+    ],
+    "subjects": [
+      "ui",
+      "cards",
+      "timeline"
+    ],
+    "moods": [
+      "calm",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "every day",
+        "chat",
+        "memory",
+        "progress",
+        "continuity",
+        "days"
+      ],
+      "zh": [
+        "每天",
+        "对话",
+        "记忆",
+        "进展",
+        "持续",
+        "日子"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "strand-cards",
+        "note": "before it: the cards it hangs on"
+      },
+      {
+        "id": "sky-gather",
+        "note": "after it: the closing sweep"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The days are glances: keep each ask and answer to a few words; the reading belongs to the caption.",
+        "Pass the film's whole content as `film` (with the cards scene): the strands and cards it uses are that film's, and its cards scene must keep three cards (a film with fewer is refused)."
+      ],
+      "zh": [
+        "前几天的对话是扫一眼的：每句几个字就够，要读的是字幕。",
+        "把整片的 content 作为 `film` 传进来（含三张卡那场）：它用的线和卡就是那部片的，那场必须是三张卡（少于三张的片子会被拒）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      12,
+      28
+    ],
+    "sec120": [
+      6,
+      14
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film (一直用下去)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/day-after-day/brick.js",
+  "card": "scene/day-after-day/CARD.md",
+  "status": "approved",
+  "tier": null,
+  "family": null,
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick from the stream original K (the source film): no upstream shot; checked instead against K at the same moment (card, Differs from upstream)"
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

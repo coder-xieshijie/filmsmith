@@ -1,0 +1,160 @@
+{
+  "id": "unit-regroup",
+  "category": "motion",
+  "name": {
+    "en": "Unit regroup",
+    "zh": "点阵重组"
+  },
+  "summary": {
+    "en": "One dot is one unit: the same dots migrate on staggered springs from a crowd into a cluster per group, a column per group and the digits of the total.",
+    "zh": "一个点就是一份：同一批点按错峰弹簧迁徙，从散布聚成每组一簇、列成每组一柱，最后拼成总数的数字。"
+  },
+  "fits": "A count whose parts matter (who, which kind) told as one continuous picture: crowd, groups, comparison, total.",
+  "notFor": "Quantities that are not counts of items (money, time, percentages); more than about 400 units (one dot then stops being one thing).",
+  "select": {
+    "intent": {
+      "en": "Every dot is one real item, so the viewer can follow one dot from the crowd into its group and into the total, and believes the chart and the number are the same things.",
+      "zh": "每个点就是一个真实的个体，观众能跟着某一颗从人群走进分组、再走进总数，于是相信图表和数字是同一批东西。"
+    },
+    "content": {
+      "en": "2–4 groups, each with a count and a name (≤ 14 chars); what one dot stands for; a headline per layout (≤ 30 chars); the total is computed.",
+      "zh": "2–4 个分组，各带数量和名称（≤ 6 字）；一个点代表多少；每一幕一行标题（≤ 14 字）；总数自动算出。"
+    },
+    "fits": {
+      "zh": "组成部分有意义的计数（谁、哪一类），用一幅连续的画面讲：人群、分组、对比、总数。"
+    },
+    "notFor": {
+      "zh": "不是“个数”的量（金额、时长、百分比）；超过约 400 个单位（一个点就不再是一个东西）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "demo",
+      "climax"
+    ],
+    "subjects": [
+      "chart",
+      "number"
+    ],
+    "moods": [
+      "technical",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "unit chart",
+        "dot swarm",
+        "isotype",
+        "every dot is a person",
+        "regroup",
+        "user count",
+        "composition"
+      ],
+      "zh": [
+        "点阵重组",
+        "活体图表",
+        "单位图",
+        "每个点是一个人",
+        "用户构成",
+        "点阵拼数字",
+        "迁徙"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "digit-roll",
+        "note": "a precise figure after the dots spell the rounded total"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Use real labels and axes at film size; placeholder data cannot carry the story.",
+        "Never add or drop a dot between layouts, or the \"same items\" promise breaks.",
+        "With another live-chart move in the same film, use each once and in different sections."
+      ],
+      "zh": [
+        "用真标签、真轴标并按成片字号做，占位数据撑不起叙事。",
+        "换布局时一个点都不能增减，否则“同一批东西”的承诺就破了。",
+        "同片还有别的活体图表手法时，各用一次并错开段落。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "unit-dot-swarm-regroup",
+        "name": "点阵重组",
+        "card": "活体图表",
+        "summary": "三幕 spring 错峰迁徙（stiffness 150、错峰 8f），终幕点阵拼数字",
+        "use": "数据叙事段落；分别讲\"实时性\"、\"每个数字是一个人\"、\"增长装不下\"",
+        "energy": "中高（数据即剧情）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/unit-dot-swarm-regroup.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 7.5,
+    "range": [
+      2.5,
+      10
+    ]
+  },
+  "tier": "T2",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "halftone"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "unit-dot-swarm-regroup",
+        "path": "demos/data/chart-live-moves/UnitDotSwarmRegroupV2.tsx",
+        "card": "references/shots/data/chart-live-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "tally-flip",
+      "note": "the tally style regroups squares between its own charts inside its template; unit-regroup is the same idea as a brick any style can use, with dots and a total spelled in them"
+    },
+    {
+      "id": "mosaic-assemble",
+      "note": "tiles assemble one picture; unit-regroup keeps one mark per item through several layouts"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/unit-regroup/brick.js",
+  "card": "motion/unit-regroup/CARD.md",
+  "compare": {
+    "ssimMean": 0.9257,
+    "ssimMin": 0.8666,
+    "ssimDrop": 0.0711,
+    "trackDevPx": 40.7,
+    "progressRmse": 0.0394,
+    "eventFrames": 1,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

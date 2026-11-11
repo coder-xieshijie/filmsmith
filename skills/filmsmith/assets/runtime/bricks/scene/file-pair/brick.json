@@ -1,0 +1,118 @@
+{
+  "id": "file-pair",
+  "category": "scene",
+  "name": {
+    "en": "File pair",
+    "zh": "文件配对"
+  },
+  "summary": {
+    "en": "A wipe line brings real lines of a real file over the frames they made; an underline pairs a token with the frame below it, one a beat.",
+    "zh": "一道擦除线带来一份真实文件的真实几行，压在它们做出的画格上；下划线把一个词和下方的画格配对，一拍一个。"
+  },
+  "fits": "Showing that a line of input made a piece of output.",
+  "notFor": "Code written for the film; outputs not made by those lines.",
+  "select": {
+    "intent": {
+      "en": "Register a line of input with the frame it produced.",
+      "zh": "让一行输入和它产生的画格对齐。"
+    },
+    "content": {
+      "en": "2–6 quoted lines with the file and first line number, 1–4 pairs { line, token, result }, a claim (≤ 5 words).",
+      "zh": "2–6 行引用代码（带文件与首行行号）、1–4 组 { 行, 词, 结果 }、一句主张（≤ 12 字）。"
+    },
+    "fits": {
+      "zh": "表明一行输入做出了一段输出。"
+    },
+    "notFor": {
+      "zh": "为片子现写的代码；不是由这些行做出的输出。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "code",
+      "image"
+    ],
+    "moods": [
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "code over result",
+        "token underline",
+        "wipe line",
+        "registration",
+        "file lines"
+      ],
+      "zh": [
+        "代码压在结果上",
+        "词下划线",
+        "擦除线",
+        "对齐",
+        "文件行"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "render-branch",
+        "note": "the band rises from its seam"
+      }
+    ],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      5,
+      12
+    ],
+    "sec120": [
+      2.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/choreo.js (file), film.js (inputOf.file, wipe-line)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/file-pair/brick.js",
+  "card": "scene/file-pair/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

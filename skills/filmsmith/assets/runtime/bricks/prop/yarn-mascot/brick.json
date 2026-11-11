@@ -1,0 +1,120 @@
+{
+  "id": "yarn-mascot",
+  "category": "prop",
+  "name": {
+    "en": "Yarn mascot",
+    "zh": "线团吉祥物"
+  },
+  "summary": {
+    "en": "The stream mascot slot: an anchor at the top of the thread with four poses (sit, drop, squash on landing, wound into a point); by default the style's own ball of thread drawn in code, or the film's own mascot as an image at the same anchor.",
+    "zh": "stream 的吉祥物位：线顶端的锚点，四种姿态（坐着、落下、落地压扁、缠成一个点）；默认是代码画的线团，也可以换成片子自己的吉祥物图片，锚点不变。"
+  },
+  "fits": "A product with a mascot or a character; the root the thread grows from.",
+  "notFor": "Brands without a mascot that must not have one; people or photographs.",
+  "select": {
+    "intent": {
+      "en": "Give the thread a root the viewer can recognise: the product itself, sitting where all the work comes back to.",
+      "zh": "给线一个能认出来的根：产品本身，坐在所有事最后回到的地方。"
+    },
+    "content": {
+      "en": "Nothing to read: an optional image of the film's own mascot; a size for the box it fills (30–160 px, default 60).",
+      "zh": "没有字：可选的一张片子自己的吉祥物图片；可设它填满的框的大小（30–160 px，默认 60）。"
+    },
+    "fits": {
+      "zh": "有吉祥物或角色的产品；线长出来的根。"
+    },
+    "notFor": {
+      "zh": "明确不要吉祥物的品牌；真人或照片。"
+    },
+    "roles": [
+      "hook",
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "abstract"
+    ],
+    "moods": [
+      "playful",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "mascot",
+        "character",
+        "yarn",
+        "anchor",
+        "landing",
+        "squash",
+        "size"
+      ],
+      "zh": [
+        "吉祥物",
+        "角色",
+        "线团",
+        "锚点",
+        "落地",
+        "压扁",
+        "尺寸"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "point-lockup",
+        "note": "the mascot ending of the lock-up"
+      },
+      {
+        "id": "glow-thread",
+        "note": "the thread grows from it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "A swapped image is drawn at the same anchor and size: give it a transparent background and its own visual centre at the middle.",
+        "The squash on landing is the only bounce in the style; do not add more."
+      ],
+      "zh": [
+        "换上的图片画在同一锚点同一尺寸：用透明底，视觉中心放在正中。",
+        "落地压扁是这个风格里唯一的弹跳，不要再加。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js mascot(), renderOpen (the drop), renderLock (the point)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/yarn-mascot/brick.js",
+  "card": "prop/yarn-mascot/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

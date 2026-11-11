@@ -1,0 +1,124 @@
+{
+  "id": "sheet-overview",
+  "category": "scene",
+  "name": {
+    "en": "Sheet overview",
+    "zh": "图纸总览"
+  },
+  "summary": {
+    "en": "Sheets → system, the claim: the camera pulls out to the whole drawing, one heavy route draws through every sheet centre, a claim panel rises over the blurred drawing with two lines at 200 px, and the amber APPROVED stamp lands in the title block.",
+    "zh": "从各张图到整个系统，即主张：镜头拉远到整张图，一条粗路线穿过每张图的中心，主张面板在模糊的图上升起，写出两行 200 px 的主张，琥珀色“批准”章落进标题栏。"
+  },
+  "fits": "The climax of a blueprint film, after the last sheet, before the release.",
+  "notFor": "Films with fewer than three sheets; a claim longer than two short lines; films where no person approves (drop the stamp).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Step back to show every sheet was one design, then state the claim with a person's approval on the whole drawing.",
+      "zh": "退后一步让人看到每张图都是同一个设计，然后在整张图上写出主张，并由人批准。"
+    },
+    "content": {
+      "en": "Label, two claim lines (≤ 18 chars), the stamp word and small line, the sheet names (3–8) to draw under it.",
+      "zh": "标签、两行主张（每行 ≤ 7 字）、印章词和小字、底下要画的图纸名（3–8 张）。"
+    },
+    "fits": {
+      "zh": "blueprint 片子的高潮，最后一张图之后、落版之前。"
+    },
+    "notFor": {
+      "zh": "少于三张图的片子；超过两行短句的主张；没有人批准的片子（去掉印章）。"
+    },
+    "roles": [
+      "claim",
+      "climax"
+    ],
+    "subjects": [
+      "diagram",
+      "title"
+    ],
+    "moods": [
+      "ceremonial",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "overview",
+        "pull-out",
+        "route",
+        "claim panel",
+        "approved",
+        "whole drawing"
+      ],
+      "zh": [
+        "总览",
+        "拉远",
+        "路线",
+        "主张面板",
+        "批准",
+        "整张图"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "release-block",
+        "note": "the release after it under the parallel rule"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The sheets under it are this brick's stand-ins (frames, titles, a box or two): in a film the host can draw the real sheets in the same world."
+      ],
+      "zh": [
+        "底下的图纸是本积木的替身（图框、标题和几个方框）；成片里宿主可以在同一世界里画真实图纸。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      7,
+      14
+    ],
+    "sec120": [
+      3.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/film.js (world route, final overview, hudStamp); choreography.js CUES.overview"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/sheet-overview/brick.js",
+  "card": "scene/sheet-overview/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

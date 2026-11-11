@@ -1,0 +1,108 @@
+{
+  "id": "device-shell",
+  "category": "prop",
+  "name": {
+    "en": "Device shell",
+    "zh": "设备外壳"
+  },
+  "summary": {
+    "en": "A head-on code-drawn laptop or phone whose screen shows a real capture and whose chin names the capture’s source; no shadow, no tilt, the 2 px edge is the outline.",
+    "zh": "正面、代码画的笔记本或手机：屏幕放真实截图，下巴写截图来源；无阴影、不倾斜，2 像素边就是轮廓。"
+  },
+  "fits": "Any film that shows one product surface after another on one device held still.",
+  "notFor": "Marketing composites (a mockup in a mockup); several devices at once.",
+  "select": {
+    "intent": {
+      "en": "One device holds every surface honestly: plain hardware claims nothing, and its chin says whose each screen is.",
+      "zh": "一台设备如实承载每个画面：朴素的硬件不替产品说话，下巴写明每屏出自哪里。"
+    },
+    "content": {
+      "en": "A real capture for the screen (optional; a neutral page without one) and its source line (≤ 44 chars / 22 字).",
+      "zh": "屏幕上的一张真实截图（可选，没有时画中性页面）和它的来源行（≤ 44 字符 / 22 字）。"
+    },
+    "fits": {
+      "zh": "一台固定不动的设备上依次展示产品画面的任何片子。"
+    },
+    "notFor": {
+      "zh": "营销合成图（框里套框）；同时出现多台设备。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "lockup"
+    ],
+    "subjects": [
+      "device",
+      "ui"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "laptop frame",
+        "phone frame",
+        "device chin",
+        "source line",
+        "head-on",
+        "hardware"
+      ],
+      "zh": [
+        "笔记本外壳",
+        "手机外壳",
+        "设备下巴",
+        "来源行",
+        "正面",
+        "硬件框"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Do not add a drop shadow, reflection or tilt; the edge is the outline."
+      ],
+      "zh": [
+        "不加投影、反光或倾斜；边线就是轮廓。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/choreo.js (DEVICES), film.js (paintDevice)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/device-shell/brick.js",
+  "card": "prop/device-shell/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

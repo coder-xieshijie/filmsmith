@@ -1,0 +1,125 @@
+{
+  "id": "card-squash",
+  "category": "motion",
+  "name": {
+    "en": "Card squash",
+    "zh": "卡片压线"
+  },
+  "summary": {
+    "en": "A card squashes into the line it made, landing exactly on the line the next shot starts from; in the swell profile it swells as it flattens.",
+    "zh": "一张卡片压扁成它自己画出的那条线，精确落在下一个镜头起始的线上；英式线形下边压边鼓起。"
+  },
+  "fits": "A card, panel or frame that hands over to a line.",
+  "notFor": "Cards that must stay readable to the end; hand-offs to anything but a line.",
+  "select": {
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Turn the finished thing back into the line, so the close can grow from it.",
+      "zh": "把做好的东西变回那条线，让收尾从线里长出来。"
+    },
+    "content": {
+      "en": "A short title on the card (≤ 4 characters).",
+      "zh": "卡片上一个短标题（≤ 4 字符）。"
+    },
+    "fits": {
+      "zh": "要交给一条线的卡片、面板或画框。"
+    },
+    "notFor": {
+      "zh": "必须读到最后的卡片；交给线以外东西的交接。"
+    },
+    "roles": [
+      "climax",
+      "lockup"
+    ],
+    "subjects": [
+      "cards",
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "squash",
+        "flatten",
+        "card to line",
+        "morph",
+        "hand-off",
+        "settle"
+      ],
+      "zh": [
+        "压扁",
+        "压平",
+        "卡片变线",
+        "变形",
+        "交接",
+        "落定"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sheet-flood",
+        "note": "its last move"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "An eased squash that overshoots lands off the next line: use the exact landing (settle)."
+      ],
+      "zh": [
+        "会过冲的缓动落不到下一条线上：用精确落定（settle）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 1,
+    "range": [
+      1,
+      1
+    ]
+  },
+  "tier": "T0",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js review (the card), swellPath"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/card-squash/brick.js",
+  "card": "motion/card-squash/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

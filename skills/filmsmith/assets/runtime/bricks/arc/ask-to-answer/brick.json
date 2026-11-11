@@ -1,0 +1,98 @@
+{
+  "id": "ask-to-answer",
+  "category": "arc",
+  "name": {
+    "en": "Ask to answer",
+    "zh": "从提问到答案"
+  },
+  "summary": {
+    "en": "The pulse arc: ask the question a word a beat, run it over the real candidates, say why it fails, ask what changed, re-run until it locks, slam the answer on the drop, explain it, name it.",
+    "zh": "pulse 的骨架：一拍一词提出问题，放到真实候选上跑，说明为什么不过，问变了什么，重跑直到锁定，答案在 drop 上砸下，解释它，给出名字。"
+  },
+  "fits": "A version release or benchmark told as a question with a measured answer, 12–40 s.",
+  "notFor": "Stories without a question and candidates; mechanisms to explain step by step.",
+  "select": {
+    "intent": {
+      "en": "A question the viewer can feel being answered: asked, tried, failed, asked again, answered on the drop.",
+      "zh": "让观众感到一个问题被回答的过程：提出、尝试、失败、再问、在 drop 上得到答案。"
+    },
+    "content": {
+      "en": "Scenes for each slot (see the card); the style's look and sound.",
+      "zh": "每个槽的场景（见卡片）；该风格的样式与声音。"
+    },
+    "fits": {
+      "zh": "把版本发布或跑分讲成一个有测量答案的问题，12–40 秒。"
+    },
+    "notFor": {
+      "zh": "没有问题和候选的故事；需要一步步讲清的机制。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "question and answer",
+        "benchmark story",
+        "search then reveal",
+        "one climax",
+        "pulse"
+      ],
+      "zh": [
+        "问答",
+        "跑分故事",
+        "先检索后揭晓",
+        "单一高潮",
+        "提问片"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "The run into the reveal must be the shortest stretch; put the long figures after it."
+      ],
+      "zh": [
+        "进揭晓前那段要最短；长的数字段放在揭晓之后。"
+      ]
+    }
+  },
+  "duration": {
+    "sec": [
+      12,
+      40
+    ]
+  },
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/content.js, timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "arc/ask-to-answer/brick.js",
+  "card": "arc/ask-to-answer/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead against the original template's scene order and lengths (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

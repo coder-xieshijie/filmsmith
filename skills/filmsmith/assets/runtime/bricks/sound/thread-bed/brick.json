@@ -1,0 +1,114 @@
+{
+  "id": "thread-bed",
+  "category": "sound",
+  "name": {
+    "en": "Thread bed",
+    "zh": "一线音乐床"
+  },
+  "summary": {
+    "en": "The thread sound: the `thread` bed in D major following a tension curve over the chain (intro, build, a half-time merge, breaks under the ink and the card, the drop on the sheet, the outro on the name) and a sound on every picture event.",
+    "zh": "thread 的声音：D 大调的 thread 音乐床，沿整条链的张力曲线走（引子、铺垫、合并处半速、水墨和卡片下的停顿、样片表上落拍、名字上的尾声），每个画面事件都有一个声音。"
+  },
+  "fits": "Reels of video and motion tools; films with many small landings.",
+  "notFor": "Films with voice-over; dark or tense subjects.",
+  "select": {
+    "intent": {
+      "en": "Sound like the chain looks: every landing heard, the energy rising to the sheet and resolving on the name.",
+      "zh": "听起来就像这条链的样子：每次落定都听得到，能量升到样片表，在名字上落定。"
+    },
+    "content": {
+      "en": "The arc roles and the cues of the scenes.",
+      "zh": "骨架的角色和各场景的提示点。"
+    },
+    "fits": {
+      "zh": "视频与动效工具的作品集；有很多小落定的片子。"
+    },
+    "notFor": {
+      "zh": "有旁白的片子；阴暗或紧张的主题。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "playful",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "D major",
+        "pluck",
+        "bell",
+        "drop",
+        "tension curve",
+        "outro"
+      ],
+      "zh": [
+        "D 大调",
+        "拨弦",
+        "铃声",
+        "落拍",
+        "张力曲线",
+        "尾声"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "line-chain",
+        "note": "its arc"
+      },
+      {
+        "id": "one-line",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "A film that opens on a hit overshoots the true-peak ceiling after AAC encoding: keep the 60 ms fade-in."
+      ],
+      "zh": [
+        "开头就是重音的片子，AAC 编码后真峰值会超：保留 60 毫秒淡入。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "bpm": [
+      112,
+      128
+    ]
+  },
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/score.mjs; timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "sound/thread-bed/sound.js",
+  "card": "sound/thread-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

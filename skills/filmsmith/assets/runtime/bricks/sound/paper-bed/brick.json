@@ -1,0 +1,107 @@
+{
+  "id": "paper-bed",
+  "category": "sound",
+  "name": {
+    "en": "Paper bed",
+    "zh": "纸面节拍床"
+  },
+  "summary": {
+    "en": "The dossier sound: lib/audio's diagram bed (felt keys, E♭) rising one step per exhibit and dropping on the struck result; only paper sounds over it: the felt-tip stroke, a sticker pressed, sheets dealt and turned, an index tab.",
+    "zh": "dossier 的声音：lib/audio 的 diagram 床（毛毡钢琴，降 E），每份证物升一级，在被划出的结果上 drop；上面只有纸面声：毡头笔划过、贴纸压下、发牌和翻页、索引标签。"
+  },
+  "fits": "Evidence and fact films, 20–45 s.",
+  "notFor": "Hype teasers; type films cut to a hard beat.",
+  "select": {
+    "intent": {
+      "en": "Sound like a desk, not a trailer: restrained paper on a quiet bed, with one drop for the proof.",
+      "zh": "听起来像一张办公桌，不像预告片：安静的底子上克制的纸声，只为证明留一次 drop。"
+    },
+    "content": {
+      "en": "An arc with one computed result; the dossier bricks' events.",
+      "zh": "一条只有一个算出结果的骨架；dossier 积木的画面事件。"
+    },
+    "fits": {
+      "zh": "证据片和事实片，20–45 秒。"
+    },
+    "notFor": {
+      "zh": "炒作式预告；硬踩拍的文字片。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "felt piano",
+        "E-flat",
+        "paper foley",
+        "highlighter",
+        "stamp"
+      ],
+      "zh": [
+        "毛毡钢琴",
+        "降 E",
+        "纸面拟音",
+        "荧光笔",
+        "盖章"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "evidence-mat",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "No typewriter, no camera shutter, no ticking clock."
+      ],
+      "zh": [
+        "不用打字机、相机快门、钟表滴答声。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "bpm": [
+      100,
+      124
+    ]
+  },
+  "styles": {
+    "fits": [
+      "dossier"
+    ],
+    "avoid": [
+      "ink",
+      "pulse"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the dossier source film; lib/audio beds.mjs diagram"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "sound/paper-bed/sound.js",
+  "card": "sound/paper-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -33,7 +33,7 @@ body:
     id: env
     attributes:
       label: Environment
-      description: OS, Node version, FFmpeg version, and the skill's self-test output (for keynote-video, `node scripts/selftest.mjs --modes <mode>` in `skills/keynote-video`).
+      description: OS, Node version, FFmpeg version, and the skill's self-test output (for keynote-video, `node scripts/selftest.mjs --modes <mode>` in `skills/filmsmith`).
       render: text
     validations:
       required: true

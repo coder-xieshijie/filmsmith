@@ -1,0 +1,160 @@
+{
+  "id": "live-trace",
+  "category": "motion",
+  "name": {
+    "en": "Live trace",
+    "zh": "示波流线"
+  },
+  "summary": {
+    "en": "A live chart streams past a pinned write head; once, a burst writes through in the accent and is marked on its peak, then the stream brakes to a dead stop.",
+    "zh": "实时曲线从钉在右侧的写入头流过；中途一次突发尖峰用强调色写入并在峰顶钉上事件标记，随后流速刹停成真静止。"
+  },
+  "fits": "A system that is live and has one event worth naming: a spike, an incident, the moment a change shipped.",
+  "notFor": "Comparing values (there is no axis to read exactly); more than one event (a second burst cheapens the first).",
+  "select": {
+    "intent": {
+      "en": "The system reads as alive without saying so, and the one event in it is noticed and named.",
+      "zh": "系统“活着”不用说出口就看得出，其中唯一的事件被看见、被点名。"
+    },
+    "content": {
+      "en": "A title and unit (≤ 24 chars), one event tag (≤ 20 chars) with its value, six time labels and three level labels; the series itself is illustrative.",
+      "zh": "标题与单位（≤ 10 字），一个事件标签（≤ 8 字）和它的数值，六个时间标签、三个刻度标签；曲线本身是示意数据。"
+    },
+    "fits": {
+      "zh": "一个实时运行、有一个值得点名的事件的系统：尖峰、故障、上线的那一刻。"
+    },
+    "notFor": {
+      "zh": "比较数值（没有可精读的坐标轴）；不止一个事件（第二次尖峰让第一次贬值）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "problem"
+    ],
+    "subjects": [
+      "chart",
+      "metric"
+    ],
+    "moods": [
+      "technical",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "oscilloscope",
+        "live chart",
+        "real-time",
+        "monitoring",
+        "spike",
+        "incident",
+        "heart monitor",
+        "stream"
+      ],
+      "zh": [
+        "示波流线",
+        "活体图表",
+        "实时曲线",
+        "监控",
+        "尖峰",
+        "故障事件",
+        "心电图",
+        "流量突增"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "axis-rescale",
+        "note": "another chart move for a different point; keep them in different sections"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The burst happens once; a second one cheapens it.",
+        "Set readings and labels at film size (≥ 32 px, the main reading 120–176 px) and let the chart fill the frame, not a small card.",
+        "With another live-chart move in the same film, use each once and in different sections."
+      ],
+      "zh": [
+        "尖峰只发生一次，第二次就廉价了。",
+        "读数和标签按成片字号（≥ 32 px，主读数 120–176 px），图表撑满画面，别缩在小卡里。",
+        "同片还有别的活体图表手法时，各用一次并错开段落。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "oscilloscope-stream",
+        "name": "示波流线",
+        "card": "活体图表",
+        "summary": "采样窗平移 8px/f + 余弦包络尖峰 + 刹停真静止",
+        "use": "数据叙事段落；分别讲\"实时性\"、\"每个数字是一个人\"、\"增长装不下\"",
+        "energy": "中高（数据即剧情）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/oscilloscope-stream.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 6,
+    "range": [
+      5,
+      7
+    ]
+  },
+  "tier": "T1",
+  "family": "horizontal",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "exhibit"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "oscilloscope-stream",
+        "path": "demos/data/chart-live-moves/OscilloscopeStreamV2.tsx",
+        "card": "references/shots/data/chart-live-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "trace-flow",
+      "note": "a frame-level transition along a traced path; live-trace is a chart that streams in place"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/live-trace/brick.js",
+  "card": "motion/live-trace/CARD.md",
+  "compare": {
+    "ssimMean": 0.7792,
+    "ssimMin": 0.7641,
+    "ssimDrop": 0.0072,
+    "trackDevPx": 2.5,
+    "progressRmse": 0.0045,
+    "eventFrames": 8,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

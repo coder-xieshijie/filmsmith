@@ -1,0 +1,104 @@
+{
+  "id": "ink-dot",
+  "category": "prop",
+  "name": {
+    "en": "Ink dot",
+    "zh": "墨点"
+  },
+  "summary": {
+    "en": "The one dot of the ink style: the full stop of the word it ends, landing with a squash, bursting as a ring, ending as the closing command's cursor.",
+    "zh": "ink 风格唯一的墨点：它结束的那个词的句号，落下时压扁，炸开成圆环，最后变成结尾命令的光标。"
+  },
+  "fits": "Any ink scene: the full stop, the progress dot, the playhead, the cursor.",
+  "notFor": "Decoration; a second accent mark.",
+  "select": {
+    "intent": {
+      "en": "One mark the eye follows through the whole film.",
+      "zh": "一个视线能从头跟到尾的标记。"
+    },
+    "content": {
+      "en": "The word it ends (≤ 8 chars) or a command.",
+      "zh": "它结束的那个词（≤ 4 字）或一行命令。"
+    },
+    "fits": {
+      "zh": "任何 ink 场景：句号、进度点、播放头、光标。"
+    },
+    "notFor": {
+      "zh": "装饰；第二个强调标记。"
+    },
+    "roles": [
+      "hook",
+      "problem",
+      "lockup"
+    ],
+    "subjects": [
+      "cursor",
+      "abstract"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "full stop",
+        "dot",
+        "squash",
+        "ring",
+        "cursor"
+      ],
+      "zh": [
+        "句号",
+        "墨点",
+        "压扁",
+        "圆环",
+        "光标"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "One dot in the frame at a time (the split stops merge back into one)."
+      ],
+      "zh": [
+        "画面里同一时间只有一个墨点（分裂的句号最后要并回一个）。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js drawDot, landSq, cta cursor"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/ink-dot/brick.js",
+  "card": "prop/ink-dot/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

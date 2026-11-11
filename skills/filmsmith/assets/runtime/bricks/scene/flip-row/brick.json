@@ -1,0 +1,151 @@
+{
+  "id": "flip-row",
+  "category": "scene",
+  "name": {
+    "en": "Flip row",
+    "zh": "翻牌连报"
+  },
+  "summary": {
+    "en": "A row of feature cards turns over one by one; each back answers its front with one big number, a before/after bar and a label.",
+    "zh": "一排功能卡逐张翻面，每张背面用一个大数字、一组前后对照条和一行标签回答正面的功能。"
+  },
+  "fits": "Features and what each one brought, three or four pairs read as a run of results (feature → outcome).",
+  "notFor": "Backs unrelated to their fronts (the turn becomes a decorative card swap); more than four cards; outcomes that need more than one number and a line.",
+  "select": {
+    "intent": {
+      "en": "\"So what?\" answered card by card: each feature turns over to show what it brought, so the row reads as a run of results.",
+      "zh": "逐张回答“所以呢？”：每个功能翻过来亮出它带来的结果，一排读作成果连报。"
+    },
+    "content": {
+      "en": "3–4 cards: front a name (≤ 14 chars, Chinese ≤ 6 characters) and a line (≤ 32 chars, Chinese ≤ 13); back one number (≤ 6 chars), a label (≤ 20 chars, Chinese ≤ 9) and optional before/after values; a headline.",
+      "zh": "3–4 张卡：正面名称（≤ 14 字符、中文 ≤ 6 字）加一行说明（≤ 32 字符、中文 ≤ 13 字）；背面一个数字（≤ 6 字符）、一行标签（≤ 20 字符、中文 ≤ 9 字）和可选的前后对照值；外加一个标题。"
+    },
+    "fits": {
+      "zh": "几个功能和各自带来的结果，三四对读成一串成果（功能 → 结果）。"
+    },
+    "notFor": {
+      "zh": "背面和正面无关（翻面成了花哨换卡）；多于四张；结果要不止一个数字加一行字。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "cards",
+      "metric",
+      "number"
+    ],
+    "moods": [
+      "editorial",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "card flip",
+        "flip reveal",
+        "feature to result",
+        "bento",
+        "stats reveal",
+        "before after"
+      ],
+      "zh": [
+        "卡片翻面揭示",
+        "翻牌连报",
+        "功能到成果",
+        "翻出数字",
+        "成果连报",
+        "前后对照"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Front and back must be a cause and its result; an unrelated back makes the flip a decorative swap.",
+        "A soft snap on each card's landing makes the run read as a rhythm."
+      ],
+      "zh": [
+        "正反两面必须是因果一对；翻出无关内容就只是花哨换图。",
+        "每张翻停配一声轻“啪”，连报的节奏才出来。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "card-flip-reveal",
+        "name": "卡片翻面揭示",
+        "card": "卡片翻面揭示",
+        "summary": "功能卡 3D 翻面揭示——卡片沿 Y 轴翻 180°，正面 UI 翻到侧棱最薄处掠过一道随角度移动的受光，背面揭出大号结论数字，逐张错峰扫过整排",
+        "use": "\"功能→成果\"的成对叙事：一排功能卡逐张翻出各自的指标/结论；元素级转场卡",
+        "energy": "中高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/card-flip-reveal.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      12
+    ],
+    "sec120": [
+      4,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "card-flip-reveal",
+        "path": "demos/transition/card-flip-reveal/CardFlipReveal.tsx",
+        "card": "references/shots/transition/card-flip-reveal.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "device-flip",
+      "note": "device-flip turns one window edge-on to swap its page (a hidden cut); flip-row turns a row over to show each card's other side, overshooting to 194° and springing back"
+    },
+    {
+      "id": "louvre",
+      "note": "louvre turns many slats to change the whole page; flip-row turns whole cards, one meaning each"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/flip-row/brick.js",
+  "card": "scene/flip-row/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.7298,
+    "ssimMin": 0.6267,
+    "ssimDrop": 0.0513,
+    "trackDevPx": 7.6,
+    "progressRmse": 0.0063,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

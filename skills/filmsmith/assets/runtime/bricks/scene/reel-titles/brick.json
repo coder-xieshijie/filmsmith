@@ -1,0 +1,123 @@
+{
+  "id": "reel-titles",
+  "category": "scene",
+  "name": {
+    "en": "Reel titles",
+    "zh": "胶片字幕卡"
+  },
+  "summary": {
+    "en": "Intertitles on the strip, each pulled into the gate by one claw pull-down and held while read; the first scene runs the strip in and brakes on the first title; a line may light the optical track.",
+    "zh": "胶片上的字幕卡，每张由抓片爪拉进片门、停住读完；开场时胶片跑进来刹在第一张上；某一行可以点亮光学声轨。"
+  },
+  "fits": "A hook or a claim in two to four short lines.",
+  "notFor": "Long sentences; more than four lines in a row.",
+  "select": {
+    "intent": {
+      "en": "Words arrive as frames of the film itself, one pull-down at a time.",
+      "zh": "文字作为胶片本身的画格到来，一次拉一格。"
+    },
+    "content": {
+      "en": "1–4 lines (≤ 3 words / 8 字 each); optionally a line that lights the track.",
+      "zh": "1–4 行（每行 ≤ 3 词 / 8 字）；可选一行点亮声轨。"
+    },
+    "fits": {
+      "zh": "用两到四行短句讲钩子或主张。"
+    },
+    "notFor": {
+      "zh": "长句；连续多于四行。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "claim"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "mechanical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "intertitles",
+        "claw pull-down",
+        "run-in brake",
+        "title frames",
+        "optical track"
+      ],
+      "zh": [
+        "字幕卡",
+        "抓片",
+        "跑入刹停",
+        "标题画格",
+        "光学声轨"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "gate-frames",
+        "note": "the frames follow on the same reel"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Declare the lead: the first pull-down belongs to the scene before."
+      ],
+      "zh": [
+        "声明 lead：第一次拉片属于上一场。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      2,
+      16
+    ],
+    "sec120": [
+      1,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "strip",
+      "any film about films, frames or renders"
+    ],
+    "avoid": [
+      "exhibit",
+      "tally"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/strip/choreo.js (titles), film.js (reelS, the track)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/reel-titles/brick.js",
+  "card": "scene/reel-titles/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

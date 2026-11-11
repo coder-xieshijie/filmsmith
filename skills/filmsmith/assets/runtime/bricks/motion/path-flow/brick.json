@@ -1,0 +1,176 @@
+{
+  "id": "path-flow",
+  "category": "motion",
+  "name": {
+    "en": "Path flow",
+    "zh": "路径输送"
+  },
+  "summary": {
+    "en": "Paths draw on one after another and packets of light run along them into one sink; the paths can erase from the source end.",
+    "zh": "几条路径依次画出，光点沿路径流向同一个汇点；路径可以从源头一端擦除。"
+  },
+  "fits": "Showing that several things feed one: integrations, data sources, inputs of a pipeline, links in an architecture diagram.",
+  "notFor": "A single connection (use tether-link); paths that cross each other many times (the packets stop reading as flow).",
+  "energy": "low",
+  "duration": {
+    "beats": 11.2,
+    "range": [
+      4,
+      12
+    ]
+  },
+  "tier": "T0",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "bezier-source-converge-merge",
+        "path": "demos/ui-entrance/bezier-source-converge-merge/BezierSourceConvergeMerge.tsx",
+        "card": "references/shots/ui-entrance/bezier-source-converge-merge.md"
+      },
+      {
+        "key": "integration-hub-map",
+        "path": "demos/ui-entrance/integration-hub-map/IntegrationHubMap.tsx",
+        "card": "references/shots/ui-entrance/integration-hub-map.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "integration-hub-map"
+  ],
+  "overlaps": [
+    {
+      "id": "signal-relay",
+      "note": "a card collapses into a node and one pulse carries it to the next card (a hand-off); path-flow keeps several paths flowing inside one scene"
+    },
+    {
+      "id": "tether-link",
+      "note": "one accent line from a claim to its source"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Turn 'these sources feed one place' into a visible process: paths connect, then packets travel toward the sink, so the direction of flow reads without a label.",
+      "zh": "把“几个来源汇到一处”这句抽象话变成看得见的过程：通路先接上，光点再流向汇点，不用标注也读得出流向。"
+    },
+    "content": {
+      "en": "2–6 sources and one sink placed by the scene (nodes, icons and labels belong to the scene); the brick draws only the paths and the packets.",
+      "zh": "2–6 个来源和 1 个汇点，位置由场景给（节点、图标、标签归场景）；积木只画路径和光点。"
+    },
+    "fits": {
+      "zh": "表现几样东西汇入一处：集成、数据来源、流水线的输入、架构图里的连线。"
+    },
+    "notFor": {
+      "zh": "只有一条连线（用 tether-link）；互相交叉很多次的路径（光点不再读作流动）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "diagram"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "data flow",
+        "pipeline",
+        "packets",
+        "converge",
+        "integration",
+        "bezier paths",
+        "neon tubes",
+        "sources to sink"
+      ],
+      "zh": [
+        "路径输送",
+        "曲线汇流吞并",
+        "集成星图",
+        "数据汇聚",
+        "多源整合",
+        "光管输送",
+        "数据包流动",
+        "统一接入"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hub-links",
+        "note": "the hub scene that draws its links with the tube look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the accent for the packets; colouring the source nodes takes the subject away from the sink.",
+        "In the tube look connect all tubes at once; one-by-one connections read as separate negotiations.",
+        "A sink with an open-shaped mark needs an opaque disc behind it, or line ends show through the gap.",
+        "Paths that cross many times stop reading as flow."
+      ],
+      "zh": [
+        "强调色只给光点；给来源节点上色会把视觉主体从汇点抢走。",
+        "光管式要所有管同时接上；逐个接读作一个个谈判。",
+        "汇点的标志若是开口形，要托在不透明圆片上，否则线头从缺口露出来。",
+        "路径交叉太多就不再读作流动。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "bezier-source-converge-merge",
+        "name": "曲线汇流吞并",
+        "card": "曲线汇流吞并",
+        "summary": "左侧四个来源节点各有一条细贝塞尔曲线连向右侧同一汇聚点，曲线先错峰由左向右 draw-on，节点沿自己的曲线滑向汇聚点并三段式加速缩小到消失，强调色数据包全程沿路径滑行，吞并完成后曲线从左端反向擦除只留品牌标志（demo：白瓷圆片托 video-shotcraft 镜刻标志）",
+        "use": "\"多源整合/统一接入/数据汇聚\"的核心机制镜头；集成、聚合、单一入口类产品的说明段落",
+        "energy": "中（长镜慢速推进，靠数据包滑行维持活性；吞并瞬间是唯一小高点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/bezier-source-converge-merge.mp4"
+      },
+      {
+        "key": "integration-hub-map",
+        "name": "集成星图",
+        "card": "集成星图",
+        "summary": "旧页面一次性快翻 180°（侧棱瞬间亮闪）落成新中枢页，五个集成 app 图标同帧弹现、随即五条彩虹光管同帧齐连，光管内输送脉冲持续流动——\"翻开新一页，生态一齐接入\"",
+        "use": "集成/生态能力段（一个产品连一切）；版本翻新叙事（旧页翻成新页）；暗场霓虹调性的功能高潮",
+        "energy": "中高（翻面是爆点，输送段是余韵）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/integration-hub-map.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/path-flow/brick.js",
+  "card": "motion/path-flow/CARD.md",
+  "compare": {
+    "ssimMean": 0.9698,
+    "ssimMin": 0.951,
+    "ssimDrop": 0.038,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

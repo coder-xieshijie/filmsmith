@@ -1,0 +1,146 @@
+{
+  "id": "word-to-chip",
+  "category": "motion",
+  "name": {
+    "en": "Word to chip",
+    "zh": "词变标签"
+  },
+  "summary": {
+    "en": "A typed tag becomes a chip in one frame, glides small into its slot on a page, and a second cut reveals the finished page.",
+    "zh": "打出的话题词一帧变成实体标签，缩小滑进页面里的槽位，再一刀切出完成的页面。"
+  },
+  "fits": "Text turning into structure: a tag, mention, keyword or command becoming an object the product understands.",
+  "notFor": "Long phrases; slow, gentle passages.",
+  "select": {
+    "intent": {
+      "en": "Text becomes a thing the product understands: a hard cut gives a sure \"done\", and the one glide between two cuts makes it feel quick and certain.",
+      "zh": "文字变成产品认得的实体：硬切给出“啪、成了”的确定感，两次硬切夹一次滑动显得又快又稳。"
+    },
+    "content": {
+      "en": "One tag, mention, keyword or command (≤ 14 chars), the finished page it lands on and its slot there.",
+      "zh": "一个标签、@提及、关键词或命令（≤ 6 字），它落进的成品页和页上的槽位。"
+    },
+    "fits": {
+      "zh": "文字变成结构：标签、提及、关键词或命令变成产品认得的对象。"
+    },
+    "notFor": {
+      "zh": "长词组（超过约 14 个字符就不像一个标记）；缓慢、温和的段落（切得很硬）。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "text"
+    ],
+    "moods": [
+      "technical",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "hashtag",
+        "tag to pill",
+        "chip",
+        "materialize",
+        "token",
+        "mention",
+        "hard cut"
+      ],
+      "zh": [
+        "话题词实体化",
+        "词变标签",
+        "胶囊标签",
+        "打 tag",
+        "实体化",
+        "硬切",
+        "关键词归位"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "type-retype",
+        "note": "a typed command can be refined first, then become a chip"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The change to a chip is a one-frame hard cut; if you want a morph or a fade, use another brick, not a softened version of this one.",
+        "Do not add a flight or bounce: two cuts around one glide is the whole rhythm."
+      ],
+      "zh": [
+        "变成标签是一帧硬切；想要渐变或变形就换别的积木，别把这块改软。",
+        "别加飞行段或回弹：两次硬切夹一次滑动就是它的全部节奏。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "hashtag-to-pill-materialize",
+        "name": "话题词实体化",
+        "card": "话题词实体化",
+        "summary": "话题词打字实体化——居中打出 \"#word\"（红实心光标恒亮），1 帧硬切变成宽大胶囊标签，hold 后缩小左移落到页面标签位，再 1 帧硬切揭示成品页；\"两次硬切一次滑动\"的节奏骨架",
+        "use": "标签/分类/关键词功能的演示段（笔记 app 打 tag、话题聚合）；\"输入 → 变成 UI 实体 → 归位到成品\"的三段式叙事",
+        "energy": "中（干脆利落，靠硬切给劲，不靠弹跳）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/hashtag-to-pill-materialize.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 3,
+    "range": [
+      3,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "edit-cut",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "hashtag-to-pill-materialize",
+        "path": "demos/interaction/hashtag-to-pill-materialize/HashtagToPillMaterialize.tsx",
+        "card": "references/shots/interaction/hashtag-to-pill-materialize.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/word-to-chip/brick.js",
+  "card": "motion/word-to-chip/CARD.md",
+  "compare": {
+    "ssimMean": 0.9311,
+    "ssimMin": 0.8014,
+    "ssimDrop": 0.0156,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

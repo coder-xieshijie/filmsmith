@@ -1,0 +1,169 @@
+{
+  "id": "float-land",
+  "category": "motion",
+  "name": {
+    "en": "Float land",
+    "zh": "浮字落定"
+  },
+  "summary": {
+    "en": "The text of a surface hovers above it with a soft same-shape shadow, then falls onto it piece by piece in reading order; the shadows close into contact shadows and go.",
+    "zh": "界面上的文字先悬浮在表面上空、下面投着同形软影，再按阅读顺序逐条落贴回界面，影子收成贴地接触影后消失。"
+  },
+  "fits": "Revealing a UI's text as the camera arrives; a list, a menu or a form settling into place.",
+  "notFor": "Long paragraphs (each piece is one line); dark text on a dark ground (the shadow cannot be seen).",
+  "select": {
+    "intent": {
+      "en": "The interface completes itself as you look: its words hover with shadows and settle into place, so the viewer feels the UI arrive rather than fade in.",
+      "zh": "界面在观众眼前“自己完成”：文字带着影子悬在上空再逐条落定，读到的是界面到位，而不是淡入。"
+    },
+    "content": {
+      "en": "A surface with 3–8 one-line text pieces (a list, menu or form; each ≤ 24 chars, Chinese ≤ 10 characters); `lift`: three cards to name one by one.",
+      "zh": "一块界面加 3–8 条单行文字（列表、菜单、表单；每条 ≤ 24 字符、中文 ≤ 10 字）；`lift` 版：要逐张点名的三张卡。"
+    },
+    "fits": {
+      "zh": "镜头到达时让界面上的文字落定；列表、菜单、表单就位。`lift`：逐个点名选项再选中一个。"
+    },
+    "notFor": {
+      "zh": "长段落（每条只能一行）；深色底上的深色字（看不见影子）；终端风格。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "hook"
+    ],
+    "subjects": [
+      "ui",
+      "list",
+      "text"
+    ],
+    "moods": [
+      "elegant",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "float and land",
+        "hover shadow",
+        "contact shadow",
+        "drop into place",
+        "lift card",
+        "text settle",
+        "UI assemble"
+      ],
+      "zh": [
+        "浮字落定",
+        "贴面游走",
+        "接触阴影抬升",
+        "悬浮落贴",
+        "同形软影",
+        "逐条落位",
+        "卡片离桌"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "graze-tour",
+        "note": "the low camera over the page while its words land"
+      },
+      {
+        "id": "perspective-glide",
+        "note": "words landing on the gliding page"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The shadow is what makes it read; on a dark ground lift the hovering pieces' brightness (~1.3×) or it is just a slide-in.",
+        "Staggered landing is for a tour; a whole layout entering at once should land on one frame.",
+        "`lift`: lift one card at a time and at least 28 px; smaller is not felt."
+      ],
+      "zh": [
+        "影子是命门；暗底上悬空的字要提亮约 1.3 倍，否则就是普通位移入场。",
+        "错峰落定用于巡礼镜头；整体登场应全体同一帧落定。",
+        "`lift` 版一次只抬一张、抬高至少 28 px，再小就感觉不到。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "graze-face-tour",
+        "name": "贴面游走",
+        "card": "贴面游走",
+        "summary": "大倾角贴面游走特写——镜头贴着 UI 表面低飞掠过（侧栏树/顶栏/列表当地形），页面文字初始悬浮在界面上空带同形软影，随镜头行进先后加速贴落回界面",
+        "use": "功能区巡礼（把 UI 当地景飞掠）；配合暗场+霓虹缘光做产品\"内里世界\"段落；界面内容逐区登场",
+        "energy": "中高（运镜持续推进+元素连续落位，信息密度高）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/graze-face-tour.mp4"
+      },
+      {
+        "key": "contact-shadow-lift",
+        "name": "接触阴影抬升",
+        "card": "元素形变",
+        "summary": "元素身体感——contact-shadow-lift 接触阴影离面抬升：卡抬起时桌上的阴影同步放大变淡，纸片离桌被阴影证明",
+        "use": "给\"位置在变\"之外补\"身体在变\"：卡片点名给悬浮证据；配 2.5D 运镜与逐张点名",
+        "energy": "A 低中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/contact-shadow-lift.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 3.5,
+    "range": [
+      2,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "lift-flip",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "terminal"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "graze-face-tour",
+        "path": "demos/camera/graze-face-tour/GrazeFaceTour.tsx",
+        "card": "references/shots/camera/graze-face-tour.md"
+      },
+      {
+        "key": "contact-shadow-lift",
+        "path": "demos/ui-entrance/element-body-moves/ContactShadowLift.tsx",
+        "card": "references/shots/ui-entrance/element-body-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/float-land/brick.js",
+  "card": "motion/float-land/CARD.md",
+  "compare": {
+    "ssimMean": 0.6891,
+    "ssimMin": 0.5322,
+    "ssimDrop": 0,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,119 @@
+{
+  "id": "request-open",
+  "category": "scene",
+  "name": {
+    "en": "Request open",
+    "zh": "请求开场"
+  },
+  "summary": {
+    "en": "A request types; its caret runs to the seam’s place and stands up into it; the first result slides out of the seam; the claim rises in two phrases.",
+    "zh": "一行请求打出来；光标跑到接缝的位置立起来变成接缝；第一个结果从接缝里滑出；主张分两段升起。"
+  },
+  "fits": "The opening of a film about input and output.",
+  "notFor": "A film that does not start from something typed.",
+  "select": {
+    "intent": {
+      "en": "The edit point becomes the boundary: what is typed opens onto what it makes.",
+      "zh": "编辑点变成边界：打下的字通向它做出的东西。"
+    },
+    "content": {
+      "en": "A request (≤ 40 characters, as the product reads it), a first result, a claim in 1–2 phrases (≤ 5 words each).",
+      "zh": "一行请求（≤ 40 字符，产品实际读的写法）、第一个结果、1–2 段主张（每段 ≤ 12 字）。"
+    },
+    "fits": {
+      "zh": "讲输入与输出的片子的开场。"
+    },
+    "notFor": {
+      "zh": "不从打字开始的片子。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "code",
+      "image",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "typed request",
+        "caret becomes seam",
+        "drawer reveal",
+        "split open",
+        "hook"
+      ],
+      "zh": [
+        "打出请求",
+        "光标变接缝",
+        "抽屉式展开",
+        "分屏打开",
+        "钩子"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "pick-list",
+        "note": "keeps the vertical seam"
+      }
+    ],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      5,
+      14
+    ],
+    "sec120": [
+      2.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/choreo.js (request), film.js (inputOf.request, split-open)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/request-open/brick.js",
+  "card": "scene/request-open/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

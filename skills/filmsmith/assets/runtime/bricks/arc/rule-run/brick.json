@@ -1,0 +1,94 @@
+{
+  "id": "rule-run",
+  "category": "arc",
+  "name": {
+    "en": "Rule run",
+    "zh": "规则跑一遍"
+  },
+  "summary": {
+    "en": "The trace arc: split the input into units, run one step slowly, loop it faster, count the result, replay an unseen input, state the thesis.",
+    "zh": "trace 的骨架：把输入拆成单元，慢放一步，循环加速，数出结果，回放一个没见过的输入，给出结论。"
+  },
+  "fits": "Explainers of an algorithm that runs on a tiny input in a few steps.",
+  "notFor": "Launches; mechanisms that cannot run on a small input.",
+  "select": {
+    "intent": {
+      "en": "The viewer learns a mechanism by watching one step, then believes it from a case it never saw.",
+      "zh": "观众看一步学会机制，再从一个没见过的例子里相信它。"
+    },
+    "content": {
+      "en": "Scenes for each slot (see the card); the style's look and sound.",
+      "zh": "每个槽的场景（见卡片）；该风格的样式与声音。"
+    },
+    "fits": {
+      "zh": "在小输入上几步就能跑完的算法讲解。"
+    },
+    "notFor": {
+      "zh": "发布片；不能在小输入上跑的机制。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "explainer arc",
+        "one step then loop",
+        "probe",
+        "algorithm walkthrough",
+        "thesis"
+      ],
+      "zh": [
+        "讲解骨架",
+        "先一步再循环",
+        "探针",
+        "算法演示",
+        "结论收束"
+      ]
+    },
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": {
+    "sec": [
+      22,
+      40
+    ]
+  },
+  "styles": {
+    "fits": [
+      "trace"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/trace/content.js, timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "arc/rule-run/brick.js",
+  "card": "arc/rule-run/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead against the original template's scene order and lengths (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,94 @@
+{
+  "id": "count-to-close",
+  "category": "arc",
+  "name": {
+    "en": "Count to close",
+    "zh": "从计数到收束"
+  },
+  "summary": {
+    "en": "The tally arc: count the set into squares, re-sort the same squares chapter by chapter, read time and trend, close on the few numbers that matter.",
+    "zh": "tally 的骨架：把集合数成方块，每章重排同一批方块，读时间与趋势，最后收束到几个关键数字。"
+  },
+  "fits": "Data stories told by counting: registries, surveys, archives, the proof part of a release.",
+  "notFor": "Films without a countable set; product demos.",
+  "select": {
+    "intent": {
+      "en": "A counted set becomes an answer chapter by chapter without ever changing its items.",
+      "zh": "一个被计数的集合一章一章变成答案，始终是同一批东西。"
+    },
+    "content": {
+      "en": "Scenes for each slot (see the card); the style's look and sound.",
+      "zh": "每个槽的场景（见卡片）；该风格的样式与声音。"
+    },
+    "fits": {
+      "zh": "用计数讲的数据故事：名录、调查、档案、发布片的证据段。"
+    },
+    "notFor": {
+      "zh": "没有可数集合的片；产品演示。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "data story",
+        "chapters",
+        "count to close",
+        "unit chart arc",
+        "tally"
+      ],
+      "zh": [
+        "数据叙事",
+        "章节",
+        "从计数到收束",
+        "方块图骨架",
+        "计数片"
+      ]
+    },
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": {
+    "sec": [
+      16,
+      40
+    ]
+  },
+  "styles": {
+    "fits": [
+      "tally"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/content.js, timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "arc/count-to-close/brick.js",
+  "card": "arc/count-to-close/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead against the original template's scene order and lengths (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

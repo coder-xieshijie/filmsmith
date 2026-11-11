@@ -1,0 +1,161 @@
+{
+  "id": "crane-reveal",
+  "category": "scene",
+  "name": {
+    "en": "Crane reveal",
+    "zh": "吊臂升起揭示"
+  },
+  "summary": {
+    "en": "From one row to the whole wall: the camera starts tight on one tracked row and cranes up and out until the whole window sits on the stage, rows washing with light as the frame passes them.",
+    "zh": "镜头先贴着表里被追踪的那一行，再像吊臂一样升起拉远，直到整个产品窗口落在台上；画框上沿扫过的每一行亮一下，大数字随镜头计数，落定后那一行翻成完成。"
+  },
+  "fits": "The first shot of an opening that starts from one concrete item and widens to the system around it: one job in a queue, one order in a ledger, one test in a run; it says \"this one is part of a whole\".",
+  "notFor": "Products without a table or list to show; a claim that needs the title on screen from the first frame (the header is out of frame until the camera lifts); slots under about 4.5 seconds.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      9,
+      12
+    ],
+    "sec120": [
+      4.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "plakat",
+      "ink"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "crane-rise-reveal",
+        "path": "demos/opening/crane-rise-reveal/CraneRiseReveal.tsx",
+        "card": "references/shots/opening/crane-rise-reveal.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "viewport-push",
+      "note": "the hand-off that pushes into a part of a page; crane-reveal goes the other way, from one row out to the whole window, and the rows react as the frame passes them"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Start on one concrete item, then widen to the system around it, so the viewer understands 'the row you just saw is one cell of a whole wall, and it is done'.",
+      "zh": "从一个具体条目起，再拉开到它所在的整个系统，观众读出“刚才那一行，只是这一整面墙的一格，而且已经完成了”。"
+    },
+    "content": {
+      "en": "A table of 8–12 rows, each a name (en ≤ 16 chars, zh ≤ 6) and a state (en ≤ 9, zh ≤ 4), one row tracked; an eyebrow, a title (en ≤ 18, zh ≤ 8), a caption (en ≤ 34, zh ≤ 14) and a counting number (≤ 8 chars) with its label.",
+      "zh": "一张 8–12 行的表，每行一个名称（英文 ≤ 16 字符，中文 ≤ 6 字）和一个状态（英文 ≤ 9，中文 ≤ 4），其中一行被追踪；一行眉标、一个标题（英文 ≤ 18，中文 ≤ 8）、一句说明（英文 ≤ 34，中文 ≤ 14）和一个会计数的数字（≤ 8 字符）及其标签。"
+    },
+    "fits": {
+      "zh": "从一个具体条目出发、拉开到它所在系统的开场第一镜：队列里的一个任务、账本里的一笔订单、一次运行里的一个测试；意思是“这一个只是整体的一部分”。"
+    },
+    "notFor": {
+      "zh": "没有表格或列表可展示的产品；第一帧就要标题在屏的主张（镜头升起前表头在画外）；短于约 4.5 秒的槽位。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "list",
+      "ui",
+      "metric"
+    ],
+    "moods": [
+      "cinematic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "crane up",
+        "pull back",
+        "detail to whole",
+        "establishing shot",
+        "queue",
+        "one of many",
+        "dashboard reveal",
+        "rows wash"
+      ],
+      "zh": [
+        "吊臂升起揭示",
+        "升降臂拉升",
+        "从细节到全局",
+        "开场定场",
+        "一行特写",
+        "整面铺满",
+        "任务队列",
+        "一格与一墙"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "count-to-result",
+        "note": "the counted number lands as the result"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The opening close-up magnifies one row about 3×; rasterise real material at high resolution or the first frame is blurred.",
+        "Blur only the fast first half of the lift; blurring the slow top softens the text.",
+        "Do not use it in the same film as a top-down dive onto one item; the mirrored move reads as the same trick."
+      ],
+      "zh": [
+        "开场特写把一行放大约 3 倍；真实素材要高分辨率栅格化，否则第一帧就糊。",
+        "运动模糊只给拉升的前半段快速部分；临顶慢速段加了会把字抹软。",
+        "别和“从全局俯冲到一个点”的镜头同片并用；一升一降互为镜像，读作同一招。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "crane-rise-reveal",
+        "name": "吊臂升起揭示",
+        "card": "吊臂升起揭示",
+        "summary": "升降臂拉升揭示——开场怼在一行数据特写，相机沿 Y 轴减速升起后拉，行行涌入直到整面 dashboard 铺满全幅",
+        "use": "\"从细节到全局\"的开场定场；与 drone-dive-landing（全局→单点俯冲）互为反向",
+        "energy": "中高（持续单向运动，无冲击拍）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/crane-rise-reveal.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/crane-reveal/brick.js",
+  "card": "scene/crane-reveal/CARD.md",
+  "compare": {
+    "ssimMean": 0.7461,
+    "ssimMin": 0.6533,
+    "ssimDrop": 0.139,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

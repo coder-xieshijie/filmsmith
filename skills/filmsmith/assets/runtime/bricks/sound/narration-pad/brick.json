@@ -1,0 +1,103 @@
+{
+  "id": "narration-pad",
+  "category": "sound",
+  "name": {
+    "en": "Narration pad",
+    "zh": "解说音乐垫"
+  },
+  "summary": {
+    "en": "A quiet pad under the voice (Fmaj7, Cmaj7/E, Am7, G6, one chord every 8 s) with five short cues on picture events; it never builds or drops.",
+    "zh": "解说下面一层安静的和弦垫（Fmaj7、Cmaj7/E、Am7、G6，每 8 秒一个和弦），画面事件配五种短音效；从不起伏。"
+  },
+  "fits": "Narrated explainers where the voice carries the film.",
+  "notFor": "Music-driven films without a voice (use a keynote bed).",
+  "select": {
+    "intent": {
+      "en": "Keep the room warm without competing with the voice; mark what lands on screen with small sounds.",
+      "zh": "让空间有温度但不和人声抢；画面落定处用小声音标一下。"
+    },
+    "content": {
+      "en": "A narration track and the picture events (turns, ticks, labels, stamps).",
+      "zh": "一条解说音轨和画面事件（转场、计数、标签、盖章）。"
+    },
+    "fits": {
+      "zh": "由解说撑起的讲解片。"
+    },
+    "notFor": {
+      "zh": "没有解说、由音乐驱动的片子（用 keynote 的音乐床）。"
+    },
+    "subjects": [
+      "voice",
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "pad",
+        "under the voice",
+        "narration",
+        "duck",
+        "Fmaj7",
+        "soft cues"
+      ],
+      "zh": [
+        "音乐垫",
+        "垫在人声下",
+        "解说",
+        "避让",
+        "Fmaj7",
+        "轻音效"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Never raise the pad to fill a pause; silence under a figure is fine."
+      ],
+      "zh": [
+        "不要为填空隙把垫子推高；数字下面留静音没问题。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "bpm": [
+      90,
+      140
+    ]
+  },
+  "styles": {
+    "fits": [
+      "terminal-ledger",
+      "blueprint-zoom"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/filmsmith/scripts/voice/voice.py step_audio; kits build/assemble.cjs (bed volume 0.5)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "sound/narration-pad/sound.js",
+  "card": "sound/narration-pad/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from terminal-ledger and blueprint-zoom kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

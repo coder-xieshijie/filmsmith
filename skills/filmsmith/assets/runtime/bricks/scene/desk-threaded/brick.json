@@ -1,0 +1,144 @@
+{
+  "id": "desk-threaded",
+  "category": "scene",
+  "name": {
+    "en": "Desk threaded",
+    "zh": "一根线串起乱桌面"
+  },
+  "summary": {
+    "en": "The stream opening: a desk piles up (windows, alerts, a sticky note, fourteen dialog copies, a cursor that never gets to click), freezes on one line, the mascot drops in, one glowing thread pierces every item, goes taut and reels them in, and the emptied desk sinks into the night as the thread straightens into the spine. `opening: 'night'` shows the pile as dark cards over the night.",
+    "zh": "stream 的开场：桌面越堆越多（窗口、弹窗、便签、十四个对话框副本、一直没点下去的光标），定格在一句话上；吉祥物落下，一根发光的线穿过每件东西、绷紧、一口收走；空了的桌面沉进夜空，线拉直成主干。`opening: 'night'` 把这堆东西换成夜空里的暗色卡片。"
+  },
+  "fits": "The open of a product that takes work off people: the overload, then the one thread that takes it.",
+  "notFor": "A calm opening; a product that does not take work off people; a pile that must be read item by item.",
+  "select": {
+    "intent": {
+      "en": "Start from the overload everyone recognises, then let one thread take all of it in one move.",
+      "zh": "从人人认得的“太多了”开始，然后让一根线一下子全部接走。"
+    },
+    "content": {
+      "en": "Three sessions, four alerts, a two-line note (≤ 36 characters / 16 Chinese characters each), one freeze line (≤ 24 / 12); optional: how many dialog copies cascade (4–30), 1–6 alerts, and the mascot's size (`mascotSize`).",
+      "zh": "三个会话、四个弹窗、两行便签（每行 ≤ 36 字符 / 16 个汉字）、一句定格（≤ 24 / 12）；可选：层叠的弹窗副本数（4–30）、1–6 条通知、吉祥物尺寸（`mascotSize`）。"
+    },
+    "fits": {
+      "zh": "帮人接活的产品的开场：先是过载，再是一根线接走一切。"
+    },
+    "notFor": {
+      "zh": "安静的开场；不是替人接活的产品；要一条条读的堆。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "problem"
+    ],
+    "subjects": [
+      "ui",
+      "cursor",
+      "abstract"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "desktop chaos",
+        "overload",
+        "thread",
+        "pierce",
+        "swallow",
+        "opening",
+        "agent",
+        "mascot size",
+        "copies"
+      ],
+      "zh": [
+        "桌面混乱",
+        "过载",
+        "穿线",
+        "串联",
+        "一口吞",
+        "开场",
+        "智能体",
+        "吉祥物尺寸",
+        "副本数"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "spine-intro",
+        "note": "next: the product names itself from the thread"
+      },
+      {
+        "id": "thread-pierce",
+        "note": "its threading"
+      },
+      {
+        "id": "reel-in",
+        "note": "its pull"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Only the note and the freeze line are read: keep everything else short; the freeze line holds while the bed breaks.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it.",
+        "A film's own mascot (`mascot`) is drawn in the 60 px box unless `mascotSize` gives its own: about 90 px sitting and 240 px dropped keep it the hero of the threading."
+      ],
+      "zh": [
+        "只有便签和定格那句要读：其余都要短；定格那句停住时音乐床断开。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。",
+        "影片自己的吉祥物（`mascot`）默认塞进 60 px 的框，要用 `mascotSize` 给尺寸：坐着约 90 px、掉进桌面约 240 px，串联时它才是主角。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      24,
+      44
+    ],
+    "sec120": [
+      12,
+      22
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderOpen; sched.js open; plan.js openItems and the opening's path"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/desk-threaded/brick.js",
+  "card": "scene/desk-threaded/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,175 @@
+{
+  "id": "word-ignite",
+  "category": "motion",
+  "name": {
+    "en": "Word ignite",
+    "zh": "词语点亮"
+  },
+  "summary": {
+    "en": "One word of a line takes the beat: a charge of light sweeps through it and leaves it glowing, or it lands hollow inside a closing aiming ring and is lit solid on one frame.",
+    "zh": "一句话里的一个词接住这一拍：一道光从左到右给它充能后持续泛光；或空心字落进收拢的瞄准圈，一帧内点亮成实心。"
+  },
+  "fits": "The one payoff word of a slogan at the film's peak (faster, yours, the product name), on the drop of the music.",
+  "notFor": "More than once a film; light grounds (both ways glow and are tuned for a dark ground); a word that is not the selling point of its line; dossier and blueprint styles (too loud).",
+  "select": {
+    "intent": {
+      "en": "Only the selling word gets the charge, so the viewer knows which word the line is for; outline nails it down in two landings, size then substance.",
+      "zh": "整句里只有卖点词被“通电”，观众知道这句话为哪个词而说；outline 式用两次落定（先尺寸、后质感）把它钉死。"
+    },
+    "content": {
+      "en": "A line (≤ 30 chars) and the one word in it to light (≤ 8 chars); outline works best on a single short word alone (≤ 6 letters, 4 Chinese).",
+      "zh": "一句话（≤ 14 字）和其中要点亮的那个词（≤ 4 字）；outline 式最适合单独一个短词（≤ 6 个字母，中文 4 字）。"
+    },
+    "fits": {
+      "zh": "全片高潮处口号里那一个卖点词（更快、你的、产品名），落在音乐的 drop 上。"
+    },
+    "notFor": {
+      "zh": "一支片用两次以上；浅色底（两式都靠发光，按深底调的）；不是句中卖点的词；dossier、blueprint 风格（太吵）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "claim"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "supercharged",
+        "gradient sweep",
+        "word glow",
+        "outline fill",
+        "aiming ring",
+        "payoff word",
+        "slogan"
+      ],
+      "zh": [
+        "渐变充能词",
+        "空心字点亮",
+        "关键词通电",
+        "充能",
+        "瞄准圈",
+        "卖点词",
+        "口号帧"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "The rest of the line stays still and plain; if everything moves, nothing is \"the one word lit\".",
+        "sweep must be fast (15–20 frames) and brightest at the front; slower it reads as a progress bar.",
+        "outline fills on one frame, never a fade, and wants a short hard sound on that frame."
+      ],
+      "zh": [
+        "关键词以外的字保持静止、不上色；全句都动就没有“只有它通电”的戏。",
+        "sweep 要快（15–20 帧）且波前最亮，慢了读作进度条。",
+        "outline 的填充必须一帧硬切、不能渐变，并在那一帧配一记短促重音。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "gradient-word-sweep",
+        "name": "渐变充能词",
+        "card": "渐变充能词",
+        "summary": "黑底标语里关键词被渐变彩光从左到右快速扫过\"充能\"——波前字符辉光最强向后衰减，填满后字符间勾连细紫红闪电、整词稳态泛光呼吸",
+        "use": "标语里给单个动词/卖点词充能（Supercharged/faster/AI…）；能量高潮段的文字戏；黑场品牌片的口号帧",
+        "energy": "高（一词爆点，前后都该让位）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/gradient-word-sweep.mp4"
+      },
+      {
+        "key": "outline-word-fill",
+        "name": "空心字点亮",
+        "card": "空心字点亮",
+        "summary": "空心词（细暖灰描边、500 字重）从 3.2 倍急缓收缩落位，虚线大圆随后从 2.8 倍收到字周围并缓慢自转，左右水平虚线从画框边缘内伸；描边先微微增亮，实心白热字在一帧内硬切点亮，一闪辉光即定格",
+        "use": "单词式利益点/口号的重锤一拍；节奏卡点上的\"钉子\"镜；深底品牌片的强调帧",
+        "energy": "高（3.2 倍收缩 + 瞬时点亮，短时高冲击）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/outline-word-fill.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      4,
+      5
+    ]
+  },
+  "tier": "T2",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "dossier",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "gradient-word-sweep",
+        "path": "demos/typography/gradient-word-sweep/GradientWordSweep.tsx",
+        "card": "references/shots/typography/gradient-word-sweep.md"
+      },
+      {
+        "key": "outline-word-fill",
+        "path": "demos/typography/outline-word-fill/OutlineWordFill.tsx",
+        "card": "references/shots/typography/outline-word-fill.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "outline-word-fill"
+  ],
+  "overlaps": [
+    {
+      "id": "whiteout-slam",
+      "note": "whiteout-slam flashes the whole frame on the peak; word-ignite keeps the peak on one word"
+    },
+    {
+      "id": "marker-stroke",
+      "note": "a quiet hand-drawn mark under the key word; word-ignite is the loud peak"
+    },
+    {
+      "id": "type-sync",
+      "note": "words lit in time with a voice or a beat; word-ignite lights one word once"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/word-ignite/brick.js",
+  "card": "motion/word-ignite/CARD.md",
+  "compare": {
+    "ssimMean": 0.4305,
+    "ssimMin": 0.4216,
+    "ssimDrop": 0.0024,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

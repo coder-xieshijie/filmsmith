@@ -1,0 +1,122 @@
+{
+  "id": "numeral-chapter",
+  "category": "scene",
+  "name": {
+    "en": "Numeral chapter",
+    "zh": "数字章节"
+  },
+  "summary": {
+    "en": "A chapter card: a 640 px numeral on one side, a mono label, the chapter title at 225 px over a 12 px ink rule and a caption; the numeral steps 6 px on every beat while it holds.",
+    "zh": "章节卡：一侧是 640 px 的巨型数字，另一侧是等宽标签、225 px 的章节标题、12 px 墨线和一行说明；停留时数字每拍挪 6 px。"
+  },
+  "fits": "Between parts of a claim-plus-steps film: one card per chapter, two seconds each.",
+  "notFor": "Films with one part; titles longer than two words; a film already paced by another chapter device.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "The film announces its structure like a poster series: a giant numeral says where you are before the page says what.",
+      "zh": "片子像一套海报那样报出结构：先用巨型数字说“第几部分”，再由页面说“是什么”。"
+    },
+    "content": {
+      "en": "Number (1–2 digits), label (≤ 14 chars), title (≤ 14 chars), caption (≤ 40 chars); side left or right.",
+      "zh": "编号（1–2 位）、标签（≤ 6 字）、标题（≤ 5 字）、说明（≤ 16 字）；数字在左或在右。"
+    },
+    "fits": {
+      "zh": "“主张 + 步骤”型片子各部分之间：每章一张卡，各约两秒。"
+    },
+    "notFor": {
+      "zh": "只有一部分的片子；超过两个词的标题；已经用别的章节手法定节奏的片子。"
+    },
+    "roles": [
+      "turn",
+      "rest"
+    ],
+    "subjects": [
+      "number",
+      "title"
+    ],
+    "moods": [
+      "editorial",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "chapter card",
+        "giant numeral",
+        "section opener",
+        "Swiss poster",
+        "part number"
+      ],
+      "zh": [
+        "章节卡",
+        "巨型数字",
+        "分节",
+        "瑞士海报",
+        "第几部分"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "option-pick",
+        "note": "a chapter page after it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Two chapter cards in a row lose the numeral's weight; put a page between them."
+      ],
+      "zh": [
+        "两张章节卡挨着放，巨型数字就失去分量；中间要隔一页。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      12
+    ],
+    "sec120": [
+      1.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (chapter)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/numeral-chapter/brick.js",
+  "card": "scene/numeral-chapter/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

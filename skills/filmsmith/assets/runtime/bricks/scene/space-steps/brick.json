@@ -1,0 +1,151 @@
+{
+  "id": "space-steps",
+  "category": "scene",
+  "name": {
+    "en": "Space steps",
+    "zh": "空间三章"
+  },
+  "summary": {
+    "en": "Three chapter cards hang in one 3D space; the camera holds on each, flies to the next as its title rises, then pulls back to show all three under the closing line.",
+    "zh": "三张章节卡悬在同一个 3D 空间里，相机逐张停留、飞往下一张，标题随落位升起，最后拉远看全三张，收尾一句话升起。"
+  },
+  "fits": "A film or section told in three steps or chapters, with a line that sums them up (demo, turn, lockup).",
+  "notFor": "More or fewer than three steps; chapters that need more than a title and a line; a camera that should stay still.",
+  "select": {
+    "intent": {
+      "en": "Three steps told as three places in one space: each chapter gets its own angle, and the pull-back at the end shows how they make one whole.",
+      "zh": "把三步讲成同一空间里的三个地方：每章换一个空间视角，最后拉远让观众看到三者合成一个整体。"
+    },
+    "content": {
+      "en": "Three chapters, each a kicker (≤ 14 chars, Chinese ≤ 6 characters), a one-word title (≤ 9 chars, Chinese ≤ 4) and a line (≤ 40 chars, Chinese ≤ 14); a closing headline (≤ 20 chars, Chinese ≤ 8).",
+      "zh": "三章，每章一个眉题（≤ 14 字符、中文 ≤ 6 字）、一个单词标题（≤ 9 字符、中文 ≤ 4 字）和一行说明（≤ 40 字符、中文 ≤ 14 字）；收尾标题（≤ 20 字符、中文 ≤ 8 字）。"
+    },
+    "fits": {
+      "zh": "分三步或三章讲的一支片或一段，加一句总括（演示、转折、落版）。"
+    },
+    "notFor": {
+      "zh": "多于或少于三步；每章要的不只是一个标题加一行字；镜头应当不动。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "demo",
+      "turn",
+      "lockup"
+    ],
+    "subjects": [
+      "cards",
+      "space",
+      "title"
+    ],
+    "moods": [
+      "cinematic",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "three steps",
+        "impress.js",
+        "roadmap",
+        "3D chapters",
+        "spatial slides",
+        "overview pull-back"
+      ],
+      "zh": [
+        "空间步进演示",
+        "空间三章",
+        "三步法",
+        "路线图",
+        "章节卡",
+        "总览拉远"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Keep the text on the rolled third card short; it only reads once the camera rights it."
+      ],
+      "zh": [
+        "侧躺的第三张卡字要短；转正后才读得出。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "basic-3d-scene",
+        "name": "空间步进演示",
+        "card": "空间步进演示",
+        "summary": "impress.js 式空间演示：卡片以不同位置/旋转/缩放散布 3D 空间，相机取各步姿态之逆依次飞行对齐，末步拉到 OVERVIEW 总览",
+        "use": "概念/路线图/三步法的空间化讲述；替代平面 slides 的\"每一步都换个空间视角\"",
+        "energy": "中（每次转场有空间惊喜，停留段安静读卡）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/basic-3d-scene.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      15,
+      15
+    ],
+    "sec120": [
+      7.5,
+      7.5
+    ]
+  },
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "basic-3d-scene",
+        "path": "demos/camera/basic-3d-scene/Basic3DScene.tsx",
+        "card": "references/shots/camera/basic-3d-scene.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "pose-fly",
+      "note": "pose-fly is one flight between two cards; space-steps chains three of them with holds, the chapter content and the closing plate"
+    },
+    {
+      "id": "chapter-push",
+      "note": "chapter-push pushes through flat chapter cards; space-steps flies between cards posed in 3D"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/space-steps/brick.js",
+  "card": "scene/space-steps/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.7707,
+    "ssimMin": 0.7309,
+    "ssimDrop": 0.026,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

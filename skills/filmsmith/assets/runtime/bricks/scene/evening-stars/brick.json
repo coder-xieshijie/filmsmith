@@ -1,0 +1,140 @@
+{
+  "id": "evening-stars",
+  "category": "scene",
+  "name": {
+    "en": "Evening stars",
+    "zh": "一晚上的星"
+  },
+  "summary": {
+    "en": "One evening of asks: the chat block lowers and a task list grows out beside it; every ask adds a running row and launches a star from its ring; then a burst of unnamed tasks (those past the film's `ui.cap` queued; without it the last two) and the list's counts. Too many to read is the point.",
+    "zh": "一晚上的请求：对话块下移，旁边长出任务列表；每个请求加一行进行中的任务，并从它的环里飞出一颗星；然后是一阵没名字的任务（超过整片 `ui.cap` 的在排队；没设时最后两个）和列表的计数。多到读不完正是要说的。"
+  },
+  "fits": "Showing volume after the single loop: the product takes many things in one evening.",
+  "notFor": "A scene where each task must be read; fewer than three asks.",
+  "select": {
+    "intent": {
+      "en": "Make the sky fill up: the scale of what is handed off, felt rather than read.",
+      "zh": "让夜空被填满：交出去的量是感到的，不是读到的。"
+    },
+    "content": {
+      "en": "A caption, 3–8 asks (each a bubble and a task title, read at a glance), a number of further tasks (0–16); optional: a file chip on an ask, a progress line on its row, the list's filter tabs, and one quoted follow-up sent along a beam to an earlier task's star (after the burst, or between the asks); file chips inside the bubbles.",
+      "zh": "一句字幕、3–8 个请求（每个是一个气泡和一个任务标题，一扫而过）、额外任务数（0–16）；可选：交代带文件签、任务行第二行进展、列表筛选页签，以及一条引用补充沿光束续派给之前那颗星（排在一口气派出之后，或插在派发之间）；文件签画进气泡里。"
+    },
+    "fits": {
+      "zh": "单个循环之后展示量：一晚上接下很多事。"
+    },
+    "notFor": {
+      "zh": "每件任务都要读的场景；少于三个请求。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "list",
+      "abstract"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "task list",
+        "burst",
+        "many tasks",
+        "stars",
+        "queue",
+        "evening",
+        "follow-up",
+        "tabs",
+        "progress",
+        "quote"
+      ],
+      "zh": [
+        "任务列表",
+        "爆发",
+        "很多任务",
+        "星",
+        "排队",
+        "晚上",
+        "续派",
+        "页签",
+        "进展",
+        "引用"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "ask-to-star",
+        "note": "before: the single loop"
+      },
+      {
+        "id": "job-constellation",
+        "note": "next: one job that keeps going"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Only the caption is read; the rows scroll by. Do not raise their size to make them readable, the point is that there are too many.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "只有字幕要读；任务行是滚过去的。不要为了能读而放大它们，要说的正是太多了。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      12,
+      36
+    ],
+    "sec120": [
+      6,
+      18
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderEvening, listScrollEased, renderBG stars; sched.js evening"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/evening-stars/brick.js",
+  "card": "scene/evening-stars/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

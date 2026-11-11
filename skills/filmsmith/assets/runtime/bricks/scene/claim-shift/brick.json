@@ -1,0 +1,123 @@
+{
+  "id": "claim-shift",
+  "category": "scene",
+  "name": {
+    "en": "Claim shift",
+    "zh": "移到下一条"
+  },
+  "summary": {
+    "en": "On the same exhibit, the lit band and the stroke move to the next printed claim, the leader following; the old claim sinks off the mat and the new one rises.",
+    "zh": "在同一份证物上，亮带和划痕一起移到下一条印出的断言，引线跟着走；旧断言从垫板沉下，新断言升起。"
+  },
+  "fits": "A second or third claim printed on the same page.",
+  "notFor": "claims on another page (a new exhibit); more than three claims on one page.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Keep the page and move the eye: the next claim is a step down the same evidence.",
+      "zh": "页面不动，视线移动：下一条断言就在同一份证据里往下一步。"
+    },
+    "content": {
+      "en": "The box of the next printed claim, the claim (≤ 8 words) and its terms.",
+      "zh": "下一条断言印出位置的框，断言（≤ 20 字）和条件。"
+    },
+    "fits": {
+      "zh": "同一页上印着的第二、第三条断言。"
+    },
+    "notFor": {
+      "zh": "在另一页上的断言（换新证物）；一页超过三条断言。"
+    },
+    "roles": [
+      "problem",
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "image",
+      "chart",
+      "metric"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "band move",
+        "next claim",
+        "highlighter",
+        "same page"
+      ],
+      "zh": [
+        "移动亮带",
+        "下一条断言",
+        "荧光笔",
+        "同一页"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "exhibit-strike",
+        "note": "the exhibit it continues"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The band moves; it never fades out and in."
+      ],
+      "zh": [
+        "亮带是移过去的，不是淡出再淡入。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      3,
+      8
+    ],
+    "sec120": [
+      1.5,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "dossier"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the dossier source film planOf claim; film.js bandAt, buildMat"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/claim-shift/brick.js",
+  "card": "scene/claim-shift/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

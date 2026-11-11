@@ -1,0 +1,137 @@
+{
+  "id": "beam-return",
+  "category": "motion",
+  "name": {
+    "en": "Beam return",
+    "zh": "沿线回传"
+  },
+  "summary": {
+    "en": "A job goes out along a beam and its result comes back along it: a star leaves the thread along an arc, drawing the beam behind it, and settles with its name and \"Running\"; later a bead of light runs back along the arc and the status turns to \"Done\". The beam stays, dim.",
+    "zh": "一件活沿光束派出、结果沿同一条光束回来：星沿弧线离开主线、身后拉出光束，停下后标出名字和“进行中”；之后一粒光沿弧线跑回主线，状态变成“已完成”。光束留下，变暗。"
+  },
+  "fits": "Long-running jobs the product keeps going in the background; a result that returns.",
+  "notFor": "Results that are not tied to a job; more than about six beams at once.",
+  "select": {
+    "intent": {
+      "en": "Show that what goes out comes back, along the same line.",
+      "zh": "让人看到派出去的会沿同一条线回来。"
+    },
+    "content": {
+      "en": "A label (≤ 30 characters / 15 Chinese characters), a running and a done status.",
+      "zh": "一个名字（≤ 30 字符 / 15 个汉字），进行中与完成两个状态。"
+    },
+    "fits": {
+      "zh": "产品在后台持续跑的活；结果回来的那一下。"
+    },
+    "notFor": {
+      "zh": "和某件活无关的结果；同时超过六条左右的光束。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "climax"
+    ],
+    "subjects": [
+      "diagram",
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "beam",
+        "return",
+        "result",
+        "dispatch",
+        "status",
+        "round trip",
+        "bead of light"
+      ],
+      "zh": [
+        "光束",
+        "回传",
+        "结果",
+        "派出",
+        "状态",
+        "往返",
+        "光点"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "job-constellation",
+        "note": "the scene that runs three of them"
+      },
+      {
+        "id": "star-launch",
+        "note": "the short version: a task leaves as a star"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The bead runs the same arc backwards: a straight return line reads as a second connection.",
+        "Cross-fade the status after the bead arrives (0.6–0.8 s), never before it."
+      ],
+      "zh": [
+        "光点沿同一条弧倒着跑：走直线回来会被看成第二条连接。",
+        "光点到了之后再交叉淡入状态（0.6–0.8 秒），不能提前。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      6
+    ]
+  },
+  "tier": "T1",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderConst (the beam with the star, io2 over 0.6 s at 0.42; the bead on 1 − io2 over 0.7 s; the status cross-fade); plan.js CONST"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "path-flow",
+      "note": "packets run along drawn paths into one sink; beam-return draws one beam outwards with its star and sends one result back"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/beam-return/brick.js",
+  "card": "motion/beam-return/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

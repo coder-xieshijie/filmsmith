@@ -1,0 +1,108 @@
+{
+  "id": "ruled-ledger",
+  "category": "prop",
+  "name": {
+    "en": "Ruled ledger",
+    "zh": "格线账本"
+  },
+  "summary": {
+    "en": "A ruled ledger page that holds the count as hand-drawn dots: a small titled card that pushes in to the full page, its rules leaving and returning.",
+    "zh": "用手绘圆点装计数的格线账页：带标题的小卡片原地推成整页，格线退下又回来。"
+  },
+  "fits": "Holding every counted item as a dot so later scenes can sort the same dots.",
+  "notFor": "Exact tables; counts over a few thousand.",
+  "select": {
+    "intent": {
+      "en": "Let the viewer see the count as a heap of real items, the same heap that will be sorted into the answer.",
+      "zh": "让观众把计数看成一堆真东西，后面正是这堆被分成答案。"
+    },
+    "content": {
+      "en": "A title (≤ 16 / 8) and a number of dots (up to about 1,200).",
+      "zh": "标题（≤ 16 / 8）和点数（约 1,200 以内）。"
+    },
+    "fits": {
+      "zh": "把数到的每件事装成一颗点，后面的场景再分同一批点。"
+    },
+    "notFor": {
+      "zh": "精确表格；几千以上的数量。"
+    },
+    "roles": [
+      "problem",
+      "demo"
+    ],
+    "subjects": [
+      "list",
+      "number"
+    ],
+    "moods": [
+      "calm",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "ledger",
+        "ruled page",
+        "dots",
+        "heap",
+        "tally",
+        "one dot one item"
+      ],
+      "zh": [
+        "账本",
+        "格线纸",
+        "圆点",
+        "一堆",
+        "计数",
+        "一点一件"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "The dots are illustrative positions; say so with the dashed note."
+      ],
+      "zh": [
+        "点的位置是示意，配虚线注说明。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/filmsmith/assets/kits/terminal-ledger/starter/components/ledger.js, marks.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "unit-count",
+      "note": "a grid of squares beside a big number (keynote); here a heap of dots on a ruled page"
+    }
+  ],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "prop/ruled-ledger/brick.js",
+  "card": "prop/ruled-ledger/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

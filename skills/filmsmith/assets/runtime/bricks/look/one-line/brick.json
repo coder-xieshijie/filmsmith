@@ -1,0 +1,116 @@
+{
+  "id": "one-line",
+  "category": "look",
+  "name": {
+    "en": "One line",
+    "zh": "一条线"
+  },
+  "summary": {
+    "en": "The thread look: one line colour that becomes everything on a near-black ground, a second ground (the field) only for large areas, a heavy variable grotesque, a serif italic voice and mono for what is typed; volume only where something is an object.",
+    "zh": "thread 的样式：近黑底上只有一种线色，它依次变成一切；第二种底色（场色）只铺大面积；粗的可变怪诞体、斜体衬线的旁白声、敲出来的字用等宽；只有“物体”才有体积。"
+  },
+  "fits": "Reels of video, motion and rendering tools, editors and creative tools.",
+  "notFor": "Subjects that are not a video tool (the chain says “making a video”); films that need photographs; a second accent.",
+  "select": {
+    "intent": {
+      "en": "A motion designer's reel cut as one unbroken transformation, in one line colour.",
+      "zh": "像动效设计师的作品集那样，一条线色、一次不断的变形。"
+    },
+    "content": {
+      "en": "A video, motion or rendering tool and about six steps it really performs.",
+      "zh": "一个视频、动效或渲染工具，以及它真做的大约六步。"
+    },
+    "fits": {
+      "zh": "视频、动效、渲染工具，剪辑器与创意工具的作品集短片。"
+    },
+    "notFor": {
+      "zh": "不是视频工具的主题（这条链本身就在说“做视频”）；需要照片的片子；第二种强调色。"
+    },
+    "subjects": [
+      "abstract",
+      "title",
+      "timeline"
+    ],
+    "moods": [
+      "playful",
+      "cinematic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "one line",
+        "vermilion",
+        "cobalt",
+        "reel",
+        "motion design",
+        "single accent"
+      ],
+      "zh": [
+        "一条线",
+        "朱红",
+        "钴蓝",
+        "作品集",
+        "动效设计",
+        "单一强调色"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "thread-line",
+        "note": "its line and engine"
+      },
+      {
+        "id": "thread-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "line-chain",
+        "note": "its arc"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "`vermilion` and `paper` are renamed `cobalt-vermilion` and `vermilion-paper` (the ids are taken by other looks).",
+        "The field is a ground, never a mark: a clip, a word or a detail in the field colour reads as a second accent."
+      ],
+      "zh": [
+        "vermilion 与 paper 改名为 cobalt-vermilion 和 vermilion-paper（这两个 id 已被别的样式占用）。",
+        "场色是底，不是记号：用场色标一段片段、一个词或一个细节，就成了第二种强调色。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/palettes.js; fx.js (FAMILY, TYPE, SPECIMEN)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "look/one-line/look.js",
+  "card": "look/one-line/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

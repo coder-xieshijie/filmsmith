@@ -1,0 +1,125 @@
+{
+  "id": "you-ends",
+  "category": "scene",
+  "name": {
+    "en": "You at both ends",
+    "zh": "两头是你"
+  },
+  "summary": {
+    "en": "A pipeline with you at both ends: the title decodes, nodes land every half beat (the first and last are you, outlined in ink), links light, a bracket names what the machine runs between, and a dot loops back from the last machine step to the first.",
+    "zh": "两头都是你的管线：标题解码出现，节点每半拍落下一个（首尾是你，用墨色描边），连线亮起，括号标出中间由机器运行的部分，一个光点从最后一个机器步骤绕回第一个。"
+  },
+  "fits": "The film's point that a person sets the work and signs it off, the machine does the middle.",
+  "notFor": "Pipelines without a person; more than six steps; a loop that is not a retry.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Put the person at the start and the end of the machine's work, visibly.",
+      "zh": "让人明明白白地站在机器工作的起点和终点。"
+    },
+    "content": {
+      "en": "A title in two halves (≤ 5 words), a sub (≤ 6 words), 3–6 nodes (tag, name, sub; the ends marked you), a bracket label, a loop label.",
+      "zh": "两半的标题（≤ 10 字）、副标（≤ 12 字）、3–6 个节点（标签、名称、说明；首尾标为你）、括号说明、回环说明。"
+    },
+    "fits": {
+      "zh": "片子要说的是：人定下工作、人签字收尾，中间交给机器。"
+    },
+    "notFor": {
+      "zh": "没有人的管线；超过六步；不是重试的回环。"
+    },
+    "roles": [
+      "claim",
+      "proof"
+    ],
+    "subjects": [
+      "diagram",
+      "list"
+    ],
+    "moods": [
+      "technical",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "human in the loop",
+        "pipeline",
+        "both ends",
+        "bracket",
+        "loop back",
+        "sign-off"
+      ],
+      "zh": [
+        "人在回路中",
+        "管线",
+        "两头",
+        "括号",
+        "回环",
+        "签字"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "install-cards",
+        "note": "the rest after it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Plakat's human-loop says the same in print; do not use both in one film."
+      ],
+      "zh": [
+        "plakat 的 human-loop 用印刷的方式讲同一件事；一部片子里不要两个都用。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      16
+    ],
+    "sec120": [
+      3,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.ends; events.js TIMING.ends"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/you-ends/brick.js",
+  "card": "scene/you-ends/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

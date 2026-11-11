@@ -1,0 +1,201 @@
+{
+  "id": "slam-drop",
+  "category": "motion",
+  "name": {
+    "en": "Slam drop",
+    "zh": "砸落"
+  },
+  "summary": {
+    "en": "A card hangs near the camera, drops with an accelerating ease-in and lands with a ring, shards, a flash and a shake.",
+    "zh": "卡片悬在镜头前，加速砸进自己的位置；落点那一帧冲击环、碎片、白闪和震屏同时起。"
+  },
+  "fits": "A heavy card landing: the headline number, the result, the one feature that matters; the slot drop when the page already has neighbours.",
+  "notFor": "More than two landings a film; calm, editorial or paper styles; text that must be read while it falls.",
+  "select": {
+    "intent": {
+      "en": "The card lands with weight: the viewer feels it is heavy, and in the slot drop sees the force travel to its neighbours.",
+      "zh": "卡片带着重量砸下：观众感到它很重；slot 式还能看见冲击力传到邻居身上。"
+    },
+    "content": {
+      "en": "One card in the scene (its rect), usually a headline number or result; for slot, the rects of its neighbours already on the page.",
+      "zh": "场景里的一张卡（给出位置框），通常是大数字或结果；slot 式还要给出页面上已在场的邻卡位置。"
+    },
+    "fits": {
+      "zh": "一张有分量的卡落地：大数字、结果、最要紧的那个功能；页面上已有邻卡时用 slot 落位。"
+    },
+    "notFor": {
+      "zh": "一支片超过两次落地；安静、编辑感或纸墨风格（用 plate-slip）；下落途中就要读的字。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "proof"
+    ],
+    "subjects": [
+      "cards",
+      "number"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "slam",
+        "score slam",
+        "impact burst",
+        "drop in",
+        "screen shake",
+        "KPI card",
+        "combo hit"
+      ],
+      "zh": [
+        "比分砸入",
+        "冲击爆点套件",
+        "连招计数",
+        "砸入式登场",
+        "砸落",
+        "震屏",
+        "KPI 卡登场"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "digit-roll",
+        "note": "the number on the landed card can roll to its value"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "At most two slams a film counting perspective-fling; one source of shake per shot.",
+        "In slot, the neighbours must have been still for at least 15 frames before they are knocked, or the cause is lost.",
+        "The ring needs contrast: a saturated ring over a white pressure disc on light grounds, a white core with a coloured glow on dark (set dark).",
+        "The landing wants a boom on the same frame; silent, the burst reads as a twitch."
+      ],
+      "zh": [
+        "连同 perspective-fling 全片砸入最多两次；一个镜头只有一个震源。",
+        "slot 式的邻卡要先静止至少 15 帧再被撞开，否则看不出因果。",
+        "冲击环要有反差：浅底上用饱和色环配白色压力盘，深底上用白芯加色辉（开 dark）。",
+        "落地帧要同帧配音爆，无声的三件套读作抽搐。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "score-slam",
+        "name": "比分砸入",
+        "card": "砸入式登场",
+        "summary": "卡从 scale 2.5/rotate 5° 六帧 Easing.in(quad) 砸落，落点帧圆环扩散+尘点飞散+震屏同帧",
+        "use": "主角卡/KPI 卡的重拳入场；impact-feedback 管落位后的反馈，本卡管入场本身就是冲击",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/score-slam.mp4"
+      },
+      {
+        "key": "impact-burst-kit",
+        "name": "冲击爆点套件",
+        "card": "砸入式登场",
+        "summary": "B 三件套 + 冲击波前沿按半径-距离精算扫过邻卡帧，邻卡外推 30px + rotate ±3° 阻尼弹回",
+        "use": "主角卡/KPI 卡的重拳入场；impact-feedback 管落位后的反馈，本卡管入场本身就是冲击",
+        "energy": "高",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/impact-burst-kit.mp4"
+      },
+      {
+        "key": "hit-counter",
+        "name": "连招计数",
+        "card": "冲击反馈",
+        "summary": "三卡接连砸入，每命中 = 顿帧 2f + 伤害数字上浮 + ×N 计数跳字逐次加码",
+        "use": "元素落位/撞击的\"命中一瞬\"——给砸入、撞停加游戏级手感；按强度阶梯选式",
+        "energy": "高（瞬时冲击）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/hit-counter.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 2.4,
+    "range": [
+      2,
+      4.4
+    ]
+  },
+  "tier": "T2",
+  "family": "zoom-depth",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse",
+      "tally",
+      "plakat"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "blueprint",
+      "stream",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "score-slam",
+        "path": "demos/effects/slam-entrance-moves/ScoreSlam.tsx",
+        "card": "references/shots/effects/slam-entrance-moves.md"
+      },
+      {
+        "key": "impact-burst-kit",
+        "path": "demos/effects/slam-entrance-moves/ImpactBurstKit.tsx",
+        "card": "references/shots/effects/slam-entrance-moves.md"
+      },
+      {
+        "key": "hit-counter",
+        "path": "demos/effects/impact-feedback/HitCounter.tsx",
+        "card": "references/shots/effects/impact-feedback.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "impact-burst-kit",
+    "hit-counter"
+  ],
+  "overlaps": [
+    {
+      "id": "perspective-fling",
+      "note": "the same weight class on another axis: flung in from the side with a perspective snap"
+    },
+    {
+      "id": "feed-stack",
+      "note": "cards set down on a stack, no impact"
+    },
+    {
+      "id": "impact-frame",
+      "note": "the hit after a crash zoom; a film takes one of the two as its peak"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/slam-drop/brick.js",
+  "card": "motion/slam-drop/CARD.md",
+  "compare": {
+    "ssimMean": 0.4864,
+    "ssimMin": 0.4097,
+    "ssimDrop": 0.0242,
+    "trackDevPx": 12.8,
+    "progressRmse": 0.0122,
+    "eventFrames": 1,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

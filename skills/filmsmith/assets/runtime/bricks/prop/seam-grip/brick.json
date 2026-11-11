@@ -1,0 +1,107 @@
+{
+  "id": "seam-grip",
+  "category": "prop",
+  "name": {
+    "en": "Seam and grip",
+    "zh": "接缝与把手"
+  },
+  "summary": {
+    "en": "The split style’s one actor: a 6 px accent seam with a paper key each side, its grip tab, and the chip beside it that names where the result comes from; it carries the engine and the scene machinery of the split scenes.",
+    "zh": "split 风格唯一的主角：两侧带纸色描边的 6 px 强调色接缝、它的把手，以及把手旁写明结果来源的标签；也承载 split 各场景共用的引擎与场景机制。"
+  },
+  "fits": "Dividing input from result for a whole film.",
+  "notFor": "Decorative rules; dividing two results of the same kind.",
+  "select": {
+    "intent": {
+      "en": "One boundary the eye can follow from the first caret to the last frame.",
+      "zh": "一条眼睛能从第一个光标一直跟到最后一帧的边界。"
+    },
+    "content": {
+      "en": "A result (frame, render or page) and its source line for the chip (≤ 52 characters).",
+      "zh": "一个结果（画格、渲染或页面）和标签上的来源（≤ 52 字符）。"
+    },
+    "fits": {
+      "zh": "整支片里分开输入与结果。"
+    },
+    "notFor": {
+      "zh": "装饰性的分隔线；分开两个同类结果。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "climax",
+      "lockup"
+    ],
+    "subjects": [
+      "code",
+      "image"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "seam",
+        "divider",
+        "grip",
+        "source chip",
+        "split view"
+      ],
+      "zh": [
+        "接缝",
+        "分隔条",
+        "把手",
+        "来源标签",
+        "分栏"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "The chip names the source and nothing else."
+      ],
+      "zh": [
+        "标签只写来源，别的不写。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/lib/handoffs/seam.js, film.js (chip, gripV, gripH, caret)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/seam-grip/brick.js",
+  "card": "prop/seam-grip/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

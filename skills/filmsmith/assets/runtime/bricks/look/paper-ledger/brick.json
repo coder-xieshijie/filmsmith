@@ -1,0 +1,102 @@
+{
+  "id": "paper-ledger",
+  "category": "look",
+  "name": {
+    "en": "Paper ledger",
+    "zh": "纸面账本"
+  },
+  "summary": {
+    "en": "Warm paper and dark ink: light terminal windows with a hard offset shadow, a ruled ledger of hand-drawn dots, one colour per meaning, a chapter label top left and one counter top right.",
+    "zh": "暖纸深墨：带硬投影的浅色终端窗、手绘圆点的格线账本、一种颜色一种含义，左上章节标签、右上一个计数器。"
+  },
+  "fits": "Narrated explainers that argue from a count: what an agent does, who waits for whom, what share needs a person.",
+  "notFor": "Music-driven teasers; dark or glossy product looks; diagrams of a system (use sketch-paper).",
+  "select": {
+    "intent": {
+      "en": "Make a count feel like evidence kept by hand: every item a dot on paper, every colour a meaning the narrator names.",
+      "zh": "让计数像手记的证据：每件事是纸上一颗点，每种颜色是解说点名的一种含义。"
+    },
+    "content": {
+      "en": "A narrated film with counts; the presenter reserve (1580–1880 × 560–860) and the caption band (y ≥ 880) kept empty.",
+      "zh": "带解说和计数的片子；主讲人预留区（1580–1880 × 560–860）与字幕带（y ≥ 880）留空。"
+    },
+    "fits": {
+      "zh": "用计数讲道理的解说片：agent 做了什么、谁在等谁、多大比例要人来定。"
+    },
+    "notFor": {
+      "zh": "音乐驱动的预告片；暗色或光泽感的产品风；系统结构图（用 sketch-paper）。"
+    },
+    "subjects": [
+      "terminal",
+      "number",
+      "list"
+    ],
+    "moods": [
+      "warm",
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "ledger",
+        "paper and ink",
+        "light terminal",
+        "hand-drawn dots",
+        "vermilion",
+        "counter",
+        "explainer"
+      ],
+      "zh": [
+        "账本",
+        "纸与墨",
+        "浅色终端",
+        "手绘圆点",
+        "朱红",
+        "计数器",
+        "解说片",
+        "文楷"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Vermilion is only the person (a decision, a hand mark); never decoration.",
+        "Keep the presenter reserve and the caption band empty in every scene."
+      ],
+      "zh": [
+        "朱红只给“人”（决定、手画标记），不做装饰。",
+        "每个场景都让出主讲人预留区和字幕带。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/filmsmith/assets/kits/terminal-ledger/starter/tokens.js, style.css"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "look/paper-ledger/look.js",
+  "card": "look/paper-ledger/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

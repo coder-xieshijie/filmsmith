@@ -1,0 +1,147 @@
+{
+  "id": "beat-list",
+  "category": "scene",
+  "name": {
+    "en": "Beat list",
+    "zh": "踩拍清单"
+  },
+  "summary": {
+    "en": "A list steps up one row per beat; the word in the lens changes tone and face, and the ground follows it, all on the beat.",
+    "zh": "一列词每拍上移一行，取景框里的词换色调换字形，背景跟着变，全都踩在拍上。"
+  },
+  "fits": "A run of five to ten names the film wants felt rather than read: features, formats, users (hook, demo, rest).",
+  "notFor": "Items that need a line each; fewer than five items; films without a steady beat.",
+  "select": {
+    "intent": {
+      "en": "A run of names felt rather than read: one word a beat, each catching the lens and retinting the whole frame, so the list becomes a metronome.",
+      "zh": "一串名字用来“感受”而不是读：每拍一个词进取景框，整屏跟着换色调，清单成了节拍器。"
+    },
+    "content": {
+      "en": "A lead of 1–3 words (Chinese ≤ 4 characters), 5–10 one-word items (≤ 10 chars, Chinese ≤ 3 characters), a counter label and an optional tagline (≤ 28 chars, Chinese ≤ 12 characters).",
+      "zh": "引导词 1–3 个词（中文 ≤ 4 字），5–10 个单词条目（≤ 10 字符、中文 ≤ 3 字），一个计数标签，收尾标语可选（≤ 28 字符、中文 ≤ 12 字）。"
+    },
+    "fits": {
+      "zh": "想让观众“感受到”而不是逐条读的五到十个名字：功能、格式、用户。"
+    },
+    "notFor": {
+      "zh": "每项要配一行说明；不到五项；没有稳定节拍的片子。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "demo",
+      "rest"
+    ],
+    "subjects": [
+      "list",
+      "title"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "beat list",
+        "word list on the beat",
+        "theme cycle",
+        "metronome",
+        "kinetic list",
+        "many modes"
+      ],
+      "zh": [
+        "节拍列表换色",
+        "踩拍清单",
+        "逐拍换词",
+        "换主题色",
+        "节拍器",
+        "多种气质"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Sound-dependent: put every jump on a kick of the bed; without the beat it reads as the UI twitching.",
+        "Jump in the first frames of the beat and hold still for the rest; a smooth scroll is just a list.",
+        "Give more words than jumps (beats + 2), or the list visibly runs out at the end."
+      ],
+      "zh": [
+        "强依赖声音：每次跳都对齐配乐的鼓点；没有节拍读成界面抽风。",
+        "跳只占拍头几帧，其余时间静止；匀速滚动就只是列表。",
+        "词数要比跳数多（拍数 + 2），否则最后露出“下面没了”。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "beat-step-list-theme-cycle",
+        "name": "节拍列表换色",
+        "card": "节拍列表换色",
+        "summary": "三通道节拍器——深色场形容词列表逐拍上移一行，视口中央固定胶囊\"接住\"下一个词并换色，整场底色同拍跟换；行、色、场三通道锁死同一拍点",
+        "use": "\"同一产品多种气质/多主题展示\"段落（modern/playful/expressive 式形容词连打）；全片节奏最密的一段；音乐段对拍",
+        "energy": "高（0.6s 一拍三通道齐跳，密度型高能）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/beat-step-list-theme-cycle.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      12
+    ],
+    "sec120": [
+      3,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "beat-step-list-theme-cycle",
+        "path": "demos/rhythm/beat-step-list-theme-cycle/BeatStepListThemeCycle.tsx",
+        "card": "references/shots/rhythm/beat-step-list-theme-cycle.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "stagger-in",
+      "note": "stagger-in brings a list in; beat-list steps through a list that is already there, one row a beat"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/beat-list/brick.js",
+  "card": "scene/beat-list/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.7004,
+    "ssimMin": 0.5835,
+    "ssimDrop": 0.1945,
+    "trackDevPx": 38.4,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "waived"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

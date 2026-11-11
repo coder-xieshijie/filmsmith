@@ -1,0 +1,154 @@
+{
+  "id": "needle-sweep",
+  "category": "motion",
+  "name": {
+    "en": "Needle sweep",
+    "zh": "满弧扫针"
+  },
+  "summary": {
+    "en": "Gauges self-test: each needle flings round the full arc lighting its ticks, springs back past its value and settles, the gauges a few frames apart; each value pops as its needle lands.",
+    "zh": "仪表点火自检：每根指针先甩满整条弧、扫过的刻度依次点亮，再弹簧回落、过冲一下停在读数上；几块表错峰几帧，指针落定同帧数值弹出。"
+  },
+  "fits": "Opening a dashboard section or revealing several readings at once: the scale first, then the values.",
+  "notFor": "A single headline number (use digit-roll or tape-run); values that are not shares of a known scale.",
+  "select": {
+    "intent": {
+      "en": "Show the full scale before the reading, so the viewer feels how big the number is; a ceremony of systems coming online.",
+      "zh": "先亮量程再报数，让观众感到数字有多大；系统就绪的开场仪式感。"
+    },
+    "content": {
+      "en": "2–4 readings that are shares of a known scale, each with a short name (≤ 12 chars); optional title and status.",
+      "zh": "2–4 个有明确量程的读数，各带一个短名称（≤ 6 字）；标题与状态可选。"
+    },
+    "fits": {
+      "zh": "仪表盘开场、一次揭晓几项指标：先量程、后数值。"
+    },
+    "notFor": {
+      "zh": "单个大数字（用 digit-roll 或 tape-run）；没有量程的数值。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "proof"
+    ],
+    "subjects": [
+      "metric"
+    ],
+    "moods": [
+      "mechanical",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "gauge",
+        "dial",
+        "needle",
+        "self-test",
+        "speedometer",
+        "KPI",
+        "dashboard"
+      ],
+      "zh": [
+        "仪表",
+        "表盘",
+        "指针",
+        "点火自检",
+        "满弧扫针",
+        "指标揭晓",
+        "仪表读数动效"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "digit-roll",
+        "note": "a headline number after the gauges settle"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Hold every needle dead still ≥ 1 s after it settles; drift reads as a bug.",
+        "Stagger the gauges a few frames; launched together they read as copies, not a wave."
+      ],
+      "zh": [
+        "指针落定后至少锁死 1 秒，尾漂像 bug。",
+        "几块表错开几帧起动；同时起动读成复制，不是一道波。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "needle-sweep-selftest",
+        "name": "满弧扫针自检",
+        "card": "仪表读数动效",
+        "summary": "指针去程 ~12f ease-out 甩满弧，回程 ~20f 带 5-8° 过冲回摆落真值；多表错峰 3-5f；落定同帧盘下数值弹出",
+        "use": "dashboard 开场仪式/性能指标揭晓；A 多表盘开机感，B 单指标大跳变",
+        "energy": "中高（机械仪式型）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/needle-sweep-selftest.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      5
+    ]
+  },
+  "tier": "T1",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "halftone",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "needle-sweep-selftest",
+        "path": "demos/data/gauge-readout-moves/NeedleSweepSelftest.tsx",
+        "card": "references/shots/data/gauge-readout-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "dial-sweep",
+      "note": "a ring of numbers sweeps and its answer flies into the title; needle-sweep keeps the dial and moves a needle over it"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/needle-sweep/brick.js",
+  "card": "motion/needle-sweep/CARD.md",
+  "compare": {
+    "ssimMean": 0.722,
+    "ssimMin": 0.7056,
+    "ssimDrop": 0,
+    "trackDevPx": 3.8,
+    "progressRmse": 0.0007,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

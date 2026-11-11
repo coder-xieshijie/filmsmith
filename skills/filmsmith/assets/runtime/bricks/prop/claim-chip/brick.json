@@ -1,0 +1,105 @@
+{
+  "id": "claim-chip",
+  "category": "prop",
+  "name": {
+    "en": "Claim chip",
+    "zh": "主张标签"
+  },
+  "summary": {
+    "en": "The claim a print carries, set in code on label stock on a glass above it: a pencil tick, a short label over a large value, a shadow on the print.",
+    "zh": "一张截图所承载的主张，用代码排在它上方玻璃层的标签纸上：一道铅笔竖线，短标签在上，大数值在下，投影落在截图上。"
+  },
+  "fits": "One number or name a print proves, kept readable over the print.",
+  "notFor": "Several claims on one print; long sentences.",
+  "select": {
+    "intent": {
+      "en": "The one thing to remember from a print, restated in code where it cannot be misread.",
+      "zh": "从一张截图里要记住的那一件事，用代码重新写出来，不会读错。"
+    },
+    "content": {
+      "en": "A label (≤ 26 chars / 12 字) and a value (≤ 11 chars / 6 字) printed in the asset (or `~` when read off an axis).",
+      "zh": "标签（≤ 26 字符 / 12 字）和素材里印着的数值（≤ 11 字符 / 6 字；从坐标轴读出的写 `~`）。"
+    },
+    "fits": {
+      "zh": "一张截图证明的那个数字或名字，在截图上方保持可读。"
+    },
+    "notFor": {
+      "zh": "一张截图上多条主张；长句。"
+    },
+    "roles": [
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "number",
+      "metric"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "claim chip",
+        "price tag",
+        "label card",
+        "value callout",
+        "pencil tick"
+      ],
+      "zh": [
+        "主张标签",
+        "价签",
+        "标签卡",
+        "数值标注",
+        "铅笔竖线"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Step it aside when a measure would lie under it."
+      ],
+      "zh": [
+        "有测量要画在它下面时先把它移开。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "exhibit",
+      "any launch argued from published evidence"
+    ],
+    "avoid": [
+      "tally",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/exhibit/film.js (chips), parallax-slide (chip)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/claim-chip/brick.js",
+  "card": "prop/claim-chip/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

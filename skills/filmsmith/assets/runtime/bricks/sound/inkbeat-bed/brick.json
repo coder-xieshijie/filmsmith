@@ -1,0 +1,107 @@
+{
+  "id": "inkbeat-bed",
+  "category": "sound",
+  "name": {
+    "en": "Ink beat",
+    "zh": "墨点节拍"
+  },
+  "summary": {
+    "en": "The ink sound: F-minor minimal techno, a build with no kick, half a bar of silence, the first drop on the name and the second on the claim; a stamp on every slam, a thud on every hop.",
+    "zh": "ink 的声音：F 小调极简 techno，没有底鼓的铺垫，半小节静默，第一次 drop 在名字上、第二次在断言上；每次砸字一记印章声，每次跳点一记闷响。"
+  },
+  "fits": "Beat-cut type films with a name drop and a claim, 20–45 s.",
+  "notFor": "Calm explainers; voice-over; films with one soft ending.",
+  "select": {
+    "intent": {
+      "en": "The type is the percussion: every slam has its stamp, and the two drops are the two things to remember.",
+      "zh": "字就是打击乐：每次砸字都有印章声，两次 drop 就是要记住的两件事。"
+    },
+    "content": {
+      "en": "An arc with a name and a claim; the ink bricks' picture events.",
+      "zh": "一条有名字和断言的骨架；ink 积木的画面事件。"
+    },
+    "fits": {
+      "zh": "有名字 drop 和断言的踩拍文字片，20–45 秒。"
+    },
+    "notFor": {
+      "zh": "安静的讲解片；有旁白的片；只有一个柔和结尾的片。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "F minor",
+        "minimal techno",
+        "two drops",
+        "stamp",
+        "build without kick"
+      ],
+      "zh": [
+        "F 小调",
+        "极简 techno",
+        "两次 drop",
+        "印章声",
+        "无底鼓铺垫"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "paper-slam",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the half bar of silence before each drop."
+      ],
+      "zh": [
+        "每次 drop 前保留半小节静默。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "bpm": [
+      120,
+      136
+    ]
+  },
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/score.mjs; lib/audio beds.mjs inkbeat"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "sound/inkbeat-bed/sound.js",
+  "card": "sound/inkbeat-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

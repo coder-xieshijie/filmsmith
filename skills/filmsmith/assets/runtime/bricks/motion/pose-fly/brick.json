@@ -1,0 +1,151 @@
+{
+  "id": "pose-fly",
+  "category": "motion",
+  "name": {
+    "en": "Pose fly",
+    "zh": "空间步进演示"
+  },
+  "summary": {
+    "en": "Cards hang in 3D space, each with its own position, turn and scale; the camera flies from one to the next by taking the inverse of its pose, so the card it lands on is square and at 1:1.",
+    "zh": "卡片散布在 3D 空间里，各有位置、转角和缩放；相机取下一张卡姿态之逆飞过去，落位时那张卡正对镜头、屏幕上 1:1。"
+  },
+  "fits": "Chapters of one story laid out in space (step 1, 2, 3, then the overview); a product tour where the order matters.",
+  "notFor": "Two unrelated scenes (there is no space to fly through); dense text on the cards in flight (they blur).",
+  "select": {
+    "intent": {
+      "en": "Turning the page becomes travelling through a space of ideas: each card has its own place and angle, so arriving at it feels like entering a new chapter.",
+      "zh": "把“翻页”变成在想法的空间里旅行：每张卡有自己的位置和角度，飞到它面前就像进入新的一章。"
+    },
+    "content": {
+      "en": "Wraps two or more cards (scene painters) and the pose of each; text on the cards stays short, since a rolled card is only readable once square.",
+      "zh": "包住两张以上的卡（场景画面）及各自姿态；卡上的字要短，侧躺的卡转正后才读得清。"
+    },
+    "fits": {
+      "zh": "一个故事的几章摆在空间里（第 1、2、3 步，再到总览）；讲究顺序的产品导览。"
+    },
+    "notFor": {
+      "zh": "两场毫不相关（没有空间可飞）；飞行中要读的密集文字（会糊）。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "turn"
+    ],
+    "subjects": [
+      "cards",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "impress.js",
+        "3D steps",
+        "camera flight",
+        "spatial slides",
+        "roadmap",
+        "chapter flight",
+        "prezi"
+      ],
+      "zh": [
+        "空间步进演示",
+        "空间飞行",
+        "三步法",
+        "路线图",
+        "卡片 3D 散布",
+        "相机取逆",
+        "章节旅行"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "space-steps",
+        "note": "three flights with holds and an overview"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the text on rolled cards short: it only reads once the camera has righted it.",
+        "A title that hangs in the world is tilted in flight: fade it in after half the flight."
+      ],
+      "zh": [
+        "侧躺的卡字要短：转正后才读得出。",
+        "挂在空间里的标题飞行中是斜的：过半程再淡入。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "basic-3d-scene",
+        "name": "空间步进演示",
+        "card": "空间步进演示",
+        "summary": "impress.js 式空间演示：卡片以不同位置/旋转/缩放散布 3D 空间，相机取各步姿态之逆依次飞行对齐，末步拉到 OVERVIEW 总览",
+        "use": "概念/路线图/三步法的空间化讲述；替代平面 slides 的\"每一步都换个空间视角\"",
+        "energy": "中（每次转场有空间惊喜，停留段安静读卡）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/basic-3d-scene.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 2,
+    "range": [
+      1.5,
+      3
+    ]
+  },
+  "tier": "T2",
+  "family": "zoom-depth",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip",
+      "split",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "basic-3d-scene",
+        "path": "demos/camera/basic-3d-scene/Basic3DScene.tsx",
+        "card": "references/shots/camera/basic-3d-scene.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/pose-fly/brick.js",
+  "card": "motion/pose-fly/CARD.md",
+  "compare": {
+    "ssimMean": 0.7604,
+    "ssimMin": 0.7024,
+    "ssimDrop": 0.0043,
+    "trackDevPx": 21.6,
+    "progressRmse": 0.0032,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

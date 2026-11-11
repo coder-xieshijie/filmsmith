@@ -1,0 +1,138 @@
+{
+  "id": "doc-page",
+  "category": "prop",
+  "name": {
+    "en": "Doc page",
+    "zh": "文档页"
+  },
+  "summary": {
+    "en": "A source document as an object: a page of title, meta and sections that can scroll in its frame and mark any line.",
+    "zh": "作为物件的来源文档：标题、元信息和分节正文的一页，能在框里滚动，能给任意一行划上荧光笔。"
+  },
+  "fits": "Any scene that needs the source a claim comes from on screen: a brief, a report, a contract, a paper; written lines where they matter and skeleton lines elsewhere.",
+  "notFor": "A real screenshot of a product page (use the film's own asset); reading a whole document (only the marked lines are meant to be read); code (use an editor prop).",
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "doc-park-left-pill-deal",
+        "path": "demos/ui-entrance/doc-park-left-pill-deal/DocParkLeftPillDeal.tsx",
+        "card": "references/shots/ui-entrance/doc-park-left-pill-deal.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "tile-card",
+      "note": "the note layout is a card in a set; doc-page is one tall page with sections, scroll and marks"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Keep the source on screen, so every claim drawn from it visibly comes from a real document instead of floating in the air.",
+      "zh": "让来源文档留在画面里，从它引出的每条结论都看得出出处，而不是空中楼阁。"
+    },
+    "content": {
+      "en": "A document's title, one meta line and 6–40 lines of headings and paragraphs; only 1–3 evidence lines need real text (en ≤ 64 chars, zh ≤ 28 chars), the rest can be skeleton bars.",
+      "zh": "一份文档的标题、一行元信息、6–40 行小标题与正文；只有 1–3 行证据句需要真文字（英文 ≤ 64 字符，中文 ≤ 28 字），其余可以是骨架条。"
+    },
+    "fits": {
+      "zh": "任何需要把结论的出处摆上屏的场景：需求简报、报告、合同、论文；要紧的几行写真文字，其余用骨架行。"
+    },
+    "notFor": {
+      "zh": "产品页面的真实截图（用影片自己的素材）；让观众读完整份文档（只有划线的那几行是给人读的）；代码（用编辑器类道具）。"
+    },
+    "roles": [
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "text",
+      "ui"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "document",
+        "source page",
+        "brief",
+        "report",
+        "highlighter",
+        "marked line",
+        "evidence",
+        "scrolling doc"
+      ],
+      "zh": [
+        "文档页",
+        "来源文档",
+        "需求简报",
+        "报告",
+        "荧光笔划线",
+        "证据行",
+        "文档驻留",
+        "滚动文档"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "doc-findings",
+        "note": "the scene that parks this page and deals findings from its marked lines"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The text must be longer than the whole scroll, or the page scrolls into blank space at the end.",
+        "Write real text only on the lines that are read; a page full of readable sentences pulls the eye off the findings."
+      ],
+      "zh": [
+        "正文要比整段滚动行程长，否则末段滚出空白。",
+        "只在要读的几行写真文字；满页可读的句子会把视线从结论上拉走。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "doc-park-left-pill-deal",
+        "name": "文档驻留发牌",
+        "card": "文档驻留发牌",
+        "summary": "文档不淡出而是向左滑出只露约 35% 宽并微缩到 0.92，右侧按旁白节奏慢速发牌三张白底描边药丸（outBack 弹入），每张落定后其下方字幕逐词加深、下一张到来前整句淡出，左侧文档全程极缓慢自动滚动保持\"正在被读\"",
+        "use": "旁白驱动的\"分析结论逐条给出\"段落；文档理解、推荐理由、审阅意见类产品的核心说明镜头",
+        "energy": "低（慢发牌节奏，全片无峰值；靠自动滚动维持活性）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/doc-park-left-pill-deal.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "prop/doc-page/brick.js",
+  "card": "prop/doc-page/CARD.md",
+  "compare": {
+    "ssimMean": null,
+    "ssimMin": null,
+    "trackDevPx": null,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

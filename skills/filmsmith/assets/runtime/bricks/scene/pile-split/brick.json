@@ -1,0 +1,128 @@
+{
+  "id": "pile-split",
+  "category": "scene",
+  "name": {
+    "en": "Pile split",
+    "zh": "分堆再拆"
+  },
+  "summary": {
+    "en": "The count sorted into the answer: the ledger card pushes in to the full page, the heap splits into piles with a share and chips; then one pile splits again into what needs a judgement and the rest.",
+    "zh": "把计数分成答案：账本卡片推成整页，一堆分成几堆，标出比例和例子；再把其中一堆拆成需要判断的和其余的。"
+  },
+  "fits": "The answer of an explainer told as shares of the same items.",
+  "notFor": "More than two groups at the first split; exact percentages that must be read to the decimal.",
+  "select": {
+    "intent": {
+      "en": "Let the viewer feel the proportion first, then read the figure, then see the part that still needs a person.",
+      "zh": "先让观众感到比例，再读到数字，再看到其中仍需要人的那一部分。"
+    },
+    "content": {
+      "en": "Two groups (count, colour, share ≤ 6 chars, count line ≤ 14 / 7, up to three example chips ≤ 12 / 4); the second may split in two with a label (≤ 14 / 6).",
+      "zh": "两组（数量、颜色、比例 ≤ 6 字符、数量说明 ≤ 14 / 7、至多 3 个例子 ≤ 12 / 4）；第二组可再拆成两份并带标签（≤ 14 / 6）。"
+    },
+    "fits": {
+      "zh": "解说片的答案用同一批东西的比例讲出来。"
+    },
+    "notFor": {
+      "zh": "第一次分超过两组；要精确到小数的百分比。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "turn"
+    ],
+    "subjects": [
+      "number",
+      "list"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "share",
+        "split",
+        "piles",
+        "percentage",
+        "needs a judgement",
+        "sorted by"
+      ],
+      "zh": [
+        "占比",
+        "拆分",
+        "分堆",
+        "百分比",
+        "需要判断",
+        "分法"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "wall-ledger",
+        "note": "before"
+      },
+      {
+        "id": "hand-mark",
+        "note": "a brace or circle on the share"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Name the rule of the sort (\"sorted by\") before the dots move.",
+        "The re-split takes its dots from one pile only; the other pile stays still."
+      ],
+      "zh": [
+        "点动之前先说出分法。",
+        "再拆只从一堆里取点，另一堆不动。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      40
+    ],
+    "sec120": [
+      5,
+      20
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film 15.8–27.4 s; skills/filmsmith/assets/kits/terminal-ledger/starter/components/ledger.js, labels.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "scene/pile-split/brick.js",
+  "card": "scene/pile-split/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

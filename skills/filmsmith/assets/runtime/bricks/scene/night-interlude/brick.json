@@ -1,0 +1,140 @@
+{
+  "id": "night-interlude",
+  "category": "scene",
+  "name": {
+    "en": "Night interlude",
+    "zh": "收束后的一段夜空"
+  },
+  "summary": {
+    "en": "A stretch of the stream night after the closing sweep for a film's own composition: the sky goes on with the film's motes and push, and the mascot stays on its perch or leaves the frame to the composition.",
+    "zh": "收束之后留一段 stream 的夜空给片子自己的合成：夜空照整片的微尘与推进继续，吉祥物留在线顶，或把画面让给合成。"
+  },
+  "fits": "A section the stream skeleton has no scene for (a draw, an offer, a reveal) after the close, or an ending of the film's own in place of the lock-up.",
+  "notFor": "Anything a stream scene already draws; a stretch with nothing over it (the night alone is a held frame); before the close (the stars are still in the sky there).",
+  "select": {
+    "intent": {
+      "en": "Keep the film one continuous night past the close, so the film's own section or ending sits in the same sky with no seam.",
+      "zh": "让收束之后仍是同一片夜空，片子自己的段落或结尾放在里面，看不出接缝。"
+    },
+    "content": {
+      "en": "Nothing to read: its length in beats (the composition's own) and whether the mascot stays on its perch; the composition over it is the film's.",
+      "zh": "没有字：长度（拍数，按合成自己的需要）和吉祥物留不留在线顶；上面的合成由片子自己画。"
+    },
+    "fits": {
+      "zh": "收束之后 stream 骨架里没有的段落（抽奖、福利、揭晓），或代替落版的片子自己的结尾。"
+    },
+    "notFor": {
+      "zh": "stream 场景已经能画的东西；上面什么都不放（只剩夜空就是一帧定格）；收束之前（那时星还在天上）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "rest",
+      "lockup"
+    ],
+    "subjects": [
+      "abstract",
+      "space"
+    ],
+    "moods": [
+      "calm",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "interlude",
+        "night",
+        "insert",
+        "extra section",
+        "own ending",
+        "continuity",
+        "sky"
+      ],
+      "zh": [
+        "插段",
+        "夜空",
+        "插入段落",
+        "自定义结尾",
+        "接缝",
+        "延续"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "split-fuse",
+        "note": "a reveal over it as the film's own ending"
+      },
+      {
+        "id": "sky-gather",
+        "note": "the close it follows"
+      },
+      {
+        "id": "point-lockup",
+        "note": "or the lock-up after it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Give it the composition's length: the film's sky push and the lock-up after it are laid out with it, so a host that redraws the sky with another length shows a seam.",
+        "With `perch: false` the composition draws the mascot where it takes it from: the perch is at (230, 156), the size the film's `mascotSize.sit`.",
+        "As the film's last scene it takes the film's rounding to a whole bar: read its length from the plan, not from `beats`."
+      ],
+      "zh": [
+        "长度给合成自己的长度：整片夜空的推进和后面的落版都按它排，宿主用别的长度重画夜空就会露接缝。",
+        "`perch: false` 时吉祥物由合成从线顶接走：线顶在 (230, 156)，大小是整片的 `mascotSize.sit`。",
+        "它是整片最后一场时会吃掉整片取整到整小节的余量：长度以排出来的为准，不以 `beats` 为准。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      1,
+      64
+    ],
+    "sec120": [
+      0.5,
+      32
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "prop/glow-thread sched.js interlude (the engine's scene after the close)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/night-interlude/brick.js",
+  "card": "scene/night-interlude/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick of the stream engine: no upstream shot; checked instead in a stream film whose own section and ending sat on a placeholder lock-up (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · 第 6 轮选 L，尾部换成 M 的合体揭晓（合体段不要标签）；补进 Skill"
+}

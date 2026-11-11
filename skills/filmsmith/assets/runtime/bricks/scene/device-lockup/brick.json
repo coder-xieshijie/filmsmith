@@ -1,0 +1,127 @@
+{
+  "id": "device-lockup",
+  "category": "scene",
+  "name": {
+    "en": "Device lock-up",
+    "zh": "设备落版"
+  },
+  "summary": {
+    "en": "Back to the product’s surface at rest (a pull back, a feed or the film’s one flip), the screen recedes under the veil, the margin gives the mark, the name, the line and the address; the region is ringed once more on the last downbeat.",
+    "zh": "回到产品静止的画面（拉远、升起或全片唯一一次翻转），屏幕整体蒙暗退后，页边给出标志、名字、一行说明和网址；最后一个强拍再圈一次区域。"
+  },
+  "fits": "The close of a film told on one device.",
+  "notFor": "A logo card on a gradient; an app-store badge or QR end card.",
+  "select": {
+    "intent": {
+      "en": "The film ends where the user meets the product, with the name and where to get it.",
+      "zh": "片子结束在用户见到产品的地方，配上名字和去哪里获取。"
+    },
+    "content": {
+      "en": "The product’s surface at rest; an optional mark image; the name (≤ 10 chars / 5 字), a line (≤ 18 / 14 字), the address (≤ 30 chars).",
+      "zh": "产品静止时的画面；可选标志图；名字（≤ 10 字符 / 5 字）、一行（≤ 18 / 14 字）、网址（≤ 30 字符）。"
+    },
+    "fits": {
+      "zh": "在一台设备上讲的片子的收尾。"
+    },
+    "notFor": {
+      "zh": "渐变底上的标志卡；应用商店徽章或二维码尾卡。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "device",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "lock-up",
+        "end card",
+        "download page",
+        "name and URL",
+        "second move",
+        "device close"
+      ],
+      "zh": [
+        "落版",
+        "尾卡",
+        "下载页",
+        "名字和网址",
+        "二次动作",
+        "设备收尾"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "screen-change",
+        "note": "the flip is usually spent here"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Hold the address at least 3 s.",
+        "Use the flip here only if the film has not turned the device yet."
+      ],
+      "zh": [
+        "网址至少停 3 秒。",
+        "只有全片还没翻转过时才在这里翻转。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      24
+    ],
+    "sec120": [
+      4,
+      12
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/choreo.js (TYPES.lockup), film.js (light all)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/device-lockup/brick.js",
+  "card": "scene/device-lockup/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

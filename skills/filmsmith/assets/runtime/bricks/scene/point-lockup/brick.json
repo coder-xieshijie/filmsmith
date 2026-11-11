@@ -1,0 +1,135 @@
+{
+  "id": "point-lockup",
+  "category": "scene",
+  "name": {
+    "en": "Point lockup",
+    "zh": "一点收成名字"
+  },
+  "summary": {
+    "en": "The stream lock-up, two endings: `name` (the mascot winds to the centre and becomes the point the name opens out of; the thread opens with it and settles as a rule under it) or `mascot` (the name opens and the mascot hops from the top of the spine onto the end of the wordmark); the tagline rises a word (a character) at a time.",
+    "zh": "stream 的落版，两种结尾：`name`（吉祥物缠到画面中央变成一个点，名字从这个点里展开，线随之打开、停成名字下面的一道线）或 `mascot`（名字展开，吉祥物从主干顶端跳到字标末尾）；标语按词（中文按字）升起。"
+  },
+  "fits": "The end of a stream film; any product with a short name and a one-line tagline.",
+  "notFor": "A long name (over 10 characters); a lock-up that needs a URL or a button.",
+  "select": {
+    "intent": {
+      "en": "End where everything went: the one point becomes the name.",
+      "zh": "在一切归去的地方结束：那一个点变成名字。"
+    },
+    "content": {
+      "en": "A name (≤ 10 characters) and a tagline (one line).",
+      "zh": "一个名字（≤ 10 字符）和一句标语（一行）。"
+    },
+    "fits": {
+      "zh": "stream 片的结尾；名字短、标语一行的任何产品。"
+    },
+    "notFor": {
+      "zh": "长名字（超过 10 字符）；需要网址或按钮的落版。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "elegant",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "lockup",
+        "logo",
+        "name",
+        "tagline",
+        "end card",
+        "point"
+      ],
+      "zh": [
+        "落版",
+        "标志",
+        "名字",
+        "标语",
+        "片尾",
+        "一个点"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "yarn-mascot",
+        "note": "the mascot ending"
+      },
+      {
+        "id": "sky-gather",
+        "note": "before: the claim"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The tagline rises per word in English and per character in Chinese: keep it to one line or it wraps under the rule.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "标语英文按词、中文按字升起：只写一行，否则会折到线下面。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      14,
+      22
+    ],
+    "sec120": [
+      7,
+      11
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderLock; sched.js lockup"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "perch-lockup",
+      "note": "both end with a mascot perching on the wordmark; perch-lockup drops the mascot in and adds a suffix and a pill, point-lockup winds the thread's mascot into a point or hops it from the spine"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/point-lockup/brick.js",
+  "card": "scene/point-lockup/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,126 @@
+{
+  "id": "install-cards",
+  "category": "scene",
+  "name": {
+    "en": "Install and step cards",
+    "zh": "安装与步骤卡"
+  },
+  "summary": {
+    "en": "Getting started under a musical break: the title decodes in two halves, a terminal rises and its commands type at reading pace, then the title and terminal leave and two to four step cards land alone, one a beat, on the drop.",
+    "zh": "在音乐的停顿里讲怎么开始：标题分两半解码出现，终端升起、命令按阅读速度敲出；随后标题和终端退场，二到四张步骤卡在落拍上一拍一张单独落下。"
+  },
+  "fits": "The rest before the climax of a CLI film: how to install, and the verbs the film has shown, as cards.",
+  "notFor": "More than two commands; steps that are not the film's own chapters; a product without a command line.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show how little it takes to start, then recap the film as the verbs you will type.",
+      "zh": "先说明开始有多简单，再用你会敲的那几个动词把整片回顾一遍。"
+    },
+    "content": {
+      "en": "A title (≤ 4 words, or its two halves), the window's title and right label, 1–2 commands, 2–4 steps of a command and a label (≤ 4 words).",
+      "zh": "一句标题（≤ 12 字，或给出两半）、窗口标题和右侧标签、1–2 条命令、2–4 个步骤（命令 + ≤ 8 字说明）。"
+    },
+    "fits": {
+      "zh": "命令行工具片子高潮前的停顿：怎么安装，再把片子讲过的动词做成卡片。"
+    },
+    "notFor": {
+      "zh": "超过两条命令；步骤不是片子自己的章节；没有命令行的产品。"
+    },
+    "roles": [
+      "rest",
+      "demo"
+    ],
+    "subjects": [
+      "terminal",
+      "code",
+      "cards"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "install",
+        "getting started",
+        "terminal",
+        "step cards",
+        "npm install",
+        "quick start"
+      ],
+      "zh": [
+        "安装",
+        "快速开始",
+        "终端",
+        "步骤卡",
+        "一行命令",
+        "上手"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "slit-tagline",
+        "note": "the climax right after it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Time the host adds goes before the cards, not after them: the cards keep their own length into the climax."
+      ],
+      "zh": [
+        "宿主加出来的时间放在卡片之前，不放在之后：卡片保持自己的长度接进高潮。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      20
+    ],
+    "sec120": [
+      4,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.install; events.js TIMING.install"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/install-cards/brick.js",
+  "card": "scene/install-cards/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

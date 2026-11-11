@@ -1,0 +1,126 @@
+{
+  "id": "detail-walk",
+  "category": "scene",
+  "name": {
+    "en": "Detail walk",
+    "zh": "细节走查"
+  },
+  "summary": {
+    "en": "One layer enlarged and one task walked through it: messages hop between the parts round by round, a window shows the change, a round without a tool call stops the loop; optionally back to the overview.",
+    "zh": "放大一层，走一遍一个任务：消息逐轮在部件间跳，窗口显示改动，一轮没有工具调用就停下循环；可选回到总图。"
+  },
+  "fits": "The mechanism of an explainer: how a request moves through the parts, round by round.",
+  "notFor": "Static structure without a flow (use layer-overview); more than four rounds.",
+  "select": {
+    "intent": {
+      "en": "Make a mechanism concrete by following one real task through it until it stops.",
+      "zh": "跟着一个真实任务走到停下，把机制讲具体。"
+    },
+    "content": {
+      "en": "The overview it zooms from, the detail layout, a typed request (≤ 30 / 14), 1–24 message steps (≤ 22 / 10, kind, times), round labels, a repository window's lines, a stop line, a note.",
+      "zh": "放大前的总图、细节布局、一行输入（≤ 30 / 14）、1–24 步消息（≤ 22 / 10、类型、时刻）、轮次标签、仓库窗口的几行、停止说明、一条注。"
+    },
+    "fits": {
+      "zh": "解说片的机制部分：一个请求如何逐轮穿过各部件。"
+    },
+    "notFor": {
+      "zh": "没有流程的静态结构（用 layer-overview）；超过四轮。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "diagram",
+      "terminal",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "agent loop",
+        "walkthrough",
+        "request flow",
+        "rounds",
+        "tool call",
+        "stop condition",
+        "zoom in"
+      ],
+      "zh": [
+        "Agent Loop",
+        "走查",
+        "请求流程",
+        "轮次",
+        "工具调用",
+        "停止条件",
+        "放大"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "layer-overview",
+        "note": "before"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Text the model writes waits between the model and the frame and types out there; never type it inside a moving chip.",
+        "A stop is shown on the loop itself (grey), not with a new symbol."
+      ],
+      "zh": [
+        "模型写的字停在模型和框之间逐字打出；不要在移动中的签里打字。",
+        "停止要在循环本身上表现（变灰），不另加符号。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      16,
+      80
+    ],
+    "sec120": [
+      8,
+      40
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint-zoom"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the source film 11.97–43.4 s; skills/filmsmith/assets/kits/blueprint-zoom/starter/components/zoom.js, loop.js, message.js, line.js, term.js, status.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "scene/detail-walk/brick.js",
+  "card": "scene/detail-walk/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from blueprint-zoom kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

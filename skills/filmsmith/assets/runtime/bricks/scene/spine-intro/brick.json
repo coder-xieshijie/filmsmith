@@ -1,0 +1,136 @@
+{
+  "id": "spine-intro",
+  "category": "scene",
+  "name": {
+    "en": "Spine intro",
+    "zh": "线顶的自我介绍"
+  },
+  "summary": {
+    "en": "The product introduces itself from the top of the thread: its name lights beside the mascot, a point lights on the spine, a short light reaches right and the chat block unfolds from it; two lines from the product arrive as bubbles.",
+    "zh": "产品在线的顶端自我介绍：名字在吉祥物旁亮起，主干上亮一个点，一道短光向右伸出，对话块从那里展开；产品说的两句话以气泡出现。"
+  },
+  "fits": "Right after the hook: the product's name and what it promises, in its own voice.",
+  "notFor": "A product without a conversational interface; more than two lines.",
+  "select": {
+    "intent": {
+      "en": "Let the product speak for itself, from the thread that just took everything.",
+      "zh": "让产品亲口说话，从刚接走一切的那根线上。"
+    },
+    "content": {
+      "en": "A name (≤ 10 characters) and two lines (≤ 86 characters / 40 Chinese characters each); optional: the product's name large and one line of who it is, on the right of the block.",
+      "zh": "一个名字（≤ 10 字符）和两句话（每句 ≤ 86 字符 / 40 个汉字）；可选：右侧的大号产品名和一句身份。"
+    },
+    "fits": {
+      "zh": "开场之后：产品的名字和它的承诺，用它自己的口吻。"
+    },
+    "notFor": {
+      "zh": "没有对话式界面的产品；超过两句。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "turn",
+      "hook"
+    ],
+    "subjects": [
+      "ui",
+      "logo",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "introduction",
+        "chat",
+        "name",
+        "spine",
+        "bubbles",
+        "promise",
+        "product name",
+        "role"
+      ],
+      "zh": [
+        "自我介绍",
+        "对话",
+        "名字",
+        "主干",
+        "气泡",
+        "承诺",
+        "产品名",
+        "身份"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "desk-threaded",
+        "note": "before: the thread takes the pile"
+      },
+      {
+        "id": "hook-unfold",
+        "note": "how the chat block opens"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The chat block stays for the next scenes (its place is planned over the film): do not end on an empty spine.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it."
+      ],
+      "zh": [
+        "对话块在后面几场还会留着（位置是按整片排的）：不要以空主干结尾。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      12,
+      26
+    ],
+    "sec120": [
+      6,
+      13
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderSpine, renderChat; sched.js intro; plan.js cardAt"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/spine-intro/brick.js",
+  "card": "scene/spine-intro/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

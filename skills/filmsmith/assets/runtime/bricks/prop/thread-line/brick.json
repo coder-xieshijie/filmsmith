@@ -1,0 +1,114 @@
+{
+  "id": "thread-line",
+  "category": "prop",
+  "name": {
+    "en": "The thread",
+    "zh": "那条线"
+  },
+  "summary": {
+    "en": "The one object of a thread film, the line in the line colour in its profile (an even rule or a swelled rule), and the engine every thread scene draws with: the template's chain as a factory, its spheres and ink in WebGL.",
+    "zh": "thread 片子里唯一的物体：线色的那条线，带它的线形（等粗直线或中间鼓起的英式线）；也是每个 thread 场景用来画的引擎：模板的整条链做成工厂函数，球体和墨用 WebGL。"
+  },
+  "fits": "Every scene of a thread film; a line that becomes a caret or a playhead elsewhere.",
+  "notFor": "A line that must carry text or a status; more than one line colour.",
+  "select": {
+    "intent": {
+      "en": "Keep one object on screen through the whole film: whatever happens, the line was there before and is there after.",
+      "zh": "让同一个物体贯穿整部片：不管发生什么，那条线之前在、之后也在。"
+    },
+    "content": {
+      "en": "Nothing to read: the line's form (line, caret, playhead) and profile.",
+      "zh": "没有字：只有线的形态（线、光标、播放头）和线形。"
+    },
+    "fits": {
+      "zh": "thread 片子的每个场景；别处一条要变成光标或播放头的线。"
+    },
+    "notFor": {
+      "zh": "要承载文字或状态的线；超过一种线色。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "lockup"
+    ],
+    "subjects": [
+      "abstract",
+      "cursor",
+      "timeline"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "line",
+        "caret",
+        "playhead",
+        "rule",
+        "swelled rule",
+        "thread"
+      ],
+      "zh": [
+        "线",
+        "光标",
+        "播放头",
+        "直线",
+        "英式线",
+        "一线"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "brief-loop",
+        "note": "every thread scene draws through its engine"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Under 4 px the line breaks the coloured-line-over-a-field rule: the swell's tips over the field carry nothing."
+      ],
+      "zh": [
+        "线细于 4 px 就违反“场色上的彩线”规则：英式线在场色上的尖端不承载任何东西。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js (threadRect, swellPath, the links); shots.js; fx.js; gl.js; timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/thread-line/brick.js",
+  "card": "prop/thread-line/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

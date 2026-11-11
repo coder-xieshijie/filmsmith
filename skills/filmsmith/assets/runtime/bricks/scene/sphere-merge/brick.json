@@ -1,0 +1,131 @@
+{
+  "id": "sphere-merge",
+  "category": "scene",
+  "name": {
+    "en": "Merging spheres",
+    "zh": "球体融合"
+  },
+  "summary": {
+    "en": "The merge link: the camera pushes through panel 3 into its shot, three glossy spheres on the field drift together, merge through a viscous neck, squash on landing and settle; the stage name under the sphere. Without the curves after it, the sphere squashes into the rod.",
+    "zh": "合并环节：镜头穿过第三格推进它的镜头，场色上三个光滑球体靠拢、经粘稠的颈部融合、落地压扁再回弹、静止；阶段名在球下。后面没有曲线环节时，球压成一根线。"
+  },
+  "fits": "A reel's shading or physics step; the middle of the short chain.",
+  "notFor": "Films without a WebGL host; anything that must look photoreal.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show volume, light and physics computed per frame, in the line colour.",
+      "zh": "用线色展示逐帧算出的体积、光和物理。"
+    },
+    "content": {
+      "en": "No copy of its own: the stage name and note.",
+      "zh": "本身没有文案：阶段名和注释。"
+    },
+    "fits": {
+      "zh": "作品集里的着色或物理一步；短链的中段。"
+    },
+    "notFor": {
+      "zh": "没有 WebGL 的宿主；必须照片级真实的画面。"
+    },
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "abstract",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "metaballs",
+        "spheres",
+        "merge",
+        "squash",
+        "WebGL",
+        "push in"
+      ],
+      "zh": [
+        "元球",
+        "球体",
+        "融合",
+        "压扁",
+        "WebGL",
+        "推进"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "panel-board",
+        "note": "the push starts from it"
+      },
+      {
+        "id": "ease-ruler",
+        "note": "the sphere becomes its rod"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Without WebGL the spheres fall back to flat discs (a P0 failure of the mode): render in a host with WebGL.",
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "没有 WebGL 时球体退化成平面圆（模式的 P0 失败）：要在支持 WebGL 的宿主里渲染。",
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      6,
+      12
+    ],
+    "sec120": [
+      3,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js merge; shots.js mergeState, squashState, MERGE_CUES; gl.js blob"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/sphere-merge/brick.js",
+  "card": "scene/sphere-merge/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}
