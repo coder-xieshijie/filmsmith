@@ -32,27 +32,11 @@ jobs:
             console.log("skills:", fs.readdirSync("skills").join(", "));
           '
 
-  keynote-video:
+  filmsmith:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: skills/keynote-video
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Syntax of every script and runtime module
-        run: |
-          find scripts assets/runtime assets/templates -name '*.mjs' -o -name '*.js' | grep -v '/test/' | while read -r f; do node --check "$f" || exit 1; done
-      - name: Timing runtime tests
-        run: node --test assets/runtime/test/timing.test.mjs
-
-  teach-video:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: skills/teach-video
+        working-directory: skills/filmsmith
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -61,8 +45,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Syntax of every script and kit module
+      - name: Syntax of every launch script, template and runtime module
         run: |
-          find scripts assets -name '*.mjs' -o -name '*.cjs' -o -name '*.js' | grep -v '/vendor/' | while read -r f; do node --check "$f" || exit 1; done
+          find scripts assets/runtime assets/templates -name '*.mjs' -o -name '*.js' | grep -v '/test/' | grep -v '/vendor/' | while read -r f; do node --check "$f" || exit 1; done
+      - name: Timing runtime tests
+        run: node --test assets/runtime/test/timing.test.mjs
+      - name: Syntax of every teach script and kit module
+        run: |
+          find scripts assets/kits -name '*.mjs' -o -name '*.cjs' -o -name '*.js' | grep -v '/vendor/' | while read -r f; do node --check "$f" || exit 1; done
           python -m py_compile scripts/voice/voice.py
-          for f in $(find scripts assets -name '*.sh'); do bash -n "$f" || exit 1; done
+          for f in $(find scripts assets/kits -name '*.sh'); do bash -n "$f" || exit 1; done
+      - name: Every link inside the skill resolves
+        run: node scripts/link-check.mjs

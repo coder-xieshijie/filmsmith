@@ -1,0 +1,130 @@
+{
+  "id": "screen-change",
+  "category": "scene",
+  "name": {
+    "en": "Screen change",
+    "zh": "屏幕换页"
+  },
+  "summary": {
+    "en": "The screen changes state while the device stays: the next capture rises like the next post of a feed, the page is flicked to its next stop, or the whole device turns once; then the copy group lands.",
+    "zh": "设备不动、屏幕换状态：下一张截图像信息流的下一条那样升上来、页面被甩到下一个停点，或整台设备翻转一次；然后文案组落定。"
+  },
+  "fits": "A change of surface (the official page after the app) or of stop on the same page.",
+  "notFor": "More than one flip a film; a cross-dissolve between states.",
+  "select": {
+    "intent": {
+      "en": "The device stays the through-line while the evidence changes under the glass.",
+      "zh": "设备始终是贯穿线索，证据在玻璃下更换。"
+    },
+    "content": {
+      "en": "The capture before and the capture after (or two stops of one long capture), each with its source line; the copy group as in screen-push.",
+      "zh": "换之前和之后的截图（或一张长截图上的两个停点），各带来源行；文案组同 screen-push。"
+    },
+    "fits": {
+      "zh": "换一个画面（应用之后的官方页面），或同一页换一个停点。"
+    },
+    "notFor": {
+      "zh": "一支片翻转超过一次；状态之间交叉淡化。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "demo",
+      "turn",
+      "proof"
+    ],
+    "subjects": [
+      "device",
+      "ui",
+      "image"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "feed stack",
+        "next capture rises",
+        "scroll reel",
+        "flick to stop",
+        "device flip",
+        "change surface"
+      ],
+      "zh": [
+        "信息流叠放",
+        "下一张升起",
+        "页面甩动",
+        "甩到停点",
+        "设备翻转",
+        "换页"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "row-band",
+        "note": "light the new surface’s rows"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Flip once a film at most; change surface with a feed.",
+        "The chin must change with the screen (half way through a feed, on the flip’s swap frame)."
+      ],
+      "zh": [
+        "一支片最多翻转一次；换画面用升起。",
+        "下巴要随屏幕换（升起到一半、翻转的切换帧）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      12
+    ],
+    "sec120": [
+      1.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/choreo.js (TYPES.feed, scroll, flip), moves.js (feed-stack, scroll-reel, device-flip adapters)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/screen-change/brick.js",
+  "card": "scene/screen-change/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

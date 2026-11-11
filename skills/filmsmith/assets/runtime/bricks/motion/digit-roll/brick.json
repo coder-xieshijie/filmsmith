@@ -1,0 +1,165 @@
+{
+  "id": "digit-roll",
+  "category": "motion",
+  "name": {
+    "en": "Digit roll",
+    "zh": "数字滚动"
+  },
+  "summary": {
+    "en": "A number changes like an odometer: each digit column rolls a full lap and lands on its new digit, one column after another.",
+    "zh": "数字像里程表一样变：每一位各自滚过一整圈再落到新数字上，从左到右一位接一位。"
+  },
+  "fits": "A counted value arriving or changing in place: a KPI, a total, a score that the next line states.",
+  "notFor": "Numbers that are not quantities (versions, ids, dates); more than one rolling number on screen at once.",
+  "select": {
+    "intent": {
+      "en": "The value reads as counted, not typed: the wheels carry over like an odometer and the width never jitters, so the eye reads the change.",
+      "zh": "数字读起来是数出来的而不是打出来的：每一位像里程表一样进位、宽度不抖，眼睛只看变化。"
+    },
+    "content": {
+      "en": "One number (old and new value, ≤ 9 digits with separators), an optional label (≤ 24 chars) and note.",
+      "zh": "一个数字（旧值和新值，≤ 9 位，可带分隔符），可选一个标签（≤ 10 字）和注释。"
+    },
+    "fits": {
+      "zh": "一个计数值就地出现或变化：KPI、总数、下一句要说的分数。"
+    },
+    "notFor": {
+      "zh": "不是数量的数字（版本号、编号、日期）；同屏不止一个滚动的数字。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "number",
+      "metric"
+    ],
+    "moods": [
+      "mechanical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "odometer",
+        "digit roll",
+        "counter",
+        "rolling number",
+        "KPI",
+        "tally",
+        "count up"
+      ],
+      "zh": [
+        "数字滚动",
+        "里程表",
+        "计数器",
+        "滚轮数字",
+        "列表堆叠压弹",
+        "纸张标题卡",
+        "跳数"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "axis-rescale",
+        "note": "the total rolls up once the new point lands"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "One rolling number on screen at a time; two rolls compete for the eye.",
+        "Only for quantities: a rolling version number or date reads as a slot machine."
+      ],
+      "zh": [
+        "同屏只滚一个数字，两个一起滚会抢视线。",
+        "只给数量用：版本号、日期滚起来像老虎机。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "list-stack-press",
+        "name": "列表堆叠压弹",
+        "card": "列表堆叠压弹",
+        "summary": "列表卡从画面底部逐张飞上摞起，每张落地压弹整摞、计数器同步跳一格",
+        "use": "feed/雷达/收件箱类\"每天有新东西\"的镜头；强调持续积累的资产列表",
+        "energy": "中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/list-stack-press.mp4"
+      },
+      {
+        "key": "paper-title-card",
+        "name": "纸张标题卡",
+        "card": "纸张标题卡",
+        "summary": "一句话逐词压印上纸、一个词标强调色斜体、短划线收束",
+        "use": "章节转场/价值主张字卡；重要功能出场前的引导卡；全片呼吸位",
+        "energy": "低（呼吸位，隔开两段高能镜头）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/paper-title-card.mp4"
+      }
+    ]
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 3,
+    "range": [
+      2,
+      4
+    ]
+  },
+  "tier": "T0",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft-lib",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "component": {
+      "path": "assets/lib/DigitRoll.tsx"
+    },
+    "usedBy": [
+      "list-stack-press",
+      "paper-title-card"
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "tally-flip",
+      "note": "a frame-level flip of the whole frame on a count; digit-roll changes one number in place"
+    },
+    {
+      "id": "scramble-resolve",
+      "note": "letters scramble and resolve into a word; digit-roll keeps every digit on its own reel"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/digit-roll/brick.js",
+  "card": "motion/digit-roll/CARD.md",
+  "compare": {
+    "ssimMean": null,
+    "ssimMin": null,
+    "ssimDrop": null,
+    "trackDevPx": null,
+    "progressRmse": null,
+    "eventFrames": null,
+    "verdict": "waived",
+    "reason": "adapts the library component assets/lib/DigitRoll.tsx, not a shot: no shot isolates the roll, so there is nothing frame-for-frame to compare with"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "print-read",
+  "category": "scene",
+  "name": {
+    "en": "Print read",
+    "zh": "截图读数"
+  },
+  "summary": {
+    "en": "One to three pencil rings draw round cells of a print; the cells lift out and turn into code-drawn readings with labels and notes, are read one by one, and go back.",
+    "zh": "铅笔在截图上圈出一到三个格子；格子抬起、变成代码画的读数卡，带标签和注释，逐张读过，再放回去。"
+  },
+  "fits": "The claim of a table or a report: the numbers that prove it.",
+  "notFor": "More than three cells; more than twice a film.",
+  "select": {
+    "intent": {
+      "en": "Lift the proof out of the evidence without leaving it: the reading and its source are one object.",
+      "zh": "把证据里的数字抬出来读，又不离开证据：读数与它的出处是同一个东西。"
+    },
+    "content": {
+      "en": "1–3 cells (box and glyph in file px, a value ≤ 8 chars, a label ≤ 18 chars / 9 字, an optional note); a caption.",
+      "zh": "1–3 个格子（文件像素的框与字形区，数值 ≤ 8 字符，标签 ≤ 18 字符 / 9 字，可选注释）；一句说明。"
+    },
+    "fits": {
+      "zh": "表格或报告的主张：证明它的那几个数。"
+    },
+    "notFor": {
+      "zh": "多于三个格子；一支片多于两次。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "claim"
+    ],
+    "subjects": [
+      "number",
+      "chart",
+      "list"
+    ],
+    "moods": [
+      "technical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "lift-out",
+        "readings",
+        "ring the cells",
+        "table to cards",
+        "benchmark rows"
+      ],
+      "zh": [
+        "抬出读数",
+        "读数卡",
+        "圈格子",
+        "表格变卡片",
+        "基准行"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "print-travel",
+        "note": "travel to the product after the proof"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Glyph boxes must sit on the printed value: the swap redraws it in place."
+      ],
+      "zh": [
+        "字形框要压在印出的数值上：切换时在原位重画。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      24
+    ],
+    "sec120": [
+      4,
+      12
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "exhibit",
+      "any launch argued from published evidence"
+    ],
+    "avoid": [
+      "tally",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/exhibit/choreo.js (read), moves.js (lift-out), film.js (readLayer)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/print-read/brick.js",
+  "card": "scene/print-read/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,147 @@
+{
+  "id": "graze-tour",
+  "category": "scene",
+  "name": {
+    "en": "Graze tour",
+    "zh": "贴面巡航"
+  },
+  "summary": {
+    "en": "The camera flies low over a product page in three legs, almost edge-on; the page's words hover with soft shadows and land as the camera passes them.",
+    "zh": "相机分三段贴着产品页面低飞，几乎与页面平行；页面上的字带着软阴影悬浮，镜头经过时依次落下。"
+  },
+  "fits": "A hook or a demo that shows the product's interface as a place, without reading it (demo, hook).",
+  "notFor": "Interfaces that must be read (the page is seen at a grazing angle); a single feature; light films that should stay flat.",
+  "select": {
+    "intent": {
+      "en": "The interface as a landscape: the camera skims its surface and the page completes itself as it passes, so the viewer feels inside the product's world.",
+      "zh": "把界面拍成地形：镜头贴着表面掠过，页面在镜头经过时自己完成，观众像身在产品的内里世界。"
+    },
+    "content": {
+      "en": "Product name, a section name, 6–10 tree items and 3–5 tabs (≤ 14 chars, Chinese ≤ 5 characters), a title and subtitle, 4–6 list rows; none of it is read closely.",
+      "zh": "产品名、分区名、6–10 个侧栏条目和 3–5 个标签（≤ 14 字符、中文 ≤ 5 字），一个标题和副标题，4–6 行列表；都不需要细读。"
+    },
+    "fits": {
+      "zh": "把产品界面当一个地方来展示、不要求读清的开场或演示。"
+    },
+    "notFor": {
+      "zh": "必须读清的界面（掠射角下看不清）；单个功能；要保持平面的明亮片子。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "hook"
+    ],
+    "subjects": [
+      "ui",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "graze",
+        "low flyover",
+        "surface camera",
+        "UI landscape",
+        "neon edge",
+        "camera skim"
+      ],
+      "zh": [
+        "贴面游走",
+        "贴面巡航",
+        "低飞掠过",
+        "界面当地形",
+        "霓虹缘光",
+        "内里世界"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Lift the hovering words (~1.3× brightness) so they are not swallowed by the dark; without visible hover the landing is lost.",
+        "Not in the same section as perspective-glide: there the page moves, here the camera does."
+      ],
+      "zh": [
+        "悬空的字要提亮约 1.3 倍，别被暗部吞掉；看不出悬浮，落定就白做了。",
+        "别和 perspective-glide 同段：那个页面动，这个镜头动。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "graze-face-tour",
+        "name": "贴面游走",
+        "card": "贴面游走",
+        "summary": "大倾角贴面游走特写——镜头贴着 UI 表面低飞掠过（侧栏树/顶栏/列表当地形），页面文字初始悬浮在界面上空带同形软影，随镜头行进先后加速贴落回界面",
+        "use": "功能区巡礼（把 UI 当地景飞掠）；配合暗场+霓虹缘光做产品\"内里世界\"段落；界面内容逐区登场",
+        "energy": "中高（运镜持续推进+元素连续落位，信息密度高）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/graze-face-tour.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      10
+    ],
+    "sec120": [
+      5,
+      5
+    ]
+  },
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "strip"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "graze-face-tour",
+        "path": "demos/camera/graze-face-tour/GrazeFaceTour.tsx",
+        "card": "references/shots/camera/graze-face-tour.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "float-land",
+      "note": "float-land is the landing of hovering pieces on one surface; graze-tour flies three camera legs over three pages and lands their words as it passes"
+    },
+    {
+      "id": "perspective-glide",
+      "note": "perspective-glide slides one tilted page past the camera; graze-tour flies almost edge-on and lands the page's words"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/graze-tour/brick.js",
+  "card": "scene/graze-tour/CARD.md",
+  "status": "approved",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "no element of the upstream page pairs with the brick's: the three pages are laid out anew from the slots (a tree, a top bar, a list) and the words are the film's; the camera legs, the cruise curve and the cross-fades are the upstream's numbers, and the landing is float-land's, whose compare passes"
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

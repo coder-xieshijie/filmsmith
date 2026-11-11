@@ -1,0 +1,125 @@
+{
+  "id": "review-callouts",
+  "category": "scene",
+  "name": {
+    "en": "Review callouts",
+    "zh": "评审标注"
+  },
+  "summary": {
+    "en": "The problem as open review items: a two-line headline lettered on its construction lines, a bus feeding 2–4 boxes of key and value, each with an amber revision triangle, one phrase underlined in amber.",
+    "zh": "把问题画成未决的评审项：两行标题沿构造线写出，一条母线分出 2–4 个“键 + 值”方框，每个带一枚琥珀色修订三角，第二行的一个短语下划琥珀色波浪线。"
+  },
+  "fits": "The opening sheet of a blueprint film: what is wrong today, as items a reviewer has marked.",
+  "notFor": "Problems that are not a list of facts; more than four items; a reviewer who is not a person (the amber means one).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "State the problem the way a reviewer would: as open items on the drawing, each flagged by a person.",
+      "zh": "像评审人那样陈述问题：画在图上的未决项，每项都被人标出。"
+    },
+    "content": {
+      "en": "Label, two headline lines (≤ 22 chars), a phrase of line 2 to underline, 2–4 key/value items (≤ 12 / 11), a note.",
+      "zh": "标签、两行标题（每行 ≤ 9 字）、第二行里要下划线的短语、2–4 个键值项（≤ 5 / 5 字）、一行注。"
+    },
+    "fits": {
+      "zh": "blueprint 片子的开场：今天哪里不对，画成评审人标出的条目。"
+    },
+    "notFor": {
+      "zh": "不是事实清单的问题；超过四项；评审人不是人（琥珀色代表人）。"
+    },
+    "roles": [
+      "hook",
+      "problem"
+    ],
+    "subjects": [
+      "title",
+      "list",
+      "diagram"
+    ],
+    "moods": [
+      "technical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "problem statement",
+        "review items",
+        "revision triangle",
+        "callouts",
+        "redline",
+        "open issues"
+      ],
+      "zh": [
+        "问题说明",
+        "评审项",
+        "修订三角",
+        "标注",
+        "红线批注",
+        "未决项"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "general-arrangement",
+        "note": "the claim sheet after it (route-pan right)"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The mark must be a substring of line 2 exactly; in Chinese mark whole words, the underline follows the measured characters."
+      ],
+      "zh": [
+        "mark 必须与第二行里的文字完全一致；中文请标整词，下划线按实测字宽画。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      7,
+      14
+    ],
+    "sec120": [
+      3.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/problem.js; choreography.js CUES.problem"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/review-callouts/brick.js",
+  "card": "scene/review-callouts/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

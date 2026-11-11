@@ -1,0 +1,117 @@
+{
+  "id": "frame-punch",
+  "category": "scene",
+  "name": {
+    "en": "Frame punch",
+    "zh": "画格冲出"
+  },
+  "summary": {
+    "en": "The frame in the gate punches to the full frame, holds a beat, and shrinks into its cell on the contact sheet laid underneath.",
+    "zh": "片门里的画格冲到满屏，停一拍，再缩进下面印样上它的那一格。"
+  },
+  "fits": "The turn from a reel to the whole set at once.",
+  "notFor": "A frame below 1920 × 1080 source px (it would soften at full size).",
+  "select": {
+    "intent": {
+      "en": "One frame is the object the eye follows from the reel to the sheet.",
+      "zh": "一个画格是眼睛从胶片跟到印样的那个对象。"
+    },
+    "content": {
+      "en": "The frame (full resolution), its cell on the sheet, the sheet’s rows.",
+      "zh": "画格（全分辨率）、它在印样上的格、印样各行。"
+    },
+    "fits": {
+      "zh": "从一卷胶片转到整组作品的转折。"
+    },
+    "notFor": {
+      "zh": "源像素小于 1920 × 1080 的画格（满屏会糊）。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "turn"
+    ],
+    "subjects": [
+      "image"
+    ],
+    "moods": [
+      "dramatic",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "gate punch",
+        "full frame",
+        "shrink to cell",
+        "cut-in",
+        "contact sheet"
+      ],
+      "zh": [
+        "片门冲出",
+        "满屏",
+        "缩回格子",
+        "切入",
+        "印样"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "length-sheet",
+        "note": "the sheet it lands on"
+      }
+    ],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      3,
+      4
+    ],
+    "sec120": [
+      1.5,
+      2
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "strip",
+      "any film about films, frames or renders"
+    ],
+    "avoid": [
+      "exhibit",
+      "tally"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/strip/choreo.js (punch), film.js (punchIn, punchOut)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/frame-punch/brick.js",
+  "card": "scene/frame-punch/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

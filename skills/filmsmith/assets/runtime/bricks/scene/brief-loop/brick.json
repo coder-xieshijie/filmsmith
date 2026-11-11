@@ -1,0 +1,130 @@
+{
+  "id": "brief-loop",
+  "category": "scene",
+  "name": {
+    "en": "Brief round the loop",
+    "zh": "绕环的需求"
+  },
+  "summary": {
+    "en": "The open: a line draws and becomes the caret, which types the brief and falls flat under it; with a second phrase the line rolls up a loop that carries the first phrase round and brings the second; the line tightens, contracts into the caret, and the caret takes the letters back.",
+    "zh": "开场：一条线拉开、变成光标，敲出需求后平躺到字下面；有第二句时线卷起一个环，把第一句带走、把第二句带进来；线收紧、缩回光标，光标把字一个个收回去。"
+  },
+  "fits": "The open of a video tool's reel: the request it starts from, and its revision going round the loop.",
+  "notFor": "A brief that is not a request; two phrases that are not a request and its revision; more than five words a phrase.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Start from the one sentence the tool is given, typed by the line that will make everything else.",
+      "zh": "从交给工具的那一句话开始，由那条之后会变成一切的线敲出来。"
+    },
+    "content": {
+      "en": "One or two phrases of ≤ 5 words (≤ 24 characters); a second phrase is the first one revised.",
+      "zh": "一到两句，每句 ≤ 12 字；第二句是第一句改过之后的样子。"
+    },
+    "fits": {
+      "zh": "视频工具作品集的开场：它接到的需求，以及需求绕一圈回来被改写。"
+    },
+    "notFor": {
+      "zh": "不是需求的开场句；两句不是“需求和改写”；一句超过 12 字。"
+    },
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "text",
+      "cursor"
+    ],
+    "moods": [
+      "calm",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "caret",
+        "typing",
+        "brief",
+        "prompt",
+        "loop",
+        "path type"
+      ],
+      "zh": [
+        "光标",
+        "打字",
+        "需求",
+        "提示词",
+        "环",
+        "路径文字"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "weight-word",
+        "note": "the word springs in after the caret closes"
+      },
+      {
+        "id": "caret-fall",
+        "note": "its caret ↔ line"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Text is read only while the line is straight: the loop carries the phrase unreadable for its middle beat by design.",
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "只有线是直的时候字才可读：绕环中间那一拍看不清是设计如此。",
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      14
+    ],
+    "sec120": [
+      3,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js open; shots.js OPEN, openPlan"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/brief-loop/brick.js",
+  "card": "scene/brief-loop/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

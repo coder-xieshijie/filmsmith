@@ -1,0 +1,113 @@
+{
+  "id": "sheet-hud",
+  "category": "prop",
+  "name": {
+    "en": "Sheet frame",
+    "zh": "图框"
+  },
+  "summary": {
+    "en": "The persistent frame of a blueprint film: border with zone ticks, the detail bubble and label panel, a corner note, a scale bar and a title block with APPROVED BY, the name, SHEET and a live SCALE; its fixed words are swap points with Chinese defaults.",
+    "zh": "blueprint 片子一直在的图框：带分区刻度的边框、详图气泡和标签栏、角注、比例尺，以及含“批准”、产品名、张次和实时比例的标题栏；固定用词都可替换，并有中文默认值。"
+  },
+  "fits": "Every sheet of a blueprint film; any drawing-office film that wants its sheet number and scale on screen.",
+  "notFor": "Films that are not drawings; light print films that want no chrome; a frame that must carry more than five fields.",
+  "select": {
+    "intent": {
+      "en": "The frame says this is one drawing and where you are in it: sheet n of N, the scale the camera is at, who approved it.",
+      "zh": "图框说明这是同一张图、看到了哪：第几张、镜头在什么比例、谁批准的。"
+    },
+    "content": {
+      "en": "Product name (≤ 12), product line (≤ 28), corner note (≤ 24), the sheet's name, sheet number and total; optionally the fixed words.",
+      "zh": "产品名（≤ 6 字）、产品一句话（≤ 12 字）、角注（≤ 10 字）、本张名称、张次与总张数；可改固定用词。"
+    },
+    "fits": {
+      "zh": "blueprint 每一张图；任何想把张次和比例留在画面上的制图风片子。"
+    },
+    "notFor": {
+      "zh": "不是图纸的片子；不想要边框的浅色印刷风；要放五个以上字段的图框。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "proof",
+      "lockup"
+    ],
+    "subjects": [
+      "text",
+      "abstract"
+    ],
+    "moods": [
+      "technical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "title block",
+        "HUD",
+        "sheet number",
+        "scale bar",
+        "drawing frame",
+        "ISO 7200"
+      ],
+      "zh": [
+        "标题栏",
+        "图框",
+        "张次",
+        "比例尺",
+        "图纸边框",
+        "批准栏"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "drafting-stamp",
+        "note": "the approval stamp lands in its APPROVED BY cell"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The label panel folds while the camera is pushed in; a host that does not pass the fold lets it cover the sheet title."
+      ],
+      "zh": [
+        "镜头推近时标签栏要折起；宿主不传折叠量，它会盖住本张标题。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/hud.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/sheet-hud/brick.js",
+  "card": "prop/sheet-hud/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

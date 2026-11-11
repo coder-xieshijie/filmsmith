@@ -1,0 +1,159 @@
+{
+  "id": "frame-snap",
+  "category": "motion",
+  "name": {
+    "en": "Frame snap",
+    "zh": "画框翻色"
+  },
+  "summary": {
+    "en": "A thick band of colour grows round the frame, then on one frame flips to the other colour of the pair; band, label and content change together with a short flash and a bounce.",
+    "zh": "一圈粗色带先于内容长出包住全屏，再在同一帧翻成另一种颜色：色带、角标和框内画面一起换，带一下白闪和框厚回弹。"
+  },
+  "fits": "A product with two modes (design and code, edit and preview, draft and review) when the film switches between them; a section frame that says the whole view is in one state.",
+  "notFor": "Ordinary cuts between shots (the flip says mode, not next); more than one flip pair in a film; scenes whose own edges carry information (the band covers 60 px).",
+  "select": {
+    "intent": {
+      "en": "The colour of the frame becomes the code for a mode, so one hard flip says \"we switched modes\" without touching the content.",
+      "zh": "画框颜色成了模式的代号，一次硬翻色就说清“换模式了”，不用动内容本身。"
+    },
+    "content": {
+      "en": "The scenes before and after the flip (often two screen recordings), two short mode labels (≤ 12 chars each) and an optional right-hand mark.",
+      "zh": "翻色前后的两个场景（常是两段录屏），两个短的模式标签（每个 ≤ 6 字），右侧标记可选。"
+    },
+    "fits": {
+      "zh": "有两种模式的产品（设计与代码、编辑与预览、草稿与审阅）在片中切换时；或用一圈框说明“整屏都处在某个状态”。"
+    },
+    "notFor": {
+      "zh": "普通的镜头间切换（翻色说的是换模式，不是下一个）；一支片里不止一对翻色；边缘本身有信息的画面（色带盖住 60 px）。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "device"
+    ],
+    "moods": [
+      "mechanical",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "brand frame",
+        "frame snap",
+        "mode switch",
+        "colour coding",
+        "border flip",
+        "chapter frame",
+        "dev mode"
+      ],
+      "zh": [
+        "品牌画框硬切",
+        "画框翻色",
+        "模式切换",
+        "颜色编码",
+        "换挡",
+        "录屏包装",
+        "双模式"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "cursor-glide",
+        "note": "a click on the mode toggle right before the flip makes it read as caused"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Band, label and content must change on the same frame; even 2 frames apart it falls into three small animations.",
+        "Keep the colour code for the whole film: no UI in the other mode's colour inside a band.",
+        "The two band colours need opposed hue and a clear lightness gap; neighbours of one lightness look like no flip.",
+        "At most two flips a film; more reads as a neon sign."
+      ],
+      "zh": [
+        "色带、角标和内容必须同一帧换，差 2 帧就散成三个小动画。",
+        "颜色编码全片守约：某色框里不许出现另一模式颜色的主 UI。",
+        "两种框色要色相对冲、明度拉开；同明度邻近色翻了等于没翻。",
+        "全片翻色最多两次，多了像霓虹灯。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "brand-frame-snap",
+        "name": "品牌画框硬切",
+        "card": "品牌画框硬切",
+        "summary": "品牌色画框语法——一圈粗纯色画框先于内容长出包住全屏，录屏窗口落进框内；模式切换时整圈画框同帧硬翻色+窗内布局同帧换，一个 borderColor 干完章节导航/状态提示/品牌露出三件事",
+        "use": "双模式/双章节产品片的全片包装层（蓝=模式A、绿=模式B 颜色编码）；真实录屏素材的品牌化包裹",
+        "energy": "中（翻色瞬间高，其余时间是安静的包装层）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/brand-frame-snap.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 3.6,
+    "range": [
+      1.4,
+      4
+    ]
+  },
+  "tier": "T1",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "brand-frame-snap",
+        "path": "demos/effects/brand-frame-snap/BrandFrameSnap.tsx",
+        "card": "references/shots/effects/brand-frame-snap.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "ground-flip",
+      "note": "a change of the whole ground with a build; frame-snap changes only the frame, at once"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/frame-snap/brick.js",
+  "card": "motion/frame-snap/CARD.md",
+  "compare": {
+    "ssimMean": 0.6222,
+    "ssimMin": 0.5057,
+    "ssimDrop": 0.0282,
+    "trackDevPx": 24.9,
+    "progressRmse": 0.0659,
+    "eventFrames": 0,
+    "verdict": "waived"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

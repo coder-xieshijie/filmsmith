@@ -1,0 +1,136 @@
+{
+  "id": "answer-whiteout",
+  "category": "scene",
+  "name": {
+    "en": "Answer whiteout",
+    "zh": "白闪揭晓"
+  },
+  "summary": {
+    "en": "The film's one whiteout on the drop: two white frames, the answer slams in amber while the ground falls back from white, its line read as a claim in a pause.",
+    "zh": "全片唯一一次白闪落在音乐的 drop 上：两帧白，答案以琥珀色砸进来，底色从白落回深色，下面一句作为主张在停顿里读完。"
+  },
+  "fits": "The climax of a question film: the measured answer, once.",
+  "notFor": "A second peak in the same film; an answer that is not a measured value; the opening.",
+  "select": {
+    "intent": {
+      "en": "The peak is marked by being the only flash: the answer arrives on the hit, in the one colour that means \"answer\", and is given time to sink in.",
+      "zh": "高潮靠“唯一一次闪白”来标记：答案踩着重拍到来，用唯一代表“答案”的颜色，并留出时间让人消化。"
+    },
+    "content": {
+      "en": "The answer value (≤ 7 chars, usually computed), one line read as a claim (≤ 30 chars), an optional query (≤ 48 chars).",
+      "zh": "答案值（≤ 5 字，通常是算出来的）、一句作为主张来读的话（≤ 12 字）、可选查询行。"
+    },
+    "fits": {
+      "zh": "提问式片子的高潮：测得的答案，只用一次。"
+    },
+    "notFor": {
+      "zh": "同一支片里的第二个高潮；不是测量值的答案；开场。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "claim"
+    ],
+    "subjects": [
+      "number",
+      "title"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "whiteout",
+        "flash slam",
+        "reveal",
+        "the answer",
+        "drop",
+        "climax"
+      ],
+      "zh": [
+        "白闪",
+        "砸入",
+        "揭晓",
+        "答案",
+        "重拍",
+        "高潮"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hop-search",
+        "note": "the search before it, `into: 'reveal'`"
+      },
+      {
+        "id": "figure-rows",
+        "note": "after it, through runtime counter-portal"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "One per film: a second flash makes the first ordinary.",
+        "Keep the answer in the normal-width Bold: the portal needs its counter."
+      ],
+      "zh": [
+        "一支片只用一次：第二次闪白会让第一次变平常。",
+        "答案保持常规宽度的粗体：穿越转场要用它的字腔。"
+      ]
+    }
+  },
+  "energy": "peak",
+  "duration": {
+    "beats": [
+      4,
+      10
+    ],
+    "sec120": [
+      2,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse"
+    ],
+    "avoid": [
+      "ink",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/film.js paintReveal, choreo.js revealPlan"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "whiteout-slam",
+      "note": "runtime frame-level transition: the exposure build into the hit; this scene paints the frames after the hit, the ground falling from white so the answer keeps a clean edge"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/answer-whiteout/brick.js",
+  "card": "scene/answer-whiteout/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

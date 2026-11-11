@@ -1,0 +1,122 @@
+{
+  "id": "weight-swing",
+  "category": "motion",
+  "name": {
+    "en": "Weight swing",
+    "zh": "字重摆动"
+  },
+  "summary": {
+    "en": "A big word springs in letter by letter and its weight swings 780 → 200 → 800 → 430 on the beats; its full stop is the line colour.",
+    "zh": "大字逐字弹入，字重在拍点上 780 → 200 → 800 → 430 摆动；句号是线色。"
+  },
+  "fits": "A one-word hook in a variable display face.",
+  "notFor": "Faces without a weight axis; long words or sentences.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Make the beat visible in a word that stays in place and keeps reading.",
+      "zh": "让节拍体现在一个原地不动、始终可读的词上。"
+    },
+    "content": {
+      "en": "One word of 4–7 letters.",
+      "zh": "四个汉字加句号。"
+    },
+    "fits": {
+      "zh": "可变字体的一词钩子。"
+    },
+    "notFor": {
+      "zh": "没有字重轴的字体；长词或整句。"
+    },
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "title"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "variable font",
+        "weight",
+        "kinetic type",
+        "spring",
+        "beat",
+        "big word"
+      ],
+      "zh": [
+        "可变字体",
+        "字重",
+        "动态字",
+        "弹簧",
+        "节拍",
+        "大字"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "weight-word",
+        "note": "the scene it plays in"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Centre by the width at the current weight, or the word slides sideways as it swings."
+      ],
+      "zh": [
+        "按当前字重的宽度居中，否则摆动时整个词会左右滑。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 4,
+    "range": [
+      4,
+      4
+    ]
+  },
+  "tier": "T0",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js word, weightAt"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/weight-swing/brick.js",
+  "card": "motion/weight-swing/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

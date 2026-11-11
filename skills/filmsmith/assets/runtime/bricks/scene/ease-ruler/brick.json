@@ -1,0 +1,130 @@
+{
+  "id": "ease-ruler",
+  "category": "scene",
+  "name": {
+    "en": "Easing ruler",
+    "zh": "缓动标尺"
+  },
+  "summary": {
+    "en": "The curves link: the sphere becomes the rod, the rod presses the merge's stage name into itself on the beat, recovers as the beat ruler, and four easing curves (ω 12–40) draw over it with their riders and the spring formula.",
+    "zh": "曲线环节：球变成横杆，横杆在拍点上把合并环节的阶段名压进自己，恢复成节拍标尺，四条缓动曲线（ω 12–40）连同骑行点和弹簧公式画在上面。"
+  },
+  "fits": "A reel's timing step: the springs the film itself moves by.",
+  "notFor": "Films without the merge before it; curves that are not the film's own.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show that every move lands on the beat, with the curves the film really uses.",
+      "zh": "用片子真用的曲线说明每个动作都落在拍上。"
+    },
+    "content": {
+      "en": "No copy of its own: the formula and ω labels, the stage name and note.",
+      "zh": "本身没有文案：公式和 ω 标签、阶段名和注释。"
+    },
+    "fits": {
+      "zh": "作品集里的计时一步：片子自己用的弹簧。"
+    },
+    "notFor": {
+      "zh": "前面没有合并环节的片子；不是片子自己的曲线。"
+    },
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "chart",
+      "timeline"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "easing",
+        "spring",
+        "curves",
+        "ruler",
+        "press",
+        "formula"
+      ],
+      "zh": [
+        "缓动",
+        "弹簧",
+        "曲线",
+        "标尺",
+        "压入",
+        "公式"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "sphere-merge",
+        "note": "its sphere and stage name"
+      },
+      {
+        "id": "edit-tracks",
+        "note": "the curves flatten into tracks"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The press reads as a hit, not a press, at one beat: keep the name on screen a full beat before it.",
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "一拍的压入看起来是“撞”而不是“压”：压之前让名字完整停留一拍。",
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      4,
+      10
+    ],
+    "sec120": [
+      2,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js curves, easingGraph, railDraw; shots.js PRESS, RIDE"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/ease-ruler/brick.js",
+  "card": "scene/ease-ruler/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

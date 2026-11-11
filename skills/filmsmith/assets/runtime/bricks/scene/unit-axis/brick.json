@@ -1,0 +1,123 @@
+{
+  "id": "unit-axis",
+  "category": "scene",
+  "name": {
+    "en": "Unit axis",
+    "zh": "方块成轴"
+  },
+  "summary": {
+    "en": "Where groups overlap, the subset squares shrink into a vertical axis and the rest drop away; one bar per series grows out of that axis, the protagonist in the accent.",
+    "zh": "组别重叠时，子集的方块缩成一根竖轴，其余方块落下淡出；每个系列从这根轴长出一根条，主角用强调色。"
+  },
+  "fits": "The surprise of a counted story: tags that overlap (one item can name several), drawn as bars on the subset itself.",
+  "notFor": "Groups that do not overlap (unit-bands keeps the squares as the bars); more than 8 series.",
+  "select": {
+    "intent": {
+      "en": "Overlap becomes a surprise you can see: the subset shrinks into an axis and bars grow out of it, so one item naming several things is shown, not claimed.",
+      "zh": "重叠变成看得见的意外：子集缩成一根轴，条从轴上长出来，一件东西同时属于几类是画出来的，不是说出来的。"
+    },
+    "content": {
+      "en": "Series (2–8, name ≤ 14 / 6 字, count, may overlap), the subset size, a title (≤ 44 / 16 字), a sub (≤ 8 words / 16 字).",
+      "zh": "系列（2–8 个，名称 ≤ 14 字符 / 6 字，数量，可重叠），子集大小，标题（≤ 44 / 16 字），副标题（≤ 8 词 / 16 字）。"
+    },
+    "fits": {
+      "zh": "计数故事里的意外：互相重叠的标签（一件可以属于几类），画成子集本身上的条。"
+    },
+    "notFor": {
+      "zh": "不重叠的分组（unit-bands 直接用方块当条）；超过 8 个系列。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "turn",
+      "proof",
+      "climax"
+    ],
+    "subjects": [
+      "chart"
+    ],
+    "moods": [
+      "dramatic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "overlap",
+        "multi-label",
+        "axis",
+        "bars from an axis",
+        "tags"
+      ],
+      "zh": [
+        "重叠",
+        "多标签",
+        "轴",
+        "从轴长出的条",
+        "标签统计"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "unit-split",
+        "note": "the subset it starts from"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Say in the sub that one item can count in several bars, or the bars read as an error."
+      ],
+      "zh": [
+        "副标题要说明一件可以计入几条，否则条长加起来像错的。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      6,
+      14
+    ],
+    "sec120": [
+      3,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "tally",
+      "any data"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/layouts.js (axis)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/unit-axis/brick.js",
+  "card": "scene/unit-axis/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

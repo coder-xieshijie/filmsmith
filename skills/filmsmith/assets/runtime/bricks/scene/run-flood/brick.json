@@ -1,0 +1,128 @@
+{
+  "id": "run-flood",
+  "category": "scene",
+  "name": {
+    "en": "Run floods the frame",
+    "zh": "运行按钮淹没画面"
+  },
+  "summary": {
+    "en": "Run is pressed and spins, then its own outline floods the frame into the live console (the same card in the other material): status, body, then the claim; the console retracts into the button.",
+    "zh": "运行按钮按下转圈，随后它自己的轮廓淹没整个画面，变成实时控制台（同一张卡换成另一种材质）：状态、响应体，然后是主张；控制台再收回按钮里。"
+  },
+  "fits": "The climax of a developer film: the thing actually runs; one claim in a pause.",
+  "notFor": "Films without a button to press; claims longer than five words.",
+  "select": {
+    "intent": {
+      "en": "The product is seen actually running: the button floods the frame into its live result and the claim lands in that moment.",
+      "zh": "看见产品真的在跑：按钮淹没画面变成实时结果，主张就落在那一刻。"
+    },
+    "content": {
+      "en": "A claim (≤ 28 chars / 14 字), the card it starts from (title, tabs, Run), the product's call and two body lines.",
+      "zh": "一句主张（≤ 28 字符 / 14 字），起始卡片（标题、标签页、运行按钮），产品调用和两行响应体。"
+    },
+    "fits": {
+      "zh": "开发者片的高潮：东西真的跑起来；一句主张在停顿里读。"
+    },
+    "notFor": {
+      "zh": "没有按钮可按的片；超过五个词的主张。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "climax",
+      "proof",
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "code",
+      "title"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "flood",
+        "run",
+        "console",
+        "button grows",
+        "invert",
+        "climax"
+      ],
+      "zh": [
+        "淹没",
+        "运行",
+        "控制台",
+        "按钮放大",
+        "反相",
+        "高潮"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "panel-focus",
+        "note": "the card it starts from"
+      },
+      {
+        "id": "mark-command",
+        "note": "the lock-up after the retract"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Put the flood on a bar line (`pre` = beats to the next bar); off the bar it reads as a glitch."
+      ],
+      "zh": [
+        "淹没要落在小节线上（`pre` 为距下一小节的拍数）；不在小节上像故障。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      8,
+      14
+    ],
+    "sec120": [
+      4,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "morph"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/morph/film.js (drawFlood, consoleFrame, floodScale)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/run-flood/brick.js",
+  "card": "scene/run-flood/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "peak",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

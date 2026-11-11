@@ -1,0 +1,124 @@
+{
+  "id": "verify-band",
+  "category": "scene",
+  "name": {
+    "en": "Verify band",
+    "zh": "验证带"
+  },
+  "summary": {
+    "en": "A check run on a copy: a dashed box (the source) links to an ink box (the copy); result rows fill, a counter climbs with an accent flash, and an accent band lands with two statements: what passed and what the person still decides.",
+    "zh": "在副本上跑检查：虚线框（源）连到墨色框（副本）；结果行逐条填好，计数器上数并闪一下强调色，最后一条强调色带落下，写两句话：通过了什么、人还要决定什么。"
+  },
+  "fits": "A proof page: a dry run, a replay on a shadow copy, a test pass before the person signs.",
+  "notFor": "Results with more than six rows; failures to dramatise (the band states a pass).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Prove the claim on a copy before anyone signs: rows of results and a counter, then a band that hands the last word to the person.",
+      "zh": "在有人签字之前先在副本上证明：一行行结果和计数，最后用色带把决定权交还给人。"
+    },
+    "content": {
+      "en": "Page head, from and to box labels, 3–6 result rows (≤ 24 chars), a count, an optional blind-spot line, two statements (≤ 32 chars).",
+      "zh": "页头、源与副本框的标签、3–6 行结果（≤ 12 字）、一个计数、可选的盲区说明、两句陈述（≤ 14 字）。"
+    },
+    "fits": {
+      "zh": "证据页：试运行、影子副本回放、人签字前的测试通过。"
+    },
+    "notFor": {
+      "zh": "结果超过六行；要渲染失败的戏剧性（色带陈述的是通过）。"
+    },
+    "roles": [
+      "proof",
+      "turn"
+    ],
+    "subjects": [
+      "list",
+      "metric"
+    ],
+    "moods": [
+      "technical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "verify",
+        "dry run",
+        "shadow copy",
+        "test pass",
+        "counter",
+        "band"
+      ],
+      "zh": [
+        "验证",
+        "试运行",
+        "影子副本",
+        "测试通过",
+        "计数器",
+        "色带"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "human-loop",
+        "note": "the loop that the proof feeds"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The band's statements are on the accent: 34/40 px is the floor at about 3:1, keep them short."
+      ],
+      "zh": [
+        "色带上的文字在强调色上约 3:1，34/40 px 是下限，句子要短。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      20
+    ],
+    "sec120": [
+      4,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (verify)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/verify-band/brick.js",
+  "card": "scene/verify-band/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

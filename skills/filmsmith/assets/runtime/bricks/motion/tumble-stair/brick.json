@@ -1,0 +1,148 @@
+{
+  "id": "tumble-stair",
+  "category": "motion",
+  "name": {
+    "en": "Tumble stair",
+    "zh": "侧棱翻飞"
+  },
+  "summary": {
+    "en": "Three cards stand edge-on, then tumble in 3D along one smooth path into a staggered stair, sharp all the way, and keep turning slowly once they stand.",
+    "zh": "三张页卡先侧棱朝前、几乎看不见，再沿一条平滑路径在 3D 里翻飞成错落的阶梯，全程清晰，站定后仍缓慢转动。"
+  },
+  "fits": "Revealing a set of pages, screens or features at once; the opening of a product film; a finale that gathers the cards before they collapse.",
+  "notFor": "One card (use card-portal or pose-fly); reading the cards' text (they are large but turned); flat or print styles that avoid 3D.",
+  "select": {
+    "intent": {
+      "en": "A set of pages appears out of nothing and lines up with energy: cards flip in from their thin edges into a stair, showing \"many capabilities\" at a glance.",
+      "zh": "一组页面从无到有、带着冲劲列队：卡片从薄边翻飞成阶梯，一眼看到“好多能力”。"
+    },
+    "content": {
+      "en": "Wraps exactly three card painters (pages, screens or feature cards); their text is decorative, not read.",
+      "zh": "包住正好三张卡（页面、屏幕或功能卡）；卡上的字只作装饰，不需要读。"
+    },
+    "fits": {
+      "zh": "一次亮出一组页面、屏幕或功能；产品片开场；收尾前把卡片聚拢（flock-finale 接着收束）。"
+    },
+    "notFor": {
+      "zh": "只有一张卡（用 pose-fly 或 card-portal）；卡上的字要读（大但斜着）；回避 3D 的平面或印刷风格。"
+    },
+    "use": [
+      "seam",
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "climax"
+    ],
+    "subjects": [
+      "cards",
+      "ui"
+    ],
+    "moods": [
+      "energetic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "card tumble",
+        "flock",
+        "3D flip-in",
+        "edge-on reveal",
+        "card stair",
+        "cards fly in"
+      ],
+      "zh": [
+        "卡片翻飞收束",
+        "侧棱翻飞",
+        "薄边翻出",
+        "阶梯站定",
+        "卡片列队",
+        "3D 翻飞"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "flock-finale",
+        "note": "pulls the stair into the title with a smoke ring"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Never let the cards stop once standing; a still stair at the climax was rejected (keep the slow turn).",
+        "No motion blur or defocus: it must stay sharp all the way."
+      ],
+      "zh": [
+        "站定后不许停住；高潮段静止被判不行（保持慢转）。",
+        "不加运动模糊或景深糊：全程清晰。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "card-flock-tumble",
+        "name": "卡片翻飞收束",
+        "card": "卡片翻飞收束",
+        "summary": "三张 UI 页卡从侧棱薄边 3D 翻飞成阶梯站定（全程清晰、样条连续丝滑），站定后保持慢转不停，快速收束吸入中心，炸出单个湍流烟雾环扩散，巨字横贯收场",
+        "use": "能量高潮段（功能页群→品牌口号的爆点转场）；霓虹/极光暗场调性；\"多页面能力\"收束成一句话的段落",
+        "energy": "极高（全片能量顶点用）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/card-flock-tumble.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 3.75,
+    "range": [
+      3,
+      5
+    ]
+  },
+  "tier": "T2",
+  "family": "lift-flip",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "blueprint",
+      "print"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "card-flock-tumble",
+        "path": "demos/transition/card-flock-tumble/CardFlockTumble.tsx",
+        "card": "references/shots/transition/card-flock-tumble.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/tumble-stair/brick.js",
+  "card": "motion/tumble-stair/CARD.md",
+  "compare": {
+    "ssimMean": 0.4982,
+    "ssimMin": 0.4639,
+    "ssimDrop": 0.0978,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

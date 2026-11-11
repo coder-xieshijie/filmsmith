@@ -1,0 +1,136 @@
+{
+  "id": "unit-bands",
+  "category": "scene",
+  "name": {
+    "en": "Unit bands",
+    "zh": "方块分档"
+  },
+  "summary": {
+    "en": "The same squares sort into one band per category, top band first, so the longest band visibly wins; optionally a roulette frame locks on the protagonist, or one block is cut into shares.",
+    "zh": "同一批方块按类别排成一档一档，从最上面一档起逐档落定，最长那档一眼胜出；可选轮盘框跳动后锁定主角，或把一整块切成份额。"
+  },
+  "fits": "Which kinds, and which one matters: a category field over a counted set (up to 9 bands with the rest folded).",
+  "notFor": "Overlapping groups (one item in several: use unit-axis); continuous measures.",
+  "select": {
+    "intent": {
+      "en": "Which kind wins becomes visible as length: the same squares sort into bands and the longest band reads before its number does.",
+      "zh": "哪一类最多变成看得见的长度：同一批方块排成带，最长的那条比数字先被读到。"
+    },
+    "content": {
+      "en": "2–9 groups (name ≤ 14 chars / 6 字, count), a protagonist index, a title with *the protagonist* marked (≤ 44 / 16 字), a sub (≤ 40 / 16 字), an optional callout (≤ 26 / 14 字).",
+      "zh": "2–9 组（名称 ≤ 14 字符 / 6 字，带数量），主角序号，标题里用 *星号* 标主角（≤ 44 / 16 字），副标题（≤ 40 / 16 字），可选标注（≤ 26 / 14 字）。"
+    },
+    "fits": {
+      "zh": "哪几类、哪一类要紧：计数集合上的一个分类字段（最多 9 条带，其余并成一条）。"
+    },
+    "notFor": {
+      "zh": "互相重叠的分组（一件属于多组：用 unit-axis）；连续量。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "chart",
+      "list"
+    ],
+    "moods": [
+      "technical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "bands",
+        "category bars",
+        "roulette",
+        "share bar",
+        "which kind",
+        "unit bar chart"
+      ],
+      "zh": [
+        "分带",
+        "分类条",
+        "轮盘锁定",
+        "占比条",
+        "哪一类",
+        "方块条形图"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "unit-count",
+        "note": "the grid it re-sorts"
+      },
+      {
+        "id": "unit-split",
+        "note": "the next question: which subset"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The roulette needs a protagonist that is not the top band, or the lock is no surprise.",
+        "Fold anything past nine bands into one 'other' band."
+      ],
+      "zh": [
+        "轮盘要锁的主角最好不是第一条，否则锁定没有意外。",
+        "超过 9 条的并成一条“其他”。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      16
+    ],
+    "sec120": [
+      3,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "tally",
+      "any data"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/tally/layouts.js (columns, share), timeline.js (roulette)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "unit-regroup",
+      "note": "its clusters and columns stand for several units a dot; here bands of one square per item"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/unit-bands/brick.js",
+  "card": "scene/unit-bands/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

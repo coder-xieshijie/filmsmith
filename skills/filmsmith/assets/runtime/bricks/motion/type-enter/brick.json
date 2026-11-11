@@ -1,0 +1,276 @@
+{
+  "id": "type-enter",
+  "category": "motion",
+  "name": {
+    "en": "Type enter",
+    "zh": "文字入场"
+  },
+  "summary": {
+    "en": "A title enters unit by unit — words, Chinese phrases or characters — each unit travelling the same short way, staggered; seven ways to travel.",
+    "zh": "标题按单位逐个入场（英文按词或字母，中文按词组或单字），每个单位走同一段短路、错峰；七种走法。"
+  },
+  "fits": "The first appearance of a title, a claim or a section heading on a still ground: blur is the quiet default for most titles, rise, press, drift, drop, path and tumble are livelier ways (tumble: the words of a page assembling after its shapes).",
+  "notFor": "Text already on screen or already read (re-entering reads as a stutter); more than two lines; more than two kinds of title entrance in a film, and drift, drop or path more than once.",
+  "select": {
+    "intent": {
+      "en": "The title arrives piece by piece in reading order, so the viewer reads it as it lands; blur stays out of the way, the other ways make the arrival an event.",
+      "zh": "标题按阅读顺序一块块到位，观众边落边读；blur 不抢戏，其余几种把入场本身做成一件事。"
+    },
+    "content": {
+      "en": "One or two lines of title (≤ 40 chars a line), an optional accent word and an optional sub line; for path, a curve that means something (a growth line).",
+      "zh": "一到两行标题（每行 ≤ 18 字），可选一个强调词和一行副标题；path 式还要一条有含义的曲线（如增长线）。"
+    },
+    "fits": {
+      "zh": "标题、主张或小节标题在安静画面上第一次出现：blur 是多数标题的安静默认，rise、press、drift、drop、path、tumble 更活泼（tumble 适合页面拼好形状后文字落位）。"
+    },
+    "notFor": {
+      "zh": "已经在画面上或已读过的字（再入场像口吃）；超过两行；一支片超过两种标题入场，drift、drop、path 各超过一次。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook",
+      "claim",
+      "turn",
+      "lockup"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "elegant",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "title entrance",
+        "blur slide",
+        "split text",
+        "stagger",
+        "letter drop",
+        "text on path",
+        "drift assembly",
+        "word by word",
+        "3d tumble"
+      ],
+      "zh": [
+        "逐词模糊入场",
+        "逐字裂升",
+        "纸张标题卡",
+        "漂移合拢",
+        "字符坠落",
+        "沿线流入",
+        "标题入场",
+        "逐词入场",
+        "三维翻转落位"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "marker-stroke",
+        "note": "mark the key word once the title has landed"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "At most two kinds of title entrance per film, counting type-retype and write-on; use blur for every title but the hero.",
+        "Chinese must be split by meaning into 3–5 phrases, not into single characters.",
+        "Over about 8 words, shorten the gap between words or the last one enters during the hold.",
+        "Keep the camera still while drift, drop or path is flying; drop wants words without descenders (g, j, p, q, y)."
+      ],
+      "zh": [
+        "连同 type-retype、write-on，一支片标题入场最多两种；主角以外的标题一律用 blur。",
+        "中文按语义切成 3–5 个词组，别退化成逐字。",
+        "超过约 8 个词就压短词间隔，否则末词挤到收尾停留里才进。",
+        "drift、drop、path 飞行时镜头必须稳；drop 避开带下行笔画的字母（g、j、p、q、y）。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "blur-slide",
+        "name": "逐词模糊入场",
+        "card": "逐词模糊入场",
+        "summary": "标题逐词入场，y 0.38em→0 + blur 18→0 + opacity 0→1 三通道走同一条 ease-out 同步收敛，词间隔约 4f；副标题在标题收完前就错峰跟进",
+        "use": "几乎所有标题/副标题成对出现的场合；产品页首屏文案、章节小标题；需要\"专业但不抢戏\"的默认文字 reveal",
+        "energy": "低（一次性收敛，无峰值无循环）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/blur-slide.mp4"
+      },
+      {
+        "key": "split-text-stagger",
+        "name": "逐字裂升",
+        "card": "文字集结",
+        "summary": "每字 overflow 盒内 translateY(115%→0) 带 10% 过冲，delay i×2f，基线同步生长",
+        "use": "大标题/标语的入场；与 type-entrance-moves、document-typewriter-reveal 同属标题入场大品类，全片 ≤2 种",
+        "energy": "A 中 / B 中高 / C 中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/split-text-stagger.mp4"
+      },
+      {
+        "key": "paper-title-card",
+        "name": "纸张标题卡",
+        "card": "纸张标题卡",
+        "summary": "一句话逐词压印上纸、一个词标强调色斜体、短划线收束",
+        "use": "章节转场/价值主张字卡；重要功能出场前的引导卡；全片呼吸位",
+        "energy": "低（呼吸位，隔开两段高能镜头）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/paper-title-card.mp4"
+      },
+      {
+        "key": "drift-assembly",
+        "name": "漂移合拢",
+        "card": "文字集结",
+        "summary": "字符 seed 方向 ±300px + blur 8px 漂入错峰归位，锁定帧加深脉冲，合体后整词呼吸 1.04",
+        "use": "大标题/标语的入场；与 type-entrance-moves、document-typewriter-reveal 同属标题入场大品类，全片 ≤2 种",
+        "energy": "A 中 / B 中高 / C 中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/drift-assembly.mp4"
+      },
+      {
+        "key": "letter-drop-physics",
+        "name": "字符坠落",
+        "card": "文字入场",
+        "summary": "标题文字入场一式——letter-drop-physics 字符坠落（重力砸落、弹跳、歪斜站定，最后一拍集体立正归位）",
+        "use": "大标题/章节字卡的入场；与 type-assembly-moves（集结系）、document-typewriter-reveal（打字机）同品类互斥选用",
+        "energy": "中高（物理趣味）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/letter-drop-physics.mp4"
+      },
+      {
+        "key": "text-on-path",
+        "name": "沿线流入",
+        "card": "文字集结",
+        "summary": "字符沿贝塞尔曲线鱼贯滑入（切线角旋转），到达后 12f 摆正水平",
+        "use": "大标题/标语的入场；与 type-entrance-moves、document-typewriter-reveal 同属标题入场大品类，全片 ≤2 种",
+        "energy": "A 中 / B 中高 / C 中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/text-on-path.mp4"
+      },
+      {
+        "key": "assemble-then-type-flyin",
+        "name": "骨架装配落字",
+        "card": "骨架装配落字",
+        "summary": "空的暗底网格上，无文字的组件骨架先从四面八方飞入贴合；随后各处文字逐字从 3D 空间旋转着飞来落位，先大标题后小标注，全部落位后页面成形",
+        "use": "页面/海报\"自己长出来\"的开场；排版类产品的能力展示；从骨架到成稿的两段式叙事",
+        "energy": "中高（骨架段稀疏、文字段密集，能量单调上升到收尾）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/assemble-then-type-flyin.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 3,
+    "range": [
+      1.5,
+      8
+    ]
+  },
+  "tier": "T0",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "blur-slide",
+        "path": "demos/typography/blur-slide/BlurSlide.tsx",
+        "card": "references/shots/typography/blur-slide.md"
+      },
+      {
+        "key": "split-text-stagger",
+        "path": "demos/typography/type-assembly-moves/SplitTextStagger.tsx",
+        "card": "references/shots/typography/type-assembly-moves.md"
+      },
+      {
+        "key": "paper-title-card",
+        "path": "demos/typography/paper-title-card/PaperTitleCard.tsx",
+        "card": "references/shots/typography/paper-title-card.md"
+      },
+      {
+        "key": "drift-assembly",
+        "path": "demos/typography/type-assembly-moves/LetterformDriftAssembly.tsx",
+        "card": "references/shots/typography/type-assembly-moves.md"
+      },
+      {
+        "key": "letter-drop-physics",
+        "path": "demos/typography/type-entrance-moves/LetterDropPhysics.tsx",
+        "card": "references/shots/typography/type-entrance-moves.md"
+      },
+      {
+        "key": "text-on-path",
+        "path": "demos/typography/type-assembly-moves/TextOnPath.tsx",
+        "card": "references/shots/typography/type-assembly-moves.md"
+      },
+      {
+        "key": "assemble-then-type-flyin",
+        "path": "demos/effects/assemble-then-type-flyin/AssembleThenTypeFlyin.tsx",
+        "card": "references/shots/effects/assemble-then-type-flyin.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [
+    "split-text-stagger",
+    "paper-title-card",
+    "drift-assembly",
+    "letter-drop-physics",
+    "text-on-path"
+  ],
+  "overlaps": [
+    {
+      "id": "path-type",
+      "note": "path-type swaps two sentences through a loop of the line; type-enter path brings one title in along a curve"
+    },
+    {
+      "id": "scramble-resolve",
+      "note": "a line resolving in reading order through scrambled glyphs, for ids and hashes"
+    },
+    {
+      "id": "lead-word",
+      "note": "lead-word shows the first word alone at 2.3× and builds the line round it; type-enter gives every unit the same short way"
+    },
+    {
+      "id": "type-retype",
+      "note": "a line typed with a visible correction; type-enter has no correction to make"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/type-enter/brick.js",
+  "card": "motion/type-enter/CARD.md",
+  "compare": {
+    "ssimMean": 0.828,
+    "ssimMin": 0.7779,
+    "ssimDrop": 0.065,
+    "trackDevPx": 1.5,
+    "progressRmse": 0.0049,
+    "eventFrames": 1,
+    "verdict": "pass",
+    "variants": {
+      "tumble": {
+        "upstream": "assemble-then-type-flyin",
+        "ssimMean": 0.6475,
+        "ssimMin": 0.6004,
+        "ssimDrop": 0.0056,
+        "trackDevPx": 0.1,
+        "progressRmse": 0.0001,
+        "eventFrames": 0,
+        "verdict": "pass"
+      }
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

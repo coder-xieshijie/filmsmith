@@ -1,0 +1,130 @@
+{
+  "id": "input-output",
+  "category": "scene",
+  "name": {
+    "en": "Input and output",
+    "zh": "输入与输出"
+  },
+  "summary": {
+    "en": "The claim as a split poster: the accent field holds what the person gives (input), an arrow points to what the product returns (output); the field then collapses into a band that carries the product name and one line.",
+    "zh": "把主张排成左右对开的海报：强调色色块里是人给出的（输入），箭头指向产品交回的（输出）；随后色块收成一条色带，托着产品名和一句话。"
+  },
+  "fits": "The claim right after the problem: what goes in, what comes out, and the product between.",
+  "notFor": "Claims that are not a transformation; more than two lines a side; a film with no person (the accent half is the person).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "The claim is a transformation the eye can check at a glance: the person's part is in the colour, the product's result in ink, and the arrow is the product.",
+      "zh": "主张是一次一眼能核对的转换：人的部分在色块里，产品的结果是墨色，箭头就是产品本身。"
+    },
+    "content": {
+      "en": "Input and output, each a label (≤ 10 chars) and 1–2 lines (≤ 12 chars); product name (≤ 16) and a one-line description (≤ 40).",
+      "zh": "输入、输出各一个标签（≤ 5 字）和 1–2 行（每行 ≤ 6 字）；产品名（≤ 8 字）和一句说明（≤ 16 字）。"
+    },
+    "fits": {
+      "zh": "紧接问题之后的主张：进去什么、出来什么、中间是产品。"
+    },
+    "notFor": {
+      "zh": "不是“转换”的主张；每边超过两行；片中没有人（强调色那一半就是人）。"
+    },
+    "roles": [
+      "claim",
+      "turn"
+    ],
+    "subjects": [
+      "title",
+      "text"
+    ],
+    "moods": [
+      "editorial",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "input output",
+        "split poster",
+        "accent field",
+        "claim",
+        "before and after",
+        "band"
+      ],
+      "zh": [
+        "输入输出",
+        "对开海报",
+        "强调色块",
+        "主张",
+        "前后对照",
+        "色带"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "problem-table",
+        "note": "its accent wipe grows into the input half"
+      },
+      {
+        "id": "numeral-chapter",
+        "note": "the first chapter after the claim"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Input lines sit on the accent at about 3:1 in clay and orange; keep them at 88 px or more.",
+        "Chinese lines of 7 characters or more step down below 88 px; split them across two lines instead."
+      ],
+      "zh": [
+        "clay、orange 下输入行在强调色上约 3:1，字号不要低于 88 px。",
+        "中文一行到 7 个字就会降到 88 px 以下，改成两行。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      8,
+      18
+    ],
+    "sec120": [
+      4,
+      9
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (claim)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/input-output/brick.js",
+  "card": "scene/input-output/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,133 @@
+{
+  "id": "symbol-scramble",
+  "category": "motion",
+  "name": {
+    "en": "Symbol scramble",
+    "zh": "符号乱码定格"
+  },
+  "summary": {
+    "en": "A value resolves in its own digit slots: symbols flicker 24 times a second, never other digits, then lock left to right; or it counts up in its own format.",
+    "zh": "一个数值在自己的数位里定格：符号每秒闪 24 次、从不显示别的数字，再从左到右锁定；或者按原格式往上数。"
+  },
+  "fits": "A measured value arriving: a benchmark result, a count, a ratio.",
+  "notFor": "Words; a value that is not measured; slot-machine fun (the symbols are not digits on purpose).",
+  "select": {
+    "intent": {
+      "en": "The number feels measured rather than typed: it searches, then settles, and no frame shows a wrong value.",
+      "zh": "让数字像是量出来的而不是写上去的：先搜索再落定，任何一帧都不显示错的数。"
+    },
+    "content": {
+      "en": "One value (≤ 9 chars, digits with optional unit or sign) and an optional label (≤ 26 chars).",
+      "zh": "一个数值（≤ 6 字，数字加可选单位或符号）和可选标签（≤ 10 字）。"
+    },
+    "fits": {
+      "zh": "测量值到来的时刻：跑分结果、计数、倍数。"
+    },
+    "notFor": {
+      "zh": "文字；不是测量来的数；老虎机式的花哨（故意用符号而不是数字）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "climax",
+      "demo"
+    ],
+    "subjects": [
+      "number",
+      "metric"
+    ],
+    "moods": [
+      "mechanical",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "scramble",
+        "decode",
+        "digit slots",
+        "resolve",
+        "count up",
+        "hash symbols"
+      ],
+      "zh": [
+        "乱码",
+        "解码",
+        "数位",
+        "定格",
+        "计数",
+        "符号闪烁"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "hop-search",
+        "note": "the answer's digits while the highlight decides"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Only digits scramble; units, signs and words stand from the first frame."
+      ],
+      "zh": [
+        "只有数字乱码；单位、符号和文字从第一帧就在。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 1,
+    "range": [
+      0.5,
+      2
+    ]
+  },
+  "tier": "T0",
+  "family": "mask-type",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "pulse",
+      "any data"
+    ],
+    "avoid": [
+      "ink"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/pulse/film.js valueGlyphs, scrambleChar, numFormat"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "digit-roll",
+      "note": "an odometer: columns roll through digits; here symbols that are never digits, in fixed slots"
+    },
+    {
+      "id": "scramble-resolve",
+      "note": "runtime hand-off: a mono line of letters; here digit slots of a proportional face"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/symbol-scramble/brick.js",
+  "card": "motion/symbol-scramble/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

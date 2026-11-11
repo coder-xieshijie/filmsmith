@@ -1,0 +1,148 @@
+{
+  "id": "strip-away",
+  "category": "scene",
+  "name": {
+    "en": "Strip away",
+    "zh": "减法收尾"
+  },
+  "summary": {
+    "en": "A click on the editor's primary button and the interface evaporates around it layer by layer, outside in; the button alone glides to the centre of a dark frame, then lets go to the lock-up.",
+    "zh": "点一下编辑器的主按钮，界面由外向内一层层蒸发；只剩按钮滑到暗场中央，再交给标志落版。"
+  },
+  "fits": "The end of a product demo whose last action is the point (publish, ship, send): the action stays, everything else goes, then the name.",
+  "notFor": "Products without a primary action in their UI; endings that should keep the product on screen.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      12
+    ],
+    "sec120": [
+      5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "ui-strip-away-outro",
+        "path": "demos/outro/ui-strip-away-outro/UiStripAwayOutro.tsx",
+        "card": "references/shots/outro/ui-strip-away-outro.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "mark-lockup",
+      "note": "the lock-up alone; strip-away arrives at it by subtracting the UI around one button"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/strip-away/brick.js",
+  "card": "scene/strip-away/CARD.md",
+  "compare": {
+    "ssimMean": 0.8646,
+    "ssimMin": 0.7938,
+    "ssimDrop": 0.0248,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "Everything but the one action falls away, so the viewer leaves with that action and the name behind it.",
+      "zh": "除了那一个动作，其余都褪去：观众带走的是这个动作和它背后的名字。"
+    },
+    "content": {
+      "en": "The primary action's label (one word ≤ 10 chars), a document title ≤ 20 chars, a wordmark ≤ 16 chars, a mark; up to four screenshots for the editor's cards.",
+      "zh": "主操作按钮的文字（≤ 3 字），≤ 8 字的文档标题，≤ 6 字的字标，一个标志；编辑器里的卡片最多 4 张截图。"
+    },
+    "fits": {
+      "zh": "最后一个动作就是重点的产品演示的结尾（发布、上线、发送）：动作留下，其余褪去，再落名字。"
+    },
+    "notFor": {
+      "zh": "界面里没有主操作的产品；片尾要留住产品画面的。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "ui",
+      "cursor",
+      "logo"
+    ],
+    "moods": [
+      "calm",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "strip away",
+        "subtractive",
+        "evaporate",
+        "publish button",
+        "UI dissolve",
+        "outro"
+      ],
+      "zh": [
+        "界面剥离",
+        "减法收尾",
+        "层层蒸发",
+        "发布按钮",
+        "只剩按钮",
+        "收尾"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "cursor-tour",
+        "note": "a cursor-led demo ending on the same click"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The button must be the action the film was about; any other button turns the ending into a random click."
+      ],
+      "zh": [
+        "按钮必须是全片讲的那个动作；换成别的按钮，结尾就成了随手一点。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "ui-strip-away-outro",
+        "name": "减法收尾",
+        "card": "减法收尾",
+        "summary": "减法式收尾——点击 Publish 后整个编辑器 UI 从外围到中心层层错峰蒸发，黑场上只剩那颗按钮滑到屏心放大，按钮再淡出交棒字标定版",
+        "use": "\"发布/完成\"语义的 outro；想讲\"一键之后一切复杂性消失\"的产品收尾",
+        "energy": "中（前段安静操作，中段持续退场，无瞬时冲击）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/ui-strip-away-outro.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

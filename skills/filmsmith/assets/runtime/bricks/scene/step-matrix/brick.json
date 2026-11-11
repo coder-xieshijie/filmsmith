@@ -1,0 +1,124 @@
+{
+  "id": "step-matrix",
+  "category": "scene",
+  "name": {
+    "en": "Step matrix",
+    "zh": "步骤矩阵"
+  },
+  "summary": {
+    "en": "A matrix of steps by targets: an accent cursor walks the cells, each finished cell is marked DONE and its column gets an accent underline; a 400 px side numeral counts columns and a strip sums the run.",
+    "zh": "“步骤 × 对象”的矩阵：强调色光标逐格走过，完成的格子标上“完成”，整列完成后划一道强调色下划线；侧边 400 px 数字计列，底部一条汇总。"
+  },
+  "fits": "A chapter page where the same steps run over several targets: databases, regions, services, files.",
+  "notFor": "More than 4 × 5 cells; steps that run in parallel (the cursor is one at a time).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show a run as progress through a grid: one cursor, one cell at a time, so order and completeness read at once.",
+      "zh": "把一次运行画成在格子里推进：一个光标、一次一格，顺序和完成度一眼可读。"
+    },
+    "content": {
+      "en": "Page head, 2–4 row names, 2–5 column names (≤ 10 chars), a done label, a side number and a strip line.",
+      "zh": "页头、2–4 个行名、2–5 个列名（≤ 5 字）、“完成”标签、侧边数字和一行汇总。"
+    },
+    "fits": {
+      "zh": "某章里同一组步骤跑过多个对象：数据库、地区、服务、文件。"
+    },
+    "notFor": {
+      "zh": "超过 4 × 5 格；并行执行的步骤（光标一次只在一格）。"
+    },
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "list",
+      "chart"
+    ],
+    "moods": [
+      "mechanical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "matrix",
+        "progress grid",
+        "cursor",
+        "rollout",
+        "step by target",
+        "done"
+      ],
+      "zh": [
+        "矩阵",
+        "进度格",
+        "光标",
+        "逐个发布",
+        "步骤乘对象",
+        "完成"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "verify-band",
+        "note": "what the run proved"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The DONE label is a mono label: in Chinese it is 完成 at 28 px, not capitals."
+      ],
+      "zh": [
+        "“完成”是等宽标签：中文 28 px，不转大写。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      8,
+      20
+    ],
+    "sec120": [
+      4,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (matrix)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/step-matrix/brick.js",
+  "card": "scene/step-matrix/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

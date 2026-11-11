@@ -1,0 +1,125 @@
+{
+  "id": "screen-wake",
+  "category": "scene",
+  "name": {
+    "en": "Screen wake",
+    "zh": "屏幕唤醒"
+  },
+  "summary": {
+    "en": "The device’s edge draws out from the camera dot, the screen lights on the first real capture on beat 1, the product’s name lands in the margin, the chin names the source.",
+    "zh": "设备的边线从摄像头点向两边画出，第 1 拍屏幕在第一张真实截图上亮起，产品名落在页边，下巴写出来源。"
+  },
+  "fits": "The opening of a launch told on one device.",
+  "notFor": "A film without a real capture to open on; a cold open on a word.",
+  "select": {
+    "intent": {
+      "en": "The film opens on the product’s own surface coming to life, so everything after reads as the real thing.",
+      "zh": "片子从产品自己的画面亮起开场，之后的一切都读作真东西。"
+    },
+    "content": {
+      "en": "The first capture with its source line; the name (≤ 10 chars / 5 字), a line (≤ 18 / 14 字), an optional note.",
+      "zh": "第一张截图和它的来源行；产品名（≤ 10 字符 / 5 字）、一行说明（≤ 18 / 14 字）、可选注释。"
+    },
+    "fits": {
+      "zh": "在一台设备上讲的发布片的开场。"
+    },
+    "notFor": {
+      "zh": "没有真实截图可开场的片子；从一个词冷开场。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "device",
+      "ui",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "screen wake",
+        "device opening",
+        "lid draws",
+        "backlight",
+        "product name",
+        "cold start"
+      ],
+      "zh": [
+        "屏幕唤醒",
+        "设备开场",
+        "边线画出",
+        "屏幕亮起",
+        "产品名",
+        "开机"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "screen-push",
+        "note": "the first push onto the part that matters"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The first capture must be the product’s surface at rest, not a marketing composite."
+      ],
+      "zh": [
+        "第一张截图必须是产品静止时的界面，不能是营销合成图。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      4,
+      12
+    ],
+    "sec120": [
+      2,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "handset",
+      "any real-asset launch"
+    ],
+    "avoid": [
+      "tally",
+      "trace"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/handset/choreo.js (TYPES.wake), film.js (paintDevice, the backlight)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/screen-wake/brick.js",
+  "card": "scene/screen-wake/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

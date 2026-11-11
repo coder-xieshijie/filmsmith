@@ -1,0 +1,115 @@
+{
+  "id": "boot-to-end",
+  "category": "arc",
+  "name": {
+    "en": "Boot to end",
+    "zh": "开机到收尾"
+  },
+  "summary": {
+    "en": "The phosphor arc: a prompt types the problem and collapses into a point of light, the claim under the horizon, chapters of the tool at work, you at both ends, the install under a break, the tunnel into the tagline, the lock-up out of a cursor.",
+    "zh": "phosphor 的骨架：提示符敲出问题并收成一个光点，地平线下的主张，工具工作的几个章节，两头是你，在停顿里安装，冲过隧道进入标语，从光标里出来的收尾。"
+  },
+  "fits": "CLI, agent, CI and infrastructure launches of 30–75 s.",
+  "notFor": "Products without a command line; films under 25 s (use boot → end, a 10 s sting).",
+  "select": {
+    "intent": {
+      "en": "One terminal session from the failing command to the URL, the cursor opening and closing it.",
+      "zh": "一次终端会话，从失败的命令到网址，光标开场也收尾。"
+    },
+    "content": {
+      "en": "A failing command, a two-line claim, 1–4 chapters of the tool at work, install commands and steps, a two-line tagline, name, chips and URL.",
+      "zh": "一条失败的命令、两行主张、1–4 章工具工作、安装命令和步骤、两行标语、产品名、标签和网址。"
+    },
+    "fits": {
+      "zh": "30–75 秒的命令行、智能体、CI 与基础设施发布片。"
+    },
+    "notFor": {
+      "zh": "没有命令行的产品；25 秒以下（用 boot → end 的 10 秒短片）。"
+    },
+    "subjects": [
+      "terminal",
+      "code",
+      "title"
+    ],
+    "moods": [
+      "technical",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "CLI launch",
+        "terminal",
+        "boot",
+        "tagline",
+        "lock-up",
+        "session"
+      ],
+      "zh": [
+        "命令行发布",
+        "终端",
+        "开机",
+        "标语",
+        "收尾",
+        "会话"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "phosphor-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "night-terminal",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Chinese pages read longer: the 43 s reseed demo runs about 55 s in Chinese."
+      ],
+      "zh": [
+        "中文页读得更久：43 秒的 reseed 示例中文约 55 秒。"
+      ]
+    }
+  },
+  "duration": {
+    "sec": [
+      30,
+      75
+    ]
+  },
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/content.js; the phosphor demo film; references/modes/phosphor.md (use cases)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "arc/boot-to-end/brick.js",
+  "card": "arc/boot-to-end/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead against the original template's scene order and lengths (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

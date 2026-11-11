@@ -1,0 +1,129 @@
+{
+  "id": "page-turn",
+  "category": "motion",
+  "name": {
+    "en": "Page turn",
+    "zh": "翻页"
+  },
+  "summary": {
+    "en": "The sheet on top turns away over its top or left edge, darkening as it tilts, onto the page that lay underneath.",
+    "zh": "最上面那张纸绕上边或左边翻走，越翻越暗，露出压在下面的那页。"
+  },
+  "fits": "A page change between two exhibits of one file.",
+  "notFor": "Frame-level cuts; sheets that should stay in view.",
+  "select": {
+    "intent": {
+      "en": "The next evidence was under this one all along: the change is paper being handled, not a cut.",
+      "zh": "下一份证据一直压在这份下面：换页是翻纸，不是剪辑。"
+    },
+    "content": {
+      "en": "Two exhibits (specs as the scenes take them).",
+      "zh": "两份证物（与场景同样的参数）。"
+    },
+    "fits": {
+      "zh": "同一卷宗里两份证物之间的换页。"
+    },
+    "notFor": {
+      "zh": "整帧切换；需要留在画面里的纸。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "demo",
+      "proof",
+      "problem"
+    ],
+    "subjects": [
+      "image",
+      "text"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "page turn",
+        "flip",
+        "perspective strips",
+        "paper"
+      ],
+      "zh": [
+        "翻页",
+        "翻转",
+        "透视条带",
+        "纸张"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "exhibit-strike",
+        "note": "enter: change"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The page underneath is still and whole from the first frame; only the top sheet moves."
+      ],
+      "zh": [
+        "下面那页从第一帧起就完整、静止；只有上面那张在动。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 1,
+    "range": [
+      0.75,
+      1.5
+    ]
+  },
+  "tier": "T2",
+  "family": "lift-flip",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "dossier"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the dossier source film turn"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "device-flip",
+      "note": "runtime: a device turned about its centre in 3D; here a paper sheet hinged on an edge, drawn in perspective strips"
+    }
+  ],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/page-turn/brick.js",
+  "card": "motion/page-turn/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "endsMoving": {
+    "reason": "the template's turn ends edge-on at its fastest on the downbeat; the page underneath (or the next cut) takes over on that frame"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

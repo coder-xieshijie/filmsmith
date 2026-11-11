@@ -1,0 +1,125 @@
+{
+  "id": "walk-frame",
+  "category": "motion",
+  "name": {
+    "en": "Walk frame",
+    "zh": "走框"
+  },
+  "summary": {
+    "en": "While a page holds, a 3 px ink frame hops over its items in reading order, one hop a beat, landing on the beat.",
+    "zh": "页面停留时，一个 3 px 墨框按阅读顺序在条目间跳，每拍一跳，正好落在拍点上。"
+  },
+  "fits": "The hold of any plakat page with two or more items: rows, options, nodes.",
+  "notFor": "Pages still landing (it starts once settled); single-item pages; dark films where a frame reads as a selection UI.",
+  "select": {
+    "intent": {
+      "en": "Keep the beat on a still page without rewriting it: one small frame moves, the content stays readable.",
+      "zh": "在静止的页面上保持节拍而不重写画面：只有一个小框在动，内容照样好读。"
+    },
+    "content": {
+      "en": "The page's item rects in reading order.",
+      "zh": "页面上各条目的矩形，按阅读顺序。"
+    },
+    "fits": {
+      "zh": "任何有两项以上的 plakat 页的停留段：行、选项、节点。"
+    },
+    "notFor": {
+      "zh": "还在落定中的页面（它从静止后才开始）；只有一项的页；框会被读成选中界面的暗色片。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "list",
+      "abstract"
+    ],
+    "moods": [
+      "calm",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "hold move",
+        "frame hop",
+        "pointer",
+        "beat keeper",
+        "reading order"
+      ],
+      "zh": [
+        "停留动作",
+        "跳框",
+        "指示框",
+        "守拍",
+        "阅读顺序"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "problem-table",
+        "note": "walks its rows"
+      },
+      {
+        "id": "human-loop",
+        "note": "walks its nodes"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Above about 140 BPM a hop each beat reads as nervous; walk every second beat there."
+      ],
+      "zh": [
+        "约 140 BPM 以上每拍一跳显得急，改成每两拍一跳。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 4,
+    "range": [
+      4,
+      4
+    ]
+  },
+  "tier": "T0",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (walk frame), timing.rules.js (holds)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/walk-frame/brick.js",
+  "card": "motion/walk-frame/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,114 @@
+{
+  "id": "poster-grid",
+  "category": "look",
+  "name": {
+    "en": "Poster grid",
+    "zh": "海报网格"
+  },
+  "summary": {
+    "en": "The plakat look: warm paper, one ink for text, rules and solid blocks, one accent for the person and the person's decisions, a visible 12-column grid, giant numerals beside small mono labels; Inter Tight and IBM Plex Mono.",
+    "zh": "plakat 的样式：暖白纸、一种墨色管文字、细线和实块，唯一的强调色只给“人和人的决定”，12 栏网格露在画面上，巨型数字配小号等宽标签；字体 Inter Tight 与 IBM Plex Mono。"
+  },
+  "fits": "Products whose story is a clear claim plus a sequence of steps or decisions with a person at the start and the end: developer workflows, review and approval tools, rollout tools.",
+  "notFor": "Products that need space, depth or spectacle; numbers about many items; stories with no human decision for the accent to mark.",
+  "select": {
+    "intent": {
+      "en": "A product launch set like a Swiss concert-poster series: restraint and a visible system make every step read as decided, and the one colour shows where a person decides.",
+      "zh": "把产品发布排成一套瑞士音乐会海报：克制和看得见的体系让每一步都显得经过斟酌，唯一的颜色指出人在哪里做决定。"
+    },
+    "content": {
+      "en": "A claim, three to six steps or decisions, real technical material for at least one page (commands, ids, numbers), a product name and URL.",
+      "zh": "一句主张、三到六个步骤或决定、至少一页真实技术物料（命令、编号、数字）、产品名与网址。"
+    },
+    "fits": {
+      "zh": "故事是“清楚的主张 + 一串步骤或决定”、首尾有人的产品：开发流程、审核与审批工具、发布工具。"
+    },
+    "notFor": {
+      "zh": "需要空间、纵深或大场面的产品；关于大量条目的数字；没有人的决定可让强调色标记的故事。"
+    },
+    "subjects": [
+      "title",
+      "list",
+      "text"
+    ],
+    "moods": [
+      "editorial",
+      "elegant"
+    ],
+    "keywords": {
+      "en": [
+        "Swiss style",
+        "International Typographic Style",
+        "Müller-Brockmann",
+        "poster",
+        "grid",
+        "paper and ink"
+      ],
+      "zh": [
+        "瑞士风格",
+        "国际主义排版",
+        "海报",
+        "网格",
+        "纸与墨",
+        "克制"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "poster-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "claim-steps",
+        "note": "its arc"
+      },
+      {
+        "id": "poster-chrome",
+        "note": "its frame"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The accent is for blocks and large type only in signal, orange, clay and poster-coral (about 3:1 on paper).",
+        "Chinese has no capitals and no negative tracking; labels are 28 px and body 40 px, so a Chinese page holds fewer items."
+      ],
+      "zh": [
+        "signal、orange、clay、poster-coral 的强调色在纸上约 3:1，只能用于色块和大字。",
+        "中文不转大写、不加负字距；标签 28 px、正文 40 px，中文页放得下的条目更少。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/palettes.js, index.html (CSS), scenes.js (SERIES)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "look/poster-grid/look.js",
+  "card": "look/poster-grid/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

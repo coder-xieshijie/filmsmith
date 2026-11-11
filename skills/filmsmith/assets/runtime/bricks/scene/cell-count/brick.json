@@ -1,0 +1,119 @@
+{
+  "id": "cell-count",
+  "category": "scene",
+  "name": {
+    "en": "Cell count",
+    "zh": "网格计数"
+  },
+  "summary": {
+    "en": "A huge number counts up at the left while one more cell of rings appears round the anchor per counted step; reversed out of ink by default.",
+    "zh": "左边一个大数字往上数，每数一步锚点周围多一个圆环细胞；默认墨底反白。"
+  },
+  "fits": "A small count that matters (voices, regions, models), at most sixteen steps.",
+  "notFor": "Large numbers or percentages (use a counter brick); counts that are not units.",
+  "select": {
+    "intent": {
+      "en": "A small count is felt as things appearing: one cell per step round the anchor while the number climbs.",
+      "zh": "小计数被感受为东西一件件出现：数字往上走，锚点周围每一步多一个细胞。"
+    },
+    "content": {
+      "en": "A value and its start (difference ≤ 16), a line (≤ 32 / 16 字), an optional label (≤ 30 / 16 字).",
+      "zh": "数值与起点（差 ≤ 16），一行字（≤ 32 字符 / 16 字），可选标签（≤ 30 / 16 字）。"
+    },
+    "fits": {
+      "zh": "一个要紧的小计数（声部、地区、模型），最多 16 步。"
+    },
+    "notFor": {
+      "zh": "大数或百分比（用计数器积木）；不是单位的计数。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "problem"
+    ],
+    "subjects": [
+      "number",
+      "abstract"
+    ],
+    "moods": [
+      "editorial",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "count",
+        "cells",
+        "voronoi",
+        "golden angle",
+        "reversed out"
+      ],
+      "zh": [
+        "计数",
+        "细胞",
+        "泰森多边形",
+        "黄金角",
+        "反白"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "field-card",
+        "note": "the cards around it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "At most four values a beat; faster and the in-between values flash unreadably."
+      ],
+      "zh": [
+        "每拍最多四个值；再快中间值会闪得读不出来。"
+      ]
+    }
+  },
+  "duration": {
+    "beats": [
+      4,
+      8
+    ],
+    "sec120": [
+      2,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/film.js (countAt, ready count), fields.js count"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/cell-count/brick.js",
+  "card": "scene/cell-count/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "energy": "mid",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,131 @@
+{
+  "id": "star-sweep",
+  "category": "motion",
+  "name": {
+    "en": "Star sweep",
+    "zh": "扫星收拢"
+  },
+  "summary": {
+    "en": "One thread gathers every star: the spine retracts into the mascot, the thread's head sweeps the sky in three passes along one smooth path catching each star it passes, the line straightens into a tether, and the caught stars flow along it into its end, which glows as one point.",
+    "zh": "一根线收回所有星：主干缩回吉祥物，线头沿一条平滑路径在夜空里扫三趟，经过的星被接到线上，线拉直成一根系绳，接住的星顺着它流进末端，末端亮成一个点。"
+  },
+  "fits": "The climax of a film that sent many things out: everything comes back to one place.",
+  "notFor": "Fewer than about eight stars; a film that has not sent stars out before.",
+  "select": {
+    "intent": {
+      "en": "Everything that was sent out comes back to one point the user can look at.",
+      "zh": "派出去的一切都回到一个用户看得过来的点。"
+    },
+    "content": {
+      "en": "Nothing to read: the stars in the sky (count, seed) and the point they flow into.",
+      "zh": "没有字：夜空里的星（数量、种子）和它们流进去的那个点。"
+    },
+    "fits": {
+      "zh": "派出很多东西的片子的高潮：一切回到一处。"
+    },
+    "notFor": {
+      "zh": "少于八颗左右的星；之前没派出过星的片子。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax"
+    ],
+    "subjects": [
+      "abstract",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "sweep",
+        "gather",
+        "collect",
+        "converge",
+        "stars",
+        "tether",
+        "climax"
+      ],
+      "zh": [
+        "扫掠",
+        "收拢",
+        "收集",
+        "汇聚",
+        "星",
+        "系绳",
+        "高潮"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "star-launch",
+        "note": "where the stars came from"
+      },
+      {
+        "id": "sky-gather",
+        "note": "the scene built on it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Catch each star on the frame the head passes it; a star that jumps early breaks the one-thread logic.",
+        "The path must not cross itself near a star or the catch reads twice."
+      ],
+      "zh": [
+        "线头经过哪颗星就在那一帧接住它；提前跳上线的星会打破“一根线”的逻辑。",
+        "路径不能在星附近自交，否则接住会看起来发生了两次。"
+      ]
+    }
+  },
+  "energy": "peak",
+  "duration": {
+    "beats": 8,
+    "range": [
+      6,
+      10
+    ]
+  },
+  "tier": "T3",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/plan.js GATHER (17 waypoints, Catmull-Rom to 400 points, the tether, catch times, flow windows); film.js renderClose, renderSpine; sched.js close"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/star-sweep/brick.js",
+  "card": "motion/star-sweep/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

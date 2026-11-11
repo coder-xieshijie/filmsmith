@@ -1,0 +1,132 @@
+{
+  "id": "sheet-flood",
+  "category": "scene",
+  "name": {
+    "en": "Flood and contact sheet",
+    "zh": "泛色与样片表"
+  },
+  "summary": {
+    "en": "The review link, the climax: the line colour floods the frame from a dot on a bar line, holds two bars, retracts onto a contact sheet of the film's own frames gathered from 420 particles, checks tick, the counter runs to the frame count, the tiles collapse into a file card with its spec line and export bar, and the card squashes into the line.",
+    "zh": "审片环节，也是高潮：线色从一个点在小节线上泛满全屏，停两小节，缩回到由 420 个粒子聚成的样片表上，表里是这部片自己的帧；逐格打勾，计数跑到总帧数，样片收成一张文件卡（规格行和导出条），卡片再压成那条线。"
+  },
+  "fits": "The climax of a video tool's reel: the film's own frames, counted and checked.",
+  "notFor": "Films without the links before it (the tiles show its own frames); short films (it needs about 10 s).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "End the steps on the proof: every frame of this very film, rendered and checked.",
+      "zh": "用证据收住所有步骤：这部片子的每一帧，都渲染过、检查过。"
+    },
+    "content": {
+      "en": "The counter label (≤ 22 characters), the card's file type (≤ 4).",
+      "zh": "计数标签（≤ 8 字）、卡片上的文件类型（≤ 4 字符）。"
+    },
+    "fits": {
+      "zh": "视频工具作品集的高潮：片子自己的帧，被数过、检查过。"
+    },
+    "notFor": {
+      "zh": "前面没有其他环节的片子（样片显示的是它自己的帧）；短片（它要大约 10 秒）。"
+    },
+    "roles": [
+      "climax",
+      "proof"
+    ],
+    "subjects": [
+      "image",
+      "number",
+      "cards"
+    ],
+    "moods": [
+      "energetic",
+      "cinematic"
+    ],
+    "keywords": {
+      "en": [
+        "flood",
+        "contact sheet",
+        "counter",
+        "checks",
+        "file card",
+        "export"
+      ],
+      "zh": [
+        "泛色",
+        "样片表",
+        "计数",
+        "打勾",
+        "文件卡",
+        "导出"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "card-squash",
+        "note": "its last move"
+      },
+      {
+        "id": "name-cut",
+        "note": "the close opens from its line"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Pass the film's length as `seconds`: the counter and `{frames}` count the host film, not the scene.",
+        "Pass the film's chain as `before` / `after`: the hand-offs read the neighbours, and the link's length is fitted with them (a link alone fits differently)."
+      ],
+      "zh": [
+        "把整片时长作为 seconds 传入：计数和 {frames} 数的是整部片，不是这一个场景。",
+        "把整片的链作为 before / after 传进来：交接读的是相邻环节，长度也和它们一起拟合（单独一环拟合出的长度不同）。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      16,
+      22
+    ],
+    "sec120": [
+      8,
+      11
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js review, floodArea, particles, tileTimes; shots.js REVIEW_CUES, CARD"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/sheet-flood/brick.js",
+  "card": "scene/sheet-flood/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

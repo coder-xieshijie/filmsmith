@@ -1,10 +1,9 @@
 # Third-party software and fonts
 
-Each skill's section lists the software and fonts it downloads at setup, none of which is committed to this repository, and the sources of the data in its examples.
+Each pipeline's section lists the software and fonts it downloads at setup, none of which is committed to this repository, and the sources of the data in its examples. Paths are inside `skills/filmsmith/`.
 
-## keynote-video
-
-Paths are inside `skills/keynote-video/`. `scripts/new-film.mjs` downloads the fonts and GSAP into each film folder when the film is set up, and `npx hyperframes` fetches HyperFrames and its headless Chrome on first use. Each keeps its own licence; the licence text of every font is saved next to it in the film's `assets/fonts/`.
+## Launch films
+ `scripts/new-film.mjs` downloads the fonts and GSAP into each film folder when the film is set up, and `npx hyperframes` fetches HyperFrames and its headless Chrome on first use. Each keeps its own licence; the licence text of every font is saved next to it in the film's `assets/fonts/`.
 
 ### Rendering
 
@@ -42,7 +41,7 @@ All from the [google/fonts](https://github.com/google/fonts) repository at the c
 
 Many bricks in `assets/runtime/bricks/` are adapted from [video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft) by Vincent Wei, at commit `1266a3ec4831289c4d893d42dd5102723658039a`, under the Apache License 2.0; the licence text is in `assets/runtime/bricks/LICENSE-video-shotcraft`. Each one has `licence: Apache-2.0` and `source` (the upstream demo and shot card) in its `brick.json`, and every adapted file starts with the upstream path and what was changed: rewritten as a HyperFrames brick in plain JavaScript (no React or Remotion), colours by role, brand, demo copy and screenshots removed, timing in beats, English and Chinese text through the shared language functions. A few options of the runtime's own hand-offs and transitions (`louvre`, `split-open`, `ink-wash` and others) take an idea from an upstream shot and say so in their file header. `assets/runtime/bricks/NOTICE.md` lists every adapted file with its upstream source; upstream has no NOTICE file of its own. The upstream text quoted in each brick's `select.upstream` (shot names, summaries, use) is carried as written, with one Chinese word for "inside" swapped for its synonym 内里. Everything else in `assets/runtime/bricks/` is Filmsmith's own (MIT).
 
-The bricks' looks name two fonts besides the ones above; a film downloads them only when its look uses one, and they are never committed: Noto Serif SC (google/fonts, OFL-1.1, Chinese films in a serif look) and [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) (OFL-1.1, the two teach-video looks).
+The bricks' looks name two fonts besides the ones above; a film downloads them only when its look uses one, and they are never committed: Noto Serif SC (google/fonts, OFL-1.1, Chinese films in a serif look) and [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) (OFL-1.1, the two teach looks).
 
 ### Data in examples
 
@@ -55,9 +54,9 @@ The bricks' looks name two fonts besides the ones above; a film downloads them o
 - scroll's example assets (`assets/templates/scroll/assets/real/`) are seven strips of one capture of this repository's own page (https://github.com/coder-xieshijie/filmsmith: the repository header and the README as rendered), made 2026-10-21 (03:16 UTC) with `tools/capture.mjs` at device pixel ratio 2, cut at one x range and scaled (ffmpeg crop and scale ×0.8, cwebp), with the file list, the sidebar and the lines naming third-party products left out (no avatars or account rows); and 41 frames (`ink/`, 12 fps, 11.9–15.3 s) of the skill's own Ink demo film, taken with `tools/frames.mjs` (ffmpeg decode and scale only). All of it is this repository's own content, under its licence; the page's typography is the host's rendering of it.
 - Every other example product (`grainlock`, `seedfield`, `tablewarden`, `shoring`, `rushes`, `reseed`, `loudgate`, `gatewright`, `tidepool`, `vela-2`, `orrery-3`, `fernwave`, `quarrystore`, stream's `Skein`) is made up, and its numbers are illustrative.
 
-## teach-video
+## Teach films
 
-Paths are inside `skills/teach-video/`. `scripts/new-film.mjs` and `scripts/voice/voice.py fonts` download GSAP, the libraries a kit lists in its `vendor.json` and the fonts into each film folder and check their sha256; `npx hyperframes` fetches HyperFrames, its headless Chrome and, for word timestamps, the Whisper model on first use. Nothing below is committed to this repository.
+`scripts/new-film-teach.mjs` and `scripts/voice/voice.py fonts` download GSAP, the libraries a kit lists in its `vendor.json` and the fonts into each film folder and check their sha256; `npx hyperframes` fetches HyperFrames, its headless Chrome and, for word timestamps, the Whisper model on first use. Nothing below is committed to this repository.
 
 | Component | Version and licence | Used for |
 |---|---|---|
@@ -71,6 +70,6 @@ Paths are inside `skills/teach-video/`. `scripts/new-film.mjs` and `scripts/voic
 | Whisper small | Downloaded by `hyperframes transcribe` | Word timestamps |
 | fonttools, FFmpeg | Called at run time, not distributed | Font subsetting, audio and video processing |
 
-`assets/lib/` is a byte-for-byte copy of the keynote-video bricks this skill can use (those whose `hosts` include `teach`) and the runtime files they import, synced from keynote-video; the bricks adapted from video-shotcraft (Apache-2.0, commit `1266a3e`) are listed in `assets/lib/bricks/NOTICE.md`, with the licence text in `assets/lib/bricks/LICENSE-video-shotcraft`, as described under keynote-video above.
+The brick library under `assets/runtime/bricks/` is shared by both pipelines, and the bricks a teach project can use are the ones whose `hosts` names `teach`; the bricks adapted from video-shotcraft (Apache-2.0, commit `1266a3e`) are listed in `assets/runtime/bricks/NOTICE.md`, with the licence text in `assets/runtime/bricks/LICENSE-video-shotcraft`, as described under Launch films above.
 
 The temporary music bed and the sound effects are synthesised in code by `voice.py` and released under CC0. The kits' demo segments use made-up content (terminal-ledger: a week of e-mail and similar; blueprint-zoom: an illustrative system diagram), labelled as illustrative on screen.

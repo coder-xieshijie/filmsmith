@@ -1,0 +1,117 @@
+{
+  "id": "film-ruler",
+  "category": "scene",
+  "name": {
+    "en": "Film ruler",
+    "zh": "片长标尺"
+  },
+  "summary": {
+    "en": "On night a ruler of the film's beats grows out of the dot, the dot riding it as the playhead at the film's own progress, two words slammed above it.",
+    "zh": "夜色底上，一把按全片拍数刻度的标尺从墨点长出，墨点作为播放头停在全片的真实进度上，上方砸下两个词。"
+  },
+  "fits": "A mid-film marker: \"half way\", \"two left\", a time claim measured by the film itself.",
+  "notFor": "a timeline of real dates; a film without a fixed length.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "The film measures itself: the dot is exactly where the film is, so \"half way\" is literally true.",
+      "zh": "片子自己量自己：墨点正好在片子走到的位置，“过半”是字面上的真。"
+    },
+    "content": {
+      "en": "Two words (≤ 7 chars each), an optional label (≤ 26 chars); the film's length in beats and this scene's start.",
+      "zh": "两个词（每个 ≤ 3 字），可选标签（≤ 10 字）；全片拍数和本场起点。"
+    },
+    "fits": {
+      "zh": "片中的标记：“过半”“还剩两个”，用片子本身量出来的时间说法。"
+    },
+    "notFor": {
+      "zh": "真实日期的时间轴；长度不固定的片子。"
+    },
+    "roles": [
+      "turn",
+      "proof"
+    ],
+    "subjects": [
+      "timeline",
+      "title"
+    ],
+    "moods": [
+      "mechanical",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "ruler",
+        "playhead",
+        "progress",
+        "ticks",
+        "self-measuring"
+      ],
+      "zh": [
+        "标尺",
+        "播放头",
+        "进度",
+        "刻度",
+        "自我丈量"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Pass the real film length and start (`film`), or the playhead lies."
+      ],
+      "zh": [
+        "要传真实的全片长度和起点（`film`），否则播放头会撒谎。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      4,
+      8
+    ],
+    "sec120": [
+      2,
+      4
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js layoutScenes ruler, drawScene ruler"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/film-ruler/brick.js",
+  "card": "scene/film-ruler/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

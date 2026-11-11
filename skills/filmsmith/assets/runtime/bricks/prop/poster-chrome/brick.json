@@ -1,0 +1,113 @@
+{
+  "id": "poster-chrome",
+  "category": "prop",
+  "name": {
+    "en": "Poster chrome",
+    "zh": "海报框"
+  },
+  "summary": {
+    "en": "The persistent frame of a plakat film: the visible 12-column grid, a header with brand, tag, section and licence, a footer with URL, platforms and one progress cell per bar, and a static paper tooth.",
+    "zh": "plakat 片子一直在的画框：看得见的 12 栏网格，页眉写品牌、标语、当前章节和许可，页脚写网址、平台和每小节一格的进度条，再加一层静态纸纹。"
+  },
+  "fits": "Every page of a plakat film; any Swiss-style film that wants its section and progress on screen.",
+  "notFor": "Films without sections or a URL to show; dark spectacle films (the frame is print furniture).",
+  "select": {
+    "intent": {
+      "en": "The film reads as one printed series: the grid shows the system, the header names where you are, the footer counts how far along it is.",
+      "zh": "整片读起来是一套印刷系列：网格露出体系，页眉说明身在哪一节，页脚数着走到了哪。"
+    },
+    "content": {
+      "en": "Brand (≤ 16 chars), tag (≤ 42), section (≤ 20), licence, URL, platforms; the number of bars and the current one.",
+      "zh": "品牌（≤ 8 字）、标语（≤ 14 字）、章节（≤ 10 字）、许可、网址、平台；总小节数与当前小节。"
+    },
+    "fits": {
+      "zh": "plakat 每一页；任何想把章节和进度留在画面上的瑞士风片子。"
+    },
+    "notFor": {
+      "zh": "没有章节或网址可示的片子；暗色大场面片（这个框是印刷用品）。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "proof",
+      "lockup"
+    ],
+    "subjects": [
+      "text",
+      "abstract"
+    ],
+    "moods": [
+      "editorial",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "header",
+        "footer",
+        "progress cells",
+        "12-column grid",
+        "paper texture",
+        "chrome"
+      ],
+      "zh": [
+        "页眉",
+        "页脚",
+        "进度格",
+        "12 栏网格",
+        "纸纹",
+        "画框"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "problem-table",
+        "note": "the first page it frames"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Over an accent field the chrome switches to onAccent at the field edge; pass the field rects or the label sinks to 2.5:1."
+      ],
+      "zh": [
+        "在强调色色块上，框的文字在色块边缘切换为 onAccent；不传色块范围，标签对比度会掉到 2.5:1。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/index.html (#grid, #paper, #chrome)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/poster-chrome/brick.js",
+  "card": "prop/poster-chrome/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

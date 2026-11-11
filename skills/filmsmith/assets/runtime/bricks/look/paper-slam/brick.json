@@ -1,0 +1,114 @@
+{
+  "id": "paper-slam",
+  "category": "look",
+  "name": {
+    "en": "Paper slam",
+    "zh": "纸面砸字"
+  },
+  "summary": {
+    "en": "The ink look: warm paper and black ink, heavy extra-condensed capitals slammed on the beat, one accent that is the dot and everything it becomes, a night ground for the middle, a misregistration ghost on impact frames only.",
+    "zh": "ink 的样式：暖白纸、黑墨，极窄的粗体大写一拍砸一个，唯一的强调色就是那个墨点和它变成的一切，中段用夜色底，只在砸下那一帧有套印错位的残影。"
+  },
+  "fits": "Launch films and teasers cut hard to a beat, 20–45 s: a dev tool with one sharp claim, a name to land on a drop.",
+  "notFor": "Calm explainers; screenshots or UI as the subject; many numbers; long sentences.",
+  "select": {
+    "intent": {
+      "en": "Type as percussion: every word is a hit on paper, and one dot carries every cut, so the film reads as one gesture.",
+      "zh": "把字当打击乐：每个词都是砸在纸上的一下，一个墨点串起每次切换，整支片像一笔写完。"
+    },
+    "content": {
+      "en": "One- or two-word statements (≤ 10 chars a word), a name, two or three labels, a number, one claim, a command.",
+      "zh": "一两个词的短句（每词 ≤ 4 字），一个名字，两三条标签，一个数，一句断言，一行命令。"
+    },
+    "fits": {
+      "zh": "踩拍硬剪的发布片和预告，20–45 秒：一个有尖锐主张的开发者工具，一个要落在 drop 上的名字。"
+    },
+    "notFor": {
+      "zh": "安静的讲解片；以截图或界面为主体；数字很多；长句。"
+    },
+    "subjects": [
+      "title",
+      "text",
+      "logo"
+    ],
+    "moods": [
+      "energetic",
+      "dramatic",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "kinetic type",
+        "slam",
+        "full stop",
+        "extra condensed",
+        "width axis",
+        "paper and ink",
+        "misregistration"
+      ],
+      "zh": [
+        "动态排版",
+        "砸字",
+        "句号墨点",
+        "极窄字",
+        "宽度轴",
+        "纸与墨",
+        "套印错位"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "inkbeat-bed",
+        "note": "its sound: a stamp per slam, two drops"
+      },
+      {
+        "id": "ink-dot",
+        "note": "the dot"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The accent is only the dot and what it becomes; never colour a word with it except the warped one.",
+        "The misregistration ghost lives one tenth of a second on impact frames; never as a resting style."
+      ],
+      "zh": [
+        "强调色只给墨点和它变成的东西；除了扭曲的那个词，不给任何字上色。",
+        "套印残影只在砸下的 0.1 秒出现，不能当静止样式。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/palettes.js, film.js (type, grid, camera)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "look/paper-slam/look.js",
+  "card": "look/paper-slam/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

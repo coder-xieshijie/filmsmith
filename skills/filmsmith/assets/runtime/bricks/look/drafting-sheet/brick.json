@@ -1,0 +1,113 @@
+{
+  "id": "drafting-sheet",
+  "category": "look",
+  "name": {
+    "en": "Drafting sheet",
+    "zh": "制图纸"
+  },
+  "summary": {
+    "en": "The blueprint look: one engineering drawing on reprographic paper, line work in two weights, one amber for a person's annotation or approval, a fine and a major drafting grid, a drifting lamp, IBM Plex Sans Condensed and Plex Mono on ISO 3098's √2 series.",
+    "zh": "blueprint 的样式：一张印在晒图纸上的工程图，两种线宽，唯一的琥珀色只给人的批注和批准，细、粗两级制图网格，缓慢移动的灯光；字体 IBM Plex Sans Condensed 与 Plex Mono，字号按 ISO 3098 的 √2 系列。"
+  },
+  "fits": "Products that are a system with parts, a plan a person signs and machine checks: rollout, backup, migration, pipeline tools.",
+  "notFor": "Consumer products, emotional stories, anything without structure to draw; films that need people or photographs.",
+  "select": {
+    "intent": {
+      "en": "A launch drawn as an engineering drawing: every line drafted, the product shown as a designed system, amber only where a person signs.",
+      "zh": "把发布画成一张工程图：每根线都是画出来的，产品是被设计出来的系统，只有人签字的地方用琥珀色。"
+    },
+    "content": {
+      "en": "A system with 3–9 things to draw (problem, arrangement, details, checks), a person who decides at least once, a name and URL.",
+      "zh": "一个能画成 3–9 张图的系统（问题、布置、详图、检查），至少一次由人决定，产品名和网址。"
+    },
+    "fits": {
+      "zh": "由部件组成、有人签字的计划和机器检查的产品：发布、备份、迁移、流水线工具。"
+    },
+    "notFor": {
+      "zh": "消费类产品、情绪故事、没有结构可画的东西；需要人物或照片的片子。"
+    },
+    "subjects": [
+      "diagram",
+      "title"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "blueprint",
+        "cyanotype",
+        "engineering drawing",
+        "drafting",
+        "ISO 3098",
+        "title block"
+      ],
+      "zh": [
+        "蓝图",
+        "蓝晒",
+        "工程图",
+        "制图",
+        "图框",
+        "标题栏"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "drafting-bed",
+        "note": "its sound"
+      },
+      {
+        "id": "sheet-route",
+        "note": "its arc"
+      },
+      {
+        "id": "sheet-hud",
+        "note": "its frame"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The condensed family is registered as `Plex Condensed` (the template's name, tools/fonts.json); a host that loads it as IBM Plex Sans Condensed must alias it.",
+        "The ISO series has no step at 40: Chinese notes at 40 px sit off the series, which is intended."
+      ],
+      "zh": [
+        "窄体字族按模板的名字注册为 Plex Condensed（tools/fonts.json）；宿主若以 IBM Plex Sans Condensed 加载须起别名。",
+        "ISO 系列没有 40 这一级：中文注释用 40 px 是有意偏离。"
+      ]
+    }
+  },
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/palettes.js; sheets/common.js (ISO, F); fx.js (strokeStyle)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "look/drafting-sheet/look.js",
+  "card": "look/drafting-sheet/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

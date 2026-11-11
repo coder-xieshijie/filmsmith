@@ -1,0 +1,94 @@
+{
+  "id": "anchor-launch",
+  "category": "arc",
+  "name": {
+    "en": "Anchor launch",
+    "zh": "锚点发布"
+  },
+  "summary": {
+    "en": "The halftone arc: one anchor holds one point all film; problem, feature cards with fields, a printed count, a collapse and burst onto the claim, the pull-back into the mark.",
+    "zh": "halftone 的骨架：一个锚点整片钉在同一点；问题、带场的功能卡、印出来的计数、塌缩后爆成主张，最后拉远露出整个标志。"
+  },
+  "fits": "Launches with a mark that has one separable piece and four to six features.",
+  "notFor": "Screenshot demos; films with no mark.",
+  "select": {
+    "intent": {
+      "en": "One piece of the mark holds still while worlds change round it, and the end reveals it was the mark.",
+      "zh": "标志的一块一直不动，世界在它周围变换，结尾揭示它就是标志。"
+    },
+    "content": {
+      "en": "Scenes for each slot (see the card); the style's look and sound.",
+      "zh": "每个槽的场景（见卡片）；该风格的样式与声音。"
+    },
+    "fits": {
+      "zh": "标志能拆出一块、有四到六个功能的发布片。"
+    },
+    "notFor": {
+      "zh": "截图演示；没有标志的片。"
+    },
+    "subjects": [
+      "abstract"
+    ],
+    "moods": [
+      "editorial",
+      "dramatic"
+    ],
+    "keywords": {
+      "en": [
+        "launch arc",
+        "anchor",
+        "reveal the mark",
+        "print launch",
+        "pull back"
+      ],
+      "zh": [
+        "发布骨架",
+        "锚点",
+        "揭示标志",
+        "印刷风发布",
+        "拉远落版"
+      ]
+    },
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "duration": {
+    "sec": [
+      14,
+      40
+    ]
+  },
+  "styles": {
+    "fits": [
+      "halftone"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/halftone/content.js, timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "arc/anchor-launch/brick.js",
+  "card": "arc/anchor-launch/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead against the original template's scene order and lengths (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

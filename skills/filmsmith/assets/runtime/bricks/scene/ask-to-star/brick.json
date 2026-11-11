@@ -1,0 +1,140 @@
+{
+  "id": "ask-to-star",
+  "category": "scene",
+  "name": {
+    "en": "Ask to star",
+    "zh": "一件事变成一颗星"
+  },
+  "summary": {
+    "en": "One ask becomes one task and one star: the user's message (with a file) and the product's reply arrive in the chat block, a chip says a task was created, the task row unfolds on a beam, runs, turns done, then shrinks into its ring and leaves as a star that stays in the sky.",
+    "zh": "一个请求变成一件任务和一颗星：用户的消息（带一个文件）和产品的回复出现在对话块里，一个小标签说任务已创建，任务行沿光束展开、运行、完成，然后缩进状态环、化作一颗星飞上夜空留在那里。"
+  },
+  "fits": "The first demo: the smallest whole loop of handing one thing off.",
+  "notFor": "Tasks that need a screen to show their result; a product with no task list.",
+  "select": {
+    "intent": {
+      "en": "Show the whole loop once, small: ask, task, done, kept.",
+      "zh": "把整个循环小小地走一遍：请求、任务、完成、留下。"
+    },
+    "content": {
+      "en": "A caption, an optional file name, an ask and a reply (bubbles), a chip, a task title with running and done lines; optional: the picture the ask is about (it flies in and shrinks into the ask) and a decision asked with a recommendation (a question card with 2–4 options drawn in the canvas, the cursor picks the recommended one, the answer goes into the chat).",
+      "zh": "一句字幕、可选的文件名、请求和回复（气泡）、一个小标签、任务标题以及进行中和完成两行；可选：请求附带的图片（飞进来、缩进对话成缩略图），和带推荐的一问（画布里画的问卷卡，2–4 个选项，光标点推荐项，回答回填进对话）。"
+    },
+    "fits": {
+      "zh": "第一段演示：交出一件事的最小完整循环。"
+    },
+    "notFor": {
+      "zh": "结果要用一整屏才能展示的任务；没有任务列表的产品。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "ui",
+      "text"
+    ],
+    "moods": [
+      "calm",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "ask",
+        "task",
+        "chat",
+        "done",
+        "star",
+        "image",
+        "questionnaire",
+        "recommendation",
+        "choice",
+        "cursor"
+      ],
+      "zh": [
+        "请求",
+        "任务",
+        "对话",
+        "完成",
+        "星",
+        "图片",
+        "问卷",
+        "推荐",
+        "选择",
+        "光标"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "evening-stars",
+        "note": "next: many asks"
+      },
+      {
+        "id": "star-launch",
+        "note": "its star"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The done line is a glance (0.8 s): keep it to a few words of what came back (\"3 icons\"), not \"Done\"; the caption is the scene's one read sentence.",
+        "Pass the film's whole content as `film`: the scene draws its window of that film (the stars sent before it, the chat feed, the block's place), and its length is fitted with it.",
+        "The questionnaire is drawn by the engine, not a DOM brick: prop/choice-chip cannot be hung inside the stream canvas (see the card)."
+      ],
+      "zh": [
+        "完成那行是扫一眼的（0.8 秒）：几个字写回来了什么（“3 个图标”），而不是“已完成”；这一屏要读的只有字幕。",
+        "把整片的 content 作为 `film` 传进来：场景画的是那部片在它这段的画面（之前派出的星、对话记录、块的位置），长度也按它拟合。",
+        "问卷由引擎在画布里画，不挂 DOM 积木：prop/choice-chip 挂不进 stream 的画布（见卡片）。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      12,
+      44
+    ],
+    "sec120": [
+      6,
+      22
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "stream"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "dossier"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/stream/film.js renderAsk, renderChat, renderBG stars; sched.js ask"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/ask-to-star/brick.js",
+  "card": "scene/ask-to-star/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

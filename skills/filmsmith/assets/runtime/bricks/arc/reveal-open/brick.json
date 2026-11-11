@@ -1,0 +1,108 @@
+{
+  "id": "reveal-open",
+  "category": "arc",
+  "name": {
+    "en": "Reveal open",
+    "zh": "揭幕开场"
+  },
+  "summary": {
+    "en": "An opening fragment: a world before the name, the name stated and held, then one hero with a whole action arc, handed on to the features.",
+    "zh": "开场片段：先给一个世界、不点名，再亮出名字并停住，然后只给一个主角、走完一整条动作弧，交给后面的功能段。"
+  },
+  "fits": "The first 11–20 seconds of a product film or launch film that names the product and then shows its atomic unit (a card, an item, a module) before the features; any length of film after it.",
+  "notFor": "Films that open on a problem or a question (use a problem slot first); cold opens with fast cuts (see cold-open); films under about 20 seconds in all, where hook and name should merge into one scene.",
+  "duration": {
+    "sec": [
+      11,
+      20
+    ]
+  },
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "arc/reveal-open/brick.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "arc/reveal-open/brick.js",
+  "card": "arc/reveal-open/CARD.md",
+  "status": "approved",
+  "select": {
+    "intent": {
+      "en": "A first impression in three steps: a world before the name, the name held, then the one thing the product is made of.",
+      "zh": "三步建立第一印象：先给一个没点名的世界，再亮出名字并停住，最后给出产品由之构成的那一样东西。"
+    },
+    "content": {
+      "en": "A product name (≤ 16 chars); one image of many or of flow; one hero object (a card, an item, a module) with a whole action arc; 11–20 s before the features.",
+      "zh": "产品名（≤ 8 字）；一个表现“很多”或“流动”的画面；一个主角（一张卡、一项、一个模块）走完一整条动作弧；功能段之前 11–20 秒。"
+    },
+    "fits": {
+      "zh": "产品片或发布片的头 11–20 秒：先点名产品，再在功能之前给出它的基本单元。"
+    },
+    "notFor": {
+      "zh": "以问题或提问开场的片（先放 problem 槽）；快切冷开场（用 cold-open）；总长不到约 20 秒的片（钩子与名字该合成一场）。"
+    },
+    "subjects": [
+      "title",
+      "cards",
+      "logo"
+    ],
+    "moods": [
+      "cinematic",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "reveal open",
+        "opening",
+        "name reveal",
+        "hero shot",
+        "first impression",
+        "launch opening"
+      ],
+      "zh": [
+        "揭幕开场",
+        "开场",
+        "亮名字",
+        "主角镜头",
+        "第一印象",
+        "发布片开头"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "name-stamp",
+        "note": "the claim slot: the name stated once and held"
+      },
+      {
+        "id": "hero-spotlight",
+        "note": "the demo slot: one hero with a whole action arc"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Hold the name at least 30 frames; a name that passes in a cut is not read.",
+        "One hero, not a crowd: a grid of features in the demo slot breaks the arc."
+      ],
+      "zh": [
+        "名字至少停 30 帧；一闪而过的名字读不到。",
+        "只给一个主角，不要一群：演示槽里放功能网格就破坏了这条弧。"
+      ]
+    }
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

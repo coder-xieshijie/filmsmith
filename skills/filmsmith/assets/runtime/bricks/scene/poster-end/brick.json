@@ -1,0 +1,123 @@
+{
+  "id": "poster-end",
+  "category": "scene",
+  "name": {
+    "en": "Poster end",
+    "zh": "海报落版"
+  },
+  "summary": {
+    "en": "The closing page, flush left: the name at 225 px, three or four parts under 4 px rules, an ink square and the URL at 47 px held at least 3 s, a rule and foot lines; an ink underline lands under the URL on the last downbeat.",
+    "zh": "左对齐的落版：225 px 的产品名，4 px 细线下的三四个要点，一个墨色方块和 47 px 的网址（至少停 3 秒），一条细线和页脚；最后一个强拍时网址下落一道墨色下划线。"
+  },
+  "fits": "The last page of a plakat film; any Swiss-style lockup with a URL.",
+  "notFor": "Logos that must be drawn as artwork; more than four parts; films that end on a question.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "End on what to type: the name, its parts as a summary, and the URL held long enough to read and remember.",
+      "zh": "以“去哪找”收尾：产品名、要点作总结，网址停得够久，读得完也记得住。"
+    },
+    "content": {
+      "en": "Name (≤ 14 chars), 2–4 parts (≤ 12 chars), URL (code, ≤ 44), 1–2 foot lines (≤ 44).",
+      "zh": "产品名（≤ 7 字）、2–4 个要点（≤ 5 字）、网址（代码，≤ 44 字符）、1–2 行页脚（≤ 16 字）。"
+    },
+    "fits": {
+      "zh": "plakat 片子的最后一页；任何带网址的瑞士风落版。"
+    },
+    "notFor": {
+      "zh": "必须画成图形的标志；超过四个要点；以问题结尾的片子。"
+    },
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "end card",
+        "lockup",
+        "URL",
+        "call to action",
+        "closing page",
+        "underline"
+      ],
+      "zh": [
+        "落版",
+        "结尾卡",
+        "网址",
+        "行动召唤",
+        "收尾页",
+        "下划线"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "poster-tagline",
+        "note": "the climax before it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "It absorbs the phrase's remainder: a host that cuts it short loses the last-downbeat underline."
+      ],
+      "zh": [
+        "它吸收乐句剩余的长度；宿主把它截短，最后一拍的下划线就没了。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": [
+      6,
+      16
+    ],
+    "sec120": [
+      3,
+      8
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/scenes.js (end)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/poster-end/brick.js",
+  "card": "scene/poster-end/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

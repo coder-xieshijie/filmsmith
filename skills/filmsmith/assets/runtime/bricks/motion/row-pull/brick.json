@@ -1,0 +1,115 @@
+{
+  "id": "row-pull",
+  "category": "motion",
+  "name": {
+    "en": "Row pull",
+    "zh": "条带拉长"
+  },
+  "summary": {
+    "en": "The longer strips of a contact sheet pull out to their own lengths one after another, then the measured lengths are set at their ends.",
+    "zh": "印样里较长的胶片依次拉长到各自的长度，然后在末端写出量出的时长。"
+  },
+  "fits": "Showing that lengths differ and by how much.",
+  "notFor": "Equal lengths; values that are not lengths.",
+  "select": {
+    "intent": {
+      "en": "Let the differences grow in front of the viewer, then name them.",
+      "zh": "让差异在观众眼前长出来，再写出数值。"
+    },
+    "content": {
+      "en": "The rows of a contact sheet with their durations.",
+      "zh": "印样的各行和它们的时长。"
+    },
+    "fits": {
+      "zh": "要表现长度不同、差多少时。"
+    },
+    "notFor": {
+      "zh": "长度都相同；不是长度的数值。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof"
+    ],
+    "subjects": [
+      "timeline",
+      "metric"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "strips pull out",
+        "length comparison",
+        "staggered growth",
+        "measured lengths"
+      ],
+      "zh": [
+        "条带拉长",
+        "长度比较",
+        "依次生长",
+        "量出的长度"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "length-sheet",
+        "note": "the scene that plays it"
+      }
+    ],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 3,
+    "range": [
+      3,
+      3
+    ]
+  },
+  "tier": "T1",
+  "family": "horizontal",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "strip",
+      "any film about films, frames or renders"
+    ],
+    "avoid": [
+      "exhibit",
+      "tally"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/strip/choreo.js (sheet: extend, lengths), film.js (sheetState)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/row-pull/brick.js",
+  "card": "motion/row-pull/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

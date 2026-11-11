@@ -1,0 +1,164 @@
+{
+  "id": "combo-hits",
+  "category": "scene",
+  "name": {
+    "en": "Combo hits",
+    "zh": "连击计数"
+  },
+  "summary": {
+    "en": "Three cards slam into their slots on an even beat; every hit freezes the frame for two frames, punches a number up off the card and steps a ×N counter up; a closing line rises after the third.",
+    "zh": "三张卡按均匀节拍接连砸进槽位；每一击全画面顿两帧、从卡面打出一个数字上浮、右上角 ×N 计数跳一级；第三击后收尾一行升起。"
+  },
+  "fits": "Three features or gains that add up, told as a combo: each one lands with its number and the total builds.",
+  "notFor": "Serious or quiet films (it is an arcade joke); more or fewer than three items; numbers that are not gains.",
+  "energy": "high",
+  "duration": {
+    "beats": [
+      12,
+      14
+    ],
+    "sec120": [
+      6,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "dossier",
+      "exhibit"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "hit-counter",
+        "path": "demos/effects/impact-feedback/HitCounter.tsx",
+        "card": "references/shots/effects/impact-feedback.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "slam-drop",
+      "note": "one card slamming in; combo-hits chains three falls with a hit-stop, numbers and a counter"
+    },
+    {
+      "id": "time-freeze",
+      "note": "its hit-stop mode holds content per hit; combo-hits uses its hitStop() as the clock"
+    },
+    {
+      "id": "count-to-result",
+      "note": "a number counting to its result; combo-hits steps a counter once per hit"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/combo-hits/brick.js",
+  "card": "scene/combo-hits/CARD.md",
+  "status": "approved",
+  "compare": {
+    "ssimMean": 0.9024,
+    "ssimMin": 0.8339,
+    "ssimDrop": 0.0864,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "select": {
+    "intent": {
+      "en": "Three gains land like hits in a fighting game, so the total feels earned and fun.",
+      "zh": "三项收益像格斗游戏的连招一样一击一击打出来，让总数显得来得爽快。"
+    },
+    "content": {
+      "en": "Exactly three cards: a title ≤ 16 chars, an optional meta line ≤ 22 chars and a gain ≤ 8 chars each; a counter label ≤ 8 chars; an optional closing line ≤ 36 chars.",
+      "zh": "正好三张卡：每张标题 ≤ 6 字、可选说明 ≤ 9 字、收益数字 ≤ 5 字；计数标签 ≤ 3 字；可选收尾一句 ≤ 14 字。"
+    },
+    "fits": {
+      "zh": "三个加起来的功能或收益，讲成连招：每项带着数字落地，总数一路攀升。"
+    },
+    "notFor": {
+      "zh": "严肃或安静的片子（它是街机梗）；不是三项；不是收益的数字。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "proof",
+      "climax",
+      "demo"
+    ],
+    "subjects": [
+      "cards",
+      "number"
+    ],
+    "moods": [
+      "playful",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "combo",
+        "hit-stop",
+        "damage number",
+        "arcade",
+        "slam",
+        "counter",
+        "game feel"
+      ],
+      "zh": [
+        "连招计数",
+        "顿帧",
+        "伤害数字",
+        "街机",
+        "砸入",
+        "连击",
+        "游戏手感"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "count-to-result",
+        "note": "the summed total as one number after the combo"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The hit-stop freezes the whole picture; a background that keeps moving through it breaks the hit.",
+        "Numbers must grow hit by hit; a smaller third hit deflates the combo."
+      ],
+      "zh": [
+        "顿帧要全画面一起停；背景照动就打不出命中感。",
+        "数字要一击比一击大；第三击变小，连招就泄气。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "hit-counter",
+        "name": "连招计数",
+        "card": "冲击反馈",
+        "summary": "三卡接连砸入，每命中 = 顿帧 2f + 伤害数字上浮 + ×N 计数跳字逐次加码",
+        "use": "元素落位/撞击的\"命中一瞬\"——给砸入、撞停加游戏级手感；按强度阶梯选式",
+        "energy": "高（瞬时冲击）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/hit-counter.mp4"
+      }
+    ]
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

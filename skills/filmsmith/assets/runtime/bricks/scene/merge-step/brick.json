@@ -1,0 +1,126 @@
+{
+  "id": "merge-step",
+  "category": "scene",
+  "name": {
+    "en": "Merge step",
+    "zh": "合并一步"
+  },
+  "summary": {
+    "en": "The most frequent pair is picked, lit on the board, fused on every row, written as a rule and taken off the token bar; or a loop of such merges at one every two beats or one a beat.",
+    "zh": "挑出最常见的一对，在棋盘上点亮，每一行同时合并，写成一条规则，词元条随之缩短；或者把这样的合并连成一串，两拍一个或一拍一个。"
+  },
+  "fits": "Teaching a rule once, slowly, then letting it repeat faster into the result.",
+  "notFor": "Steps whose state is not a merge, sort or reduction.",
+  "select": {
+    "intent": {
+      "en": "A rule is taught once, slowly, then repeats faster, so the viewer learns the step and then believes it converges.",
+      "zh": "规则先慢讲一遍，再加速重复，观众先学会这一步，再相信它会收敛。"
+    },
+    "content": {
+      "en": "The run, which steps to show (`from`, `to`), the pace (`slow` | `loop`), a caption (≤ 64 / 24 字 with markup).",
+      "zh": "运行输入，显示哪几步（`from`、`to`），节奏（`slow` 或 `loop`），说明（含标记 ≤ 64 字符 / 24 字）。"
+    },
+    "fits": {
+      "zh": "把一条规则慢讲一遍，再让它加速重复到结果。"
+    },
+    "notFor": {
+      "zh": "状态不是合并、排序或归约的步骤。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "diagram",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "merge step",
+        "rule",
+        "loop",
+        "iteration",
+        "converge"
+      ],
+      "zh": [
+        "合并一步",
+        "规则",
+        "循环",
+        "迭代",
+        "收敛"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "pair-fuse",
+        "note": "the fuse it uses"
+      },
+      {
+        "id": "count-to-result",
+        "note": "after the loop"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Run the slow step once; a second slow step bores, a loop without a slow step teaches nothing."
+      ],
+      "zh": [
+        "慢步只跑一次；两次就拖沓，没有慢步直接循环就什么都没教。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      3,
+      12
+    ],
+    "sec120": [
+      1.5,
+      6
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "trace"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/trace/timing.rules.js (step, loop), pieces.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/merge-step/brick.js",
+  "card": "scene/merge-step/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

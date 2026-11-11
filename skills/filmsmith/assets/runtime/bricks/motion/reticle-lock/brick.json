@@ -1,0 +1,175 @@
+{
+  "id": "reticle-lock",
+  "category": "motion",
+  "name": {
+    "en": "Reticle lock",
+    "zh": "准星咬合"
+  },
+  "summary": {
+    "en": "Four L-shaped corners fly in as one frame, shrink past the target, bite onto it with a click, and a small label pops above.",
+    "zh": "四个 L 形角标组成的取景框从画外冲进来，收缩过头再回弹，“咔”地咬住目标，上方弹出一枚小标签。"
+  },
+  "fits": "Pointing at one region while the picture keeps running: the panel, the number, the button the next line is about.",
+  "notFor": "More than two locks a film, or twice on the same target (it reads as a military template); a frozen frame to annotate (use time-freeze).",
+  "select": {
+    "intent": {
+      "en": "\"This one\" without stopping the picture: a targeting frame catches one region in motion with a felt click, so the eye goes straight there.",
+      "zh": "不停画面就说“看这个”：取景框在运动中咔地咬住一块区域，视线立刻被带过去。"
+    },
+    "content": {
+      "en": "The target's rect on the running scene and an optional label (≤ 16 chars, Chinese ≤ 6 characters); a stopping list can fire it on its stop frame.",
+      "zh": "目标在画面里的位置，加一枚可选标签（≤ 16 字符、中文 ≤ 6 字）；滚动急停的列表可在停住那帧触发。"
+    },
+    "fits": {
+      "zh": "画面照常走时点名一块区域：下一句要讲的面板、数字或按钮。"
+    },
+    "notFor": {
+      "zh": "一支片锁两次以上，或同一目标锁两次（像军事模板）；冻结画面再标注（用 time-freeze）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "ui",
+      "metric"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "reticle",
+        "lock-on",
+        "targeting",
+        "HUD",
+        "FUI",
+        "corner brackets",
+        "callout",
+        "focus frame"
+      ],
+      "zh": [
+        "准星锁定",
+        "准星咬合",
+        "科幻 HUD",
+        "取景框",
+        "四角括号",
+        "刹停锁定",
+        "点名目标"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "scan-line",
+        "note": "the brackets that frame a scanned document"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "At most twice a film, on different targets; repeated it reads as a military template.",
+        "Give the bite a mechanical click; a game UI sound cheapens it.",
+        "Stopping-list variant: the corners must fly on the very frame the list stops, or it reads as two moves."
+      ],
+      "zh": [
+        "一支片最多两次，目标不同；连用像军事模板。",
+        "咬合帧配一声机械咔嗒；游戏界面音会显廉价。",
+        "急停列表版：角标必须在列表停住的同一帧起飞，错开就成了两个动作。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "reticle-lock-on",
+        "name": "准星锁定",
+        "card": "科幻 HUD 动效",
+        "summary": "FUI/HUD 准星咬合——reticle-lock-on 四个 L 形角标组成的取景框从画外飞入、超调回弹后咬合锁定目标",
+        "use": "任何\"看这里\"的目标点名（替代箭头圈红，画面不冻结）",
+        "energy": "中高（咬合帧是打击点）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/reticle-lock-on.mp4"
+      },
+      {
+        "key": "brake-reticle-lock",
+        "name": "刹停准星锁定",
+        "card": "滚动刹停",
+        "summary": "滚动三段：sin-in 加速→cubic-out 猛减速冲过头 +30px→回弹落定；blur=v×0.12 封顶 24px；角标从 ±620/±320 画外 Easing.back(2.4) 飞入咬合，高亮 6f 内完成、标签 back(2.6) 弹出",
+        "use": "changelog/发布史/长列表段落：\"一直在发货，今天这条最大\"；要给停点更强打击感用 B",
+        "energy": "高开中收（速度对比型）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/brake-reticle-lock.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 3,
+    "range": [
+      2,
+      3
+    ]
+  },
+  "tier": "T0",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "halftone"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "reticle-lock-on",
+        "path": "demos/effects/fui-hud-moves/ReticleLockOn.tsx",
+        "card": "references/shots/effects/fui-hud-moves.md"
+      },
+      {
+        "key": "brake-reticle-lock",
+        "path": "demos/data/scroll-brake-moves/BrakeReticleLock.tsx",
+        "card": "references/shots/data/scroll-brake-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "tether-link",
+      "note": "a line from a claim to a ringed region; reticle-lock marks the region alone"
+    },
+    {
+      "id": "spotlight-band",
+      "note": "lights a band of an asset; no frame"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/reticle-lock/brick.js",
+  "card": "motion/reticle-lock/CARD.md",
+  "compare": {
+    "ssimMean": 0.5736,
+    "ssimMin": 0.5664,
+    "ssimDrop": 0.0044,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

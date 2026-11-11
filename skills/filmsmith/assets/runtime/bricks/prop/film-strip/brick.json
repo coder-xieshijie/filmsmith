@@ -1,0 +1,107 @@
+{
+  "id": "film-strip",
+  "category": "prop",
+  "name": {
+    "en": "Film strip",
+    "zh": "胶片条"
+  },
+  "summary": {
+    "en": "One strip of film: a black base with sprocket holes, frames a pitch apart, a variable-area optical track beside each, intertitles as frames; a fixed gate with four corner marks.",
+    "zh": "一条胶片：带齿孔的黑色片基，按片距排列的画格，每格旁一条可变面积光学声轨，字幕卡也是一格；固定片门带四个角标。"
+  },
+  "fits": "Real frames, titles and pages carried as one reel.",
+  "notFor": "Several unrelated reels; vertical video.",
+  "select": {
+    "intent": {
+      "en": "Every picture is a frame on one strip, so order and count are physical.",
+      "zh": "每个画面都是同一条胶片上的一格，顺序和数量都是实物。"
+    },
+    "content": {
+      "en": "Frames (images, cropped 16:9) and intertitle lines (≤ 3 words / 8 字).",
+      "zh": "画格（图片，裁成 16:9）和字幕卡（≤ 3 词 / 8 字）。"
+    },
+    "fits": {
+      "zh": "把真实画格、标题和页面串成一卷。"
+    },
+    "notFor": {
+      "zh": "多卷互不相关的胶片；竖屏视频。"
+    },
+    "roles": [
+      "hook",
+      "demo",
+      "lockup"
+    ],
+    "subjects": [
+      "image",
+      "title",
+      "timeline"
+    ],
+    "moods": [
+      "mechanical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "film strip",
+        "sprocket holes",
+        "optical track",
+        "intertitle frame",
+        "film gate"
+      ],
+      "zh": [
+        "胶片条",
+        "齿孔",
+        "光学声轨",
+        "字幕卡画格",
+        "片门"
+      ]
+    },
+    "pairs": [],
+    "pitfalls": {
+      "en": [
+        "Intertitles longer than the frame wrap badly: keep ≤ 16 chars / 8 字."
+      ],
+      "zh": [
+        "字幕卡比画格宽会很难看：≤ 16 字符 / 8 字。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "strip",
+      "any film about films, frames or renders"
+    ],
+    "avoid": [
+      "exhibit",
+      "tally"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/strip/lib/handoffs/strip.js (paintStrip, paintTrack), film.js (gate)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/film-strip/brick.js",
+  "card": "prop/film-strip/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

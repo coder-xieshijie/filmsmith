@@ -1,0 +1,167 @@
+{
+  "id": "cursor-glide",
+  "category": "motion",
+  "name": {
+    "en": "Cursor glide",
+    "zh": "光标滑点"
+  },
+  "summary": {
+    "en": "A plain pointer glides in to a control, presses it about its tip and an accent ripple confirms the click; several stops make a tour.",
+    "zh": "普通光标减速滑到控件上，绕箭头尖按下，强调色涟漪确认点击；多个停点就是一段巡游。"
+  },
+  "fits": "A user action on an interface just before the interface responds: a segment, checkbox, button or card.",
+  "notFor": "Pointing without clicking; a mascot acting for the user; tours of more than four or five stops.",
+  "select": {
+    "intent": {
+      "en": "A visible hand arrives, slows and presses, so the change that follows reads as caused by the user, not autoplayed.",
+      "zh": "一只看得见的手滑来、减速、按下，让接下来的变化读成用户点出来的，而不是自己在播。"
+    },
+    "content": {
+      "en": "The scene it plays over and 1–5 click targets (tip positions), each with travel and rest frames; no text.",
+      "zh": "它所在的场景，加 1–5 个点击目标（箭头尖的位置），各带移动和停留帧数；不需要文字。"
+    },
+    "fits": {
+      "zh": "界面响应之前的一次用户操作：分段控件、复选框、按钮或卡片被点下。"
+    },
+    "notFor": {
+      "zh": "只指不点（用箭头或高亮更清楚）；让吉祥物替用户操作；超过四五个停点的巡游（会变成录屏）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "cursor",
+      "ui"
+    ],
+    "moods": [
+      "calm",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "cursor",
+        "pointer",
+        "click",
+        "ripple",
+        "tap",
+        "mouse",
+        "UI tour",
+        "press"
+      ],
+      "zh": [
+        "光标",
+        "鼠标指针",
+        "点击",
+        "涟漪",
+        "按下",
+        "分段控件特写",
+        "画布物化动效",
+        "界面巡游"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "row-to-card",
+        "note": "the clicks pick the rows that then fly to the canvas"
+      },
+      {
+        "id": "theme-reveal",
+        "note": "a click on the toggle starts the ripple from the pressed point"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The brick draws only the pointer and its ripple; the control must answer in the same frame (another brick or the scene), or the click does nothing.",
+        "Keep the ripple centred on the click point, not on the moving part, or it reads as a trail.",
+        "One click is shown once: do not film the same click both as a page and as a close-up."
+      ],
+      "zh": [
+        "积木只画光标和涟漪；控件的响应要由场景或别的积木在同帧接上，否则点了等于没点。",
+        "涟漪圆心钉在点击点，不跟着被拨动的部件走，否则读成拖尾。",
+        "同一次点击只拍一遍：别既拍整页版又拍特写版。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "segmented-thumb-hero",
+        "name": "分段控件特写",
+        "card": "分段控件特写",
+        "summary": "分段控件 thumb 位移当主角特写——超大胶囊 segmented control 弹簧浮入，描边箭头光标画外滑入按下，白 thumb 8f ease-out 滑到另一段，到位瞬间新图标 spring 弹出、旧图标收起",
+        "use": "\"模式切换/二选一\"功能的宣告镜头（demo 的 video-shotcraft Prompt→Film、Chat→Agent 式）；一个 UI 微交互撑一整镜的特写拍法",
+        "energy": "中（微交互特写，精致不轰）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/segmented-thumb-hero.mp4"
+      },
+      {
+        "key": "panel-to-canvas",
+        "name": "行倒卡上画布",
+        "card": "画布物化动效",
+        "summary": "复选框逐个自动打勾→按钮按下→三行沿上抛弧线错峰飞出，途中行形态与卡形态交叉淡化，落位带随机倾角；面板行槽塌陷成虚线留白",
+        "use": "AI/协作工具\"生成结果落到画布上\"的叙事段落；A 式讲\"已有内容换了个存在形态\"，B 式讲\"从一句话长出一棵结构\"",
+        "energy": "中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/panel-to-canvas.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 2.6,
+    "range": [
+      2,
+      8
+    ]
+  },
+  "tier": "T0",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "segmented-thumb-hero",
+        "path": "demos/interaction/segmented-thumb-hero/SegmentedThumbHero.tsx",
+        "card": "references/shots/interaction/segmented-thumb-hero.md"
+      },
+      {
+        "key": "panel-to-canvas",
+        "path": "demos/interaction/canvas-materialize-moves/PanelToCanvasMaterialize.tsx",
+        "card": "references/shots/interaction/canvas-materialize-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/cursor-glide/brick.js",
+  "card": "motion/cursor-glide/CARD.md",
+  "compare": {
+    "ssimMean": 0.9044,
+    "ssimMin": 0.9,
+    "ssimDrop": 0.0053,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

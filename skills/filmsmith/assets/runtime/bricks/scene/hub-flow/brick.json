@@ -1,0 +1,125 @@
+{
+  "id": "hub-flow",
+  "category": "scene",
+  "name": {
+    "en": "Hub flow",
+    "zh": "中枢流程"
+  },
+  "summary": {
+    "en": "Inputs → hub → outputs: nodes slide in around the owner's hub, connectors draw, dots travel in and out, each output lights on the beat and its checks tick along the bottom.",
+    "zh": "输入 → 中枢 → 输出：节点围绕负责人的中枢滑入，连线画出，光点流入流出，每个输出在拍点亮起，底部对应的检查依次打勾。"
+  },
+  "fits": "A chapter that shows what the tool does with its inputs, and the checks each output passes.",
+  "notFor": "More than three inputs or outputs; flows with branches or loops (use you-ends for a loop).",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show the tool as the owner in the middle: everything passes through it, and each result is checked.",
+      "zh": "把工具画成中间的负责人：一切经过它，每个结果都被检查。"
+    },
+    "content": {
+      "en": "The header, a command, 1–3 inputs and 1–3 outputs (a name and a sub), the hub (label, name, sub), 0–5 checks each tied to an output.",
+      "zh": "页眉、一条命令、1–3 个输入和 1–3 个输出（名称和说明）、中枢（标签、名称、说明）、0–5 个检查（各对应一个输出）。"
+    },
+    "fits": {
+      "zh": "展示工具如何处理输入、每个输出通过哪些检查的章节。"
+    },
+    "notFor": {
+      "zh": "超过三个输入或输出；有分支或循环的流程（循环用 you-ends）。"
+    },
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "diagram",
+      "terminal"
+    ],
+    "moods": [
+      "technical",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "flow",
+        "hub",
+        "inputs",
+        "outputs",
+        "pipeline",
+        "checks"
+      ],
+      "zh": [
+        "流程",
+        "中枢",
+        "输入",
+        "输出",
+        "管线",
+        "检查"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "chapter-card",
+        "note": "before it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Each output lights on a beat; with three outputs and five checks the page runs about five bars."
+      ],
+      "zh": [
+        "每个输出在拍点亮起；三个输出加五个检查时整页约五小节。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      6,
+      20
+    ],
+    "sec120": [
+      3,
+      10
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/film.js BUILD.flow; events.js TIMING.flow"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/hub-flow/brick.js",
+  "card": "scene/hub-flow/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,127 @@
+{
+  "id": "weight-word",
+  "category": "scene",
+  "name": {
+    "en": "Weight swing word",
+    "zh": "字重摆动的大字"
+  },
+  "summary": {
+    "en": "The big word: its letters spring in on 1/32 notes and its weight swings 780 → 200 → 800 → 430 on the beats; the full stop is the line colour.",
+    "zh": "大字：字母按三十二分音符依次弹入，字重在拍点上 780 → 200 → 800 → 430 摆动；句号是线色。"
+  },
+  "fits": "The hook of a reel: the brief's one-word answer.",
+  "notFor": "A word over seven letters (four Chinese characters); a sentence.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Answer the brief in one word and make the beat visible in its weight.",
+      "zh": "用一个词回答需求，让节拍在字重上看得见。"
+    },
+    "content": {
+      "en": "One word of 4–7 letters and an optional full stop.",
+      "zh": "四个汉字加一个句号。"
+    },
+    "fits": {
+      "zh": "作品集的钩子：需求的一个词的回答。"
+    },
+    "notFor": {
+      "zh": "超过四个汉字的词；整句话。"
+    },
+    "roles": [
+      "hook"
+    ],
+    "subjects": [
+      "title"
+    ],
+    "moods": [
+      "energetic",
+      "playful"
+    ],
+    "keywords": {
+      "en": [
+        "big word",
+        "variable font",
+        "weight",
+        "kinetic type",
+        "hook",
+        "full stop"
+      ],
+      "zh": [
+        "大字",
+        "可变字体",
+        "字重",
+        "动态字",
+        "钩子",
+        "句号"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "glyph-swatch",
+        "note": "its first four glyphs become the swatches"
+      },
+      {
+        "id": "weight-swing",
+        "note": "its motion"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The palette takes the first four glyph boxes: a word under four letters breaks the hand-off."
+      ],
+      "zh": [
+        "配色环节取前四个字形框：少于四个字，交接就断了。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      2,
+      6
+    ],
+    "sec120": [
+      1,
+      3
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "thread"
+    ],
+    "avoid": [
+      "phosphor",
+      "plakat",
+      "blueprint"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/thread/film.js word, WORD, weightAt"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/weight-word/brick.js",
+  "card": "scene/weight-word/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

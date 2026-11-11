@@ -1,0 +1,156 @@
+{
+  "id": "axis-rescale",
+  "category": "motion",
+  "name": {
+    "en": "Axis rescale",
+    "zh": "爆表重标"
+  },
+  "summary": {
+    "en": "A value too big for its chart shoots through the ceiling rule into the headline, hangs, then the y axis rescales under it, the history flattens and the point falls back to its true height with its value.",
+    "zh": "新值大到图表装不下：折线顶破天花板规线冲进标题区、悬停半拍，随后 y 轴重标、旧数据被压扁，新值落回真实高度并弹出读数。"
+  },
+  "fits": "One growth number that is the claim (a jump of several times), shown on the chart people already trust.",
+  "notFor": "Ordinary growth (the drama then lies about the size); twice in a film; charts without a y axis.",
+  "select": {
+    "intent": {
+      "en": "The growth is too big for the chart, so the viewer feels the size of the jump before reading the number; the rescale then keeps the chart honest.",
+      "zh": "增长大到图表装不下，让观众先感到跳变有多大再读数；随后重标坐标，图表依旧说真话。"
+    },
+    "content": {
+      "en": "A time series of 6–12 points whose newest value is several times the old maximum, with the old and new y range, a unit, x labels (≤ 4 chars each), a title (≤ 30 chars) and a total label.",
+      "zh": "一条 6–12 个点的时间序列，最新值是旧最大值的好几倍；给出新旧 y 轴量程、单位、x 轴标签（每个 ≤ 3 字）、标题（≤ 14 字）和总量标签。"
+    },
+    "fits": {
+      "zh": "一个本身就是主张的增长数字（翻了几倍），放在观众已经信任的图表上讲。"
+    },
+    "notFor": {
+      "zh": "普通的增长（这场戏会夸大数字）；一支片用两次；没有 y 轴的图表。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "climax",
+      "proof"
+    ],
+    "subjects": [
+      "chart",
+      "metric"
+    ],
+    "moods": [
+      "dramatic",
+      "energetic"
+    ],
+    "keywords": {
+      "en": [
+        "off the charts",
+        "axis rescale",
+        "ceiling break",
+        "growth spike",
+        "y-axis",
+        "line chart",
+        "hockey stick"
+      ],
+      "zh": [
+        "坐标轴爆表重标",
+        "活体图表",
+        "爆表",
+        "顶破天花板",
+        "重标坐标轴",
+        "增长装不下",
+        "折线图"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "digit-roll",
+        "note": "the headline total can roll up after the point lands"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The break and the rescale happen once a film; repeated, they cheapen the claim.",
+        "Use real axes, labels and copy at film size (labels ≥ 32 px); grey placeholder bars cannot carry a data story.",
+        "Only for a jump of several times: on ordinary growth the drama lies about the data."
+      ],
+      "zh": [
+        "爆表加重标一支片只发生一次，重复就廉价。",
+        "用真轴标、真标签、真文案，并按成片字号做（标签 ≥ 32 px）；灰色占位条撑不起数据叙事。",
+        "只配翻几倍的跳变；普通增长用它就是夸大数据。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "axis-rescale-shock",
+        "name": "坐标轴爆表重标",
+        "card": "活体图表",
+        "summary": "冲出框 220px + 重标三联动（刻度换/网格密/旧线压扁）+ 震 8px",
+        "use": "数据叙事段落；分别讲\"实时性\"、\"每个数字是一个人\"、\"增长装不下\"",
+        "energy": "中高（数据即剧情）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/axis-rescale-shock.mp4"
+      }
+    ]
+  },
+  "energy": "high",
+  "duration": {
+    "beats": 5,
+    "range": [
+      5,
+      8
+    ]
+  },
+  "tier": "T2",
+  "family": "vertical",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "ink",
+      "halftone"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "axis-rescale-shock",
+        "path": "demos/data/chart-live-moves/AxisRescaleShockV2.tsx",
+        "card": "references/shots/data/chart-live-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "slam-drop",
+      "note": "a number dropped onto its slot with an impact; axis-rescale breaks a chart's frame and rescales it"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/axis-rescale/brick.js",
+  "card": "motion/axis-rescale/CARD.md",
+  "compare": {
+    "ssimMean": 0.8444,
+    "ssimMin": 0.8023,
+    "ssimDrop": 0.0101,
+    "trackDevPx": 11.6,
+    "progressRmse": 0.0022,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

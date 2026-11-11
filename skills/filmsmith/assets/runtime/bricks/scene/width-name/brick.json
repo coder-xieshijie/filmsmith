@@ -1,0 +1,123 @@
+{
+  "id": "width-name",
+  "category": "scene",
+  "name": {
+    "en": "Width name",
+    "zh": "变宽名字"
+  },
+  "summary": {
+    "en": "The name rises out of the accent field on the drop, its width jumping once a beat, two labels under it, then a playhead with the dot runs under it.",
+    "zh": "名字在 drop 上从强调色满底里升起，宽度每拍跳一次，下方两条标签，随后一条带墨点的播放头从下面划过。"
+  },
+  "fits": "The name on the first drop of a launch film.",
+  "notFor": "a long name (it must fit at every width); a second name.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "The name breathes with the music: the drop lands it, the bar shapes it, and the dot underlines it.",
+      "zh": "名字跟着音乐呼吸：drop 让它落下，小节塑造它，墨点在下面画线。"
+    },
+    "content": {
+      "en": "A name (one word, ≤ 10 chars) and one or two labels (≤ 20 chars).",
+      "zh": "一个名字（一个词，≤ 4 字）和一两条标签（每条 ≤ 8 字）。"
+    },
+    "fits": {
+      "zh": "发布片第一次 drop 上的名字。"
+    },
+    "notFor": {
+      "zh": "长名字（每种宽度都要放得下）；第二个名字。"
+    },
+    "roles": [
+      "climax",
+      "lockup"
+    ],
+    "subjects": [
+      "logo",
+      "title"
+    ],
+    "moods": [
+      "energetic",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "name reveal",
+        "width jump",
+        "variable font",
+        "drop",
+        "playhead"
+      ],
+      "zh": [
+        "名字揭晓",
+        "宽度跳变",
+        "可变字体",
+        "drop",
+        "播放头"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "step-dots",
+        "note": "the night after the name"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The name is fitted at its widest width, so every jump stays inside the margins."
+      ],
+      "zh": [
+        "名字按最宽的宽度定字号，所以每次跳宽都不出边距。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      7,
+      10
+    ],
+    "sec120": [
+      3.5,
+      5
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "ink"
+    ],
+    "avoid": [
+      "pulse",
+      "dossier",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/ink/film.js layoutScenes name, namePlayhead; plan.js widthSteps"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/width-name/brick.js",
+  "card": "scene/width-name/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

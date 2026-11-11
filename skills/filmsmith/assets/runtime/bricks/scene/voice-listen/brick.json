@@ -1,0 +1,154 @@
+{
+  "id": "voice-listen",
+  "category": "scene",
+  "name": {
+    "en": "Voice listen",
+    "zh": "语音实时转写"
+  },
+  "summary": {
+    "en": "A live transcript above, a scrolling waveform capsule below: words rise on their syllables, the pause shows in both, and on send the transcript becomes a message bubble.",
+    "zh": "上方实时转写、下方滚动声纹胶囊：词随音节浮现，停顿两处同时可见；发送后转写收进一枚消息气泡。"
+  },
+  "fits": "Voice input in a demo: what was said and that it was heard, ending on the sent message.",
+  "notFor": "More than two short phrases; a real recording's waveform (it is drawn from the phrases' timing, not from sound); conversations with replies.",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      9,
+      14
+    ],
+    "sec120": [
+      4.5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "voice-waveform-live",
+        "path": "demos/interaction/voice-waveform-live/VoiceWaveformLive.tsx",
+        "card": "references/shots/interaction/voice-waveform-live.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "type-sync",
+      "note": "a line bound to a time track as it is read; voice-listen is speech being captured into an input"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "A live receipt that it is listening: the viewer reads what was said in the transcript and sees in the waveform that it was heard, rising when you speak and flattening when you pause, then the words are sent.",
+      "zh": "“它真的在听”的实时回执：观众从转写读到说了什么，从声纹看出被听见了（说话时高耸、停顿时塌平），最后这句话被发出去。"
+    },
+    "content": {
+      "en": "1–2 short spoken phrases (each en ≤ 32 chars, zh ≤ 12, one line), an optional hint (en ≤ 26, zh ≤ 10), a listening label and a sent label (en ≤ 18, zh ≤ 6); optional word times to sit on a voice-over.",
+      "zh": "1–2 句说出的短语（每句英文 ≤ 32 字符，中文 ≤ 12 字，一行内），可选提示语（英文 ≤ 26，中文 ≤ 10），一个“正在听”标签和一个“已发送”标签（英文 ≤ 18，中文 ≤ 6）；可选每个词的时刻以对齐旁白。"
+    },
+    "fits": {
+      "zh": "演示里的语音输入：说了什么、它听见了，最后落在发出去的消息上。"
+    },
+    "notFor": {
+      "zh": "超过两句短语；真实录音的波形（声纹按短语时序画出，不是从声音算的）；带回复的对话。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "hook"
+    ],
+    "subjects": [
+      "voice",
+      "ui"
+    ],
+    "moods": [
+      "technical",
+      "warm"
+    ],
+    "keywords": {
+      "en": [
+        "voice input",
+        "live transcript",
+        "waveform",
+        "listening",
+        "speech to text",
+        "voice assistant",
+        "dictation",
+        "send message"
+      ],
+      "zh": [
+        "语音实时转写",
+        "实时声纹",
+        "语音输入",
+        "正在听",
+        "语音转文字",
+        "声纹胶囊",
+        "语音助手",
+        "消息气泡"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "pill-dictate",
+        "note": "a quieter typed version of the same request"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "With a real voice-over, sit the words and the waveform's talk and pause on the voice track; a second off and it shows.",
+        "The waveform follows speech, not the music; tying it to the score turns a product feature into decoration."
+      ],
+      "zh": [
+        "有真人旁白时，词和声纹的说停要对齐音轨；错位一秒就穿帮。",
+        "声纹跟着说话走，不跟配乐；跟着 BGM 跳就从产品功能变成了装饰。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "voice-waveform-live",
+        "name": "实时声纹",
+        "card": "实时声纹",
+        "summary": "录音胶囊实时声纹——64 根细竖条随\"说话\"起伏，说话时中部高耸、停顿缩成点线，波形从右往左滚动；说→停→说→提交塌缩的完整表演",
+        "use": "语音输入/AI 助手\"正在听你说\"的功能镜头；无 UI 内容可展示但需要持续活性撑画面的段落",
+        "energy": "中（功能性活性，不是炫技）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/voice-waveform-live.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/voice-listen/brick.js",
+  "card": "scene/voice-listen/CARD.md",
+  "compare": {
+    "ssimMean": 0.9551,
+    "ssimMin": 0.933,
+    "ssimDrop": 0.037,
+    "trackDevPx": 0,
+    "progressRmse": 0.0007,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

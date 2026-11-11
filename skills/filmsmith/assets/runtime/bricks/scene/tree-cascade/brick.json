@@ -1,0 +1,156 @@
+{
+  "id": "tree-cascade",
+  "category": "scene",
+  "name": {
+    "en": "Tree cascade",
+    "zh": "一句话长树"
+  },
+  "summary": {
+    "en": "A prompt is typed and sent; a tree grows out of it level by level, each link running ahead with a glowing head and pulling its node out, while the camera pulls back from the words to the whole structure.",
+    "zh": "打字并发送一句提示；一棵树从这句话里逐层长出，连线带发光头先到、把节点从端口拉出来，相机从字拉远到整棵结构。"
+  },
+  "fits": "Generating structure from one sentence on a canvas: a plan, a diagram, a data model, an outline, a mind map.",
+  "notFor": "More than seven nodes or three levels; trees meant to be studied in detail; an existing chart coming alive (this shows a structure being born).",
+  "energy": "mid",
+  "duration": {
+    "beats": [
+      10,
+      14
+    ],
+    "sec120": [
+      5,
+      7
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "diagram-cascade",
+        "path": "demos/interaction/canvas-materialize-moves/DiagramCascadeBuild.tsx",
+        "card": "references/shots/interaction/canvas-materialize-moves.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "hub-links",
+      "note": "sources joined to one hub by running paths; tree-cascade grows a hierarchy from one root"
+    }
+  ],
+  "select": {
+    "intent": {
+      "en": "Show a structure being born from one sentence: links pull nodes out level by level, so the viewer reads 'it builds the whole structure from what I asked', with the order of growth carrying the sense of structure.",
+      "zh": "表现一个结构从一句话里诞生：连线逐层把节点拉出来，观众读出“它从我这句话搭出了整个结构”，结构感来自生长的先后。"
+    },
+    "content": {
+      "en": "One prompt (en ≤ 40 chars, zh ≤ 16) and 3–7 nodes in up to three levels (root, children, grandchildren), each a title (en ≤ 13, zh ≤ 5) and a meta line (en ≤ 16, zh ≤ 7); an optional status line.",
+      "zh": "一句提示（英文 ≤ 40 字符，中文 ≤ 16 字）和 3–7 个节点、最多三层（根、子、孙），每个节点一个标题（英文 ≤ 13，中文 ≤ 5）和一行元信息（英文 ≤ 16，中文 ≤ 7）；可选一行状态。"
+    },
+    "fits": {
+      "zh": "在画布上从一句话生成结构：计划、结构图、数据模型、大纲、脑图。"
+    },
+    "notFor": {
+      "zh": "超过七个节点或三层；要细看的树；已有图表“活起来”（这里演的是结构的诞生）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "diagram",
+      "ui",
+      "text"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "diagram cascade",
+        "generate tree",
+        "prompt to diagram",
+        "mind map",
+        "data model",
+        "ER diagram",
+        "AI generation",
+        "canvas"
+      ],
+      "zh": [
+        "一句话长树",
+        "级联生成树",
+        "画布物化",
+        "一句话长出结构",
+        "脑图",
+        "ER 图",
+        "AI 生成",
+        "逐层弹出"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "pill-dictate",
+        "note": "the quiet request before the tree grows"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Grow level by level; all nodes at once loses the sense of structure, which comes from the order.",
+        "Centre the final breath on the tree's visual weight, not the frame centre, or it reads as a whole-screen zoom.",
+        "Do not use it to animate an existing chart; it means generation, not a diagram that is alive."
+      ],
+      "zh": [
+        "一层一层长；所有节点同时出现，结构感就没了，结构感来自先后。",
+        "成树后的呼吸以树的视觉重心为原点，不用画面中心，否则读作整屏缩放。",
+        "别拿它去演已有图表；它讲的是生成，不是图表在动。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "diagram-cascade",
+        "name": "级联生成树",
+        "card": "画布物化动效",
+        "summary": "prompt 逐字敲出（敲完描边变深确认）→根（深色）→2 子→4 孙逐层弹出，折角连线描线先行 8f，成树后整棵呼吸一拍",
+        "use": "AI/协作工具\"生成结果落到画布上\"的叙事段落；A 式讲\"已有内容换了个存在形态\"，B 式讲\"从一句话长出一棵结构\"",
+        "energy": "中",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/diagram-cascade.mp4"
+      }
+    ]
+  },
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "scene/tree-cascade/brick.js",
+  "card": "scene/tree-cascade/CARD.md",
+  "compare": {
+    "ssimMean": 0.7331,
+    "ssimMin": 0.7205,
+    "ssimDrop": 0.0203,
+    "trackDevPx": 0,
+    "progressRmse": 0.0001,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

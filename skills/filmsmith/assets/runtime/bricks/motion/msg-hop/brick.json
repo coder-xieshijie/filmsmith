@@ -1,0 +1,130 @@
+{
+  "id": "msg-hop",
+  "category": "motion",
+  "name": {
+    "en": "Message hop",
+    "zh": "消息跳转"
+  },
+  "summary": {
+    "en": "A message travels one connector: it slides out from under one part, rests whole in the gap, slides under the next; its colour says who wrote it.",
+    "zh": "消息走过一条连线：从一个部件下面滑出，在空隙里完整停一下，再滑进下一个部件下面；颜色表示谁写的。"
+  },
+  "fits": "One hop of a message between two parts; the steps of a request.",
+  "notFor": "Flows of many packets at once (use path-flow).",
+  "select": {
+    "intent": {
+      "en": "Give the eye one still, whole label per hop, so the viewer reads what moved before it moves on.",
+      "zh": "每一跳给眼睛一个静止、完整的标签，观众读到是什么在动再继续。"
+    },
+    "content": {
+      "en": "Two parts, the connector between them and one message chip.",
+      "zh": "两个部件、它们之间的连线和一条消息签。"
+    },
+    "fits": {
+      "zh": "消息在两个部件之间的一跳；一次请求的各步。"
+    },
+    "notFor": {
+      "zh": "同时很多数据包的流动（用 path-flow）。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "diagram",
+      "text"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "message",
+        "hop",
+        "request",
+        "travel along a line",
+        "pause in the gap",
+        "packet"
+      ],
+      "zh": [
+        "消息",
+        "一跳",
+        "请求",
+        "沿线移动",
+        "空隙停顿",
+        "数据包"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "msg-chip",
+        "note": "the chip it moves"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Every hop between two parts gets a hold, or the chip is whole for only a few frames.",
+        "First rounds slow (0.6–1 s a hop), repeated rounds about 0.5 s."
+      ],
+      "zh": [
+        "每一跳都要有停顿，否则消息签只有几帧是完整的。",
+        "第一轮慢（每跳 0.6–1 秒），重复的轮次约 0.5 秒。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 2,
+    "range": [
+      1,
+      3
+    ]
+  },
+  "tier": "T0",
+  "family": "line-path",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint-zoom"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/filmsmith/assets/kits/blueprint-zoom/starter/components/message.js travel (under, hold)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "path-flow",
+      "note": "many glowing packets into one sink (keynote); here one labelled chip that rests in the gap"
+    }
+  ],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "motion/msg-hop/brick.js",
+  "card": "motion/msg-hop/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from blueprint-zoom kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "endsMoving": {
+    "reason": "the chip slides under the receiving part at speed (power2.in) and is hidden there once 35 % covered, as the kit's travel does; the part takes over on that frame"
+  },
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

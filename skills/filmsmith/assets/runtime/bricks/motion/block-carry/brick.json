@@ -1,0 +1,127 @@
+{
+  "id": "block-carry",
+  "category": "motion",
+  "name": {
+    "en": "Block carry",
+    "zh": "色块延续"
+  },
+  "summary": {
+    "en": "The block that ends one page crosses the cut changing only its rectangle and becomes the first block of the next page; the rest of the outgoing page rolls up under it.",
+    "zh": "结束上一页的那个色块跨过剪辑点，只改变自己的矩形，变成下一页的第一个色块；上一页的其余内容在它下面从下往上卷走。"
+  },
+  "fits": "A seam between two plakat pages where the outgoing page ends on a solid block the next page also needs: a command block to a bar, a pick to a node.",
+  "notFor": "Pages with no solid block; outlined boxes (the block must be filled to read as the same object); seams that change colour meaning.",
+  "select": {
+    "intent": {
+      "en": "Keep one solid shape across the cut so two pages read as one argument; the colour keeps its meaning (ink the system, accent the person).",
+      "zh": "让一个实心形状跨过剪辑点，两页读起来是同一个论证；颜色的含义不变（墨色是系统，强调色是人）。"
+    },
+    "content": {
+      "en": "The block's rect on each page and its kind (ink or accent); the pages on either side.",
+      "zh": "色块在两页上的矩形与种类（墨色或强调色）；两侧的页面。"
+    },
+    "fits": {
+      "zh": "两页 plakat 之间的接缝：上一页以实心色块结束、下一页也要用到它，如命令块变横条、选项变节点。"
+    },
+    "notFor": {
+      "zh": "没有实心色块的页；只有描边的框（要填满才认得出是同一物体）；会改变颜色含义的接缝。"
+    },
+    "use": [
+      "seam"
+    ],
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "abstract",
+      "title"
+    ],
+    "moods": [
+      "editorial",
+      "mechanical"
+    ],
+    "keywords": {
+      "en": [
+        "reblock",
+        "shape carry",
+        "match cut",
+        "object constancy",
+        "block morph",
+        "Swiss"
+      ],
+      "zh": [
+        "色块延续",
+        "形状接力",
+        "匹配剪辑",
+        "物体恒常",
+        "色块变形",
+        "瑞士风"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "install-block",
+        "note": "its command block"
+      },
+      {
+        "id": "poster-tagline",
+        "note": "lands as the bar"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The incoming scene must be told (`enterBy: reblock`, `from`) or it draws its own block a second time."
+      ],
+      "zh": [
+        "要告诉下一场（enterBy: reblock、from），否则它会再画一遍自己的色块。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 2,
+    "range": [
+      2,
+      2
+    ]
+  },
+  "tier": "T2",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "plakat"
+    ],
+    "avoid": [
+      "tally",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/plakat/devices.js (plakat-reblock); scenes.js tagline/flow `from`"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/block-carry/brick.js",
+  "card": "motion/block-carry/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

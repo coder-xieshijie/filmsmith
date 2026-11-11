@@ -1,0 +1,115 @@
+{
+  "id": "seam-close",
+  "category": "motion",
+  "name": {
+    "en": "Seam close",
+    "zh": "接缝合上"
+  },
+  "summary": {
+    "en": "The lock-up’s second move: the seam and the page beside it slide off the frame’s right edge on the last bar; the caret blinks after the install line.",
+    "zh": "落版的第二个动作：接缝连同旁边的页面在最后一小节滑出画面右缘；光标在安装命令后闪烁。"
+  },
+  "fits": "Closing a film whose through-line is the seam.",
+  "notFor": "Films without a seam; a mid-film change.",
+  "select": {
+    "intent": {
+      "en": "End where the film began: the seam leaves, the caret waits.",
+      "zh": "结束在开头的地方：接缝离开，光标等待。"
+    },
+    "content": {
+      "en": "The lock-up’s name, install line and address.",
+      "zh": "落版的名字、安装命令和网址。"
+    },
+    "fits": {
+      "zh": "以接缝为主线的片子收尾。"
+    },
+    "notFor": {
+      "zh": "没有接缝的片子；片中的切换。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "lockup"
+    ],
+    "subjects": [
+      "code",
+      "title"
+    ],
+    "moods": [
+      "calm",
+      "ceremonial"
+    ],
+    "keywords": {
+      "en": [
+        "seam closes",
+        "caret blinks",
+        "end card",
+        "last bar"
+      ],
+      "zh": [
+        "接缝合上",
+        "光标闪烁",
+        "片尾",
+        "最后一小节"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "seam-lockup",
+        "note": "its second move"
+      }
+    ],
+    "pitfalls": {
+      "en": [],
+      "zh": []
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 2,
+    "range": [
+      2,
+      2
+    ]
+  },
+  "tier": "T1",
+  "family": "split-wipe",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "split",
+      "any film whose input maps line by line to an output"
+    ],
+    "avoid": [
+      "exhibit",
+      "handset"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/split/film.js (stateOf lockup: close, blinks)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "motion/seam-close/brick.js",
+  "card": "motion/seam-close/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

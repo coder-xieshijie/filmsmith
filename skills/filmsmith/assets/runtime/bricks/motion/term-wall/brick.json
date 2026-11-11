@@ -1,0 +1,125 @@
+{
+  "id": "term-wall",
+  "category": "motion",
+  "name": {
+    "en": "Terminal to wall",
+    "zh": "终端缩成墙"
+  },
+  "summary": {
+    "en": "One terminal becomes many: its content goes, the window shrinks into the first small window of a grid and copies of it pop out row by row into a wall.",
+    "zh": "一个终端变成许多个：内容退下，窗口缩成格子里第一个小窗，再一行行复制出一面墙。"
+  },
+  "fits": "From one question to the volume of work behind it (many runs, many batches).",
+  "notFor": "Exact numbers of windows; windows that must stay readable.",
+  "select": {
+    "intent": {
+      "en": "Show scale by multiplication: the one window the viewer knows becomes a wall too big to read one by one.",
+      "zh": "用复制来表现规模：观众认识的那一个窗口变成一面读不过来的墙。"
+    },
+    "content": {
+      "en": "A terminal on screen and the wall's size (default 6 × 4).",
+      "zh": "画面上的一个终端和墙的尺寸（默认 6 × 4）。"
+    },
+    "fits": {
+      "zh": "从一个问题到它背后的工作量（很多次运行、很多批）。"
+    },
+    "notFor": {
+      "zh": "窗口个数要精确；窗口内容要能读。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "problem",
+      "demo"
+    ],
+    "subjects": [
+      "terminal",
+      "device"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "wall of windows",
+        "multiply",
+        "scale",
+        "shrink",
+        "many runs",
+        "batches"
+      ],
+      "zh": [
+        "窗口墙",
+        "复制",
+        "规模",
+        "缩小",
+        "很多次运行",
+        "分批"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "term-count",
+        "note": "before: the window it shrinks"
+      },
+      {
+        "id": "wall-ledger",
+        "note": "the scene that runs it"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "The small windows hold grey lines, not text: they are volume, not content."
+      ],
+      "zh": [
+        "小窗里是灰线不是字：表示量，不是内容。"
+      ]
+    }
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 4,
+    "range": [
+      3,
+      5
+    ]
+  },
+  "tier": "T1",
+  "family": "zoom-depth",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "terminal-ledger"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "skills/filmsmith/assets/kits/terminal-ledger/starter/components/wall.js fromTerm"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "teach"
+  ],
+  "entry": "motion/term-wall/brick.js",
+  "card": "motion/term-wall/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from terminal-ledger kit: no upstream shot; checked instead side by side with the kit's approved example film at the same moments (the style's recipe, card: Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

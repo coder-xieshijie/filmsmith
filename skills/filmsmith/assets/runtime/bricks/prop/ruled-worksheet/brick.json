@@ -1,0 +1,104 @@
+{
+  "id": "ruled-worksheet",
+  "category": "prop",
+  "name": {
+    "en": "Ruled worksheet",
+    "zh": "格子演算纸"
+  },
+  "summary": {
+    "en": "A ruled paper card beside the exhibit: a title with its exhibit tab, rows of label and value, a rule, the computed result struck with the highlighter.",
+    "zh": "证物旁一张画格的纸卡：带证物标签的标题、名称与数值各行、一条横线、被荧光笔划出的计算结果。"
+  },
+  "fits": "Computing in the open from published figures.",
+  "notFor": "Tables to read (show the page); more than five rows.",
+  "select": {
+    "intent": {
+      "en": "Show the arithmetic, so the result can be checked.",
+      "zh": "把算式摆出来，结果可以核对。"
+    },
+    "content": {
+      "en": "A title (≤ 16 chars), 1–5 rows, a value and caption.",
+      "zh": "一个标题（≤ 7 字），1–5 行，一个数值和说明。"
+    },
+    "fits": {
+      "zh": "用发布的数字当面计算。"
+    },
+    "notFor": {
+      "zh": "要阅读的表格（直接展示页面）；超过五行。"
+    },
+    "roles": [
+      "demo",
+      "climax",
+      "proof"
+    ],
+    "subjects": [
+      "metric",
+      "number",
+      "list"
+    ],
+    "moods": [
+      "technical",
+      "editorial"
+    ],
+    "keywords": {
+      "en": [
+        "worksheet",
+        "ruled paper",
+        "calculation",
+        "result"
+      ],
+      "zh": [
+        "演算纸",
+        "格子纸",
+        "计算",
+        "结果"
+      ]
+    },
+    "pitfalls": {
+      "en": [
+        "Values derived by reading a chart are marked ~ and listed in the film's notes."
+      ],
+      "zh": [
+        "从图上读出的数值标 ~，并记在片子的说明里。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "dossier"
+    ],
+    "avoid": [
+      "ink",
+      "pulse",
+      "scroll"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "adapted"
+  },
+  "source": {
+    "kind": "own",
+    "path": "the dossier source film buildWorksheet, paintWorksheet"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "prop/ruled-worksheet/brick.js",
+  "card": "prop/ruled-worksheet/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

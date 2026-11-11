@@ -1,0 +1,161 @@
+{
+  "id": "perspective-glide",
+  "category": "motion",
+  "name": {
+    "en": "Perspective glide",
+    "zh": "侧立透视滑行"
+  },
+  "summary": {
+    "en": "A page stands steeply on edge (60°) and glides along its own plane past a camera that never moves, lighting up as it comes.",
+    "zh": "页面 60° 侧立在 3D 空间里，机位不动，页面自己沿横面滑过镜头，边滑边从暗处亮起来。"
+  },
+  "fits": "Showing a long UI (a board, a timeline, a feed) as an object in space; an opener or a b-roll shot under a voice line.",
+  "notFor": "Reading the page's text (it is at 60°); short slots (it needs about 8 beats to read as a glide).",
+  "select": {
+    "intent": {
+      "en": "The page shows itself off: a long interface stands as a steep wall and slides past a still camera like train carriages, so it reads as a real object in space.",
+      "zh": "页面在自我展示：长界面立成一堵斜墙，像列车车厢一样从不动的镜头前滑过，读成空间里的实物。"
+    },
+    "content": {
+      "en": "Wraps one long, wide page (a board, timeline or feed; a long screenshot works) or a strip of 2–4 page painters; its text is not read.",
+      "zh": "包住一张又长又宽的页面（看板、时间线、信息流，长截图即可）或 2–4 页拼成的长条；上面的字不需要读清。"
+    },
+    "fits": {
+      "zh": "把长界面（看板、时间线、信息流）当空间里的实物展示；开场或旁白下的空镜。"
+    },
+    "notFor": {
+      "zh": "要读页面上的字（斜了 60°）；时长短的槽（约 8 拍才读得出滑行）。"
+    },
+    "use": [
+      "in-scene",
+      "seam"
+    ],
+    "roles": [
+      "hook",
+      "demo",
+      "rest"
+    ],
+    "subjects": [
+      "ui",
+      "space"
+    ],
+    "moods": [
+      "cinematic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "steep tilt",
+        "perspective slide",
+        "3D page",
+        "tilted wall",
+        "locked camera",
+        "UI b-roll",
+        "side glide"
+      ],
+      "zh": [
+        "侧立透视滑行",
+        "60 度侧立",
+        "斜墙",
+        "物动镜不动",
+        "页面滑过",
+        "空镜",
+        "透视炫技"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "float-land",
+        "note": "words falling onto the page as it glides"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep the angle within 55–65°; outside it is another shot.",
+        "Do not use with graze-tour in the same section: one moves the camera, this one the page."
+      ],
+      "zh": [
+        "倾角保持在 55–65°；超出就换了手法。",
+        "别和 graze-tour 放在同一段：那个是镜头动，这个是页面动，二选一。"
+      ]
+    },
+    "upstream": [
+      {
+        "key": "steep-tilt-glide",
+        "name": "侧立透视滑行",
+        "card": "侧立透视滑行",
+        "summary": "固定镜头下直立页面以 60° 强透视侧立（右近左远），页面自身沿其 3D 横面方向滑移掠过镜头（物动镜不动），滑移带速度重影、文字组件悬空贴落、由暗揭亮",
+        "use": "长页面/多区块 UI 的炫技巡览（内容依次滑过固定机位）；暗场霓虹调性；与贴面运镜卡互补的\"侧掠\"机位",
+        "energy": "中高（透视炫技+持续运动，但节奏是匀的）",
+        "preview": "https://vincentwei1021.github.io/video-shotcraft/media/steep-tilt-glide.mp4"
+      }
+    ]
+  },
+  "energy": "mid",
+  "duration": {
+    "beats": 8,
+    "range": [
+      6,
+      12
+    ]
+  },
+  "tier": "T2",
+  "family": "horizontal",
+  "surface": [
+    "dom"
+  ],
+  "styles": {
+    "fits": [
+      "any"
+    ],
+    "avoid": [
+      "paper",
+      "strip",
+      "split"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "shotcraft",
+    "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+    "upstream": [
+      {
+        "key": "steep-tilt-glide",
+        "path": "demos/camera/steep-tilt-glide/SteepTiltGlide.tsx",
+        "card": "references/shots/camera/steep-tilt-glide.md"
+      }
+    ]
+  },
+  "licence": "Apache-2.0",
+  "mergedFrom": [],
+  "overlaps": [
+    {
+      "id": "scroll-reel",
+      "note": "scrolls a page flat on screen"
+    },
+    {
+      "id": "camera-truck",
+      "note": "the camera moves past flat cards; here the page moves and the camera is locked"
+    }
+  ],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/perspective-glide/brick.js",
+  "card": "motion/perspective-glide/CARD.md",
+  "compare": {
+    "ssimMean": 0.7408,
+    "ssimMin": 0.7062,
+    "ssimDrop": 0.0636,
+    "trackDevPx": 0,
+    "progressRmse": 0,
+    "eventFrames": 0,
+    "verdict": "pass"
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

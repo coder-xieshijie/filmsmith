@@ -1,0 +1,115 @@
+{
+  "id": "phosphor-bed",
+  "category": "sound",
+  "name": {
+    "en": "Phosphor bed",
+    "zh": "磷光音乐床"
+  },
+  "summary": {
+    "en": "The phosphor sound: a terminal synth bed at 120–136 BPM building by chapter and breaking under the install, typing keys under every typed line, ticks and pops for options and picks, a riser into the burst ending on an impact.",
+    "zh": "phosphor 的声音：120–136 BPM 的终端合成器音乐床，按章节加强、在安装页停顿；每次敲字有键声，选项和选择有滴答和弹响，冲进爆发有上扬，以一声撞击结束。"
+  },
+  "fits": "CLI and infrastructure launches; films with typing and a climax.",
+  "notFor": "Calm or warm films; films with voice-over.",
+  "select": {
+    "intent": {
+      "en": "Sound like a terminal at night with a beat under it: precise keys, clean ticks, one big rush.",
+      "zh": "听起来像夜里带着节拍的终端：精确的键声、干净的滴答、一次大的冲刺。"
+    },
+    "content": {
+      "en": "The arc roles and their scenes; cues from the scenes' plans.",
+      "zh": "骨架角色与各场景；场景 plan 给出的提示点。"
+    },
+    "fits": {
+      "zh": "命令行与基础设施的发布片；有打字和高潮的片子。"
+    },
+    "notFor": {
+      "zh": "安静或温暖的片子；有旁白的片子。"
+    },
+    "subjects": [
+      "abstract",
+      "terminal"
+    ],
+    "moods": [
+      "energetic",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "synth",
+        "terminal",
+        "typing",
+        "riser",
+        "impact",
+        "drop"
+      ],
+      "zh": [
+        "合成器",
+        "终端",
+        "打字声",
+        "上扬",
+        "撞击",
+        "落拍"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "boot-to-end",
+        "note": "its arc"
+      },
+      {
+        "id": "night-terminal",
+        "note": "its look"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Typing keys under long Chinese lines get dense: the cue plays one key per two characters."
+      ],
+      "zh": [
+        "长中文句下的键声会很密：每两个字一声键。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "bpm": [
+      120,
+      136
+    ]
+  },
+  "styles": {
+    "fits": [
+      "phosphor"
+    ],
+    "avoid": [
+      "plakat",
+      "blueprint",
+      "thread"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/phosphor/score.mjs; timing.rules.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "sound/phosphor-bed/sound.js",
+  "card": "sound/phosphor-bed/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; its presets and cues are read off the template's score.mjs (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

@@ -1,0 +1,128 @@
+{
+  "id": "detail-confirm",
+  "category": "scene",
+  "name": {
+    "en": "Detail confirmed",
+    "zh": "详图确认"
+  },
+  "summary": {
+    "en": "Decisions a person settles: leaders run from 2–3 questions to their answers, an amber bracket closes the chosen answers, a summary box with a note, and the amber stamp lands on beat 5 with a push-in and a thud.",
+    "zh": "人拍板的决定：引线从 2–3 个问题连到答案，琥珀色括号框住选定的答案，一个汇总框加一行注，第 5 拍琥珀色印章随镜头推近和一声闷响落下。"
+  },
+  "fits": "A sheet where a person answers what the product will then do: a policy, a review, a sign-off.",
+  "notFor": "Decisions a machine makes; more than three questions; answers longer than 12 characters.",
+  "select": {
+    "use": [
+      "in-scene"
+    ],
+    "intent": {
+      "en": "Show the moment a person decides, and certify it: the answers are bracketed in amber and stamped on the beat.",
+      "zh": "呈现人做决定的那一刻并加以证明：答案被琥珀色括住，印章踩着拍落下。"
+    },
+    "content": {
+      "en": "Label, a one-word title, a sub, 2–3 questions (≤ 56) with answers (≤ 12), a round label, a summary (≤ 48), a note, a stamp word and small line.",
+      "zh": "标签、单词标题、副标题、2–3 个问题（≤ 12 字）和答案（≤ 6 字）、轮次标签、汇总（≤ 20 字）、注、印章词和小字。"
+    },
+    "fits": {
+      "zh": "人来回答、产品随后执行的一张图：策略、评审、签字。"
+    },
+    "notFor": {
+      "zh": "机器做的决定；超过三个问题；超过 6 字的答案。"
+    },
+    "roles": [
+      "turn",
+      "demo"
+    ],
+    "subjects": [
+      "list",
+      "text"
+    ],
+    "moods": [
+      "ceremonial",
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "sign-off",
+        "review",
+        "questions and answers",
+        "leaders",
+        "stamp",
+        "push-in"
+      ],
+      "zh": [
+        "签字",
+        "评审",
+        "问答",
+        "引线",
+        "盖章",
+        "推近"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "drafting-stamp",
+        "note": "its stamp"
+      },
+      {
+        "id": "inspection-record",
+        "note": "a machine check after the person's"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "`issue: true` only times the flood: the print itself is the host's shape-flood transition between the vellum and the print palettes."
+      ],
+      "zh": [
+        "issue: true 只给出浸染的时刻：从原稿到蓝图的转换由宿主的 shape-flood 转场完成。"
+      ]
+    }
+  },
+  "energy": "high",
+  "duration": {
+    "beats": [
+      10,
+      22
+    ],
+    "sec120": [
+      5,
+      11
+    ]
+  },
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "blueprint"
+    ],
+    "avoid": [
+      "plakat",
+      "phosphor"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/blueprint/sheets/detail.js; choreography.js CUES.detail, STAMP_B, ISSUE_N0"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch"
+  ],
+  "entry": "scene/detail-confirm/brick.js",
+  "card": "scene/detail-confirm/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

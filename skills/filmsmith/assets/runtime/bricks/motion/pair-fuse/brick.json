@@ -1,0 +1,127 @@
+{
+  "id": "pair-fuse",
+  "category": "motion",
+  "name": {
+    "en": "Pair fuse",
+    "zh": "成对合并"
+  },
+  "summary": {
+    "en": "A lit pair of chips slides together and closes into one learned chip; every row fuses the same pair, the token bar shrinks.",
+    "zh": "一对亮起的字块滑到一起，合成一个“学到的”字块；每一行同时合并同一对，下面的词元条随之缩短。"
+  },
+  "fits": "Any process whose step joins two neighbours into one unit: merging, compressing, bundling; the run decides which pair.",
+  "notFor": "Reassignment or routing (items move from owner to owner and nothing fuses): fusing chips would say the wrong thing.",
+  "select": {
+    "intent": {
+      "en": "Two neighbours visibly become one unit, so the viewer sees what a merge step does rather than being told.",
+      "zh": "两个相邻单元看得见地合成一个，观众看到合并这一步做了什么，而不是听人说。"
+    },
+    "content": {
+      "en": "A board of rows of chips (a run: corpus of 2–6 words with weights); which pair fuses comes from the run.",
+      "zh": "一块由芯片行组成的板（一次运行：2–6 个带权重的词）；哪一对合并由运行决定。"
+    },
+    "fits": {
+      "zh": "任何把两个相邻单元合成一个的过程：合并、压缩、打包；由运行决定合哪一对。"
+    },
+    "notFor": {
+      "zh": "重新分配或路由（东西换主人、没有合并）：芯片融合会讲错。"
+    },
+    "use": [
+      "in-scene"
+    ],
+    "roles": [
+      "demo"
+    ],
+    "subjects": [
+      "diagram",
+      "code"
+    ],
+    "moods": [
+      "technical",
+      "calm"
+    ],
+    "keywords": {
+      "en": [
+        "merge",
+        "BPE",
+        "fuse",
+        "tokenizer",
+        "pair",
+        "chips"
+      ],
+      "zh": [
+        "合并",
+        "字节对编码",
+        "融合",
+        "分词器",
+        "字符对",
+        "芯片"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "merge-step",
+        "note": "the scene that names the rule"
+      },
+      {
+        "id": "token-bar",
+        "note": "shrinks as each fuse lands"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Every row must fuse the same pair in the same step; a row skipped reads as a bug."
+      ],
+      "zh": [
+        "每一行在同一步都要合并同一对；漏一行就像 bug。"
+      ]
+    }
+  },
+  "energy": "low",
+  "duration": {
+    "beats": 3,
+    "range": [
+      2,
+      4
+    ]
+  },
+  "tier": "T0",
+  "family": "shape",
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "trace"
+    ],
+    "avoid": [
+      "halftone",
+      "morph"
+    ]
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/trace/pieces.js (drawRow), runs/bpe.js"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "motion/pair-fuse/brick.js",
+  "card": "motion/pair-fuse/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}

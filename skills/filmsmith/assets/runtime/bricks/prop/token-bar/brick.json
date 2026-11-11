@@ -1,0 +1,105 @@
+{
+  "id": "token-bar",
+  "category": "prop",
+  "name": {
+    "en": "Token bar",
+    "zh": "词元条"
+  },
+  "summary": {
+    "en": "The through-line of a run: one cell per unit, label and count at the left; cells shrink away as the run reduces the count, the bar lights for the result.",
+    "zh": "运行的贯穿线索：一格一个单元，左边是标签和计数；运行减少计数时格子缩走，结果出来时整条亮起。"
+  },
+  "fits": "A run that reduces a total: tokens, bytes, steps.",
+  "notFor": "Totals that grow without bound; more than about 150 units.",
+  "select": {
+    "intent": {
+      "en": "The total the run reduces is always visible, so every step's saving is felt.",
+      "zh": "运行在减少的总数一直看得见，每一步省下多少都能感到。"
+    },
+    "content": {
+      "en": "The starting count and the current count (≤ 150 units); a label (≤ 10 / 4 字).",
+      "zh": "起始数与当前数（≤ 150 个单位）；标签（≤ 10 字符 / 4 字）。"
+    },
+    "fits": {
+      "zh": "把总数往下减的运行：词元、字节、步数。"
+    },
+    "notFor": {
+      "zh": "无限增长的总数；超过约 150 个单位。"
+    },
+    "roles": [
+      "demo",
+      "proof"
+    ],
+    "subjects": [
+      "chart",
+      "number"
+    ],
+    "moods": [
+      "technical"
+    ],
+    "keywords": {
+      "en": [
+        "token bar",
+        "count bar",
+        "progress",
+        "through-line"
+      ],
+      "zh": [
+        "词元条",
+        "计数条",
+        "进度",
+        "贯穿线索"
+      ]
+    },
+    "pairs": [
+      {
+        "id": "count-to-result",
+        "note": "grows its count into the result"
+      }
+    ],
+    "pitfalls": {
+      "en": [
+        "Keep it at the same place all film; it is the through-line."
+      ],
+      "zh": [
+        "整片放在同一位置；它就是贯穿线索。"
+      ]
+    }
+  },
+  "duration": null,
+  "surface": [
+    "canvas"
+  ],
+  "styles": {
+    "fits": [
+      "trace",
+      "any diagram"
+    ],
+    "avoid": []
+  },
+  "langs": {
+    "en": "full",
+    "zh": "full"
+  },
+  "source": {
+    "kind": "own",
+    "path": "assets/templates/trace/pieces.js (token bar)"
+  },
+  "licence": "MIT",
+  "mergedFrom": [],
+  "overlaps": [],
+  "hosts": [
+    "launch",
+    "teach"
+  ],
+  "entry": "prop/token-bar/brick.js",
+  "card": "prop/token-bar/CARD.md",
+  "compare": {
+    "verdict": "waived",
+    "waive": {
+      "all": "an own brick split from an existing style: no upstream shot; checked instead side by side with the original template at the same moment (card, Differs from upstream)"
+    }
+  },
+  "status": "approved",
+  "approvedBy": "taste/journal.md 2026-11-10 · K 片积木重组：算不退步，进 Skill"
+}
