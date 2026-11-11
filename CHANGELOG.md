@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0 — 2026-11-11
 
 - repo: one skill. `skills/filmsmith/` holds both kinds of film: `SKILL.md` keeps the rules every film keeps, carries the description and routes to `pipelines/launch.md` (music-driven launch, teaser, showreel, no voice-over) or `pipelines/teach.md` (Chinese-narrated explainer). Both pipelines use one brick library at `assets/runtime/bricks/`, one runtime, one set of scripts and one measuring story, so a brick is written, checked and carded once and a style is a recipe either pipeline can read. Install is one command: `npx skills add coder-xieshijie/filmsmith`.
 - launch: the workflow, the styles table, the seventeen recipes and mode cards, `PLAN.md`, `new-film.mjs`, `check-film.mjs` and `selftest.mjs` move under the one skill unchanged in substance; paths inside the text, the cards and the scripts follow (`skills/filmsmith/...`).
